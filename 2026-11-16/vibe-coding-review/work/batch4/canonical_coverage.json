@@ -793,10 +793,10 @@
    "title": "多源 end 缝隙必须量化",
    "canonical": "多源 `end` 之间的缝隙必须量化到「字节数 / 指令数 / 归属到哪个函数 / 换口径后的分子与比率 / 对基本块与 CFG 边的影响」，并给具体地址样本；缝隙若全是填充，必须写明当前口径下有多少填充被计入分子。",
    "constraint_object": "输出 / 文档。",
-   "check_method": "数字来自 `evidence_m13_ledger.json` 的 `pe_gap` 段（该文件现为 `sources` 中的 M13 历史快照），经人工核对 + `ledger_check.py --check` 的引用链校验。M13 复算：缝隙 113,731 B = `.text` 3.2262%，换 `.pdata` 口径 -0.0402pp；缝隙内 objdump 指令 113,731 条全为 `cc/90`，我方解出 372 条全为 `int3`，跨 pdata end 的指令 0、CFG 边 0。注意：这三个数字**未逐字登记**在新权威的 M13 小节（该节只登记 §6 下界结论的 6 个数字），故不受数字漂移检查保护——属显式缺口，见附录 C。",
-   "enforced_at": "`work\\evidence_numbers_ledger.json`（现行权威，M13 小节）；`work\\outputs\\NUMBERS_LEDGER.md` §5；`pack\\tools\\ledger_check.py`（对已登记小节/数字与 `sources` sha256 硬校验）。",
-   "basis": "`CHANGELOG.md:97`；`PROGRESS.md:264`；`evidence_m13_ledger.json` 的 `pe_gap`；`evidence_numbers_ledger.json` 的 `sources` 条目",
-   "canonical_status": "`规范`（引用链改指现行权威；`pe_gap` 三个数字尚未被新权威登记，见附录 C）",
+   "check_method": "数字登记在 `evidence_numbers_ledger.json` 的 `M13-pe_gap` 小节（11 个数字，含 113,731 / 3.2262% / -0.0402pp）与 `M13` 小节，`ledger_check.py --check` 对已登记数字做逐字漂移硬校验（改数字→exit 1，已有负例验证）。M13 复算：缝隙 113,731 B = `.text` 3.2262%，换 `.pdata` 口径 -0.0402pp；缝隙内 objdump 指令 113,731 条全为 `cc/90`，我方解出 372 条全为 `int3`，跨 pdata end 的指令 0、CFG 边 0。",
+   "enforced_at": "`work\\evidence_numbers_ledger.json`（现行权威，`M13-pe_gap` 小节）；`work\\outputs\\NUMBERS_LEDGER.md` §5；`pack\\tools\\ledger_check.py`（数字漂移硬失败）。",
+   "basis": "`CHANGELOG.md:97`；`PROGRESS.md:264`；`evidence_m13_ledger.json` 的 `pe_gap`；`evidence_numbers_ledger.json` 的 `M13-pe_gap` 小节",
+   "canonical_status": "`规范`（数字已登记进现行权威的 `M13-pe_gap` 小节，受 `ledger_check --check` 保护）",
    "confidence": "high"
   },
   {
