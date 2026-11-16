@@ -40,6 +40,17 @@ readelf/objdump/pefile/ildasm 等权威工具交叉验证。三种用法：CLI /
 - `powershell`（Windows PowerShell 5.1）与 `pwsh`（PowerShell 7）：.NET 运行期 oracle 用。
 - 原工作区的**样本与工具链**（仓库不入库，见下）：`2026-11-15\m3-task-card\work\samples`、
   `2026-11-15\m2-task-card\work\samples`、`2026-11-15\m2-task-card\work\tools`。
+  M19 补证样本在 `samples\m19_sigblob\{_gen,_neg}`（7 个 DLL），随 m3 samples 一起恢复；
+  `work\m19_sample_manifest.json` 登记其 sha256，`gate.ps1` preflight 逐条核对。
+
+**仅重新生成 M19 受控样本时需要（门禁不需要）**
+
+- `ilasm`（.NET Framework 4.x，默认 `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\ilasm.exe`）。
+  `gate.ps1` **不调用** `ilasm`：样本是恢复来的成品，preflight 只校验 sha256。
+  缺 `ilasm` 时门禁照常跑；只有重跑 `work\outputs\m19_sigblob\gen.ps1` 会 `exit 2` 并打印缺失路径。
+- 重建后 `gen.ps1` 自动重写 manifest：`ilasm` 的随机 MVID / 时间戳由 `determinize.py`
+  固定，同版本 `ilasm` 重跑产出**逐字节相同**（sha256 不变，不会变成下一次门禁的随机红）；
+  换 `ilasm` 版本仍可能漂，重跑 `gen.ps1` 重新登记即可。
 
 **步骤（在克隆根执行；路径可含空格与中文）**
 
@@ -61,7 +72,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 （`rekit`/`tests`/`pack03`/`tools` → `pack\04_rekit项目源码\*`、`pack\03_路线图与章程`）。
 来源不全时 exit 2；目标已存在时 SKIP，不覆盖、不删除。
 
-`gate.ps1` 先做前置检查（缺样本 / 工具链 / junction / dnfile 直接 exit 2，不静默跳过），再按固定顺序执行：
+`gate.ps1` 先做前置检查（缺样本 / M19 样本 manifest / 工具链 / junction / dnfile 直接 exit 2，不静默跳过），再按固定顺序执行：
 `ledger_check.py --check` → `tests\evidence_index.py --check` → `verify_gate.py --run`
 （23 套 verify + pytest + ledger）。`-List` 只看计划，`-Only verify_map,verify_iat` 跑子集。
 
@@ -75,8 +86,8 @@ cd "2026-11-15\m3-task-card\work"   # pytest 必须在 work 目录执行：tests
 python -m pytest tests -q
 ```
 
-依赖：Python 3.8+ 纯标准库即可跑全部功能（构建期需要 setuptools；pefile / dnfile / ildasm / objdump
-仅交叉验证用到）。objdump 需要 GNU binutils，且含中文路径时必须 `LC_ALL=C`（`verify_gate.py` 已自动处理）。
+依赖：Python 3.8+ 纯标准库即可跑全部功能（构建期需要 setuptools；pefile / dnfile / objdump
+仅交叉验证用到；`ilasm` 仅重建 M19 受控样本时用到）。objdump 需要 GNU binutils，且含中文路径时必须 `LC_ALL=C`（`verify_gate.py` 已自动处理）。
 
 **路径垫片（2026-11-17 起不再需要）**：旧测试曾硬编码 `<旧仓库根>`，
 依赖 `<旧仓库根>\...` 目录联接；且 Windows 上 `/home/...` 按**当前盘符根**解析，克隆在 C: 时

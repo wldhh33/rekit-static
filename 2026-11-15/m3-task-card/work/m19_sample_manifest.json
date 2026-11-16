@@ -1,12 +1,12 @@
 ﻿{
     "schema":  1,
     "batch":  "2026-11-17 M19 签名层补证",
-    "note":  "ilasm 写入随机 MVID/时间戳：重跑后 sha256 会变，需重跑 gen.ps1 重新登记；可复现的是源码与签名结构。",
+    "note":  "同版本 ilasm + determinize.py 逐字节可复现（MVID/时间戳已固定）；换 ilasm 版本或跳过 determinize 仍会漂，重跑 gen.ps1 即重写本 manifest。",
     "samples":  [
                     {
                         "file":  "SigSample.dll",
                         "role":  "受控样本",
-                        "sha256":  "6a5c050759b7b517b577c1a50683d6166ebf1a869e1deafaaed2ff6d158d8a0d",
+                        "sha256":  "459d56df595a974a0e2459e7f030f13600f31b90acae39ea5ab428ba42e20246",
                         "size":  2048,
                         "build":  "ilasm v4.0.30319 汇编 outputs\\m19_sigblob\\SigSample.il",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",
@@ -15,7 +15,7 @@
                     {
                         "file":  "DeepSig63.dll",
                         "role":  "受控样本",
-                        "sha256":  "5171a5e4dbbe01604ccc4726362012a51586a13b4d5ebdda3a42052fb40e056f",
+                        "sha256":  "ca34799ecb52d7c1b744af146534a0ed74959d95de2d5e57ec8ec1d6a78fbb26",
                         "size":  2048,
                         "build":  "ilasm v4.0.30319 汇编 outputs\\m19_sigblob\\DeepSig63.il",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",
@@ -24,7 +24,7 @@
                     {
                         "file":  "DeepSig.dll",
                         "role":  "受控样本",
-                        "sha256":  "c244275ef13a42da53cf618916bd7c2e1247fc4a67ee523177660456d7f47d9d",
+                        "sha256":  "f4d4618a5ef508748de3fd98a0194c5d2f52bf6b9709f13b9da98358980011e6",
                         "size":  2048,
                         "build":  "ilasm v4.0.30319 汇编 outputs\\m19_sigblob\\DeepSig.il",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",
@@ -33,7 +33,7 @@
                     {
                         "file":  "BadCompressed.dll",
                         "role":  "负样本",
-                        "sha256":  "e90b099525a2c10b7533ee20ae63230644e3173ef6724f2e598e1fe009a1505f",
+                        "sha256":  "c71224cf744d2a24728c94ead52d66db0e07261ccc9a3c49d8d8c043fd17ae5d",
                         "size":  2048,
                         "build":  "make_negatives.py 原位改 1 字节（03 -\u003e e0，长度不变）→ bad_compressed_int",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",
@@ -42,7 +42,7 @@
                     {
                         "file":  "TruncatedSig.dll",
                         "role":  "负样本",
-                        "sha256":  "5fb4e9615c08f34e27139143be1b03bfbfe217bc5c198602b981efaaeaedf1eb",
+                        "sha256":  "b2b99a51447dc10fae8c45bee2210cb6244e2f1dcbba7d75f78dc804433beb84",
                         "size":  2048,
                         "build":  "make_negatives.py 原位改 1 字节（03 -\u003e 08，长度不变）→ truncated_signature",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",
@@ -51,7 +51,7 @@
                     {
                         "file":  "UnknownCodedTag.dll",
                         "role":  "负样本",
-                        "sha256":  "280081c6254dc717628ea53b8b39b2a0851e55d92756ff46ffecb5382c904074",
+                        "sha256":  "e2867b2e36c90cbe94776f8dda8f0b0390999f3266ac8400cbdda9d76c5e0c18",
                         "size":  2048,
                         "build":  "make_negatives.py 原位改 1 字节（09 -\u003e 0b，长度不变）→ decoded_with_unknown",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",
@@ -60,7 +60,7 @@
                     {
                         "file":  "UnknownElemType.dll",
                         "role":  "负样本",
-                        "sha256":  "f30c35bdd18b1b092339dffd924fbb1397033efad072f8592fb07e0ded583c6a",
+                        "sha256":  "d33ce9e10338723ca33641854e49ecb3f34a018507ba05d643b7d203aa24c81c",
                         "size":  2048,
                         "build":  "make_negatives.py 原位改 1 字节（01 -\u003e 6f，长度不变）→ trailing_bytes",
                         "license":  "self-authored IL（本项目自写，无第三方内容）",

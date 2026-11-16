@@ -4,12 +4,17 @@ outputs/m19_sigblob/gen.ps1 — M19 签名层补证样本重建（2026-11-17 补
 做两件事（全部在 work 内，路径按 $PSScriptRoot 定位，可换盘符）：
   1. ilasm 汇编 SigSample.il / DeepSig63.il / DeepSig.il
      -> samples\m19_sigblob\_gen\{SigSample,DeepSig63,DeepSig}.dll
+     随后 python determinize.py 固定 MVID 与 COFF 时间戳（否则每次 sha256 都变）
   2. python make_negatives.py 生成 _neg\BadCompressed.dll /
-     TruncatedSig.dll / UnknownCodedTag.dll
+     TruncatedSig.dll / UnknownCodedTag.dll / UnknownElemType.dll
 最后写 work\m19_sample_manifest.json（sha256 + 构造方式），供 R95 口径登记。
 
-注意：ilasm 会写入随机 MVID 与时间戳，重跑后 sha256 会变 —— 这不是逐字节可复现，
-可复现的是源码与签名结构；重跑后需同步 manifest 并重跑 verify_sigblob。
+依赖边界（R126）：
+  - 门禁（gate.ps1）**不调用本脚本**，只要 samples\m19_sigblob\{_gen,_neg} 里的 7 个
+    DLL 在且 sha256 与 manifest 一致即可运行；
+  - ilasm **仅重新生成样本时需要**（默认 .NET Framework 4.x 路径，缺了本脚本 exit 2）；
+  - 固定 MVID 后，同版本 ilasm + determinize.py 产出逐字节相同；换 ilasm 版本仍可能漂，
+    重跑本脚本会重写 manifest，gate preflight 会按新 sha 校验。
 #>
 [CmdletBinding()]
 param(
@@ -39,6 +44,11 @@ foreach ($m in $Map) {
     & $Ilasm /dll /nologo /output:$($m.Dll) $($m.Src) | Out-Null
     if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $m.Dll)) {
         Write-Host "gen: FAIL ilasm exit=$LASTEXITCODE $($m.Name)" -ForegroundColor Red
+        exit 1
+    }
+    & $Python (Join-Path $Here "determinize.py") $($m.Dll) | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "gen: FAIL determinize exit=$LASTEXITCODE $($m.Name)" -ForegroundColor Red
         exit 1
     }
 }
@@ -77,7 +87,7 @@ foreach ($n in $negData.negatives) {
 $manifest = [ordered]@{
     schema = 1
     batch  = "2026-11-17 M19 签名层补证"
-    note   = "ilasm 写入随机 MVID/时间戳：重跑后 sha256 会变，需重跑 gen.ps1 重新登记；可复现的是源码与签名结构。"
+    note   = "同版本 ilasm + determinize.py 逐字节可复现（MVID/时间戳已固定）；换 ilasm 版本或跳过 determinize 仍会漂，重跑 gen.ps1 即重写本 manifest。"
     samples = $rows
 }
 $manifestPath = Join-Path $Work "m19_sample_manifest.json"

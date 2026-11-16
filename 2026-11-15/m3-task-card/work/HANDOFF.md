@@ -11,7 +11,8 @@
 - `tests\verify_layout.py` 首版即带可失败自证（工件=注入 ID + 基线 + 观察到失败行），5 类注入全检出 + 空比对判 FAIL；补证后 **33 项（PASS 32 / SKIP 1）**（新增 `auto-<tag>`×2、`auto-selfproof-<tag>`×2、`agg-auto-runtime` 下限 5/实测 10）。证据 `work\evidence_m20_layout.json`。
 - **M19（.NET 签名语义层 `sigblob`）已收口（2026-11-17）**：方法签名 32,518 / 字段 911 / 局部 3,974；可读 blob 37,403，解码率 100.0000%，unknown 0；dnfile 字节边界 52,403 行、SRM canonical 37,403 行、M17 交叉 29,728 行全 0 不一致。定标②偏离已登记：dnfile 无签名 API，改 SRM（`tests\sigref.ps1`，pwsh 缺失即 `env_missing` exit 2）。证据 `work\evidence_m19_sigblob.json`。补证后 **27 项**（`coverage` 4/4、`negatives`、`depth` 63/64、`unknown_policy`）。
 - **补证批次（2026-11-17，不占里程碑号）**：M19 四类缺口由 `SigSample.dll`（ilasm）**4/4 命中**；`bad_compressed_int`/`truncated_signature`/`depth_exceeded` 各有原位 1 字节负样本（精确 reason + 仅目标行 undecoded + SRM 同行 error）；unknown 两分支补齐；补证首次触发并修掉 `rekit\sigblob.py` 两处真实缺陷。样本登记 `work\m19_sample_manifest.json`（sha256 + 构造方式）。**仍无样本**：`sentinel`/`pinned`（需 vararg 调用点/局部签名，未冒充）。
-- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（补证收口 run `20261117T034706-6f29`，`GATE: PASS exit=0`，约 434 s；含 `verify_sigblob` 27 项 / `verify_layout` 33 项）。总账 **10 小节 / 103 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`；`evidence_index --check` 129/129。
+- **M19 样本依赖边界（R126 复核，2026-11-17）**：样本是**恢复来的成品**（`samples\m19_sigblob\{_gen,_neg}`，随 m3 samples 由 setup 复制，不入库），门禁**不调用 ilasm**；`ilasm` 只在重跑 `outputs\m19_sigblob\gen.ps1` 时需要（缺则 exit 2）。`determinize.py` 固定 MVID/COFF 时间戳后，同版本 ilasm 重跑**逐字节相同**（7/7 实测），sha 漂移不再变成随机红。preflight 新增：`samples\m19_sigblob` 非空 + manifest 逐条 sha256；演练：缺 `_gen` → exit 2（3 条 missing）、样本被替换 → exit 2（manifest/actual 双哈希 + 重建指引）、无 ilasm 跑 gen.ps1 → exit 2（打印缺失路径）。
+- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（补证 + 依赖边界收口 run `20261117T040139-2ff9`，`GATE: PASS exit=0`，约 437 s；含 `verify_sigblob` 27 项 / `verify_layout` 33 项）。总账 **10 小节 / 103 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`；`evidence_index --check` 129/129。
 - **治理当前态**：`pack\` 已 git 初始化（基线 tag `baseline-pre-rename`）；4 个 mojibake 目录已改名、`work` 下 junction 已重建（`pack` 7 个目录均可访问）；`pack\rules.json` 119 条；`pack\tools\status.py` 硬判 HANDOFF/verification/ledger。
 - 文档漂移已修（本轮实测）：`pack\AGENTS.md` 规模改 **27 模块 / 18,600 行**；`CHARTER.md` 补 M20 行与转段触发器 T1–T5（**T1/T4 已命中**，T1 曾被误读为需两个条件同时满足，已更正并留记录）。
 - **U1 收口（2026-11-17）**：`v0.1.0` 由 `5fbb421` 移至 `d63d244`（含 U1-a + U1-b；worktree 检出该提交后 ledger/evidence_index 双 PASS）；新增单命令门禁 `pack\tools\gate.ps1`（preflight fail-fast + ledger → evidence_index → verify_gate）；`.github\workflows\gate.yml` 为**未验证**草稿（仅手动触发，从未运行）；新增规则 **R126**；`evidence_index.repo_root()` 修掉 junction 入口多算一级目录的 bug。
@@ -24,6 +25,7 @@ U1 交付批次已全部收口（打包 / console entry / 示例 / 证据索引 
 | 项 | 状态 / 前置 |
 |---|---|
 | `sentinel` / `pinned` 样本 | 补证后**仍无样本**：`sentinel`（0x41）需 vararg 调用点签名（IL `.method vararg` + 调用点），`pinned`（0x45）只出现在局部变量签名（C# `fixed` 可生成，但 M19 对 `LOCAL_SIG` 只记长度/边界，要先扩范围才测得到）；本批方法签名样本链覆盖不到，未造、未冒充 |
+| M19 样本重建 | 命令：`powershell -File "2026-11-15\m3-task-card\work\outputs\m19_sigblob\gen.ps1"`（需 ilasm；产出确定，自动重写 manifest）；缺样本时 gate 报 exit 2 并给出这条命令 |
 | 真 CI | `.github\workflows\gate.yml` 只是未验证草稿（无远端、从未触发）；启用与远端推送留 U2 |
 | 122 条 null run_id | **不回填**（不猜来源）；新证据按 `AGENTS.md` §8 的 run_id 约定落盘，避免缺口扩大 |
 | tag 覆盖范围 | `v0.1.0` 停在 `d63d244`（U1-a + U1-b）；**`v0.1.1` 覆盖门禁脚本、setup、R126、去垫片等收尾补件**；release tag 只在该批次全部收口后打 |
@@ -56,10 +58,11 @@ U1 交付批次已全部收口（打包 / console entry / 示例 / 证据索引 
 
 - `work\evidence_m20_layout.json` —— M20 三表逐行明细、分母恒等式、长度来源、运行期 oracle、静态结论边界；补证后每个受控样本多 `auto_runtime` 段（`static_conclusion=false`），聚合 `rt_auto_off=10`。
 - `work\evidence_m19_sigblob.json` —— M19 签名解码与三方对拍（dnfile 字节 / SRM canonical / M17 交叉）；补证后多 `supplement` 段（`sigsample` / `coverage` / `negatives` / `depth` / `unknown_policy`）。
-- `work\m19_sample_manifest.json` —— 补证 7 个样本登记（3 正 + 4 负；sha256 / size / 构造方式 `ilasm`/`make_negatives.py` / `license=self-authored IL` / `redistributable=false`）。注：`ilasm` 写随机 MVID/时间戳，重跑后 sha256 会变，须重跑 `gen.ps1` 重新登记；可复现的是源码与签名结构。
-- `work\outputs\m19_sigblob\{SigSample.il,DeepSig63.il,make_negatives.py}`、`tests\layoutauto.ps1` —— 补证样本源码/构造器/运行期探针（`gen.ps1` 一条命令重建）。
+- `work\m19_sample_manifest.json` —— 补证 7 个样本登记（3 正 + 4 负；sha256 / size / 构造方式 `ilasm`/`make_negatives.py` / `license=self-authored IL` / `redistributable=false`）。`gen.ps1` 汇编后调用 `determinize.py` 固定 MVID/COFF 时间戳：同版本 ilasm 重跑逐字节相同（7/7 实测），换版本仍可能漂，重跑即重登记。
+- `work\outputs\m19_sigblob\{SigSample.il,DeepSig63.il,make_negatives.py,determinize.py}`、`tests\layoutauto.ps1` —— 补证样本源码/构造器/去随机化脚本/运行期探针（`gen.ps1` 一条命令重建）。
 - `work\verification\20261117T013424-1713\`、`work\verification\20261117T014558-2b7c\` —— M20 收口与文档定稿后复跑的全量门禁（23 套日志 + vharness.json + pytest.log + summary.json）。
 - `work\verification\20261117T034706-6f29\` —— 补证批次收口经 `pack\tools\gate.ps1` 实跑的全量门禁（23 套 + pytest 554 + ledger PASS，约 434 s）。
+- `work\verification\20261117T040139-2ff9\` —— 样本依赖边界修复后的全量门禁（preflight 含 m19 manifest 校验；23 套 + pytest 554 + ledger PASS，约 437 s）。
 - `work\verification\20261117T023235-f180\` —— U1 收口后经 `pack\tools\gate.ps1` 实跑的全量门禁（23 套日志 + vharness.json + pytest.log + summary.json）。
 - `work\outputs\NUMBERS_LEDGER.md` §15/§16 —— M19/M20 数字人读镜像；权威 `work\evidence_numbers_ledger.json`。
 - `work\outputs\TASK_m18_ilflow.md`、`outputs\m19_sigblob\`、`outputs\m20_layout\` —— 任务卡与受控样本源码（`.il`/`.cs`/`gen.ps1`）+ `spec.md`（静态/运行期边界）。

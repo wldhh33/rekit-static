@@ -377,7 +377,8 @@
 - 布局运行期补证：`tests/layoutauto.ps1`（PowerShell 5.1 `CSharpCodeProvider` + `/unsafe`，编译期引用样本，先清零再逐字段赋值、扫首个非零字节）量出 **10 个字段偏移**；sequential 两例与 ECMA-335 §II.10.1.2 独立推导一致，auto 两例只做运行期自洽；`verify_layout.py` 28 → **33 项**（新增 `auto-<tag>` ×2、`auto-selfproof-<tag>` ×2、`agg-auto-runtime` 下限 5/实测 10），证据 `auto_runtime` 段显式 `static_conclusion=false`。
 - 样本登记（R95 口径）：`work/m19_sample_manifest.json` 逐条登记 sha256 / size / 构造方式（生成器 + 输入）/ `license` / `redistributable=false`（本机生成、不入库）。
 - **仍无样本**：`sentinel`（0x41，需 vararg 调用点签名）与 `pinned`（0x45，需局部变量签名）——本批方法签名样本链造不出，未冒充；原因写在总账 §15。
-- 门禁（补证收口）：`gate.ps1` run `20261117T034706-6f29` —— **23/23 套 + pytest 554 passed + ledger PASS + `GATE: PASS exit=0`**（约 434 s）；`ledger_check --check` 10 小节 / 10 证据 / **103 个登记数字**；`evidence_index --check` 129/129。
+- 依赖边界（R126 复核，2026-11-17）：样本是**恢复来的成品**，门禁不调用 `ilasm`（preflight 只按 `m19_sample_manifest.json` 逐条核对 7 个 DLL 的 sha256，缺/不一致 exit 2）；`determinize.py` 固定 MVID 与 COFF 时间戳后，同版本 `ilasm` 重跑逐字节相同（7/7 实测），sha 漂移不再随机变红。README「必须预置」与「仅重建样本时需要」已分开写。
+- 门禁（补证 + 依赖边界收口）：`gate.ps1` run `20261117T040139-2ff9` —— **23/23 套 + pytest 554 passed + ledger PASS + `GATE: PASS exit=0`**（约 437 s）；`ledger_check --check` 10 小节 / 10 证据 / **103 个登记数字**；`evidence_index --check` 129/129。
 
 ### 2026-11-17 U1-a — 交付批次（打包 / info / JSON 契约 / 示例 / tag，不占里程碑号）
 
