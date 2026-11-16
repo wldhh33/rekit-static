@@ -210,7 +210,7 @@
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m20_layout.json",
       "role": "M20 布局层 dnfile 列值 + 源码真值 + 运行期 oracle 对账",
-      "sha256": "bc42f1d7432d1c88c996e87fccac382623acc5da193eaa2cf57c8f8f8f691c57"
+      "sha256": "acbb6a7ec4e064b705db0a1d0a2fbce69f464276d0bc6ac8c99e74dfb6b2dd4c"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m5_expr_residual.json",

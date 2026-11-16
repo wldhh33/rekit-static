@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_at": "2026-11-17T02:19:04",
+ "generated_at": "2026-11-17T02:55:23",
  "work_dir": "2026-11-15/m3-task-card/work",
  "rules": {
   "coverage": "work/evidence_* 每个文件都必须在 entries 中",
@@ -633,7 +633,7 @@
   "evidence_m15_funcreport.json": {
    "sha256": "e26c86608fb86fbbe8ba185dff83176a3bd16decbfe1c2e48f8a8872eb7da369",
    "size": 3530,
-   "mtime": "2026-11-17T02:13:39",
+   "mtime": "2026-11-17T02:35:13",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -644,7 +644,9 @@
     "20261117T010924-0a7b",
     "20261117T013424-1713",
     "20261117T014558-2b7c",
-    "20261117T021100-746c"
+    "20261117T021100-746c",
+    "20261117T021944-26c9",
+    "20261117T023235-f180"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -690,7 +692,7 @@
   "evidence_m16_datarefs.json": {
    "sha256": "a1d7961f1b3faaff26f123401d73566c44beabb70e19d897daeb4b6b23f750e9",
    "size": 4132,
-   "mtime": "2026-11-17T02:12:07",
+   "mtime": "2026-11-17T02:33:41",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -701,7 +703,9 @@
     "20261117T010924-0a7b",
     "20261117T013424-1713",
     "20261117T014558-2b7c",
-    "20261117T021100-746c"
+    "20261117T021100-746c",
+    "20261117T021944-26c9",
+    "20261117T023235-f180"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -748,7 +752,7 @@
   "evidence_m17_dotnet.json": {
    "sha256": "c3300c5b8e7b4a871146a9de0578fb735baef01d52fe7a834085ac15ace76dbe",
    "size": 9869,
-   "mtime": "2026-11-17T02:12:11",
+   "mtime": "2026-11-17T02:33:45",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -759,7 +763,9 @@
     "20261117T010924-0a7b",
     "20261117T013424-1713",
     "20261117T014558-2b7c",
-    "20261117T021100-746c"
+    "20261117T021100-746c",
+    "20261117T021944-26c9",
+    "20261117T023235-f180"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -859,7 +865,7 @@
   "evidence_m18_ilflow.json": {
    "sha256": "eca5ee510cf40cca677d35c6c8e87c273989682dc5ffb72c93115d298ae8fd79",
    "size": 20245,
-   "mtime": "2026-11-17T02:14:09",
+   "mtime": "2026-11-17T02:35:43",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -870,7 +876,9 @@
     "20261117T010924-0a7b",
     "20261117T013424-1713",
     "20261117T014558-2b7c",
-    "20261117T021100-746c"
+    "20261117T021100-746c",
+    "20261117T021944-26c9",
+    "20261117T023235-f180"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -1009,14 +1017,16 @@
   "evidence_m19_sigblob.json": {
    "sha256": "e46e4a577e92ee3bd045aee549225c350c4a2623e71574fcbd0c22977fd7b85a",
    "size": 17329,
-   "mtime": "2026-11-17T02:14:58",
+   "mtime": "2026-11-17T02:36:33",
    "run_id": null,
    "run_ids": [
     "20261117T010924-0a7b",
     "20261117T013424-1713",
     "20261117T014558-2b7c",
     "20261117T015832-66cf",
-    "20261117T021100-746c"
+    "20261117T021100-746c",
+    "20261117T021944-26c9",
+    "20261117T023235-f180"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -1028,14 +1038,16 @@
    "sections_kind": "json_top_level_keys"
   },
   "evidence_m20_layout.json": {
-   "sha256": "bc42f1d7432d1c88c996e87fccac382623acc5da193eaa2cf57c8f8f8f691c57",
-   "size": 15180,
-   "mtime": "2026-11-17T02:14:15",
+   "sha256": "acbb6a7ec4e064b705db0a1d0a2fbce69f464276d0bc6ac8c99e74dfb6b2dd4c",
+   "size": 14996,
+   "mtime": "2026-11-17T02:55:11",
    "run_id": null,
    "run_ids": [
     "20261117T014558-2b7c",
     "20261117T015832-66cf",
-    "20261117T021100-746c"
+    "20261117T021100-746c",
+    "20261117T021944-26c9",
+    "20261117T023235-f180"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -2146,9 +2158,9 @@
    "sections_kind": "text_headings"
   },
   "evidence_numbers_ledger.json": {
-   "sha256": "d075f471beb961e7e09fd25eb56715fa0f83e51b3a7691c87d60f37831d8cef5",
+   "sha256": "6f42a214b5ce16ff39ca005ed25e202409cbcf935d1763ffcac0fb1e9655f9a2",
    "size": 6640,
-   "mtime": "2026-11-17T02:06:29",
+   "mtime": "2026-11-17T02:55:19",
    "run_id": "20261116T235937-c6ff",
    "run_ids": [
     "20261116T235937-c6ff"

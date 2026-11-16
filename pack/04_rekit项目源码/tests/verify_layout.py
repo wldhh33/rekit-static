@@ -57,6 +57,18 @@ RT_TYPES = {
 }
 TID = {"FieldLayout": 0x10, "ClassLayout": 0x0F, "FieldRVA": 0x1D}
 
+
+def _evidence_path(p):
+    """证据里的路径必须与克隆位置无关：work 内写相对路径（/ 分隔）；
+    仓库外样本（mscorlib / System.Console）保留绝对路径。绝对路径进证据会让
+    sha256 随克隆目录变化，ledger_check 在异地克隆必然 FAIL。"""
+    try:
+        rel = os.path.relpath(p, WORK)
+    except ValueError:
+        return p
+    return rel.replace(os.sep, "/") if not rel.startswith("..") else p
+
+
 CHECKS = []
 
 
@@ -649,7 +661,7 @@ def main():
                                      "" if not pn else " 首条=" + pn[0]["line"]))
 
         evidence[tag] = {
-            "path": path,
+            "path": _evidence_path(path),
             "denominators": {k: den[k] for k in
                              ("FieldLayout", "ClassLayout", "FieldRVA",
                               "identity_ok")},
