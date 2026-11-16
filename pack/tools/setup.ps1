@@ -66,6 +66,22 @@ if ($Problems.Count -gt 0) {
     exit 2
 }
 
+Write-Host ""
+Write-Host "== assets =="
+foreach ($rel in $required) {
+    $from = Join-Path $Src $rel
+    $to = Join-Path $Root $rel
+    if (Test-Path -LiteralPath $to) {
+        Skip "already present: $rel (不覆盖；要重来请手动移走)"
+        continue
+    }
+    New-Item -ItemType Directory -Path (Split-Path -Parent $to) -Force | Out-Null
+    Copy-Item -LiteralPath $from -Destination $to -Recurse -Force
+    $n = @(Get-ChildItem -LiteralPath $to -Recurse -File).Count
+    Ok "copied: $rel ($n files)"
+}
+
+# junction 必须在资产复制之后：m3\work\tools 的目标就是 m2\work\tools
 if (-not $SkipJunctions) {
     Write-Host ""
     Write-Host "== junctions =="
@@ -103,21 +119,6 @@ if (-not $SkipJunctions) {
         New-Item -ItemType Junction -Path $link -Target $target | Out-Null
         Ok "junction created: $($pair.Link)"
     }
-}
-
-Write-Host ""
-Write-Host "== assets =="
-foreach ($rel in $required) {
-    $from = Join-Path $Src $rel
-    $to = Join-Path $Root $rel
-    if (Test-Path -LiteralPath $to) {
-        Skip "already present: $rel (不覆盖；要重来请手动移走)"
-        continue
-    }
-    New-Item -ItemType Directory -Path (Split-Path -Parent $to) -Force | Out-Null
-    Copy-Item -LiteralPath $from -Destination $to -Recurse -Force
-    $n = @(Get-ChildItem -LiteralPath $to -Recurse -File).Count
-    Ok "copied: $rel ($n files)"
 }
 
 if ($Problems.Count -gt 0) {
