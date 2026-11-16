@@ -107,7 +107,7 @@
  ],
  "samples": {
   "rekit": {
-   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m17\\_gen\\RekitSample.dll",
+   "path": "D:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m17\\_gen\\RekitSample.dll",
    "denominators": {
     "MethodDef": {
      "rows": 18,
@@ -237,7 +237,7 @@
    "m17_problems": 0
   },
   "flow": {
-   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m18\\_gen\\FlowSample.dll",
+   "path": "D:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m18\\_gen\\FlowSample.dll",
    "denominators": {
     "MethodDef": {
      "rows": 20,

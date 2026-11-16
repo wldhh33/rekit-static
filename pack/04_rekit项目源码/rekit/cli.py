@@ -32,6 +32,123 @@ def detect_format(path):
     return None
 
 
+# U1（2026-11-17 交付批次）：`rekit info <file> [--json]` 分诊报告。
+# 字段名已冻结（见 pack\03_路线图与章程\JSON_CONTRACT.md），改名按破坏性变更处理。
+INFO_SCHEMA = 1
+_ELF_EM = {0x03: "i386", 0x28: "ARM", 0x3E: "x86-64", 0xB7: "AArch64",
+           0xF3: "RISC-V"}
+_ELF_ET = {1: "REL", 2: "EXEC", 3: "DYN", 4: "CORE"}
+
+
+def _dotnet_info(path):
+    from . import dotnet
+    try:
+        r = dotnet.open_tables(path)
+    except Exception as e:  # 元数据层失败不影响 info 其余字段
+        return {"is_cli": None, "status": "error",
+                "reason": "%s: %s" % (type(e).__name__, e)}
+    status = r.get("status")
+    if status == dotnet.STATUS_OK:
+        return {"is_cli": True, "status": status, "reason": None}
+    return {"is_cli": True if status != dotnet.STATUS_NOT_DOTNET else False,
+            "status": status, "reason": r.get("reason")}
+
+
+def build_info(path):
+    """返回 info 的 JSON 对象；键集合即冻结契约（缺失写 null，不省略键）。"""
+    from . import elf, pe
+    fmt = detect_format(path)
+    if fmt == "elf":
+        r = elf.parse(path)
+        with open(path, "rb") as f:
+            head = f.read(5)
+        secs = [{"name": s[0], "addr": s[2], "offset": s[3], "size": s[4]}
+                for s in r["sections"]]
+        return {"schema": INFO_SCHEMA, "path": str(path), "format": "ELF",
+                "arch": _ELF_EM.get(r["machine"], "0x%x" % r["machine"]),
+                "bits": 64 if head[4] == 2 else 32,
+                "type": _ELF_ET.get(r["type"], "0x%x" % r["type"]),
+                "entry": r["entry"], "image_base": None, "subsystem": None,
+                "nsections": len(secs), "sections": secs,
+                "security": r["security"], "imports": None, "exports": None,
+                "dotnet": None}
+    if fmt == "pe":
+        r = pe.parse(path)
+        secs = [{"name": s[4], "addr": s[0], "offset": s[2], "size": s[3]}
+                for s in r["sections"]]
+        exp = r.get("exports")
+        return {"schema": INFO_SCHEMA, "path": str(path), "format": "PE",
+                "arch": r["machine"],
+                "bits": 64 if r["magic"] == 0x20B else 32,
+                "type": "DLL" if int(r["chars"], 16) & 0x2000 else "EXE",
+                "entry": r["entry"], "image_base": r["image_base"],
+                "subsystem": r["subsystem"], "nsections": r["nsect"],
+                "sections": secs, "security": None,
+                "imports": sorted(r["imports"]) if r["imports"] else [],
+                "exports": None if not exp else {"dll": exp["dll"],
+                                                 "nfuncs": exp["nfuncs"]},
+                "dotnet": _dotnet_info(path)}
+    return None
+
+
+def render_info(info):
+    lines = ["file     : %s" % info["path"],
+             "format   : %s (%s, %d-bit, %s)" % (info["format"], info["arch"],
+                                                 info["bits"], info["type"]),
+             "entry    : 0x%x" % info["entry"],
+             "sections : %d" % info["nsections"]]
+    if info["format"] == "ELF":
+        s = info["security"]
+        lines.append("security : NX %s (%s) | RELRO %s | PIE %s | W+X segs %d"
+                     % (s["nx"], s["nx_reason"], s["relro"], s["pie"],
+                        len(s["wx_segments"])))
+    else:
+        lines.append("imagebase: 0x%x  subsystem: %s"
+                     % (info["image_base"], info["subsystem"]))
+        lines.append("imports  : %d DLL" % len(info["imports"]))
+        if info["exports"]:
+            lines.append("exports  : %s (%d funcs)"
+                         % (info["exports"]["dll"], info["exports"]["nfuncs"]))
+    d = info["dotnet"]
+    if d is not None:
+        lines.append("dotnet   : cli=%s status=%s%s"
+                     % (d["is_cli"], d["status"],
+                        "" if not d["reason"] else " (%s)" % d["reason"]))
+    return "\n".join(lines)
+
+
+def _info_main(argv):
+    import argparse
+    import json
+    ap = argparse.ArgumentParser(
+        prog="rekit.cli info",
+        description="一条命令输出分诊报告（格式/架构/入口/节/保护/导入导出/.NET）")
+    ap.add_argument("file", help="待分析文件")
+    ap.add_argument("--json", action="store_true", help="输出 JSON（字段名已冻结）")
+    args = ap.parse_args(argv)
+    if not os.path.exists(args.file):
+        print("rekit: %s: 文件不存在" % args.file, file=sys.stderr)
+        return 2
+    try:
+        info = build_info(args.file)
+    except OSError as e:
+        print("rekit: %s: 读取失败(%s)" % (args.file, e), file=sys.stderr)
+        return 2
+    except Exception as e:
+        print("rekit: %s: 解析失败(%s: %s)" % (args.file, type(e).__name__, e),
+              file=sys.stderr)
+        return 3
+    if info is None:
+        print("rekit: %s: 无法识别的格式（非 ELF / 非 PE）" % args.file,
+              file=sys.stderr)
+        return 2
+    if args.json:
+        print(json.dumps(info, ensure_ascii=False, indent=2, default=str))
+    else:
+        print(render_info(info))
+    return 0
+
+
 def main(argv=None):
     # M1.5（2026-11-15）：`rekit mcp` 启动 MCP stdio 服务器（CLI+MCP 双身份）。
     # 手动短路而非 argparse subparsers——保持单文件位置参数行为与 58 断言逐字节兼容。
@@ -39,6 +156,9 @@ def main(argv=None):
     if argv and argv[0] == "mcp":
         from . import mcp
         return mcp.serve()
+    # U1（2026-11-17）：`rekit info <file> [--json]` 分诊报告（章程承诺的命令）。
+    if argv and argv[0] == "info":
+        return _info_main(argv[1:])
     # M2（2026-11-15 U1）：`rekit fingerprint <file> [--json]` 指纹层。
     # 同样走手动短路，保证既有单文件位置参数路径逐字节不变。
     if argv and argv[0] == "fingerprint":

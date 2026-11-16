@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rekit"
+version = "0.1.0"
+description = "rekit —— 纯标准库二进制静态分诊工具（PE / ELF / .NET）"
+readme = { text = "纯标准库实现的二进制静态分诊/分析工具；用法见 README.md。", content-type = "text/plain" }
+requires-python = ">=3.8"
+license = { text = "内部学习项目，未声明开源许可" }
+dependencies = []
+
+[project.scripts]
+rekit = "rekit.cli:main"
+
+[tool.setuptools]
+packages = ["rekit"]

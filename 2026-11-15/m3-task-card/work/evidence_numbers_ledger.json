@@ -205,12 +205,12 @@
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m19_sigblob.json",
       "role": "M19 签名语义层 dnfile 字节 + SRM canonical 对账",
-      "sha256": "faa8c092237cb9f9d21ca34810313a6bf60d50f4f260dbeedd0c1f299ed9d1d8"
+      "sha256": "e46e4a577e92ee3bd045aee549225c350c4a2623e71574fcbd0c22977fd7b85a"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m20_layout.json",
       "role": "M20 布局层 dnfile 列值 + 源码真值 + 运行期 oracle 对账",
-      "sha256": "d1aad217e4b3298a5185013165178f21e6a28ab615575106e952874223bf18d0"
+      "sha256": "bc42f1d7432d1c88c996e87fccac382623acc5da193eaa2cf57c8f8f8f691c57"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m5_expr_residual.json",

@@ -366,3 +366,13 @@
 - 文档漂移修正（本轮实测）：`HANDOFF.md` 补 M19/M20 并把过期态（git 未初始化、目录名 4/7、21 套、8 小节 67 数字）改为实测值；`pack/AGENTS.md` 规模改 **27 模块 / 18,600 行**（原 25 / 16,939）、23 套、23 个 verify；`CHARTER.md` 补 M20 行与转段触发器 T1–T5。
 - 转段触发器实测：**T1 已命中**（验收 700 / 实现 730 = **0.96 ≥ 0.90**；该条曾被误读为「需同时满足两个条件」而写成未命中，已更正——判据是「比值 ≥0.90 **或** 连续 2 个里程碑验收新增 > 实现新增」，任一满足即命中；「连续 2 次验收 > 实现」不成立：M19 493 < 907、M20 700 < 730）；T2 计数 **1/2**；T3 未命中（429.4s < 10 分钟，新增证据 1 个）；**T4 已命中**（运行期 oracle 依赖 PowerShell + Windows CLR，别人无法直接复跑）；T5 未命中（未改任何既有 verify）。**T1 + T4 同时命中 ⇒ 停止纵深，转交付批次**。
 - 规则：**R123** 类型布局的静态结论只到元数据写明的值（`FieldLayout.Offset`、`ClassLayout` 两列、`FieldRVA` 的 RVA 与字节），sequential/auto 偏移必须标运行期推导、不进静态分母；**R124** `FieldRVA` 数据长度不是元数据字段，按「valuetype ClassSize → 基元 → unknown」分源并逐类计数，推不出写 unknown 及缺什么，不得用 `.data` 字面量反推；**R125** 静态结论与运行期推导必须分栏（`static_conclusion.includes/excludes`），交叉印证不得反写成静态来源。
+
+### 2026-11-17 U1-a — 交付批次（打包 / info / JSON 契约 / 示例 / tag，不占里程碑号）
+
+- 打包：`04_rekit项目源码/pyproject.toml`（setuptools，`packages=["rekit"]`，console entry `rekit = rekit.cli:main`，`requires-python >= 3.8`，`dependencies = []`）。实测 `python -m pip install -e .` 后任意目录 `rekit info <file>` 可跑；未安装仍可 `python -m rekit.cli`。新增 `rekit/__main__.py` 支撑 `python -m rekit <cmd>`（既有 `test_ilflow` 用例一直在等这个入口，此前靠机器上残留的旧安装偶然通过）。
+- `rekit info <file> [--json]`：章程承诺的命令补齐。字段 15 个（sha 无关），缺失写 `null` 不省键；ELF 带 `security`（沿用 `elf.parse`），PE 带 `image_base/subsystem/imports/exports` 与 `dotnet{is_cli,status,reason}`。失败语义与既有分诊一致（2=不存在/不可识别，3=解析失败）。
+- JSON 契约冻结：`pack/03_路线图与章程/JSON_CONTRACT.md` 冻结 `info`/`map`/`ilflow`/`datarefs` 的 `--json` 顶层字段名；改名或删除按破坏性变更处理，新增字段须同步登记。`map` 无 `schema` 键（历史原因）已在契约里明写。
+- 示例：`04_rekit项目源码/README.md` 给出 PE/ELF/.NET 各一条可复现命令与预期摘要（ELF 用 `bin_ls.elf` 的 info/map/datarefs；PE 用 `minipe.exe` 的 info/map；.NET 先跑 `work/outputs/m20_layout/gen.ps1` 再 info/ilflow）。**.NET 样本重新生成不是逐字节可复现**（编译期时间戳），可复现的是源码与元数据——README 已写明。
+- 文档漂移修正（本轮实测）：`pack/README.md` 数字权威改 `evidence_numbers_ledger.json`、R33–R119 已有规范文件、目录名损坏提示改为「已改名」、21 套/4 分钟改 23 套/约 7.2 分钟、pytest 必须在 `work` 目录跑；`PATH_MAP.md` 规模改 27 模块/25 test/23 verify 并补 `pyproject.toml`、`README.md`、`JSON_CONTRACT`；`AGENTS.md` 规模 18,600→**18,720** 行、CLI 入口与 pytest 工作目录。
+- 回归：全量门禁 23/23、pytest **554 passed**、ledger PASS（run 见收口提交说明）；`v0.1.0` tag。
+

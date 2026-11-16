@@ -7,7 +7,7 @@
 
 - `rekit`：纯 Python 标准库实现的二进制静态分诊/分析工具（PE / ELF / .NET），提供 CLI、Python 模块、MCP 三种用法。
 - 项目性质：每日逆向学习的**载体**。当天没有回流成 `rekit` 模块/规则/测试，当天不算达标。
-- 规模（2026-11-17 实测，含 M20 `layout.py`）：27 个模块 / 18,600 行；25 个测试文件 / 6,386 行；23 个独立验证脚本 / 9,976 行。
+- 规模（2026-11-17 U1 交付批次实测）：27 个模块 / 18,720 行；25 个测试文件 / 6,386 行；23 个独立验证脚本 / 9,976 行。
 
 ## 2. 硬约束（不可协商）
 
@@ -31,10 +31,10 @@ python "pack\tools\status.py"
 |---|---|
 | 状态摘要（≤20 行） | `python pack\tools\status.py` |
 | 全量门禁（23 套 verify + pytest） | `python pack\tools\verify_gate.py --run`（`--list` 只看计划） |
-| 全量单测 | `python -m pytest "2026-11-15\m3-task-card\work\tests" -q` |
+| 全量单测 | `cd "2026-11-15\m3-task-card\work"` 后 `python -m pytest tests -q`（fixture 路径按 cwd 解析，必须在 work 目录跑） |
 | 单个验证脚本 | `python "2026-11-15\m3-task-card\work\tests\verify_disasm.py" --all` |
 | 指纹混淆矩阵 | `python "...\tests\verify_fingerprint.py" --all --matrix` |
-| 运行 CLI | `python -m rekit.cli <file>`（在 `rekit` 的父目录下） |
+| 运行 CLI | `rekit info <file>`（已 `pip install -e .` 后任意目录）；未安装时 `python -m rekit.cli <file>`（在 `rekit` 父目录下） |
 
 验证结果统一落在 `work\verification\<run_id>\`（每套一个日志 + `summary.json`，`latest\` 为副本）。
 

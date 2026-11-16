@@ -173,7 +173,7 @@
  ],
  "samples": {
   "il": {
-   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m20\\_gen\\LayoutSample.dll",
+   "path": "D:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m20\\_gen\\LayoutSample.dll",
    "denominators": {
     "FieldLayout": {
      "rows": 3,
@@ -276,7 +276,7 @@
    }
   },
   "csharp": {
-   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m20\\_gen\\LayoutCSharp.dll",
+   "path": "D:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m20\\_gen\\LayoutCSharp.dll",
    "denominators": {
     "FieldLayout": {
      "rows": 3,
