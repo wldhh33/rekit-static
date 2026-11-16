@@ -1,0 +1,580 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "den-il",
+   "name": "分母恒等式与 unknown/undecoded 分离",
+   "status": "PASS",
+   "detail": "行=3/2/3 问题=0"
+  },
+  {
+   "id": "dn-cols-il",
+   "name": "dnfile 三表原始列值逐行相等",
+   "status": "PASS",
+   "detail": "行=8 问题=0"
+  },
+  {
+   "id": "dn-rva-il",
+   "name": "dnfile RVA→offset 与数据字节逐行复算",
+   "status": "PASS",
+   "detail": "行=2 问题=0"
+  },
+  {
+   "id": "src-il",
+   "name": "源码声明（.il/.cs）逐行相等",
+   "status": "PASS",
+   "detail": "比较项=8 问题=0"
+  },
+  {
+   "id": "runtime-il",
+   "name": "运行期 oracle（OffsetOf/SizeOf）与静态段边界",
+   "status": "PASS",
+   "detail": "偏移=5 size=2 auto=1 问题=0"
+  },
+  {
+   "id": "den-csharp",
+   "name": "分母恒等式与 unknown/undecoded 分离",
+   "status": "PASS",
+   "detail": "行=3/3/1 问题=0"
+  },
+  {
+   "id": "dn-cols-csharp",
+   "name": "dnfile 三表原始列值逐行相等",
+   "status": "PASS",
+   "detail": "行=7 问题=0"
+  },
+  {
+   "id": "dn-rva-csharp",
+   "name": "dnfile RVA→offset 与数据字节逐行复算",
+   "status": "PASS",
+   "detail": "行=1 问题=0"
+  },
+  {
+   "id": "src-csharp",
+   "name": "源码声明（.il/.cs）逐行相等",
+   "status": "PASS",
+   "detail": "比较项=8 问题=0"
+  },
+  {
+   "id": "runtime-csharp",
+   "name": "运行期 oracle（OffsetOf/SizeOf）与静态段边界",
+   "status": "PASS",
+   "detail": "偏移=9 size=1 auto=0 问题=0"
+  },
+  {
+   "id": "name-csharp",
+   "name": "__StaticArrayInitTypeSize=N == ClassSize == 长度",
+   "status": "PASS",
+   "detail": "行=1 问题=0"
+  },
+  {
+   "id": "den-mscorlib",
+   "name": "分母恒等式与 unknown/undecoded 分离",
+   "status": "PASS",
+   "detail": "行=78/63/128 问题=0"
+  },
+  {
+   "id": "dn-cols-mscorlib",
+   "name": "dnfile 三表原始列值逐行相等",
+   "status": "PASS",
+   "detail": "行=269 问题=0"
+  },
+  {
+   "id": "dn-rva-mscorlib",
+   "name": "dnfile RVA→offset 与数据字节逐行复算",
+   "status": "PASS",
+   "detail": "行=128 问题=0"
+  },
+  {
+   "id": "runtime-mscorlib",
+   "name": "非受控样本不产出运行期结论",
+   "status": "PASS",
+   "detail": "runtime_derived.available=False"
+  },
+  {
+   "id": "name-mscorlib",
+   "name": "__StaticArrayInitTypeSize=N == ClassSize == 长度",
+   "status": "PASS",
+   "detail": "行=120 问题=0"
+  },
+  {
+   "id": "den-console",
+   "name": "分母恒等式与 unknown/undecoded 分离",
+   "status": "PASS",
+   "detail": "行=0/3/0 问题=0"
+  },
+  {
+   "id": "dn-cols-console",
+   "name": "dnfile 三表原始列值逐行相等",
+   "status": "PASS",
+   "detail": "行=3 问题=0"
+  },
+  {
+   "id": "dn-rva-console",
+   "name": "dnfile RVA→offset 复算",
+   "status": "SKIP",
+   "detail": "该样本 FieldRVA=0，无可复算行（由聚合分母兜底）"
+  },
+  {
+   "id": "runtime-console",
+   "name": "非受控样本不产出运行期结论",
+   "status": "PASS",
+   "detail": "runtime_derived.available=False"
+  },
+  {
+   "id": "agg-fieldlayout",
+   "name": "聚合分母（全样本合计）",
+   "status": "PASS",
+   "detail": "rows=84 下限=3"
+  },
+  {
+   "id": "agg-classlayout",
+   "name": "聚合分母（全样本合计）",
+   "status": "PASS",
+   "detail": "rows=71 下限=3"
+  },
+  {
+   "id": "agg-fieldrva",
+   "name": "聚合分母（全样本合计）",
+   "status": "PASS",
+   "detail": "rows=132 下限=1"
+  },
+  {
+   "id": "agg-src",
+   "name": "源码真值比较项聚合",
+   "status": "PASS",
+   "detail": "比较项=16 下限=8"
+  },
+  {
+   "id": "agg-runtime",
+   "name": "运行期推导偏移聚合",
+   "status": "PASS",
+   "detail": "偏移=14 size=3 auto=1 下限=3"
+  },
+  {
+   "id": "agg-dn",
+   "name": "dnfile 逐行比较聚合",
+   "status": "PASS",
+   "detail": "cols=287 rva=131 下限=3/1"
+  },
+  {
+   "id": "agg-name-invariant",
+   "name": "ClassSize 命名不变量聚合",
+   "status": "PASS",
+   "detail": "行=121 下限=1"
+  },
+  {
+   "id": "selfproof",
+   "name": "比对器可失败自证（5 类注入 + 空比对）",
+   "status": "PASS",
+   "detail": "fieldlayout=[FAIL] m20-src selfproof FieldLayout A offset expected=0 actual=4 / classlayout=[FAIL] m20-src selfproof ClassLayout LayoutSample.ExplicitBlob (pack,size) expected=(1, 24) actual=(1, 25) / fieldrva-bytes=[FAIL] m20-src selfproof FieldRVA Blob24 数据 expected=0102030405060708090a0b0c0d0e0f101112131415161718 actual='fe02030405060708090a0b0c0d0e0f101112131415161718' / rva+1=[FAIL] m20-rva Blob24 file_off dnfile=593 rekit=592 / empty=空比对已拒绝"
+  }
+ ],
+ "samples": {
+  "il": {
+   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m20\\_gen\\LayoutSample.dll",
+   "denominators": {
+    "FieldLayout": {
+     "rows": 3,
+     "rows_read": 3,
+     "field_ref_ok": 3,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 3,
+     "decoded_clean": 3,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "ClassLayout": {
+     "rows": 2,
+     "rows_read": 2,
+     "parent_ref_ok": 2,
+     "parent_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 2,
+     "decoded_clean": 2,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "FieldRVA": {
+     "rows": 3,
+     "rows_read": 3,
+     "field_ref_ok": 3,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "length_known": 2,
+     "length_unknown": 1,
+     "unknown_by_reason": {
+      "valuetype_not_typedef": 1
+     },
+     "data_ok": 2,
+     "rva_unmapped": 0,
+     "data_truncated": 0,
+     "undecoded_by_reason": {},
+     "length_by_source": {
+      "valuetype_class_size": 1,
+      "primitive": 1
+     },
+     "undecoded": 0,
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_length_ok": true,
+     "identity_data_ok": true,
+     "ratios": {
+      "data_over_length_known": 1.0,
+      "unknown_over_rows": 0.3333333333333333
+     }
+    },
+    "identity_ok": true
+   },
+   "counts": {
+    "fieldlayout_rows": 3,
+    "fieldlayout_offsets": 3,
+    "fieldlayout_explicit_owners": 3,
+    "fieldlayout_other_owners": 0,
+    "classlayout_rows": 2,
+    "classlayout_explicit": 1,
+    "classlayout_sequential": 1,
+    "classlayout_auto": 0,
+    "classlayout_packing_nonzero": 2,
+    "classlayout_size_nonzero": 2,
+    "fieldrva_rows": 3,
+    "fieldrva_data_ok": 2,
+    "fieldrva_bytes_total": 28,
+    "fieldrva_length_by_source": {
+     "valuetype_class_size": 1,
+     "primitive": 1
+    },
+    "unknown_by_reason": {
+     "valuetype_not_typedef": 1
+    },
+    "anomalies": {},
+    "items_stored": {
+     "fieldlayouts": 3,
+     "classlayouts": 2,
+     "fieldrvas": 3
+    },
+    "runtime_derived_types": 0
+   },
+   "runtime_derived": {
+    "available": false,
+    "types": 0,
+    "static_conclusion": false
+   }
+  },
+  "csharp": {
+   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m20\\_gen\\LayoutCSharp.dll",
+   "denominators": {
+    "FieldLayout": {
+     "rows": 3,
+     "rows_read": 3,
+     "field_ref_ok": 3,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 3,
+     "decoded_clean": 3,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "ClassLayout": {
+     "rows": 3,
+     "rows_read": 3,
+     "parent_ref_ok": 3,
+     "parent_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 3,
+     "decoded_clean": 3,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "FieldRVA": {
+     "rows": 1,
+     "rows_read": 1,
+     "field_ref_ok": 1,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "length_known": 1,
+     "length_unknown": 0,
+     "unknown_by_reason": {},
+     "data_ok": 1,
+     "rva_unmapped": 0,
+     "data_truncated": 0,
+     "undecoded_by_reason": {},
+     "length_by_source": {
+      "valuetype_class_size": 1
+     },
+     "undecoded": 0,
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_length_ok": true,
+     "identity_data_ok": true,
+     "ratios": {
+      "data_over_length_known": 1.0,
+      "unknown_over_rows": 0.0
+     }
+    },
+    "identity_ok": true
+   },
+   "counts": {
+    "fieldlayout_rows": 3,
+    "fieldlayout_offsets": 3,
+    "fieldlayout_explicit_owners": 3,
+    "fieldlayout_other_owners": 0,
+    "classlayout_rows": 3,
+    "classlayout_explicit": 2,
+    "classlayout_sequential": 1,
+    "classlayout_auto": 0,
+    "classlayout_packing_nonzero": 2,
+    "classlayout_size_nonzero": 2,
+    "fieldrva_rows": 1,
+    "fieldrva_data_ok": 1,
+    "fieldrva_bytes_total": 32,
+    "fieldrva_length_by_source": {
+     "valuetype_class_size": 1
+    },
+    "unknown_by_reason": {},
+    "anomalies": {},
+    "items_stored": {
+     "fieldlayouts": 3,
+     "classlayouts": 3,
+     "fieldrvas": 1
+    },
+    "runtime_derived_types": 0
+   },
+   "runtime_derived": {
+    "available": false,
+    "types": 0,
+    "static_conclusion": false
+   }
+  },
+  "mscorlib": {
+   "path": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\mscorlib.dll",
+   "denominators": {
+    "FieldLayout": {
+     "rows": 78,
+     "rows_read": 78,
+     "field_ref_ok": 78,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 78,
+     "decoded_clean": 78,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "ClassLayout": {
+     "rows": 63,
+     "rows_read": 63,
+     "parent_ref_ok": 63,
+     "parent_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 63,
+     "decoded_clean": 63,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "FieldRVA": {
+     "rows": 128,
+     "rows_read": 128,
+     "field_ref_ok": 128,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "length_known": 128,
+     "length_unknown": 0,
+     "unknown_by_reason": {},
+     "data_ok": 128,
+     "rva_unmapped": 0,
+     "data_truncated": 0,
+     "undecoded_by_reason": {},
+     "length_by_source": {
+      "valuetype_class_size": 120,
+      "primitive": 8
+     },
+     "undecoded": 0,
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_length_ok": true,
+     "identity_data_ok": true,
+     "ratios": {
+      "data_over_length_known": 1.0,
+      "unknown_over_rows": 0.0
+     }
+    },
+    "identity_ok": true
+   },
+   "counts": {
+    "fieldlayout_rows": 78,
+    "fieldlayout_offsets": 78,
+    "fieldlayout_explicit_owners": 78,
+    "fieldlayout_other_owners": 0,
+    "classlayout_rows": 63,
+    "classlayout_explicit": 46,
+    "classlayout_sequential": 17,
+    "classlayout_auto": 0,
+    "classlayout_packing_nonzero": 44,
+    "classlayout_size_nonzero": 61,
+    "fieldrva_rows": 128,
+    "fieldrva_data_ok": 128,
+    "fieldrva_bytes_total": 64421,
+    "fieldrva_length_by_source": {
+     "valuetype_class_size": 120,
+     "primitive": 8
+    },
+    "unknown_by_reason": {},
+    "anomalies": {},
+    "items_stored": {
+     "fieldlayouts": 78,
+     "classlayouts": 63,
+     "fieldrvas": 128
+    },
+    "runtime_derived_types": 0
+   },
+   "runtime_derived": {
+    "available": false,
+    "types": 0,
+    "static_conclusion": false
+   }
+  },
+  "console": {
+   "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\7.0.20\\System.Console.dll",
+   "denominators": {
+    "FieldLayout": {
+     "rows": 0,
+     "rows_read": 0,
+     "field_ref_ok": 0,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 0,
+     "decoded_clean": 0,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": null
+     }
+    },
+    "ClassLayout": {
+     "rows": 3,
+     "rows_read": 3,
+     "parent_ref_ok": 3,
+     "parent_ref_missing": 0,
+     "missing_by_reason": {},
+     "decoded": 3,
+     "decoded_clean": 3,
+     "decoded_with_unknown": 0,
+     "unknown_by_reason": {},
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "FieldRVA": {
+     "rows": 0,
+     "rows_read": 0,
+     "field_ref_ok": 0,
+     "field_ref_missing": 0,
+     "missing_by_reason": {},
+     "length_known": 0,
+     "length_unknown": 0,
+     "unknown_by_reason": {},
+     "data_ok": 0,
+     "rva_unmapped": 0,
+     "data_truncated": 0,
+     "undecoded_by_reason": {},
+     "length_by_source": {},
+     "undecoded": 0,
+     "identity_rows_ok": true,
+     "identity_ref_ok": true,
+     "identity_length_ok": true,
+     "identity_data_ok": true,
+     "ratios": {
+      "data_over_length_known": null,
+      "unknown_over_rows": null
+     }
+    },
+    "identity_ok": true
+   },
+   "counts": {
+    "fieldlayout_rows": 0,
+    "fieldlayout_offsets": 0,
+    "fieldlayout_explicit_owners": 0,
+    "fieldlayout_other_owners": 0,
+    "classlayout_rows": 3,
+    "classlayout_explicit": 0,
+    "classlayout_sequential": 3,
+    "classlayout_auto": 0,
+    "classlayout_packing_nonzero": 0,
+    "classlayout_size_nonzero": 3,
+    "fieldrva_rows": 0,
+    "fieldrva_data_ok": 0,
+    "fieldrva_bytes_total": 0,
+    "fieldrva_length_by_source": {},
+    "unknown_by_reason": {},
+    "anomalies": {},
+    "items_stored": {
+     "fieldlayouts": 0,
+     "classlayouts": 3,
+     "fieldrvas": 0
+    },
+    "runtime_derived_types": 0
+   },
+   "runtime_derived": {
+    "available": false,
+    "types": 0,
+    "static_conclusion": false
+   }
+  }
+ },
+ "aggregate": {
+  "FieldLayout": 84,
+  "ClassLayout": 71,
+  "FieldRVA": 132,
+  "dn_cols": 287,
+  "dn_rva": 131,
+  "src": 16,
+  "rt_off": 14,
+  "rt_size": 3,
+  "rt_auto": 1,
+  "name": 121
+ }
+}

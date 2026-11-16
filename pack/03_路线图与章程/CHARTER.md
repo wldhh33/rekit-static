@@ -38,7 +38,34 @@
 | M16 非字符串数据引用层（`rekit datarefs`，收口 ✅ 2026-11-16） | `datarefs.py`：对象只认声明（ELF `STT_OBJECT.st_size` / DWARF 变量 + 类型链），引用点按 7 种寻址形态分列；归因三档 `object_start`/`inside_object`/`after_object` 不合并；指针槽首地址与内部值分列；分母先行（声明候选 = 接受 + 拒收 + 去重）；PE COFF/导出表无尺寸字段单列 `format_rejections`、不进对象分母；`funcreport` 升 `SCHEMA=2` 七层，`data_refs` 接真实来源 | **分母恒等式成立；引用点由外部 objdump/readelf 独立重算；三档不合并；「没有声明来源」与「声明存在但不可解析」分开报（R109–R111）** ✅ 已达成：`dyn_static` **539 = 483 + 41 + 15**、有代码引用 **417/483（86.3354%）**、形态合计 **25,941**、分档 `object_start=1709/inside_object=669/after_object=259/data_unattributed=1001/not_data=236`、指针槽首地址 92 内部 30；PE `datarefs_full.exe` **9 = 7 + 2 + 0**、**5/7（71.4286%）**、COFF 格式层拒收 720；外部重算 readelf 对象 501 条、objdump DWARF 7 条、引用点 fix **207/207** / dyn **3854/3855**、指针槽 2/2；可失败自证（目标 +4、删 `g_table`）均检出；pytest **509 passed（70.33s）** + **18/18 verify exit 0**；回归期修掉 `id()` 作缓存键导致的约 1/15 偶发误报（改按内容作键）。｜来源：`NUMBERS_LEDGER.md` §11；`PROGRESS.md` 2026-11-16「M16」节；`work/evidence_m16_datarefs.json`、`evidence_m16_pytest.log`、`evidence_m16_verify.log` |
 | M17 .NET 程序集结构层（收口 ✅ 2026-11-16） | `dotnet.py`：PE DataDirectory[14] → CLI 头 → BSJB 元数据根 → `#~` 表流（45 表 schema、coded index 宽度）→ TypeDef/MethodDef；MethodDef.RVA 只用节表换算；tiny/fat 方法体头与 EH 子句；ECMA-335 opcode 表切 IL 边界；`#US` 字面量；CLI `rekit dotnet`；`funcreport` 对 .NET 显式 `not_applicable` | **分母恒等式成立；IL 边界由独立 dncil 全量证伪；受控样本标注局限；声明可读/本轮读不出分列** ✅ 已达成：受控 6/18、System.Console 47/433、mscorlib 3,356/29,257；三者 25,726 个方法体与 598,917 条 IL 指令边界逐条与 dnfile/dncil 一致；pytest 528 passed、verify 20/20 |
 | M18 .NET IL 控制流与调用关系（收口 ✅ 2026-11-16） | `ilflow.py`：token 解析（MethodDef / MemberRef / MethodSpec / StandAloneSig，未解析按 5 类原因分列）；分支目标（短/长/switch，落点三分类，越界单列）；基本块与四类边（fallthrough/branch/leave/switch）；EH 子句单列结构 + `leave` 越区检查；分母恒等式；CLI `rekit ilflow`；`verify_ilflow.py` 用 dncil 独立重算分支/块/边/可达、dnfile 独立核对每个调用点 token | **分母先报且恒等式成立；每个调用点/分支/EH 由独立来源证伪；空比对一律 FAIL；块与 x86 规则显式区分；EH 建模选择给理由** ✅ 已达成：四样本（受控 2 + 真实 Console/mscorlib）分母全对平；dncil 全量覆盖 25,735 个有体方法 / 94,346 条调用 / 109,684 块 / 109,029 条边 / 2,192 条 EH 子句；发现并修复实现缺陷 1 处（无条件 `br/br.s` 的假 fallthrough 边，mscorlib -8,258 条假边、3 个块可达性反转）；verify **41 项全 PASS**、pytest **554 passed**、21 个 verify 脚本 exit 0（fingerprint 需 `--all --matrix`）；证据 outputs/TASK_m18_ilflow.md、work/evidence_m18_*；规则 R115–R119 |
-| M19 .NET 签名语义层（**已实现：2026-11-17，验收见 PROGRESS 同日 M19**） | `sigblob.py`：只解 `#Blob` 内的签名 blob——MethodDef / MemberRef / StandAloneSig 三处调用点（`CallSite`），字段 `Field` 签名只做长度与边界，不做类型语义；内容含调用约定字节、泛型参数个数、返回类型与参数类型编码（class/valuetype/数组/指针/byref/泛型实例/自定义修饰符） | **定标要求（开工时按此验收；② 的 dnfile 字面不可执行，偏离与替代已登记：见 PROGRESS 2026-11-17 M19 / spec §5）**：① 分母先行——每张表「有 Blob 引用的行数」二分恒等式，未解码原因逐类计数；② 期望值不取被测实现——用 `dnfile` 的 `Signature` 解码独立对拍，逐 blob 逐字节边界一致；③ 类型编码未知一律 `unknown` 并写缺什么，禁止按名称猜；④ 与 M17/M18 的分工写清：M17 只到方法体位置，M18 只到 IL 结构与调用目标，M19 只到「签名说了什么类型」，不做类型布局 / 字段 RVA / 特性 / 反编译 |
+| M19 .NET 签名语义层（收口 ✅ 2026-11-17） | `sigblob.py`：只解 `#Blob` 内的签名 blob——MethodDef / MemberRef / StandAloneSig 三处调用点（`CallSite`），字段 `Field` 签名只做长度与边界，不做类型语义；内容含调用约定字节、泛型参数个数、返回类型与参数类型编码（class/valuetype/数组/指针/byref/泛型实例/自定义修饰符） | **定标要求（开工时按此验收；② 的 dnfile 字面不可执行，偏离与替代已登记：见 PROGRESS 2026-11-17 M19 / spec §5）**：① 分母先行——每张表「有 Blob 引用的行数」二分恒等式，未解码原因逐类计数；② 期望值不取被测实现——用 `dnfile` 的 `Signature` 解码独立对拍，逐 blob 逐字节边界一致；③ 类型编码未知一律 `unknown` 并写缺什么，禁止按名称猜；④ 与 M17/M18 的分工写清：M17 只到方法体位置，M18 只到 IL 结构与调用目标，M19 只到「签名说了什么类型」，不做类型布局 / 字段 RVA / 特性 / 反编译 |
+| M20 .NET 类型布局与字段 RVA（.NET 纵切面封口，**不当作第四个 .NET 里程碑**；✅ 2026-11-17） | `layout.py`：静态可证三样——`FieldLayout.Offset`、`ClassLayout.PackingSize/ClassSize`、`FieldRVA` 的 RVA→文件偏移→数据字节；数据长度来源分 `valuetype ClassSize` / 基元 / `unknown`；sequential/auto 偏移单列 `runtime_derived`（`static_conclusion=false`）；CLI `rekit layout` | **静态只报元数据写明的值；sequential/auto 偏移标运行期推导、不进静态结论；三表分母二分恒等式逐项成立；`unknown` 与 `undecoded` 分离（R121）；期望值不取被测实现** ✅ 已达成：四样本 `FieldLayout` **84** / `ClassLayout` **71** / `FieldRVA` **132** = **287**（恒等式全成立）；数据解码率 **100.0000%**（131/131）、unknown **1**（**0.7576%**，`valuetype_not_typedef`）；dnfile 三表列值 **287** 行 + RVA→文件偏移 **131** 行、源码真值 **16 项**、ClassSize/推导长度 **121** 行全部 0 不一致；运行期 oracle **14 个偏移 / 3 个 size / 1 个 auto 不可得**；`verify_layout` **28 项**（PASS 27 / SKIP 1）首版带工件式可失败自证；全量 **23 套** + pytest **554 passed** + ledger PASS；规则 **R123–R125** |
+
+## 转段触发器（T1–T5，可执行判据；2026-11-17 定标）
+
+> 用途：判断「继续往纵深加层」还是「转入交付」。**每个里程碑收口时逐条实测并写入 PROGRESS**；任一命中即停止纵深、转交付批次；全部不命中才允许开下一层。
+
+测量对象与数据来源（先写死，不许收口时临时换）：
+
+- **行数**：`git diff --numstat <上一收口 tag>..<本收口 tag>` 的新增行（删行不计）。实现 = `rekit/*.py`；验收 = `tests/verify_*.py` / `tests/test_*.py` 的新增行 + `tests/vharness.py` 新增检查。
+- **证据**：`work/evidence_*.json|log` 的**新增文件名**数；同一文件重跑覆盖不算新增。
+- **时长**：`work/verification/<run_id>/summary.json` 的 `vharness.seconds + pytest.seconds`。
+
+| 编号 | 判据（任一满足即命中） |
+|---|---|
+| T1 | 本里程碑「验收新增行 / 实现新增行」≥ **0.90**，或**连续 2 个**里程碑的验收新增行 > 实现新增行 |
+| T2 | **连续 2 个**里程碑的主要产出是「补上一层 `out_of_scope`」（M20 记第 1 次） |
+| T3 | 全量门禁 > **10 分钟**，或单次收口新增证据 > **20 个** |
+| T4 | 出现以下任一：**要给别人一条可复现命令** / **要把 rekit 当库 import** / **要跑在没有垫片的机器上** |
+| T5 | 一次收口需**同时修改 ≥3 个既有 verify 脚本** |
+
+**M20 收口实测（2026-11-17）**
+
+- **T1 已命中（记录更正）**：实现新增 730 行（`layout.py` 726 + `cli.py` 4）、验收新增 700 行（`verify_layout.py`），比值 **0.96 ≥ 0.90** → 判据第一条满足，**命中**。**该条曾被误读为「需同时满足两个条件」而写成未命中，已更正**——原判据是「比值 ≥0.90 **或** 连续 2 个里程碑验收新增 > 实现新增」，表头也已写明「任一满足即命中」；「连续 2 次验收 > 实现」这一条本身不成立（M19 493 < 907、M20 700 < 730），但不影响 T1 命中。
+- **T2 计数 1/2**：M20 确实是在补 .NET 纵切面最后一层（类型布局与字段 RVA），记第 1 次；若下一层仍以补 `out_of_scope` 为主即命中。
+- **T3 未命中**：本次全量 **356.2s + 73.2s = 429.4s（7.2 分钟）**；新增证据 **1 个**（`evidence_m20_layout.json`）。
+- **T4 已命中**：`verify_layout.py` 的运行期 oracle 依赖 `powershell` + Windows CLR，别人拿到仓库**无法直接复跑**；交付批次必须给出可复现命令或写清环境前置。
+- **T5 未命中**：M20 只新增 `verify_layout.py`，未改任何既有 verify 脚本（`vharness.py` 是门禁登记，不计入）。
 
 ## 每日任务量（2026-11-07 依基线数据定标，详见 PROGRESS.md）
 

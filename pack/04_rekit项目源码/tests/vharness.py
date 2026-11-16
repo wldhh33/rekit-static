@@ -31,6 +31,7 @@ MIN_DENOM = {
     "verify_gopclntab.py": 25, "verify_iat.py": 15, "verify_ilflow.py": 41,
     "verify_map.py": 27, "verify_paramdecl.py": 34, "verify_recdesc.py": 115,
     "verify_sigblob.py": 17,
+    "verify_layout.py": 28,
     "verify_sitejoin.py": 9, "verify_struct.py": 21, "verify_strxref.py": 24,
     "verify_switchcand.py": 73, "verify_vexaudit.py": 15,
 }
@@ -46,6 +47,7 @@ REQUIRES = {
     "verify_vexaudit.py": ("objdump",), "verify_iat.py": ("objdump",),
     "verify_sitejoin.py": ("objdump",),
     "verify_sigblob.py": ("pwsh",),
+    "verify_layout.py": ("powershell",),
 }
 
 SUITES = {
@@ -66,6 +68,7 @@ SUITES = {
     "verify_paramdecl.py": ([], ("flag", 0)),
     "verify_recdesc.py": (["--all"], ("flag", 0)),
     "verify_sigblob.py": ([], ("inline", r"\[PASS\] selfproof")),
+    "verify_layout.py": ([], ("inline", r"\[PASS\] selfproof")),
     "verify_sitejoin.py": ([], ("flag", 0)),
     "verify_struct.py": ([], ("flag", 0)),
     "verify_strxref.py": ([], ("flag", 0)),

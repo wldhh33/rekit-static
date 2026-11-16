@@ -79,6 +79,11 @@ def main(argv=None):
     if argv and argv[0] == "sigblob":
         from . import sigblob
         return sigblob.main(argv[1:])
+    # M20（2026-11-17）：`rekit layout <file> [--json] [--limit N] [--runtime J]`
+    # .NET 类型布局与字段 RVA：FieldLayout/ClassLayout/FieldRVA 的静态可证部分。
+    if argv and argv[0] == "layout":
+        from . import layout
+        return layout.main(argv[1:])
     # M18（2026-11-16）：`rekit ilflow <file> [--json] [--limit N]`
     # .NET IL 控制流与调用关系：token 三态解析、分支目标落点、基本块/边、EH 结构。
     if argv and argv[0] == "ilflow":

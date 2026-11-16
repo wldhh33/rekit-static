@@ -552,7 +552,142 @@
         }
       ],
       "unprotected_distinct": 1
+    },
+    "M19": {
+      "heading": "## 15. M19 .NET 签名语义层（#Blob 签名解码）",
+      "registered": [
+        "37,403",
+        "52,403",
+        "29,728",
+        "32,518",
+        "911",
+        "3,974",
+        "29,257",
+        "3,429",
+        "3,908",
+        "14,718",
+        "36,594",
+        "1,020",
+        "100.0000%",
+        "22 套",
+        "554 passed"
+      ],
+      "unprotected": [
+        {
+          "token": "17",
+          "occurrences": 1
+        },
+        {
+          "token": "20261117",
+          "occurrences": 1
+        },
+        {
+          "token": "237",
+          "occurrences": 1
+        },
+        {
+          "token": "277",
+          "occurrences": 1
+        },
+        {
+          "token": "35",
+          "occurrences": 1
+        },
+        {
+          "token": "433",
+          "occurrences": 1
+        },
+        {
+          "token": "65",
+          "occurrences": 1
+        },
+        {
+          "token": "66",
+          "occurrences": 1
+        },
+        {
+          "token": "7.0",
+          "occurrences": 1
+        },
+        {
+          "token": "73",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 10
+    },
+    "M20": {
+      "heading": "## 16. M20 .NET 类型布局与字段 RVA（.NET 纵切面封口）",
+      "registered": [
+        "84",
+        "71",
+        "132",
+        "131",
+        "64,421",
+        "120 / 8",
+        "122 / 9 / 1",
+        "287",
+        "16 项",
+        "14 个偏移 / 3 个 size / 1 个 auto",
+        "121",
+        "100.0000%",
+        "0.7576%",
+        "28 项",
+        "23 套",
+        "554 passed"
+      ],
+      "unprotected": [
+        {
+          "token": "0102",
+          "occurrences": 1
+        },
+        {
+          "token": "128",
+          "occurrences": 1
+        },
+        {
+          "token": "1713",
+          "occurrences": 1
+        },
+        {
+          "token": "20261117",
+          "occurrences": 1
+        },
+        {
+          "token": "24",
+          "occurrences": 1
+        },
+        {
+          "token": "25",
+          "occurrences": 1
+        },
+        {
+          "token": "27",
+          "occurrences": 1
+        },
+        {
+          "token": "592",
+          "occurrences": 1
+        },
+        {
+          "token": "593",
+          "occurrences": 1
+        },
+        {
+          "token": "63",
+          "occurrences": 1
+        },
+        {
+          "token": "7.0",
+          "occurrences": 1
+        },
+        {
+          "token": "78",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 12
     }
   },
-  "unprotected_distinct_total": 105
+  "unprotected_distinct_total": 127
 }

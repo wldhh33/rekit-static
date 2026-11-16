@@ -1,14 +1,14 @@
-# 数字总账（M13-patch → M18）
+# 数字总账（M13-patch → M20）
 
-> 生成：2026-11-16 ｜ 覆盖：M13-patch 下界重算 → M18 .NET IL 控制流层
-> 本文件是**人读镜像**；机器快照 `work/evidence_numbers_ledger.json` 是**唯一权威数字源**（生效范围 M13–M18）。
+> 生成：2026-11-17 ｜ 覆盖：M13-patch 下界重算 → M20 .NET 类型布局与字段 RVA
+> 本文件是**人读镜像**；机器快照 `work/evidence_numbers_ledger.json` 是**唯一权威数字源**（生效范围 M13–M20）。
 
 ## 0. 以哪一份为准
 
 - **唯一权威**：`work/evidence_numbers_ledger.json`。它逐小节登记本文件的数字（`sections`）、
-  逐证据登记 sha256（`sources`）与新鲜度规则，生效范围 **M13–M18**（含 M13-patch、M14–M18）。
+  逐证据登记 sha256（`sources`）与新鲜度规则，生效范围 **M13–M20**（含 M13-patch、M14–M20）。
 - **漂移检查（硬失败）**：`python "pack\tools\ledger_check.py" --check`。以下任一情况 **exit 1**，不是提示：
-  ① 本文件 §0 声明的权威路径与 JSON 不一致；② M14–M18 任一小节缺失；③ 任一登记数字在小节正文里找不到；
+  ① 本文件 §0 声明的权威路径与 JSON 不一致；② M14–M20 任一小节缺失；③ 任一登记数字在小节正文里找不到；
   ④ 任一证据文件 sha256 变化（权威落后于证据）。
   新鲜度**以字节为准**：证据被原样重写（sha256 相同、仅 mtime 变新）**不算**落后，只打印 note——时钟不作判据。
   重登记用 `--write`，重登记后必须复核数字。
@@ -16,7 +16,7 @@
   PE 缝隙量化、M13 的 6 条下界判定、5 条判据问题、代码 sha256 **仍然有效**，但**不再单独作为总账权威**；
   它与新权威的关系由 `evidence_numbers_ledger.json` 的 `sources` 条目（sha256）固定。
 - **未受保护数字（显式清单，不是隐性漏洞）**：`python "pack\tools\ledger_check.py" --audit --audit-json "2026-11-15\m3-task-card\work\evidence_ledger_unprotected.json"`。
-  审计只对小节正文（排除标题行）取数，逐节列出「已公布但未进 `numbers` 登记」的数值。当前 8 个小节、已登记 67 个、去重后未登记 105 个；
+  审计只对小节正文（排除标题行）取数，逐节列出「已公布但未进 `numbers` 登记」的数值。当前 10 个小节、已登记 98 个、去重后未登记 127 个；
   不登记的原因分五类：①**区间/分布描述**（如 `1–3: 609`，登记的是区间端点与总数）②**派生百分比**（分子分母已登记，
   如 `0.0496%`、`76.40%`）③**旧值/对照值**（R102 禁止入账，只作 `match_old` 证据）④**地址与样例字节**
   ⑤**逐样本细分格**（登记表已保头部数字，细分格由证据 JSON 承担）。凡「可被单独改动且会改变结论」的数字必须登记。
@@ -445,3 +445,16 @@ python %TEMP%/m12_ledger.py      # 汇总为 evidence_m12_ledger.json（M12 快�
 - 对拍抓到并处理的口径差异 1 处：SRM 原生把修饰类型渲染为 `modreq(class [TR]X)T`，spec §3 写死为 `modreq([TR]X)T`；在参考侧 formatter 按 spec 去掉 `class/valuetype` 前缀（System.Console 3 处），未放宽被测实现或比较判据。
 - 未覆盖（如实登记，不外推）：本批四样本的方法签名中未出现多维数组（`ARRAY`）、`FNPTR`、`modopt`、以及内嵌 TypeSpec 引用，这几条解码路径已实现但无样本证伪；unknown 政策与 `depth_exceeded`/`bad_compressed_int`/`truncated_signature` 同样无负样本。
 - 门禁：`verify_sigblob.py` 17 项全 PASS；全量 **22 套**、pytest **554 passed**、`ledger_check --check` PASS（run `20261117T010924-0a7b`，证据 `work\evidence_m19_sigblob.json`）。
+
+## 16. M20 .NET 类型布局与字段 RVA（.NET 纵切面封口）
+
+- 静态可证分母（四样本，二分恒等式全部成立）：`FieldLayout` **84** 行、`ClassLayout` **71** 行、`FieldRVA` **132** 行，三者相加 = **287** 行，等于 dnfile 独立读同一批表的行数。`FieldLayout`/`ClassLayout` 解出 **84 / 71**（clean 84 / 71，unknown 0）；`FieldRVA` 的 `field_ref_ok=132`、`length_known=131`、`length_unknown=1`，`data_ok=131`、`rva_unmapped=0`、`data_truncated=0`，数据解码率 **100.0000%**（131/131），unknown 占比 **0.7576%**（1/132），逐项恒等式写在报告里而不是只写在文档里。
+- 逐样本：mscorlib（v4.0.30319）`FieldLayout` **78** / `ClassLayout` **63** / `FieldRVA` **128**，数据字节 **64,421**，长度来源 **120 / 8**（valuetype ClassSize / 基元）；System.Console.dll（7.0.20）只有 `ClassLayout` **3** 行，另两表为 0；受控 IL 样本 3 / 2 / 3（28 字节，含 1 条 unknown），受控 C# 样本 3 / 3 / 1（32 字节）。
+- 长度来源合计 **122 / 9 / 1**（valuetype ClassSize / 基元 / unknown）。唯一 unknown 是 IL 样本的 `System.DateTime` 静态字段：类型在别的程序集、本模块没有 ClassLayout，按 `valuetype_not_typedef` 记 unknown，不拿 `.data` 字面量的 8 字节反推。
+- 独立对拍（期望值不取被测实现）：dnfile 逐行比较三表原始列值（Offset/Field、PackingSize/ClassSize/Parent、RVA/Field + 字段名）共 **287** 行，0 不一致；dnfile 的 PE RVA→文件偏移独立复算 **131** 行（位置与字节），0 不一致；源码真值（`.il` 的 `.pack`/`.size`/`.field [N]`/`.data`、`.cs` 的 `[FieldOffset]`/`[StructLayout]`/数组初始化器）共 **16 项**，0 不一致；`__StaticArrayInitTypeSize=N` 的 N、`ClassSize`、推导长度三者相等 **121** 行，0 不一致。
+- 运行期推导（不进静态结论）：受控样本上 `Marshal.OffsetOf` / `Marshal.SizeOf(Type)` 给出 **14 个偏移 / 3 个 size / 1 个 auto 边界**。显式布局的静态 `FieldLayout.Offset` 与运行期逐一相等，`ClassSize` 与运行期 size 相等；sequential/auto 字段在报告里没有任何静态偏移；auto 类型被 CLR 拒绝（`cannot be marshaled as an unmanaged structure`），如实记为运行期不可得，不写成静态值。
+- 可失败自证（首版即带，工件=注入 ID + 基线 + 观察到的失败行）：`FieldLayout.Offset` +4 → `[FAIL] m20-src selfproof FieldLayout A offset expected=0 actual=4`；`ClassLayout.ClassSize` +1 → `[FAIL] ... expected=(1, 24) actual=(1, 25)`；FieldRVA 文件字节翻转 → `[FAIL] ... 数据 expected=0102… actual=fe02…`；RVA +1 → `[FAIL] m20-rva Blob24 file_off dnfile=593 rekit=592`；空比对 → 拒绝 PASS。
+- 边界：sequential/auto 偏移、`ClassSize=0` 时的运行期 size、实例字段的引用布局都不在静态结论里（报告 `static_conclusion.excludes` 明列）；`PackingSize=0` / `ClassSize=0` 照抄“未指定”，不代换默认值。
+- 门禁：`verify_layout.py` **28 项**（PASS 27 / SKIP 1；SKIP 是 System.Console 的 `FieldRVA=0` 无可复算行，由聚合分母兜底）；全量 **23 套**、pytest **554 passed**、`ledger_check --check` PASS（run `20261117T013424-1713`，证据 `work\evidence_m20_layout.json`）。
+- **R123–R125**：类型布局的静态结论只到元数据写明的值（`FieldLayout.Offset`、`ClassLayout` 两列、`FieldRVA` 的 RVA 与字节）；sequential/auto 偏移必须标运行期推导，不得进静态分母；`FieldRVA` 数据长度不是元数据字段，推不出记 unknown 并写缺什么。
+

@@ -1,83 +1,63 @@
 # HANDOFF · 会话交接
 
 > 规则：每次会话结束前更新本文件；开工先读本文件 + `pack\AGENTS.md`，再跑 `python "pack\tools\status.py"`。
-> 六段缺一不可、不得留空；全文 ≤150 行。历史进度看 `work\pack03\PROGRESS.md`，这里只写"当前"和"下一步"。
+> 六段缺一不可、不得留空；全文 ≤150 行。历史进度看 `pack\03_路线图与章程\PROGRESS.md`，这里只写"当前"和"下一步"。
 
 ## 1. 当前进度
 
-- **M18（.NET IL 控制流 ilflow）已收口（2026-11-16）**：pytest 554 passed；21 个 verify 脚本全部 exit 0（`verify_fingerprint` 用 `--all --matrix`）；`verify_ilflow` 41 项全 PASS。
-- M18 收口证据：`work/evidence_m18_pytest_all.log`、`work/evidence_m18_verify.log`、`work/evidence_m18_verify_all.log`、`work/evidence_m18_ilflow.json`；任务卡 `outputs/TASK_m18_ilflow.md`。已断言的旧不可信日志保留为 `work/evidence_m18_verify_broken.log`。
-- **本批（B1 / O3 交接协议，2026-11-16）已完成**：新增 `pack\AGENTS.md`、`pack\PATH_MAP.md`、`pack\tools\status.py`、本文件；从 `tmp\pack` 复制恢复 `pack\01_方法论文档`、`pack\02_规则库`（复制，未移动）。
-- 本批**没有改动** `rekit\*.py`、`tests\*.py`、任何样本、任何已公布数字；回退依据见 `2026-11-16\vibe-coding-review\work\batch1\MANIFEST.sha256`。
-- **O4（数字总账链路）已完成（2026-11-16）**：权威迁移到 `work\evidence_numbers_ledger.json`（M13–M18，8 小节 / 8 证据 / **67 个登记数字**，历史源 `evidence_m13_ledger.json` 降级）；新增 `pack\tools\ledger_check.py`（`--write` 重生成 / `--check` 漂移硬失败 / `--audit` 未登记数字清单）。R103 的 `pe_gap` 三数字（113,731 / 3.2262% / -0.0402pp）已补登记并用「改数字→FAIL」负例验证；未登记 105 个数字落 `work\evidence_ledger_unprotected.json`（五类原因）。新鲜度改**字节判据**（sha256 变才 FAIL，原样重写只记 note）。
-- **O2-b（门禁语义统一）已完成（2026-11-16）**：`verify_gate.py` 改为委托 `tests\vharness.py --json`（不再留第二套判定）；vharness 收紧——分母下限 21 套、自证只认工件（布尔值 FAIL）、15 套缺 objdump 即 `env_missing` exit 2；`run_id` 加随机后缀；`status.py` 把「最近一次 verdict 非 PASS」「ledger 漂移」升为硬失败（git 未初始化仍 WARN）。
-- **B2（O2 外部门禁）已完成（2026-11-16）**：新增 `pack\tools\verify_gate.py`，全量实跑 **21/21 verify PASS + pytest 554 passed**，`VERDICT: PASS exit=0`；产物 `work\verification\20261116T213155\`。跑前跑后 `work` 顶层 112 个 `*.json|*.log` 哈希零变化（`batch2\no_side_effects.json`）。
-- **B3（O5 规则登记 + O4 数字总账）已完成（2026-11-16）**：新增 `pack\rules.json`（R01–R119 共 119 条，摘录+出处+互证状态）与缺口报告 `batch3\rules_gap_report.md`；O4 **不新建总账**——`work\outputs\NUMBERS_LEDGER.md` 已存在且以 `evidence_m13_ledger.json` 为唯一权威，只补了指针。
-- **O2-a（vharness + 表达式层验收补强）已完成（2026-11-16）**：`tests\vharness.py` 已是严格模式（空比对 FAIL、缺自证 FAIL），`--all` **21/21 套 PASS、63 检查点零失败**（`work\evidence_o2a_vharness.json`；备份前后态 `evidence_o2a_vharness_before.json` 为 15/6）。
-- `verify_expr` 的验收洞已补：**接入 objdump 外部 oracle**（全节线性反汇编对照 + 下层账目），`--selftest` 两处注入均可失败。M5-U1 已公布数字复跑**逐项相等**（抽样 57、入口 15/18·8/18·18/21、块数 14/15·8/8·15/18、调用集 8/15·5/8·12/18）。**已知残差**（不判失败、不表述为零分歧）：域内 objdump 比 expr 多解 cli 1 条(1/18 函数)、bin_ls 403 条(7/18)、dyn_static 390 条(13/21)，CFG 可达子集 vs 线性全扫，**未逐指令归因**，逐地址落 `work\evidence_m5_expr_residual.json`（objdump 2.47.20260726）。pytest **554 passed / 0 skipped / 0 failed**。
-- **B4（规则史收敛 R33–R119）已完成（2026-11-16）**：新增 `pack\02_规则库\规则库_R33-R119.md`，87 条逐条给出「编号/原意/约束对象/判定方式/落地位置/依据/状态」；9 条「撞号」裁决（**0 条真撞号**，5 条属 R01–R32、4 条是摘要/提及行误判）+ 21 条多写法唯一化（6 条范围外 + 15 条 R33+）写入附录 A/B；**3 条标注「材料不足」**（R49/R93/R110），8 条标注「仅文档级」。`rules.json` 只新增 canonical 字段，mined 字段 0 处改动（`batch4\verify_merge.py` 自证）。
+- **M20（.NET 类型布局与字段 RVA，.NET 纵切面封口）已收口（2026-11-17）**。实现 `rekit\layout.py` + `rekit layout`；分母四样本 `FieldLayout` 84 / `ClassLayout` 71 / `FieldRVA` 132 = 287 行，二分恒等式全部成立；数据解码率 100.0000%（131/131），unknown 0.7576%（1/132）。
+- 静态只报元数据写明的三样：`FieldLayout.Offset`、`ClassLayout.PackingSize/ClassSize`、`FieldRVA` 的 RVA→文件偏移→字节。sequential/auto 偏移单列 `runtime_derived`（14 个偏移 / 3 个 size / 1 个 auto 不可得），`static_conclusion=false`，不进静态结论。
+- 独立对拍（期望值不取被测实现）：dnfile 三表原始列值 287 行、dnfile RVA→文件偏移 131 行、源码真值 16 项（`.il` 的 `.pack/.size/.field [N]/.data`、`.cs` 的 `[FieldOffset]/[StructLayout]`/数组初始化器）、`__StaticArrayInitTypeSize=N` 与 ClassSize/推导长度 121 行，**全部 0 不一致**。
+- `tests\verify_layout.py` 首版即带可失败自证（工件=注入 ID + 基线 + 观察到失败行），5 类注入全检出 + 空比对判 FAIL；**28 项（PASS 27 / SKIP 1）**。证据 `work\evidence_m20_layout.json`。
+- **M19（.NET 签名语义层 `sigblob`）已收口（2026-11-17）**：方法签名 32,518 / 字段 911 / 局部 3,974；可读 blob 37,403，解码率 100.0000%，unknown 0；dnfile 字节边界 52,403 行、SRM canonical 37,403 行、M17 交叉 29,728 行全 0 不一致。定标②偏离已登记：dnfile 无签名 API，改 SRM（`tests\sigref.ps1`，pwsh 缺失即 `env_missing` exit 2）。证据 `work\evidence_m19_sigblob.json`。
+- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（run `20261117T014558-2b7c`，`VERDICT: PASS exit=0`；收口 run 为 `20261117T013424-1713`）。总账 **10 小节 / 98 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`。
+- **治理当前态**：`pack\` 已 git 初始化（基线 tag `baseline-pre-rename`）；4 个 mojibake 目录已改名、`work` 下 junction 已重建（`pack` 7 个目录均可访问）；`pack\rules.json` 119 条；`pack\tools\status.py` 硬判 HANDOFF/verification/ledger。
+- 文档漂移已修（本轮实测）：`pack\AGENTS.md` 规模改 **27 模块 / 18,600 行**；`CHARTER.md` 补 M20 行与转段触发器 T1–T5（**T1/T4 已命中**，T1 曾被误读为需两个条件同时满足，已更正并留记录）。
 
 ## 2. 未完成清单
 
-以下条目会改 `rekit`/`tests` 源码，本会话只写改法，由源码会话执行：
+M20 之后**不再开下一层**，下一步是交付型批次，由用户另排：
 
-| 编号 | 改法 | 提案位置 |
+| 批次项 | 内容 | 前置 |
 |---|---|---|
-| ~~O2-a~~ | **已完成**：`tests\vharness.py` 已建（严格模式：空比对 FAIL、缺自证 FAIL，统一 exit 0/1/2），`--all` 21/21；6 个脚本已补可失败 `--selftest`，`verify_expr` 接入 objdump 外部 oracle。证据 `work\evidence_o2a_vharness.json`、`evidence_o2a_expr.log` | 提案 §4 O2 + 附录 A |
-| O2-b | ~~新增 `tests\verify_all.py`~~ 已由 `pack\tools\verify_gate.py` 承担（外部门禁，不动 tests）；tests 内**不再**新建第二个总入口，避免两套 VERDICT 口径 | §4 O2 |
-| O4 | ~~新建 `work\numbers.json`~~ **不新建**：总账已存在（`work\outputs\NUMBERS_LEDGER.md`）。**权威已于 2026-11-16 迁移到 `work\evidence_numbers_ledger.json`**（M13–M18，67 数字，`ledger_check.py --check` 硬校验；`evidence_m13_ledger.json` 为历史源）。新增数字必须先落 JSON 再改人读镜像，改后跑 `ledger_check --check` 与「改数字→FAIL」负例 | §4 O4 |
-| O5 | `pack\rules.json` **已建**（119 条）；**规则史收敛已完成**：`02_规则库\规则库_R33-R119.md` 已建，`rules.json` 已回填 canonical 字段。**余 3 条材料不足**（R49 五类清单、R93 五项检查、R110 窗口大小）与 3 条口径需人定，见 `batch4\human_decisions.md` | §4 O5 + `batch4\human_decisions.md` |
-| — | 修正 `pack\README.md` 过期内容："73 断言 / 5 模块 / `cd 04_rekit项目源码`" 均已失真（实为 554 passed / 25 模块 / 目录名 mojibake） | 提案 §4 O1 |
+| 打包 | 可安装/可分发形态（纯标准库，不引运行时依赖） | 需先定"包子集"（`cli.py` 入口 + 被 import 的模块闭包） |
+| console entry | 安装后 `rekit` 命令可用；当前只有 `python -m rekit.cli` | 同上 |
+| 示例 | 命令行示例与输出样例（含 .NET 纵切面：`dotnet`/`ilflow`/`sigblob`/`layout`） | 交付形态定稿后 |
+| 证据索引 | 把 `work\evidence_*.json|log` 按里程碑建索引，标明可复跑命令 | 无 |
+| R95 七个样本登记 | R95 要求的 7 个样本补进 `m9_sample_manifest.json`（sha256/许可/可再分发） | 需确认样本来源 |
+| 打 v0.1.0 | tag 与发布说明 | 以上完成且全量门禁绿 |
 
 非源码类、尚未做：
 
-- ~~**规则史缺口（最要紧）**：`02_规则库` 只到 R32，R33–R119 共 87 条没有规范文件~~ **已收敛（B4）**：`pack\02_规则库\规则库_R33-R119.md` 已建，87 条全部给出规范定义；3 条材料不足与 6 条待确认见 `batch4\human_decisions.md`。
-- 顺带修正一个假事实：早期 `metrics.json` 报「缺 R9/R10/R11/R14/R17/R20/R26」，实为补零写法差异导致的假缺口，规则库原文一直有这 7 条（原文写 `R9` 不是 `R09`）。
-
-- `pack` 下 4 个 mojibake 目录重命名（维护窗口，按 `pack\PATH_MAP.md` 手册逐个人工执行）。
-- git 基线（**维护窗口执行，本会话不自行 `git init`**，改法如下）：
-  1. 确认另一会话已停写 `rekit`（`work\rekit` 与 `pack\04_…\rekit` 是同一目录，不是副本）
-  2. 先改名（4 个目录），再 init；否则 git 会把一次改名记成删+增
-  3. `git init` 于 `pack\`；`git config core.autocrlf false`、`core.quotepath false`
-  4. `.gitignore`：`work\samples\`、`work\verification\`、`tmp\`、`__pycache__\`、`*.pyc`、`cli-64.exe`（出处不明，不入库）
-  5. 第一次提交只放治理文件（`AGENTS.md`/`PATH_MAP.md`/`tools\`/`README.md`/`rules.json`），源码与 tests 各单独一次
-  6. 每次提交前必须 `python "pack\tools\verify_gate.py" --run` 全绿；回退就是删 `.git`
+- `pack\README.md` 过期内容（"73 断言 / 5 模块 / `cd 04_rekit项目源码`"）未修 —— 交付批次一并处理，避免与包结构改动打架。
+- `pack\02_规则库\规则库_R33-R119.md` 余 3 条「材料不足」（R49/R93/R110）与 6 条待确认，见 `2026-11-16\vibe-coding-review\work\batch4\human_decisions.md`。
+- 工作树有 5 个与本轮无关的既有改动（`2026-11-16\vibe-coding-review\...`、`pack\02_规则库\规则库_R33-R119.md`、`pack\rules.json`），属 R103/B4 前序工作，**不要夹带进 M20 提交**。
 
 ## 3. 已否决方案
 
-1. **本批不 `git init`**：会把另一会话正在写的源码、99 MB 样本、junction 一并捕获；首次提交内容未定，回退成本高于收益。
-2. **本批不重命名 mojibake 目录**：`work\rekit`、`work\tests` 是指向这些目录的 junction，改名即断链。
-3. **不复制整个 `work` 开分支**：会复制 99 MB 样本并制造第 N 份副本。
-4. **不用 `git mv` 批量改名**：当前无 git 基线，无法回滚。
-5. **不把 `tmp\pack` 的 5 模块旧代码合并回 `pack`**：`pack` 已有 25 模块，旧副本并入会被误当最新（`tmp` 仅作 01/02 文档来源）。
-6. **不为 `status.py` 引入第三方库**：纯标准库，避免给"开工第一条命令"增加环境依赖。
+1. **把 sequential/auto 偏移写进静态结论**：CLR 的字段排序是运行期行为，元数据里只有 `FieldLayout` 显式偏移；写进去就是把推导冒充声明（R123）。
+2. **用 `.data` 字面量长度反推 `FieldRVA` 数据长度**：唯一的 unknown（IL 样本 `System.DateTime`）就是反例；按 R121 记 unknown 并写缺什么。
+3. **把 dotnet 自家解析器当唯一裁判**：dnfile 不实现 `FieldRVA`（M17 已记），只做列值与 RVA 换算对拍；数据字节另用源码数组初始化器对拍。
+4. **为让 unknown 归零而把外部程序集类型当"已解析"**：外部类型的长度在本模块里不可知，归零等于按名称猜。
+5. **M20 后继续叠下一层**：`.NET` 纵切面到此封口，再叠就是补 `out_of_scope`，触发 T2（见 CHARTER）。
+6. **为 `status.py` 引入第三方库**：纯标准库，避免给"开工第一条命令"增加环境依赖。
+7. **把整个 `work` 复制一份来"开分支"**：会复制 99 MB 样本并制造第 N 份副本。
 
 ## 4. 待确认问题
 
-1. ~~`pack\03_…\CHARTER|PROGRESS|CHANGELOG` 与 `work\pack03\` 哪份权威~~ **已定（2026-11-16 实测）**：`work\pack03` 是 junction 指向 `pack\03_…`，**同一份文件**，不存在双副本；改任一路径即改文件本身。
-2. `01_方法论文档`、`02_规则库` 是否只存在于 `tmp\pack` 快照？已恢复，但需确认 RMS 是否还有其他目录只在 `tmp` 里。
-3. `verify_fingerprint.py` 不带参数时是否等价于 `--all --matrix`？`verify_all.py` 的调用参数待定。
-4. `tests\fixtures\cli-64.exe` 出处不明（AGENTS.md 已标"不可再分发"）。git 初始化前需决定是否入库。
+1. **T4 已命中**（CHARTER 转段触发器）：本轮已出现"要给别人一条可复现命令"的需求雏形——`verify_layout.py` 依赖 `powershell` 跑运行期 oracle，别人拿到仓库无法直接复跑；交付批次必须给出可复现命令或明确标注环境前置。
+2. R95 七个样本的口径：是指定 7 个具体样本（哪 7 个？），还是 7 类样本（中型 ELF/PE/跳板密集/插件式/未 strip MSVC+PDB…）？登记前需确认。
+3. v0.1.0 的"可分发"边界：`tests\fixtures\cli-64.exe` 出处不明（`AGENTS.md` 已标"不可再分发"），发布包必须排除，但仓库是否保留待定。
+4. `verify_layout.py` 的 SKIP 1（System.Console 的 `FieldRVA=0`）是否需要在交付批次补一个"零行表"负样本，目前由聚合分母兜底。
 
 ## 5. 新增证据文件
 
-- `2026-11-16\vibe-coding-review\work\batch1\status_output.txt` —— 本批 `status.py` 首跑输出（实测证据）
-- `2026-11-16\vibe-coding-review\work\batch1\MANIFEST.sha256` —— 本批新增文件哈希 + 删除式回退步骤
-- `2026-11-16\vibe-coding-review\work\batch2\gate_run.txt`、`no_side_effects.json`、`MANIFEST.sha256` —— B2 全量门禁结果与"零副作用"证明
-- `2026-11-16\vibe-coding-review\work\batch3\rules_gap_report.md`、`rules_coverage.json`、`rules_extracted.json`、`mine_rules.py` —— B3 规则覆盖与缺口（含 9 条撞号明细）
-- `pack\02_规则库\规则库_R33-R119.md` —— **B4 规则史收敛**：87 条规范定义 + 附录 A（9 条裁决）/ B（21 条唯一写法）/ C（需人定）
-- `2026-11-16\vibe-coding-review\work\batch4\` —— `canonical_coverage.json`（机器可读镜像）、`human_decisions.md`（仍需人定）、`merge_canonical.py`、`verify_merge.py`、`rules.before_canonical.json`（回退基线）、`MANIFEST.sha256`
-- `pack\rules.json` —— 119 条规则登记表（机器生成，可复跑）
-- `2026-11-15\m3-task-card\work\verification\20261116T213155\` —— B2 门禁产物（21 套日志 + summary.json）
-- `2026-11-16\vibe-coding-review\outputs\VIBE_CODING_OPTIMIZATION_PROPOSAL.md` —— 优化提案主文档（上一任务交付物，不属本批回滚范围）
-- `2026-11-16\vibe-coding-review\work\metrics.json`、`project_survey.md`、`research_sources.md`、`collect_metrics.py` —— 提案采集材料（同上）
-
-- `work\evidence_o2a_vharness.json`、`evidence_o2a_vharness_before.json` —— O2-a 全量 vharness（21/21、63 检查点）与接入前旧态（15/6）
-- `work\evidence_o2a_expr.log`、`evidence_o2a_pytest_after_expr.log` —— verify_expr 外部 oracle 实跑输出（含 `[oracle]` 与残差行）与 pytest `554 passed`
-- `work\evidence_numbers_ledger.json` —— **数字总账唯一权威**（M13–M18，8 小节/8 证据/67 数字，含 per-source sha256 与新鲜度规则）
-- `work\evidence_ledger_unprotected.json` —— `ledger_check --audit` 未登记数字清单（105 个，五类原因）
-- `work\evidence_m5_expr_residual.json` —— M5 表达式层残差逐地址（cli 1 / bin_ls 403 / dyn_static 390，objdump 2.47.20260726）
-- `work\verification\20261117T001004-58f1\` —— O2-b 全量门禁产物（21 套日志 + vharness.json + pytest.log + summary.json）
+- `work\evidence_m20_layout.json` —— M20 三表逐行明细、分母恒等式、长度来源、运行期 oracle、静态结论边界。
+- `work\evidence_m19_sigblob.json` —— M19 签名解码与三方对拍（dnfile 字节 / SRM canonical / M17 交叉）。
+- `work\verification\20261117T013424-1713\`、`work\verification\20261117T014558-2b7c\` —— M20 收口与文档定稿后复跑的全量门禁（23 套日志 + vharness.json + pytest.log + summary.json）。
+- `work\outputs\NUMBERS_LEDGER.md` §15/§16 —— M19/M20 数字人读镜像；权威 `work\evidence_numbers_ledger.json`。
+- `work\outputs\TASK_m18_ilflow.md`、`outputs\m19_sigblob\`、`outputs\m20_layout\` —— 任务卡与受控样本源码（`.il`/`.cs`/`gen.ps1`）+ `spec.md`（静态/运行期边界）。
+- `2026-11-16\vibe-coding-review\work\batch1..batch4\` —— 治理批次（HANDOFF 协议/门禁/规则/总账）证据，未受本轮影响。
 
 ## 6. 下一位第一条命令
 
@@ -86,6 +66,6 @@ python "pack\tools\status.py"
 python "pack\tools\verify_gate.py" --list
 ```
 
-期望：`HANDOFF: 6/6 段非空`、`pack 目录名损坏 4/7`（已知，WARN 不算失败）、`verification/latest: PASS`（最近一次须为全量，否则 WARN）、`numbers ledger: PASS`、`git: 未初始化`（WARN），末行 `VERDICT: PASS exit=0`。
-要跑全量再执行 `python "pack\tools\verify_gate.py" --run`（约 7 分钟，21 套 + pytest + ledger）。
+期望：`HANDOFF: 6/6 段非空`、`pack 目录: 7 个均可访问`、`verification/latest: PASS scope=all`、`numbers ledger: PASS`、`git: 已初始化`、末行 `VERDICT: PASS exit=0`。
+要跑全量再执行 `python "pack\tools\verify_gate.py" --run`（约 8 分钟，23 套 + pytest + ledger）。
 若退出码为 1：先按本文件模板补齐 HANDOFF、修 ledger 漂移或重跑门禁，不要绕过。
