@@ -4,10 +4,11 @@
 # 与 pefile 现场采集的权威快照（bin_ls.elf: DYN/0x6760/14段/30节/NX·FullRELRO·PIE；
 # minidll.dll: AMD64/DLL/2节/4导出/无Rich）
 import json
+import os
 import subprocess
 import sys
 
-REPO = "<旧仓库根>"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FIX = REPO + "/tests/fixtures"
 BIN_LS = FIX + "/bin_ls.elf"
 MINIDLL = FIX + "/minidll.dll"

@@ -30,6 +30,7 @@ python "pack\tools\status.py"
 | 目的 | 命令 |
 |---|---|
 | 状态摘要（≤20 行） | `python pack\tools\status.py` |
+| 干净克隆恢复（junction + 样本/工具链） | `powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\setup.ps1" -AssetsSource <原工作区根>` |
 | 单命令门禁（推荐，含前置检查） | `powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"`（`-List` 只看计划；前置缺失 exit 2） |
 | 全量门禁（23 套 verify + pytest） | `python pack\tools\verify_gate.py --run`（`--list` 只看计划） |
 | 全量单测 | `cd "2026-11-15\m3-task-card\work"` 后 `python -m pytest tests -q`（fixture 路径按 cwd 解析，必须在 work 目录跑） |
@@ -59,20 +60,20 @@ python "pack\tools\status.py"
 | 日报 | `pack\06_日报docx\` | 10 期 docx |
 | 工作目录 | `2026-11-15\m3-task-card\work\` | 证据、样本、任务卡、`pack03` 文档的**权威副本** |
 | 工作目录里的源码 | `work\rekit`、`work\tests` | 指向 `pack` 的目录联接（junction），不是副本 |
-| 样本 | `work\samples\` | 约 99 MB；`tests\samples`、`tests\fixtures` 另有小样本 |
+| 样本 | `work\samples\`（m2 + m3） | 约 170 MB；被 `.gitignore` 排除，新克隆用 `setup.ps1` 恢复；`tests\samples`、`tests\fixtures` 已入库 |
 
 `pack` 与 `work\pack03` 的 CHARTER/PROGRESS/CHANGELOG：**内容相同**，编辑时先确认改哪一份，改完同步另一份。
 `.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `d63d244`，其后是 U1 收口补件。
 
 ## 6. 环境怪癖（已知，不是 bug）
 
-- 本机 Python 3.14；`rekit` 运行时纯标准库。
+- 本机 Python 3.14；`rekit` 运行时纯标准库。全量门禁另需 `dnfile`（M19/M20 对拍，缺则 `env_missing`）与 `pefile`（pytest 交叉断言，缺则 skip）。
 - GNU binutils 2.47 在 `2026-11-15\m2-task-card\work\tools\binutils-2.47\`，未加入 PATH，测试脚本内临时注入。
 - objdump 打开含中文的绝对路径会报 `Illegal byte sequence`：先设 `LC_ALL=C`。
 - 系统策略拦截 MSI/安装器；外部工具只用免安装 zip，单包 <500 MB，来源与许可须清楚。
 - `cli-64.exe` 出处不明，**不可再分发**，只在本机测试。
-- 部分旧测试硬编码 `<旧仓库根>`（Linux 路径），Windows 上靠 junction
-  `<旧仓库根> → pack\04_rekit项目源码` 垫片工作；移动 `04_` 目录后必须同步重建该垫片，否则 pytest 会大面积 `FileNotFoundError`。
+- 部分旧测试曾硬编码 `<旧仓库根>`；2026-11-17 已把 5 个测试与 3 个生成器
+  改为按 `__file__` 定位，**垫片不再需要**（旧版在 C: 盘克隆时会解析到 `C:\home` 并报 31 个失败/错误）。
 - `pack` 下 4 个目录名已于 2026-11-17 由 mojibake 改回可读名（`03_路线图与章程` / `04_rekit项目源码` / `05_每日日志` / `06_日报docx`），`work` 下 6 个 junction 已同步重建；`2026-11-16\vibe-coding-review` 的调研快照保留旧名，作为当日记录。
 - Windows 终端显示中文可能乱码；路径操作优先用 Python，不要依赖 PowerShell 的字符串编码。
 

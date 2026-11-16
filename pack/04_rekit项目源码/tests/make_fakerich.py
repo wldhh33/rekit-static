@@ -6,6 +6,7 @@
 #      —— 无 DanS^key 锚。仅单向找 "Rich" 的解析器会误匹配；双向锚定实现须返回 None。
 #   2) .text 数据深处 0x500：又一处 "Rich" —— 限界 [0x40, e_lfanew) 之外的匹配必须被排除。
 # 与 make_minipe.py 同构（e_lfanew 0x40→0x200，headers 0x200→0x400），独立构造不引用 rekit。
+import os
 import struct
 
 SIZE = 0x800
@@ -68,6 +69,7 @@ struct.pack_into("<Q", buf, 0x660 + 8, 0)
 buf[0x700:0x700 + 2] = b"\x00\x00"
 buf[0x702:0x702 + 12] = b"ExitProcess\x00"
 
-out = "<旧仓库根>/tests/fixtures/minipe_fakerich.exe"
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                   "fixtures", "minipe_fakerich.exe")
 open(out, "wb").write(bytes(buf))
 print("minipe_fakerich.exe written, %d bytes" % len(buf))

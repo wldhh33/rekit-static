@@ -8,7 +8,7 @@ import subprocess
 import sys
 import tempfile
 
-REPO = "<旧仓库根>"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FIX = REPO + "/tests/fixtures"
 
 

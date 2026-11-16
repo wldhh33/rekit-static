@@ -19,6 +19,7 @@
 #     EAT[0]=Add@0x1010 ordinal1  EAT[1]=Sub@0x1020 ordinal2
 #     EAT[2]=Mul@0x1030 ordinal3  EAT[3]=(纯序号)@0x1040 ordinal4
 #     NamePtrs=[Add→0x2070, Mul→0x2074, Sub→0x2078]  Ordinals=[0, 2, 1]
+import os
 import struct
 
 SIZE = 0x800
@@ -87,5 +88,6 @@ buf[0x670:0x674] = b"Add\x00"
 buf[0x674:0x678] = b"Mul\x00"
 buf[0x678:0x67C] = b"Sub\x00"
 
-open("<旧仓库根>/tests/minidll.dll", "wb").write(bytes(buf))
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "minidll.dll")
+open(out, "wb").write(bytes(buf))
 print("minidll.dll written, %d bytes" % len(buf))

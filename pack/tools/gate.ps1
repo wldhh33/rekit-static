@@ -8,7 +8,7 @@ pack\tools\gate.ps1 — 单命令门禁入口（U1 收口，2026-11-17）
   3) verify_gate.py --run             23 套 verify + pytest + ledger 复核
 
 本机事实（脚本会逐项检查）：
-  - 样本与 binutils 被 .gitignore 排除，fresh clone 后必须先从原始副本恢复；
+  - 样本（m2/m3）与 binutils 被 .gitignore 排除，fresh clone 后先跑 setup.ps1 恢复；
   - pytest 必须在 work 目录执行（fixture 路径按 cwd 解析，verify_gate 已代为切目录）；
   - .NET 运行期 oracle 需要 Windows：verify_layout 用 Windows PowerShell 的 CLR，
     verify_sigblob 用 pwsh 7 的 System.Reflection.Metadata（另需 Python 包 dnfile）。
@@ -55,7 +55,7 @@ foreach ($p in @(
         (Join-Path $Tools "ledger_check.py")
     )) {
     if (-not (Test-Path -LiteralPath $p)) {
-        Add-Problem "missing: $p (work 下的 junction 见 README 安装与复现验收)"
+        Add-Problem "missing: $p (run pack\tools\setup.ps1 -AssetsSource <orig> to rebuild junctions)"
     } else {
         Ok "exists: $p"
     }
@@ -78,21 +78,29 @@ if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
     }
 }
 
-# 3. 样本（.gitignore 排除，必须先恢复）
+# 3. 样本（.gitignore 排除，必须先恢复；m3 与 m2 两棵树都参与验证）
 foreach ($s in @("m9", "m17", "m18", "m20")) {
     $d = Join-Path $Work "samples\$s"
     if (-not (Test-Path -LiteralPath $d)) {
-        Add-Problem "missing samples\$s (samples are .gitignored; restore before running gate)"
+        Add-Problem "missing samples\$s (run pack\tools\setup.ps1 -AssetsSource <orig>; samples are .gitignored)"
     } elseif (-not (Get-ChildItem -LiteralPath $d -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1)) {
         Add-Problem "empty samples\$s"
     } else {
         Ok "samples: $s"
     }
 }
+$m2Samples = Join-Path $Root "2026-11-15\m2-task-card\work\samples"
+if (-not (Test-Path -LiteralPath $m2Samples)) {
+    Add-Problem "missing m2 samples (run pack\tools\setup.ps1 -AssetsSource <orig>)"
+} elseif (-not (Get-ChildItem -LiteralPath $m2Samples -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1)) {
+    Add-Problem "empty m2 samples"
+} else {
+    Ok "samples: m2"
+}
 
 # 4. binutils（.gitignore 排除，verifies 需要 objdump）
 if (-not (Test-Path -LiteralPath (Join-Path $Bin "objdump.exe"))) {
-    Add-Problem "missing objdump: $Bin (binutils is .gitignored; restore before running gate)"
+    Add-Problem "missing objdump: $Bin (run pack\tools\setup.ps1 -AssetsSource <orig>; binutils is .gitignored)"
 } else {
     Ok "objdump: $Bin"
 }
@@ -104,6 +112,20 @@ foreach ($t in @("powershell", "pwsh")) {
     } else {
         Ok "$t available"
     }
+}
+
+# 6. Python 交叉验证依赖：dnfile 缺失会让 verify_sigblob/verify_layout env_missing -> 门禁 FAIL
+& python -c "import dnfile" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Add-Problem "missing Python package dnfile (python -m pip install dnfile)"
+} else {
+    Ok "python package: dnfile"
+}
+& python -c "import pefile" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "  WARN pefile missing: pefile cross-check assertions in pytest will skip (optional)"
+} else {
+    Ok "python package: pefile"
 }
 
 if ($script:problems.Count -gt 0) {

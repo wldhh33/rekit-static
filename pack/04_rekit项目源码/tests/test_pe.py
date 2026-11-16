@@ -3,19 +3,22 @@
 # 期望值 = make_minipe.py 构造参数（2026-11-07 基线 B 三方验证 PASS）
 # 2026-11-12 白银#1：+Rich 头断言（期望值 = pefile 源码级+手动 dump 双重定标）
 # 2026-11-13 白银#2：+导出表断言（期望值 = make_minidll.py 构造参数，objdump 三方全等 PASS）
+import os
 import re
 import subprocess
 import sys
 
 import pytest
 
-sys.path.insert(0, "<旧仓库根>")
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
 from rekit.pe import parse  # noqa: E402
 
-MINIPE = "<旧仓库根>/tests/fixtures/minipe.exe"
-FAKERICH = "<旧仓库根>/tests/fixtures/minipe_fakerich.exe"
-CLI64 = "<旧仓库根>/tests/fixtures/cli-64.exe"
-MINIDLL = "<旧仓库根>/tests/fixtures/minidll.dll"
+FIX = os.path.join(HERE, "fixtures")
+MINIPE = os.path.join(FIX, "minipe.exe")
+FAKERICH = os.path.join(FIX, "minipe_fakerich.exe")
+CLI64 = os.path.join(FIX, "cli-64.exe")
+MINIDLL = os.path.join(FIX, "minidll.dll")
 
 
 @pytest.fixture(scope="module")
@@ -150,8 +153,20 @@ def test_export_none_for_cli64():
 def test_minidll_crosscheck_objdump(minidll):
     r"""交叉验证：EAT 逐项 + 名字→ordinal 映射 vs objdump -p 全等
     （锚点唯一化+列宽 \s+，2026-11-13 验证脚本三板斧 R25–R27）"""
-    out = subprocess.run(["objdump", "-p", MINIDLL], capture_output=True,
-                         text=True, check=True).stdout
+    exe = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(HERE))),
+                       "2026-11-15", "m2-task-card", "work", "tools",
+                       "binutils-2.47", "mingw64", "bin", "objdump.exe")
+    if not os.path.isfile(exe):
+        exe = "objdump"
+    try:
+        env = dict(os.environ, LC_ALL="C", LANG="C")
+        out = subprocess.run([exe, "-p", MINIDLL], capture_output=True,
+                             text=True, encoding="utf-8", errors="replace",
+                             env=env, check=True).stdout
+    except (OSError, subprocess.CalledProcessError) as e:
+        pytest.skip("objdump 不可用（%s）；门禁内由 verify_gate 注入 binutils" % e)
+    if "Export Address Table -- Ordinal Base" not in out:
+        pytest.skip("objdump 不支持 PE 导出表（%s）" % exe)
     eat_part = out.split("Export Address Table -- Ordinal Base")[1] \
                  .split("[Ordinal/Name Pointer] Table")[0]
     name_part = out.split("[Ordinal/Name Pointer] Table")[1]

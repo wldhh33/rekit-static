@@ -2,6 +2,7 @@
 # make_minipe.py — 独立构造最小 PE32+（与 rekit/pe.py 解析代码互不引用，双向验证）
 # 布局：DOS头64B(含e_lfanew=0x40) + PE sig + COFF(20B) + OptHdrPE32+(0xF0) +
 #       节表(2×40B) + .text@0x400 + .idata@0x600
+import os
 import struct
 
 SIZE = 0x800
@@ -59,5 +60,6 @@ struct.pack_into("<Q", buf, 0x660 + 8, 0)
 buf[0x700:0x700 + 2] = b"\x00\x00"                  # hint
 buf[0x702:0x702 + 12] = b"ExitProcess\x00"
 
-open("<旧仓库根>/tests/minipe.exe", "wb").write(bytes(buf))
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "minipe.exe")
+open(out, "wb").write(bytes(buf))
 print("minipe.exe written, %d bytes" % len(buf))

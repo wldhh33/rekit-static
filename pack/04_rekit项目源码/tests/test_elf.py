@@ -2,16 +2,18 @@
 # rekit ELF 回归测试套件 — 2026-11-07 落地（craft-anything 基线审计借鉴）
 # 快照期望值来自 2026-11-07 全量验收 PASS 的真实输出（readelf 交叉验证过）
 # 纪律：每个白银任务的验收断言必须固化进本套件，跑全量回归后才能收工。
+import os
 import shutil
 import subprocess
 import sys
 
 import pytest
 
-sys.path.insert(0, "<旧仓库根>")
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
 from rekit.elf import parse  # noqa: E402
 
-FIX = "<旧仓库根>/tests/fixtures"
+FIX = os.path.join(HERE, "fixtures")
 
 # 2026-11-07 快照：/bin/ls (Ubuntu 24.04, coreutils) 30 节名序列
 BIN_LS_SECTIONS = [

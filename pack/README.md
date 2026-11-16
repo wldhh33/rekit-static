@@ -30,17 +30,40 @@
 安全防护（NX·RELRO·PIE）/导入导出清单/编译器指纹/控制流与调用关系。纯手写解析，结果一律与
 readelf/objdump/pefile/ildasm 等权威工具交叉验证。三种用法：CLI / Python 模块 / MCP 服务器。
 
-## 安装与复现验收
+## 安装与复现验收（干净克隆演练过，2026-11-17）
 
-一条命令（推荐；Windows PowerShell 5.1 或 pwsh 7 均可）：
+**前置（Windows 10/11）**
+
+- Python 3.8+；安装交叉验证依赖：`python -m pip install dnfile pefile`。
+  `dnfile` 是**必需**的：`verify_sigblob` / `verify_layout` 缺它即 `env_missing`（exit 2）→ 门禁 FAIL。
+  `pefile` 只影响 pytest 里少量 pefile 交叉断言（缺了会 skip），建议一并装。
+- `powershell`（Windows PowerShell 5.1）与 `pwsh`（PowerShell 7）：.NET 运行期 oracle 用。
+- 原工作区的**样本与工具链**（仓库不入库，见下）：`2026-11-15\m3-task-card\work\samples`、
+  `2026-11-15\m2-task-card\work\samples`、`2026-11-15\m2-task-card\work\tools`。
+
+**步骤（在克隆根执行；路径可含空格与中文）**
 
 ```powershell
+# 1. 克隆
+git clone <repo-url> rekit
+cd rekit
+
+# 2. 恢复仓库外资产 + 重建目录联接（必须有显式来源；不下载、不猜来源）
+powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\setup.ps1" `
+    -AssetsSource "D:\path\to\original\workspace"
+
+# 3. 单命令门禁
 powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 ```
 
-`gate.ps1` 先做前置检查（缺样本 / 工具链 / 目录联接直接 exit 2，不静默跳过），再按固定顺序执行：
+`setup.ps1` 只做两件事：把上列 samples / tools 从 `-AssetsSource` 复制进来；在
+`2026-11-15\m2-task-card\work` 与 `...\m3-task-card\work` 下建 7 个 junction
+（`rekit`/`tests`/`pack03`/`tools` → `pack\04_rekit项目源码\*`、`pack\03_路线图与章程`）。
+来源不全时 exit 2；目标已存在时 SKIP，不覆盖、不删除。
+
+`gate.ps1` 先做前置检查（缺样本 / 工具链 / junction / dnfile 直接 exit 2，不静默跳过），再按固定顺序执行：
 `ledger_check.py --check` → `tests\evidence_index.py --check` → `verify_gate.py --run`
-（23 套 verify + pytest + ledger，约 7–8 分钟）。`-List` 只看计划，`-Only verify_map,verify_iat` 跑子集。
+（23 套 verify + pytest + ledger）。`-List` 只看计划，`-Only verify_map,verify_iat` 跑子集。
 
 手动等价步骤：
 
@@ -52,33 +75,40 @@ cd "2026-11-15\m3-task-card\work"   # pytest 必须在 work 目录执行：tests
 python -m pytest tests -q
 ```
 
-**跑之前必须知道的三件事（本脚本会逐项检查）**
-
-1. **样本与工具链不在仓库里**：`.gitignore` 排除了 `2026-11-15\m3-task-card\work\samples\`
-   与 `2026-11-15\m2-task-card\work\tools\`（binutils 2.47 / upx 5.3.0）。fresh clone 后必须先从
-   原始副本恢复，否则 `gate.ps1` 前置检查直接 exit 2。仓库**不提供自动恢复脚本**——这些二进制
-   没有可公开校验的来源，写一个假的下载地址不如明确说“跑不了，先恢复”。
-2. **pytest 的 cwd 是硬约束**：必须在 `2026-11-15\m3-task-card\work` 下执行；从仓库根跑会因
-   `tests/fixtures` 相对路径解析失败而大面积报错。`gate.ps1` 与 `verify_gate.py` 已代为切换。
-3. **.NET 运行期 oracle 仅 Windows**：`verify_layout.py` 需要 `powershell`（Windows PowerShell 5.1
-   的 CLR），`verify_sigblob.py` 需要 `pwsh` 7 的 `System.Reflection.Metadata`；另需 Python 包
-   `dnfile`。缺失时对应套报 `env_missing`（exit 2），不静默跳过。
-
 依赖：Python 3.8+ 纯标准库即可跑全部功能（构建期需要 setuptools；pefile / dnfile / ildasm / objdump
-仅交叉验证用到，缺失自动跳过或 `env_missing`）。objdump 需要 GNU binutils，且含中文路径时必须
-`LC_ALL=C`（`verify_gate.py` 已自动处理）。
+仅交叉验证用到）。objdump 需要 GNU binutils，且含中文路径时必须 `LC_ALL=C`（`verify_gate.py` 已自动处理）。
 
-**路径垫片**：部分老测试硬编码 `<旧仓库根>`，Windows 上依赖目录联接
-`<旧仓库根> → pack\04_rekit项目源码`。没有垫片时 **pytest** 会大面积失败；
-安装后的 `rekit` 命令与 `python -m rekit.cli` **不受影响**。移动 `04_rekit项目源码` 后必须重建该垫片。
+**路径垫片（2026-11-17 起不再需要）**：旧测试曾硬编码 `<旧仓库根>`，
+依赖 `<旧仓库根>\...` 目录联接；且 Windows 上 `/home/...` 按**当前盘符根**解析，克隆在 C: 时
+需要 `<旧仓库根>\...`（普通用户通常无权限）。本次演练已把 5 个测试与 3 个生成器改为按
+`__file__` 定位，垫片已可删除。**没有改路径前**的失败点是：pytest 报
+`FileNotFoundError: '<旧仓库根>/.../tests/fixtures/bin_ls.elf'`（约 31 个失败/错误）。
+
+### 干净克隆演练记录（2026-11-17）
+
+严格按上一版 README 操作，第一次 `gate.ps1` 即 **exit 2**，preflight 报 9 项缺失：
+
+| 文档当时写的 | 实际发生 | 缺的那一步 |
+|---|---|---|
+| “fresh clone 后必须先从原始副本恢复” | 没有给恢复命令 / 来源格式 | 新增 `pack\tools\setup.ps1`，把来源写成显式参数 |
+| `gate.ps1` 报 “junction 见 README” | README 没有 junction 创建步骤 | 同上，setup 建 7 个 junction |
+| 只提 m3 samples + binutils | pytest 的 `paramdecl`/`strxref` 还要 **m2 samples** | preflight 增加 m2 samples 检查，setup 一并复制 |
+| “另需 Python 包 dnfile”，无安装命令 | 缺 dnfile 时两套 `env_missing` → 门禁 FAIL | 前置写明 `python -m pip install dnfile pefile`，preflight 硬检查 |
+| “依赖 `<旧仓库根>` 垫片” | 克隆在 C: 时 `<旧仓库根>` 解析到 `C:\home`，31 个失败/错误 | 测试改 `__file__` 相对定位，垫片降级为历史说明 |
+| 手动 pytest 步骤 | PATH 里的 objdump 非 2.47 且输出 GBK，`test_minidll_crosscheck_objdump` 报 UnicodeDecodeError→TypeError | 测试内优先用仓库 binutils 并设 `LC_ALL=C`；工具不可用时才 skip（gate 内仍执行断言） |
+
+修后从零复跑结果见 `PROGRESS.md` / `CHANGELOG.md` 同日条目（run id 与耗时以那次记录为准）。
 
 ## 版本与 tag
 
-- `v0.1.0` → `d63d244`（U1-a 打包 + U1-b 证据索引 / R95 补登记的完整交付）。
-- **重定位记录（2026-11-17）**：tag 最初指向 `5fbb421`（仅 U1-a）；因证据索引与 R95 样本登记在其后的
-  `d63d244`，本次移至 `d63d244`。仓库无远端、未推送，无下游影响；原指向与原因保留在 tag 说明、
-  `CHANGELOG.md` 与 `PROGRESS.md`，未抹除。
-- U1 收口补件（`pack\tools\gate.ps1`、本节文档、R126）在 tag 之后的提交里，**未包含在 `v0.1.0` 内**。
+- `v0.1.0` → `d63d244`（U1-a 打包 + U1-b 证据索引 / R95 补登记的完整交付），**保持不动**。
+- `v0.1.1` → 干净克隆演练后的补件提交（`gate.ps1`、`setup.ps1`、R126、垫片去除、文档），
+  tag 说明写明覆盖范围。
+- **重定位记录（2026-11-17）**：`v0.1.0` 最初指向 `5fbb421`（仅 U1-a）；因证据索引与 R95 样本登记
+  在其后的 `d63d244`，本次移至 `d63d244`。仓库无远端、未推送，无下游影响；原指向与原因保留在
+  tag 说明、`CHANGELOG.md` 与 `PROGRESS.md`，未抹除。
+- **release tag 规则（2026-11-17 起）**：`v*` tag 只在该批次**全部收口后**打，且只打在包含该批次
+  全部补件的提交上；批次中途不打 tag，避免再次出现“tag 停在半成品、需要重定位”的情况。
 
 ## CI 状态
 
