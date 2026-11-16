@@ -435,3 +435,13 @@ python %TEMP%/m12_ledger.py      # 汇总为 evidence_m12_ledger.json（M12 快�
   两组数字不得混用。
 
 
+
+## 15. M19 .NET 签名语义层（#Blob 签名解码）
+
+- 调用点分母（四样本，恒等式全部成立）：方法签名解出 **32,518** 个；字段签名 **911** 个、局部变量签名 **3,974** 个按口径只做长度与边界、不计类型语义；三者相加 = **37,403** = 三张调用点表的全部可读 blob，解码率 **100.0000%**，undecoded 0、unknown 节点 0。Field(0x04) 表只做长度/边界，`non_field_signature=0`。
+- 逐样本分母：mscorlib（v4.0.30319）MethodDef **29,257** / MemberRef **3,429** / StandAloneSig **3,908** / Field **14,718**，三张调用点表可读 blob 合计 **36,594**；System.Console.dll（7.0.20）四张表可读 blob 共 **1,020** 行（MethodDef 433、MemberRef 237、StandAloneSig 73、Field 277）；受控 RekitSample 36 行、FlowSample 35 行。
+- 独立对拍（期望值不取被测实现）：dnfile 逐行重算 #Blob 索引/文件偏移/长度/字节，四表四样本共 **52,403** 行，0 不一致；微软 SRM `DecodeSignature` 经 pwsh 编译参考 provider，逐行整串比 canonical 共 **37,403** 行，0 不一致；与 M17 的 `signature_len`/签名 hex 前缀逐行相等共 **29,728** 行，0 不一致。
+- 可失败自证（首版即带，工件=注入 ID + 基线 + 观察到的失败行）：blob 字节注入（`String`→`Int32`）→ `[FAIL] m19-drift token=0x06000003`；rekit 报告 blob 索引 +1 → `[FAIL] m19-bytes ... blob_index: dnfile=65 rekit=66`；长度前缀 +1 → `undecoded/trailing_bytes`；SRM 侧 canonical 改一字 → `[FAIL] m19-srm ... canonical 不一致`；空比对 → 拒绝 PASS。
+- 对拍抓到并处理的口径差异 1 处：SRM 原生把修饰类型渲染为 `modreq(class [TR]X)T`，spec §3 写死为 `modreq([TR]X)T`；在参考侧 formatter 按 spec 去掉 `class/valuetype` 前缀（System.Console 3 处），未放宽被测实现或比较判据。
+- 未覆盖（如实登记，不外推）：本批四样本的方法签名中未出现多维数组（`ARRAY`）、`FNPTR`、`modopt`、以及内嵌 TypeSpec 引用，这几条解码路径已实现但无样本证伪；unknown 政策与 `depth_exceeded`/`bad_compressed_int`/`truncated_signature` 同样无负样本。
+- 门禁：`verify_sigblob.py` 17 项全 PASS；全量 **22 套**、pytest **554 passed**、`ledger_check --check` PASS（run `20261117T010924-0a7b`，证据 `work\evidence_m19_sigblob.json`）。

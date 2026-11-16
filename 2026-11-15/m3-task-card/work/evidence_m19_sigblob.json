@@ -1,0 +1,630 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "den-rekit",
+   "name": "四张表分母恒等式",
+   "status": "PASS",
+   "detail": "rows=36 坏恒等式=[] identity_ok=True"
+  },
+  {
+   "id": "bytes-rekit",
+   "name": "dnfile 字节边界逐行对拍",
+   "status": "PASS",
+   "detail": "行=36 问题=0"
+  },
+  {
+   "id": "srm-rekit",
+   "name": "SRM canonical 逐行对拍",
+   "status": "PASS",
+   "detail": "行=32 问题=0"
+  },
+  {
+   "id": "m17-rekit",
+   "name": "与 M17 signature_len 逐行相等",
+   "status": "PASS",
+   "detail": "行=18 问题=0"
+  },
+  {
+   "id": "den-flow",
+   "name": "四张表分母恒等式",
+   "status": "PASS",
+   "detail": "rows=35 坏恒等式=[] identity_ok=True"
+  },
+  {
+   "id": "bytes-flow",
+   "name": "dnfile 字节边界逐行对拍",
+   "status": "PASS",
+   "detail": "行=35 问题=0"
+  },
+  {
+   "id": "srm-flow",
+   "name": "SRM canonical 逐行对拍",
+   "status": "PASS",
+   "detail": "行=34 问题=0"
+  },
+  {
+   "id": "m17-flow",
+   "name": "与 M17 signature_len 逐行相等",
+   "status": "PASS",
+   "detail": "行=20 问题=0"
+  },
+  {
+   "id": "den-console",
+   "name": "四张表分母恒等式",
+   "status": "PASS",
+   "detail": "rows=1020 坏恒等式=[] identity_ok=True"
+  },
+  {
+   "id": "bytes-console",
+   "name": "dnfile 字节边界逐行对拍",
+   "status": "PASS",
+   "detail": "行=1020 问题=0"
+  },
+  {
+   "id": "srm-console",
+   "name": "SRM canonical 逐行对拍",
+   "status": "PASS",
+   "detail": "行=743 问题=0"
+  },
+  {
+   "id": "m17-console",
+   "name": "与 M17 signature_len 逐行相等",
+   "status": "PASS",
+   "detail": "行=433 问题=0"
+  },
+  {
+   "id": "den-mscorlib",
+   "name": "四张表分母恒等式",
+   "status": "PASS",
+   "detail": "rows=51312 坏恒等式=[] identity_ok=True"
+  },
+  {
+   "id": "bytes-mscorlib",
+   "name": "dnfile 字节边界逐行对拍",
+   "status": "PASS",
+   "detail": "行=51312 问题=0"
+  },
+  {
+   "id": "srm-mscorlib",
+   "name": "SRM canonical 逐行对拍",
+   "status": "PASS",
+   "detail": "行=36594 问题=0"
+  },
+  {
+   "id": "m17-mscorlib",
+   "name": "与 M17 signature_len 逐行相等",
+   "status": "PASS",
+   "detail": "行=29257 问题=0"
+  },
+  {
+   "id": "selfproof",
+   "name": "比对器可失败自证",
+   "status": "PASS",
+   "detail": "字节注入=[FAIL] m19-drift token=0x06000003 baseline=sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=String params=[Int32] observed=sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=Int32 params=[Int32] 索引+1=[FAIL] m19-bytes token=0x06000003 table=MethodDef row=3 blob_index: dnfile=65 rekit=66 长度前缀=True SRM改字=[FAIL] m19-srm token=0x06000003 canonical 不一致 SRM=sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=String params=[Int32] rekit=sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=String params=[Int32]X 空比对=True"
+  }
+ ],
+ "samples": {
+  "rekit": {
+   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m17\\_gen\\RekitSample.dll",
+   "denominators": {
+    "MethodDef": {
+     "rows": 18,
+     "rows_read": 18,
+     "no_blob_index": 0,
+     "has_blob_index": 18,
+     "blob_readable": 18,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 18,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 18,
+     "decoded_with_unknown": 0,
+     "method_decoded": 18,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "MemberRef": {
+     "rows": 11,
+     "rows_read": 11,
+     "no_blob_index": 0,
+     "has_blob_index": 11,
+     "blob_readable": 11,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 11,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 11,
+     "decoded_with_unknown": 0,
+     "method_decoded": 10,
+     "field_sig_length_only": 1,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "StandAloneSig": {
+     "rows": 3,
+     "rows_read": 3,
+     "no_blob_index": 0,
+     "has_blob_index": 3,
+     "blob_readable": 3,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 3,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 3,
+     "decoded_with_unknown": 0,
+     "method_decoded": 0,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 3,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "Field": {
+     "rows": 4,
+     "rows_read": 4,
+     "no_blob_index": 0,
+     "has_blob_index": 4,
+     "blob_readable": 4,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "length_only": 4,
+     "non_field_signature": 0,
+     "note": "Field 签名只做长度与边界，不做类型语义",
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_length_ok": true
+    },
+    "identity_ok": true,
+    "ratios": {
+     "decoded_over_readable": 1.0,
+     "undecoded_over_readable": 0.0,
+     "unknown_over_decoded": 0.0
+    }
+   },
+   "counts": {
+    "method_signature_sites": 28,
+    "method_signatures_decoded": 28,
+    "field_signature_sites": 1,
+    "local_signature_sites": 3,
+    "call_sites_decoded": 32,
+    "call_sites_undecoded": 0,
+    "readable_total": 32,
+    "decoded_with_unknown": 0,
+    "unknown_nodes": 0,
+    "unknown_by_missing": {},
+    "anomalies": {},
+    "items_stored": {
+     "methods": 18,
+     "memberrefs": 11,
+     "standalonesigs": 3,
+     "fields": 4
+    }
+   },
+   "bytes_rows": 36,
+   "bytes_problems": 0,
+   "srm_rows": 32,
+   "srm_problems": 0,
+   "srm_error": null,
+   "m17_rows": 18,
+   "m17_problems": 0
+  },
+  "flow": {
+   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m18\\_gen\\FlowSample.dll",
+   "denominators": {
+    "MethodDef": {
+     "rows": 20,
+     "rows_read": 20,
+     "no_blob_index": 0,
+     "has_blob_index": 20,
+     "blob_readable": 20,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 20,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 20,
+     "decoded_with_unknown": 0,
+     "method_decoded": 20,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "MemberRef": {
+     "rows": 11,
+     "rows_read": 11,
+     "no_blob_index": 0,
+     "has_blob_index": 11,
+     "blob_readable": 11,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 11,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 11,
+     "decoded_with_unknown": 0,
+     "method_decoded": 10,
+     "field_sig_length_only": 1,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "StandAloneSig": {
+     "rows": 3,
+     "rows_read": 3,
+     "no_blob_index": 0,
+     "has_blob_index": 3,
+     "blob_readable": 3,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 3,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 3,
+     "decoded_with_unknown": 0,
+     "method_decoded": 0,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 3,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "Field": {
+     "rows": 1,
+     "rows_read": 1,
+     "no_blob_index": 0,
+     "has_blob_index": 1,
+     "blob_readable": 1,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "length_only": 1,
+     "non_field_signature": 0,
+     "note": "Field 签名只做长度与边界，不做类型语义",
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_length_ok": true
+    },
+    "identity_ok": true,
+    "ratios": {
+     "decoded_over_readable": 1.0,
+     "undecoded_over_readable": 0.0,
+     "unknown_over_decoded": 0.0
+    }
+   },
+   "counts": {
+    "method_signature_sites": 30,
+    "method_signatures_decoded": 30,
+    "field_signature_sites": 1,
+    "local_signature_sites": 3,
+    "call_sites_decoded": 34,
+    "call_sites_undecoded": 0,
+    "readable_total": 34,
+    "decoded_with_unknown": 0,
+    "unknown_nodes": 0,
+    "unknown_by_missing": {},
+    "anomalies": {},
+    "items_stored": {
+     "methods": 20,
+     "memberrefs": 11,
+     "standalonesigs": 3,
+     "fields": 1
+    }
+   },
+   "bytes_rows": 35,
+   "bytes_problems": 0,
+   "srm_rows": 34,
+   "srm_problems": 0,
+   "srm_error": null,
+   "m17_rows": 20,
+   "m17_problems": 0
+  },
+  "console": {
+   "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\7.0.20\\System.Console.dll",
+   "denominators": {
+    "MethodDef": {
+     "rows": 433,
+     "rows_read": 433,
+     "no_blob_index": 0,
+     "has_blob_index": 433,
+     "blob_readable": 433,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 433,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 433,
+     "decoded_with_unknown": 0,
+     "method_decoded": 433,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "MemberRef": {
+     "rows": 237,
+     "rows_read": 237,
+     "no_blob_index": 0,
+     "has_blob_index": 237,
+     "blob_readable": 237,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 237,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 237,
+     "decoded_with_unknown": 0,
+     "method_decoded": 229,
+     "field_sig_length_only": 8,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "StandAloneSig": {
+     "rows": 73,
+     "rows_read": 73,
+     "no_blob_index": 0,
+     "has_blob_index": 73,
+     "blob_readable": 73,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 73,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 73,
+     "decoded_with_unknown": 0,
+     "method_decoded": 0,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 73,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "Field": {
+     "rows": 277,
+     "rows_read": 277,
+     "no_blob_index": 0,
+     "has_blob_index": 277,
+     "blob_readable": 277,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "length_only": 277,
+     "non_field_signature": 0,
+     "note": "Field 签名只做长度与边界，不做类型语义",
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_length_ok": true
+    },
+    "identity_ok": true,
+    "ratios": {
+     "decoded_over_readable": 1.0,
+     "undecoded_over_readable": 0.0,
+     "unknown_over_decoded": 0.0
+    }
+   },
+   "counts": {
+    "method_signature_sites": 662,
+    "method_signatures_decoded": 662,
+    "field_signature_sites": 8,
+    "local_signature_sites": 73,
+    "call_sites_decoded": 743,
+    "call_sites_undecoded": 0,
+    "readable_total": 743,
+    "decoded_with_unknown": 0,
+    "unknown_nodes": 0,
+    "unknown_by_missing": {},
+    "anomalies": {},
+    "items_stored": {
+     "methods": 433,
+     "memberrefs": 237,
+     "standalonesigs": 73,
+     "fields": 277
+    }
+   },
+   "bytes_rows": 1020,
+   "bytes_problems": 0,
+   "srm_rows": 743,
+   "srm_problems": 0,
+   "srm_error": null,
+   "m17_rows": 433,
+   "m17_problems": 0
+  },
+  "mscorlib": {
+   "path": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\mscorlib.dll",
+   "denominators": {
+    "MethodDef": {
+     "rows": 29257,
+     "rows_read": 29257,
+     "no_blob_index": 0,
+     "has_blob_index": 29257,
+     "blob_readable": 29257,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 29257,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 29257,
+     "decoded_with_unknown": 0,
+     "method_decoded": 29257,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "MemberRef": {
+     "rows": 3429,
+     "rows_read": 3429,
+     "no_blob_index": 0,
+     "has_blob_index": 3429,
+     "blob_readable": 3429,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 3429,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 3429,
+     "decoded_with_unknown": 0,
+     "method_decoded": 2541,
+     "field_sig_length_only": 888,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "StandAloneSig": {
+     "rows": 3908,
+     "rows_read": 3908,
+     "no_blob_index": 0,
+     "has_blob_index": 3908,
+     "blob_readable": 3908,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 3908,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 3908,
+     "decoded_with_unknown": 0,
+     "method_decoded": 0,
+     "field_sig_length_only": 13,
+     "local_sig_length_only": 3895,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "Field": {
+     "rows": 14718,
+     "rows_read": 14718,
+     "no_blob_index": 0,
+     "has_blob_index": 14718,
+     "blob_readable": 14718,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "length_only": 14718,
+     "non_field_signature": 0,
+     "note": "Field 签名只做长度与边界，不做类型语义",
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_length_ok": true
+    },
+    "identity_ok": true,
+    "ratios": {
+     "decoded_over_readable": 1.0,
+     "undecoded_over_readable": 0.0,
+     "unknown_over_decoded": 0.0
+    }
+   },
+   "counts": {
+    "method_signature_sites": 31798,
+    "method_signatures_decoded": 31798,
+    "field_signature_sites": 901,
+    "local_signature_sites": 3895,
+    "call_sites_decoded": 36594,
+    "call_sites_undecoded": 0,
+    "readable_total": 36594,
+    "decoded_with_unknown": 0,
+    "unknown_nodes": 0,
+    "unknown_by_missing": {},
+    "anomalies": {},
+    "items_stored": {
+     "methods": 29257,
+     "memberrefs": 3429,
+     "standalonesigs": 3908,
+     "fields": 14718
+    }
+   },
+   "bytes_rows": 51312,
+   "bytes_problems": 0,
+   "srm_rows": 36594,
+   "srm_problems": 0,
+   "srm_error": null,
+   "m17_rows": 29257,
+   "m17_problems": 0
+  }
+ }
+}

@@ -342,3 +342,14 @@
 - 全量实跑 `work\verification\20261117T001004-58f1`（vharness 383.6s + pytest 84.3s）：**21/21 套 PASS、pytest 554 passed / 0 failed / 0 skipped、ledger PASS 67 数字、VERDICT: PASS exit=0**；`status.py` 复跑 PASS（HANDOFF 6/6、latest PASS、ledger PASS、git WARN）。
 - 判据变化汇总：mtime→sha256（删误报、真变仍拦）；自证「能跑」→「必须是工件且含失败行」；分母「非 0」→「≥实测下限」；缺外部工具「跳过」→ exit 2；gate 不再自建判定。
 - 未动：`rekit\*.py` 0 处、样本 0 处、任何已公布数字 0 处改动；目录改名与 `git init` 未做。定标：**M19 = .NET 签名语义层（`#Blob` 解码）**，已写入章程，本轮不动工。
+
+### 2026-11-17 M19 — .NET 签名语义层（sigblob）
+
+- 新增 `rekit/sigblob.py` + `rekit sigblob`：只解 MethodDef / MemberRef / StandAloneSig 的 `#Blob` 签名（调用约定、泛型参数数、返回/参数类型）；`Field(0x04)` 与 `LOCAL_SIG`/字段签名只做长度与边界。上游 `dotnet.Tables.blob_span()`（`blob()` 复用同一实现，避免偏移逻辑漂移）与 `TypeResolver`（TypeDef/TypeRef 嵌套链）；TypeSpec 只写 `spec@0x1Bxxxxxx`，不解其 blob。
+- **定标偏离（已向用户说明并继续）**：PyPI `dnfile` 0.5.0–0.18.0 全版本没有签名解码 API，定标②的字面「用 dnfile 的 Signature 解码」不存在。替代保持两条不让步：字节边界仍由 dnfile（`Signature_BlobIndex` + `Signature.value/raw_size/item_size/rva`）逐行比对；语义期望值改用微软 SRM `DecodeSignature`（`tests/sigref.ps1`，pwsh 7.6.6/.NET 10 `Add-Type` 编译 `ISignatureTypeProvider<string>`）。新增 `pwsh` 依赖，缺失 → `env_missing` exit 2（fail-closed）。
+- 分母先行（四样本，恒等式全部成立）：方法签名 **32,518** 个（受控 18 + 20、Console 662、mscorlib 31,798）；字段签名 **911**、局部签名 **3,974** 只做长度；三张调用点表可读 blob **37,403**，解码率 **100.0000%**，undecoded 0、unknown 节点 0、`Field.non_field_signature=0`。mscorlib 四表 29,257 / 3,429 / 3,908 / 14,718；Console 433 / 237 / 73 / 277。
+- 独立对拍（期望值不取被测实现）：dnfile 重算索引/文件偏移/长度/字节 **52,403** 行；SRM canonical 整串 **37,403** 行；M17 `signature_len`/签名 hex 前缀 **29,728** 行；三者 0 不一致。对拍抓到 3 处 `modreq` 渲染差异（SRM 原生带 `class` 前缀，spec §3 写死 `modreq([TR]X)`），在参考侧 formatter 按 spec 归一，未改被测实现与比较判据。
+- 可失败自证（首版即带工件）：字节注入（`String`→`Int32`）→ `[FAIL] m19-drift token=0x06000003`；报告索引 +1 → `[FAIL] m19-bytes ... blob_index: dnfile=65 rekit=66`；长度前缀 +1 → `undecoded/trailing_bytes`；SRM 侧 canonical 改一字 → `[FAIL] m19-srm ... canonical 不一致`；空比对 → 拒绝 PASS。`verify_sigblob.py` **17 项全 PASS**。
+- 未覆盖（如实登记，不换宽松样本）：本批四样本的方法签名中未出现多维数组（`ARRAY`）、`FNPTR`、`modopt`、内嵌 TypeSpec 引用；这些路径已实现但无证伪样本。`depth_exceeded`/`bad_compressed_int`/`truncated_signature` 同样无负样本。
+- 回归：全量门禁 **22 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（run `20261117T010924-0a7b`）；总账新增 §15（9 小节 / 9 证据 / 82 数字），`evidence_m19_sigblob.json` 登记 sha256。
+- 规则：**R120** 方法签名必须 `consumed == blob_len`，剩余字节记 `trailing_bytes` 且计 undecoded；**R121** `unknown`（结构已解、类型节点未知，计 `decoded_with_unknown`）与 `undecoded`（字节没解完）必须分开计数，两者都不得按名称猜；**R122** 参考实现与 spec 的 canonical 文本冲突时按 spec 归一，但必须在文档披露冲突点与处理方式，不得改被测实现或比较判据。

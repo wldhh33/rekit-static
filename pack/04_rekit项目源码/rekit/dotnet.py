@@ -495,24 +495,42 @@ class Tables:
         except ValueError:
             return {"value": None, "missing": "string_unterminated"}
 
-    def blob(self, idx):
+    def blob_span(self, idx):
+        """#Blob 项的定位（不读内容）：文件偏移/长度/结束位置 + 缺失原因。
+
+        idx==0 表示「没有 blob」而非缺失：off/end 为 None、len=0、missing=None。
+        """
         r = self._heap_range(HEAP_BLOB)
         if r is None:
-            return {"value": None, "length": None, "missing": "no_blob_heap"}
+            return {"index": idx, "off": None, "len": None, "end": None,
+                    "missing": "no_blob_heap"}
         base, size = r
         if idx == 0:
-            return {"value": b"", "length": 0, "missing": None}
+            return {"index": 0, "off": None, "len": 0, "end": None,
+                    "missing": None}
         if idx >= size:
-            return {"value": None, "length": None,
+            return {"index": idx, "off": None, "len": None, "end": None,
                     "missing": "blob_index_out_of_range"}
         try:
             n, pos = _compressed(self.data, base + idx)
         except ValueError as e:
-            return {"value": None, "length": None,
+            return {"index": idx, "off": None, "len": None, "end": None,
                     "missing": "blob_length_invalid: %s" % e}
-        if pos + n > base + size or pos + n > len(self.data):
-            return {"value": None, "length": n, "missing": "blob_truncated"}
-        return {"value": self.data[pos:pos + n], "length": n, "missing": None}
+        end = pos + n
+        if end > base + size or end > len(self.data):
+            return {"index": idx, "off": pos, "len": n, "end": end,
+                    "missing": "blob_truncated"}
+        return {"index": idx, "off": pos, "len": n, "end": end,
+                "missing": None}
+
+    def blob(self, idx):
+        s = self.blob_span(idx)
+        if s["missing"] is not None:
+            return {"value": None, "length": s["len"], "missing": s["missing"]}
+        if s["off"] is None:                      # idx==0：空 blob
+            return {"value": b"", "length": 0, "missing": None}
+        return {"value": self.data[s["off"]:s["end"]], "length": s["len"],
+                "missing": None}
 
     def guid(self, idx):
         r = self._heap_range(HEAP_GUID)

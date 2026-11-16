@@ -1,7 +1,7 @@
 {
   "schema": "numbers-ledger/1",
   "authority": "本文件；人读镜像为 work/outputs/NUMBERS_LEDGER.md",
-  "scope": "M13 收口（含 M13-patch）至 M18 收口；M12 及更早见 evidence_m12_ledger.json",
+  "scope": "M13 收口（含 M13-patch）至 M19 收口；M12 及更早见 evidence_m12_ledger.json",
   "effective_from": "M13-patch",
   "mirror": "2026-11-15/m3-task-card/work/outputs/NUMBERS_LEDGER.md",
   "freshness_rule": "以字节为准：任一登记证据文件的当前 sha256 与本文件登记值不等 → 检查 FAIL（必须 --write 重登记并复核数字）；证据被原样重写（sha256 相同、仅 mtime 变新）不算权威落后，只记 note",
@@ -121,6 +121,27 @@
         "7/18",
         "13/21"
       ]
+    },
+    {
+      "milestone": "M19",
+      "heading": "## 15. M19 .NET 签名语义层（#Blob 签名解码）",
+      "numbers": [
+        "37,403",
+        "52,403",
+        "29,728",
+        "32,518",
+        "911",
+        "3,974",
+        "29,257",
+        "3,429",
+        "3,908",
+        "14,718",
+        "36,594",
+        "1,020",
+        "100.0000%",
+        "22 套",
+        "554 passed"
+      ]
     }
   ],
   "sources": [
@@ -158,6 +179,11 @@
       "path": "2026-11-15/m3-task-card/work/evidence_m18_ilflow.json",
       "role": "M18 IL 控制流层 dncil 全量对账",
       "sha256": "eca5ee510cf40cca677d35c6c8e87c273989682dc5ffb72c93115d298ae8fd79"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m19_sigblob.json",
+      "role": "M19 签名语义层 dnfile 字节 + SRM canonical 对账",
+      "sha256": "faa8c092237cb9f9d21ca34810313a6bf60d50f4f260dbeedd0c1f299ed9d1d8"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m5_expr_residual.json",

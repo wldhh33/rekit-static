@@ -36,6 +36,7 @@ SECTIONS = [
     ("M17", "## 12. M17 .NET 程序集结构层（新对象：CLI 程序集）"),
     ("M18", "## 13. M18 .NET IL 控制流层（新分母：方法体/IL 指令）"),
     ("M5", "## 14. M5 表达式层验收补强（补记，跨里程碑）"),
+    ("M19", "## 15. M19 .NET 签名语义层（#Blob 签名解码）"),
 ]
 
 # 登记数字：必须在对应小节正文里逐字出现
@@ -56,6 +57,9 @@ NUMBERS = {
     "M18": ["108,267", "107,765", "41/41", "554 passed",
             "1,372", "1,245", "1,133", "2,164", "93,194", "51,063", "52,837", "5,058"],
     "M5": ["57 个抽样函数", "403", "390", "2.47.20260726", "1/18", "7/18", "13/21"],
+    "M19": ["37,403", "52,403", "29,728", "32,518", "911", "3,974",
+            "29,257", "3,429", "3,908", "14,718", "36,594", "1,020",
+            "100.0000%", "22 套", "554 passed"],
 }
 
 SOURCES = [
@@ -66,6 +70,7 @@ SOURCES = [
     ("evidence_m16_datarefs.json", "M16 数据引用层外部重算"),
     ("evidence_m17_dotnet.json", "M17 .NET 结构层 dnfile/dncil 对账"),
     ("evidence_m18_ilflow.json", "M18 IL 控制流层 dncil 全量对账"),
+    ("evidence_m19_sigblob.json", "M19 签名语义层 dnfile 字节 + SRM canonical 对账"),
     ("evidence_m5_expr_residual.json", "M5 表达式层 objdump oracle 残差逐地址"),
 ]
 
@@ -90,7 +95,7 @@ def build():
     return {
         "schema": "numbers-ledger/1",
         "authority": "本文件；人读镜像为 work/outputs/NUMBERS_LEDGER.md",
-        "scope": "M13 收口（含 M13-patch）至 M18 收口；M12 及更早见 evidence_m12_ledger.json",
+        "scope": "M13 收口（含 M13-patch）至 M19 收口；M12 及更早见 evidence_m12_ledger.json",
         "effective_from": "M13-patch",
         "mirror": "2026-11-15/m3-task-card/work/outputs/NUMBERS_LEDGER.md",
         "freshness_rule": ("以字节为准：任一登记证据文件的当前 sha256 与本文件登记值不等 → "

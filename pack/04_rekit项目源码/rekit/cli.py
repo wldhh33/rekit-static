@@ -74,6 +74,11 @@ def main(argv=None):
     if argv and argv[0] == "expr":
         from . import expr
         return expr.main(argv[1:])
+    # M19（2026-11-17）：`rekit sigblob <file> [--json] [--limit N]`
+    # .NET 签名语义层：MethodDef/MemberRef/StandAloneSig 的 #Blob 签名解码。
+    if argv and argv[0] == "sigblob":
+        from . import sigblob
+        return sigblob.main(argv[1:])
     # M18（2026-11-16）：`rekit ilflow <file> [--json] [--limit N]`
     # .NET IL 控制流与调用关系：token 三态解析、分支目标落点、基本块/边、EH 结构。
     if argv and argv[0] == "ilflow":
