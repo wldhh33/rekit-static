@@ -18,6 +18,13 @@
 #   (f) 可失败自证（工件形式，首版即带）：FieldLayout 偏移注入、ClassLayout
 #       大小注入、FieldRVA 文件字节篡改、RVA+1 注入、空比对，五类都必须被
 #       检出；任何一类检不出即 FAIL。
+#   (g) sequential/auto 运行期推导（2026-11-17 补证批次，单列，不进静态结论）：
+#       tests/layoutauto.ps1 用编译期引用 + /unsafe 探针（清零后逐字段赋值、
+#       扫描首个非零字节）给出偏移，sizeof(T) 给出 CLR 实际大小。
+#       sequential 的期望由源码声明 + ECMA-335 §II.10.1.2 独立推导（不是取自
+#       rekit）；auto 无静态推导，只做运行期自洽（每个字段量到、互不重叠、
+#       不越界）并配负控（-1 / 越界 / 重叠注入必须被检出）。
+#       所有结果标 static_conclusion=false。
 #
 # 空比对一律 FAIL（_guard）；分母为 0 的逐表比较记 SKIP 并由聚合分母兜底。
 # 缺 dnfile / powershell / 样本 -> env_missing(exit 2)，不静默跳过。
@@ -44,6 +51,7 @@ MSCORLIB = r"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll"
 CONSOLE = (r"C:\Program Files\dotnet\shared\Microsoft.NETCore.App"
            r"\7.0.20\System.Console.dll")
 ORACLE = os.path.join(HERE, "layoutref.ps1")
+ORACLE_AUTO = os.path.join(HERE, "layoutauto.ps1")
 OUT_JSON = os.path.join(WORK, "evidence_m20_layout.json")
 
 SAMPLES = (("il", IL), ("csharp", CS), ("mscorlib", MSCORLIB),
@@ -54,6 +62,26 @@ RT_TYPES = {
            "LayoutSample.AutoStruct"],
     "csharp": ["LayoutCSharp.ExplicitPair", "LayoutCSharp.SeqPack4",
                "LayoutCSharp.Plain"],
+}
+# sequential/auto 运行期探针（layoutauto.ps1，单列，不进静态结论）
+AUTO_TYPES = {
+    "il": ("LayoutSample.SeqStruct", "LayoutSample.AutoStruct"),
+    "csharp": ("LayoutCSharp.SeqPack4", "LayoutCSharp.Plain"),
+}
+# sequential 的独立期望：字段偏移按 ECMA-335 §II.10.1.2（声明顺序 + 自然对齐，
+# 对齐上限 = pack）从源码声明推导；size 只在元数据显式写了 ClassSize 时断言。
+# auto 无静态推导，offsets=None 表示只做运行期自洽。
+AUTO_EXPECT = {
+    "il": {
+        "LayoutSample.SeqStruct": {"pack": 2, "size": 16,
+                                   "offsets": {"X": 0, "Y": 2}},
+        "LayoutSample.AutoStruct": {"pack": 0, "size": None, "offsets": None},
+    },
+    "csharp": {
+        "LayoutCSharp.SeqPack4": {"pack": 4, "size": None,
+                                  "offsets": {"B": 0, "L": 4, "S": 12}},
+        "LayoutCSharp.Plain": {"pack": 0, "size": None, "offsets": None},
+    },
 }
 TID = {"FieldLayout": 0x10, "ClassLayout": 0x0F, "FieldRVA": 0x1D}
 
@@ -450,6 +478,89 @@ def _runtime_checks(tag, path, rep, oracle):
     return probs, n_off, n_size, n_auto
 
 
+# ── (g) sequential/auto 运行期探针（补证批次，不进静态结论）──────────
+def _run_auto_oracle(path, types):
+    cmd = ["powershell", "-NoProfile", "-NonInteractive", "-File",
+           ORACLE_AUTO, "-Assembly", path, "-Types", ",".join(types)]
+    p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                       timeout=300)
+    if p.returncode != 0:
+        raise RuntimeError("layoutauto.ps1 exit=%d stderr=%s"
+                           % (p.returncode,
+                              p.stderr.decode("utf-8", "replace")[:300]))
+    txt = p.stdout.decode("utf-8", "replace").strip()
+    if not txt:
+        raise RuntimeError("layoutauto.ps1 无输出")
+    return json.loads(txt)
+
+
+def _auto_problems(tag, types, expect):
+    """运行期自洽 + sequential 的源码/ECMA 推导期望。返回 (问题, 字段数)。"""
+    probs, n = [], 0
+    for tname, exp in expect.items():
+        g = types.get(tname)
+        if g is None:
+            probs.append("%s：探针未返回该类型" % tname)
+            continue
+        if g.get("errors"):
+            probs.append("%s：有字段未测量 %r" % (tname, g["errors"]))
+        offs = g.get("offsets") or {}
+        size = g.get("size")
+        vals = list(offs.values())
+        n += len(vals)
+        if not vals:
+            probs.append("%s：没有任何字段偏移（空测量）" % tname)
+        if any(v is None or v < 0 for v in vals):
+            probs.append("%s：字段未量到 %r" % (tname, offs))
+        if len(set(vals)) != len(vals):
+            probs.append("%s：字段偏移重叠 %r" % (tname, offs))
+        if not isinstance(size, int) or size <= 0:
+            probs.append("%s：size=%r" % (tname, size))
+        elif any(v is not None and not (0 <= v < size) for v in vals):
+            probs.append("%s：偏移越界 size=%d %r" % (tname, size, offs))
+        if exp.get("offsets") is not None:
+            for fname, want in exp["offsets"].items():
+                if offs.get(fname) != want:
+                    probs.append("%s.%s offset 期望=%d 运行期=%r（pack=%d 推导）"
+                                 % (tname, fname, want, offs.get(fname),
+                                    exp["pack"]))
+        if exp.get("size") is not None and size != exp["size"]:
+            probs.append("%s size 期望=%d 运行期=%r"
+                         % (tname, exp["size"], size))
+    return probs, n
+
+
+def _auto_selfproof(types, expect):
+    """负控：seq 偏移 +4 必须被源码/ECMA 期望抓到；auto 的 -1 / 越界 / 重叠
+    必须被运行期自洽抓到。任一注入检不出 -> 该键为空字符串 -> FAIL。"""
+    hits = {}
+    seq = next((k for k, v in expect.items() if v.get("offsets")), None)
+    aut = next((k for k, v in expect.items()
+                if v.get("offsets") is None), None)
+    if seq:
+        bad = json.loads(json.dumps(types))
+        f = sorted(expect[seq]["offsets"])[0]
+        bad[seq]["offsets"][f] = expect[seq]["offsets"][f] + 4
+        p, _ = _auto_problems("sp", bad, {seq: expect[seq]})
+        hits["seq+4"] = next((x for x in p if f in x), "")
+    if aut:
+        bad = json.loads(json.dumps(types))
+        names = sorted(bad[aut]["offsets"])
+        bad[aut]["offsets"][names[0]] = -1
+        p, _ = _auto_problems("sp", bad, {aut: expect[aut]})
+        hits["auto-1"] = next((x for x in p if "未量到" in x), "")
+        bad = json.loads(json.dumps(types))
+        bad[aut]["offsets"][names[0]] = bad[aut]["size"] + 4
+        p, _ = _auto_problems("sp", bad, {aut: expect[aut]})
+        hits["auto-oob"] = next((x for x in p if "越界" in x), "")
+        if len(names) >= 2:
+            bad = json.loads(json.dumps(types))
+            bad[aut]["offsets"][names[1]] = bad[aut]["offsets"][names[0]]
+            p, _ = _auto_problems("sp", bad, {aut: expect[aut]})
+            hits["auto-overlap"] = next((x for x in p if "重叠" in x), "")
+    return hits
+
+
 # ── 分母恒等式 / 计数一致性 ─────────────────────────────────────────
 def _den_problems(rep):
     probs = []
@@ -547,7 +658,7 @@ def main():
         print("env_missing: powershell 不在 PATH（运行时 oracle 需要）")
         return 2
     logging.disable(logging.CRITICAL)
-    for p in (IL_SRC, CS_SRC, ORACLE):
+    for p in (IL_SRC, CS_SRC, ORACLE, ORACLE_AUTO):
         if not os.path.exists(p):
             print("env_missing: 缺文件 %s" % p)
             return 2
@@ -558,7 +669,7 @@ def main():
     evidence = {}
     agg = {"FieldLayout": 0, "ClassLayout": 0, "FieldRVA": 0,
            "dn_cols": 0, "dn_rva": 0, "src": 0, "rt_off": 0, "rt_size": 0,
-           "rt_auto": 0, "name": 0}
+           "rt_auto": 0, "rt_auto_off": 0, "name": 0}
     rep0 = None
 
     for tag, path in SAMPLES:
@@ -616,6 +727,7 @@ def main():
                  "行=%d 问题=%d%s" % (nr, len(pr),
                                      "" if not pr else " 首条=" + pr[0]["line"]))
 
+        auto_ev = None
         if tag in CONTROLLED:
             exp = exp_by_tag[tag]
             ps, ns = _src_problems(rep, exp, tag)
@@ -642,6 +754,31 @@ def main():
                         "" if not prt else " 首条=" + prt[0]["line"]))
             except Exception as e:
                 _add("runtime-" + tag, "运行期 oracle 可执行", "FAIL",
+                     "%s: %s" % (type(e).__name__, e))
+            auto_ev = None
+            try:
+                auto = _run_auto_oracle(path, AUTO_TYPES[tag])
+                pa, na = _auto_problems(tag, auto.get("types") or {},
+                                        AUTO_EXPECT[tag])
+                agg["rt_auto_off"] += na
+                _add("auto-" + tag,
+                     "sequential/auto 运行期偏移（运行期推导，不进静态结论）",
+                     "PASS" if (na > 0 and not pa) else "FAIL",
+                     "字段=%d 问题=%d%s"
+                     % (na, len(pa), "" if not pa else " 首条=" + pa[0]))
+                hits = _auto_selfproof(auto.get("types") or {},
+                                       AUTO_EXPECT[tag])
+                _add("auto-selfproof-" + tag,
+                     "运行期探针负控（注入必须被检出）",
+                     "PASS" if (hits and all(hits.values())) else "FAIL",
+                     " / ".join("%s=%s" % (k, "检出" if v else "未检出")
+                                for k, v in hits.items()))
+                auto_ev = {"source": auto.get("source"),
+                           "static_conclusion": False,
+                           "types": auto.get("types"),
+                           "unsupported": auto.get("unsupported")}
+            except Exception as e:
+                _add("auto-" + tag, "运行期探针可执行", "FAIL",
                      "%s: %s" % (type(e).__name__, e))
         else:
             _add("runtime-" + tag, "非受控样本不产出运行期结论",
@@ -670,6 +807,7 @@ def main():
                                 "types": len(rep["runtime_derived"]["types"]),
                                 "static_conclusion":
                                     rep["runtime_derived"]["static_conclusion"]},
+            "auto_runtime": auto_ev,
         }
 
     # 聚合分母：三张表都必须在全部样本里真的出现过
@@ -684,6 +822,9 @@ def main():
          "PASS" if agg["rt_off"] >= 3 else "FAIL",
          "偏移=%d size=%d auto=%d 下限=3"
          % (agg["rt_off"], agg["rt_size"], agg["rt_auto"]))
+    _add("agg-auto-runtime", "sequential/auto 运行期探针偏移聚合",
+         "PASS" if agg["rt_auto_off"] >= 5 else "FAIL",
+         "字段=%d 下限=5" % agg["rt_auto_off"])
     _add("agg-dn", "dnfile 逐行比较聚合",
          "PASS" if agg["dn_cols"] >= 3 and agg["dn_rva"] >= 1 else "FAIL",
          "cols=%d rva=%d 下限=3/1" % (agg["dn_cols"], agg["dn_rva"]))

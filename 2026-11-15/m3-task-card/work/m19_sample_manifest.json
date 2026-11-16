@@ -1,0 +1,70 @@
+﻿{
+    "schema":  1,
+    "batch":  "2026-11-17 M19 签名层补证",
+    "note":  "ilasm 写入随机 MVID/时间戳：重跑后 sha256 会变，需重跑 gen.ps1 重新登记；可复现的是源码与签名结构。",
+    "samples":  [
+                    {
+                        "file":  "SigSample.dll",
+                        "role":  "受控样本",
+                        "sha256":  "6a5c050759b7b517b577c1a50683d6166ebf1a869e1deafaaed2ff6d158d8a0d",
+                        "size":  2048,
+                        "build":  "ilasm v4.0.30319 汇编 outputs\\m19_sigblob\\SigSample.il",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    },
+                    {
+                        "file":  "DeepSig63.dll",
+                        "role":  "受控样本",
+                        "sha256":  "5171a5e4dbbe01604ccc4726362012a51586a13b4d5ebdda3a42052fb40e056f",
+                        "size":  2048,
+                        "build":  "ilasm v4.0.30319 汇编 outputs\\m19_sigblob\\DeepSig63.il",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    },
+                    {
+                        "file":  "DeepSig.dll",
+                        "role":  "受控样本",
+                        "sha256":  "c244275ef13a42da53cf618916bd7c2e1247fc4a67ee523177660456d7f47d9d",
+                        "size":  2048,
+                        "build":  "ilasm v4.0.30319 汇编 outputs\\m19_sigblob\\DeepSig.il",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    },
+                    {
+                        "file":  "BadCompressed.dll",
+                        "role":  "负样本",
+                        "sha256":  "e90b099525a2c10b7533ee20ae63230644e3173ef6724f2e598e1fe009a1505f",
+                        "size":  2048,
+                        "build":  "make_negatives.py 原位改 1 字节（03 -\u003e e0，长度不变）→ bad_compressed_int",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    },
+                    {
+                        "file":  "TruncatedSig.dll",
+                        "role":  "负样本",
+                        "sha256":  "5fb4e9615c08f34e27139143be1b03bfbfe217bc5c198602b981efaaeaedf1eb",
+                        "size":  2048,
+                        "build":  "make_negatives.py 原位改 1 字节（03 -\u003e 08，长度不变）→ truncated_signature",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    },
+                    {
+                        "file":  "UnknownCodedTag.dll",
+                        "role":  "负样本",
+                        "sha256":  "280081c6254dc717628ea53b8b39b2a0851e55d92756ff46ffecb5382c904074",
+                        "size":  2048,
+                        "build":  "make_negatives.py 原位改 1 字节（09 -\u003e 0b，长度不变）→ decoded_with_unknown",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    },
+                    {
+                        "file":  "UnknownElemType.dll",
+                        "role":  "负样本",
+                        "sha256":  "f30c35bdd18b1b092339dffd924fbb1397033efad072f8592fb07e0ded583c6a",
+                        "size":  2048,
+                        "build":  "make_negatives.py 原位改 1 字节（01 -\u003e 6f，长度不变）→ trailing_bytes",
+                        "license":  "self-authored IL（本项目自写，无第三方内容）",
+                        "redistributable":  false
+                    }
+                ]
+}

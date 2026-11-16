@@ -15,9 +15,16 @@
 #       canonical 相对基线漂移必须被检出；blob 索引 +1 必须报索引不一致；
 #       blob 长度前缀篡改必须报 undecoded/trailing_bytes；SRM 侧 canonical
 #       改一字必须被检出；空比对必须 FAIL。
+#   (e) 补证批次（2026-11-17，单列，不并入四样本已公布分母）：
+#       SigSample 覆盖 ARRAY(0x14) / FNPTR(0x1B) / modopt(0x20) / TypeSpec 引用
+#       四条原样本未出现的路径；DeepSig63(63 层)/DeepSig(64 层) 给
+#       depth_exceeded 的边界证据；_neg 下两个原位改字节的样本给
+#       bad_compressed_int / truncated_signature 的负控证据。三类各自独立
+#       对拍（dnfile 字节 + SRM 佐证），空比对一律 FAIL。
 #
 # 样本：受控 RekitSample.dll、FlowSample.dll、真实 System.Console.dll、
-#       mscorlib.dll（沿用 M17/M18 同一批；读不出如实 unknown 并单列）。
+#       mscorlib.dll（沿用 M17/M18 同一批；读不出如实 unknown 并单列）；
+#       补证用 SigSample.dll / DeepSig63.dll / DeepSig.dll / 两个负样本。
 # 工具缺失 -> env_missing（exit 2，fail-closed）；任何 FAIL -> exit 1。
 import collections
 import json
@@ -38,6 +45,15 @@ from rekit import sigblob as SB                    # noqa: E402
 
 REKIT = os.path.join(WORK, "samples", "m17", "_gen", "RekitSample.dll")
 FLOW = os.path.join(WORK, "samples", "m18", "_gen", "FlowSample.dll")
+M19GEN = os.path.join(WORK, "samples", "m19_sigblob", "_gen")
+M19NEG = os.path.join(WORK, "samples", "m19_sigblob", "_neg")
+SIGSAMPLE = os.path.join(M19GEN, "SigSample.dll")
+DEEPSIG63 = os.path.join(M19GEN, "DeepSig63.dll")
+DEEPSIG = os.path.join(M19GEN, "DeepSig.dll")
+NEG_BADCOMP = os.path.join(M19NEG, "BadCompressed.dll")
+NEG_TRUNC = os.path.join(M19NEG, "TruncatedSig.dll")
+NEG_UNKNOWN = os.path.join(M19NEG, "UnknownCodedTag.dll")
+NEG_UNKNOWN_ELEM = os.path.join(M19NEG, "UnknownElemType.dll")
 CONSOLE = r"C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.20\System.Console.dll"
 MSCORLIB = r"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll"
 SIGREF = os.path.join(HERE, "sigref.ps1")
@@ -333,6 +349,338 @@ def _drift(rep, baseline):
     return probs
 
 
+# ── 补证批次（2026-11-17）：受控样本 + 错误路径负样本 ────────────────
+# 这些样本只作补证，**不并入**四样本的已公布分母（37,403 等口径不变）。
+COVERAGE = (
+    ("MArray", "ARRAY(0x14) 多维数组 rank=2 下界 0,0", "[r=2;lb=0,0]"),
+    ("MFn", "FNPTR(0x1B) 函数指针", "fnptr("),
+    ("MMod", "modopt(0x20) 修饰 TypeRef",
+     "modopt([TR]System.Runtime.CompilerServices.IsConst)"),
+    ("MOpt", "modopt(0x20) 修饰 TypeSpec 内嵌引用", "modopt(spec@0x1B"),
+)
+
+NEG_CASES = (
+    ("bad-compressed", NEG_BADCOMP, "MSimple", "bad_compressed_int"),
+    ("truncated", NEG_TRUNC, "MSimple", "truncated_signature"),
+)
+
+# unknown 政策的两条分支：coded index 非法（结构解完）与元素类型字节不认识。
+# 都要求 decoded + unknown 账本命中，且分母从 decoded_clean 变成 with_unknown。
+UNKNOWN_CASES = (
+    ("coded-index", NEG_UNKNOWN, "MMod", "coded_index_tag_3",
+     "unknown(coded_index_tag_3)Int32"),
+    ("elem-type", NEG_UNKNOWN_ELEM, "MSimple", "element_type_0x6f",
+     "ret=unknown(element_type_0x6f)"),
+)
+
+
+def _check_sample(tag, path):
+    """单样本四类对拍：分母恒等式 / dnfile 字节 / SRM canonical / M17 前缀。
+
+    返回 (证据 dict, 报告)；样本不可用返回 (None, None)（已记 FAIL）。
+    """
+    if not os.path.exists(path):
+        _add("sample-" + tag, "样本存在", "FAIL", "缺文件 %s" % path)
+        return None, None
+    try:
+        rep = SB.build(path, limit=None)
+    except Exception as e:
+        _add("sample-" + tag, "样本可构建", "FAIL",
+             "%s: %s" % (type(e).__name__, e))
+        return None, None
+    if rep.get("status") != "ok":
+        _add("sample-" + tag, "样本可构建", "FAIL",
+             "status=%s reason=%s" % (rep.get("status"),
+                                      rep.get("reason")))
+        return None, None
+    check_denominators(tag, rep)
+    try:
+        bprobs, bn = compare_bytes(tag, path, rep)
+    except Exception as e:
+        _add("bytes-" + tag, "dnfile 字节边界逐行对拍", "FAIL",
+             "%s: %s" % (type(e).__name__, e))
+        bprobs, bn = [], 0
+    bok = _guard(bn, "bytes-" + tag) and not bprobs
+    _add("bytes-" + tag, "dnfile 字节边界逐行对拍",
+         "PASS" if bok else "FAIL",
+         "行=%d 问题=%d%s" % (bn, len(bprobs),
+                             "" if not bprobs
+                             else " 首条=" + bprobs[0]["line"]))
+    try:
+        sprobs, sn = compare_srm(tag, path, rep)
+        srm_error = None
+    except Exception as e:
+        sprobs, sn, srm_error = [], 0, "%s: %s" % (type(e).__name__, e)
+    sok = _guard(sn, "srm-" + tag) and not sprobs and srm_error is None
+    _add("srm-" + tag, "SRM canonical 逐行对拍",
+         "PASS" if sok else "FAIL",
+         "行=%d 问题=%d%s" % (sn, len(sprobs),
+                             "" if not sprobs
+                             else " 首条=" + sprobs[0]["line"])
+         if srm_error is None else "环境/解码失败：" + srm_error)
+    mprobs, mn = compare_m17(tag, path, rep)
+    mok = _guard(mn, "m17-" + tag) and not mprobs
+    _add("m17-" + tag, "与 M17 signature_len 逐行相等",
+         "PASS" if mok else "FAIL",
+         "行=%d 问题=%d%s" % (mn, len(mprobs),
+                             "" if not mprobs
+                             else " 首条=" + mprobs[0]["line"]))
+    den = rep["denominators"]
+    return {
+        "path": _evidence_path(path),
+        "denominators": {k: den[k] for k in
+                         ("MethodDef", "MemberRef", "StandAloneSig",
+                          "Field", "identity_ok", "ratios")},
+        "counts": rep["counts"],
+        "bytes_rows": bn, "bytes_problems": len(bprobs),
+        "srm_rows": sn, "srm_problems": len(sprobs),
+        "srm_error": srm_error,
+        "m17_rows": mn, "m17_problems": len(mprobs),
+    }, rep
+
+
+def check_coverage(rep):
+    """四条原样本未出现的解码路径：不止“能跑”，要断言 canonical 真含该类结构。"""
+    by_name = {it["name"]: it for it in rep.get("methods") or []
+               if it.get("name")}
+    probs = []
+    shown = {}
+    n = 0
+    for mname, what, needle in COVERAGE:
+        it = by_name.get(mname)
+        if it is None:
+            probs.append("%s：样本无方法 %s" % (what, mname))
+            continue
+        n += 1
+        canon = (it.get("signature") or {}).get("canonical") or ""
+        shown[mname] = canon
+        if it["status"] != "decoded":
+            probs.append("%s：%s status=%s reason=%s"
+                         % (what, mname, it["status"], it.get("reason")))
+        elif needle not in canon:
+            probs.append("%s：%s canonical 不含 %r（实际 %s）"
+                         % (what, mname, needle, canon))
+    ok = _guard(n, "coverage") and not probs
+    _add("coverage", "四条缺证路径逐类命中（ARRAY/FNPTR/modopt/TypeSpec）",
+         "PASS" if ok else "FAIL",
+         "命中=%d/%d%s" % (n, len(COVERAGE),
+                           "" if not probs else " 首条=" + probs[0]))
+    return {"hit": n, "expect": len(COVERAGE), "problems": probs,
+            "canonical": shown}
+
+
+def check_negatives(base_rep):
+    """两个字节损坏负样本：reason 精确、只影响目标行、字节与正样本恰好差 1 字节、
+    dnfile 独立读仍一致（证明是 blob 内容非法而非 rekit 读错）、SRM 同行为 error。"""
+    base = {} if base_rep is None else {
+        it["name"]: it for it in base_rep.get("methods") or []
+        if it.get("name")}
+    out = {}
+    for tag, path, method, reason in NEG_CASES:
+        probs = []
+        rep = None
+        if os.path.exists(path):
+            rep = SB.build(path, limit=None)
+        if rep is None or rep.get("status") != "ok":
+            _add("neg-" + tag, "负样本 %s 精确上报" % reason, "FAIL",
+                 "样本缺失或不可构建")
+            out[tag] = {"problems": ["样本不可用"], "reason": reason}
+            continue
+        rows = [it for it in rep["methods"] if it.get("name") == method]
+        it = rows[0] if len(rows) == 1 else None
+        if it is None:
+            probs.append("%s 行数=%d（期望 1）" % (method, len(rows)))
+        else:
+            if it["status"] != "undecoded":
+                probs.append("status=%s（期望 undecoded）" % it["status"])
+            if it["reason"] != reason:
+                probs.append("reason=%r（期望 %r）" % (it["reason"], reason))
+            b0 = base.get(method)
+            if b0 is None:
+                probs.append("正样本基线缺失（%s）" % method)
+            else:
+                if (it["blob_index"], it["blob_off"], it["blob_len"]) != \
+                        (b0["blob_index"], b0["blob_off"], b0["blob_len"]):
+                    probs.append("blob 索引/偏移/长度与正样本不同（结构被改动）")
+                bx = bytes.fromhex(it["blob_hex"])
+                by = bytes.fromhex(b0["blob_hex"])
+                d = [i for i in range(min(len(bx), len(by)))
+                     if bx[i] != by[i]]
+                if len(d) != 1:
+                    probs.append("blob 与正样本差异 %d 字节（期望恰好 1）"
+                                 % len(d))
+        others = [x.get("name") for x in rep["methods"]
+                  if x.get("name") != method and x["status"] != "decoded"]
+        if others:
+            probs.append("其余方法被连带影响: %r" % others)
+        if base_rep is None or rep["denominators"]["MethodDef"]["rows"] != \
+                base_rep["denominators"]["MethodDef"]["rows"]:
+            probs.append("MethodDef 行数变化（原位补丁不应改结构）")
+        bprobs, bn = compare_bytes("neg-" + tag, path, rep)
+        if bprobs:
+            probs.append("dnfile 对拍 %d 问题：%s"
+                         % (len(bprobs), bprobs[0]["line"]))
+        if not _guard(bn, "neg-" + tag):
+            probs.append("dnfile 对拍分母为 0")
+        srm_ok = False
+        try:
+            for r in _run_sigref(path):
+                if (r["table"] == "MethodDef" and it is not None
+                        and r["row"] == it["row"]):
+                    srm_ok = r["status"] == "error"
+        except Exception as e:
+            probs.append("SRM 佐证失败：%s" % e)
+        if not srm_ok:
+            probs.append("SRM 未对同一行报 error")
+        ok = not probs
+        _add("neg-" + tag, "负样本 %s 精确上报" % reason,
+             "PASS" if ok else "FAIL",
+             "目标=%s status=%s reason=%s 其余行=%d decoded 问题=%d%s"
+             % (method, it["status"] if it else None,
+                it["reason"] if it else None,
+                len([x for x in rep["methods"] if x.get("name") != method]),
+                len(probs), "" if not probs else " 首条=" + probs[0]))
+        out[tag] = {"path": _evidence_path(path), "method": method,
+                    "expect_reason": reason, "problems": probs,
+                    "dnfile_rows": bn}
+    return out
+
+
+def check_depth():
+    """depth_exceeded 的边界证据：63 层解出 63 个 []；64 层拒绝；SRM 能解 64 层。"""
+    probs = []
+    info = {}
+    r63 = SB.build(DEEPSIG63, limit=None)
+    it63 = next((x for x in r63.get("methods") or []
+                 if x.get("name") == "MDeep63"), None)
+    if it63 is None:
+        probs.append("DeepSig63 里找不到 MDeep63")
+    else:
+        c63 = (it63.get("signature") or {}).get("canonical") or ""
+        info["levels63"] = c63.count("[]")
+        if it63["status"] != "decoded":
+            probs.append("63 层 status=%s（期望 decoded）" % it63["status"])
+        if c63.count("[]") != 63:
+            probs.append("63 层 canonical 的 [] 个数=%d（期望 63）"
+                         % c63.count("[]"))
+    r64 = SB.build(DEEPSIG, limit=None)
+    it64 = next((x for x in r64.get("methods") or []
+                 if x.get("name") == "MDeep"), None)
+    if it64 is None:
+        probs.append("DeepSig 里找不到 MDeep")
+    else:
+        info["status64"] = it64["status"]
+        info["reason64"] = it64["reason"]
+        if (it64["status"], it64["reason"]) != ("undecoded",
+                                                "depth_exceeded"):
+            probs.append("64 层 status=%s reason=%s（期望 undecoded/"
+                         "depth_exceeded）" % (it64["status"], it64["reason"]))
+    try:
+        meth = [r for r in _run_sigref(DEEPSIG) if r["status"] == "method"]
+        if len(meth) != 1:
+            probs.append("SRM 在 DeepSig 上的方法行数=%d" % len(meth))
+        else:
+            info["srm_levels64"] = (meth[0].get("canonical")
+                                    or "").count("[]")
+            if info["srm_levels64"] != 64:
+                probs.append("SRM canonical 的 [] 个数=%d（期望 64）"
+                             % info["srm_levels64"])
+    except Exception as e:
+        probs.append("SRM 佐证失败：%s" % e)
+    ok = not probs
+    _add("neg-depth", "depth_exceeded 边界（63 层可解 / 64 层拒绝）",
+         "PASS" if ok else "FAIL",
+         "63层[]=%s 64层=%s/%s SRM64层[]=%s%s"
+         % (info.get("levels63"), info.get("status64"),
+            info.get("reason64"), info.get("srm_levels64"),
+            "" if not probs else " 首条=" + probs[0]))
+    return dict(problems=probs, **info)
+
+
+def check_unknown_policy(base_rep):
+    """unknown 政策两条分支：结构解完（decoded），但必须记入 unknown 账本
+    （decoded_with_unknown），不得算 decoded_clean。"""
+    base = {x.get("name"): x for x in (base_rep or {}).get("methods") or []}
+    out = {}
+    for tag, path, method, missing, needle in UNKNOWN_CASES:
+        cid = "unknown-" + tag
+        probs = []
+        try:
+            rep = SB.build(path, limit=None)
+        except Exception as e:
+            _add(cid, "unknown 政策 " + tag, "FAIL",
+                 "%s: %s" % (type(e).__name__, e))
+            out[tag] = {"problems": ["样本不可用"]}
+            continue
+        rows = [it for it in rep["methods"] if it.get("name") == method]
+        it = rows[0] if len(rows) == 1 else None
+        if it is None:
+            probs.append("%s 行数=%d（期望 1）" % (method, len(rows)))
+            miss = []
+        else:
+            if it["status"] != "decoded":
+                probs.append("status=%s（期望 decoded，结构应解完）"
+                             % it["status"])
+            miss = sorted(u.get("missing") for u in it.get("unknown") or [])
+            if miss != [missing]:
+                probs.append("unknown missing=%r（期望 [%r]）"
+                             % (miss, missing))
+            canon = (it.get("signature") or {}).get("canonical") or ""
+            if needle not in canon:
+                probs.append("canonical=%r（期望含 %r）" % (canon, needle))
+            b0 = base.get(method)
+            if b0 is None:
+                probs.append("正样本基线缺失（%s）" % method)
+            else:
+                if (it["blob_index"], it["blob_off"], it["blob_len"]) != \
+                        (b0["blob_index"], b0["blob_off"], b0["blob_len"]):
+                    probs.append("blob 索引/偏移/长度与正样本不同")
+                bx = bytes.fromhex(it["blob_hex"])
+                by = bytes.fromhex(b0["blob_hex"])
+                if len(bx) != len(by) or len([i for i in range(len(bx))
+                                              if bx[i] != by[i]]) != 1:
+                    probs.append("blob 与正样本不是恰好差 1 字节")
+        others = [x.get("name") for x in rep["methods"]
+                  if x.get("name") != method and x["status"] != "decoded"]
+        if others:
+            probs.append("其余方法被连带影响: %r" % others)
+        den = rep["denominators"]["MethodDef"]
+        if den.get("decoded_with_unknown") != 1:
+            probs.append("分母 decoded_with_unknown=%r（期望 1）"
+                         % den.get("decoded_with_unknown"))
+        if den.get("decoded_clean") != 4:
+            probs.append("分母 decoded_clean=%r（期望 4）"
+                         % den.get("decoded_clean"))
+        bprobs, bn = compare_bytes("unknown-" + tag, path, rep)
+        if bprobs:
+            probs.append("dnfile 对拍 %d 问题：%s"
+                         % (len(bprobs), bprobs[0]["line"]))
+        if not _guard(bn, "unknown-" + tag):
+            probs.append("dnfile 对拍分母为 0")
+        srm_ok = False
+        try:
+            for r in _run_sigref(path):
+                if (r["table"] == "MethodDef" and it is not None
+                        and r["row"] == it["row"]):
+                    srm_ok = r["status"] == "error"
+        except Exception as e:
+            probs.append("SRM 佐证失败：%s" % e)
+        if not srm_ok:
+            probs.append("SRM 未对同一行报 error")
+        ok = not probs
+        _add(cid, "unknown 政策（%s）" % tag,
+             "PASS" if ok else "FAIL",
+             "missing=%r with_unknown=%r clean=%r%s"
+             % (miss, den.get("decoded_with_unknown"),
+                den.get("decoded_clean"),
+                "" if not probs else " 首条=" + probs[0]))
+        out[tag] = {"path": _evidence_path(path), "missing": miss,
+                    "decoded_with_unknown": den.get("decoded_with_unknown"),
+                    "decoded_clean": den.get("decoded_clean"),
+                    "problems": probs, "dnfile_rows": bn}
+    return out
+
+
 # ── 自证 ────────────────────────────────────────────────────────────
 def selfproof():
     rep0 = SB.build(REKIT, limit=None)
@@ -428,71 +776,32 @@ def main():
 
     evidence = {}
     for tag, path in SAMPLES:
-        if not os.path.exists(path):
-            _add("sample-" + tag, "样本存在", "FAIL", "缺文件 %s" % path)
-            continue
-        try:
-            rep = SB.build(path, limit=None)
-        except Exception as e:
-            _add("sample-" + tag, "样本可构建", "FAIL",
-                 "%s: %s" % (type(e).__name__, e))
-            continue
-        if rep.get("status") != "ok":
-            _add("sample-" + tag, "样本可构建", "FAIL",
-                 "status=%s reason=%s" % (rep.get("status"),
-                                          rep.get("reason")))
-            continue
-        check_denominators(tag, rep)
-        try:
-            bprobs, bn = compare_bytes(tag, path, rep)
-        except Exception as e:
-            _add("bytes-" + tag, "dnfile 字节边界逐行对拍", "FAIL",
-                 "%s: %s" % (type(e).__name__, e))
-            bprobs, bn = [], 0
-        bok = _guard(bn, "bytes-" + tag) and not bprobs
-        _add("bytes-" + tag, "dnfile 字节边界逐行对拍",
-             "PASS" if bok else "FAIL",
-             "行=%d 问题=%d%s" % (bn, len(bprobs),
-                                 "" if not bprobs
-                                 else " 首条=" + bprobs[0]["line"]))
-        try:
-            sprobs, sn = compare_srm(tag, path, rep)
-            srm_error = None
-        except Exception as e:
-            sprobs, sn, srm_error = [], 0, "%s: %s" % (type(e).__name__, e)
-        sok = _guard(sn, "srm-" + tag) and not sprobs and srm_error is None
-        _add("srm-" + tag, "SRM canonical 逐行对拍",
-             "PASS" if sok else "FAIL",
-             "行=%d 问题=%d%s" % (sn, len(sprobs),
-                                 "" if not sprobs
-                                 else " 首条=" + sprobs[0]["line"])
-             if srm_error is None else "环境/解码失败：" + srm_error)
-        mprobs, mn = compare_m17(tag, path, rep)
-        mok = _guard(mn, "m17-" + tag) and not mprobs
-        _add("m17-" + tag, "与 M17 signature_len 逐行相等",
-             "PASS" if mok else "FAIL",
-             "行=%d 问题=%d%s" % (mn, len(mprobs),
-                                 "" if not mprobs
-                                 else " 首条=" + mprobs[0]["line"]))
-        den = rep["denominators"]
-        evidence[tag] = {
-            "path": _evidence_path(path),
-            "denominators": {k: den[k] for k in
-                             ("MethodDef", "MemberRef", "StandAloneSig",
-                              "Field", "identity_ok", "ratios")},
-            "counts": rep["counts"],
-            "bytes_rows": bn, "bytes_problems": len(bprobs),
-            "srm_rows": sn, "srm_problems": len(sprobs),
-            "srm_error": srm_error,
-            "m17_rows": mn, "m17_problems": len(mprobs),
-        }
+        got, _rep = _check_sample(tag, path)
+        if got is not None:
+            evidence[tag] = got
+
+    # 补证批次：补证样本单列，不并入上面四样本的已公布分母
+    supplement = {}
+    got, base_rep = _check_sample("sigsample", SIGSAMPLE)
+    if got is not None:
+        supplement["sigsample"] = got
+    supplement["coverage"] = check_coverage(base_rep) if base_rep else {
+        "hit": 0, "expect": len(COVERAGE), "problems": ["受控样本不可用"],
+        "canonical": {}}
+    if base_rep is None:
+        _add("coverage", "四条缺证路径逐类命中（ARRAY/FNPTR/modopt/TypeSpec）",
+             "FAIL", "受控样本不可用")
+    supplement["negatives"] = check_negatives(base_rep)
+    supplement["depth"] = check_depth()
+    supplement["unknown_policy"] = check_unknown_policy(base_rep)
 
     selfproof()
 
     failed = [c for c in CHECKS if c["status"] == "FAIL"]
     n_skip = sum(1 for c in CHECKS if c["status"] == "SKIP")
     payload = {"schema": 1, "status": "fail" if failed else "pass",
-               "checks": CHECKS, "samples": evidence}
+               "checks": CHECKS, "samples": evidence,
+               "supplement": supplement}
     with open(OUT_JSON, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=1)
     print("\n== 汇总 ==  检查=%d PASS=%d FAIL=%d SKIP=%d → %s"

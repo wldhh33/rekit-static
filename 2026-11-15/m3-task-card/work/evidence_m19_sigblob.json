@@ -99,6 +99,66 @@
    "detail": "行=29257 问题=0"
   },
   {
+   "id": "den-sigsample",
+   "name": "四张表分母恒等式",
+   "status": "PASS",
+   "detail": "rows=5 坏恒等式=[] identity_ok=True"
+  },
+  {
+   "id": "bytes-sigsample",
+   "name": "dnfile 字节边界逐行对拍",
+   "status": "PASS",
+   "detail": "行=5 问题=0"
+  },
+  {
+   "id": "srm-sigsample",
+   "name": "SRM canonical 逐行对拍",
+   "status": "PASS",
+   "detail": "行=5 问题=0"
+  },
+  {
+   "id": "m17-sigsample",
+   "name": "与 M17 signature_len 逐行相等",
+   "status": "PASS",
+   "detail": "行=5 问题=0"
+  },
+  {
+   "id": "coverage",
+   "name": "四条缺证路径逐类命中（ARRAY/FNPTR/modopt/TypeSpec）",
+   "status": "PASS",
+   "detail": "命中=4/4"
+  },
+  {
+   "id": "neg-bad-compressed",
+   "name": "负样本 bad_compressed_int 精确上报",
+   "status": "PASS",
+   "detail": "目标=MSimple status=undecoded reason=bad_compressed_int 其余行=4 decoded 问题=0"
+  },
+  {
+   "id": "neg-truncated",
+   "name": "负样本 truncated_signature 精确上报",
+   "status": "PASS",
+   "detail": "目标=MSimple status=undecoded reason=truncated_signature 其余行=4 decoded 问题=0"
+  },
+  {
+   "id": "neg-depth",
+   "name": "depth_exceeded 边界（63 层可解 / 64 层拒绝）",
+   "status": "PASS",
+   "detail": "63层[]=63 64层=undecoded/depth_exceeded SRM64层[]=64"
+  },
+  {
+   "id": "unknown-coded-index",
+   "name": "unknown 政策（coded-index）",
+   "status": "PASS",
+   "detail": "missing=['coded_index_tag_3'] with_unknown=1 clean=4"
+  },
+  {
+   "id": "unknown-elem-type",
+   "name": "unknown 政策（elem-type）",
+   "status": "PASS",
+   "detail": "missing=['element_type_0x6f'] with_unknown=1 clean=4"
+  },
+  {
    "id": "selfproof",
    "name": "比对器可失败自证",
    "status": "PASS",
@@ -625,6 +685,194 @@
    "srm_error": null,
    "m17_rows": 29257,
    "m17_problems": 0
+  }
+ },
+ "supplement": {
+  "sigsample": {
+   "path": "samples/m19_sigblob/_gen/SigSample.dll",
+   "denominators": {
+    "MethodDef": {
+     "rows": 5,
+     "rows_read": 5,
+     "no_blob_index": 0,
+     "has_blob_index": 5,
+     "blob_readable": 5,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 5,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 5,
+     "decoded_with_unknown": 0,
+     "method_decoded": 5,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": 1.0,
+      "undecoded_over_readable": 0.0,
+      "unknown_over_decoded": 0.0
+     }
+    },
+    "MemberRef": {
+     "rows": 0,
+     "rows_read": 0,
+     "no_blob_index": 0,
+     "has_blob_index": 0,
+     "blob_readable": 0,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 0,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 0,
+     "decoded_with_unknown": 0,
+     "method_decoded": 0,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": null,
+      "undecoded_over_readable": null,
+      "unknown_over_decoded": null
+     }
+    },
+    "StandAloneSig": {
+     "rows": 0,
+     "rows_read": 0,
+     "no_blob_index": 0,
+     "has_blob_index": 0,
+     "blob_readable": 0,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "decoded": 0,
+     "undecoded": 0,
+     "undecoded_by_reason": {},
+     "decoded_clean": 0,
+     "decoded_with_unknown": 0,
+     "method_decoded": 0,
+     "field_sig_length_only": 0,
+     "local_sig_length_only": 0,
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_decode_ok": true,
+     "identity_unknown_ok": true,
+     "ratios": {
+      "decoded_over_readable": null,
+      "undecoded_over_readable": null,
+      "unknown_over_decoded": null
+     }
+    },
+    "Field": {
+     "rows": 0,
+     "rows_read": 0,
+     "no_blob_index": 0,
+     "has_blob_index": 0,
+     "blob_readable": 0,
+     "blob_unreadable": 0,
+     "unreadable_by_reason": {},
+     "length_only": 0,
+     "non_field_signature": 0,
+     "note": "Field 签名只做长度与边界，不做类型语义",
+     "identity_rows_ok": true,
+     "identity_read_ok": true,
+     "identity_length_ok": true
+    },
+    "identity_ok": true,
+    "ratios": {
+     "decoded_over_readable": 1.0,
+     "undecoded_over_readable": 0.0,
+     "unknown_over_decoded": 0.0
+    }
+   },
+   "counts": {
+    "method_signature_sites": 5,
+    "method_signatures_decoded": 5,
+    "field_signature_sites": 0,
+    "local_signature_sites": 0,
+    "call_sites_decoded": 5,
+    "call_sites_undecoded": 0,
+    "readable_total": 5,
+    "decoded_with_unknown": 0,
+    "unknown_nodes": 0,
+    "unknown_by_missing": {},
+    "anomalies": {},
+    "items_stored": {
+     "methods": 5,
+     "memberrefs": 0,
+     "standalonesigs": 0,
+     "fields": 0
+    }
+   },
+   "bytes_rows": 5,
+   "bytes_problems": 0,
+   "srm_rows": 5,
+   "srm_problems": 0,
+   "srm_error": null,
+   "m17_rows": 5,
+   "m17_problems": 0
+  },
+  "coverage": {
+   "hit": 4,
+   "expect": 4,
+   "problems": [],
+   "canonical": {
+    "MArray": "sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=Int32 params=[Int32[r=2;lb=0,0]]",
+    "MFn": "sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=Int32 params=[fnptr(sig cc=CDecl hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=Int32 params=[Int32])]",
+    "MMod": "sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=Int32 params=[modopt([TR]System.Runtime.CompilerServices.IsConst)Int32]",
+    "MOpt": "sig cc=Default hasthis=0 explicit=0 generic=0 gpc=0 req=1 ret=Int32 params=[modopt(spec@0x1B000001)Int32]"
+   }
+  },
+  "negatives": {
+   "bad-compressed": {
+    "path": "samples/m19_sigblob/_neg/BadCompressed.dll",
+    "method": "MSimple",
+    "expect_reason": "bad_compressed_int",
+    "problems": [],
+    "dnfile_rows": 5
+   },
+   "truncated": {
+    "path": "samples/m19_sigblob/_neg/TruncatedSig.dll",
+    "method": "MSimple",
+    "expect_reason": "truncated_signature",
+    "problems": [],
+    "dnfile_rows": 5
+   }
+  },
+  "depth": {
+   "problems": [],
+   "levels63": 63,
+   "status64": "undecoded",
+   "reason64": "depth_exceeded",
+   "srm_levels64": 64
+  },
+  "unknown_policy": {
+   "coded-index": {
+    "path": "samples/m19_sigblob/_neg/UnknownCodedTag.dll",
+    "missing": [
+     "coded_index_tag_3"
+    ],
+    "decoded_with_unknown": 1,
+    "decoded_clean": 4,
+    "problems": [],
+    "dnfile_rows": 5
+   },
+   "elem-type": {
+    "path": "samples/m19_sigblob/_neg/UnknownElemType.dll",
+    "missing": [
+     "element_type_0x6f"
+    ],
+    "decoded_with_unknown": 1,
+    "decoded_clean": 4,
+    "problems": [],
+    "dnfile_rows": 5
+   }
   }
  }
 }

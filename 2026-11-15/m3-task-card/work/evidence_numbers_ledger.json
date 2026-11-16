@@ -140,7 +140,11 @@
         "1,020",
         "100.0000%",
         "22 套",
-        "554 passed"
+        "554 passed",
+        "27 项",
+        "4/4",
+        "63 个 `[]`",
+        "64 个 `[]`"
       ]
     },
     {
@@ -160,9 +164,10 @@
         "121",
         "100.0000%",
         "0.7576%",
-        "28 项",
+        "33 项",
         "23 套",
-        "554 passed"
+        "554 passed",
+        "10 个字段偏移"
       ]
     }
   ],
@@ -205,12 +210,12 @@
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m19_sigblob.json",
       "role": "M19 签名语义层 dnfile 字节 + SRM canonical 对账",
-      "sha256": "4696d19c3a4d3768b4795acc92681fb248f8d83da698a340850614e79110f7cf"
+      "sha256": "abf7f631cd9f1f4f5c0b6fd73b5dc982667db66c62bfb1de6ca9bc912036169c"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m20_layout.json",
       "role": "M20 布局层 dnfile 列值 + 源码真值 + 运行期 oracle 对账",
-      "sha256": "acbb6a7ec4e064b705db0a1d0a2fbce69f464276d0bc6ac8c99e74dfb6b2dd4c"
+      "sha256": "83600cb2f3657c0ff5a0d5dc8a7f0734be5732cd71ce4e1e0032932116e88eb6"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m5_expr_residual.json",

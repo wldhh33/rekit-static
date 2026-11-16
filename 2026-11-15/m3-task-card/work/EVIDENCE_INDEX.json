@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_at": "2026-11-17T03:03:52",
+ "generated_at": "2026-11-17T03:47:01",
  "work_dir": "2026-11-15/m3-task-card/work",
  "rules": {
   "coverage": "work/evidence_* 每个文件都必须在 entries 中",
@@ -633,7 +633,7 @@
   "evidence_m15_funcreport.json": {
    "sha256": "e26c86608fb86fbbe8ba185dff83176a3bd16decbfe1c2e48f8a8872eb7da369",
    "size": 3530,
-   "mtime": "2026-11-17T02:35:13",
+   "mtime": "2026-11-17T03:15:47",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -646,7 +646,8 @@
     "20261117T014558-2b7c",
     "20261117T021100-746c",
     "20261117T021944-26c9",
-    "20261117T023235-f180"
+    "20261117T023235-f180",
+    "20261117T031307-aa41"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -692,7 +693,7 @@
   "evidence_m16_datarefs.json": {
    "sha256": "a1d7961f1b3faaff26f123401d73566c44beabb70e19d897daeb4b6b23f750e9",
    "size": 4132,
-   "mtime": "2026-11-17T02:33:41",
+   "mtime": "2026-11-17T03:14:14",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -705,7 +706,8 @@
     "20261117T014558-2b7c",
     "20261117T021100-746c",
     "20261117T021944-26c9",
-    "20261117T023235-f180"
+    "20261117T023235-f180",
+    "20261117T031307-aa41"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -752,7 +754,7 @@
   "evidence_m17_dotnet.json": {
    "sha256": "c3300c5b8e7b4a871146a9de0578fb735baef01d52fe7a834085ac15ace76dbe",
    "size": 9869,
-   "mtime": "2026-11-17T02:33:45",
+   "mtime": "2026-11-17T03:14:18",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -765,7 +767,8 @@
     "20261117T014558-2b7c",
     "20261117T021100-746c",
     "20261117T021944-26c9",
-    "20261117T023235-f180"
+    "20261117T023235-f180",
+    "20261117T031307-aa41"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -865,7 +868,7 @@
   "evidence_m18_ilflow.json": {
    "sha256": "eca5ee510cf40cca677d35c6c8e87c273989682dc5ffb72c93115d298ae8fd79",
    "size": 20245,
-   "mtime": "2026-11-17T02:35:43",
+   "mtime": "2026-11-17T03:16:17",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -878,7 +881,8 @@
     "20261117T014558-2b7c",
     "20261117T021100-746c",
     "20261117T021944-26c9",
-    "20261117T023235-f180"
+    "20261117T023235-f180",
+    "20261117T031307-aa41"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -1015,9 +1019,9 @@
    "sections_kind": "text_headings"
   },
   "evidence_m19_sigblob.json": {
-   "sha256": "4696d19c3a4d3768b4795acc92681fb248f8d83da698a340850614e79110f7cf",
-   "size": 17145,
-   "mtime": "2026-11-17T03:03:44",
+   "sha256": "abf7f631cd9f1f4f5c0b6fd73b5dc982667db66c62bfb1de6ca9bc912036169c",
+   "size": 24097,
+   "mtime": "2026-11-17T03:46:36",
    "run_id": null,
    "run_ids": [
     "20261117T010924-0a7b",
@@ -1026,28 +1030,31 @@
     "20261117T015832-66cf",
     "20261117T021100-746c",
     "20261117T021944-26c9",
-    "20261117T023235-f180"
+    "20261117T023235-f180",
+    "20261117T031307-aa41"
    ],
    "run_id_source": "ambiguous",
    "sections": [
     "schema",
     "status",
     "checks",
-    "samples"
+    "samples",
+    "supplement"
    ],
    "sections_kind": "json_top_level_keys"
   },
   "evidence_m20_layout.json": {
-   "sha256": "acbb6a7ec4e064b705db0a1d0a2fbce69f464276d0bc6ac8c99e74dfb6b2dd4c",
-   "size": 14996,
-   "mtime": "2026-11-17T02:55:11",
+   "sha256": "83600cb2f3657c0ff5a0d5dc8a7f0734be5732cd71ce4e1e0032932116e88eb6",
+   "size": 16917,
+   "mtime": "2026-11-17T03:46:45",
    "run_id": null,
    "run_ids": [
     "20261117T014558-2b7c",
     "20261117T015832-66cf",
     "20261117T021100-746c",
     "20261117T021944-26c9",
-    "20261117T023235-f180"
+    "20261117T023235-f180",
+    "20261117T031307-aa41"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -2158,9 +2165,9 @@
    "sections_kind": "text_headings"
   },
   "evidence_numbers_ledger.json": {
-   "sha256": "9a8c6881dd1da5f307b168c272b8e9e5373be4846d8e1cb908aae4a398f9bded",
-   "size": 6640,
-   "mtime": "2026-11-17T03:03:48",
+   "sha256": "f8af03f565173ef4d7b52ab2c99d668a5af1428dbb9162a5f3d5080de128bb1c",
+   "size": 6754,
+   "mtime": "2026-11-17T03:46:56",
    "run_id": "20261116T235937-c6ff",
    "run_ids": [
     "20261116T235937-c6ff"

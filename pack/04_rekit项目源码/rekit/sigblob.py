@@ -378,7 +378,10 @@ def decode_type(ctx, b, off, depth=0):
         el, off = decode_type(ctx, b, off, depth + 1)
         key = "modreq" if tag == 0x1F else "modopt"
         if ref is None:
-            prefix = "unknown(%s)" % missing
+            # 修饰类型引用解不出（coded tag 非法 / 行号越界 / 名字读不出）：
+            # 与 VALUETYPE/CLASS 分支同一口径，记入 unknown 账本，
+            # 否则分母会把它记成 decoded_clean，与 spec 的 unknown 政策冲突。
+            prefix = _canon_unknown(ctx.unknown(missing, b, start, off))
         else:
             prefix = "%s(%s)" % (key, _ref_token(ref))
         return {"kind": key, "modifier": ref, "element": el,
@@ -391,6 +394,10 @@ def decode_type(ctx, b, off, depth=0):
                 "canonical": "pinned(%s)" % el["canonical"]}, off
 
     node = ctx.unknown("element_type_0x%02x" % tag, b, start, off)
+    # unknown 节点不消耗字节；但调用方（decode_method_sig 等）要读 canonical，
+    # 缺了会在未识别元素类型上直接 KeyError。canonical 与 VALUETYPE/CLASS
+    # 分支同一写法，不改字节边界。
+    node["canonical"] = _canon_unknown(node)
     return node, off
 
 

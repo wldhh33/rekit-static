@@ -33,6 +33,18 @@
    "detail": "偏移=5 size=2 auto=1 问题=0"
   },
   {
+   "id": "auto-il",
+   "name": "sequential/auto 运行期偏移（运行期推导，不进静态结论）",
+   "status": "PASS",
+   "detail": "字段=4 问题=0"
+  },
+  {
+   "id": "auto-selfproof-il",
+   "name": "运行期探针负控（注入必须被检出）",
+   "status": "PASS",
+   "detail": "seq+4=检出 / auto-1=检出 / auto-oob=检出 / auto-overlap=检出"
+  },
+  {
    "id": "den-csharp",
    "name": "分母恒等式与 unknown/undecoded 分离",
    "status": "PASS",
@@ -61,6 +73,18 @@
    "name": "运行期 oracle（OffsetOf/SizeOf）与静态段边界",
    "status": "PASS",
    "detail": "偏移=9 size=1 auto=0 问题=0"
+  },
+  {
+   "id": "auto-csharp",
+   "name": "sequential/auto 运行期偏移（运行期推导，不进静态结论）",
+   "status": "PASS",
+   "detail": "字段=6 问题=0"
+  },
+  {
+   "id": "auto-selfproof-csharp",
+   "name": "运行期探针负控（注入必须被检出）",
+   "status": "PASS",
+   "detail": "seq+4=检出 / auto-1=检出 / auto-oob=检出 / auto-overlap=检出"
   },
   {
    "id": "name-csharp",
@@ -151,6 +175,12 @@
    "name": "运行期推导偏移聚合",
    "status": "PASS",
    "detail": "偏移=14 size=3 auto=1 下限=3"
+  },
+  {
+   "id": "agg-auto-runtime",
+   "name": "sequential/auto 运行期探针偏移聚合",
+   "status": "PASS",
+   "detail": "字段=10 下限=5"
   },
   {
    "id": "agg-dn",
@@ -273,6 +303,29 @@
     "available": false,
     "types": 0,
     "static_conclusion": false
+   },
+   "auto_runtime": {
+    "source": "unsafe-fixed-sentinel",
+    "static_conclusion": false,
+    "types": {
+     "LayoutSample.SeqStruct": {
+      "size": 16,
+      "offsets": {
+       "X": 0,
+       "Y": 2
+      },
+      "errors": {}
+     },
+     "LayoutSample.AutoStruct": {
+      "size": 16,
+      "offsets": {
+       "X": 8,
+       "Y": 0
+      },
+      "errors": {}
+     }
+    },
+    "unsupported": null
    }
   },
   "csharp": {
@@ -370,6 +423,31 @@
     "available": false,
     "types": 0,
     "static_conclusion": false
+   },
+   "auto_runtime": {
+    "source": "unsafe-fixed-sentinel",
+    "static_conclusion": false,
+    "types": {
+     "LayoutCSharp.SeqPack4": {
+      "size": 16,
+      "offsets": {
+       "B": 0,
+       "L": 4,
+       "S": 12
+      },
+      "errors": {}
+     },
+     "LayoutCSharp.Plain": {
+      "size": 24,
+      "offsets": {
+       "X": 0,
+       "Y": 8,
+       "Z": 16
+      },
+      "errors": {}
+     }
+    },
+    "unsupported": null
    }
   },
   "mscorlib": {
@@ -469,7 +547,8 @@
     "available": false,
     "types": 0,
     "static_conclusion": false
-   }
+   },
+   "auto_runtime": null
   },
   "console": {
    "path": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\7.0.20\\System.Console.dll",
@@ -562,7 +641,8 @@
     "available": false,
     "types": 0,
     "static_conclusion": false
-   }
+   },
+   "auto_runtime": null
   }
  },
  "aggregate": {
@@ -575,6 +655,7 @@
   "rt_off": 14,
   "rt_size": 3,
   "rt_auto": 1,
+  "rt_auto_off": 10,
   "name": 121
  }
 }
