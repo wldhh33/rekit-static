@@ -63,7 +63,7 @@ python "pack\tools\status.py"
 | 样本 | `work\samples\`（m2 + m3） | 约 170 MB；被 `.gitignore` 排除，新克隆用 `setup.ps1` 恢复；`tests\samples`、`tests\fixtures` 已入库 |
 
 `pack` 与 `work\pack03` 的 CHARTER/PROGRESS/CHANGELOG：**内容相同**，编辑时先确认改哪一份，改完同步另一份。
-`.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `d63d244`，其后是 U1 收口补件。
+`.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `d63d244`（U1-a+U1-b），`v0.1.1` 覆盖门禁脚本、`setup.ps1`、R126、去垫片等收尾补件。
 
 ## 6. 环境怪癖（已知，不是 bug）
 
@@ -74,6 +74,9 @@ python "pack\tools\status.py"
 - `cli-64.exe` 出处不明，**不可再分发**，只在本机测试。
 - 部分旧测试曾硬编码 `<旧仓库根>`；2026-11-17 已把 5 个测试与 3 个生成器
   改为按 `__file__` 定位，**垫片不再需要**（旧版在 C: 盘克隆时会解析到 `C:\home` 并报 31 个失败/错误）。
+- **证据里不得写仓库内绝对路径**：`evidence_*` 被 `ledger_check` 按 sha256 登记，绝对路径会让 sha256
+  随克隆目录变化，异地 clone 门禁必 FAIL。`verify_layout` / `verify_sigblob` 已改为写 work 相对路径；
+  仓库外 oracle（`mscorlib` / `System.Console`）保留绝对路径。
 - `pack` 下 4 个目录名已于 2026-11-17 由 mojibake 改回可读名（`03_路线图与章程` / `04_rekit项目源码` / `05_每日日志` / `06_日报docx`），`work` 下 6 个 junction 已同步重建；`2026-11-16\vibe-coding-review` 的调研快照保留旧名，作为当日记录。
 - Windows 终端显示中文可能乱码；路径操作优先用 Python，不要依赖 PowerShell 的字符串编码。
 

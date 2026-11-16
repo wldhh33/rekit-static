@@ -96,14 +96,23 @@ python -m pytest tests -q
 | “另需 Python 包 dnfile”，无安装命令 | 缺 dnfile 时两套 `env_missing` → 门禁 FAIL | 前置写明 `python -m pip install dnfile pefile`，preflight 硬检查 |
 | “依赖 `<旧仓库根>` 垫片” | 克隆在 C: 时 `<旧仓库根>` 解析到 `C:\home`，31 个失败/错误 | 测试改 `__file__` 相对定位，垫片降级为历史说明 |
 | 手动 pytest 步骤 | PATH 里的 objdump 非 2.47 且输出 GBK，`test_minidll_crosscheck_objdump` 报 UnicodeDecodeError→TypeError | 测试内优先用仓库 binutils 并设 `LC_ALL=C`；工具不可用时才 skip（gate 内仍执行断言） |
+| “`gate.ps1` 全绿，可复跑” | 异地克隆跑完 23 套 verify 后，`verify_gate` 内部 `ledger_check` 报 `证据 sha256 变化：evidence_m20_layout.json` | `verify_layout.py` 把样本**绝对路径**写进证据；克隆换了目录，sha256 必然变。改为写 work 相对路径 |
+| 同上（第 2 轮） | 修完 layout 后，同类问题又出现在 `evidence_m19_sigblob.json` | `verify_sigblob.py` 同样把绝对路径写进证据；按同一方式改为相对路径 |
+| “证据路径只是展示信息” | 绝对路径进被 `sha256` 登记的证据 = 门禁只在本机同一目录下成立 | 改为：work 内样本写相对路径；仓库外 oracle（`mscorlib` / `System.Console`）保留绝对路径并在本表说明 |
 
-修后从零复跑结果见 `PROGRESS.md` / `CHANGELOG.md` 同日条目（run id 与耗时以那次记录为准）。
+修后从零复跑（2026-11-17，commit `26b0559`，克隆到 `%TEMP%\rekit_clean_20261117d`）：
+
+- `setup.ps1`：**exit 0，0.9 s**（samples 16 + 11 文件、tools 376 文件、7 个 junction）。
+- `gate.ps1`：**exit 0，432.5 s（7.2 分钟）**，run id `20261117T030415-70ee` —— 23/23 套 verify PASS、pytest **554 passed / 0 failed / 0 skipped**、`ledger_check` PASS、`VERDICT: PASS`。
+- 结论：**按本 README 从空目录可跑通**；每一步失败点都在上表，未跳过步骤、未放宽判据。
 
 ## 版本与 tag
 
 - `v0.1.0` → `d63d244`（U1-a 打包 + U1-b 证据索引 / R95 补登记的完整交付），**保持不动**。
-- `v0.1.1` → 干净克隆演练后的补件提交（`gate.ps1`、`setup.ps1`、R126、垫片去除、文档），
-  tag 说明写明覆盖范围。
+- `v0.1.1` → 干净克隆演练后的补件提交，覆盖：`gate.ps1`（preflight）、`setup.ps1`（资产恢复 +
+  junction）、R126、路径垫片去除、`verify_layout` / `verify_sigblob` 证据路径改为 work 相对路径、
+  本 README 与 CHANGELOG / PROGRESS / HANDOFF 的演练记录。tag 说明写明覆盖范围。
+  **该 tag 由演练验证：**从空目录按本 README 跑通（run `20261117T030415-70ee`）。
 - **重定位记录（2026-11-17）**：`v0.1.0` 最初指向 `5fbb421`（仅 U1-a）；因证据索引与 R95 样本登记
   在其后的 `d63d244`，本次移至 `d63d244`。仓库无远端、未推送，无下游影响；原指向与原因保留在
   tag 说明、`CHANGELOG.md` 与 `PROGRESS.md`，未抹除。

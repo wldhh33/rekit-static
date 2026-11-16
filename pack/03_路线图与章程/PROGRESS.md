@@ -396,4 +396,16 @@
 - **run_id 落盘约定**：历史 122 条 `null` 维持不回填；新证据首行写 `run_id: <id>`，或出现在 `work/verification/<run_id>/summary.json` 清单里，`evidence_index` 据此归因。约定写入 `HANDOFF.md` 与 `AGENTS.md`。
 - 回归：`gate.ps1` 实跑 run `20261117T023235-f180` = **23/23 套 + pytest 554 passed + ledger PASS + `GATE: PASS exit=0`**；preflight 16 项全 OK。
 
+### 2026-11-17 U1 干净克隆演练 — 异地 clone 从零跑通（`v0.1.1`）
+
+三件事（用户要求口径）：
+
+1. **克隆后照文档做**：`git clone` 到仓库外空目录 `%TEMP%\rekit_clean_20261117d`（C: 盘），按 `pack\README.md` 三步：clone → `setup.ps1 -AssetsSource <原工作区>` → `gate.ps1`。
+2. **第一次失败在哪**：第一轮克隆（改了 setup 之前）`gate.ps1` 直接 **exit 2**，preflight 报 9 项缺失（m3/work 的 rekit/tests/pack03、work/tests/evidence_index.py、m3 samples 4 项、objdump）——README 当时只说"必须恢复"，没给恢复命令与来源格式。修 setup 后又依次暴露 5 个问题（详见 `CHANGELOG.md` 同日行）：setup 先建 junction 后复制资产（exit 1）、C: 盘 `<旧仓库根>` 解析到 `C:\home`（31 个失败/错误）、手动 pytest 的 objdump GBK 解码、`evidence_m20_layout.json` 与 `evidence_m19_sigblob.json` 内嵌 `D:\...` 绝对路径导致异地 clone 跑完 verify 后 `ledger_check` FAIL。
+3. **修完是否真的从零跑通**：是。commit `26b0559` 的干净克隆：`setup.ps1` **exit 0 / 0.9 s**，`gate.ps1` **exit 0 / 432.5 s（7.2 分钟）**，run id `20261117T030415-70ee` —— **23/23 套 verify PASS、pytest 554 passed（0 failed / 0 skipped）、ledger PASS**、`VERDICT: PASS`、`GATE: PASS exit=0`。未跳过任何步骤、未放宽任何判据。
+
+- **本轮补件（`v0.1.1` 内容）**：新增 `pack\tools\setup.ps1`（资产恢复 + 7 个 junction，显式来源、幂等、不删除）；`gate.ps1` preflight 增加 m2 samples 与 `dnfile` 硬检查；5 个测试 + 3 个生成器去 `<旧仓库根>` 硬编码；`verify_layout.py` / `verify_sigblob.py` 证据路径改 work 相对路径（仓库外 `mscorlib` / `System.Console` 保留绝对路径）；README 写入演练记录与前置。
+- **证据一致性**：两处路径改动只改"路径怎么表示"，未改任何期望值/分母/判据。重登记前后：`ledger_check` 10 小节 / 10 证据 / **98 个登记数字**全等；`verify_layout` 28 项（PASS 27 / SKIP 1）、`verify_sigblob` 17 项结果全等。`ledger_check --write` 与 `evidence_index --write` 仅重算 sha256/形式字段。
+- **tag**：`v0.1.0` 保持 `d63d244` 不动；本轮补件提交打 **`v0.1.1`**（说明写明"覆盖门禁脚本与 R126 等收尾补件"）。**release tag 规则**：`v*` 只在该批次全部收口后打，只打在包含该批次全部补件的提交上。
+
 

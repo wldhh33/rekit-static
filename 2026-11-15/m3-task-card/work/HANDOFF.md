@@ -10,21 +10,22 @@
 - 独立对拍（期望值不取被测实现）：dnfile 三表原始列值 287 行、dnfile RVA→文件偏移 131 行、源码真值 16 项（`.il` 的 `.pack/.size/.field [N]/.data`、`.cs` 的 `[FieldOffset]/[StructLayout]`/数组初始化器）、`__StaticArrayInitTypeSize=N` 与 ClassSize/推导长度 121 行，**全部 0 不一致**。
 - `tests\verify_layout.py` 首版即带可失败自证（工件=注入 ID + 基线 + 观察到失败行），5 类注入全检出 + 空比对判 FAIL；**28 项（PASS 27 / SKIP 1）**。证据 `work\evidence_m20_layout.json`。
 - **M19（.NET 签名语义层 `sigblob`）已收口（2026-11-17）**：方法签名 32,518 / 字段 911 / 局部 3,974；可读 blob 37,403，解码率 100.0000%，unknown 0；dnfile 字节边界 52,403 行、SRM canonical 37,403 行、M17 交叉 29,728 行全 0 不一致。定标②偏离已登记：dnfile 无签名 API，改 SRM（`tests\sigref.ps1`，pwsh 缺失即 `env_missing` exit 2）。证据 `work\evidence_m19_sigblob.json`。
-- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（U1 收口 run `20261117T023235-f180`，经 `gate.ps1` 实跑，`GATE: PASS exit=0`）。总账 **10 小节 / 98 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`。
+- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（干净克隆演练 run `20261117T030415-70ee`，`GATE: PASS exit=0`，432.5 s）。总账 **10 小节 / 98 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`。
 - **治理当前态**：`pack\` 已 git 初始化（基线 tag `baseline-pre-rename`）；4 个 mojibake 目录已改名、`work` 下 junction 已重建（`pack` 7 个目录均可访问）；`pack\rules.json` 119 条；`pack\tools\status.py` 硬判 HANDOFF/verification/ledger。
 - 文档漂移已修（本轮实测）：`pack\AGENTS.md` 规模改 **27 模块 / 18,600 行**；`CHARTER.md` 补 M20 行与转段触发器 T1–T5（**T1/T4 已命中**，T1 曾被误读为需两个条件同时满足，已更正并留记录）。
 - **U1 收口（2026-11-17）**：`v0.1.0` 由 `5fbb421` 移至 `d63d244`（含 U1-a + U1-b；worktree 检出该提交后 ledger/evidence_index 双 PASS）；新增单命令门禁 `pack\tools\gate.ps1`（preflight fail-fast + ledger → evidence_index → verify_gate）；`.github\workflows\gate.yml` 为**未验证**草稿（仅手动触发，从未运行）；新增规则 **R126**；`evidence_index.repo_root()` 修掉 junction 入口多算一级目录的 bug。
+- **干净克隆演练（2026-11-17，`v0.1.1`）**：仓库外空目录按 `pack\README.md` 从零操作，第一次 `gate.ps1` 即 exit 2（9 项前置缺失）。新增 `pack\tools\setup.ps1`（显式 `-AssetsSource`、先复制后 junction、幂等）；去掉 5 个测试 + 3 个生成器的 `<旧仓库根>` 硬编码；`verify_layout`/`verify_sigblob` 证据路径改 work 相对路径（绝对路径会让 sha256 随克隆目录漂移）。修后：setup 0.9 s、gate **432.5 s**、23/23 + 554 passed + ledger PASS、exit 0。详见 `CHANGELOG.md` / `PROGRESS.md` 同日条目。
 
 ## 2. 未完成清单
 
-U1 交付批次已全部落地（打包 / console entry / 示例 / 证据索引 / R95 7 样本 / `v0.1.0`）。仍未做：
+U1 交付批次已全部收口（打包 / console entry / 示例 / 证据索引 / R95 7 样本 / 干净克隆演练 / `v0.1.1`）。仍未做：
 
 | 项 | 状态 / 前置 |
 |---|---|
 | 真 CI | `.github\workflows\gate.yml` 只是未验证草稿（无远端、从未触发）；启用与远端推送留 U2 |
 | 122 条 null run_id | **不回填**（不猜来源）；新证据按 `AGENTS.md` §8 的 run_id 约定落盘，避免缺口扩大 |
-| v0.1.0 覆盖范围 | tag 停在 `d63d244`；U1 收口补件（`gate.ps1`、文档、R126）在其后提交，**未包含在 tag 内** |
-| 下一条命令 | 本文件 §6；全量用 `gate.ps1`（约 8 分钟） |
+| tag 覆盖范围 | `v0.1.0` 停在 `d63d244`（U1-a + U1-b）；**`v0.1.1` 覆盖门禁脚本、setup、R126、去垫片等收尾补件**；release tag 只在该批次全部收口后打 |
+| 下一条命令 | 本文件 §6；全量用 `gate.ps1`（干净克隆实测 432.5 s） |
 
 非源码类、尚未做：
 
