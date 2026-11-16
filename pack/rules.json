@@ -2064,10 +2064,10 @@
    "title": "选样标准先声明",
    "canonical": "样本选取必须在测量前以结构判据声明（尺寸带 / stripped 判据 / 程序性质 / 插件形态 / 来源），**禁止**按覆盖率结果挑选或剔除；合成样本与真实样本必须分栏，结论必须标注适用范围；登记表必须有 sha256、许可、可再分发/仅本地三栏。",
    "constraint_object": "样本清单。",
-   "check_method": "逐样本核对登记表三栏（sha256 / 许可 / 可再分发或仅本地），并核 `selection_rules.violations` 为空。2026-11-16 实测：M2 `sample_manifest.json` 11/11、M9 `m9_sample_manifest.json` 7/7 三栏齐全且 `violations=[]`；但总账 25 个样本中有 7 个 `tests/fixtures` 未登记（`dyn_nopie`/`dyn_static`/`dyn_execstack`/`dyn_norelro`/`minipe.exe`/`minidll.dll`/`minipe_fakerich.exe`），登记覆盖为 18/25。",
-   "enforced_at": "`2026-11-15\\m2-task-card\\work\\sample_manifest.json`；`2026-11-15\\m3-task-card\\work\\m9_sample_manifest.json`；核对脚本 `2026-11-16\\vibe-coding-review\\work\\batch5\\check_r95_manifest.py`。",
+   "check_method": "逐样本核对登记表三栏（sha256 / 许可 / 可再分发或仅本地），并核 `selection_rules.violations` 为空。2026-11-16 实测：M2 `sample_manifest.json` 11/11、M9 `m9_sample_manifest.json` 7/7 三栏齐全且 `violations=[]`；但总账 25 个样本中有 7 个 `tests/fixtures` 未登记（`dyn_nopie`/`dyn_static`/`dyn_execstack`/`dyn_norelro`/`minipe.exe`/`minidll.dll`/`minipe_fakerich.exe`），登记覆盖为 18/25。2026-11-17 已补登记这 7 个 fixtures（`work\\fixtures_sample_manifest.json`，sha256 现算、许可不明写 unknown 且 redistributable=false / local_only=true），登记覆盖 **25/25**。",
+   "enforced_at": "`2026-11-15\\m2-task-card\\work\\sample_manifest.json`；`2026-11-15\\m3-task-card\\work\\m9_sample_manifest.json`；`2026-11-15\\m3-task-card\\work\\fixtures_sample_manifest.json`；核对脚本 `2026-11-16\\vibe-coding-review\\work\\batch5\\check_r95_manifest.py`。",
    "basis": "`CHANGELOG.md:89`；两份 manifest 的 2026-11-16 实测结果",
-   "canonical_status": "`规范`（规则成立）；**落地 18/25**：7 个 fixture 缺登记行，使用限制见规则库附录 C",
+   "canonical_status": "`规范`（规则成立）；**落地 25/25**（2026-11-17 补登记 7 个 fixtures；2026-11-16 曾为 18/25），使用限制见规则库附录 C",
    "confidence": "high",
    "unique_wording": "五项结构判据+禁止按结果挑样+合成/真实分栏+登记表三栏（CHANGELOG.md:89 + PROGRESS.md:238）。"
   },
@@ -2294,10 +2294,10 @@
    "title": "多源 end 缝隙必须量化",
    "canonical": "多源 `end` 之间的缝隙必须量化到「字节数 / 指令数 / 归属到哪个函数 / 换口径后的分子与比率 / 对基本块与 CFG 边的影响」，并给具体地址样本；缝隙若全是填充，必须写明当前口径下有多少填充被计入分子。",
    "constraint_object": "输出 / 文档。",
-   "check_method": "数字来自 `evidence_m13_ledger.json` 的 `pe_gap` 段（该文件现为 `sources` 中的 M13 历史快照），经人工核对 + `ledger_check.py --check` 的引用链校验。M13 复算：缝隙 113,731 B = `.text` 3.2262%，换 `.pdata` 口径 -0.0402pp；缝隙内 objdump 指令 113,731 条全为 `cc/90`，我方解出 372 条全为 `int3`，跨 pdata end 的指令 0、CFG 边 0。注意：这三个数字**未逐字登记**在新权威的 M13 小节（该节只登记 §6 下界结论的 6 个数字），故不受数字漂移检查保护——属显式缺口，见附录 C。",
-   "enforced_at": "`work\\evidence_numbers_ledger.json`（现行权威，M13 小节）；`work\\outputs\\NUMBERS_LEDGER.md` §5；`pack\\tools\\ledger_check.py`（对已登记小节/数字与 `sources` sha256 硬校验）。",
-   "basis": "`CHANGELOG.md:97`；`PROGRESS.md:264`；`evidence_m13_ledger.json` 的 `pe_gap`；`evidence_numbers_ledger.json` 的 `sources` 条目",
-   "canonical_status": "`规范`（引用链改指现行权威；`pe_gap` 三个数字尚未被新权威登记，见附录 C）",
+   "check_method": "数字登记在 `evidence_numbers_ledger.json` 的 `M13-pe_gap` 小节（11 个数字，含 113,731 / 3.2262% / -0.0402pp）与 `M13` 小节，`ledger_check.py --check` 对已登记数字做逐字漂移硬校验（改数字→exit 1，已有负例验证）。M13 复算：缝隙 113,731 B = `.text` 3.2262%，换 `.pdata` 口径 -0.0402pp；缝隙内 objdump 指令 113,731 条全为 `cc/90`，我方解出 372 条全为 `int3`，跨 pdata end 的指令 0、CFG 边 0。",
+   "enforced_at": "`work\\evidence_numbers_ledger.json`（现行权威，`M13-pe_gap` 小节）；`work\\outputs\\NUMBERS_LEDGER.md` §5；`pack\\tools\\ledger_check.py`（数字漂移硬失败）。",
+   "basis": "`CHANGELOG.md:97`；`PROGRESS.md:264`；`evidence_m13_ledger.json` 的 `pe_gap`；`evidence_numbers_ledger.json` 的 `M13-pe_gap` 小节",
+   "canonical_status": "`规范`（数字已登记进现行权威的 `M13-pe_gap` 小节，受 `ledger_check --check` 保护）",
    "confidence": "high"
   },
   {
@@ -2779,7 +2779,7 @@
   "adjudicated_items": 8,
   "adjudicated_rule_ids": 14,
   "material_insufficient": 0,
-  "r95_registration_gap": "18/25（7 个 tests/fixtures 未登记三栏）",
+  "r95_registration_gap": "0（25/25；2026-11-17 补齐 7 个 tests/fixtures 登记，此前为 18/25）",
   "updated_at": "2026-11-16（8 项存疑裁决后）",
   "authority_update": "2026-11-16：现行权威改为 evidence_numbers_ledger.json（M13–M18），evidence_m13_ledger.json 降为历史快照"
  }

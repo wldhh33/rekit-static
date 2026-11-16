@@ -376,3 +376,13 @@
 - 文档漂移修正（本轮实测）：`pack/README.md` 数字权威改 `evidence_numbers_ledger.json`、R33–R119 已有规范文件、目录名损坏提示改为「已改名」、21 套/4 分钟改 23 套/约 7.2 分钟、pytest 必须在 `work` 目录跑；`PATH_MAP.md` 规模改 27 模块/25 test/23 verify 并补 `pyproject.toml`、`README.md`、`JSON_CONTRACT`；`AGENTS.md` 规模 18,600→**18,720** 行、CLI 入口与 pytest 工作目录。
 - 回归：全量门禁 23/23、pytest **554 passed**、ledger PASS（run 见收口提交说明）；`v0.1.0` tag。
 
+### 2026-11-17 U1-b — 证据索引与 R95 样本补登记（不占里程碑号）
+
+- `tests/evidence_index.py`：给 `work/evidence_*` 建索引（`work/EVIDENCE_INDEX.json`，大写名避免被 `evidence_*` 通配捕获）。每条 = sha256 / size / mtime / 来源 run_id / 覆盖小节。三条可失败判据：① 覆盖率（每个证据文件必须在索引里，空分母不得 PASS）；② 存在性（索引条目必须真实存在，含反向的「索引有、磁盘无」）；③ 一致性（重算 sha256/size 必须相等）。任一不满足 exit 1。
+- run_id 归因规则写死并自证：恰好 1 个 verification run 的日志提到该文件名才填；多个 run 提到记 `ambiguous` 并列出全部，不取「最后一个」冒充来源；都没提到再看文件内容里的 run id；仍无写 `null`。结果：129 条中 `verification_log` 1、`ambiguous` 6、`not_found` **122**——历史证据绝大多数没有记录来源 run_id，这是索引暴露的真实缺口，不补猜。
+- 覆盖小节：JSON 取顶层键，文本取标题行（`§` / `#` / `===` 形式），截断上限 100，规则写在索引 `rules` 段。
+- 可失败自证 `--self-test`：6/6 通过，其中 4 条是「构造破坏 → 必须 exit 1」正例（新增证据未入索引 / 索引条目文件缺失 / 证据被改动 / sha+size 双不符），2 条是 run_id 归因（唯一 run 填写、两个 run 判 ambiguous）；自证在临时目录跑，不碰真实证据。
+- R95 补登记：`work/fixtures_sample_manifest.json` 登记 7 个 `tests/fixtures`（`dyn_nopie`/`dyn_static`/`dyn_execstack`/`dyn_norelro`/`minipe.exe`/`minidll.dll`/`minipe_fakerich.exe`），sha256/size 现算；仓库内无许可文件 → 一律 `license=unknown` + `redistributable=false` + `local_only=true`；来源未留档的写「构造方式未经本表验证」，不编造 gcc 参数。R95 口径由 **18/25 改为 25/25**（`rules.json` 与规则库三处同步，同时保留 2026-11-16 的 18/25 历史观测）。
+- 回归：`--write` 后 `--check` PASS（129/129，sha 全一致）；全量门禁保持 23/23 + pytest 554 + ledger PASS（本步只新增脚本与登记表，未改任何既有 verify 判据）。
+
+
