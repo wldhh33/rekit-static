@@ -1,0 +1,28 @@
+# B1 / O3 交接协议 · 新增文件清单与回退依据
+# 生成时间: 2026-11-16  生成方式: hashlib.sha256 逐文件现算（下方每行 = 哈希 + 相对路径）
+# 本批性质: 纯增量（新建 5 个文件 + 从 tmp\pack 复制 2 个目录），未修改任何既有文件
+#           未改动 rekit\*.py、tests\*.py、样本、已公布数字
+#
+# 校验单个文件: powershell -c "Get-FileHash -Algorithm SHA256 '<路径>'"
+#
+# 回退步骤（按序执行，任一步失败即停止并报告）:
+#   1. 删除本清单列出的 9 个文件 = 新增 5（AGENTS/PATH_MAP/status.py/HANDOFF/自证脚本）
+#      + 证据 2（status_output.txt / status_selfproof.txt）+ 复制 2（01/02 文档）
+#   2. 删除新增的空目录: pack\tools、pack\01_方法论文档、pack\02_规则库
+#   3. 复核: python "pack\tools\status.py" 若仍可运行说明未删干净；
+#      删干净后该命令应报 "can't open file"，即回到"交接协议尚未建立"的状态
+#   4. 本次复制自 tmp\pack 的 01/02 只做复制未做移动，tmp 源文件仍在，可重复恢复
+#
+# 不纳入本清单: 2026-11-16\vibe-coding-review\outputs\VIBE_CODING_OPTIMIZATION_PROPOSAL.md
+#               及 work\*.py|json|md 采集材料 —— 属上一任务交付物，不随本批回滚
+#
+# sha256                                                           相对工作区根路径
+5718c1e4553a80b8a8991d36144653d4af4eb064c5f658ac00d08916ef5fd111  pack\AGENTS.md
+e57a1d869caedfbf25c1fac023b5d2c0717c024876a9f10f89d6ff41e783a5b6  pack\PATH_MAP.md
+ca51a78339126c427094bdf935324442334b3e7ad750b5f581fe412a40e42380  pack\tools\status.py
+eefc21396bc6a566680af75c4691aac4c9a2abdd57eebf9fde7807c9a13b15bf  pack\01_方法论文档\工作逻辑与思考流程.md
+0594a5320d72f6f5fde3ea8d32fd952f15d59f56726a61d008df1e05f15b605e  pack\02_规则库\规则库_R01-R32.md
+c99509a03a480928e5a016d25c82ae5b1656dd82904b9a1e309e4466bf497a63  2026-11-15\m3-task-card\work\HANDOFF.md
+b6e62f218bac3c518d1893449fc7ddeb8c96c46029a2245000e2bbe03847cf6b  2026-11-16\vibe-coding-review\work\batch1\status_output.txt
+ba2f4c0c40b9df5c57875ed9714d51d3358426339d2051152d8aef5821355745  2026-11-16\vibe-coding-review\work\batch1\status_selfproof.txt
+b54abf8b70a4b1f30a6068ee95299ab9fe914ce971e69fb53c9cc5c8d816be68  2026-11-16\vibe-coding-review\work\batch1\selfproof_status.py

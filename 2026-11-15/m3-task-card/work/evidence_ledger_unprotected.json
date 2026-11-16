@@ -1,0 +1,558 @@
+{
+  "mirror": "2026-11-15/m3-task-card/work/outputs/NUMBERS_LEDGER.md",
+  "rule": "unprotected = 小节正文里出现、但不是任一已登记数字子串的数值；常见原因：推算/旧值对照（R102 禁入账）、区间描述、派生百分比、地址与样例字节",
+  "sections": {
+    "M13": {
+      "heading": "## 6. 下界结论",
+      "registered": [
+        "5,039 / 276",
+        "206,541",
+        "26,652 / 26,702",
+        "12,272 / 3,530 / 37,891",
+        "1,974",
+        "2,081",
+        "16,332",
+        "16,179",
+        "17 个可测样本"
+      ],
+      "unprotected": [
+        {
+          "token": "18",
+          "occurrences": 2
+        },
+        {
+          "token": "1,066",
+          "occurrences": 1
+        },
+        {
+          "token": "1,067",
+          "occurrences": 1
+        },
+        {
+          "token": "11",
+          "occurrences": 1
+        },
+        {
+          "token": "16,177",
+          "occurrences": 1
+        },
+        {
+          "token": "2.88%",
+          "occurrences": 1
+        },
+        {
+          "token": "3.2",
+          "occurrences": 1
+        },
+        {
+          "token": "3.9922%",
+          "occurrences": 1
+        },
+        {
+          "token": "317",
+          "occurrences": 1
+        },
+        {
+          "token": "4.0034%",
+          "occurrences": 1
+        },
+        {
+          "token": "417",
+          "occurrences": 1
+        },
+        {
+          "token": "64",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 12
+    },
+    "M13-pe_gap": {
+      "heading": "## 5. PE：`.pdata` end 与 gopclntab 下一入口之间 1–31 字节缝隙的量化",
+      "registered": [
+        "113,731",
+        "3.2262%",
+        "-0.0402pp",
+        "7,139 / 7,152",
+        "148,861",
+        "76.40%",
+        "15.93",
+        "372 条",
+        "750,109",
+        "80.9903%",
+        "0.0496%"
+      ],
+      "unprotected": [
+        {
+          "token": "-372",
+          "occurrences": 1
+        },
+        {
+          "token": "1,871",
+          "occurrences": 1
+        },
+        {
+          "token": "100%",
+          "occurrences": 1
+        },
+        {
+          "token": "16",
+          "occurrences": 1
+        },
+        {
+          "token": "3,704",
+          "occurrences": 1
+        },
+        {
+          "token": "609",
+          "occurrences": 1
+        },
+        {
+          "token": "749,737",
+          "occurrences": 1
+        },
+        {
+          "token": "81.0305%",
+          "occurrences": 1
+        },
+        {
+          "token": "955",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 9
+    },
+    "M14": {
+      "heading": "## 9. M14 对齐实测（C4）",
+      "registered": [
+        "149,225",
+        "26,652",
+        "1,067",
+        "1,066",
+        "923,970",
+        "26,702",
+        "3.9922%",
+        "4.0034%",
+        "8,906"
+      ],
+      "unprotected": [
+        {
+          "token": "660",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 1
+    },
+    "M15": {
+      "heading": "## 10. M15 报告层不产生新数字",
+      "registered": [
+        "485 passed",
+        "18/18",
+        "5,039/276",
+        "206,541",
+        "26,652"
+      ],
+      "unprotected": [
+        {
+          "token": "26,702",
+          "occurrences": 1
+        },
+        {
+          "token": "73.58",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 2
+    },
+    "M16": {
+      "heading": "## 11. M16 数据引用层（新分母：声明对象）",
+      "registered": [
+        "86.3354%",
+        "417 / 51 / 39",
+        "25,941",
+        "8,853 / 22,067",
+        "509 passed",
+        "483"
+      ],
+      "unprotected": [
+        {
+          "token": "15",
+          "occurrences": 4
+        },
+        {
+          "token": "12",
+          "occurrences": 2
+        },
+        {
+          "token": "16",
+          "occurrences": 2
+        },
+        {
+          "token": "18",
+          "occurrences": 2
+        },
+        {
+          "token": "207",
+          "occurrences": 2
+        },
+        {
+          "token": "400",
+          "occurrences": 2
+        },
+        {
+          "token": "512",
+          "occurrences": 2
+        },
+        {
+          "token": "539",
+          "occurrences": 2
+        },
+        {
+          "token": "1001",
+          "occurrences": 1
+        },
+        {
+          "token": "11",
+          "occurrences": 1
+        },
+        {
+          "token": "1700",
+          "occurrences": 1
+        },
+        {
+          "token": "1709",
+          "occurrences": 1
+        },
+        {
+          "token": "18519",
+          "occurrences": 1
+        },
+        {
+          "token": "190",
+          "occurrences": 1
+        },
+        {
+          "token": "2155",
+          "occurrences": 1
+        },
+        {
+          "token": "236",
+          "occurrences": 1
+        },
+        {
+          "token": "238",
+          "occurrences": 1
+        },
+        {
+          "token": "259",
+          "occurrences": 1
+        },
+        {
+          "token": "2695",
+          "occurrences": 1
+        },
+        {
+          "token": "30",
+          "occurrences": 1
+        },
+        {
+          "token": "32",
+          "occurrences": 1
+        },
+        {
+          "token": "3854",
+          "occurrences": 1
+        },
+        {
+          "token": "3855",
+          "occurrences": 1
+        },
+        {
+          "token": "501",
+          "occurrences": 1
+        },
+        {
+          "token": "669",
+          "occurrences": 1
+        },
+        {
+          "token": "70.33",
+          "occurrences": 1
+        },
+        {
+          "token": "71.4286%",
+          "occurrences": 1
+        },
+        {
+          "token": "720",
+          "occurrences": 1
+        },
+        {
+          "token": "92",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 29
+    },
+    "M17": {
+      "heading": "## 12. M17 .NET 程序集结构层（新对象：CLI 程序集）",
+      "registered": [
+        "6,592",
+        "592,206",
+        "27/27",
+        "528 passed",
+        "25,315",
+        "29,257",
+        "396",
+        "433"
+      ],
+      "unprotected": [
+        {
+          "token": "18",
+          "occurrences": 3
+        },
+        {
+          "token": "10",
+          "occurrences": 2
+        },
+        {
+          "token": "23",
+          "occurrences": 2
+        },
+        {
+          "token": "3,356",
+          "occurrences": 2
+        },
+        {
+          "token": "4,724",
+          "occurrences": 2
+        },
+        {
+          "token": "4,725",
+          "occurrences": 2
+        },
+        {
+          "token": "47",
+          "occurrences": 2
+        },
+        {
+          "token": "76",
+          "occurrences": 2
+        },
+        {
+          "token": "77",
+          "occurrences": 2
+        },
+        {
+          "token": "1,261",
+          "occurrences": 1
+        },
+        {
+          "token": "1,651",
+          "occurrences": 1
+        },
+        {
+          "token": "1,783",
+          "occurrences": 1
+        },
+        {
+          "token": "119",
+          "occurrences": 1
+        },
+        {
+          "token": "12",
+          "occurrences": 1
+        },
+        {
+          "token": "140",
+          "occurrences": 1
+        },
+        {
+          "token": "16,029",
+          "occurrences": 1
+        },
+        {
+          "token": "19",
+          "occurrences": 1
+        },
+        {
+          "token": "2,164",
+          "occurrences": 1
+        },
+        {
+          "token": "2,222",
+          "occurrences": 1
+        },
+        {
+          "token": "2,623",
+          "occurrences": 1
+        },
+        {
+          "token": "25,726",
+          "occurrences": 1
+        },
+        {
+          "token": "256",
+          "occurrences": 1
+        },
+        {
+          "token": "26",
+          "occurrences": 1
+        },
+        {
+          "token": "3,355",
+          "occurrences": 1
+        },
+        {
+          "token": "3,942",
+          "occurrences": 1
+        },
+        {
+          "token": "301",
+          "occurrences": 1
+        },
+        {
+          "token": "37",
+          "occurrences": 1
+        },
+        {
+          "token": "4,723",
+          "occurrences": 1
+        },
+        {
+          "token": "46",
+          "occurrences": 1
+        },
+        {
+          "token": "563",
+          "occurrences": 1
+        },
+        {
+          "token": "656",
+          "occurrences": 1
+        },
+        {
+          "token": "660",
+          "occurrences": 1
+        },
+        {
+          "token": "70.64",
+          "occurrences": 1
+        },
+        {
+          "token": "75",
+          "occurrences": 1
+        },
+        {
+          "token": "856",
+          "occurrences": 1
+        },
+        {
+          "token": "9,286",
+          "occurrences": 1
+        },
+        {
+          "token": "98",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 37
+    },
+    "M18": {
+      "heading": "## 13. M18 .NET IL 控制流层（新分母：方法体/IL 指令）",
+      "registered": [
+        "108,267",
+        "107,765",
+        "41/41",
+        "554 passed",
+        "1,372",
+        "1,245",
+        "1,133",
+        "2,164",
+        "93,194",
+        "51,063",
+        "52,837",
+        "5,058"
+      ],
+      "unprotected": [
+        {
+          "token": "20",
+          "occurrences": 2
+        },
+        {
+          "token": "25,315",
+          "occurrences": 2
+        },
+        {
+          "token": "396",
+          "occurrences": 2
+        },
+        {
+          "token": "11",
+          "occurrences": 1
+        },
+        {
+          "token": "12",
+          "occurrences": 1
+        },
+        {
+          "token": "15",
+          "occurrences": 1
+        },
+        {
+          "token": "17",
+          "occurrences": 1
+        },
+        {
+          "token": "21",
+          "occurrences": 1
+        },
+        {
+          "token": "23",
+          "occurrences": 1
+        },
+        {
+          "token": "29,257",
+          "occurrences": 1
+        },
+        {
+          "token": "30",
+          "occurrences": 1
+        },
+        {
+          "token": "433",
+          "occurrences": 1
+        },
+        {
+          "token": "596",
+          "occurrences": 1
+        },
+        {
+          "token": "599",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 14
+    },
+    "M5": {
+      "heading": "## 14. M5 表达式层验收补强（补记，跨里程碑）",
+      "registered": [
+        "57 个抽样函数",
+        "403",
+        "390",
+        "2.47.20260726",
+        "1/18",
+        "7/18",
+        "13/21"
+      ],
+      "unprotected": [
+        {
+          "token": "64",
+          "occurrences": 1
+        }
+      ],
+      "unprotected_distinct": 1
+    }
+  },
+  "unprotected_distinct_total": 105
+}

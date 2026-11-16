@@ -1,0 +1,180 @@
+[
+ {
+  "rel": "samples/m9/elf_plugin_liblua54_stripped.so",
+  "candidates": 30,
+  "eligible": 21,
+  "promoted": 21,
+  "blocked": 9,
+  "mismatch": 0,
+  "empty_boundary_promoted": 0,
+  "res_unchanged": true,
+  "boundary_size": 47339,
+  "samples_blocked": [
+   {
+    "fn": 34464,
+    "jmp": 34536,
+    "kind": "rel32",
+    "count": 34,
+    "n_targets": 4,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 36800,
+    "jmp": 37163,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 21,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 62608,
+    "jmp": 62673,
+    "kind": "rel32",
+    "count": 34,
+    "n_targets": 4,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 66992,
+    "jmp": 67044,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 9,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 81600,
+    "jmp": 81800,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 12,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   }
+  ]
+ },
+ {
+  "rel": "samples/m9/elf_jumpdense_python310_stripped",
+  "candidates": 104,
+  "eligible": 57,
+  "promoted": 57,
+  "blocked": 47,
+  "mismatch": 0,
+  "empty_boundary_promoted": 0,
+  "res_unchanged": true,
+  "boundary_size": 684728,
+  "samples_blocked": [
+   {
+    "fn": 464406,
+    "jmp": 464551,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 7,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 859910,
+    "jmp": 860083,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 6,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 1014402,
+    "jmp": 1014492,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 5,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 1033627,
+    "jmp": 1033706,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 7,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   },
+   {
+    "fn": 1036607,
+    "jmp": 1036685,
+    "kind": "rel32",
+    "count": null,
+    "n_targets": 6,
+    "eligible": false,
+    "promoted": false,
+    "blocked_reasons": [
+     "表长未证明（无 cmp/ja guard）",
+     "表项有被拒或扫描被截断"
+    ]
+   }
+  ]
+ },
+ {
+  "rel": "samples/m9/elf_medium_synth_go_stripped",
+  "candidates": 0,
+  "eligible": 0,
+  "promoted": 0,
+  "blocked": 0,
+  "mismatch": 0,
+  "empty_boundary_promoted": 0,
+  "res_unchanged": true,
+  "boundary_size": 923970,
+  "samples_blocked": []
+ },
+ {
+  "rel": "samples/m9/pe_medium_synth_go_stripped.exe",
+  "candidates": 0,
+  "eligible": 0,
+  "promoted": 0,
+  "blocked": 0,
+  "mismatch": 0,
+  "empty_boundary_promoted": 0,
+  "res_unchanged": true,
+  "boundary_size": 925712,
+  "samples_blocked": []
+ }
+]

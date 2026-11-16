@@ -1,0 +1,60 @@
+M8-U2 数字底稿（build 实测）
+
+== hello_go_linux  fmt=ELF  addr_base=0
+  src dwarf         present=True readable=True declares=formal_parameters      count=5077
+  src elf_symtab    present=True readable=True declares=function_identity_only count=None
+  dwarf meta: {'cus': 59, 'versions': {5: 59}, 'declarations': 2805, 'subprograms_with_low_pc': 1794, 'formal_parameters': 5077, 'params_with_expr': 916, 'params_with_loclist': 2637, 'params_without_location': 1524}
+  external census: {'cus': 59, 'subprograms': 2805, 'params_under_subprogram': 5077, 'subprogram_with_low_pc': 1794}
+  available=True  sites=11471  site_status={'bound': 2057, 'zero_params': 4903, 'partial': 3418, 'no_target': 189, 'abstained': 904}
+  params: bound=5824 partial=1696 abstained=6155 zero_params_sites=4903 bound_pieces=8354 no_decl=0 no_target=189
+  partial 缺段合计=1813
+  abstain_reasons: {'形参的入口位置表达式为空（DWARF 未给出位置）': 2358, '调用点前没有寄存器 rax 的可判定定义': 954, '调用点前没有寄存器 rbx 的可判定定义': 835, '调用点前没有寄存器 rcx 的可判定定义': 689, '调用点前没有寄存器 rdi 的可判定定义': 409, '间接调用目标不可静态确定': 189, '调用点前没有寄存器 rsi 的可判定定义': 157, '调用点前没有寄存器 rax,rbx 的可判定定义': 107, '形参入口位置在栈/帧基址（DW_OP_fbreg/CFA）': 99, '调用点前没有寄存器 rax,rbx,rcx 的可判定定义': 84, '调用点前没有寄存器 r8 的可判定定义': 63, '调用点前没有寄存器 r9 的可判定定义': 40, '调用点前没有寄存器 rdi,rsi,r8 的可判定定义': 30, '调用点前没有寄存器 reg17 的可判定定义': 23}
+
+== hello_go.exe  fmt=PE  addr_base=5368709120
+  src dwarf         present=True readable=True declares=formal_parameters      count=5261
+  src coff_symbols  present=True readable=True declares=function_identity_only count=None
+  src pdata         present=True readable=True declares=function_range_only    count=None
+  dwarf meta: {'cus': 61, 'versions': {5: 61}, 'declarations': 2880, 'subprograms_with_low_pc': 1884, 'formal_parameters': 5261, 'params_with_expr': 981, 'params_with_loclist': 2775, 'params_without_location': 1505}
+  external census: {'cus': 61, 'subprograms': 2880, 'params_under_subprogram': 5261, 'subprogram_with_low_pc': 1884}
+  available=True  sites=11980  site_status={'bound': 2101, 'zero_params': 4988, 'partial': 3777, 'no_target': 195, 'abstained': 919}
+  params: bound=6448 partial=1834 abstained=6789 zero_params_sites=4988 bound_pieces=9152 no_decl=0 no_target=195
+  partial 缺段合计=2001
+  abstain_reasons: {'形参的入口位置表达式为空（DWARF 未给出位置）': 2754, '调用点前没有寄存器 rax 的可判定定义': 1000, '调用点前没有寄存器 rbx 的可判定定义': 839, '调用点前没有寄存器 rcx 的可判定定义': 733, '调用点前没有寄存器 rdi 的可判定定义': 432, '间接调用目标不可静态确定': 195, '形参入口位置在栈/帧基址（DW_OP_fbreg/CFA）': 155, '调用点前没有寄存器 rsi 的可判定定义': 154, '调用点前没有寄存器 rax,rbx 的可判定定义': 112, '调用点前没有寄存器 rbx,rcx,rdi 的可判定定义': 89, '调用点前没有寄存器 rax,rbx,rcx 的可判定定义': 80, '调用点前没有寄存器 r8 的可判定定义': 48, '调用点前没有寄存器 r9 的可判定定义': 37, '调用点前没有寄存器 rdi,rsi,r8 的可判定定义': 27}
+
+== cli-64.exe  fmt=PE  addr_base=5368709120
+  src pdata         present=True readable=True declares=function_range_only    count=None
+  available=False  sites=153  site_status={'no_target': 55, 'no_declaration': 98}
+  params: bound=0 partial=0 abstained=153 zero_params_sites=0 bound_pieces=0 no_decl=98 no_target=55
+  partial 缺段合计=0
+  abstain_reasons: {'目标没有可读的形参声明': 98, '间接调用目标不可静态确定': 55}
+
+== bin_ls.elf  fmt=ELF  addr_base=0
+  src gnu_debuglink present=True readable=False declares=external_reference_only count=None
+  src elf_dynsym    present=True readable=True declares=function_identity_only count=None
+  src eh_frame      present=True readable=True declares=function_range_only    count=None
+  available=False  sites=1154  site_status={'no_declaration': 1116, 'no_target': 38}
+  params: bound=0 partial=0 abstained=1154 zero_params_sites=0 bound_pieces=0 no_decl=1116 no_target=38
+  partial 缺段合计=0
+  abstain_reasons: {'目标没有可读的形参声明': 1116, '间接调用目标不可静态确定': 38}
+
+== dyn_static  fmt=ELF  addr_base=0
+  src elf_symtab    present=True readable=True declares=function_identity_only count=None
+  src eh_frame      present=True readable=True declares=function_range_only    count=None
+  available=False  sites=3609  site_status={'no_declaration': 3457, 'no_target': 152}
+  params: bound=0 partial=0 abstained=3609 zero_params_sites=0 bound_pieces=0 no_decl=3457 no_target=152
+  partial 缺段合计=0
+  abstain_reasons: {'目标没有可读的形参声明': 3457, '间接调用目标不可静态确定': 152}
+
+== hello_rust.exe  fmt=PE  addr_base=5368709120
+  src pdb           present=True readable=False declares=types_only_undecoded   count=None
+  src pdata         present=True readable=True declares=function_range_only    count=None
+  available=False  sites=1029  site_status={'no_target': 193, 'no_declaration': 836}
+  params: bound=0 partial=0 abstained=1029 zero_params_sites=0 bound_pieces=0 no_decl=836 no_target=193
+  partial 缺段合计=0
+  abstain_reasons: {'目标没有可读的形参声明': 836, '间接调用目标不可静态确定': 193}
+
+== minidll.dll  fmt=PE  addr_base=5368709120
+  src export_table  present=True readable=True declares=function_identity_only count=None
+  available=False  sites=0  site_status={}
+  params: bound=0 partial=0 abstained=0 zero_params_sites=0 bound_pieces=0 no_decl=0 no_target=0
+  partial 缺段合计=0

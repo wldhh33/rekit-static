@@ -1,0 +1,30 @@
+{
+ "sample": "samples/m9/elf_medium_cc1_stripped",
+ "descend_s": 34.4,
+ "analyze_s": 28.9,
+ "stats": {
+  "candidates": 64,
+  "high": 52,
+  "medium": 2,
+  "low": 10,
+  "promoted": 0,
+  "blocked": 0,
+  "not_checked": 64,
+  "unmatched": 3457,
+  "rejected": 1,
+  "new_insns": 17582,
+  "new_blocks": 4618
+ },
+ "budget": {
+  "step_budget": null,
+  "max_functions": null,
+  "cost_model": "len(insns)+len(blocks)，与机器速度无关",
+  "steps_used": 703571,
+  "functions_analyzed": 1974,
+  "functions_skipped_budget": 0,
+  "analysis_coverage": 1.0,
+  "scope_note": "stats 中候选/升格比率的分母只含 functions_analyzed；skipped 单列，不当作“无候选”，也不并入确定集"
+ },
+ "functions_with_indirect_jmp": 1974,
+ "analyze_s_fixed": 7.4
+}

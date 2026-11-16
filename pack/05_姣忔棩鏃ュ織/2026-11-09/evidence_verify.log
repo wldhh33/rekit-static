@@ -1,0 +1,15 @@
+[PASS] A1 bin_ls.elf 节数与条数 {'.rela.dyn': 215, '.rela.plt': 110} — got {'.rela.dyn': 215, '.rela.plt': 110}
+[PASS] A1 dyn_pie 节数与条数 {'.rela.dyn': 8} — got {'.rela.dyn': 8}
+[PASS] A1 dyn_nopie 节数与条数 {'.rela.dyn': 2} — got {'.rela.dyn': 2}
+[PASS] A1 dyn_static 节数与条数 {'.rela.plt': 22} — got {'.rela.plt': 22}
+[PASS] A2 bin_ls 总条数 = 325 (readelf=325, mine=325)
+[PASS] A2 逐条 (offset,type,name,addend) 一致，diff=0 — 325/325 全一致
+[PASS] A2' objdump -R 三方复核（名字 + *ABS* addend） — objdump 325 条；带符号名与无符号 addend 全一致
+[PASS] A3-1 sym_idx ∈ [0, 138) 全量落界
+[PASS] A3-1' JUMP_SLOT/GLOB_DAT/COPY 查表名 == r_info 序号对应名（全量 128 条）
+[PASS] A3-2 110 JUMP_SLOT + 12 GLOB_DAT 的 r_offset 落 .got [0x26c08, 0x26ff0) — 122/122 全落
+[PASS] A3-3 6 条 COPY 落 .bss [0x27280,0x28598) 且 st_value==r_offset
+[PASS] A3-4 抽样 5 条 (getenv,cap_to_text,__ctype_toupper_loc...) offset+type 与 readelf 一致
+[PASS] A1' dyn_static 22 条全 R_X86_64_IRELATIVE(0x25) 且 sym_idx=0
+
+13/13 PASS

@@ -1,0 +1,32 @@
+Magic:            7f 45 4c 46 (0x7f 'ELF')
+Class:            ELF64
+Data:             2's complement, little endian
+Type:             DYN
+Machine:          Advanced Micro Devices X86-64
+Entry point:      0x6760
+Start of program headers: 64 (bytes into file)
+Number of program headers: 14
+Number of section headers: 30
+
+Program headers:
+  Type               Offset           VirtAddr      FileSiz   Flg
+  PHDR           0x00000040 0x0000000000000040 0x0000000310   R  
+  INTERP         0x00000394 0x0000000000000394 0x000000001c   R  
+  LOAD           0x00000000 0x0000000000000000 0x0000003810   R  
+  LOAD           0x00004000 0x0000000000004000 0x0000016cf9   R E
+  LOAD           0x0001b000 0x000000000001b000 0x0000009538   R  
+  LOAD           0x00024fb0 0x0000000000025fb0 0x00000012d0   RW 
+  DYNAMIC        0x000259f8 0x00000000000269f8 0x0000000210   RW 
+  NOTE           0x00000350 0x0000000000000350 0x0000000020   R  
+  NOTE           0x00000370 0x0000000000000370 0x0000000024   R  
+  NOTE           0x00024518 0x0000000000024518 0x0000000020   R  
+  GNU_PROPERTY   0x00000350 0x0000000000000350 0x0000000020   R  
+  GNU_EH_FRAME   0x00020388 0x0000000000020388 0x0000000a74   R  
+  GNU_STACK      0x00000000 0x0000000000000000 0x0000000000   RW 
+  GNU_RELRO      0x00024fb0 0x0000000000025fb0 0x0000001050   R  
+
+PT_LOAD count: 4
+  LOAD#1 off=0x0 vaddr=0x0 filesz=0x3810 flags=[R  ]
+  LOAD#2 off=0x4000 vaddr=0x4000 filesz=0x16cf9 flags=[R E]
+  LOAD#3 off=0x1b000 vaddr=0x1b000 filesz=0x9538 flags=[R  ]
+  LOAD#4 off=0x24fb0 vaddr=0x25fb0 filesz=0x12d0 flags=[RW ]

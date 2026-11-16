@@ -1,0 +1,50 @@
+== A) 分母先行：18 样本 × 声明来源 ==
+来源类别             present  readable        形参声明数  语义（CLASS_DECLARES）
+dwarf               2/18      2/18        10338  formal_parameters
+pdb                 1/18      0/18            0  types_only_undecoded
+export_table        1/18      1/18            0  function_identity_only
+coff_symbols        1/18      1/18            0  function_identity_only
+elf_symtab          6/18      6/18            0  function_identity_only
+elf_dynsym          5/18      5/18            0  function_identity_only
+gnu_debuglink       1/18      0/18            0  external_reference_only
+eh_frame            7/18      7/18            0  function_range_only
+pdata               6/18      6/18            0  function_range_only
+  [无法验证] pdb：present 1/18 但 readable 0/18 → 定位到了、读不出声明，本轮无法验证
+  [结构性] export_table：present 1/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] coff_symbols：present 1/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] elf_symtab：present 6/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] elf_dynsym：present 5/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [无法验证] gnu_debuglink：present 1/18 但 readable 0/18 → 定位到了、读不出声明，本轮无法验证
+  [结构性] eh_frame：present 7/18，语义=function_range_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] pdata：present 6/18，语义=function_range_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  DWARF 版本分布（有可读 DWARF 的样本）：v5×120
+  [无法验证] DWARF v2：18 样本中 0 条 → 真实样本无法验证（仅有合成单测；不得写成「v2 不支持/没有形参」）
+  [无法验证] DWARF v3：18 样本中 0 条 → 真实样本无法验证（仅有合成单测；不得写成「v3 不支持/没有形参」）
+
+== 样本矩阵（先 present，再结果；无声明来源的样本单列分母）==
+样本                           格式   DWARF(可读/声明)      站点   bound partial    zero     无声明     无目标     形参弃权
+dyn_pie                      ELF  ELF/-          未构建       -       -       -       -       -        -
+dyn_nopie                    ELF  ELF/-          未构建       -       -       -       -       -        -
+dyn_static                   ELF  ELF/-         3609       0       0       0    3457     152     3609
+dyn_execstack                ELF  ELF/-          未构建       -       -       -       -       -        -
+dyn_norelro                  ELF  ELF/-          未构建       -       -       -       -       -        -
+bin_ls.elf                   ELF  ELF/-         1154       0       0       0    1116      38     1154
+hello_go_linux               ELF  ELF/5077     11471    2057    3418    4903       0     189     6155
+busybox-1.35.0-musl-x86_64   ELF  ELF/-          未构建       -       -       -       -       -        -
+upx_dyn_pie                  ELF  ELF/-          未构建       -       -       -       -       -        -
+upx_cli-64.exe               PE   PE/-           未构建       -       -       -       -       -        -
+upx_putty-64bit.exe          PE   PE/-           未构建       -       -       -       -       -        -
+cli-64.exe                   PE   PE/-           153       0       0       0      98      55      153
+minipe.exe                   PE   PE/-           未构建       -       -       -       -       -        -
+minidll.dll                  PE   PE/-             0       0       0       0       0       0        0
+  [无可绑定对象] minidll.dll：0 个调用点 → 本样本不构成参数绑定的分母；不能读成「0 个参数」
+minipe_fakerich.exe          PE   PE/-           未构建       -       -       -       -       -        -
+hello_go.exe                 PE   PE/5261      11980    2101    3777    4988       0     195     6789
+hello_rust.exe               PE   PE/-          1029       0       0       0     836     193     1029
+putty-64bit.exe              PE   PE/-           未构建       -       -       -       -       -        -
+
+== 结果分列（只统计声明来源可读的样本）==
+  hello_go_linux：站点 11471 ｜ 因声明绑定：形参 5824、寄存器段 8354（bound 站点 2057） ｜ 部分绑定形参 1696（partial 站点 3418） ｜ 因证据不足弃权：形参 6155（abstained 站点 904） ｜ 零形参声明站点 4903 ｜ objdump 写核对 8354 段（未建模 0）
+  hello_go.exe：站点 11980 ｜ 因声明绑定：形参 6448、寄存器段 9152（bound 站点 2101） ｜ 部分绑定形参 1834（partial 站点 3777） ｜ 因证据不足弃权：形参 6789（abstained 站点 919） ｜ 零形参声明站点 4988 ｜ objdump 写核对 9152 段（未建模 0）
+
+结果: PASS

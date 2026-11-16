@@ -1,0 +1,190 @@
+{
+ "copies": {
+  "pack_modules": 25,
+  "pack_rekit": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\pack\\04_rekit椤圭洰婧愮爜\\rekit",
+  "pack_vs_work_identical": true,
+  "tmp_pack_modules": 5,
+  "tmp_pack_rekit": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\tmp\\pack\\04_rekit项目源码\\rekit"
+ },
+ "docs_pack03": {
+  "CHANGELOG.md": {
+   "bytes": 68998,
+   "lines": 107
+  },
+  "CHARTER.md": {
+   "bytes": 34921,
+   "lines": 100
+  },
+  "PROGRESS.md": {
+   "bytes": 103518,
+   "lines": 330
+  },
+  "RE-ROADMAP.md": {
+   "bytes": 19448,
+   "lines": 110
+  }
+ },
+ "docs_total_bytes": 226885,
+ "evidence_bytes": 3058983,
+ "evidence_files_in_work_root": 115,
+ "generated_from": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15",
+ "git": {
+  "initialized": false
+ },
+ "pack_dirs_on_disk": [
+  "03_璺嚎鍥句笌绔犵▼",
+  "04_rekit椤圭洰婧愮爜",
+  "05_姣忔棩鏃ュ織",
+  "06_鏃ユ姤docx",
+  "README.md"
+ ],
+ "rekit": {
+  "loc": 16939,
+  "module_names": [
+   "__init__.py",
+   "callfacts.py",
+   "callgraph.py",
+   "cli.py",
+   "coverage.py",
+   "datarefs.py",
+   "disasm.py",
+   "dotnet.py",
+   "elf.py",
+   "expr.py",
+   "fingerprint.py",
+   "funcreport.py",
+   "gopclntab.py",
+   "iat.py",
+   "ilflow.py",
+   "mapview.py",
+   "mcp.py",
+   "paramdecl.py",
+   "pe.py",
+   "recdesc.py",
+   "sitejoin.py",
+   "struct.py",
+   "strxref.py",
+   "switchcand.py",
+   "vexaudit.py"
+  ],
+  "modules": 25
+ },
+ "rules": {
+  "gaps": [
+   9,
+   10,
+   11,
+   14,
+   17,
+   20,
+   26
+  ],
+  "max": 119,
+  "min": 1,
+  "unique_ids": 112
+ },
+ "sample_manifest_entries": 7,
+ "samples": {
+  "samples": {
+   "bytes": 99176836,
+   "files": 14
+  },
+  "tests/fixtures": {
+   "bytes": 993176,
+   "files": 10
+  },
+  "tests/samples": {
+   "bytes": 8789572,
+   "files": 11
+  }
+ },
+ "surface": {
+  "cli_lines": 144,
+  "cli_subcommands_matched": [
+   "mcp",
+   "fingerprint",
+   "map",
+   "iat",
+   "disasm",
+   "recdesc",
+   "coverage",
+   "expr",
+   "ilflow",
+   "dotnet",
+   "datarefs",
+   "funcreport",
+   "sitejoin",
+   "callfacts",
+   "callgraph"
+  ],
+  "mcp_bytes": 14811,
+  "mcp_tools": [
+   "rekit_fingerprint",
+   "rekit_iat",
+   "rekit_info",
+   "rekit_map"
+  ]
+ },
+ "tests": {
+  "py_files": 51,
+  "test_loc": 6386,
+  "test_modules": 25,
+  "verify_argparse_counts": {
+   "verify_c4_alignment.py": 0,
+   "verify_callfacts.py": 2,
+   "verify_callgraph.py": 1,
+   "verify_coverage.py": 0,
+   "verify_datarefs.py": 0,
+   "verify_disasm.py": 3,
+   "verify_dotnet.py": 0,
+   "verify_expr.py": 3,
+   "verify_fingerprint.py": 5,
+   "verify_funcreport.py": 0,
+   "verify_gopclntab.py": 0,
+   "verify_iat.py": 3,
+   "verify_ilflow.py": 0,
+   "verify_map.py": 6,
+   "verify_paramdecl.py": 2,
+   "verify_recdesc.py": 2,
+   "verify_sitejoin.py": 2,
+   "verify_struct.py": 1,
+   "verify_strxref.py": 3,
+   "verify_switchcand.py": 1,
+   "verify_vexaudit.py": 0
+  },
+  "verify_loc": 8343,
+  "verify_names": [
+   "verify_c4_alignment.py",
+   "verify_callfacts.py",
+   "verify_callgraph.py",
+   "verify_coverage.py",
+   "verify_datarefs.py",
+   "verify_disasm.py",
+   "verify_dotnet.py",
+   "verify_expr.py",
+   "verify_fingerprint.py",
+   "verify_funcreport.py",
+   "verify_gopclntab.py",
+   "verify_iat.py",
+   "verify_ilflow.py",
+   "verify_map.py",
+   "verify_paramdecl.py",
+   "verify_recdesc.py",
+   "verify_sitejoin.py",
+   "verify_struct.py",
+   "verify_strxref.py",
+   "verify_switchcand.py",
+   "verify_vexaudit.py"
+  ],
+  "verify_scripts": 21
+ },
+ "tmp_pack_dirs": [
+  "01_方法论文档",
+  "02_规则库",
+  "03_路线图与章程",
+  "04_rekit项目源码",
+  "05_每日日志",
+  "06_日报docx",
+  "README.md"
+ ]
+}

@@ -1,0 +1,155 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "full-matrix",
+   "name": "状态矩阵",
+   "status": "PASS",
+   "detail": "全部匹配"
+  },
+  {
+   "id": "full-absence",
+   "name": "absence 覆盖",
+   "status": "PASS",
+   "detail": "覆盖全部非 present 字段"
+  },
+  {
+   "id": "full-a",
+   "name": "块/调用目标为指令起点",
+   "status": "PASS",
+   "detail": "checked; 0 个目标不在本节（未抽查）"
+  },
+  {
+   "id": "full-b",
+   "name": "块内指令落域且为起点",
+   "status": "PASS",
+   "detail": "12 条指令全部通过"
+  },
+  {
+   "id": "go-matrix",
+   "name": "状态矩阵",
+   "status": "PASS",
+   "detail": "全部匹配"
+  },
+  {
+   "id": "go-absence",
+   "name": "absence 覆盖",
+   "status": "PASS",
+   "detail": "覆盖全部非 present 字段"
+  },
+  {
+   "id": "go-a",
+   "name": "块/调用目标为指令起点",
+   "status": "PASS",
+   "detail": "checked; 0 个目标不在本节（未抽查）"
+  },
+  {
+   "id": "go-b",
+   "name": "块内指令落域且为起点",
+   "status": "PASS",
+   "detail": "25 条指令全部通过"
+  },
+  {
+   "id": "go-e",
+   "name": "指令数上界",
+   "status": "PASS",
+   "detail": "报告=25 objdump[0x401320,0x401380)=50"
+  },
+  {
+   "id": "scarce-matrix",
+   "name": "状态矩阵",
+   "status": "PASS",
+   "detail": "全部匹配"
+  },
+  {
+   "id": "scarce-absence",
+   "name": "absence 覆盖",
+   "status": "PASS",
+   "detail": "覆盖全部非 present 字段"
+  },
+  {
+   "id": "scarce-a",
+   "name": "块/调用目标为指令起点",
+   "status": "PASS",
+   "detail": "checked; 0 个目标不在本节（未抽查）"
+  },
+  {
+   "id": "scarce-b",
+   "name": "块内指令落域且为起点",
+   "status": "PASS",
+   "detail": "1 条指令全部通过"
+  },
+  {
+   "id": "full-c",
+   "name": "符号 size",
+   "status": "PASS",
+   "detail": "报告 end-addr=0x1e，objdump --dwarf=info size=0x1e"
+  },
+  {
+   "id": "full-d",
+   "name": "DWARF 形参数",
+   "status": "PASS",
+   "detail": "报告=3 objdump=3（DIE@c2）"
+  },
+  {
+   "id": "scarce-f",
+   "name": "缺失语义",
+   "status": "PASS",
+   "detail": "parameters=missing_source，人读含“缺：”=True"
+  }
+ ],
+ "reports": {
+  "full": {
+   "status": "ok",
+   "function": {
+    "addr": 5344,
+    "symbol": null
+   },
+   "sections": {
+    "identity": "present",
+    "boundary": "present",
+    "blocks_and_edges": "present",
+    "expressions": "present",
+    "calls": "absent_measured",
+    "strings_and_data": "absent_measured",
+    "parameters": "present"
+   },
+   "layer_errors": []
+  },
+  "go": {
+   "status": "ok",
+   "function": {
+    "addr": 4199200,
+    "symbol": "internal/abi.(*IntArgRegBitmap).Set [go1.20+]"
+   },
+   "sections": {
+    "identity": "present",
+    "boundary": "present",
+    "blocks_and_edges": "present",
+    "expressions": "abstained",
+    "calls": "present",
+    "strings_and_data": "absent_measured",
+    "parameters": "missing_source"
+   },
+   "layer_errors": []
+  },
+  "scarce": {
+   "status": "ok",
+   "function": {
+    "addr": 4096,
+    "symbol": "AddressOfEntryPoint"
+   },
+   "sections": {
+    "identity": "present",
+    "boundary": "missing_source",
+    "blocks_and_edges": "present",
+    "expressions": "present",
+    "calls": "absent_measured",
+    "strings_and_data": "absent_measured",
+    "parameters": "missing_source"
+   },
+   "layer_errors": []
+  }
+ }
+}

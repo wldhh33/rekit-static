@@ -1,0 +1,18 @@
+verify_c4_alignment.py exit=0 18.4s OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑
+verify_callfacts.py exit=0 2.6s 结果: PASS
+verify_callgraph.py exit=0 1.5s 结果: PASS
+verify_coverage.py exit=0 2.5s VERDICT: PASS
+verify_disasm.py exit=0 0.7s VERDICT: PASS
+verify_expr.py exit=0 44.4s PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）
+verify_fingerprint.py exit=0 0.1s E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）
+verify_funcreport.py exit=0 33.4s == 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS
+verify_gopclntab.py exit=0 10.4s VERDICT: PASS
+verify_iat.py exit=0 0.9s VERDICT: PASS
+verify_map.py exit=0 0.1s VERDICT: PASS
+verify_paramdecl.py exit=0 20.0s 结果: PASS
+verify_recdesc.py exit=0 5.9s VERDICT: PASS
+verify_sitejoin.py exit=0 9.2s 结果: PASS
+verify_struct.py exit=0 19.1s 结果: PASS
+verify_strxref.py exit=0 34.7s OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突
+verify_switchcand.py exit=0 41.3s PASS（负向基线 通过；收益数字见上，不静默取舍）
+verify_vexaudit.py exit=0 1.8s VERDICT: PASS

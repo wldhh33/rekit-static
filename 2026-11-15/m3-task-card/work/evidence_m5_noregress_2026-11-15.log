@@ -1,0 +1,40 @@
+rekit M5-U1 零回归证据（2026-11-15）
+说明：命令均在 work/ 下执行，binutils-2.47 已挂 PATH。selftest 是故意注入错误，检测器必须失败。
+
+## pytest（全量）
+280 passed in 8.23s
+exit=0
+
+## verify_disasm.py --all（5 样本，含 avx_dense）
+VERDICT: PASS
+exit=0；长度不一致 0（cli-64 1694 / minidll 6421 / dyn_static 22523 / bin_ls 26353 / avx_dense 53）
+## verify_disasm.py --selftest
+VERDICT: FAIL
+exit=0（检测器自证能失败）
+
+## verify_recdesc.py --all
+VERDICT: PASS
+exit=0；avx_dense abstain 0 / 种子 5/5 / 覆盖 94.8%；dyn_static 确定边 30202 / 未解出 18 / 未解析 123
+## verify_recdesc.py --selftest（注入 0x1000 长度 +1）
+[selftest] 注入 0x1000 长度 +1 → 检出错误 1 条 / 已检出（能失败）→ PASS
+exit=0
+
+## verify_map.py --all --matrix
+VERDICT: PASS
+exit=0；6 个样本合计命中 2402 / 失配 0
+## verify_map.py --selftest（翻转 1 格真值）
+VERDICT: FAIL
+非 0 退出 = 检出成功
+
+## verify_iat.py --all --selftest
+结论：失配 0 项
+VERDICT: PASS
+exit=0（故意改坏 1 字节被检出；原样本不动=True）
+
+## verify_expr.py（本单元新增：抽样 + Ghidra 弱参照对读）
+抽样总量: 57 个函数（规则见文件头；等距取点，无随机数）
+  -- 汇总: 入口存在 15/18（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 14/15 ｜ 重叠集内调用集相等 8/15
+  -- 汇总: 入口存在 8/18（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 8/8 ｜ 重叠集内调用集相等 5/8
+  -- 汇总: 入口存在 18/21（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 15/18 ｜ 重叠集内调用集相等 12/18
+PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）
+exit=0

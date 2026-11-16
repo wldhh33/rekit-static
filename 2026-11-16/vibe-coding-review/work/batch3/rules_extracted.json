@@ -1,0 +1,1582 @@
+{
+ "R48": {
+  "text": "补强）：“确定边为 0”原来把真零（minidll 全是单条 ret 桩，确实无控制流）和标签性零（dyn_pie 有 13 条边但无声明边界）用同一句话收尾，易被误读。现按“有无跳转/分支指令”三分支输出，并新增断言 test_true_zero_edges_told_apart_from_label_zero（243→244）。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:68",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "零值可解释（关键计数为 0 必须在输出里说明结构性原因，不得让人误读为“不存在”）。",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:73"
+   },
+   {
+    "text": "落地更彻底，两个 0 不再共用一句话",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:23"
+   }
+  ]
+ },
+ "R49": {
+  "text": "抽样规则先写定（分层等距 + 5 类强制覆盖，无随机数",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:29",
+  "kind": "trail",
+  "score": 32,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R50": {
+  "text": "弱参照只判可机械项并逐条归因",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:29",
+  "kind": "trail",
+  "score": 19,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R51": {
+  "text": "表达式 abstain 必须带 missing，禁止占位表达式",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:29",
+  "kind": "trail",
+  "score": 28,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R52": {
+  "text": "段覆盖前缀不得展开为绝对地址",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:29",
+  "kind": "trail",
+  "score": 11,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R45": {
+  "text": "拆成两句话：禁止「把猜测当已知」——候选目标不得写进 definite/speculative、不得当作确定边或表达式 case",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:32",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "M5",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "间接目标不猜（jmp/call 间接一律 target=None + unresolved",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:73"
+   },
+   {
+    "text": "的同一分界：禁止把猜测当已知，不禁止提出有证据的候选",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:43"
+   }
+  ]
+ },
+ "R53": {
+  "text": "候选层默认关闭且不写回（独立模块 + 显式开关 + 单列输出",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:34",
+  "kind": "trail",
+  "score": 35,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R54": {
+  "text": "候选必须带证据等级与依据，表长须由 cmp idx,imm + ja/jae 证明，无 guard 不得给 high",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:34",
+  "kind": "trail",
+  "score": 55,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R55": {
+  "text": "候选被拒必须带理由（跨函数/落在已解出指令内部/不可解），首个非法项即截止、不静默续扫",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:34",
+  "kind": "trail",
+  "score": 40,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R56": {
+  "text": "结构化只允许 --structured 显式开启，默认输出逐字节不变",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:40",
+  "kind": "trail",
+  "score": 39,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R57": {
+  "text": "每个节点必须带 block/edges/join，且每个可达块在文本中出现且仅出现一次（缺失即判不可回溯，不得输出",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:40",
+  "kind": "trail",
+  "score": 54,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R58": {
+  "text": "switch 只认 high，其余保留 goto 并写明证据等级",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:40",
+  "kind": "trail",
+  "score": 29,
+  "milestone": "M5",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R59": {
+  "text": "调用点必须来自全量已解出 call 指令，cfg.calls（块末）不得当全量",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:46",
+  "kind": "trail",
+  "score": 44,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R60": {
+  "text": "三态逐点归因、占比分母=直接调用点，PLT/导入名字无回指不得给",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:46",
+  "kind": "trail",
+  "score": 29,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R61": {
+  "text": "间接调用候选层默认关闭/单列/带证据等级，high 只描述操作数事实",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:46",
+  "kind": "trail",
+  "score": 31,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R62": {
+  "text": "跨过程观察只报同块窗口事实，禁止 ABI/参数个数/参数名推断，窗口截断与 rsp 改写必须显式标注",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:46",
+  "kind": "trail",
+  "score": 47,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R63": {
+  "text": "事实层每条证据必须且只能标 declared/observed/derived 之一，操作数事实不得出现 declared，目标证据与操作数证据分开计数",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:51",
+  "kind": "trail",
+  "score": 65,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R64": {
+  "text": "不产出参数列表、不猜个数与名称，证据不足一律 abstain 且写 missing",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:51",
+  "kind": "trail",
+  "score": 38,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R65": {
+  "text": "跨块不追（例外须先给可验证判据并先测后开），同块窗口在未解码指令处必须截断，栈槽基址改写必须转 abstain",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:51",
+  "kind": "trail",
+  "score": 52,
+  "milestone": "M6",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R66": {
+  "text": "某等级证据计数为 0 时必须写明\"结构性恒等 / 缺失\"及由此 abstain 的结论，不得只留数字",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:56",
+  "kind": "trail",
+  "score": 55,
+  "milestone": "M6",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "某等级证据计数为 0 时必须写明\"结构性恒等 / 缺失\"及由此 abstain 的结论，不得只留数字",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:130"
+   }
+  ]
+ },
+ "R67": {
+  "text": "回归依赖外部工具时，PATH / 编码 / locale 前置必须写入文档环境记录，不得只留在日志。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:130",
+  "kind": "trail",
+  "score": 47,
+  "milestone": "M6",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "回归依赖外部工具时，PATH / 编码 / locale 前置必须写入文档环境记录，不得只留在日志",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:56"
+   },
+   {
+    "text": "U1：R59–R62；U2：R63–R65；收口：R66–R67",
+    "kind": "paren",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:130"
+   }
+  ]
+ },
+ "R68": {
+  "text": "三层对齐以调用指令虚拟地址为主键，键重复不得合并或取其一（报 data_anomaly 回 recdesc 复核",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:60",
+  "kind": "trail",
+  "score": 61,
+  "milestone": "M7",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "三层对齐以调用指令地址为主键，重复不合并",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:142"
+   }
+  ]
+ },
+ "R69": {
+  "text": "冲突必须逐条归因（layer_bug / caliber_difference / data_anomaly），归因须由可复现的字节或字段比对支撑，禁止只写\"疑似\"",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:60",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "M7",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "冲突必须逐条归因且归因由可复现的字节/字段比对支撑",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:142"
+   }
+  ]
+ },
+ "R70": {
+  "text": "拼接层只读，任何未列入快照证明的副作用视为违约，下层缺陷只单列不在本层修补",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:60",
+  "kind": "trail",
+  "score": 34,
+  "milestone": "M7",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "拼接层只读、下层缺陷只单列不在本层修补。",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:142"
+   }
+  ]
+ },
+ "R72": {
+  "text": "已公布数字发现偏低必须就地标注「已知偏低 + 差额 + 修正单元」",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:63",
+  "kind": "bold",
+  "score": 36,
+  "milestone": "M7",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "已公布数字发现偏低必须就地标注「已知偏低 + 差额 + 修正单元」",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:151"
+   },
+   {
+    "text": "把这次两个错误的根因固化成规则",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:63"
+   }
+  ]
+ },
+ "R74": {
+  "text": "每条硬不变量至少一条独立来源路径且须写入文档，R75 判据修正后必须全量重跑校验器并做前后 diff（校验器 FAIL 优先怀疑校验器同错",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:68",
+  "kind": "bold",
+  "score": 51,
+  "milestone": "M7",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "禁止校验器 import 被测私有判据：原实现与 _effects 同错时会形成「不变量恒成立」的自洽假象",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:69"
+   },
+   {
+    "text": "独立化——写集合改由外部 objdump -d 文本重算，不再 import callgraph._effects / _Ctx",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHARTER.md:28"
+   }
+  ]
+ },
+ "R76": {
+  "text": "由「call 不算写 rsp」的口径升级为可判定定义：w 对 (r,t) 是暂态写 ⇔ 存在同一函数内已解出的 b（a<b≤t）把 r 复原，且 (a,b)、(b,t) 内无其它写",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:71",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "M8",
+  "n_candidates": 9,
+  "alternates": [
+   {
+    "text": "由「call 不算写 rsp」升级为可判定定义（暂态写 ⇔ 存在同一函数内已解出的复原指令且区间内无其它写，T1/T2/T3",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHARTER.md:28"
+   },
+   {
+    "text": "判据化（不是特例豁免）：w 对 (r,t) 是暂态写 ⇔ 存在 b（a<b≤t）是同一函数内已解出的指令且把 r 复原为 a 之前的值（T1），且 (a,b)、(b,t) 内无对 r 的其它写（T2/",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:186"
+   }
+  ]
+ },
+ "R77": {
+  "text": "验收脚本引用被测私有符号按「取输入 / 取被测输出 / 仅定位自证 / 当期望值」四类定性",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:180",
+  "kind": "bold",
+  "score": 45,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "私有符号按四类定性",
+    "kind": "paren",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:70"
+   }
+  ]
+ },
+ "R71": {
+  "text": "指令类别必须按「跳 legacy 前缀 + REX 后的 opcode」判定，ff 还须核 ModRM.reg",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:151",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "跳前缀 opcode + ModRM.reg∈{2,3} + expr 复核",
+    "kind": "paren",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:154"
+   },
+   {
+    "text": "跳前缀取 opcode（新增 _is_padding",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHARTER.md:28"
+   }
+  ]
+ },
+ "R78": {
+  "text": "判据的证据集合为空时只能当负向约束，不得输出肯定结论，文档须显式写「可判定证据集合为空」",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:206",
+  "kind": "bold",
+  "score": 52,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "判据的证据集合为空时只能当负向约束（R76 暂态写即实例），不得输出肯定结论且文档须显式写明",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:74"
+   }
+  ]
+ },
+ "R79": {
+  "text": "声明来源必须能定位到文件偏移与解析路径，读不到即 abstain，禁止用 ABI 惯例补齐",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:206",
+  "kind": "bold",
+  "score": 45,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "声明必须定位到文件偏移与解析路径，读不到即 abstain，禁止 ABI 惯例补齐",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:74"
+   }
+  ]
+ },
+ "R80": {
+  "text": "分母先行：先报来源 present/readable/样本覆盖，0 覆盖只能报「本轮无法验证」，并区分结构性缺失/本轮缺失/真零",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:206",
+  "kind": "bold",
+  "score": 60,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "分母先行，0 覆盖只能报「本轮无法验证」并区分结构性缺失/本轮缺失/真零",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:74"
+   }
+  ]
+ },
+ "R81": {
+  "text": "站点级状态不得把部分绑定或弃权说成绑定，数字必须按形参级 bound/partial/abstained 分列。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:206",
+  "kind": "bold",
+  "score": 59,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "站点级状态不得把部分绑定或弃权说成绑定，数字按形参级分列",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:74"
+   }
+  ]
+ },
+ "R82": {
+  "text": "字符串识别必须给「编码/最短长度/终止条件/重叠处理」四要素，默认只认 NUL 终止可打印 ASCII，UTF-8 与长度分界不报（宁可少报",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:218",
+  "kind": "bold",
+  "score": 68,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "字符串识别必须写死「编码 / 最短长度 / 终止条件 / 重叠处理」",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:77"
+   }
+  ]
+ },
+ "R83": {
+  "text": "引用点只在已解出指令集合内认定，必须同时报代码覆盖率与「外部工具量化的未解码漏报数」，refs 在输出里声明为下界",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:78",
+  "kind": "bold",
+  "score": 60,
+  "milestone": "M8",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "引用点只在已解出指令集合内认定，必须同时报代码覆盖率与外部工具量化的未解码漏报数，refs 声明为下界",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:218"
+   },
+   {
+    "text": "单列为下界外缺口，并把 refs 声明为下界，不写成「没有引用」。",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:211"
+   }
+  ]
+ },
+ "R84": {
+  "text": "引用点期望值必须由外部工具独立算出——verify_strxref.py 不 import rekit.expr/elf/pe，也不用 strxref 中间结果",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:79",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M8",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "引用点期望值须由外部工具独立算出（objdump 字节 + 地址算术），--selftest 必须注入五类错例并全部检出",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:218"
+   },
+   {
+    "text": "期望值独立化 + 可失败自证",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:79"
+   }
+  ]
+ },
+ "R75": {
+  "text": "已定「硬不变量须有独立来源」，本轮把「期望值来源」也纳入：读 objdump 注释或复用被测解析等于自证",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:79",
+  "kind": "trail",
+  "score": 49,
+  "milestone": "M8",
+  "n_candidates": 7,
+  "alternates": [
+   {
+    "text": "判据修正后必须全量重跑校验器并做前后 diff，校验器 FAIL 优先怀疑校验器同错。M7 规则编号收束为 R68–R75。",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:158"
+   },
+   {
+    "text": "先怀疑校验器，确认校验器三处修复（空比对/偏移/缺表）后该差异仍在，才判为实现缺陷",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:107"
+   }
+  ]
+ },
+ "R85": {
+  "text": "「无白名单数据节 / 有白名单节但零字符串 / 无代码节」三种零值必须分别给结构性原因（strings_zero_reason / no_code_reason），不得共用一句 0",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:80",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M8",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "「无白名单数据节/有节无字符串/无代码节」三种零值必须分别给结构性原因",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:218"
+   },
+   {
+    "text": "零值三分 + R86 空交集",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:80"
+   }
+  ]
+ },
+ "R86": {
+  "text": "三层对账交集为 0 时必须写明「无非空对账对象」，并给出非零替代核对项（本轮函数域核对 3691 条、冲突 0），不得把空交集当对账通过",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:80",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M8",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "三层对账交集为 0 必须写明「无非空对账对象」并给出非零替代核对项（本轮函数域 3691 条），不得把空交集当对账通过。",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:218"
+   }
+  ]
+ },
+ "R87": {
+  "text": "收口对账必须「判据 → 实测 → 证据文件」三列成对，无可复跑入口就写「无」，不得用「基本完成」代替结论",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:228",
+  "kind": "bold",
+  "score": 60,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "收口对账必须「判据 → 实测 → 证据文件」三列成对，每条判据给可复跑入口",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:81"
+   },
+   {
+    "text": "对账三列成对",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:81"
+   }
+  ]
+ },
+ "R88": {
+  "text": "更正台账独立成节，四列「旧结论/新结论/证据/以哪版为准」，被推翻的旧段落必须显式撤销",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:228",
+  "kind": "bold",
+  "score": 43,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": [
+   {
+    "text": "更正台账独立成节，四列「旧结论 / 新结论 / 证据 / 以哪版为准」",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:82"
+   }
+  ]
+ },
+ "R89": {
+  "text": "「能/不能回答」不得合并成\"暂不支持\"，必须二分归因为「信息不在文件里」与「还没做」并给判定依据",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:228",
+  "kind": "bold",
+  "score": 48,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "「能回答 / 不能回答」不得合并成\"暂不支持\"",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:83"
+   },
+   {
+    "text": "能力二分归因",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:83"
+   }
+  ]
+ },
+ "R90": {
+  "text": "收口必须有机器快照（逐样本 + 合计 + 被测代码 sha256），文档数字与快照不一致即收口失败。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:228",
+  "kind": "bold",
+  "score": 53,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "收口必须有机器快照（逐样本 + 合计 + 被测代码 sha256",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:84"
+   },
+   {
+    "text": "入 CHANGELOG",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHARTER.md:28"
+   }
+  ]
+ },
+ "R91": {
+  "text": "覆盖率分母一律由外部 objdump 对同一节 [VA, VA+size) 独立计数，分子必须同起始地址、同长度",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:85",
+  "kind": "bold",
+  "score": 59,
+  "milestone": "M9",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "覆盖率分母必须由外部 objdump 独立计数、分子同址同长，报告必须同时给分子/分母/分母口径",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:238"
+   },
+   {
+    "text": "覆盖率分母先行",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:85"
+   }
+  ]
+ },
+ "R92": {
+  "text": "汇总只允许 scope=full（清单全部样本都跑）与 scope=sampled（分层子集，必须附样本名单",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:86",
+  "kind": "bold",
+  "score": 57,
+  "milestone": "M9",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "汇总必须声明 full/sampled，sampled 必须附名单，代码强制",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:238"
+   },
+   {
+    "text": "抽样与全样本分栏",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:86"
+   }
+  ]
+ },
+ "R93": {
+  "text": "跳转表候选升格只能以外部 objdump 的指令起点集合为边界判据，recdesc 自身解码结果不得参与",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:87",
+  "kind": "bold",
+  "score": 55,
+  "milestone": "M9",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "升格判据只能用外部 objdump 指令起点，被测实现自身解码不得作判据，空边界负控必须 0 升格",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:238"
+   },
+   {
+    "text": "升格判据独立",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:87"
+   }
+  ]
+ },
+ "R94": {
+  "text": "伪 VEX/EVEX 弃权必须逐条归入 decoder_defect（objdump 同址解出 v* 指令）/ illegal_encoding（同址 (bad)）/ data_not_instruction（不是指令起点）/ objdump_nonvex_at_addr 之一并给计数",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:88",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M9",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "VEX/EVEX 弃权必须逐条归入四类计数，decoder_defect>0 必须修复或登记",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:238"
+   },
+   {
+    "text": "VEX 弃权四分类",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:88"
+   }
+  ]
+ },
+ "R95": {
+  "text": "样本选取必须在测量前以结构判据声明（尺寸带 / stripped 判据 / 程序性质 / 插件形态 / 来源），禁止按覆盖率结果挑选或剔除",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:89",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M9",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "选样标准测量前以结构判据声明，禁止按覆盖率挑样本，合成/真实分栏且结论标注适用范围，sha256/许可/可再分发三栏入册",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:238"
+   },
+   {
+    "text": "选样标准先声明 + 合成/真实分栏",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:89"
+   }
+  ]
+ },
+ "R06": {
+  "text": "vaddr ≠ file offset：ELF 动态段的地址值是虚拟地址，必须经 PT_LOAD 映射换算",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:17",
+  "kind": "trail",
+  "score": 53,
+  "milestone": "",
+  "n_candidates": 5,
+  "alternates": []
+ },
+ "R96": {
+  "text": "因规模/时限未跑完的分析层，必须在结果里显式记 skipped 并给中止证据（CPU 秒/墙钟），不得写 0、不得省略、不得用部分结果冒充全量",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:90",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M9",
+  "n_candidates": 7,
+  "alternates": [
+   {
+    "text": "超规模导致未跑完的层必须显式记 skipped 并给中止证据，不得写 0 或省略。",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:238"
+   },
+   {
+    "text": "只要求“显式登记 skipped”，但墙钟超时不可复现",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:92"
+   }
+  ]
+ },
+ "R97": {
+  "text": "stripped Go ELF 的覆盖率必须标注种子源（仅 e_entry）与可达函数数/总数，写明“可达域”，函数清单必须来自外部工具",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:247",
+  "kind": "bold",
+  "score": 68,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "stripped Go ELF 的覆盖率必须同时标注种子源（只有 e_entry）与可达函数数/总函数数，写明“可达域”",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:91"
+   },
+   {
+    "text": "stripped Go ELF 覆盖率必须标可达域",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:91"
+   }
+  ]
+ },
+ "R98": {
+  "text": "超时类层必须给确定性预算（指令步数/函数批次，不按墙钟），skipped 作第三类单列，任何比率分母只含 analyzed 且并列 analysis_coverage。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:247",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "超时类分析层必须提供确定性预算（按指令步数/函数批次，不按墙钟），skipped 作为第三类单列（既非已分析也非“无候选”",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:92"
+   },
+   {
+    "text": "确定性预算与 skipped 三分法",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:92"
+   }
+  ]
+ },
+ "R99": {
+  "text": "declared 级种子必须逐源单列（inclusive declared_by_source + exclusive declared_only_by_source 两口径），禁止合并成一个不区分的「已声明」总数",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:93",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M11",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "declared 来源逐源单列、R100 覆盖率变化必须拆分可达域 vs 解码、R101 新增 declared 源必须双源独立对拍、未验证版本不得冒充已验证。测算脚本 evidence_m11_ex",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:255"
+   },
+   {
+    "text": "declared 来源逐源单列",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:93"
+   }
+  ]
+ },
+ "R100": {
+  "text": "报告覆盖率变化必须拆成「种子来源新增（可达域扩大）」与「解码本身」两部分",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:94",
+  "kind": "bold",
+  "score": 39,
+  "milestone": "M11",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "覆盖率变化拆分",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:94"
+   }
+  ]
+ },
+ "R101": {
+  "text": "新增 declared 来源必须双源独立对拍（官方解析器 + 外部 objdump 边界），不一致按 only_ours/only_official/end_diff/name_diff 单列归因",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:95",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M11",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "新增 declared 源双源对拍",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:95"
+   },
+   {
+    "text": "入 CHANGELOG",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHARTER.md:32"
+   }
+  ]
+ },
+ "R102": {
+  "text": "推算值不得进总账，总账只收实测（可复现命令 + 机器快照 + 逐样本 sha256），推算只能出现在过程文档且必须标注前提，实测出来立即替换",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:264",
+  "kind": "bold",
+  "score": 68,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "任何推算值不得进入总账",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:96"
+   },
+   {
+    "text": "任何推算值不得进入总账",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:168"
+   }
+  ]
+ },
+ "R103": {
+  "text": "多源 end 之间的缝隙必须量化到「字节数 / 指令数 / 归属 / 换口径后的分子与比率 / 边与块的影响」，缝隙若全是填充必须写明当前口径下多少填充被计入分子。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:264",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "多源 end 之间的缝隙必须量化到「字节数 / 指令数 / 归属到哪个函数 / 换口径后的分子与比率 / 对基本块与 CFG 边的影响」，并给具体地址样本",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:97"
+   },
+   {
+    "text": "多源 end 之间的缝隙必须量化到「字节数 / 指令数 / 归属 / 换口径后的分子与比率 / 边与块的影响」",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:170"
+   }
+  ]
+ },
+ "R104": {
+  "text": "下界结论必须绑定分母来源，分母不随种子变的标 seed_invariant 并给结构证明，随种子变的必须用同一判据复算且逐项复现旧值（match_old=true",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:276",
+  "kind": "bold",
+  "score": 68,
+  "milestone": "",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "下界/比例结论必须绑定分母来源。分母不受种子影响的，标 seed_invariant 并给结构证明（判据不读取子",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:98"
+   },
+   {
+    "text": "下界/比例结论必须绑定分母来源。分母不受种子影响的，标 seed_invariant 并给结构证明（判据不读种子",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:172"
+   }
+  ]
+ },
+ "R105": {
+  "text": "分类名不得替代判据。VEX 的 data_not_instruction 只能写成“非 objdump 指令起点”，不得简写为“数据 / 不在代码里”",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:99",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M13",
+  "n_candidates": 5,
+  "alternates": [
+   {
+    "text": "分类名不得替代判据，data_not_instruction 只能写“非 objdump 指令起点”且必须同时报域内比例",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:276"
+   },
+   {
+    "text": "分类名不得替代判据。data_not_instruction 只能写成“非 objdump 指令起点”，不得简写为“数据/不在代码里”",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:174"
+   }
+  ]
+ },
+ "R106": {
+  "text": "skipped 只用于分析覆盖率。整层未运行标 no_run，预算跳过标 skipped_budget，二者不得混用，且都不得进入下界表",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:100",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M13",
+  "n_candidates": 6,
+  "alternates": [
+   {
+    "text": "skipped 只用于分析覆盖率，未运行标 no_run、预算跳过标 skipped_budget，二者不混用且不进下界表。",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:276"
+   },
+   {
+    "text": "skipped 只用于分析覆盖率",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:176"
+   }
+  ]
+ },
+ "R108": {
+  "text": "面向人的报告层只能合成既有层结论，每个可证伪条目必须带 source={layer,field,text}",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:102",
+  "kind": "bold",
+  "score": 56,
+  "milestone": "M15",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "报告层只呈现不判断：任何结论必须带来源层与字段",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:295"
+   },
+   {
+    "text": "报告层只呈现不判断",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:102"
+   }
+  ]
+ },
+ "R109": {
+  "text": "对象分母必须是 声明候选 = 接受 + 拒收 + 去重",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:103",
+  "kind": "bold",
+  "score": 30,
+  "milestone": "M16",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "判别式对象分母必须写成 声明候选 = 接受 + 拒收 + 去重",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:248"
+   },
+   {
+    "text": "对象分母与格式层拒收分账",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:306"
+   }
+  ]
+ },
+ "R110": {
+  "text": "三档归因不合并、after_object 只表示邻接",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:306",
+  "kind": "bold",
+  "score": 34,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "引用点归因三档（首地址/对象内部/对象之后窗口）不得合并",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:103"
+   },
+   {
+    "text": "引用点归因三档（首地址/内部/之后窗口）不得合并计数",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:250"
+   }
+  ]
+ },
+ "R111": {
+  "text": "“没有声明来源”与“声明存在但不可解析”分开报，且过程缓存不得以对象地址为键。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:306",
+  "kind": "bold",
+  "score": 42,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "“声明来源没有”与“声明来源存在但不可解析”不得合并成同一状态",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:104"
+   },
+   {
+    "text": "“声明来源没有”与“声明来源存在但不可解析”不得合并成同一状态",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:253"
+   }
+  ]
+ },
+ "R112": {
+  "text": ".NET 方法体不是 x86，既有 x86 各层必须显式 not_applicable 并写原因，不得返回空列表/0",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:105",
+  "kind": "bold",
+  "score": 61,
+  "milestone": "M17",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": ".NET 方法体不是 x86，x86 各层必须显式 not_applicable",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:318"
+   },
+   {
+    "text": ".NET 方法体不是 x86 指令。既有 x86 各层（disasm/recdesc/expr/",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:321"
+   }
+  ]
+ },
+ "R113": {
+  "text": ".NET 分母逐级二分恒等式、RVA=0 原因逐类计数（unclassified 单列",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:318",
+  "kind": "bold",
+  "score": 43,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": ".NET 分母必须逐级二分并保持恒等式：MethodDef = 有 RVA + 无 RVA",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:325"
+   },
+   {
+    "text": "分母逐级二分恒等式（MethodDef = 有RVA + 无RVA",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:105"
+   }
+  ]
+ },
+ "R114": {
+  "text": "IL 边界必须由独立 opcode 表/解码器逐条证伪（真实样本全量）并用 code_size 尾部字节对账",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:105",
+  "kind": "bold",
+  "score": 57,
+  "milestone": "M17",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "IL 边界必须由独立 opcode 表/解码器全量证伪并用尾字节对账。",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:318"
+   },
+   {
+    "text": "IL 指令边界必须由独立 opcode 表/解码器逐条证伪（本轮 dncil",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:329"
+   }
+  ]
+ },
+ "R115": {
+  "text": "IL 分支目标/指令偏移基准写死——dncil 的 offset 与分支操作数都含方法体头，校验器统一减 header_size",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:106",
+  "kind": "bold",
+  "score": 63,
+  "milestone": "M18",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "偏移基准写死且校验器不共用换算",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:330"
+   }
+  ]
+ },
+ "R116": {
+  "text": "基本块终结符分两层——条件跳转与 switch 不终结（保留 fallthrough），br/br.s、leave/leave.s、ret/throw/rethrow/endfinally/endfilter/jmp 终结，call/callvirt/newobj 不终结，EH 边界切块，越界分支目标不切块但必须单列。R117：EH 只单列结构信息、不建 CFG 边（运行时异常传播不是静态转移",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:106",
+  "kind": "bold",
+  "score": 51,
+  "milestone": "M18",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "IL 终结符分两层",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:330"
+   }
+  ]
+ },
+ "R118": {
+  "text": "token 未解析原因必须可追问到表行与分类（method_missing/row_out_of_range/bad_parent/unsupported_parent/token_kind_mismatch），bad_parent 是规范三类之外的必要补充，不得为凑三类改归因为“签名不匹配”。R119：任何对拍分母为 0 一律 FAIL（空对空不等于通过",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:106",
+  "kind": "bold",
+  "score": 51,
+  "milestone": "M18",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": "未解析原因可追问到表行，bad_parent 为必要补充",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:330"
+   }
+  ]
+ },
+ "R119": {
+  "text": "空比对一律 FAIL + 可失败自证。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:330",
+  "kind": "bold",
+  "score": 22,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": [
+   {
+    "text": ".NET IL 控制流与调用关系",
+    "kind": "trail",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHANGELOG.md:106"
+   }
+  ]
+ },
+ "R01": {
+  "text": "字段计数先行：连续同类型字段多的 struct 串，先列字段表数个数再写串",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:8",
+  "kind": "trail",
+  "score": 37,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R02": {
+  "text": "构造器先画 RVA→RAW 地址表：检查区间不重叠再写字节",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:10",
+  "kind": "trail",
+  "score": 29,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R03": {
+  "text": "三方交叉验证是金标准：构造器 / 解析器 / objdump 互相独立，专门抓\"自以为对\"的 bug",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:11",
+  "kind": "trail",
+  "score": 50,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": []
+ },
+ "R04": {
+  "text": "验收失败先怀疑验收器：验收脚本自身的正则错位是历史返工 Top1",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:12",
+  "kind": "trail",
+  "score": 32,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R05": {
+  "text": "PE32 与 PE32+ 差异清单：ImageBase 4/8B、栈堆 4/8B×4、BaseOfData 仅 PE32、DataDirs 起点 96/112",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:13",
+  "kind": "trail",
+  "score": 60,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R07": {
+  "text": "glibc 2.34+ 无独立 libm 依赖：libm 已并入 libc，别拿 libm 当\"多依赖\"测试样本",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:19",
+  "kind": "trail",
+  "score": 56,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R15": {
+  "text": "权威工具显示怪癖清单：readelf/objdump 各有显示怪癖（伪符号 *ABS* 等），对拍前先建清单",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:34",
+  "kind": "trail",
+  "score": 54,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R12": {
+  "text": "验收脚本正则错位是历史返工 Top1：多次复现，催生 R13 升级版",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:27",
+  "kind": "trail",
+  "score": 22,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R22": {
+  "text": "权威工具输出须源码级对齐：不读权威库源码就按直觉解释其输出格式，会造出",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:54",
+  "kind": "trail",
+  "score": 35,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R23": {
+  "text": "双向锚定防御巧合字节串：找签名时若存在\"明文锚 A + 由 A 派生的加密锚 B\"",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:56",
+  "kind": "trail",
+  "score": 41,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R24": {
+  "text": "格式话术统一律：同一结构在\"存储域/明文域\"两种描述下形似实异（DanS^ck,ck,ck,ck",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:58",
+  "kind": "trail",
+  "score": 48,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R27": {
+  "text": "列宽差异用 \\s+：4 位 hint 与 8 位 RVA 的填充空格数不同，对齐列一律 \\s+",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:67",
+  "kind": "trail",
+  "score": 47,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R28": {
+  "text": "分诊工具崩溃路径可控律：对外 CLI 的失败路径语义分层且零 traceback",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:71",
+  "kind": "trail",
+  "score": 40,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R29": {
+  "text": "模板函数参数化保输出一致律：统一入口复用模块渲染时参数化 main(argv=None",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:73",
+  "kind": "trail",
+  "score": 43,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R25": {
+  "text": "锚点唯一性检查：split 外部工具输出前先确认锚点串只出现一次",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:63",
+  "kind": "trail",
+  "score": 32,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": []
+ },
+ "R30": {
+  "text": "协议服务器双错误语义：工具级错误 → isError:true 连接存活",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:78",
+  "kind": "trail",
+  "score": 36,
+  "milestone": "",
+  "n_candidates": 3,
+  "alternates": []
+ },
+ "R31": {
+  "text": "权威期望提取防边界吞噬：正则提取期望值用排除字符类（[^\\]\\s]+ 而非 \\S+",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:80",
+  "kind": "trail",
+  "score": 41,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R32": {
+  "text": "新接口层命名对齐权威工具：新接口层没有历史包袱，命名一次性对齐权威源",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:82",
+  "kind": "trail",
+  "score": 34,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R33": {
+  "text": "GT 标注须独立证据复核",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:58",
+  "kind": "paren",
+  "score": -2,
+  "milestone": "M2",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R34": {
+  "text": "矩阵分键与分母：family/version 不混表、弃权格单列",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:58",
+  "kind": "paren",
+  "score": 18,
+  "milestone": "M2",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R35": {
+  "text": "unknown 三态裁决：对不可判定格给确定值即误报",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:58",
+  "kind": "paren",
+  "score": 12,
+  "milestone": "M2",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R43": {
+  "text": "种子权威性分列（权威/启发式/派生成功率不得合并，权威分不得被启发式补分",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:73",
+  "kind": "bold",
+  "score": 44,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R44": {
+  "text": "边置信分级（确定/疑似/跨函数/未解出/未解析互斥，猜的边不得进确定集",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:73",
+  "kind": "bold",
+  "score": 35,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R46": {
+  "text": "函数边界硬约束（.pdata/FDE/st_size 为界，越界不并函数，跨函数边单列",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:73",
+  "kind": "bold",
+  "score": 43,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R47": {
+  "text": "弃权代价量化（abstain 必须给条数与占比，不许写“未量化”",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:73",
+  "kind": "bold",
+  "score": 32,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R36": {
+  "text": "写回类操作最小纪律：只产新文件",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:74",
+  "kind": "trail",
+  "score": 9,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R37": {
+  "text": "幂等必须可证：同一输入两次写同一产物路径，比对两次 dst_sha256",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:75",
+  "kind": "trail",
+  "score": 30,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R38": {
+  "text": "修复正确性用原件字节证明：区间 sha256 / 逐 slot 字节 / 产物整文件 sha256 三层，\"能启动/看起来对\"不作判据",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:76",
+  "kind": "trail",
+  "score": 54,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R39": {
+  "text": "名称源缺失时一律 unresolved：PE OriginalFirstThunk=0 时 INT 与 IAT 同址，拿 IAT 充当 INT 会把伪地址写入名称源区（测一次即自毁），不许用\"猜测回填\"换成功率。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:77",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R40": {
+  "text": "加壳/未加壳分维度：成功率分母按 iat 与 iat_packed 拆开，加壳样本只报\"结构上不可修复\"的条数，不并入未加壳成功率。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:78",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R41": {
+  "text": "参照工具自身被证伪时：弃用该参照但保留样本格数（如 objdump 对 Go 长节名 RVA→节错位），并在真值里标 *_reliable=False",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:79",
+  "kind": "trail",
+  "score": 54,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R42": {
+  "text": "弃权必须可解释：结构性做不到的弃权要随结果带 repairable=false + 人话 caveats（CLI/MCP 都要），只给状态枚举等于让使用者自己猜",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:80",
+  "kind": "trail",
+  "score": 54,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R73": {
+  "text": "校验器不得与被测模块共用同一判据实现，且每条\"恒成立\"不变量至少要有一次注入/反向验证，否则「同错」会互相背书（本轮 verify_callgraph 即实例）。",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:151",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R107": {
+  "text": "结论措辞强度必须与证据强度匹配，不得用更强的说法替代——分类名不得暗示判据没证明的东西",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:286",
+  "kind": "bold",
+  "score": 51,
+  "milestone": "",
+  "n_candidates": 4,
+  "alternates": [
+   {
+    "text": "结论的措辞强度必须与证据强度匹配，不得用更强的说法替代",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\outputs\\NUMBERS_LEDGER.md:177"
+   },
+   {
+    "text": "入 CHANGELOG",
+    "kind": "bold",
+    "src": "2026-11-15\\m3-task-card\\work\\pack03\\CHARTER.md:35"
+   }
+  ]
+ },
+ "R117": {
+  "text": "EH 只单列、leave 建边并检查越区",
+  "src": "2026-11-15\\m3-task-card\\work\\pack03\\PROGRESS.md:330",
+  "kind": "bold",
+  "score": 20,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R18": {
+  "text": "工具写入权限分层：Bash 与 Write/Edit 工具的权限通道不同，root 属主文件写入会被拒",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:41",
+  "kind": "trail",
+  "score": 51,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R19": {
+  "text": "内联吞噬调用链：-O2 下小函数默认内联，call 从调用方消失",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:46",
+  "kind": "trail",
+  "score": 32,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R21": {
+  "text": "传参双轨：整型与浮点寄存器编号独立计数（rdi..r9 与 xmm0..xmm7 互不占位",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:50",
+  "kind": "trail",
+  "score": 45,
+  "milestone": "",
+  "n_candidates": 2,
+  "alternates": []
+ },
+ "R08": {
+  "text": "st_value 是 vaddr：链接视图虚拟地址，与 readelf -sW 显示值一致即自证",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:23",
+  "kind": "trail",
+  "score": 48,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R09": {
+  "text": "sh_link 是节索引：符号表的配套字符串表靠它找（.strtab/.dynstr",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:24",
+  "kind": "trail",
+  "score": 42,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R10": {
+  "text": "readelf 符号名 @VERSION 陷阱：readelf 显示 getenv@GLIBC_2.2.5，比对时要剥版本后缀",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:25",
+  "kind": "trail",
+  "score": 60,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R11": {
+  "text": "SHN_UNDEF 语义：st_shndx==0 = 导入符号，运行时由动态链接器解析，value 为 0 属正常",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:26",
+  "kind": "trail",
+  "score": 57,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R13": {
+  "text": "正则分组三连坑（R12 升级版）：多分组正则必须先写分组清单注释",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:31",
+  "kind": "trail",
+  "score": 20,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R14": {
+  "text": "验收脚本防空转：filter 驱动的检查必须带计数下限（0 匹配时必须报错而非静默通过",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:33",
+  "kind": "trail",
+  "score": 43,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R16": {
+  "text": "常量表必须经权威源校验后才可用于语义判定：DT_TAGS 显示名有 3 处错位史",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:38",
+  "kind": "trail",
+  "score": 40,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R17": {
+  "text": "语义型任务的样本布局先行：三态判定类任务先画\"状态×样本\"覆盖矩阵再动手，缺格先补样本",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:40",
+  "kind": "trail",
+  "score": 43,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R20": {
+  "text": "栈参数右→左：push 序 = 参数序的逆序",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:48",
+  "kind": "trail",
+  "score": 22,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ },
+ "R26": {
+  "text": "正则边界对齐列语义：(\\w+) 会把行尾 Type 列 \"Export RVA\" 吃成函数名",
+  "src": "pack\\02_规则库\\规则库_R01-R32.md:65",
+  "kind": "trail",
+  "score": 46,
+  "milestone": "",
+  "n_candidates": 1,
+  "alternates": []
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "reference": "objdump -d -M intel（外部边界+助记符）",
+ "entry": 4791232,
+ "ext_instructions": 923970,
+ "ext_reachable_instructions": 76168,
+ "ext_reachable_ratio": 0.08243557691267032,
+ "ext_reachable_functions": 849,
+ "ours_instructions": 76168,
+ "ours_only_instructions": 0,
+ "ext_only_instructions": 0,
+ "ext_only_samples": [],
+ "ours_only_samples": [],
+ "walk_stops": {
+  "outside": 0,
+  "not_boundary": 0
+ },
+ "examples": {
+  "runtime.main": {
+   "entry": 4535584,
+   "end": 4536992,
+   "ext": 278,
+   "ext_reachable": 0,
+   "ours": 0,
+   "first_missing": 4535584,
+   "direct_callers": [],
+   "n_direct_callers": 0
+  },
+  "runtime.typesEqual": {
+   "entry": 4712384,
+   "end": 4715392,
+   "ext": 721,
+   "ext_reachable": 171,
+   "ours": 171,
+   "first_missing": 4712725,
+   "direct_callers": [
+    {
+     "addr": 4711478,
+     "func": "?"
+    },
+    {
+     "addr": 4713124,
+     "func": "?"
+    },
+    {
+     "addr": 4713203,
+     "func": "?"
+    },
+    {
+     "addr": 4713521,
+     "func": "?"
+    },
+    {
+     "addr": 4713568,
+     "func": "?"
+    },
+    {
+     "addr": 4713600,
+     "func": "?"
+    }
+   ],
+   "n_direct_callers": 11
+  },
+  "runtime.asminit": {
+   "entry": 4779360,
+   "end": 4779392,
+   "ext": 32,
+   "ext_reachable": 1,
+   "ours": 1,
+   "first_missing": 4779361,
+   "direct_callers": [
+    {
+     "addr": 4549636,
+     "func": "?"
+    },
+    {
+     "addr": 4552577,
+     "func": "?"
+    }
+   ],
+   "n_direct_callers": 2
+  },
+  "main.main": {
+   "entry": 7311776,
+   "end": 7314752,
+   "ext": 571,
+   "ext_reachable": 0,
+   "ours": 0,
+   "first_missing": 7311776,
+   "direct_callers": [],
+   "n_direct_callers": 0
+  },
+  "crypto/internal/fips140/sha3.keccakF1600": {
+   "entry": 7334816,
+   "end": 7354400,
+   "ext": 5121,
+   "ext_reachable": 0,
+   "ours": 0,
+   "first_missing": 7334816,
+   "direct_callers": [
+    {
+     "addr": 7328483,
+     "func": "?"
+    },
+    {
+     "addr": 7329005,
+     "func": "?"
+    },
+    {
+     "addr": 7329376,
+     "func": "?"
+    }
+   ],
+   "n_direct_callers": 3
+  }
+ }
+}

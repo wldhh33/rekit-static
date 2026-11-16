@@ -1,0 +1,32 @@
+Entry: 0x6760  Sections: 30  Phdrs: 14
+Nr  Name                     Type           Address                   Off       Size
+[ 0]                          NULL           0x0000000000000000 0x00000000 0x00000000
+[ 1] .note.gnu.property       NOTE           0x0000000000000350 0x00000350 0x00000020
+[ 2] .note.gnu.build-id       NOTE           0x0000000000000370 0x00000370 0x00000024
+[ 3] .interp                  PROGBITS       0x0000000000000394 0x00000394 0x0000001c
+[ 4] .gnu.hash                GNU_HASH       0x00000000000003b0 0x000003b0 0x000000b0
+[ 5] .dynsym                  DYNSYM         0x0000000000000460 0x00000460 0x00000cf0
+[ 6] .dynstr                  STRTAB         0x0000000000001150 0x00001150 0x00000652
+[ 7] .gnu.version             VERSYM         0x00000000000017a2 0x000017a2 0x00000114
+[ 8] .gnu.version_r           VERNEED        0x00000000000018b8 0x000018b8 0x000000e0
+[ 9] .rela.dyn                RELA           0x0000000000001998 0x00001998 0x00001428
+[10] .rela.plt                RELA           0x0000000000002dc0 0x00002dc0 0x00000a50
+[11] .init                    PROGBITS       0x0000000000004000 0x00004000 0x00000017
+[12] .plt                     PROGBITS       0x0000000000004020 0x00004020 0x000006f0
+[13] .plt.got                 PROGBITS       0x0000000000004710 0x00004710 0x00000020
+[14] .text                    PROGBITS       0x0000000000004740 0x00004740 0x000165ae
+[15] .fini                    PROGBITS       0x000000000001acf0 0x0001acf0 0x00000009
+[16] .rodata                  PROGBITS       0x000000000001b000 0x0001b000 0x00005388
+[17] .eh_frame_hdr            PROGBITS       0x0000000000020388 0x00020388 0x00000a74
+[18] .eh_frame                PROGBITS       0x0000000000020e00 0x00020e00 0x00003718
+[19] .note.ABI-tag            NOTE           0x0000000000024518 0x00024518 0x00000020
+[20] .init_array              INIT_ARRAY     0x0000000000025fb0 0x00024fb0 0x00000008
+[21] .fini_array              FINI_ARRAY     0x0000000000025fb8 0x00024fb8 0x00000008
+[22] .data.rel.ro             PROGBITS       0x0000000000025fc0 0x00024fc0 0x00000a38
+[23] .dynamic                 DYNAMIC        0x00000000000269f8 0x000259f8 0x00000210
+[24] .got                     PROGBITS       0x0000000000026c08 0x00025c08 0x000003e8
+[25] .data                    PROGBITS       0x0000000000027000 0x00026000 0x00000280
+[26] .bss                     NOBITS         0x0000000000027280 0x00026280 0x00001318
+[27] .gnu_debugaltlink        PROGBITS       0x0000000000000000 0x00026280 0x00000049
+[28] .gnu_debuglink           PROGBITS       0x0000000000000000 0x000262cc 0x00000034
+[29] .shstrtab                STRTAB         0x0000000000000000 0x00026300 0x00000126

@@ -1,0 +1,53 @@
+# M5-U2 跳转表候选层：CLI 证据（2026-11-15T23:05:23）
+
+## 1) 默认关闭：不带开关的输出（片段）
+// FUNC handle_amd  0x401870..0x401b30  boundary=declared  authority=authoritative
+// 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+// 指令 80 / 已提升 80 / abstain 0（0.00%）/ 语句 92
+L_0x401870:
+  esi = edi;
+  edi ^= edi;
+  flags = cmp(esi, 0xc5);
+  if (esi == 0xc5) goto L_0x40192d;
+  goto L_0x401880;  /* 未取分支 */
+L_0x401880:
+  push(rbx);
+  eax = -0x80000000;
+  cpuid();
+  r8d = eax;
+  flags = cmp(eax, -0x7fffffe4);
+  if (eax <=u -0x7fffffe4) goto L_0x4018f0;
+  goto L_0x401892;  /* 未取分支 */
+L_0x401892:
+  ecx = 0x3;
+  flags = cmp(esi, 0xc1);
+  if (esi > 0xc1) goto L_0x4018b7;
+  goto L_0x40189f;  /* 未取分支 */
+L_0x40189f:
+  ecx = 0x2;
+  flags = cmp(esi, 0xbe);
+
+## 2) 显式开启：--switch-candidates（单函数）
+  goto L_0x4018eb;
+L_0x401b07:
+  ecx = shr(ecx, 0xe);
+  edi = ecx;
+  edi &= 0x3fc00;
+  goto L_0x4018eb;
+
+── 跳转表候选（非确定；仅 --switch-candidates 输出）──
+声明: 候选不进确定边 / 不进表达式默认输出 / 不进 CFG 确定口径；块数另记 blocks_candidate，与 CFG blocks 并列。
+函数 0x401870  域 0x401870..0x401b30  boundary=declared  既有块 23
+  候选 1  rel32  jmp@0x40192b  表 0x476020  ｜ 证据 high
+      依据: 形态 rel32：0x40191d → 0x401924 → 0x401928 → 0x40192b
+      依据: 表基址 0x476020（lea rip 相对）
+      依据: 表项 4 字节，目标 = 表基址 + s32 偏移
+      依据: 表长 8（guard 0x401914：0x401914 `cmp idx,0x7` + `ja`）
+      候选目标: 0x40198e, 0x40195a, 0x401a5e, 0x401a46, 0x401953, 0x4019b0, 0x401a2e, 0x401a79
+      候选口径新增: 指令 +77 ｜ 块 23 → 43
+  ! 候选层默认关闭，仅在 --switch-candidates 下输出；不进入确定边/表达式/CFG 口径
+  ! 表长优先取 cmp/ja 上界；无 guard 时表长未证明，证据最多 medium，且扫描有上限
+  ! 候选目标必须落在该函数权威声明的域内；跨函数/落在指令内部/不可解一律拒绝并记理由
+  ! 候选展开是独立 BFS，不改写 recdesc 的 res；候选块数单独记为 blocks_candidate
+  ! Pattern A（绝对 8 字节表）只在非 PIE 时语义成立；PIE 下该形态视为证据不足
+EXIT=0

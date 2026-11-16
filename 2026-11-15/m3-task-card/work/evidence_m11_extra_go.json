@@ -1,0 +1,118 @@
+{
+  "samples": {
+    "hello_go_linux": {
+      "path": "tests/samples/fingerprint/hello_go_linux",
+      "m9_row": {
+        "numerator": 138224,
+        "denominator": 171832
+      },
+      "reproduced_off": true,
+      "off": {
+        "numerator": 138224,
+        "denominator": 171832,
+        "ratio": 0.8044136132967085,
+        "matched": 138224,
+        "len_conflict": 0,
+        "ours_only": 0,
+        "objdump_only": 33608,
+        "identity_ok": true
+      },
+      "on": {
+        "numerator": 138292,
+        "denominator": 171832,
+        "ratio": 0.8048093486661391,
+        "matched": 138292,
+        "len_conflict": 0,
+        "ours_only": 0,
+        "objdump_only": 33540,
+        "identity_ok": true
+      },
+      "gain": 68,
+      "matched_lost": 0,
+      "same_addr_len_changed": 0,
+      "seed_stats_off": {
+        "entry": 1,
+        "symtab_func": 1797
+      },
+      "seed_stats_on": {
+        "entry": 1,
+        "gopclntab": 1794,
+        "symtab_func": 1797
+      },
+      "gopclntab": {
+        "status": "ok",
+        "version": "go1.20+",
+        "nfunc": 1796,
+        "n_markers": 2,
+        "reason": null,
+        "where": "elf_section:.gopclntab",
+        "warnings": [
+          "pcHeader.textStart=0（未重定位）；与 Go 官方 gosym 一致，采用 .text 基址 0x401000",
+          "2 条链接器标记（go:buildid/textfips*）不是函数，应作为 marker 排除"
+        ]
+      }
+    },
+    "hello_go.exe": {
+      "path": "tests/samples/fingerprint/hello_go.exe",
+      "m9_row": {
+        "numerator": 143525,
+        "denominator": 182854
+      },
+      "reproduced_off": true,
+      "off": {
+        "numerator": 143525,
+        "denominator": 182854,
+        "ratio": 0.7849158344909053,
+        "matched": 143525,
+        "len_conflict": 0,
+        "ours_only": 0,
+        "objdump_only": 39329,
+        "identity_ok": true
+      },
+      "on": {
+        "numerator": 147351,
+        "denominator": 182854,
+        "ratio": 0.8058396316186685,
+        "matched": 147351,
+        "len_conflict": 0,
+        "ours_only": 0,
+        "objdump_only": 35503,
+        "identity_ok": true
+      },
+      "gain": 3826,
+      "matched_lost": 0,
+      "same_addr_len_changed": 0,
+      "seed_stats_off": {
+        "entry": 1,
+        "pdata": 1587
+      },
+      "seed_stats_on": {
+        "entry": 1,
+        "gopclntab": 1884,
+        "pdata": 1587
+      },
+      "gopclntab": {
+        "status": "ok",
+        "version": "go1.20+",
+        "nfunc": 1887,
+        "n_markers": 3,
+        "reason": null,
+        "where": "magic_scan@0xb5ea8",
+        "warnings": [
+          "pcHeader.textStart=0（未重定位）；与 Go 官方 gosym 一致，采用 .text 基址 0x140001000",
+          "3 条链接器标记（go:buildid/textfips*）不是函数，应作为 marker 排除"
+        ]
+      }
+    }
+  },
+  "union25": {
+    "baseline_numerator": 11620527,
+    "baseline_denominator": 15313023,
+    "baseline_ratio": 0.7588656400503023,
+    "gain_synth_go": 683182,
+    "gain_hello_go": 3894,
+    "projected_numerator": 12307603,
+    "projected_ratio": 0.8037343769417704,
+    "note": "推算值：只替换 4 个 Go 样本分子，其余 21 个可测样本与 4 个无 .text 样本按 M9 数据不变；未重跑全量"
+  }
+}

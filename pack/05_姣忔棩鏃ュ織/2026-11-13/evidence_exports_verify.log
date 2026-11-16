@@ -1,0 +1,7 @@
+PASS  EAT 全表 ordinal→RVA 逐项全等（4 项，含纯序号）
+PASS  名字→ordinal 映射全等（{'Add': 1, 'Mul': 3, 'Sub': 2}）
+PASS  Mul→ord3@0x1030 / Sub→ord2@0x1020（顺序≠EAT序陷阱防住）
+PASS  纯序号导出以 (None, ord4, 0x1040) 呈现
+PASS  DLL 名 minidll.dll / Base=1
+
+ALL PASS (0 FAIL)

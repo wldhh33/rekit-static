@@ -1,0 +1,37 @@
+== D1: 自动识别 + cli ≡ 模块直调（10 fixtures）==
+  bin_ls.elf             -> elf  exit=0  identical=True
+      audit: Entry: 0x6760  Sections: 30  Phdrs: 14 | Checksec: NX enabled (GNU_STACK RW) | RELRO full | PIE yes | W+X segs none
+  dyn_pie                -> elf  exit=0  identical=True
+      audit: Entry: 0x1040  Sections: 30  Phdrs: 14 | Checksec: NX enabled (GNU_STACK RW) | RELRO partial | PIE yes | W+X segs none
+  dyn_nopie              -> elf  exit=0  identical=True
+      audit: Entry: 0x401020  Sections: 28  Phdrs: 14 | Checksec: NX enabled (GNU_STACK RW) | RELRO partial | PIE no | W+X segs none
+  dyn_static             -> elf  exit=0  identical=True
+      audit: Entry: 0x4015c0  Sections: 26  Phdrs: 11 | Checksec: NX enabled (GNU_STACK RW) | RELRO partial | PIE no | W+X segs none
+  dyn_norelro            -> elf  exit=0  identical=True
+      audit: Entry: 0x401040  Sections: 30  Phdrs: 13 | Checksec: NX enabled (GNU_STACK RW) | RELRO none | PIE no | W+X segs none
+  dyn_execstack          -> elf  exit=0  identical=True
+      audit: Entry: 0x1050  Sections: 31  Phdrs: 14 | Checksec: NX disabled (GNU_STACK RWE) | RELRO partial | PIE yes | W+X segs none
+  minipe.exe             -> pe   exit=0  identical=True
+      audit: EntryPoint: 0x1000 (RVA) | Machine:    AMD64
+  cli-64.exe             -> pe   exit=0  identical=True
+      audit: EntryPoint: 0x1D40 (RVA) | Machine:    AMD64
+  minidll.dll            -> pe   exit=0  identical=True
+      audit: EntryPoint: 0x1000 (RVA) | Machine:    AMD64
+  minipe_fakerich.exe    -> pe   exit=0  identical=True
+      audit: EntryPoint: 0x1000 (RVA) | Machine:    AMD64
+D1 PASS
+
+== D2: 负样本友好降级 ==
+  text 文件（非二进制）            exit=2(期望2) stderr='rekit: /tmp/tmp_b4k2i5w/not_a_binary.txt: 无法识别的格式（非 ELF / 非 PE）' traceback=False -> PASS
+  MZ 无 PE 签名               exit=2(期望2) stderr='rekit: /tmp/tmp_b4k2i5w/mz_no_pe.bin: 无法识别的格式（非 ELF / 非 PE）' traceback=False -> PASS
+  截断 ELF（解析失败路径）           exit=3(期望3) stderr='rekit: /tmp/tmp_b4k2i5w/truncated.elf: 解析失败(error: unpack_from requires a buffer of at least 64 bytes for unpacking 48 bytes at offset 16 (actual buffer size is 16))' traceback=False -> PASS
+D2 PASS
+
+== D4: 锚点唯一性自检（R25 加固可证伪性）==
+  正例（唯一锚点）: 提取成功 'Checksec: NX enabled'
+  负例1（重复锚点）: 已拦截 ✓ 锚点 'Checksec:' 出现 2 次（期望 1）——拒绝提取
+  负例2（缺失锚点）: 已拦截 ✓ 锚点 'Checksec:' 出现 0 次（期望 1）——拒绝提取
+D4 PASS
+
+============================================================
+总验收: D1=PASS  D2=PASS  D4=PASS

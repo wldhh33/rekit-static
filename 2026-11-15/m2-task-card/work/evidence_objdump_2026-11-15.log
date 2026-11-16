@@ -1,0 +1,62 @@
+=== 2026-11-15 objdump 环境与验收证据（PATH 由脚本注入） ===
+d:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\tools\binutils-2.47\mingw64\bin\objdump.exe
+GNU objdump (GNU Binutils) 2.47.20260726
+Copyright (C) 2026 Free Software Foundation, Inc.
+objdump path : d:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\tools\binutils-2.47\mingw64\bin\objdump.EXE
+objdump ver  : GNU objdump (GNU Binutils) 2.47.20260726
+target       : <旧仓库根>\tests\fixtures\minidll.dll
+
+--- objdump 原始片段（EAT + 名字指针表）---
+  Ordinal Base 			1
+  	Export Address Table 		00000004
+  	Export Address Table 		0000000000002040
+  Export Address Table -- Ordinal Base 1
+  	[   0] +base[   1] 00001010 Export RVA
+  	[   1] +base[   2] 00001020 Export RVA
+  	[   2] +base[   3] 00001030 Export RVA
+  	[   3] +base[   4] 00001040 Export RVA
+  [Ordinal/Name Pointer] Table -- Ordinal Base 1
+  	[   0] +base[   1]  0000 Add
+  	[   2] +base[   3]  0001 Mul
+  	[   1] +base[   2]  0002 Sub
+
+--- EAT: ordinal -> RVA ---
+  objdump : [(1, 4112), (2, 4128), (3, 4144), (4, 4160)]
+  rekit   : [(1, 4112), (2, 4128), (3, 4144), (4, 4160)]
+  equal   : True
+
+--- 名字 -> ordinal ---
+  objdump : [('Add', 1), ('Mul', 3), ('Sub', 2)]
+  rekit   : [('Add', 1), ('Mul', 3), ('Sub', 2)]
+  equal   : True
+
+VERDICT: PASS 全等
+........................................................................ [ 78%]
+....................                                                     [100%]
+92 passed in 4.35s
+.................                                                        [100%]
+17 passed, 1 deselected in 0.03s
+=== 单条测试 verbose（证明真跑非 skip） ===
+============================= test session starts =============================
+platform win32 -- Python 3.14.0, pytest-9.2.0, pluggy-1.7.0 -- C:\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: <旧仓库根>
+collecting ... collected 1 item
+
+tests/test_pe.py::test_minidll_crosscheck_objdump PASSED                 [100%]
+
+============================== 1 passed in 0.09s ==============================
+
+=== 块说明与复现命令 ===
+[1-33]  verify_objdump.py 输出：objdump 2.47 对 minidll.dll 的 EAT 与 名字->ordinal，两表与 rekit 全等
+[34-36] python -m pytest tests -q                      → 92 passed（0 skipped / 0 failed）
+[37-38] python -m pytest tests/test_pe.py -q -k "not objdump" → 17 passed, 1 deselected
+        （要求3：去掉 objdump 依赖后的断言部分单独跑，解析器自身结论正确，缺的只是外部参照）
+[39-48] python -m pytest tests/test_pe.py::test_minidll_crosscheck_objdump -v → PASSED（不是 skip）
+
+复现（本 shell 未继承新 PATH 时需注入；已写入用户级 PATH，重启终端/IDE 后可直接跑）：
+  $env:PATH = 'd:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\tools\binutils-2.47\mingw64\bin;' + $env:PATH
+  python -m pytest tests -q
+
+安装记录（sha256 / URL / 许可）见 work/sample_manifest.json 的 tools[1]，许可原文在
+  work/tools/binutils-2.47/mingw64/share/licenses/{binutils,gettext-runtime,libiconv,zlib-ng-compat,zstd}

@@ -1,0 +1,127 @@
+E9 fingerprint 混淆矩阵 · 真值冻结于 2026-11-15（E9 执行前冻结；冻结后不再改动，除非另立修正记录并注明证据）
+清单: D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\sample_manifest.json
+样本数: 18（正样本 upx=3，负样本=15）
+
+[1] 逐样本矩阵（✓ 命中 / ○ 正确弃权 / ✗ 未命中 / ‼ 违规）
+sample                         fmt  role     pack   compiler           stripped/coff  mitigations
+-------------------------------------------------------------------------------------------------
+dyn_pie                        ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=yes
+dyn_nopie                      ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=no
+dyn_static                     ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=no
+dyn_execstack                  ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=disabled,relro=partial,pie=yes
+dyn_norelro                    ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=none,pie=no
+bin_ls.elf                     ELF  negative ✓none ○unknown                  ✓true         ✓nx=enabled,relro=full,pie=yes
+hello_go_linux                 ELF  negative ✓none ✓go 1.27.3                ✓false        ✓nx=enabled,relro=none,pie=no
+busybox-1.35.0-musl-x86_64     ELF  negative ✓none ○unknown                  ✓true         ✓nx=enabled,relro=partial,pie=no
+upx_dyn_pie                    ELF  positive ✓upx  ○unknown                  ○unknown      ○nx=unknown,relro=unknown,pie=unknown
+upx_cli-64.exe                 PE   positive ✓upx  ✓msvc 19.29               ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+upx_putty-64bit.exe            PE   positive ✓upx  ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+cli-64.exe                     PE   negative ✓none ✓msvc 19.29               ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minipe.exe                     PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minidll.dll                    PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minipe_fakerich.exe            PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+hello_go.exe                   PE   negative ✓none ✓go 1.27.3                ✓n/a / present ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+hello_rust.exe                 PE   negative ✓none ✓rust                     ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+putty-64bit.exe                PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+
+[2] packer 混淆矩阵（only 可判定格）
+  GT \ 实际                none       upx       
+  none                   15         0         
+  upx                    0          3         
+
+[2] compiler.family 混淆矩阵（only 可判定格）
+  GT \ 实际                gcc        go         msvc       rust      
+  gcc                    5          0          0          0         
+  go                     0          2          0          0         
+  msvc                   0          0          2          0         
+  rust                   0          0          0          1         
+
+[2] compiler.version 混淆矩阵（only GT 有明确版本的格）
+  GT \ 实际                1.27.3     14.2.0     19.29     
+  1.27.3                 2          0          0         
+  14.2.0                 0          5          0         
+  19.29                  0          0          2         
+
+[2] stripped 混淆矩阵（ELF true/false；PE 固定 n/a）
+  GT \ 实际                False      True       n/a       
+  False                  6          0          0         
+  True                   0          2          0         
+  n/a                    0          0          9         
+
+[2] COFF 符号表混淆矩阵（PE）
+  GT \ 实际                absent     present   
+  absent                 8          0         
+  present                0          1         
+
+[2] mitigations 分项（only 可判定格；弃权格单独计数）
+
+  nx：可判定 17 格，命中 17；弃权格 1，正确弃权 1
+    GT=True           实际=True           ×9
+    GT=disabled       实际=disabled       ×1
+    GT=enabled        实际=enabled        ×7
+
+  relro：可判定 8 格，命中 8；弃权格 1，正确弃权 1
+    GT=full           实际=full           ×1
+    GT=none           实际=none           ×2
+    GT=partial        实际=partial        ×5
+
+  pie：可判定 8 格，命中 8；弃权格 1，正确弃权 1
+    GT=no             实际=no             ×5
+    GT=yes            实际=yes            ×3
+
+  dynamicbase：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=True           实际=True           ×9
+
+  high_entropy_va：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=True           实际=True           ×9
+
+  cfg：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=False          实际=False          ×9
+
+  dll_characteristics：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=0x8160         实际=0x8160         ×9
+
+[3] 汇总
+  样本分母           : 18（异常 0）
+  可判定格           : 132，命中 132，命中率 100.00%
+  不可判定格（弃权） : 12，正确弃权 12（100%），误报 0
+  未命中 / 误报 / 违规: 0 / 0 / 0
+
+E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）
+
+=== 首跑 / 重跑说明（2026-11-15） ===
+首跑结论已是 PASS（132/132 可判定格、12/12 正确弃权、误报 0、违规 0），
+但发现验证器自身缺陷：compiler.family 与 compiler.version 被混进同一张混淆矩阵
+（行标题出现 14.2.0 / 19.29 / 1.27.3 等版本值），且 mitigations 只按样本汇总、没有分项矩阵。
+处理：只改验证器（confusion() 增加 key 维度过滤；新增 print_mitigations() 分项；
+[1] 的加固列改为 ✓/○/✗ 三态），**判据与 ground truth 一格未改**，随后重跑，即本文件输出。
+重跑动因属"验收器返工"，不计入判定放宽。
+
+=== 真值冻结前修正（2 处，均为样本标注错误，非判据问题） ===
+S5 hello_go_linux：nx 由 "?" → enabled（pyelftools PT_GNU_STACK 仅 R/W + readelf -lW 复核）
+S7 busybox：relro 由 "none(静态)" → partial（readelf -lW 实测存在 PT_GNU_RELRO @0x711fe0, 0x20 字节）
+两处均先取证、再改标注，改后仍按原判据执行；未出现"改标注迁就工具输出"的情况
+（修正方向：工具原本答 enabled/partial，标注原写 ?/none）。
+
+=== 计数口径 ===
+可判定格 132 = packer 18 + compiler.family 18 + compiler.version 9 + stripped 18 + COFF 9 + ELF 加固 21 + PE 位 32 + DllChar 7
+不可判定格 12 = compiler.family 8（bin_ls/busybox/putty/upx_putty/minipe/minidll/fakerich/upx_elf）+ stripped 1 + ELF 加固 3
+
+=== 计数口径更正（上一节"计数口径"两项分解写错，以此为准） ===
+可判定格 132 = packer 18 + compiler.family 10 + compiler.version 9 + stripped 17 + COFF 9
+              + nx 17 + relro 8 + pie 8 + dynamicbase 9 + high_entropy_va 9 + cfg 9 + DllChar 9
+不可判定格 12 = compiler.family 8（bin_ls / busybox / putty / upx_putty / minipe / minidll /
+                minipe_fakerich / upx_dyn_pie）+ stripped 1（upx_dyn_pie）+ nx 1 + relro 1 + pie 1
+另 1 格 record_only = hello_rust.exe 的 compiler.version（rustc 不嵌版本串，GT 不约束版本，
+                故不计入分母；这是"不可得"而非"答错"）
+更正方法：用脚本自身 check_sample() 重算每维格数后核对，132/12 与矩阵输出一致。
+
+=== 收口终校验（2026-11-15，文档收口后再跑一次，确认未被文字改动影响） ===
+1) manifest：JSON 可解析，e9_ground_truth.samples=18，tools=2
+2) pytest：GNU objdump (GNU Binutils) 2.47.20260726 注入后 `python -m pytest tests -q`
+   → 92 passed in 3.86s（0 skipped / 0 failed）
+3) E9：`python tests/verify_fingerprint.py --all --matrix` → VERDICT: PASS，EXITCODE=0
+   （可判定格 132/132，弃权 12/12，误报 0，违规 0，异常 0）
+4) 附带修正（不影响判定）：run_pytest.ps1 原为 UTF-8 无 BOM，被 Windows PowerShell 5.1
+   以 ANSI(GBK) 解析中文注释时报 ParserError；已补 UTF-8 BOM（内容未改），5.1 与 pwsh 7 均可直接运行。
+   此问题出在"复现脚本的编码"，与 E9 判据、GT、矩阵口径无关，故不重跑矩阵。

@@ -1,0 +1,895 @@
+{
+ "schema": "vharness_run/1",
+ "suites": [
+  {
+   "schema": "vharness/1",
+   "suite": "verify_c4_alignment.py",
+   "started_at": "2026-11-16T23:16:06",
+   "duration_s": 37.86,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_callfacts.py",
+   "started_at": "2026-11-16T23:16:43",
+   "duration_s": 2.49,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_callgraph.py",
+   "started_at": "2026-11-16T23:16:46",
+   "duration_s": 1.44,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_coverage.py",
+   "started_at": "2026-11-16T23:16:47",
+   "duration_s": 2.47,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_datarefs.py",
+   "started_at": "2026-11-16T23:16:50",
+   "duration_s": 20.09,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "== 汇总 ==  检查=12 PASS=12 FAIL=0 SKIP=0 → PASS",
+    "legacy_counts": {
+     "checks": 12,
+     "pass": 12,
+     "fail": 0,
+     "skip": 0
+    }
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:检查项",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=12（检查项）"
+    },
+    {
+     "id": "legacy_summary",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "== 汇总 ==  检查=12 PASS=12 FAIL=0 SKIP=0 → PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "inline 标记 '\\\\[PASS\\\\] selfproof' 命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "== 汇总 ==  检查=12 PASS=12 FAIL=0 SKIP=0 → PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_disasm.py",
+   "started_at": "2026-11-16T23:17:10",
+   "duration_s": 0.82,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_dotnet.py",
+   "started_at": "2026-11-16T23:17:11",
+   "duration_s": 3.59,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "== 汇总 ==  检查=27 PASS=27 FAIL=0 SKIP=0 → PASS",
+    "legacy_counts": {
+     "checks": 27,
+     "pass": 27,
+     "fail": 0,
+     "skip": 0
+    }
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:检查项",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=27（检查项）"
+    },
+    {
+     "id": "legacy_summary",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "== 汇总 ==  检查=27 PASS=27 FAIL=0 SKIP=0 → PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "inline 标记 '\\\\[PASS\\\\] selfproof' 命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "== 汇总 ==  检查=27 PASS=27 FAIL=0 SKIP=0 → PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_expr.py",
+   "started_at": "2026-11-16T23:17:14",
+   "duration_s": 45.31,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "PASS（表达式层外部 oracle：objdump 反汇编对照 + 下层账目；Ghidra 仅弱参照；分歧不静默丢弃）",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "PASS（表达式层外部 oracle：objdump 反汇编对照 + 下层账目；Ghidra 仅弱参照；分歧不静默丢弃）"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "PASS（表达式层外部 oracle：objdump 反汇编对照 + 下层账目；Ghidra 仅弱参照；分歧不静默丢弃）"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_fingerprint.py",
+   "started_at": "2026-11-16T23:18:00",
+   "duration_s": 0.22,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_funcreport.py",
+   "started_at": "2026-11-16T23:18:00",
+   "duration_s": 33.99,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS",
+    "legacy_counts": {
+     "checks": 16,
+     "pass": 16,
+     "fail": 0,
+     "skip": 0
+    },
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:检查项",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=16（检查项）"
+    },
+    {
+     "id": "legacy_summary",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_gopclntab.py",
+   "started_at": "2026-11-16T23:18:34",
+   "duration_s": 9.85,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS"
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "inline 标记 '✓' 命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_iat.py",
+   "started_at": "2026-11-16T23:18:44",
+   "duration_s": 1.35,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_ilflow.py",
+   "started_at": "2026-11-16T23:18:45",
+   "duration_s": 16.25,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "== 汇总 ==  检查=41 PASS=41 FAIL=0 SKIP=0 → PASS",
+    "legacy_counts": {
+     "checks": 41,
+     "pass": 41,
+     "fail": 0,
+     "skip": 0
+    }
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:检查项",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=41（检查项）"
+    },
+    {
+     "id": "legacy_summary",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "== 汇总 ==  检查=41 PASS=41 FAIL=0 SKIP=0 → PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "inline 标记 '\\\\[PASS\\\\] selfproof' 命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "== 汇总 ==  检查=41 PASS=41 FAIL=0 SKIP=0 → PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_map.py",
+   "started_at": "2026-11-16T23:19:01",
+   "duration_s": 0.23,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS",
+    "selftest_exit": 1
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=1（期望 1）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_paramdecl.py",
+   "started_at": "2026-11-16T23:19:02",
+   "duration_s": 21.37,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_recdesc.py",
+   "started_at": "2026-11-16T23:19:23",
+   "duration_s": 10.63,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_sitejoin.py",
+   "started_at": "2026-11-16T23:19:33",
+   "duration_s": 8.12,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_struct.py",
+   "started_at": "2026-11-16T23:19:42",
+   "duration_s": 15.1,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_strxref.py",
+   "started_at": "2026-11-16T23:19:57",
+   "duration_s": 31.33,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_switchcand.py",
+   "started_at": "2026-11-16T23:20:28",
+   "duration_s": 46.97,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "PASS（负向基线 通过；收益数字见上，不静默取舍）",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "PASS（负向基线 通过；收益数字见上，不静默取舍）"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "PASS（负向基线 通过；收益数字见上，不静默取舍）"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_vexaudit.py",
+   "started_at": "2026-11-16T23:21:15",
+   "duration_s": 1.75,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "VERDICT: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "VERDICT: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "VERDICT: PASS"
+  }
+ ],
+ "totals": {
+  "suites": 21,
+  "legacy_pass": 21,
+  "pass": 21,
+  "fail": 0,
+  "env_skip": 0
+ },
+ "duration_s": 311.2,
+ "exit": 0
+}

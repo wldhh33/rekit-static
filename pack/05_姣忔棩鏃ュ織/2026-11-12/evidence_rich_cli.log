@@ -1,0 +1,20 @@
+=== 证据1：CLI 正样本（cli-64.exe，修正 prodid/build 后）===
+Rich:       key=0x31A563A3 DanS@0x80 Rich@0xe8 pairs=11
+    comp.id=0x00937809 (prodid=147 build=30729) count=16
+    comp.id=0x01017EA4 (prodid=257 build=32420) count=2
+    comp.id=0x00FD7EA4 (prodid=253 build=32420) count=4
+    comp.id=0x01057EA4 (prodid=261 build=32420) count=19
+    comp.id=0x01047EA4 (prodid=260 build=32420) count=10
+    comp.id=0x01037EA4 (prodid=259 build=32420) count=3
+    comp.id=0x0101784B (prodid=257 build=30795) count=3
+    comp.id=0x00010000 (prodid=1 build=0) count=69
+    comp.id=0x01047F14 (prodid=260 build=32532) count=1
+    comp.id=0x00FF7F14 (prodid=255 build=32532) count=1
+    comp.id=0x01027F14 (prodid=258 build=32532) count=1
+
+=== 证据2：CLI 负样本×5（含 28MB .NET DLL 深处 Rich 误匹配防线）===
+  minipe.exe                                                 -> Rich:       (none)
+  minipe_fakerich.exe                                        -> Rich:       (none)
+  Aspose.Words.dll                                           -> Rich:       (none)
+  Autofac.dll                                                -> Rich:       (none)
+  Microsoft.Extensions.DependencyInjection.Abstractions.dll  -> Rich:       (none)

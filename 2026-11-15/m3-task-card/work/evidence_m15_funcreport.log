@@ -1,0 +1,18 @@
+[PASS] full-matrix 状态矩阵 :: 全部匹配
+[PASS] full-absence absence 覆盖 :: 覆盖全部非 present 字段
+[PASS] full-a 块/调用目标为指令起点 :: checked; 0 个目标不在本节（未抽查）
+[PASS] full-b 块内指令落域且为起点 :: 12 条指令全部通过
+[PASS] go-matrix 状态矩阵 :: 全部匹配
+[PASS] go-absence absence 覆盖 :: 覆盖全部非 present 字段
+[PASS] go-a 块/调用目标为指令起点 :: checked; 0 个目标不在本节（未抽查）
+[PASS] go-b 块内指令落域且为起点 :: 25 条指令全部通过
+[PASS] go-e 指令数上界 :: 报告=25 objdump[0x401320,0x401380)=50
+[PASS] scarce-matrix 状态矩阵 :: 全部匹配
+[PASS] scarce-absence absence 覆盖 :: 覆盖全部非 present 字段
+[PASS] scarce-a 块/调用目标为指令起点 :: checked; 0 个目标不在本节（未抽查）
+[PASS] scarce-b 块内指令落域且为起点 :: 1 条指令全部通过
+[PASS] full-c 符号 size :: 报告 end-addr=0x1e，objdump --dwarf=info size=0x1e
+[PASS] full-d DWARF 形参数 :: 报告=3 objdump=3（DIE@c2）
+[PASS] scarce-f 缺失语义 :: parameters=missing_source，人读含“缺：”=True
+
+== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS

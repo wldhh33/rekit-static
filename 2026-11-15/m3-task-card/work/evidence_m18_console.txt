@@ -1,0 +1,24 @@
+file   : C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.20\System.Console.dll
+status : ok
+asm    : System.Console 7.0.0.0
+
+[分母]
+  方法: MethodDef 433 = 有体 396 + 无体 37；分析 396 + 部分 0 + 空 0（恒等 True）
+  分支指令 596（leave_long=2, leave_short=24, long=13, short=556, switch=1）；switch 1 / case 4
+  分支目标 599：instruction 599 / inside_instruction 0 / outside_method 0 / decode_error 0（恒等 True）
+  调用指令 1133（call=862, callvirt=140, ldftn=1, newobj=130）
+  token: internal 572 / external 561 / unresolved 0（恒等 True）
+  token 表: MemberRef=514, MethodDef=572, MethodSpec=47
+  EH: 子句 23（catch=3, finally=20）；坏边界 0 / 坏区间 0；catch token external=3
+  块 1372 / 边 1245（branch=569, fallthrough=646, leave=26, switch=4）/ 不可达块 63；leave 跳入保护区 0（从 finally/fault 跳出 0、位于 filter 内 0）
+  父解析: typeref=179, typeref_external=179, typespec=22, typespec_external=22
+
+[比例]（分母见上）
+  internal_over_tokens = 0.504854
+  external_over_tokens = 0.495146
+  unresolved_over_tokens = 0.000000
+  targets_valid_over_total = 1.000000
+  eh_boundary_ok_over_clauses = 1.000000
+  blocks_reachable_over_total = 0.954082
+
+[方法明细]（存储 0 个；--limit 只影响逐方法明细（blocks/branch_sites/call_sites/eh）；所有分母统计全部有体方法）

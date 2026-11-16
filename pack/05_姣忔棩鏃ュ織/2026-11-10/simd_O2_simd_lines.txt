@@ -1,0 +1,2 @@
+  70:	c5 f9 ef c0          	vpxor  %xmm0,%xmm0,%xmm0
+  74:	62 f1 7f 28 7f 07    	vmovdqu8 %ymm0,(%rdi)

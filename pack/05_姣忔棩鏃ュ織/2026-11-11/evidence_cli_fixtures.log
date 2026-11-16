@@ -1,0 +1,7 @@
+[0] tests/fixtures/bin_ls.elf → Checksec: NX enabled (GNU_STACK RW) | RELRO full | PIE yes | W+X segs none
+[0] tests/fixtures/dyn_execstack → Checksec: NX disabled (GNU_STACK RWE) | RELRO partial | PIE yes | W+X segs none
+[0] tests/fixtures/dyn_nopie → Checksec: NX enabled (GNU_STACK RW) | RELRO partial | PIE no | W+X segs none
+[0] tests/fixtures/dyn_norelro → Checksec: NX enabled (GNU_STACK RW) | RELRO none | PIE no | W+X segs none
+[0] tests/fixtures/dyn_pie → Checksec: NX enabled (GNU_STACK RW) | RELRO partial | PIE yes | W+X segs none
+[0] tests/fixtures/dyn_static → Checksec: NX enabled (GNU_STACK RW) | RELRO partial | PIE no | W+X segs none
+[0] tests/fixtures/minipe.exe → Machine:    AMD64

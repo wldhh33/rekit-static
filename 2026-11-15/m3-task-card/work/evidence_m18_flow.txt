@@ -1,0 +1,43 @@
+file   : samples\m18\_gen\FlowSample.dll
+status : ok
+asm    : FlowSample 0.0.0.0
+
+[分母]
+  方法: MethodDef 20 = 有体 19 + 无体 1；分析 19 + 部分 0 + 空 0（恒等 True）
+  分支指令 6（leave_short=2, long=1, short=3）；switch 0 / case 0
+  分支目标 6：instruction 6 / inside_instruction 0 / outside_method 0 / decode_error 0（恒等 True）
+  调用指令 17（call=9, callvirt=4, ldftn=1, newobj=3）
+  token: internal 8 / external 9 / unresolved 0（恒等 True）
+  token 表: MemberRef=10, MethodDef=6, MethodSpec=1
+  EH: 子句 3（catch=2, finally=1）；坏边界 0 / 坏区间 0；catch token external=2
+  块 30 / 边 11（branch=4, fallthrough=5, leave=2）/ 不可达块 3；leave 跳入保护区 0（从 finally/fault 跳出 0、位于 filter 内 0）
+  父解析: typeref=3, typeref_external=3, typespec=5, typespec_external=4, typespec_internal=1
+
+[比例]（分母见上）
+  internal_over_tokens = 0.470588
+  external_over_tokens = 0.529412
+  unresolved_over_tokens = 0.000000
+  targets_valid_over_total = 1.000000
+  eh_boundary_ok_over_clauses = 1.000000
+  blocks_reachable_over_total = 0.900000
+
+[方法明细]（存储 19 个；--limit 只影响逐方法明细（blocks/branch_sites/call_sites/eh）；所有分母统计全部有体方法）
+  0x06000001 Rekit.Flow.Ops.Callee  insn=4 blocks=1 edges=0
+  0x06000002 Rekit.Flow.Ops.Caller  insn=5 blocks=1 edges=0
+  0x06000003 Rekit.Flow.Ops.TakeFunc  insn=4 blocks=1 edges=0
+  0x06000004 Rekit.Flow.Ops.Loop  insn=19 blocks=4 edges=4
+  0x06000005 Rekit.Flow.Ops.LongBranch  insn=260 blocks=3 edges=3
+  0x06000006 Rekit.Flow.Ops.CallExternal  insn=9 blocks=1 edges=0
+  0x06000007 Rekit.Flow.Ops.Forward  insn=4 blocks=1 edges=0
+  0x06000008 Rekit.Flow.Ops.ForwardInt  insn=4 blocks=1 edges=0
+  0x06000009 Rekit.Flow.Ops.Guarded  insn=22 blocks=7 edges=4
+  0x0600000a Rekit.Flow.Box`1.Put  insn=4 blocks=1 edges=0
+  0x0600000b Rekit.Flow.Box`1.Get  insn=3 blocks=1 edges=0
+  0x0600000c Rekit.Flow.Box`1..ctor  insn=3 blocks=1 edges=0
+  0x0600000d Rekit.Flow.Base.M  insn=4 blocks=1 edges=0
+  0x0600000e Rekit.Flow.Base..ctor  insn=3 blocks=1 edges=0
+  0x0600000f Rekit.Flow.Derived.M  insn=6 blocks=1 edges=0
+  0x06000010 Rekit.Flow.Derived..ctor  insn=3 blocks=1 edges=0
+  0x06000012 Rekit.Flow.Calc.Apply  insn=4 blocks=1 edges=0
+  0x06000013 Rekit.Flow.Calc.Use  insn=4 blocks=1 edges=0
+  0x06000014 Rekit.Flow.Calc..ctor  insn=3 blocks=1 edges=0

@@ -1,0 +1,10 @@
+fixture          NX*       RELRO*    PIE*      ok?    NX        RELRO     PIE    extra
+bin_ls.elf       enabled   full      yes       PASS   enabled   full      yes    stackflags=0x6 bind_now=True wx=-
+dyn_pie          enabled   partial   yes       PASS   enabled   partial   yes    stackflags=0x6 bind_now=False wx=-
+dyn_nopie        enabled   partial   no        PASS   enabled   partial   no     stackflags=0x6 bind_now=False wx=-
+dyn_static       enabled   partial   no        PASS   enabled   partial   no     stackflags=0x6 bind_now=False wx=-
+dyn_norelro      enabled   none      no        PASS   enabled   none      no     stackflags=0x6 bind_now=False wx=-
+dyn_execstack    disabled  partial   yes       PASS   disabled  partial   yes    stackflags=0x7 bind_now=False wx=-
+
+18/18 cells equal (expect 18/18) -> A1 PASS
+exit=0

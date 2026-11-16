@@ -1,0 +1,184 @@
+M4（cfg）收口证据 — 2026-11-15
+================================================================================
+本文件记录 M4 收口当次执行的命令、退出码与关键数字，以及逐条对账。
+所有命令均在 work/ 目录下执行；样本为 tests/fixtures/ 内固化文件。
+
+§0 环境前置（必读）
+
+  objdump 不在系统 PATH，需先挂 binutils 2.47：
+
+  $env:PATH="D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\tools\binutils-2.47\mingw64\bin;"+$env:PATH
+  $ objdump --version | head -1
+    GNU objdump (GNU Binutils) 2.47.20260726
+  $ python -c "import capstone; print(capstone.__version__)"
+    5.0.7
+
+  如实记录（不掩盖）：同一套代码在**未挂 binutils PATH** 时执行 pytest 的结果是
+    1 failed, 238 passed, 4 skipped —— 失败项 test_pe.py::test_minidll_crosscheck_objdump，
+    原因是 subprocess 找不到 objdump（FileNotFoundError），4 skip 为 objdump 缺失时的
+    skip 分支，不是 capstone 缺失。挂上 PATH 后 243 passed / 0 skipped。
+  结论：这是**环境前置缺失**，不是代码回归；因此上表首次结果一并留档，供复核。
+
+§1 收口执行的五条命令与退出码
+
+  $ python -m pytest tests -q
+    244 passed in 6.94s
+    PYTEST_EXIT=0
+
+  $ python tests/verify_disasm.py --all
+    判定：分歧 0 项 / 环境错误 0 项
+    VERDICT: PASS
+    DISASM_EXIT=0
+
+  $ python tests/verify_recdesc.py --all
+    缺失/不可解释边界 0 项
+    VERDICT: PASS
+    RECDESC_EXIT=0
+
+  $ python tests/verify_map.py --all --matrix
+    可判定格 2402：命中 2402（100.00%）/ 失配 0 / 误报 0 / 解析异常 0
+    [abstain] 弃权格 2（不计入可判定格分母）
+    VERDICT: PASS
+    MAP_EXIT=0
+
+  $ python tests/verify_iat.py --all --selftest
+    [反例] 篡改 1 slot → status=unresolved bytes_untouched=True
+    [selftest] 故意改坏 1 字节 → 检查器已检出（能失败）
+    结论：失配 0 项
+    VERDICT: PASS
+    IAT_EXIT=0
+
+  M1–M3 四个里程碑的验收路径全部复跑通过，M4 增量未造成任何一侧回归。
+
+§2 M4 完成标准逐条对账
+
+  标准①（线性扫描对齐） 线性 vs GNU objdump 2.47（-z）7 样本逐条边界
+    → 长度不一致 0 条；不在 objdump 线性起点 0 条（cli/bin_ls/dyn_pie/dyn_nopie/
+      dyn_static/avx 均为 0；minidll 4 条已在 §3 归因，为导出种子落在单字节 ret 上）
+    → 达成。
+
+  标准②（种子分级 + 边界可信）
+    权威种子成功率（分列，不与启发式合并）：
+      cli-64.exe 41/41 ｜ minidll.dll 5/5 ｜ bin_ls.elf 331/331 ｜ dyn_pie 6/6
+      ｜ dyn_nopie 7/7 ｜ dyn_static 1067/1090 ｜ avx_dense 2/5
+    启发式种子默认关闭，本条不参与权威分母。
+    → 缺失/不可解释边界 0 项；三方（自研/objdump 2.47/capstone 5）同址同长 0 分歧
+    → 达成。
+
+  标准③（CFG 边分级）
+    五类边互斥（verify_recdesc.cfg_check 独立重算，冲突即 errors）
+    确定边以 .pdata（cli）/FDE（bin_ls、dyn_pie、dyn_nopie、dyn_static）/st_size 为前提
+    间接 jmp/call 一律 target=None 并记 unresolved（dyn_pie 0x108f、0x10d0 为实例）
+    跨函数边单列，不并入函数内图
+    → 达成。
+
+  标准④（弃权代价量化）
+    avx_dense.exe：VEX 25/53 (47.2%)，abstain 3 点，漏 38 条 (71.7%)
+    dyn_static：abstain 107 点，漏 12385 条 (10.9%)，VEX 4367/113924 (3.8%)
+    其余 5 样本 abstain 0 点
+    → 达成（不允许写“未量化”，此处均给条数与占比）。
+
+  标准⑤（回归）
+    pytest 244 passed exit 0 + 4 验证脚本 exit 0（§1）
+    → 达成。
+
+§3 边数据全表（函数内边；调用边另行单列，不计入总边）
+
+  样本              总边   确定   疑似  跨函数  未解出  未解析  未解析占比  未解出占比
+  cli-64.exe         436    394     0      9      0      33     7.6%       0.0%
+  minidll.dll          0      0     0      0      0       0       —          —
+  bin_ls.elf        5511   5340     0     82     80       9     0.2%       1.5%
+  dyn_pie             16      0    13      1      0       2    12.5%       0.0%
+  dyn_nopie            13      0    10      1      0       2    15.4%       0.0%
+  dyn_static       27375  26882    15    313     42     123     0.4%       0.2%
+  avx_dense.exe        3      0     3      0      0       0     0.0%       0.0%
+  ------------------------------------------------------------------------------
+  合计             33354  32616    41    406    122     169     0.51%      0.37%
+  （确定 97.80% ｜ 疑似 0.12% ｜ 跨函数 1.22%）
+
+  调用边（calls，单列）：
+    cli-64.exe   确定 8 / 目标未解出 0 / 未解析 5
+    bin_ls.elf   确定 49 / 目标未解出 112 / 未解析 4
+    dyn_static   确定 702 / 目标未解出 16 / 未解析 11
+    dyn_pie      确定 0 / 目标未解出 1 / 未解析 0
+
+  两个“0”的性质必须分开看：
+  · minidll.dll 总边 0 是**真零**：5 个权威种子（导出 EAT + EntryPoint）
+    全部指向单条 `ret` 桩函数（0x1000/0x1010/0x1020/0x1030/0x1040），
+    函数内确实没有控制转移。CLI 走的是“真零”分支，原文见 §4。
+  · dyn_pie / dyn_nopie / avx_dense 确定边 0 是**标签性零**：样本有控制流（13/10/3
+    条边摆在那里），但函数结束界没有权威声明（FDE 只覆盖部分函数 / AVX 样本是自建
+    PE 无 .pdata），因此无法给边打“确定”标签——不是“没有控制流”。
+
+§4 “确定边为 0”在 CLI 里能不能看懂（实证原文）
+
+  $ python -m rekit.cli recdesc tests/fixtures/dyn_pie
+    > CFG（函数内边分级，不合并；调用边单列）:
+    >   确定 0 ｜ 疑似 13 ｜ 跨函数 1 ｜ 目标未解出 0 ｜ 未解析 2
+    >   调用边：确定 0 ｜ 目标未解出 1 ｜ 未解析 0（间接，不猜目标）
+    >   函数：声明边界 2 个 ｜ 边界未知 4 个
+    >   ！确定边为 0：本样本仅 2 个函数有声明结束界，其余函数边界未知；16 条边
+        只能记疑似/跨函数/未解析——不代表没有控制流
+      · 跨函数 taken 0x1120 -> 0x10a0（函数 0x10a0）
+      · 未解析 jmp_ind @0x108f（目标不猜）
+      · 未解析 jmp_ind @0x10d0（目标不猜）
+
+  $ python -m rekit.cli recdesc tests/samples/avx/avx_dense.exe
+    CFG（函数内边分级，不合并；调用边单列）:
+      确定 0 ｜ 疑似 3 ｜ 跨函数 0 ｜ 目标未解出 0 ｜ 未解析 0
+      函数：声明边界 0 个 ｜ 边界未知 2 个
+      ！确定边为 0：本样本没有权威声明的函数结束界（.pdata/FDE/st_size），
+      无法给边打‘确定’标签；3 条边只能记疑似/跨函数/未解析——不代表没有控制流
+
+  $ python -m rekit.cli recdesc tests/fixtures/minidll.dll
+      确定 0 ｜ 疑似 0 ｜ 跨函数 0 ｜ 目标未解出 0 ｜ 未解析 0
+      函数：声明边界 0 个 ｜ 边界未知 5 个
+      ！确定边为 0：解出的 5 个基本块里没有任何跳转/分支指令（只有 ret 与顺序
+      指令，例如单条 ret 桩函数）——本样本确实没有函数内控制流
+
+  结论：单独看到 0 的人会同时看到三件事——(a) 这个 0 属于哪一类边的 0；
+  (b) 为什么是 0（缺声明边界 / 无控制转移）；(c) 这个样本其实有多少条边。
+  “只看到 0”的情况在 M4 里被 R48 正面消掉了。
+
+§5 未解析 / 未解出各占多少（正面回答）
+
+  全样本合计（分母 = 33354 条函数内边）：
+    未解析（unresolved，间接目标不猜） 169 条 = 0.51%
+    未解出（undecoded，目标地址未被解出）122 条 = 0.37%
+    两者合计 291 条 = 0.87%（即 99.13% 的边有明确落点与类别）
+
+  分布不均，集中在两类样本：
+    cli-64.exe 未解析 7.6%（33 条全为 jmp_ind，MSVC 的 switch/异常分派）
+    dyn_static 绝对数最大（未解析 123、未解出 42，分母 27375）
+    未解出主要集中在 bin_ls.elf（80 条，占其 1.5%），原因是无符号样本里
+    分支目标落在未被任何种子/FDE 覆盖的区段。
+
+§6 下一里程碑建议起点（并标注“结构上做不到”还是“还没做”）
+
+  建议起点：M5 第一单元 = 对“已有权威声明边界的小函数”做表达式恢复
+    （输入 = M4 已产出的函数域 + 基本块 + CFG 确定边；输出 = 伪 C 表达式树，
+     范围限定在 .pdata/FDE 覆盖的函数，验收用人工抽样 + 与 Ghidra 反编译对读）。
+  为什么从这里开始（“还没做”，不是做不到）：
+    · 块、边、函数域、调用边都已在 M4 落地，输入数据齐备；这是缺口，不是墙。
+    · 抽样可证伪：小函数伪代码与原汇编逐表达式对读，能给出“哪一行对不上”。
+
+  明确属“结构上做不到 / 只能接受 abstain”的部分（不得当 KPI）：
+    · 间接 jmp/call 目标解析（跳转表、虚表、PLT 后的真实目标、C++ 虚调用）
+      ——纯静态、无符号、无调试信息、不做数据/代码判别时，目标不可判定；
+      本工具的正确行为是 target=None + unresolved，不是“猜一个”。
+    · VEX/EVEX 指令的解码缺口（当前 abstain）：这是**还没做**（可以补长度表），
+      与上面那条性质不同，不要把两者混成“做不到”。
+    · 无任何声明边界的函数边界推断：属**结构上做不到**（信息不在文件里），
+      M4 的做法是另起 boundary=unknown 根 + 边记疑似，这是正确终点而不是欠债。
+
+§7 证据入口
+
+  rekit/disasm.py            长度表/前缀族/VEX abstain；CLI `rekit disasm`
+  rekit/recdesc.py           种子分级 / _build_blocks / _build_cfg / render_text
+  tests/test_recdesc.py      40 项（块函数域/确定边/疑似互斥/间接不猜/跨函数单列/
+                             AVX 无确定边/计数一致/确定边为 0 的 CLI 解释/
+                             真零与标签性零必须用不同句子）
+  tests/verify_recdesc.py    cfg_check 独立重算 + 每样本 CFG 行 + abstain 归因
+  work/evidence_recdesc_2026-11-15.log   M4 第二单元证据
+  work/evidence_cfg_2026-11-15.log       M4 第三单元证据（含 -12 条行为修正说明）
+  outputs/TASK_m4_cfg.md                 M4 任务卡与判据

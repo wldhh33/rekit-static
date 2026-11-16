@@ -1,0 +1,108 @@
+{
+  "busybox-1.35.0-musl-x86_64": {
+    "format": "ELF64",
+    "type": "ET_EXEC",
+    "machine": "EM_X86_64",
+    "n_sections": 10,
+    "has_symtab": false,
+    "has_dynsym": false,
+    "has_comment": false,
+    "upx_like": [],
+    "go_buildinfo": false,
+    "note_sections": [],
+    "interp": null,
+    "needed": [],
+    "has_gopclntab": false
+  },
+  "hello_go.exe": {
+    "format": "PE32+",
+    "machine": "0x8664",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".pdata",
+      ".xdata",
+      "/4",
+      "/19",
+      "/32",
+      "/46",
+      "/65",
+      "/78",
+      "/95",
+      "/112",
+      ".idata",
+      ".reloc",
+      ".symtab"
+    ],
+    "dll_chars": "0x8160",
+    "NX_COMPAT": true,
+    "DYNAMICBASE": true,
+    "HIGH_ENTROPY_VA": true,
+    "GUARD_CF": false,
+    "ptr_symtab": 2374656,
+    "has_rich_in_headers": false,
+    "timestamp": 0
+  },
+  "hello_go_linux": {
+    "format": "ELF64",
+    "type": "ET_EXEC",
+    "machine": "EM_X86_64",
+    "n_sections": 26,
+    "has_symtab": true,
+    "has_dynsym": false,
+    "has_comment": false,
+    "upx_like": [],
+    "go_buildinfo": true,
+    "note_sections": [
+      ".note.go.buildid",
+      ".note.gnu.build-id"
+    ],
+    "interp": null,
+    "needed": [],
+    "has_gopclntab": true
+  },
+  "hello_rust.exe": {
+    "format": "PE32+",
+    "machine": "0x8664",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".pdata",
+      ".reloc"
+    ],
+    "dll_chars": "0x8160",
+    "NX_COMPAT": true,
+    "DYNAMICBASE": true,
+    "HIGH_ENTROPY_VA": true,
+    "GUARD_CF": false,
+    "ptr_symtab": 0,
+    "has_rich_in_headers": true,
+    "timestamp": 1794738517
+  },
+  "putty-64bit.exe": {
+    "format": "PE32+",
+    "machine": "0x8664",
+    "sections": [
+      ".text",
+      ".rdata",
+      ".data",
+      ".pdata",
+      ".00cfg",
+      ".gxfg",
+      ".tls",
+      "_RDATA",
+      ".rsrc",
+      ".reloc"
+    ],
+    "dll_chars": "0x8160",
+    "NX_COMPAT": true,
+    "DYNAMICBASE": true,
+    "HIGH_ENTROPY_VA": true,
+    "GUARD_CF": false,
+    "ptr_symtab": 0,
+    "has_rich_in_headers": false,
+    "timestamp": 1786686963
+  }
+}

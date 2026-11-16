@@ -1,0 +1,11 @@
+PASS B1a Machine AMD64
+PASS B1b Magic 0x20B PE32+
+PASS B1c EntryPoint 0x1000
+PASS B1d ImageBase 0x140000000
+PASS B1e Subsystem Console
+PASS B1f SizeOfImage 0x3000
+PASS B2a .text VA/RawPtr/RawSize
+PASS B2b .idata VA/RawPtr/RawSize
+PASS B3 KERNEL32.dll/ExitProcess
+B1+B2+B3: ALL PASS
+B4 imports = {'struct', 'sys'} -> PASS

@@ -1,0 +1,378 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "sample-status",
+   "name": "状态与恒等式",
+   "status": "PASS",
+   "detail": "status=ok identity=True MethodDef=18 有RVA=15 无RVA=3 体成功=15"
+  },
+  {
+   "id": "sample-tables",
+   "name": "dnfile 表行数",
+   "status": "PASS",
+   "detail": "表行数核对 20 张；全部一致"
+  },
+  {
+   "id": "sample-typedef",
+   "name": "dnfile TypeDef 逐行",
+   "status": "PASS",
+   "detail": "TypeDef 逐行核对 6 行；全部一致"
+  },
+  {
+   "id": "sample-methoddef",
+   "name": "dnfile MethodDef 逐行",
+   "status": "PASS",
+   "detail": "MethodDef 逐行核对 18 行；全部一致"
+  },
+  {
+   "id": "sample-offsets",
+   "name": "dnfile RVA→文件偏移",
+   "status": "PASS",
+   "detail": "方法体文件偏移核对 15 个；全部一致"
+  },
+  {
+   "id": "sample-il",
+   "name": "dncil IL 边界逐条",
+   "status": "PASS",
+   "detail": "IL 边界逐条核对 15 个方法（前 None 个）；全部一致"
+  },
+  {
+   "id": "sample-us",
+   "name": "#US 字符串字面量（dnfile）",
+   "status": "PASS",
+   "detail": "#US 条目 10（dnfile 逐个取值核对）；ldstr token 9 个；全部一致"
+  },
+  {
+   "id": "sample-reflect",
+   "name": "CLR 反射核对",
+   "status": "PASS",
+   "detail": "反射核对 5 个类型、排除构造方法 4 个；全部一致"
+  },
+  {
+   "id": "console-status",
+   "name": "状态与恒等式",
+   "status": "PASS",
+   "detail": "status=ok identity=True MethodDef=433 有RVA=396 无RVA=37 体成功=396"
+  },
+  {
+   "id": "console-tables",
+   "name": "dnfile 表行数",
+   "status": "PASS",
+   "detail": "表行数核对 26 张；全部一致"
+  },
+  {
+   "id": "console-typedef",
+   "name": "dnfile TypeDef 逐行",
+   "status": "PASS",
+   "detail": "TypeDef 逐行核对 47 行；全部一致"
+  },
+  {
+   "id": "console-methoddef",
+   "name": "dnfile MethodDef 逐行",
+   "status": "PASS",
+   "detail": "MethodDef 逐行核对 433 行；全部一致"
+  },
+  {
+   "id": "console-offsets",
+   "name": "dnfile RVA→文件偏移",
+   "status": "PASS",
+   "detail": "方法体文件偏移核对 396 个；全部一致"
+  },
+  {
+   "id": "console-il",
+   "name": "dncil IL 边界逐条",
+   "status": "PASS",
+   "detail": "IL 边界逐条核对 120 个方法（前 120 个）；全部一致"
+  },
+  {
+   "id": "console-us",
+   "name": "#US 字符串字面量（dnfile）",
+   "status": "PASS",
+   "detail": "#US 条目 77（dnfile 逐个取值核对）；ldstr token 76 个；全部一致"
+  },
+  {
+   "id": "mscorlib-status",
+   "name": "状态与恒等式",
+   "status": "PASS",
+   "detail": "status=ok identity=True MethodDef=29257 有RVA=25315 无RVA=3942 体成功=25315"
+  },
+  {
+   "id": "mscorlib-tables",
+   "name": "dnfile 表行数",
+   "status": "PASS",
+   "detail": "表行数核对 31 张；全部一致"
+  },
+  {
+   "id": "mscorlib-typedef",
+   "name": "dnfile TypeDef 逐行",
+   "status": "PASS",
+   "detail": "TypeDef 逐行核对 3356 行；全部一致"
+  },
+  {
+   "id": "mscorlib-methoddef",
+   "name": "dnfile MethodDef 逐行",
+   "status": "PASS",
+   "detail": "MethodDef 逐行核对 29257 行；全部一致"
+  },
+  {
+   "id": "mscorlib-offsets",
+   "name": "dnfile RVA→文件偏移",
+   "status": "PASS",
+   "detail": "方法体文件偏移核对 25315 个；全部一致"
+  },
+  {
+   "id": "mscorlib-il",
+   "name": "dncil IL 边界逐条",
+   "status": "PASS",
+   "detail": "IL 边界逐条核对 120 个方法（前 120 个）；全部一致"
+  },
+  {
+   "id": "mscorlib-us",
+   "name": "#US 字符串字面量（dnfile）",
+   "status": "PASS",
+   "detail": "#US 条目 4725（dnfile 逐个取值核对）；ldstr token 4724 个；全部一致"
+  },
+  {
+   "id": "selfproof-il",
+   "name": "IL 边界检查器能失败",
+   "status": "PASS",
+   "detail": "干净=True，偏移+1=False，删一条=False（期望 True/False/False）"
+  },
+  {
+   "id": "selfproof-opcode",
+   "name": "未知 opcode 必须报不可解",
+   "status": "PASS",
+   "detail": "干净 err=None；末字节改 0xFF 后 err={'offset': 15, 'reason': 'unknown_opcode', 'byte': 'ff'}（期望 unknown_opcode@15）"
+  },
+  {
+   "id": "selfproof-offset",
+   "name": "方法体偏移检查器能失败",
+   "status": "PASS",
+   "detail": "干净=True，偏移+1=False（期望 True/False）"
+  },
+  {
+   "id": "selfproof-tables",
+   "name": "表行数检查器能失败",
+   "status": "PASS",
+   "detail": "干净=True，MethodDef+1=False（期望 True/False）"
+  },
+  {
+   "id": "funcreport-na",
+   "name": "funcreport 对 .NET 显式 not_applicable",
+   "status": "PASS",
+   "detail": "status=not_applicable 全节非present=True absence 覆盖 8 行；reason='该文件是 .NET 程序集（PE DataDirectory[14] 非空，CLI 头 RVA=0x2008）：方法体是'"
+  }
+ ],
+ "denominators": {
+  "sample": {
+   "methoddef_rows": 18,
+   "methods_with_rva": 15,
+   "methods_without_rva": 3,
+   "without_rva_by_reason": {
+    "abstract": 2,
+    "pinvoke": 1,
+    "runtime": 0,
+    "native": 0,
+    "unclassified": 0
+   },
+   "rva_mapped": 15,
+   "rva_unmapped": 0,
+   "body_ok": 15,
+   "body_bad_header": 0,
+   "body_code_truncated": 0,
+   "tiny_bodies": 12,
+   "fat_bodies": 3,
+   "methods_with_eh": 1,
+   "eh_clauses": 2,
+   "il_decoded": 15,
+   "il_undecodable": 0,
+   "il_instructions": 119,
+   "methods_identity_ok": true,
+   "rva_identity_ok": true,
+   "body_identity_ok": true,
+   "il_identity_ok": true,
+   "identity_ok": true,
+   "body_ratio": 0.8333333333333334,
+   "il_boundary_ratio": 1.0,
+   "types_typedef_rows": 6,
+   "types_pseudo_module": 1,
+   "types_named": 5,
+   "types_nested": 0,
+   "types_with_methods": 5,
+   "fields_rows": 4,
+   "params_rows": 9,
+   "interface_impls": 1,
+   "nested_class_rows": 0,
+   "detail_methods_stored": 15
+  },
+  "console": {
+   "methoddef_rows": 433,
+   "methods_with_rva": 396,
+   "methods_without_rva": 37,
+   "without_rva_by_reason": {
+    "abstract": 0,
+    "pinvoke": 33,
+    "runtime": 4,
+    "native": 0,
+    "unclassified": 0
+   },
+   "rva_mapped": 396,
+   "rva_unmapped": 0,
+   "body_ok": 396,
+   "body_bad_header": 0,
+   "body_code_truncated": 0,
+   "tiny_bodies": 256,
+   "fat_bodies": 140,
+   "methods_with_eh": 23,
+   "eh_clauses": 23,
+   "il_decoded": 396,
+   "il_undecodable": 0,
+   "il_instructions": 6592,
+   "methods_identity_ok": true,
+   "rva_identity_ok": true,
+   "body_identity_ok": true,
+   "il_identity_ok": true,
+   "identity_ok": true,
+   "body_ratio": 0.9145496535796767,
+   "il_boundary_ratio": 1.0,
+   "types_typedef_rows": 47,
+   "types_pseudo_module": 1,
+   "types_named": 46,
+   "types_nested": 18,
+   "types_with_methods": 26,
+   "fields_rows": 277,
+   "params_rows": 617,
+   "interface_impls": 1,
+   "nested_class_rows": 18,
+   "detail_methods_stored": 396
+  },
+  "mscorlib": {
+   "methoddef_rows": 29257,
+   "methods_with_rva": 25315,
+   "methods_without_rva": 3942,
+   "without_rva_by_reason": {
+    "abstract": 2222,
+    "pinvoke": 563,
+    "runtime": 301,
+    "native": 0,
+    "unclassified": 856
+   },
+   "rva_mapped": 25315,
+   "rva_unmapped": 0,
+   "body_ok": 25315,
+   "body_bad_header": 0,
+   "body_code_truncated": 0,
+   "tiny_bodies": 16029,
+   "fat_bodies": 9286,
+   "methods_with_eh": 1651,
+   "eh_clauses": 2164,
+   "il_decoded": 25315,
+   "il_undecodable": 0,
+   "il_instructions": 592206,
+   "methods_identity_ok": true,
+   "rva_identity_ok": true,
+   "body_identity_ok": true,
+   "il_identity_ok": true,
+   "identity_ok": true,
+   "body_ratio": 0.8652630139795604,
+   "il_boundary_ratio": 1.0,
+   "types_typedef_rows": 3356,
+   "types_pseudo_module": 1,
+   "types_named": 3355,
+   "types_nested": 660,
+   "types_with_methods": 2623,
+   "fields_rows": 14718,
+   "params_rows": 38810,
+   "interface_impls": 1394,
+   "nested_class_rows": 660,
+   "detail_methods_stored": 25315
+  }
+ },
+ "tables": {
+  "sample": {
+   "Module": 1,
+   "TypeRef": 7,
+   "TypeDef": 6,
+   "Field": 4,
+   "MethodDef": 18,
+   "Param": 9,
+   "InterfaceImpl": 1,
+   "MemberRef": 11,
+   "Constant": 1,
+   "CustomAttribute": 2,
+   "StandAloneSig": 3,
+   "PropertyMap": 1,
+   "Property": 1,
+   "MethodSemantics": 1,
+   "ModuleRef": 1,
+   "TypeSpec": 2,
+   "ImplMap": 1,
+   "Assembly": 1,
+   "AssemblyRef": 1,
+   "GenericParam": 1
+  },
+  "console": {
+   "Module": 1,
+   "TypeRef": 116,
+   "TypeDef": 47,
+   "Field": 277,
+   "MethodDef": 433,
+   "Param": 617,
+   "InterfaceImpl": 1,
+   "MemberRef": 237,
+   "Constant": 191,
+   "CustomAttribute": 331,
+   "FieldMarshal": 21,
+   "ClassLayout": 3,
+   "StandAloneSig": 73,
+   "EventMap": 1,
+   "Event": 1,
+   "PropertyMap": 10,
+   "Property": 109,
+   "MethodSemantics": 141,
+   "ModuleRef": 2,
+   "TypeSpec": 9,
+   "ImplMap": 33,
+   "Assembly": 1,
+   "AssemblyRef": 5,
+   "ManifestResource": 2,
+   "NestedClass": 18,
+   "MethodSpec": 19
+  },
+  "mscorlib": {
+   "Module": 1,
+   "TypeDef": 3356,
+   "Field": 14718,
+   "MethodDef": 29257,
+   "Param": 38810,
+   "InterfaceImpl": 1394,
+   "MemberRef": 3429,
+   "Constant": 6293,
+   "CustomAttribute": 20891,
+   "FieldMarshal": 826,
+   "DeclSecurity": 462,
+   "ClassLayout": 63,
+   "FieldLayout": 78,
+   "StandAloneSig": 3908,
+   "EventMap": 15,
+   "Event": 33,
+   "PropertyMap": 1251,
+   "Property": 5011,
+   "MethodSemantics": 5986,
+   "MethodImpl": 1318,
+   "ModuleRef": 17,
+   "TypeSpec": 1261,
+   "ImplMap": 563,
+   "FieldRVA": 128,
+   "Assembly": 1,
+   "File": 5,
+   "ManifestResource": 8,
+   "NestedClass": 660,
+   "GenericParam": 1783,
+   "MethodSpec": 656,
+   "GenericParamConstraint": 98
+  }
+ }
+}

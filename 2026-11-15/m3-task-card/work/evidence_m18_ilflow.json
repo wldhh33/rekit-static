@@ -1,0 +1,599 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "flow-status",
+   "name": "状态与分母恒等式",
+   "status": "PASS",
+   "detail": "status=ok 方法=20 有体=19 分析=19 部分=0 空=0 失败=0；调用=17(internal=8 external=9 unresolved=0)；分支=6 目标=6；EH=3；块=30 边=11"
+  },
+  {
+   "id": "flow-branch-denom",
+   "name": "dncil 全量分支分母",
+   "status": "PASS",
+   "detail": "dncil 全量：分支形态 {'short': 3, 'long': 1, 'leave_short': 2} / 目标 6（{'instruction': 6}） vs 本层 {'short': 3, 'long': 1, 'leave_short': 2} / 6（{'instruction': 6, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "flow-branch",
+   "name": "dncil 逐方法分支目标",
+   "status": "PASS",
+   "detail": "逐方法比对 19 个方法 / 6 个目标（全量存储）；全部一致"
+  },
+  {
+   "id": "flow-blocks-denom",
+   "name": "dncil 独立切块分母",
+   "status": "PASS",
+   "detail": "dncil 独立切块：块 30 / 边 11（{'branch': 4, 'fallthrough': 5, 'leave': 2}）/ 不可达 3 vs 本层 30 / 11 / 3（{'branch': 4, 'fallthrough': 5, 'leave': 2}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "flow-blocks",
+   "name": "dncil 逐方法块/边/可达",
+   "status": "PASS",
+   "detail": "块/边逐方法比对 19 个方法 / 30 块（全量存储）；全部一致"
+  },
+  {
+   "id": "flow-eh-denom",
+   "name": "dncil 全量 EH 分母",
+   "status": "PASS",
+   "detail": "dncil 全量：EH 子句 3（{'catch': 2, 'finally': 1}） vs 本层 3（{'catch': 2, 'finally': 1}）；空体方法排除 0；全部一致"
+  },
+  {
+   "id": "flow-eh",
+   "name": "dncil 逐方法 EH 结构",
+   "status": "PASS",
+   "detail": "EH 逐方法比对 19 个方法 / 3 条子句（全量存储）；全部一致"
+  },
+  {
+   "id": "flow-call-denom",
+   "name": "dncil 全量调用分母",
+   "status": "PASS",
+   "detail": "dncil 全量：调用 17（{'call': 9, 'ldftn': 1, 'newobj': 3, 'callvirt': 4}）/ token 表 {'MethodDef': 6, 'MemberRef': 10, 'MethodSpec': 1} vs 本层 17（{'call': 9, 'ldftn': 1, 'newobj': 3, 'callvirt': 4}）/ {'MethodDef': 6, 'MemberRef': 10, 'MethodSpec': 1}；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "flow-token",
+   "name": "dnfile 独立 token 解析",
+   "status": "PASS",
+   "detail": "token 独立核对 19 个方法 / 17 个调用点（去重 13 个 token；表行数 {'MethodDef': 20, 'MemberRef': 11, 'MethodSpec': 1, 'TypeRef': 8}）；全部一致"
+  },
+  {
+   "id": "flow-unres",
+   "name": "未解析行号越界复核",
+   "status": "PASS",
+   "detail": "row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致"
+  },
+  {
+   "id": "filter-status",
+   "name": "状态与分母恒等式",
+   "status": "PASS",
+   "detail": "status=ok 方法=5 有体=5 分析=5 部分=0 空=0 失败=0；调用=2(internal=1 external=0 unresolved=1)；分支=5 目标=5；EH=2；块=15 边=8"
+  },
+  {
+   "id": "filter-branch-denom",
+   "name": "dncil 全量分支分母",
+   "status": "PASS",
+   "detail": "dncil 全量：分支形态 {'short': 1, 'leave_short': 4} / 目标 5（{'instruction': 5}） vs 本层 {'short': 1, 'leave_short': 4} / 5（{'instruction': 5, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "filter-branch",
+   "name": "dncil 逐方法分支目标",
+   "status": "PASS",
+   "detail": "逐方法比对 5 个方法 / 5 个目标（全量存储）；全部一致"
+  },
+  {
+   "id": "filter-blocks-denom",
+   "name": "dncil 独立切块分母",
+   "status": "PASS",
+   "detail": "dncil 独立切块：块 15 / 边 8（{'branch': 1, 'fallthrough': 3, 'leave': 4}）/ 不可达 6 vs 本层 15 / 8 / 6（{'branch': 1, 'fallthrough': 3, 'leave': 4}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "filter-blocks",
+   "name": "dncil 逐方法块/边/可达",
+   "status": "PASS",
+   "detail": "块/边逐方法比对 5 个方法 / 15 块（全量存储）；全部一致"
+  },
+  {
+   "id": "filter-eh-denom",
+   "name": "dncil 全量 EH 分母",
+   "status": "PASS",
+   "detail": "dncil 全量：EH 子句 2（{'filter': 1, 'fault': 1}） vs 本层 2（{'filter': 1, 'fault': 1}）；空体方法排除 0；全部一致"
+  },
+  {
+   "id": "filter-eh",
+   "name": "dncil 逐方法 EH 结构",
+   "status": "PASS",
+   "detail": "EH 逐方法比对 5 个方法 / 2 条子句（全量存储）；全部一致"
+  },
+  {
+   "id": "filter-call-denom",
+   "name": "dncil 全量调用分母",
+   "status": "PASS",
+   "detail": "dncil 全量：调用 2（{'ldftn': 1, 'calli': 1}）/ token 表 {'MethodDef': 1, 'StandAloneSig': 1} vs 本层 2（{'ldftn': 1, 'calli': 1}）/ {'MethodDef': 1, 'StandAloneSig': 1}；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "filter-token",
+   "name": "dnfile 独立 token 解析",
+   "status": "PASS",
+   "detail": "token 独立核对 5 个方法 / 2 个调用点（去重 2 个 token；表行数 {'MethodDef': 5, 'MemberRef': 0, 'MethodSpec': 0, 'TypeRef': 1}）；全部一致"
+  },
+  {
+   "id": "filter-unres",
+   "name": "未解析行号越界复核",
+   "status": "PASS",
+   "detail": "row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致"
+  },
+  {
+   "id": "console-status",
+   "name": "状态与分母恒等式",
+   "status": "PASS",
+   "detail": "status=ok 方法=433 有体=396 分析=396 部分=0 空=0 失败=0；调用=1133(internal=572 external=561 unresolved=0)；分支=596 目标=599；EH=23；块=1372 边=1245"
+  },
+  {
+   "id": "console-branch-denom",
+   "name": "dncil 全量分支分母",
+   "status": "PASS",
+   "detail": "dncil 全量：分支形态 {'short': 556, 'leave_short': 24, 'leave_long': 2, 'long': 13, 'switch': 1} / 目标 599（{'instruction': 599}） vs 本层 {'short': 556, 'leave_short': 24, 'leave_long': 2, 'long': 13, 'switch': 1} / 599（{'instruction': 599, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "console-branch",
+   "name": "dncil 逐方法分支目标",
+   "status": "PASS",
+   "detail": "逐方法比对 396 个方法 / 599 个目标（存储前 2000 个有体方法）；全部一致"
+  },
+  {
+   "id": "console-blocks-denom",
+   "name": "dncil 独立切块分母",
+   "status": "PASS",
+   "detail": "dncil 独立切块：块 1372 / 边 1245（{'branch': 569, 'fallthrough': 646, 'leave': 26, 'switch': 4}）/ 不可达 63 vs 本层 1372 / 1245 / 63（{'branch': 569, 'fallthrough': 646, 'leave': 26, 'switch': 4}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "console-blocks",
+   "name": "dncil 逐方法块/边/可达",
+   "status": "PASS",
+   "detail": "块/边逐方法比对 396 个方法 / 1372 块（存储前 2000 个有体方法）；全部一致"
+  },
+  {
+   "id": "console-eh-denom",
+   "name": "dncil 全量 EH 分母",
+   "status": "PASS",
+   "detail": "dncil 全量：EH 子句 23（{'finally': 20, 'catch': 3}） vs 本层 23（{'finally': 20, 'catch': 3}）；空体方法排除 0；全部一致"
+  },
+  {
+   "id": "console-eh",
+   "name": "dncil 逐方法 EH 结构",
+   "status": "PASS",
+   "detail": "EH 逐方法比对 396 个方法 / 23 条子句（存储前 2000 个有体方法）；全部一致"
+  },
+  {
+   "id": "console-call-denom",
+   "name": "dncil 全量调用分母",
+   "status": "PASS",
+   "detail": "dncil 全量：调用 1133（{'call': 862, 'callvirt': 140, 'newobj': 130, 'ldftn': 1}）/ token 表 {'MemberRef': 514, 'MethodDef': 572, 'MethodSpec': 47} vs 本层 1133（{'call': 862, 'callvirt': 140, 'newobj': 130, 'ldftn': 1}）/ {'MemberRef': 514, 'MethodDef': 572, 'MethodSpec': 47}；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "console-token",
+   "name": "dnfile 独立 token 解析",
+   "status": "PASS",
+   "detail": "token 独立核对 396 个方法 / 1133 个调用点（去重 438 个 token；表行数 {'MethodDef': 433, 'MemberRef': 237, 'MethodSpec': 19, 'TypeRef': 116}）；全部一致"
+  },
+  {
+   "id": "console-unres",
+   "name": "未解析行号越界复核",
+   "status": "PASS",
+   "detail": "row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致"
+  },
+  {
+   "id": "mscorlib-status",
+   "name": "状态与分母恒等式",
+   "status": "PASS",
+   "detail": "status=ok 方法=29257 有体=25315 分析=25315 部分=0 空=0 失败=0；调用=93194(internal=93174 external=0 unresolved=20)；分支=51063 目标=52837；EH=2164；块=108267 边=107765"
+  },
+  {
+   "id": "mscorlib-branch-denom",
+   "name": "dncil 全量分支分母",
+   "status": "PASS",
+   "detail": "dncil 全量：分支形态 {'short': 44719, 'long': 3253, 'leave_short': 2663, 'switch': 234, 'leave_long': 194} / 目标 52837（{'instruction': 52837}） vs 本层 {'short': 44719, 'long': 3253, 'leave_short': 2663, 'switch': 234, 'leave_long': 194} / 52837（{'instruction': 52837, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "mscorlib-branch",
+   "name": "dncil 逐方法分支目标",
+   "status": "PASS",
+   "detail": "逐方法比对 2000 个方法 / 4100 个目标（存储前 2000 个有体方法）；全部一致"
+  },
+  {
+   "id": "mscorlib-blocks-denom",
+   "name": "dncil 独立切块分母",
+   "status": "PASS",
+   "detail": "dncil 独立切块：块 108267 / 边 107765（{'branch': 47972, 'fallthrough': 54928, 'leave': 2857, 'switch': 2008}）/ 不可达 5058 vs 本层 108267 / 107765 / 5058（{'branch': 47972, 'fallthrough': 54928, 'leave': 2857, 'switch': 2008}）；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "mscorlib-blocks",
+   "name": "dncil 逐方法块/边/可达",
+   "status": "PASS",
+   "detail": "块/边逐方法比对 2000 个方法 / 8291 块（存储前 2000 个有体方法）；全部一致"
+  },
+  {
+   "id": "mscorlib-eh-denom",
+   "name": "dncil 全量 EH 分母",
+   "status": "PASS",
+   "detail": "dncil 全量：EH 子句 2164（{'finally': 1465, 'catch': 692, 'fault': 7}） vs 本层 2164（{'finally': 1465, 'catch': 692, 'fault': 7}）；空体方法排除 0；全部一致"
+  },
+  {
+   "id": "mscorlib-eh",
+   "name": "dncil 逐方法 EH 结构",
+   "status": "PASS",
+   "detail": "EH 逐方法比对 2000 个方法 / 83 条子句（存储前 2000 个有体方法）；全部一致"
+  },
+  {
+   "id": "mscorlib-call-denom",
+   "name": "dncil 全量调用分母",
+   "status": "PASS",
+   "detail": "dncil 全量：调用 93194（{'call': 48838, 'callvirt': 30516, 'newobj': 13613, 'ldftn': 209, 'ldvirtftn': 18}）/ token 表 {'MethodDef': 85189, 'MemberRef': 6837, 'MethodSpec': 1168} vs 本层 93194（{'call': 48838, 'callvirt': 30516, 'newobj': 13613, 'ldftn': 209, 'ldvirtftn': 18}）/ {'MethodDef': 85189, 'MemberRef': 6837, 'MethodSpec': 1168}；部分方法排除 0；全部一致"
+  },
+  {
+   "id": "mscorlib-token",
+   "name": "dnfile 独立 token 解析",
+   "status": "PASS",
+   "detail": "token 独立核对 2000 个方法 / 7926 个调用点（去重 2012 个 token；表行数 {'MethodDef': 29257, 'MemberRef': 3429, 'MethodSpec': 656, 'TypeRef': 0}）；全部一致"
+  },
+  {
+   "id": "mscorlib-unres",
+   "name": "未解析行号越界复核",
+   "status": "PASS",
+   "detail": "row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致"
+  },
+  {
+   "id": "selfproof",
+   "name": "比对器可失败自证",
+   "status": "PASS",
+   "detail": "分支 干净=True 目标+1=False；token 干净=True 改名=True；EH 干净=True 删一条=False；块 干净=True 少一块=True；空比对保护=True；字节篡改 inside=True row_oob=True methoddef_row=True（期望 T/F/T/T/T/F/T/T/T/T/T/T）"
+  }
+ ],
+ "denominators": {
+  "flow": {
+   "branch_total": 6,
+   "switch_count": 0,
+   "switch_cases": 0,
+   "targets_total": 6,
+   "leave_into_region": 0,
+   "leave_exits_finally": 0,
+   "leave_in_filter": 0,
+   "call_total": 17,
+   "eh_clauses": 3,
+   "eh_bad_boundary": 0,
+   "eh_bad_range": 0,
+   "blocks_total": 30,
+   "edges_total": 11,
+   "unreachable_blocks": 3,
+   "methods_total": 20,
+   "methods_with_body": 19,
+   "methods_analyzed": 19,
+   "methods_partial": 0,
+   "methods_empty": 0,
+   "methods_identity_ok": true,
+   "methods_with_eh": 1,
+   "eh_clauses_declared": 3,
+   "tokens_internal": 8,
+   "tokens_external": 9,
+   "tokens_unresolved": 0,
+   "targets_valid": 6,
+   "targets_inside_instruction": 0,
+   "targets_outside_method": 0,
+   "targets_decode_error": 0,
+   "token_identity_ok": true,
+   "target_identity_ok": true,
+   "eh_identity_ok": true,
+   "block_identity_ok": true,
+   "edge_identity_ok": true,
+   "identity_ok": true,
+   "method_errors": 0,
+   "ratios": {
+    "internal_over_tokens": 0.47058823529411764,
+    "external_over_tokens": 0.5294117647058824,
+    "unresolved_over_tokens": 0.0,
+    "targets_valid_over_total": 1.0,
+    "eh_boundary_ok_over_clauses": 1.0,
+    "blocks_reachable_over_total": 0.9
+   },
+   "call_by_opcode": {
+    "call": 9,
+    "ldftn": 1,
+    "newobj": 3,
+    "callvirt": 4
+   },
+   "token_by_table": {
+    "MethodDef": 6,
+    "MemberRef": 10,
+    "MethodSpec": 1
+   },
+   "unresolved_by_reason": {},
+   "branch_by_form": {
+    "short": 3,
+    "long": 1,
+    "leave_short": 2
+   },
+   "target_checks": {
+    "instruction": 6,
+    "inside_instruction": 0,
+    "outside_method": 0
+   },
+   "eh_by_kind": {
+    "catch": 2,
+    "finally": 1
+   },
+   "catch_tokens_by_status": {
+    "external": 2
+   },
+   "edges_by_kind": {
+    "branch": 4,
+    "fallthrough": 5,
+    "leave": 2
+   },
+   "parent_counts": {
+    "typespec": 5,
+    "typespec_external": 4,
+    "typeref": 3,
+    "typeref_external": 3,
+    "typespec_internal": 1
+   }
+  },
+  "filter": {
+   "branch_total": 5,
+   "switch_count": 0,
+   "switch_cases": 0,
+   "targets_total": 5,
+   "leave_into_region": 0,
+   "leave_exits_finally": 0,
+   "leave_in_filter": 0,
+   "call_total": 2,
+   "eh_clauses": 2,
+   "eh_bad_boundary": 0,
+   "eh_bad_range": 0,
+   "blocks_total": 15,
+   "edges_total": 8,
+   "unreachable_blocks": 6,
+   "methods_total": 5,
+   "methods_with_body": 5,
+   "methods_analyzed": 5,
+   "methods_partial": 0,
+   "methods_empty": 0,
+   "methods_identity_ok": true,
+   "methods_with_eh": 2,
+   "eh_clauses_declared": 2,
+   "tokens_internal": 1,
+   "tokens_external": 0,
+   "tokens_unresolved": 1,
+   "targets_valid": 5,
+   "targets_inside_instruction": 0,
+   "targets_outside_method": 0,
+   "targets_decode_error": 0,
+   "token_identity_ok": true,
+   "target_identity_ok": true,
+   "eh_identity_ok": true,
+   "block_identity_ok": true,
+   "edge_identity_ok": true,
+   "identity_ok": true,
+   "method_errors": 0,
+   "ratios": {
+    "internal_over_tokens": 0.5,
+    "external_over_tokens": 0.0,
+    "unresolved_over_tokens": 0.5,
+    "targets_valid_over_total": 1.0,
+    "eh_boundary_ok_over_clauses": 1.0,
+    "blocks_reachable_over_total": 0.6
+   },
+   "call_by_opcode": {
+    "ldftn": 1,
+    "calli": 1
+   },
+   "token_by_table": {
+    "MethodDef": 1,
+    "StandAloneSig": 1
+   },
+   "unresolved_by_reason": {
+    "token_kind_mismatch": 1
+   },
+   "branch_by_form": {
+    "short": 1,
+    "leave_short": 4
+   },
+   "target_checks": {
+    "instruction": 5,
+    "inside_instruction": 0,
+    "outside_method": 0
+   },
+   "eh_by_kind": {
+    "filter": 1,
+    "fault": 1
+   },
+   "catch_tokens_by_status": {},
+   "edges_by_kind": {
+    "branch": 1,
+    "fallthrough": 3,
+    "leave": 4
+   },
+   "parent_counts": {}
+  },
+  "console": {
+   "branch_total": 596,
+   "switch_count": 1,
+   "switch_cases": 4,
+   "targets_total": 599,
+   "leave_into_region": 0,
+   "leave_exits_finally": 0,
+   "leave_in_filter": 0,
+   "call_total": 1133,
+   "eh_clauses": 23,
+   "eh_bad_boundary": 0,
+   "eh_bad_range": 0,
+   "blocks_total": 1372,
+   "edges_total": 1245,
+   "unreachable_blocks": 63,
+   "methods_total": 433,
+   "methods_with_body": 396,
+   "methods_analyzed": 396,
+   "methods_partial": 0,
+   "methods_empty": 0,
+   "methods_identity_ok": true,
+   "methods_with_eh": 23,
+   "eh_clauses_declared": 23,
+   "tokens_internal": 572,
+   "tokens_external": 561,
+   "tokens_unresolved": 0,
+   "targets_valid": 599,
+   "targets_inside_instruction": 0,
+   "targets_outside_method": 0,
+   "targets_decode_error": 0,
+   "token_identity_ok": true,
+   "target_identity_ok": true,
+   "eh_identity_ok": true,
+   "block_identity_ok": true,
+   "edge_identity_ok": true,
+   "identity_ok": true,
+   "method_errors": 0,
+   "ratios": {
+    "internal_over_tokens": 0.5048543689320388,
+    "external_over_tokens": 0.49514563106796117,
+    "unresolved_over_tokens": 0.0,
+    "targets_valid_over_total": 1.0,
+    "eh_boundary_ok_over_clauses": 1.0,
+    "blocks_reachable_over_total": 0.9540816326530612
+   },
+   "call_by_opcode": {
+    "call": 862,
+    "callvirt": 140,
+    "newobj": 130,
+    "ldftn": 1
+   },
+   "token_by_table": {
+    "MemberRef": 514,
+    "MethodDef": 572,
+    "MethodSpec": 47
+   },
+   "unresolved_by_reason": {},
+   "branch_by_form": {
+    "short": 556,
+    "leave_short": 24,
+    "leave_long": 2,
+    "long": 13,
+    "switch": 1
+   },
+   "target_checks": {
+    "instruction": 599,
+    "inside_instruction": 0,
+    "outside_method": 0
+   },
+   "eh_by_kind": {
+    "finally": 20,
+    "catch": 3
+   },
+   "catch_tokens_by_status": {
+    "external": 3
+   },
+   "edges_by_kind": {
+    "branch": 569,
+    "fallthrough": 646,
+    "leave": 26,
+    "switch": 4
+   },
+   "parent_counts": {
+    "typeref": 179,
+    "typeref_external": 179,
+    "typespec": 22,
+    "typespec_external": 22
+   }
+  },
+  "mscorlib": {
+   "branch_total": 51063,
+   "switch_count": 234,
+   "switch_cases": 2008,
+   "targets_total": 52837,
+   "leave_into_region": 0,
+   "leave_exits_finally": 0,
+   "leave_in_filter": 0,
+   "call_total": 93194,
+   "eh_clauses": 2164,
+   "eh_bad_boundary": 0,
+   "eh_bad_range": 0,
+   "blocks_total": 108267,
+   "edges_total": 107765,
+   "unreachable_blocks": 5058,
+   "methods_total": 29257,
+   "methods_with_body": 25315,
+   "methods_analyzed": 25315,
+   "methods_partial": 0,
+   "methods_empty": 0,
+   "methods_identity_ok": true,
+   "methods_with_eh": 1651,
+   "eh_clauses_declared": 2164,
+   "tokens_internal": 93174,
+   "tokens_external": 0,
+   "tokens_unresolved": 20,
+   "targets_valid": 52837,
+   "targets_inside_instruction": 0,
+   "targets_outside_method": 0,
+   "targets_decode_error": 0,
+   "token_identity_ok": true,
+   "target_identity_ok": true,
+   "eh_identity_ok": true,
+   "block_identity_ok": true,
+   "edge_identity_ok": true,
+   "identity_ok": true,
+   "method_errors": 0,
+   "ratios": {
+    "internal_over_tokens": 0.9997853939094792,
+    "external_over_tokens": 0.0,
+    "unresolved_over_tokens": 0.00021460609052084898,
+    "targets_valid_over_total": 1.0,
+    "eh_boundary_ok_over_clauses": 1.0,
+    "blocks_reachable_over_total": 0.9532821635401368
+   },
+   "call_by_opcode": {
+    "call": 48838,
+    "callvirt": 30516,
+    "newobj": 13613,
+    "ldftn": 209,
+    "ldvirtftn": 18
+   },
+   "token_by_table": {
+    "MethodDef": 85189,
+    "MemberRef": 6837,
+    "MethodSpec": 1168
+   },
+   "unresolved_by_reason": {
+    "bad_parent": 20
+   },
+   "branch_by_form": {
+    "short": 44719,
+    "long": 3253,
+    "leave_short": 2663,
+    "switch": 234,
+    "leave_long": 194
+   },
+   "target_checks": {
+    "instruction": 52837,
+    "inside_instruction": 0,
+    "outside_method": 0
+   },
+   "eh_by_kind": {
+    "finally": 1465,
+    "catch": 692,
+    "fault": 7
+   },
+   "catch_tokens_by_status": {
+    "internal": 692
+   },
+   "edges_by_kind": {
+    "branch": 47972,
+    "fallthrough": 54928,
+    "leave": 2857,
+    "switch": 2008
+   },
+   "parent_counts": {
+    "typespec": 2527,
+    "typespec_internal": 2523,
+    "typespec_unresolved": 4
+   }
+  }
+ }
+}

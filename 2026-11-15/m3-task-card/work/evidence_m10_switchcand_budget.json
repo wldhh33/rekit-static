@@ -1,0 +1,43 @@
+{
+ "sample": "samples/m9/elf_jumpdense_python310_stripped",
+ "insns": 627658,
+ "full": {
+  "analyzed": 417,
+  "skipped": 0,
+  "coverage": 1.0,
+  "candidates": 104,
+  "promoted": 0,
+  "steps_used": 53373
+ },
+ "budget_50000": {
+  "analyzed": 384,
+  "skipped": 33,
+  "coverage": 0.920863309352518,
+  "candidates": 57,
+  "promoted": 0,
+  "steps_used": 49998,
+  "deterministic": true,
+  "skip_reasons": [
+   "step_budget_exhausted"
+  ]
+ },
+ "budget_0": {
+  "analyzed": 0,
+  "skipped": 417,
+  "coverage": 0.0,
+  "candidates": 0,
+  "promoted": 0,
+  "steps_used": 0,
+  "functions_out": 0
+ },
+ "budget_0_bin_ls": {
+  "analyzed": 0,
+  "skipped": 9,
+  "coverage": 0.0,
+  "candidates": 0,
+  "promoted": 0,
+  "steps_used": 0,
+  "functions_out": 0
+ },
+ "caveat": "skipped 是第三类：既不算作已分析，也不算作无候选；候选/升格比率分母只含 functions_analyzed，且必须同时报 analysis_coverage"
+}

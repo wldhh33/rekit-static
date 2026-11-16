@@ -1,0 +1,265 @@
+{
+ "schema": "vharness_run/1",
+ "suites": [
+  {
+   "schema": "vharness/1",
+   "suite": "verify_c4_alignment.py",
+   "started_at": "2026-11-16T23:07:21",
+   "duration_s": 39.06,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_callgraph.py",
+   "started_at": "2026-11-16T23:08:01",
+   "duration_s": 1.63,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_expr.py",
+   "started_at": "2026-11-16T23:08:02",
+   "duration_s": 42.11,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）"
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "FAIL",
+     "reason_code": "selfproof_missing",
+     "detail": "该脚本没有自证（sp=None）"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 2,
+    "fail": 1,
+    "env_skip": 0
+   },
+   "exit": 1,
+   "legacy_exit": 0,
+   "last_line": "PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_funcreport.py",
+   "started_at": "2026-11-16T23:08:44",
+   "duration_s": 36.66,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS",
+    "legacy_counts": {
+     "checks": 16,
+     "pass": 16,
+     "fail": 0,
+     "skip": 0
+    },
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:检查项",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=16（检查项）"
+    },
+    {
+     "id": "legacy_summary",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "== 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_struct.py",
+   "started_at": "2026-11-16T23:09:21",
+   "duration_s": 18.8,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "结果: PASS",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "结果: PASS"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "结果: PASS"
+  },
+  {
+   "schema": "vharness/1",
+   "suite": "verify_switchcand.py",
+   "started_at": "2026-11-16T23:09:40",
+   "duration_s": 57.61,
+   "meta": {
+    "legacy_exit": 0,
+    "last_line": "PASS（负向基线 通过；收益数字见上，不静默取舍）",
+    "selftest_exit": 0
+   },
+   "requires_missing": [],
+   "cases": [
+    {
+     "id": "nonempty:汇总行",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "分母=1（汇总行）"
+    },
+    {
+     "id": "legacy_exit",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "PASS（负向基线 通过；收益数字见上，不静默取舍）"
+    },
+    {
+     "id": "selfproof",
+     "verdict": "PASS",
+     "reason_code": null,
+     "detail": "--selftest exit=0（期望 0）标记命中=True"
+    }
+   ],
+   "totals": {
+    "cases": 3,
+    "pass": 3,
+    "fail": 0,
+    "env_skip": 0
+   },
+   "exit": 0,
+   "legacy_exit": 0,
+   "last_line": "PASS（负向基线 通过；收益数字见上，不静默取舍）"
+  }
+ ],
+ "totals": {
+  "suites": 6,
+  "legacy_pass": 6,
+  "pass": 5,
+  "fail": 1,
+  "env_skip": 0
+ },
+ "duration_s": 195.9,
+ "exit": 1
+}

@@ -1,0 +1,55 @@
+dyn_pie                           0.0s
+dyn_nopie                         0.0s
+dyn_static                        2.0s
+dyn_execstack                     0.0s
+dyn_norelro                       0.0s
+bin_ls.elf                        0.5s
+hello_go_linux                    4.1s
+busybox-1.35.0-musl-x86_64        0.1s
+upx_dyn_pie                       0.0s
+upx_cli-64.exe                    0.0s
+upx_putty-64bit.exe               0.0s
+cli-64.exe                        0.0s
+minipe.exe                        0.0s
+minidll.dll                       0.0s
+minipe_fakerich.exe               0.0s
+hello_go.exe                      4.4s
+hello_rust.exe                    0.6s
+putty-64bit.exe                   7.4s
+WROTE d:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\evidence_m8close_snapshot.json
+{
+  "strings_total": 13829,
+  "strings_unique": 2266,
+  "strings_multi": 434,
+  "strings_no_site": 11129,
+  "reason_cross_section": 262,
+  "reason_undecoded": 0,
+  "reason_indirect": 514,
+  "reason_no_evidence": 10353,
+  "sites_total": 3732,
+  "sites_rip_mem": 2,
+  "sites_lea_rip": 3727,
+  "sites_imm": 3,
+  "sites_without_function": 0,
+  "suffix_refs": 556,
+  "unlifted": 29688,
+  "rejected_binary": 31882,
+  "rejected_short": 116695,
+  "rejected_high": 22728,
+  "no_nul_tail": 2,
+  "cross_checked": 0,
+  "cross_domain_checked": 3691,
+  "cross_conflicts": 0,
+  "cf_sites": 48398,
+  "cf_facts_before": 167965,
+  "cf_facts_after": 135851,
+  "cf_abstains": 83718,
+  "cf_cross_facts": 202,
+  "cf_cross_abstains": 388,
+  "params_bound": 12272,
+  "params_partial": 3530,
+  "params_abstained": 37891,
+  "bound_pieces": 17506,
+  "samples_callfacts": 14,
+  "samples_dwarf": 2
+}

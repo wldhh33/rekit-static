@@ -1,0 +1,4 @@
+status.py 可失败自证（临时工作区，不触碰真实文件）
+[A 无 HANDOFF] exit=1 | [FAIL] HANDOFF.md 缺失 -> 先按模板补齐再开工
+[B 空段] exit=1 | [FAIL] HANDOFF: 空段=3. 已否决方案
+[C 完整] exit=0 | [PASS] HANDOFF: 6/6 段非空, 13 行

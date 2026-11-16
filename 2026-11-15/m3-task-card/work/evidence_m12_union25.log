@@ -1,0 +1,32 @@
+[1/25] dyn_pie 56 -> 56 (+0) 0.1s
+[2/25] dyn_nopie 53 -> 53 (+0) 0.1s
+[3/25] dyn_static 94765 -> 94765 (+0) 1.3s
+[4/25] dyn_execstack 59 -> 59 (+0) 0.1s
+[5/25] dyn_norelro 56 -> 56 (+0) 0.1s
+[6/25] bin_ls.elf 17475 -> 17475 (+0) 0.2s
+[7/25] hello_go_linux 138224 -> 138292 (+68) 1.8s
+[8/25] busybox-1.35.0-musl-x86_64 305 -> 305 (+0) 1.3s
+[9/25] upx_dyn_pie None -> None (+0) 0.0s
+[10/25] upx_cli-64.exe None -> None (+0) 0.0s
+[11/25] upx_putty-64bit.exe None -> None (+0) 0.0s
+[12/25] cli-64.exe 1525 -> 1525 (+0) 0.1s
+[13/25] minipe.exe 1 -> 1 (+0) 0.1s
+[14/25] minidll.dll 1 -> 1 (+0) 0.1s
+[15/25] minipe_fakerich.exe None -> None (+0) 0.0s
+[16/25] hello_go.exe 143525 -> 147351 (+3826) 2.1s
+[17/25] hello_rust.exe 22582 -> 22582 (+0) 0.3s
+[18/25] putty-64bit.exe 220256 -> 220256 (+0) 3.0s
+[19/25] elf_plugin_liblua54_stripped.so 36574 -> 36574 (+0) 0.5s
+[20/25] elf_jumpdense_python310_stripped 627658 -> 627658 (+0) 10.2s
+[21/25] elf_medium_cc1_stripped 4049517 -> 4049517 (+0) 145.5s
+[22/25] elf_medium_lto1_stripped 3910063 -> 3910063 (+0) 132.7s
+[23/25] elf_medium_synth_go_stripped 76168 -> 748093 (+671925) 11.0s
+[24/25] pe_medium_synth_go_stripped.exe 738852 -> 750109 (+11257) 12.8s
+[25/25] pe_medium_gdb181.exe 1542812 -> 1542812 (+0) 30.3s
+
+NEW union25 12307603/15313023=0.803734  OLD 11620527/15313023=0.758866  delta +687076  353.5s
+changed samples: 4
+  d:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work/samples/hello_go_linux +68
+  d:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work/samples/hello_go.exe +3826
+  samples/m9/elf_medium_synth_go_stripped +671925
+  samples/m9/pe_medium_synth_go_stripped.exe +11257

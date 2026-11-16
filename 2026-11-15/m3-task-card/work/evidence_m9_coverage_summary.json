@@ -1,0 +1,818 @@
+{
+ "generated_at": "2026-11-16",
+ "denominator_scope": "分母 = GNU objdump 2.47 对同一文件、同一节地址范围 [VA, VA+size) 用 `objdump -d -M intel` 列出的指令条数（外部工具独立计数；不以 recdesc 自身解出的条数为分母）",
+ "numerator_scope": "分子 = recdesc 已解出且与 objdump 同起始地址、同长度的指令条数",
+ "aggregates": {
+  "old18_full": {
+   "scope": "full",
+   "sample_set": null,
+   "note": "M8 冻结清单 18 样本（4 个无 .text 的加壳样本不计入分母）",
+   "samples_total": 18,
+   "samples_measured": 14,
+   "samples_unavailable": 4,
+   "unavailable": [
+    {
+     "path": "tests/samples/fingerprint/upx/upx_dyn_pie",
+     "error": null
+    },
+    {
+     "path": "tests/samples/fingerprint/upx/upx_cli-64.exe",
+     "error": null
+    },
+    {
+     "path": "tests/samples/fingerprint/upx/upx_putty-64bit.exe",
+     "error": null
+    },
+    {
+     "path": "tests/fixtures/minipe_fakerich.exe",
+     "error": null
+    }
+   ],
+   "numerator": 638883,
+   "denominator": 1028253,
+   "ratio": 0.6213286029800059,
+   "denominator_scope": "分母 = GNU objdump 2.47 对同一文件、同一节地址范围 [VA, VA+size) 用 `objdump -d -M intel` 列出的指令条数（外部工具独立计数；不以 recdesc 自身解出的条数为分母）",
+   "numerator_scope": "分子 = recdesc 已解出且与 objdump 同起始地址、同长度的指令条数",
+   "identity_ok": true,
+   "rows": [
+    {
+     "path": "dyn_pie",
+     "numerator": 56,
+     "denominator": 64,
+     "ratio": 0.875
+    },
+    {
+     "path": "dyn_nopie",
+     "numerator": 53,
+     "denominator": 65,
+     "ratio": 0.8153846153846154
+    },
+    {
+     "path": "dyn_static",
+     "numerator": 94765,
+     "denominator": 113924,
+     "ratio": 0.8318264808117692
+    },
+    {
+     "path": "dyn_execstack",
+     "numerator": 59,
+     "denominator": 67,
+     "ratio": 0.8805970149253731
+    },
+    {
+     "path": "dyn_norelro",
+     "numerator": 56,
+     "denominator": 68,
+     "ratio": 0.8235294117647058
+    },
+    {
+     "path": "bin_ls.elf",
+     "numerator": 17475,
+     "denominator": 22523,
+     "ratio": 0.7758735514807086
+    },
+    {
+     "path": "hello_go_linux",
+     "numerator": 138224,
+     "denominator": 171832,
+     "ratio": 0.8044136132967085
+    },
+    {
+     "path": "busybox-1.35.0-musl-x86_64",
+     "numerator": 305,
+     "denominator": 245678,
+     "ratio": 0.0012414624020058776
+    },
+    {
+     "path": "upx_dyn_pie",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "upx_cli-64.exe",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "upx_putty-64bit.exe",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "cli-64.exe",
+     "numerator": 1525,
+     "denominator": 1694,
+     "ratio": 0.9002361275088547
+    },
+    {
+     "path": "minipe.exe",
+     "numerator": 1,
+     "denominator": 1,
+     "ratio": 1.0
+    },
+    {
+     "path": "minidll.dll",
+     "numerator": 1,
+     "denominator": 9,
+     "ratio": 0.1111111111111111
+    },
+    {
+     "path": "minipe_fakerich.exe",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "hello_go.exe",
+     "numerator": 143525,
+     "denominator": 182854,
+     "ratio": 0.7849158344909053
+    },
+    {
+     "path": "hello_rust.exe",
+     "numerator": 22582,
+     "denominator": 26353,
+     "ratio": 0.8569043372671044
+    },
+    {
+     "path": "putty-64bit.exe",
+     "numerator": 220256,
+     "denominator": 263121,
+     "ratio": 0.8370901600404377
+    }
+   ]
+  },
+  "new7_full": {
+   "scope": "full",
+   "sample_set": null,
+   "note": "M9 新增 7 样本全量",
+   "samples_total": 7,
+   "samples_measured": 7,
+   "samples_unavailable": 0,
+   "unavailable": [],
+   "numerator": 10981644,
+   "denominator": 14284770,
+   "ratio": 0.7687658954256876,
+   "denominator_scope": "分母 = GNU objdump 2.47 对同一文件、同一节地址范围 [VA, VA+size) 用 `objdump -d -M intel` 列出的指令条数（外部工具独立计数；不以 recdesc 自身解出的条数为分母）",
+   "numerator_scope": "分子 = recdesc 已解出且与 objdump 同起始地址、同长度的指令条数",
+   "identity_ok": true,
+   "rows": [
+    {
+     "path": "elf_plugin_liblua54_stripped.so",
+     "numerator": 36574,
+     "denominator": 47339,
+     "ratio": 0.772597646760599
+    },
+    {
+     "path": "elf_jumpdense_python310_stripped",
+     "numerator": 627658,
+     "denominator": 684728,
+     "ratio": 0.9166530359500414
+    },
+    {
+     "path": "elf_medium_cc1_stripped",
+     "numerator": 4049517,
+     "denominator": 5063038,
+     "ratio": 0.799819594480626
+    },
+    {
+     "path": "elf_medium_lto1_stripped",
+     "numerator": 3910063,
+     "denominator": 4863491,
+     "ratio": 0.8039622156183696
+    },
+    {
+     "path": "elf_medium_synth_go_stripped",
+     "numerator": 76168,
+     "denominator": 923970,
+     "ratio": 0.08243557691267032
+    },
+    {
+     "path": "pe_medium_synth_go_stripped.exe",
+     "numerator": 738852,
+     "denominator": 925712,
+     "ratio": 0.7981445633199095
+    },
+    {
+     "path": "pe_medium_gdb181.exe",
+     "numerator": 1542812,
+     "denominator": 1776492,
+     "ratio": 0.8684598635963461
+    }
+   ]
+  },
+  "union25_full": {
+   "scope": "full",
+   "sample_set": null,
+   "note": "合并 25 样本（旧 18 + 新 7）；4 个无 .text 样本不计入分母",
+   "samples_total": 25,
+   "samples_measured": 21,
+   "samples_unavailable": 4,
+   "unavailable": [
+    {
+     "path": "tests/samples/fingerprint/upx/upx_dyn_pie",
+     "error": null
+    },
+    {
+     "path": "tests/samples/fingerprint/upx/upx_cli-64.exe",
+     "error": null
+    },
+    {
+     "path": "tests/samples/fingerprint/upx/upx_putty-64bit.exe",
+     "error": null
+    },
+    {
+     "path": "tests/fixtures/minipe_fakerich.exe",
+     "error": null
+    }
+   ],
+   "numerator": 11620527,
+   "denominator": 15313023,
+   "ratio": 0.7588656400503023,
+   "denominator_scope": "分母 = GNU objdump 2.47 对同一文件、同一节地址范围 [VA, VA+size) 用 `objdump -d -M intel` 列出的指令条数（外部工具独立计数；不以 recdesc 自身解出的条数为分母）",
+   "numerator_scope": "分子 = recdesc 已解出且与 objdump 同起始地址、同长度的指令条数",
+   "identity_ok": true,
+   "rows": [
+    {
+     "path": "dyn_pie",
+     "numerator": 56,
+     "denominator": 64,
+     "ratio": 0.875
+    },
+    {
+     "path": "dyn_nopie",
+     "numerator": 53,
+     "denominator": 65,
+     "ratio": 0.8153846153846154
+    },
+    {
+     "path": "dyn_static",
+     "numerator": 94765,
+     "denominator": 113924,
+     "ratio": 0.8318264808117692
+    },
+    {
+     "path": "dyn_execstack",
+     "numerator": 59,
+     "denominator": 67,
+     "ratio": 0.8805970149253731
+    },
+    {
+     "path": "dyn_norelro",
+     "numerator": 56,
+     "denominator": 68,
+     "ratio": 0.8235294117647058
+    },
+    {
+     "path": "bin_ls.elf",
+     "numerator": 17475,
+     "denominator": 22523,
+     "ratio": 0.7758735514807086
+    },
+    {
+     "path": "hello_go_linux",
+     "numerator": 138224,
+     "denominator": 171832,
+     "ratio": 0.8044136132967085
+    },
+    {
+     "path": "busybox-1.35.0-musl-x86_64",
+     "numerator": 305,
+     "denominator": 245678,
+     "ratio": 0.0012414624020058776
+    },
+    {
+     "path": "upx_dyn_pie",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "upx_cli-64.exe",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "upx_putty-64bit.exe",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "cli-64.exe",
+     "numerator": 1525,
+     "denominator": 1694,
+     "ratio": 0.9002361275088547
+    },
+    {
+     "path": "minipe.exe",
+     "numerator": 1,
+     "denominator": 1,
+     "ratio": 1.0
+    },
+    {
+     "path": "minidll.dll",
+     "numerator": 1,
+     "denominator": 9,
+     "ratio": 0.1111111111111111
+    },
+    {
+     "path": "minipe_fakerich.exe",
+     "numerator": null,
+     "denominator": null,
+     "ratio": null
+    },
+    {
+     "path": "hello_go.exe",
+     "numerator": 143525,
+     "denominator": 182854,
+     "ratio": 0.7849158344909053
+    },
+    {
+     "path": "hello_rust.exe",
+     "numerator": 22582,
+     "denominator": 26353,
+     "ratio": 0.8569043372671044
+    },
+    {
+     "path": "putty-64bit.exe",
+     "numerator": 220256,
+     "denominator": 263121,
+     "ratio": 0.8370901600404377
+    },
+    {
+     "path": "elf_plugin_liblua54_stripped.so",
+     "numerator": 36574,
+     "denominator": 47339,
+     "ratio": 0.772597646760599
+    },
+    {
+     "path": "elf_jumpdense_python310_stripped",
+     "numerator": 627658,
+     "denominator": 684728,
+     "ratio": 0.9166530359500414
+    },
+    {
+     "path": "elf_medium_cc1_stripped",
+     "numerator": 4049517,
+     "denominator": 5063038,
+     "ratio": 0.799819594480626
+    },
+    {
+     "path": "elf_medium_lto1_stripped",
+     "numerator": 3910063,
+     "denominator": 4863491,
+     "ratio": 0.8039622156183696
+    },
+    {
+     "path": "elf_medium_synth_go_stripped",
+     "numerator": 76168,
+     "denominator": 923970,
+     "ratio": 0.08243557691267032
+    },
+    {
+     "path": "pe_medium_synth_go_stripped.exe",
+     "numerator": 738852,
+     "denominator": 925712,
+     "ratio": 0.7981445633199095
+    },
+    {
+     "path": "pe_medium_gdb181.exe",
+     "numerator": 1542812,
+     "denominator": 1776492,
+     "ratio": 0.8684598635963461
+    }
+   ]
+  },
+  "medium_band_sampled": {
+   "scope": "sampled",
+   "sample_set": [
+    "elf_medium_cc1_stripped",
+    "elf_medium_lto1_stripped",
+    "pe_medium_gdb181.exe"
+   ],
+   "note": "中型带分层抽样（10–50MB 的 3 个真实样本）",
+   "samples_total": 3,
+   "samples_measured": 3,
+   "samples_unavailable": 0,
+   "unavailable": [],
+   "numerator": 9502392,
+   "denominator": 11703021,
+   "ratio": 0.8119606040183983,
+   "denominator_scope": "分母 = GNU objdump 2.47 对同一文件、同一节地址范围 [VA, VA+size) 用 `objdump -d -M intel` 列出的指令条数（外部工具独立计数；不以 recdesc 自身解出的条数为分母）",
+   "numerator_scope": "分子 = recdesc 已解出且与 objdump 同起始地址、同长度的指令条数",
+   "identity_ok": true,
+   "rows": [
+    {
+     "path": "elf_medium_cc1_stripped",
+     "numerator": 4049517,
+     "denominator": 5063038,
+     "ratio": 0.799819594480626
+    },
+    {
+     "path": "elf_medium_lto1_stripped",
+     "numerator": 3910063,
+     "denominator": 4863491,
+     "ratio": 0.8039622156183696
+    },
+    {
+     "path": "pe_medium_gdb181.exe",
+     "numerator": 1542812,
+     "denominator": 1776492,
+     "ratio": 0.8684598635963461
+    }
+   ]
+  }
+ },
+ "new_samples": [
+  {
+   "sample": "samples/m9/elf_plugin_liblua54_stripped.so",
+   "size": 265280,
+   "text_bytes": 176630,
+   "instructions": 36574,
+   "blocks": 6157,
+   "byte_coverage": 0.7389231727339637,
+   "numerator": 36574,
+   "denominator": 47339,
+   "ratio": 0.772597646760599,
+   "len_conflict": 0,
+   "ours_only": 0,
+   "objdump_bad": 0,
+   "vex_lead": 853,
+   "vex_abstain_sites": 613,
+   "vex_decoder_defect": 0,
+   "switchcand": {
+    "candidates": 30,
+    "high": 21,
+    "medium": 0,
+    "low": 9,
+    "promoted": 21,
+    "blocked": 9,
+    "not_checked": 0,
+    "unmatched": 13,
+    "rejected": 0,
+    "new_insns": 3987,
+    "new_blocks": 854,
+    "n_functions": 37
+   },
+   "switchcand_skipped": null
+  },
+  {
+   "sample": "samples/m9/elf_jumpdense_python310_stripped",
+   "size": 5941864,
+   "text_bytes": 2824958,
+   "instructions": 627658,
+   "blocks": 145787,
+   "byte_coverage": 0.9083749209722765,
+   "numerator": 627658,
+   "denominator": 684728,
+   "ratio": 0.9166530359500414,
+   "len_conflict": 0,
+   "ours_only": 0,
+   "objdump_bad": 0,
+   "vex_lead": 17949,
+   "vex_abstain_sites": 10166,
+   "vex_decoder_defect": 0,
+   "switchcand": {
+    "candidates": 104,
+    "high": 57,
+    "medium": 0,
+    "low": 47,
+    "promoted": 57,
+    "blocked": 47,
+    "not_checked": 0,
+    "unmatched": 357,
+    "rejected": 38,
+    "new_insns": 11215,
+    "new_blocks": 3355,
+    "n_functions": 417
+   },
+   "switchcand_skipped": null
+  },
+  {
+   "sample": "samples/m9/elf_medium_cc1_stripped",
+   "size": 33961808,
+   "text_bytes": 20979132,
+   "instructions": 4049517,
+   "blocks": 778951,
+   "byte_coverage": 0.775378028032809,
+   "numerator": 4049517,
+   "denominator": 5063038,
+   "ratio": 0.799819594480626,
+   "len_conflict": 0,
+   "ours_only": 0,
+   "objdump_bad": 0,
+   "vex_lead": 123963,
+   "vex_abstain_sites": 68395,
+   "vex_decoder_defect": 0,
+   "switchcand": null,
+   "switchcand_skipped": "M9_SKIP_SW=1（规模超限，跳转表层单独跑）"
+  },
+  {
+   "sample": "samples/m9/elf_medium_lto1_stripped",
+   "size": 32556080,
+   "text_bytes": 20165308,
+   "instructions": 3910063,
+   "blocks": 750168,
+   "byte_coverage": 0.7793387038769752,
+   "numerator": 3910063,
+   "denominator": 4863491,
+   "ratio": 0.8039622156183696,
+   "len_conflict": 0,
+   "ours_only": 0,
+   "objdump_bad": 0,
+   "vex_lead": 118071,
+   "vex_abstain_sites": 65914,
+   "vex_decoder_defect": 0,
+   "switchcand": null,
+   "switchcand_skipped": "M9_SKIP_SW=1（规模超限，跳转表层单独跑）"
+  },
+  {
+   "sample": "samples/m9/elf_medium_synth_go_stripped",
+   "size": 7725216,
+   "text_bytes": 3511473,
+   "instructions": 76168,
+   "blocks": 14302,
+   "byte_coverage": 0.08988193843438352,
+   "numerator": 76168,
+   "denominator": 923970,
+   "ratio": 0.08243557691267032,
+   "len_conflict": 0,
+   "ours_only": 0,
+   "objdump_bad": 1,
+   "vex_lead": 20459,
+   "vex_abstain_sites": 16332,
+   "vex_decoder_defect": 0,
+   "switchcand": {
+    "candidates": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "promoted": 0,
+    "blocked": 0,
+    "not_checked": 0,
+    "unmatched": 11,
+    "rejected": 0,
+    "new_insns": 0,
+    "new_blocks": 0,
+    "n_functions": 9
+   },
+   "switchcand_skipped": null
+  },
+  {
+   "sample": "samples/m9/pe_medium_synth_go_stripped.exe",
+   "size": 7925248,
+   "text_bytes": 3525201,
+   "instructions": 738853,
+   "blocks": 127152,
+   "byte_coverage": 0.9115312857337781,
+   "numerator": 738852,
+   "denominator": 925712,
+   "ratio": 0.7981445633199095,
+   "len_conflict": 0,
+   "ours_only": 1,
+   "objdump_bad": 2,
+   "vex_lead": 20299,
+   "vex_abstain_sites": 16179,
+   "vex_decoder_defect": 0,
+   "switchcand": {
+    "candidates": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "promoted": 0,
+    "blocked": 0,
+    "not_checked": 0,
+    "unmatched": 110,
+    "rejected": 0,
+    "new_insns": 0,
+    "new_blocks": 0,
+    "n_functions": 71
+   },
+   "switchcand_skipped": null
+  },
+  {
+   "sample": "samples/m9/pe_medium_gdb181.exe",
+   "size": 10764796,
+   "text_bytes": 7584976,
+   "instructions": 1542816,
+   "blocks": 298456,
+   "byte_coverage": 0.8673554141766566,
+   "numerator": 1542812,
+   "denominator": 1776492,
+   "ratio": 0.8684598635963461,
+   "len_conflict": 2,
+   "ours_only": 2,
+   "objdump_bad": 1,
+   "vex_lead": 38324,
+   "vex_abstain_sites": 27392,
+   "vex_decoder_defect": 0,
+   "switchcand": null,
+   "switchcand_skipped": "M9_SKIP_SW=1（规模超限，跳转表层单独跑）"
+  }
+ ],
+ "vex_totals_new7": {
+  "lead_bytes": 339918,
+  "abstain_sites": 204991,
+  "decoder_defect": 0,
+  "illegal_encoding": 0,
+  "data_not_instruction": 204991
+ },
+ "promotion_new": [
+  {
+   "rel": "samples/m9/elf_plugin_liblua54_stripped.so",
+   "candidates": 30,
+   "eligible": 21,
+   "promoted": 21,
+   "blocked": 9,
+   "mismatch": 0,
+   "empty_boundary_promoted": 0,
+   "res_unchanged": true,
+   "boundary_size": 47339,
+   "samples_blocked": [
+    {
+     "fn": 34464,
+     "jmp": 34536,
+     "kind": "rel32",
+     "count": 34,
+     "n_targets": 4,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 36800,
+     "jmp": 37163,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 21,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 62608,
+     "jmp": 62673,
+     "kind": "rel32",
+     "count": 34,
+     "n_targets": 4,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 66992,
+     "jmp": 67044,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 9,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 81600,
+     "jmp": 81800,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 12,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    }
+   ]
+  },
+  {
+   "rel": "samples/m9/elf_jumpdense_python310_stripped",
+   "candidates": 104,
+   "eligible": 57,
+   "promoted": 57,
+   "blocked": 47,
+   "mismatch": 0,
+   "empty_boundary_promoted": 0,
+   "res_unchanged": true,
+   "boundary_size": 684728,
+   "samples_blocked": [
+    {
+     "fn": 464406,
+     "jmp": 464551,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 7,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 859910,
+     "jmp": 860083,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 6,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 1014402,
+     "jmp": 1014492,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 5,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 1033627,
+     "jmp": 1033706,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 7,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    },
+    {
+     "fn": 1036607,
+     "jmp": 1036685,
+     "kind": "rel32",
+     "count": null,
+     "n_targets": 6,
+     "eligible": false,
+     "promoted": false,
+     "blocked_reasons": [
+      "表长未证明（无 cmp/ja guard）",
+      "表项有被拒或扫描被截断"
+     ]
+    }
+   ]
+  },
+  {
+   "rel": "samples/m9/elf_medium_synth_go_stripped",
+   "candidates": 0,
+   "eligible": 0,
+   "promoted": 0,
+   "blocked": 0,
+   "mismatch": 0,
+   "empty_boundary_promoted": 0,
+   "res_unchanged": true,
+   "boundary_size": 923970,
+   "samples_blocked": []
+  },
+  {
+   "rel": "samples/m9/pe_medium_synth_go_stripped.exe",
+   "candidates": 0,
+   "eligible": 0,
+   "promoted": 0,
+   "blocked": 0,
+   "mismatch": 0,
+   "empty_boundary_promoted": 0,
+   "res_unchanged": true,
+   "boundary_size": 925712,
+   "samples_blocked": []
+  }
+ ],
+ "decode_invariance": {
+  "samples": 18,
+  "mismatch": 0,
+  "recdesc_sha_now": "f719a9793baaa06ae8728caac7c8952c1acc2f632532d54298fe934dc9ce561f",
+  "m8_recdesc_sha": "04292b512f1fc8e2c3c46383f78ebbece2c39616ecde5d684c2f647c9e1de78e"
+ },
+ "code_sha256": {
+  "recdesc.py": "f719a9793baaa06ae8728caac7c8952c1acc2f632532d54298fe934dc9ce561f",
+  "disasm.py": "699d74abb80688d40d1ff65526b42024df3d0f44b2548c29022f3d7b7cd61b07",
+  "coverage.py": "3d0c0272a14c66a25a5b455e274e9cb307554b9232e1cd6bbfd4af674f518156",
+  "vexaudit.py": "e93072425193f2f41f91f31d5e8af81bdf1b85f3a256362f6e3d83f133c03167",
+  "switchcand.py": "6645b091cc6aa52117d4a489b1a92722b5d0c22dfe50ac2d18a49fb1680379e7"
+ }
+}

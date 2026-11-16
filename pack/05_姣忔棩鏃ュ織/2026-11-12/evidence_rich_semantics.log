@@ -1,0 +1,40 @@
+=== 证据3：Rich 结构字节级定标（cli-64.exe，2026-11-12）===
+--- 手动 dump 加密区（DanS@0x80 .. Rich@0xe8, key=0x31a563a3）---
+  [ 0] 0x536e6144 <- DanS
+  [ 1] 0x00000000 <- padding
+  [ 2] 0x00000000 <- padding
+  [ 3] 0x00000000 <- padding
+  [ 4] 0x00937809 <- pair[0] id
+  [ 5] 0x00000010 <- count
+  [ 6] 0x01017ea4 <- pair[1] id
+  [ 7] 0x00000002 <- count
+  [ 8] 0x00fd7ea4 <- pair[2] id
+  [ 9] 0x00000004 <- count
+  [10] 0x01057ea4 <- pair[3] id
+  [11] 0x00000013 <- count
+  [12] 0x01047ea4 <- pair[4] id
+  [13] 0x0000000a <- count
+  [14] 0x01037ea4 <- pair[5] id
+  [15] 0x00000003 <- count
+  [16] 0x0101784b <- pair[6] id
+  [17] 0x00000003 <- count
+  [18] 0x00010000 <- pair[7] id
+  [19] 0x00000045 <- count
+  [20] 0x01047f14 <- pair[8] id
+  [21] 0x00000001 <- count
+  [22] 0x00ff7f14 <- pair[9] id
+  [23] 0x00000001 <- count
+  [24] 0x01027f14 <- pair[10] id
+  [25] 0x00000001 <- count
+结构结论: DanS + 3×padding(0) + 11 对 comp.id + Rich(明文) + key(明文)
+证伪昨日'9对'误读: 0x01027f14 ^ 0x31a563a3 = 0x30a71cb7 != 0x68636952('Rich')
+
+--- pefile 源码关键语义（values = 解密后 comp.id 平铺，4-dword 头跳过）---
+  L42   raw_data = rich_data[: rich_data.find(b"Rich")]
+  L70   data = data[4:]
+  L74   if data[2 * i] == RICH:
+  L83   headervalues += [data[2 * i] ^ checksum, data[2 * i + 1] ^ checksum]
+
+=== 证据4：单向 vs 双向对照（fakerich 陷阱1：stub区 Rich+key 无 DanS 锚）===
+  单向实现(仅找Rich): rich_off=0x80 key=0x11223344 -> 被骗，返回垃圾结果
+  双向锚定(rekit):    DanS^key 不存在于 [0x40, rich_off) -> None 正确拒绝

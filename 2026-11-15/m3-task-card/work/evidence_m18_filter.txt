@@ -1,0 +1,30 @@
+file   : samples\m18\_gen\FilterSample.dll
+status : ok
+asm    : FilterSample 1.0.0.0
+
+[分母]
+  方法: MethodDef 5 = 有体 5 + 无体 0；分析 5 + 部分 0 + 空 0（恒等 True）
+  分支指令 5（leave_short=4, short=1）；switch 0 / case 0
+  分支目标 5：instruction 5 / inside_instruction 0 / outside_method 0 / decode_error 0（恒等 True）
+  调用指令 2（calli=1, ldftn=1）
+  token: internal 1 / external 0 / unresolved 1（恒等 True）
+  未解析原因: token_kind_mismatch=1
+  token 表: MethodDef=1, StandAloneSig=1
+  EH: 子句 2（fault=1, filter=1）；坏边界 0 / 坏区间 0；catch token 无
+  块 15 / 边 8（branch=1, fallthrough=3, leave=4）/ 不可达块 6；leave 跳入保护区 0（从 finally/fault 跳出 0、位于 filter 内 0）
+  父解析: 无
+
+[比例]（分母见上）
+  internal_over_tokens = 0.500000
+  external_over_tokens = 0.000000
+  unresolved_over_tokens = 0.500000
+  targets_valid_over_total = 1.000000
+  eh_boundary_ok_over_clauses = 1.000000
+  blocks_reachable_over_total = 0.600000
+
+[方法明细]（存储 5 个；--limit 只影响逐方法明细（blocks/branch_sites/call_sites/eh）；所有分母统计全部有体方法）
+  0x06000001 Rekit.Flow.ILSample.Target  insn=2 blocks=1 edges=0
+  0x06000002 Rekit.Flow.ILSample.Calli  insn=4 blocks=1 edges=0
+  0x06000003 Rekit.Flow.ILSample.Filter  insn=22 blocks=8 edges=7
+  0x06000004 Rekit.Flow.ILSample.Fault  insn=4 blocks=3 edges=1
+  0x06000005 Rekit.Flow.ILSample.Dead  insn=6 blocks=2 edges=0

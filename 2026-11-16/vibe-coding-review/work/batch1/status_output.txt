@@ -1,0 +1,12 @@
+CMD: python "pack\tools\status.py"
+EXIT: 0
+
+[PASS] HANDOFF: 6/6 段非空, 77 行
+[info] git: 未初始化 (n/a)
+[info] verification/latest: 存在
+[info] numbers ledger: 2026-11-15\m3-task-card\work\outputs\NUMBERS_LEDGER.md
+[info] rules registry: 119 条 (互证 47 / 撞号 9 / 过短 3)
+[PASS] sample manifest: 7 条
+[WARN] pack 目录名损坏/不可访问 4/7 个 (见 PATH_MAP.md)
+[info] 规模: rekit 模块 25 / 测试 25 / 验证脚本 21
+VERDICT: PASS exit=0

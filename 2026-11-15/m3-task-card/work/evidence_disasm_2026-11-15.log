@@ -1,0 +1,72 @@
+==============================================================================
+x86-64 线性扫描 vs objdump 2.47：指令边界逐行对齐
+==============================================================================
+
+[tests/fixtures/cli-64.exe] PE/MSVC x64  .text VA=0x1000 off=0x400 size=0x17bc
+  我方边界 1694 条 / objdump 1694 条 / 已对齐 1694 条
+  停止: 无（扫到节尾）
+  文件落点: hit=1694 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/samples/fingerprint/hello_rust.exe] PE/rustc  .text VA=0x1000 off=0x400 size=0x15e0e
+  我方边界 26353 条 / objdump 26353 条 / 已对齐 26353 条
+  停止: 无（扫到节尾）
+  文件落点: hit=26353 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/fixtures/bin_ls.elf] ELF/glibc PIE  .text VA=0x4740 off=0x4740 size=0x165ae
+  我方边界 22523 条 / objdump 22523 条 / 已对齐 22523 条
+  停止: 无（扫到节尾）
+  文件落点: hit=22523 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/fixtures/dyn_pie] ELF GCC PIE  .text VA=0x1040 off=0x1040 size=0xf4
+  我方边界 64 条 / objdump 64 条 / 已对齐 64 条
+  停止: 无（扫到节尾）
+  文件落点: hit=64 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/samples/avx/avx_dense.exe] PE/自建 AVX 密集（VEX2/VEX3）  .text VA=0x1000 off=0x400 size=0xc0
+  我方边界 53 条 / objdump 53 条 / 已对齐 53 条
+  停止: 无（扫到节尾）
+  文件落点: hit=53 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+caveats（线性扫描盲区，扫出来的不都是指令）:
+  ! 线性扫描无法区分代码与数据：跳转表/对齐填充/内联字面量会被当作指令
+  ! 不跟踪跳转、不做递归下降：函数尾部的交错数据区会被继续当作指令
+  ! VEX/EVEX（AVX/AVX-512）已按前缀+map+ModRM/SIB/disp+imm 计长，但仍不解助记符；保留位非法的伪 VEX/EVEX 编码一律 abstain（不猜长度）
+  ! x87/3DNow 仅按长度表计长，不校验语义
+  ! 超过 15 字节的非法前缀序列不单独报错（按表继续）
+
+判定：分歧 0 项 / 环境错误 0 项
+
+VERDICT: PASS
+
+===== --selftest（故意破坏，必须被抓住）=====
+[selftest] 把我方第 4 条指令长度 +1，检查器必须检出
+
+==============================================================================
+x86-64 线性扫描 vs objdump 2.47：指令边界逐行对齐
+==============================================================================
+
+[tests/fixtures/cli-64.exe] PE/MSVC x64  .text VA=0x1000 off=0x400 size=0x17bc
+  我方边界 1694 条 / objdump 1694 条 / 已对齐 3 条
+  停止: 无（扫到节尾）
+  文件落点: hit=1694 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+  ✗ 首个分歧 #3 @0x1009
+     我方 len=2 bytes=cc 00
+     objdump len=1 text=int3
+     上下文: cc cc cc cc cc cc cc 48 83 ec 28 85 c9 75 12 8b
+     capstone: len=1 int3 
+     仲裁: ours_wrong
+
+caveats（线性扫描盲区，扫出来的不都是指令）:
+  ! 线性扫描无法区分代码与数据：跳转表/对齐填充/内联字面量会被当作指令
+  ! 不跟踪跳转、不做递归下降：函数尾部的交错数据区会被继续当作指令
+  ! VEX/EVEX（AVX/AVX-512）已按前缀+map+ModRM/SIB/disp+imm 计长，但仍不解助记符；保留位非法的伪 VEX/EVEX 编码一律 abstain（不猜长度）
+  ! x87/3DNow 仅按长度表计长，不校验语义
+  ! 超过 15 字节的非法前缀序列不单独报错（按表继续）
+
+判定：分歧 1 项 / 环境错误 0 项
+  ✗ tests/fixtures/cli-64.exe 边界错 @0x1009（capstone 与 objdump 一致）
+
+VERDICT: FAIL
+
+[selftest] 已检出（能失败）→ 通过
+DISASM_SELFTEST_EXIT=0

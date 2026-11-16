@@ -1,0 +1,121 @@
+════════════════════════════════════════════════════════════════════════
+rekit M4 第三单元证据 —— 基本块规则显式化 + CFG 边分级 2026-11-15
+append-only：只追加，不改旧行
+════════════════════════════════════════════════════════════════════════
+
+§0 先回答：上一单元的“基本块划分”到底做了没有
+
+  做了，不是本单元才补。
+  · 实现：rekit/recdesc.py 的 _build_blocks（上一单元已存在并在 descend 中调用）
+  · 输出：CLI 打印块数；cli-64.exe 338 块、dyn_static 18705 块、avx_dense 4 块
+  · 断言：tests/test_recdesc.py::test_blocks_partition_every_instruction_exactly_once
+    要求每条指令恰好属于一个块、块内地址连续、后继都在已解出集合内（31 项中已跑）
+  但上一单元只做到“切块 + 计数”，缺三件事，本单元补齐：
+    1) 切分规则只写在代码注释里，没有独立陈述；
+    2) 块没有函数归属，极端情况下只能靠地址相邻推断；
+    3) 没有 CFG 边，更没有确定/疑似/跨函数/未解析的分级。
+  本单元把这三件事补上（见 §1–§3），原块划分语义不变。
+
+§1 基本块切分规则（写死，测试可查）
+
+  1.1 leader（块的唯一起点）
+    · 函数入口种子（权威/启发式/派生）
+    · 直接跳转/分支目标（jmp_rel/jcc_rel/jcc_rel32/loop_rel/call_rel）
+    · 非 call 控制转移之后的顺序地址（jmp/jcc 的 fallthrough）
+    · 指令所属函数（origin）发生变化处
+  1.2 终结符（块末不再有顺序边）
+    ret / hlt / trap / ud2 / jmp_rel / jmp_ind
+  1.3 call 不终结基本块
+    call_rel / call_ind 之后顺序流继续，函数内 CFG 只保留 fallthrough 边；
+    调用目标单列到 cfg.calls，不混入函数内边。
+  1.4 块与函数
+    每块带 function/range/boundary/authority：
+      function = 该函数的根地址（origin）
+      range    = [function, 声明 end]，无声明时 end=None
+      boundary = declared（.pdata EndAddress / FDE range / symtab st_size）
+                 | unknown（派生根、无结束界的种子）
+    块内每条指令的 origin 必须等于块的 function；块绝不跨函数合并。
+    顺序流进入另一个已声明函数时立即截断，交给那个函数自己的种子（不合并）。
+  1.5 块与 CFG
+    块的顺序由块内指令集合定义；CFG 的节点是块，边只连块首。
+    目标不是块首时（例如跳进指令内部），该目标本身已因“分支目标”成为 leader。
+
+  实现位置：_build_blocks（块）、_build_cfg（边）、descend（两者装配与统计）。
+
+§2 CFG 五类边（互斥，不合并）
+
+  definite       确定边：源函数有权威声明 end、根非启发式；目标已解出且同函数
+  speculative    疑似边：目标已解出且同函数，但函数边界未声明，或根来自启发式
+  cross_function 跨函数边：目标已解出但属于另一个函数（尾调用/跨函数分支），单列
+  undecoded      目标无法判定：直接目标未解出（数据/填充/VEX abstain）
+  unresolved     目标无法判定：间接 jmp/call，target=None，绝不猜目标
+  另：calls = 调用边（definite/undecoded/unresolved），不混入函数内 CFG。
+
+  每样本（tests/verify_recdesc.py --all，独立 cfg_check 重算）:
+    样本                         确定   疑似  跨函数  未解出  未解析 | 调用 定/未解/未解析 | 函数 声明/未知
+    cli-64.exe                    394     0      9      0      33   |  8 /  0 /  5   | 41 / 44
+    minidll.dll                     0     0      0      0       0   |  0 /  0 /  0   |  0 /  5
+    bin_ls.elf                   5340     0     82     80       9   | 49 /112 /  4   |331 /  0
+    dyn_pie                         0    13      1      0       2   |  0 /  1 /  0   |  2 /  4
+    dyn_nopie                        0    10      1      0       2   |  0 /  0 /  0   |  3 /  4
+    dyn_static                  26882    15    313     42     123   |702 / 16 / 11   |1061 /  5
+    avx_dense.exe                   0     3      0      0       0   |  0 /  0 /  0   |  0 /  2
+
+  读法（重要的不是在“多”，而是在分类正确）：
+    · cli-64：每个 .pdata 函数都有 end，394 条确定边全部同函数、目标已解出；
+      33 条未解析边全部是 jmp_ind，target=None；9 条跨函数边单列。
+      函数末尾不连 fallthrough（块结束地址等于声明 end 时，后面即使被别的函数
+      解出也不算边）——这条规则把原先 4 条 boundary 假边清掉了。
+    · dyn_pie/nopie：只有 2/3 个 FDE 带 range，其余种子（e_entry 等）无结束界，
+      因此图里没有一个“确定”边，全部记疑似——不拿推断边界冒充声明边界。
+    · avx_dense：无 .pdata/符号结束界，3 条边全部疑似；VEX 起点 abstain，无边。
+    · bin_ls：112 条调用边目标未解出（PLT/外部），80 条分支边目标未解出；
+      不猜目标、不把它们并进确定集。
+    · dyn_static：26882 条确定边、15 条疑似（无声明边界的派生函数内部）、
+      313 条跨函数、42 条目标未解出、123 条间接未解析。
+
+  verify_recdesc 的 cfg_check 独立重算并断言：
+    · 确定 ∩ 疑似 = ∅；
+    · 确定边：目标在已解出集合、origin 同源、源块 boundary=declared、to_block 存在；
+    · 疑似边：来源块 boundary=unknown 或 authority=heuristic；
+    · 跨函数边：目标 origin ≠ 源块 function，且不出现在确定/疑似集合；
+    · 未解析边：target 必须为 None；未解析调用边同理；
+    · 未解出边的目标不得其实已解出。
+
+§3 函数边界作为 CFG 硬约束（.pdata / .eh_frame / symtab）
+
+  · 函数范围只来自权威声明：PE .pdata EndAddress、ELF FDE address_range、
+    symtab st_size；三者经 _seed_add 合并时取较大 end 并记录冲突。
+  · 顺序流到 end 即停；顺序流进入另一个已声明函数立即截断（不合并两函数）。
+  · 分支/调用目标：
+      - 落在当前声明范围内  → 沿用当前函数 origin 与 end；
+      - 落在另一个声明范围  → origin/end 改为目标函数，CFG 记 cross_function；
+      - 不在任何声明范围    → 不得算进当前已声明函数：另起 boundary=unknown 的根，
+        CFG 仍记 cross_function（to_boundary=unknown），不冒充“已知函数”。
+  · 跨函数边单列在 cfg.edges.cross_function，带 to_function/to_boundary，
+    永不进入 definite/speculative；CLI 文本先列 5 条，JSON 全量。
+  · 无声明边界的派生函数：内部边只能记疑似，这是“边界未知”的真实代价，
+    不是把猜测洗成确定。
+
+§4 回归
+
+  $ python -m pytest tests -q
+    242 passed（上一单元 235 + 本单元新增 7 项 CFG/块断言）
+  $ python tests/verify_disasm.py --all        分歧 0 项 / 环境错误 0 项，PASS
+  $ python tests/verify_map.py --all --matrix  可判定格 2402/2402 命中，失配 0，PASS
+  $ python tests/verify_iat.py --all --selftest 失配 0 项，selftest 检出，PASS
+  $ python tests/verify_recdesc.py --all       VERDICT: PASS（含新增 CFG 检查）
+  $ python tests/verify_recdesc.py --all --selftest
+    [selftest] 注入 0x1000 长度 +1 → 检出错误 1 条 → PASS
+
+  行为变化说明（不是判据放宽）：
+  · 为守住“不得把界外代码算进有声明边界的函数”，分支目标若既不在当前范围、
+    也不在任何声明范围，改为另起 boundary=unknown 的根。dyn_static 因此少解
+    12 条越界指令（83007→82995），函数边界更干净；其余样本条数不变。
+  · 新增 cfg_check 只会让验收更严（多一组互斥/归属断言），未删任何旧断言。
+
+§5 证据入口
+
+  rekit/recdesc.py        文件头规则 / _build_blocks / _build_cfg / render_text
+  tests/test_recdesc.py   块函数域 / 确定边 / 疑似互斥 / 间接不猜 / 跨函数单列 / AVX 无确定边
+  tests/verify_recdesc.py cfg_check + 每样本 CFG 行 + 覆盖/漏检说明

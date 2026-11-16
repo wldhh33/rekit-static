@@ -1,0 +1,9 @@
+=== A5: CLI checksec 行 ===
+Checksec: NX enabled (GNU_STACK RW) | RELRO full | PIE yes | W+X segs none
+Entry: 0x6760  Sections: 30  Phdrs: 14
+Checksec: NX disabled (GNU_STACK RWE) | RELRO partial | PIE yes | W+X segs none
+Entry: 0x1050  Sections: 31  Phdrs: 14
+Checksec: NX enabled (GNU_STACK RW) | RELRO none | PIE no | W+X segs none
+Entry: 0x401040  Sections: 30  Phdrs: 13
+..................................                                       [100%]
+34 passed in 0.17s

@@ -1,0 +1,476 @@
+{
+ "elf": {
+  "label": "elf_gosym",
+  "binary": "elf_medium_synth_go_stripped",
+  "format": "elf",
+  "n_funcs": 8908,
+  "ours_total": 76168,
+  "ext_total": 923970,
+  "objdump_bad": 1,
+  "seed_count": 1,
+  "seed_sources": [
+   "entry"
+  ],
+  "classes": {
+   "matched": 3,
+   "partial": 846,
+   "seed_missing": 8059,
+   "len_conflict": 0,
+   "empty_ext": 0
+  },
+  "inst_by_class": {
+   "matched_ours": 67,
+   "matched_ext": 67,
+   "partial_ours": 76101,
+   "partial_ext": 90564,
+   "seed_missing_ext": 833323,
+   "len_conflict_ours": 0,
+   "len_conflict_ext": 0
+  },
+  "totals_check": {
+   "ext_sum": 923954,
+   "ours_sum": 76168,
+   "len_mm": 0
+  },
+  "indirect_calls_in_decoded": 78,
+  "seed_missing_direct_ref_BUG": 0,
+  "seed_missing_samples": [
+   {
+    "entry": 7334816,
+    "end": 7354400,
+    "name": "crypto/internal/fips140/sha3.keccakF1600",
+    "ext": 5121,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 6279008,
+    "end": 6293888,
+    "name": "go/ast.Walk",
+    "ext": 3266,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 6386752,
+    "end": 6400288,
+    "name": "go/parser.(*resolver).Visit",
+    "ext": 2711,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 4852608,
+    "end": 4863840,
+    "name": "unicode.map.init.2",
+    "ext": 2464,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 5080320,
+    "end": 5092032,
+    "name": "time.parse",
+    "ext": 2343,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 6521536,
+    "end": 6531552,
+    "name": "image/png.(*decoder).readImagePass",
+    "ext": 2180,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 5720768,
+    "end": 5730496,
+    "name": "database/sql.convertAssignRows",
+    "ext": 2153,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 5999744,
+    "end": 6010144,
+    "name": "encoding/json/v2.parseFieldOptions",
+    "ext": 1965,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 4916416,
+    "end": 4925504,
+    "name": "reflect.StructOf",
+    "ext": 1839,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 6864000,
+    "end": 6871456,
+    "name": "crypto/sha1.blockAVX2",
+    "ext": 1740,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 5277184,
+    "end": 5285088,
+    "name": "fmt.(*pp).printValue",
+    "ext": 1701,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   },
+   {
+    "entry": 5068480,
+    "end": 5077856,
+    "name": "time.Time.appendFormat",
+    "ext": 1698,
+    "ours": 0,
+    "len_mm": 0,
+    "direct_ref": false
+   }
+  ],
+  "partial_samples": [
+   {
+    "entry": 4712384,
+    "end": 4715392,
+    "name": "runtime.typesEqual",
+    "ext": 721,
+    "ours": 171,
+    "len_mm": 0
+   },
+   {
+    "entry": 4317888,
+    "end": 4318944,
+    "name": "runtime.printpanicval",
+    "ext": 240,
+    "ours": 29,
+    "len_mm": 0
+   },
+   {
+    "entry": 4475552,
+    "end": 4476480,
+    "name": "runtime.freeSpecial",
+    "ext": 216,
+    "ours": 25,
+    "len_mm": 0
+   },
+   {
+    "entry": 4203584,
+    "end": 4203968,
+    "name": "internal/abi.(*Type).DescriptorSize",
+    "ext": 115,
+    "ours": 20,
+    "len_mm": 0
+   },
+   {
+    "entry": 4327456,
+    "end": 4328480,
+    "name": "runtime.itabInit",
+    "ext": 261,
+    "ours": 220,
+    "len_mm": 0
+   },
+   {
+    "entry": 4360896,
+    "end": 4361056,
+    "name": "runtime.(*mspan).typePointersOf",
+    "ext": 68,
+    "ours": 37,
+    "len_mm": 0
+   },
+   {
+    "entry": 4521952,
+    "end": 4522144,
+    "name": "runtime.fatal",
+    "ext": 70,
+    "ours": 39,
+    "len_mm": 0
+   },
+   {
+    "entry": 4523136,
+    "end": 4523328,
+    "name": "runtime.fatalpanic",
+    "ext": 67,
+    "ours": 36,
+    "len_mm": 0
+   },
+   {
+    "entry": 4539328,
+    "end": 4539392,
+    "name": "runtime.badmorestackgsignal",
+    "ext": 42,
+    "ours": 11,
+    "len_mm": 0
+   },
+   {
+    "entry": 4690528,
+    "end": 4690560,
+    "name": "runtime.traceLockInit",
+    "ext": 32,
+    "ours": 1,
+    "len_mm": 0
+   },
+   {
+    "entry": 4703168,
+    "end": 4703328,
+    "name": "runtime.goStatusToTraceGoStatus",
+    "ext": 50,
+    "ours": 19,
+    "len_mm": 0
+   },
+   {
+    "entry": 4779360,
+    "end": 4779392,
+    "name": "runtime.asminit",
+    "ext": 32,
+    "ours": 1,
+    "len_mm": 0
+   }
+  ],
+  "len_conflict_samples": [],
+  "matched_samples": [
+   {
+    "entry": 4626272,
+    "end": 4626400,
+    "name": "runtime.unblocksig",
+    "ext": 32,
+    "ours": 32,
+    "len_mm": 0
+   },
+   {
+    "entry": 4571360,
+    "end": 4571456,
+    "name": "runtime.save",
+    "ext": 27,
+    "ours": 27,
+    "len_mm": 0
+   },
+   {
+    "entry": 4792256,
+    "end": 4792288,
+    "name": "runtime.rt_sigaction",
+    "ext": 8,
+    "ours": 8,
+    "len_mm": 0
+   }
+  ]
+ },
+ "pe": {
+  "label": "pe_pdata",
+  "binary": "pe_medium_synth_go_stripped.exe",
+  "format": "pe",
+  "n_funcs": 7152,
+  "ours_total": 738853,
+  "ext_total": 925712,
+  "objdump_bad": 2,
+  "seed_count": 7153,
+  "seed_sources": [
+   "entry",
+   "pdata"
+  ],
+  "classes": {
+   "matched": 6388,
+   "partial": 764,
+   "seed_missing": 0,
+   "len_conflict": 0,
+   "empty_ext": 0
+  },
+  "inst_by_class": {
+   "matched_ours": 550443,
+   "matched_ext": 550443,
+   "partial_ours": 175846,
+   "partial_ext": 201124,
+   "seed_missing_ext": 0,
+   "len_conflict_ours": 0,
+   "len_conflict_ext": 0
+  },
+  "totals_check": {
+   "ext_sum": 751567,
+   "ours_sum": 726289,
+   "len_mm": 0
+  },
+  "indirect_calls_in_decoded": 2781,
+  "seed_missing_direct_ref_BUG": 0,
+  "seed_missing_samples": [],
+  "partial_samples": [
+   {
+    "entry": 2198528,
+    "end": 2212037,
+    "name": "sub_218c00",
+    "ext": 2684,
+    "ours": 38,
+    "len_mm": 0
+   },
+   {
+    "entry": 2333312,
+    "end": 2343303,
+    "name": "sub_239a80",
+    "ext": 2155,
+    "ours": 366,
+    "len_mm": 0
+   },
+   {
+    "entry": 1119104,
+    "end": 1127002,
+    "name": "sub_111380",
+    "ext": 1695,
+    "ours": 74,
+    "len_mm": 0
+   },
+   {
+    "entry": 2983968,
+    "end": 2990935,
+    "name": "sub_2d8820",
+    "ext": 1365,
+    "ours": 22,
+    "len_mm": 0
+   },
+   {
+    "entry": 2937856,
+    "end": 2943142,
+    "name": "sub_2cd400",
+    "ext": 1209,
+    "ours": 24,
+    "len_mm": 0
+   },
+   {
+    "entry": 673952,
+    "end": 680118,
+    "name": "sub_a48a0",
+    "ext": 1358,
+    "ours": 355,
+    "len_mm": 0
+   },
+   {
+    "entry": 3045536,
+    "end": 3050661,
+    "name": "sub_2e78a0",
+    "ext": 1121,
+    "ours": 121,
+    "len_mm": 0
+   },
+   {
+    "entry": 2351840,
+    "end": 2359310,
+    "name": "sub_23e2e0",
+    "ext": 1450,
+    "ours": 650,
+    "len_mm": 0
+   },
+   {
+    "entry": 2825856,
+    "end": 2830281,
+    "name": "sub_2b1e80",
+    "ext": 847,
+    "ours": 121,
+    "len_mm": 0
+   },
+   {
+    "entry": 822496,
+    "end": 826053,
+    "name": "sub_c8ce0",
+    "ext": 823,
+    "ours": 111,
+    "len_mm": 0
+   },
+   {
+    "entry": 505280,
+    "end": 508275,
+    "name": "sub_7b5c0",
+    "ext": 708,
+    "ours": 171,
+    "len_mm": 0
+   },
+   {
+    "entry": 1532672,
+    "end": 1542373,
+    "name": "sub_176300",
+    "ext": 2126,
+    "ours": 1589,
+    "len_mm": 0
+   }
+  ],
+  "len_conflict_samples": [],
+  "matched_samples": [
+   {
+    "entry": 3153408,
+    "end": 3172993,
+    "name": "sub_301e00",
+    "ext": 5119,
+    "ours": 5119,
+    "len_mm": 0
+   },
+   {
+    "entry": 652224,
+    "end": 663449,
+    "name": "sub_9f3c0",
+    "ext": 2457,
+    "ours": 2457,
+    "len_mm": 0
+   },
+   {
+    "entry": 2681952,
+    "end": 2689406,
+    "name": "sub_28ec60",
+    "ext": 1735,
+    "ours": 1735,
+    "len_mm": 0
+   },
+   {
+    "entry": 3452160,
+    "end": 3459933,
+    "name": "sub_34ad00",
+    "ext": 1582,
+    "ours": 1582,
+    "len_mm": 0
+   },
+   {
+    "entry": 173952,
+    "end": 181264,
+    "name": "sub_2a780",
+    "ext": 1580,
+    "ours": 1580,
+    "len_mm": 0
+   },
+   {
+    "entry": 3237248,
+    "end": 3246558,
+    "name": "sub_316580",
+    "ext": 1553,
+    "ours": 1553,
+    "len_mm": 0
+   },
+   {
+    "entry": 2031776,
+    "end": 2039023,
+    "name": "sub_1f00a0",
+    "ext": 1500,
+    "ours": 1500,
+    "len_mm": 0
+   },
+   {
+    "entry": 1319776,
+    "end": 1325829,
+    "name": "sub_142360",
+    "ext": 1356,
+    "ours": 1356,
+    "len_mm": 0
+   }
+  ]
+ }
+}

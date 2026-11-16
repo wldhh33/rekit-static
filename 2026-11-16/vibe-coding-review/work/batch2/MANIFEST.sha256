@@ -1,0 +1,15 @@
+# B2 / O2 外部门禁 · 新增文件与回退依据
+# 生成时间: 2026-11-16
+# 本批性质: 新增 1 个工具脚本 + 2 个证据文件；运行时产生 work\verification\<run_id>\
+#           未修改 tests\*.py、rekit\*.py、样本、既有证据（见 no_side_effects.json）
+#
+# 回退步骤:
+#   1. 删除 pack\tools\verify_gate.py、batch2\ 整个目录
+#   2. 删除 work\verification\ 整个目录（本批新建，内含 run 日志）与 work\verification\latest
+#   3. 复核: work 顶层 112 个 *.json|*.log 的 sha256 应与 batch1\work_hashes_before_gate.json 全等
+#
+# sha256                                                           相对工作区根路径
+8add5ccf93ad4482d77060ee7f6f682a5f4bccd2a5df075305b1121a298932a8  pack\tools\verify_gate.py
+6ed4fff13724932f650e4fe2f4fd4cad6e01995156baa44e37e86b49a5fd7b0d  2026-11-16\vibe-coding-review\work\batch2\gate_run.txt
+ce308ab7654af32a24f0fa5c9a1a460c60e4ac806567c3b6a91aa7348327ae7e  2026-11-16\vibe-coding-review\work\batch2\no_side_effects.json
+145759ba9c6905939abe97de699472b0e9edf65e85383596e51994a989afab28  2026-11-15\m3-task-card\work\verification\20261116T213155\summary.json

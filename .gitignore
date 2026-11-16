@@ -1,0 +1,44 @@
+# ============================================================
+# rekit 工作树 .gitignore
+# 原则：能由实验/工具再产生的不入库；作为判据与结论依据的记录入库。
+# ============================================================
+
+# ---- 1. 样本二进制（体积大、可重新获取；不是结论依据）----
+# m3 的 25 样本语料（m9/m17/m18 三组）与 m2 的早期 6 样本。
+# 证据文件里只出现样本名与数字，样本本身不入库也能复核结论口径。
+/2026-11-15/m3-task-card/work/samples/
+/2026-11-15/m2-task-card/work/samples/
+
+# ---- 2. 第三方工具链（外部下载物，非本项目源码）----
+# binutils-2.47（GNU objdump）与 upx 发行包；vharness 通过 PATH 注入使用，
+# 版本已在文档中写死，不需要把二进制纳入版本控制。
+/2026-11-15/m2-task-card/work/tools/
+/upx-5.3.0-win64.zip
+
+# ---- 3. 门禁运行产物（每次 verify_gate 都会重生成）----
+# run 目录含各套 log、pytest log、summary.json。基线 run_id 记录在
+# git tag / 提交说明与 HANDOFF 中，不靠把产物入库来证明。
+/2026-11-15/m3-task-card/work/verification/
+/2026-11-15/m2-task-card/work/verification/
+
+# ---- 4. 目录联接（junction）：内容已由 pack/ 入库，避免重复 ----
+# work/rekit、work/tests → pack/04_.../；work/pack03 → pack/03_.../；
+# work/tools → m2/work/tools。真实内容只保留 pack/ 一份。
+/2026-11-15/m2-task-card/work/pack03/
+/2026-11-15/m2-task-card/work/rekit/
+/2026-11-15/m2-task-card/work/tests/
+/2026-11-15/m3-task-card/work/pack03/
+/2026-11-15/m3-task-card/work/rekit/
+/2026-11-15/m3-task-card/work/tests/
+/2026-11-15/m3-task-card/work/tools/
+
+# ---- 5. Python 缓存与测试缓存 ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# ---- 6. 临时探针 / 本地草稿 ----
+# tmp/ 下是解包残留与一次性探针；.screenshots 为调试截图。
+/tmp/
+/.screenshots/

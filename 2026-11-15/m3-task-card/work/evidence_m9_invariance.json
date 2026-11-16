@@ -1,0 +1,175 @@
+{
+ "snapshot": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\evidence_m8close_snapshot.json",
+ "recdesc_sha_now": "f719a9793baaa06ae8728caac7c8952c1acc2f632532d54298fe934dc9ce561f",
+ "m8_recdesc_sha": "04292b512f1fc8e2c3c46383f78ebbece2c39616ecde5d684c2f647c9e1de78e",
+ "samples": 18,
+ "mismatch": 0,
+ "rows": [
+  {
+   "id": "dyn_pie",
+   "path": "tests/fixtures/dyn_pie",
+   "m8_n": 56,
+   "now_n": 56,
+   "m8_bytes": 193,
+   "now_bytes": 193,
+   "same": true
+  },
+  {
+   "id": "dyn_nopie",
+   "path": "tests/fixtures/dyn_nopie",
+   "m8_n": 53,
+   "now_n": 53,
+   "m8_bytes": 164,
+   "now_bytes": 164,
+   "same": true
+  },
+  {
+   "id": "dyn_static",
+   "path": "tests/fixtures/dyn_static",
+   "m8_n": 94773,
+   "now_n": 94773,
+   "m8_bytes": 383409,
+   "now_bytes": 383409,
+   "same": true
+  },
+  {
+   "id": "dyn_execstack",
+   "path": "tests/fixtures/dyn_execstack",
+   "m8_n": 59,
+   "now_n": 59,
+   "m8_bytes": 208,
+   "now_bytes": 208,
+   "same": true
+  },
+  {
+   "id": "dyn_norelro",
+   "path": "tests/fixtures/dyn_norelro",
+   "m8_n": 56,
+   "now_n": 56,
+   "m8_bytes": 179,
+   "now_bytes": 179,
+   "same": true
+  },
+  {
+   "id": "bin_ls.elf",
+   "path": "tests/fixtures/bin_ls.elf",
+   "m8_n": 17475,
+   "now_n": 17475,
+   "m8_bytes": 67967,
+   "now_bytes": 67967,
+   "same": true
+  },
+  {
+   "id": "hello_go_linux",
+   "path": "work/samples/hello_go_linux",
+   "m8_n": 138224,
+   "now_n": 138224,
+   "m8_bytes": 575718,
+   "now_bytes": 575718,
+   "same": true
+  },
+  {
+   "id": "busybox-1.35.0-musl-x86_64",
+   "path": "work/samples/busybox-1.35.0-musl-x86_64",
+   "m8_n": 305,
+   "now_n": 305,
+   "m8_bytes": 1156,
+   "now_bytes": 1156,
+   "same": true
+  },
+  {
+   "id": "upx_dyn_pie",
+   "path": "tests/samples/fingerprint/upx/upx_dyn_pie",
+   "m8_n": 0,
+   "now_n": null,
+   "m8_bytes": 0,
+   "now_bytes": null,
+   "same": true,
+   "note": "无 .text（找不到可分析的节 .text）；M8 no_code=True"
+  },
+  {
+   "id": "upx_cli-64.exe",
+   "path": "tests/samples/fingerprint/upx/upx_cli-64.exe",
+   "m8_n": 0,
+   "now_n": null,
+   "m8_bytes": 0,
+   "now_bytes": null,
+   "same": true,
+   "note": "无 .text（找不到可分析的节 .text）；M8 no_code=True"
+  },
+  {
+   "id": "upx_putty-64bit.exe",
+   "path": "tests/samples/fingerprint/upx/upx_putty-64bit.exe",
+   "m8_n": 0,
+   "now_n": null,
+   "m8_bytes": 0,
+   "now_bytes": null,
+   "same": true,
+   "note": "无 .text（找不到可分析的节 .text）；M8 no_code=True"
+  },
+  {
+   "id": "cli-64.exe",
+   "path": "tests/fixtures/cli-64.exe",
+   "m8_n": 1525,
+   "now_n": 1525,
+   "m8_bytes": 5847,
+   "now_bytes": 5847,
+   "same": true
+  },
+  {
+   "id": "minipe.exe",
+   "path": "tests/fixtures/minipe.exe",
+   "m8_n": 1,
+   "now_n": 1,
+   "m8_bytes": 1,
+   "now_bytes": 1,
+   "same": true
+  },
+  {
+   "id": "minidll.dll",
+   "path": "tests/fixtures/minidll.dll",
+   "m8_n": 5,
+   "now_n": 5,
+   "m8_bytes": 5,
+   "now_bytes": 5,
+   "same": true
+  },
+  {
+   "id": "minipe_fakerich.exe",
+   "path": "tests/fixtures/minipe_fakerich.exe",
+   "m8_n": 0,
+   "now_n": null,
+   "m8_bytes": 0,
+   "now_bytes": null,
+   "same": true,
+   "note": "无 .text（找不到可分析的节 .text）；M8 no_code=True"
+  },
+  {
+   "id": "hello_go.exe",
+   "path": "work/samples/hello_go.exe",
+   "m8_n": 143525,
+   "now_n": 143525,
+   "m8_bytes": 599706,
+   "now_bytes": 599706,
+   "same": true
+  },
+  {
+   "id": "hello_rust.exe",
+   "path": "work/samples/hello_rust.exe",
+   "m8_n": 22582,
+   "now_n": 22582,
+   "m8_bytes": 80735,
+   "now_bytes": 80735,
+   "same": true
+  },
+  {
+   "id": "putty-64bit.exe",
+   "path": "work/samples/putty-64bit.exe",
+   "m8_n": 220287,
+   "now_n": 220287,
+   "m8_bytes": 859011,
+   "now_bytes": 859011,
+   "same": true
+  }
+ ]
+}

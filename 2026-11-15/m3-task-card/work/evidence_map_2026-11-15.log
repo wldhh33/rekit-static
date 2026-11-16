@@ -1,0 +1,100 @@
+
+==============================================================================
+M3 映射混淆矩阵（真值快照 map_ground_truth.json）
+==============================================================================
+
+[elf_sec] 格数 170
+  expected\got    hit    nif  unmap
+  nif               0      9      0
+  命中 169 / 失配 0
+  误报FP 0
+
+[elf_seg] 格数 163
+  expected\got    hit    nif  unmap
+  hit              62      0      0
+  nif               0      8      0
+  命中 163 / 失配 0
+  误报FP 0
+
+[iat] 格数 1702
+  expected\got    hit    nif  unmap
+  命中 1701 / 失配 0
+  误报FP 0
+
+[iat_packed] 格数 110
+  expected\got    hit    nif  unmap
+  命中 110 / 失配 0
+  误报FP 0
+
+[pe_hdr] 格数 18
+  expected\got    hit    nif  unmap
+  hit              18      0      0
+  命中 18 / 失配 0
+  误报FP 0
+
+[pe_sec] 格数 241
+  expected\got    hit    nif  unmap
+  hit              90      0      0
+  nif               0     12      0
+  命中 241 / 失配 0
+  误报FP 0
+
+[abstain] 弃权格 2（不计入可判定格分母）
+
+可判定格 2402：命中 2402（100.00%）/ 失配 0 / 误报 0 / 解析异常 0
+
+VERDICT: PASS
+
+===== --selftest（翻转 1 个真值，必须失败＝检出成功）=====
+[selftest] 翻转 tests/fixtures/bin_ls.elf 的一个 LOAD vaddr
+
+==============================================================================
+M3 映射混淆矩阵（真值快照 map_ground_truth.json）
+==============================================================================
+
+[elf_sec] 格数 170
+  expected\got    hit    nif  unmap
+  nif               0      9      0
+  命中 169 / 失配 0
+  误报FP 0
+
+[elf_seg] 格数 163
+  expected\got    hit    nif  unmap
+  hit              61      0      1
+  nif               0      8      0
+  命中 159 / 失配 4
+  误报FP 0
+   ✗ tests/fixtures/bin_ls.elf                  LOAD#0           期望=fields 实得=file=[0, 14352] mem=[0, 14352] 
+   ✗ tests/fixtures/bin_ls.elf                  LOAD#0.@首        期望=hit 实得=hit 
+   ✗ tests/fixtures/bin_ls.elf                  LOAD#0.@末        期望=hit 实得=unmapped 
+   ✗ tests/fixtures/bin_ls.elf                  LOAD#0.rev       期望=addr_in 实得=0x0 
+
+[iat] 格数 1702
+  expected\got    hit    nif  unmap
+  命中 1701 / 失配 0
+  误报FP 0
+
+[iat_packed] 格数 110
+  expected\got    hit    nif  unmap
+  命中 110 / 失配 0
+  误报FP 0
+
+[pe_hdr] 格数 18
+  expected\got    hit    nif  unmap
+  hit              18      0      0
+  命中 18 / 失配 0
+  误报FP 0
+
+[pe_sec] 格数 241
+  expected\got    hit    nif  unmap
+  hit              90      0      0
+  nif               0     12      0
+  命中 241 / 失配 0
+  误报FP 0
+
+[abstain] 弃权格 2（不计入可判定格分母）
+
+可判定格 2402：命中 2398（99.83%）/ 失配 4 / 误报 0 / 解析异常 0
+
+VERDICT: FAIL
+MAP_SELFTEST_EXIT=1 (非 0 = 检出成功)

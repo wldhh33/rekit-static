@@ -1,0 +1,29 @@
+
+=== tests/fixtures/cli-64.exe ===
+函数 41 ｜ 块 294 ｜ 可达/输出 294/294 ｜ 可回溯违规 0
+结构: if 88 / else 17 / while 20 / do-while 2 / for 0 / switch 0（证据不足降级 0，无候选 3）
+控制转移: goto 60 / break 3 / continue 1 / 条件不可判 3
+不可结构: 不可约 0 块（0 函数）/ 不可达 0 块 / goto 密集 9 函数
+候选去向: high 0 = switch 0 + 未展开块(label) 0 + 降级 0 + 跳过域 0 + 无去向 0
+goto 密集代表: 0x1bc4(21 块), 0x24cc(20 块), 0x1fe4(16 块), 0x1f58(12 块), 0x2394(8 块)
+耗时 0.1s
+
+=== tests/fixtures/bin_ls.elf ===
+函数 331 ｜ 块 3821 ｜ 可达/输出 3821/3821 ｜ 可回溯违规 0
+结构: if 1193 / else 334 / while 50 / do-while 1 / for 1 / switch 3（证据不足降级 2，无候选 2）
+控制转移: goto 887 / break 11 / continue 2 / 条件不可判 21
+不可结构: 不可约 441 块（12 函数）/ 不可达 0 块 / goto 密集 79 函数
+候选去向: high 3 = switch 3 + 未展开块(label) 0 + 降级 0 + 跳过域 0 + 无去向 0
+goto 密集代表: 0xca80(231 块), 0xb820(108 块), 0xb1e0(107 块), 0xdc80(74 块), 0xadd0(45 块)
+耗时 1.2s
+
+=== tests/fixtures/dyn_static ===
+函数 1084 ｜ 块 21088 ｜ 可达/输出 21088/21088 ｜ 可回溯违规 0
+结构: if 5905 / else 1560 / while 425 / do-while 21 / for 9 / switch 9（证据不足降级 5，无候选 73）
+控制转移: goto 4347 / break 85 / continue 27 / 条件不可判 206
+不可结构: 不可约 2407 块（77 函数）/ 不可达 24 块 / goto 密集 240 函数
+候选去向: high 29 = switch 9 + 未展开块(label) 20 + 降级 0 + 跳过域 0 + 无去向 0
+goto 密集代表: 0x44fdd0(185 块), 0x402b00(142 块), 0x4607c0(123 块), 0x4070b0(120 块), 0x41bb30(109 块)
+耗时 17.9s
+
+结果: PASS

@@ -1,0 +1,1662 @@
+{
+  "generated_at": "2026-11-16T02:38:13",
+  "manifest": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work\\sample_manifest.json",
+  "code_sha256": {
+    "strxref.py": "8e929ecf6475180465bc1479394ceefa9a5054b1d259b700927ac3b55fc5d6c6",
+    "callfacts.py": "ce2383e00f5d910952bfdde737cb54ede3b77546740a2085fdabde0a98398c3a",
+    "callgraph.py": "7f3f56027633ac9092588a9f935895c7e3518af0cd643e5b91767d6477e8eb35",
+    "paramdecl.py": "5dd7991e800e454bc2dd57cae31ca17cfa06cb16a8e168534def6401fd1b9b16",
+    "recdesc.py": "04292b512f1fc8e2c3c46383f78ebbece2c39616ecde5d684c2f647c9e1de78e"
+  },
+  "totals": {
+    "strings_total": 13829,
+    "strings_unique": 2266,
+    "strings_multi": 434,
+    "strings_no_site": 11129,
+    "reason_cross_section": 262,
+    "reason_undecoded": 0,
+    "reason_indirect": 514,
+    "reason_no_evidence": 10353,
+    "sites_total": 3732,
+    "sites_rip_mem": 2,
+    "sites_lea_rip": 3727,
+    "sites_imm": 3,
+    "sites_without_function": 0,
+    "suffix_refs": 556,
+    "unlifted": 29688,
+    "rejected_binary": 31882,
+    "rejected_short": 116695,
+    "rejected_high": 22728,
+    "no_nul_tail": 2,
+    "cross_checked": 0,
+    "cross_domain_checked": 3691,
+    "cross_conflicts": 0,
+    "cf_sites": 48398,
+    "cf_facts_before": 167965,
+    "cf_facts_after": 135851,
+    "cf_abstains": 83718,
+    "cf_cross_facts": 202,
+    "cf_cross_abstains": 388,
+    "params_bound": 12272,
+    "params_partial": 3530,
+    "params_abstained": 37891,
+    "bound_pieces": 17506,
+    "samples_callfacts": 14,
+    "samples_dwarf": 2
+  },
+  "samples": [
+    {
+      "id": "dyn_pie",
+      "format": "ELF",
+      "path": "tests/fixtures/dyn_pie",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 2,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 56,
+          "decoded_bytes": 193,
+          "text_bytes": 244,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.791
+        },
+        "strings_zero_reason": "白名单节内没有 NUL 终止的可打印 ASCII 段（长度≥4）"
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 3,
+          "direct": 2,
+          "indirect": 1,
+          "facts_before": 9,
+          "facts_after": 1,
+          "abstains": 4,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 10,
+            "derived": 10
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 3,
+            "observed": 2,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 3,
+            "site_status": {
+              "no_target": 1,
+              "no_declaration": 2
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 3,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 2,
+            "no_target_sites": 1,
+            "abstain_reasons": {
+              "间接调用目标不可静态确定": 1,
+              "目标没有可读的形参声明": 2
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "dyn_nopie",
+      "format": "ELF",
+      "path": "tests/fixtures/dyn_nopie",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 2,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 53,
+          "decoded_bytes": 164,
+          "text_bytes": 241,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.6805
+        },
+        "strings_zero_reason": "白名单节内没有 NUL 终止的可打印 ASCII 段（长度≥4）"
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 2,
+          "direct": 1,
+          "indirect": 1,
+          "facts_before": 10,
+          "facts_after": 1,
+          "abstains": 3,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 11,
+            "derived": 11
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 1,
+            "observed": 1,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 2,
+            "site_status": {
+              "no_target": 1,
+              "no_declaration": 1
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 2,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 1,
+            "no_target_sites": 1,
+            "abstain_reasons": {
+              "间接调用目标不可静态确定": 1,
+              "目标没有可读的形参声明": 1
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "dyn_static",
+      "format": "ELF",
+      "path": "tests/fixtures/dyn_static",
+      "strxref": {
+        "strings_total": 1076,
+        "strings_unique": 432,
+        "strings_multi": 144,
+        "strings_no_site": 500,
+        "no_site_reason": {
+          "cross_section": 191,
+          "undecoded": 0,
+          "indirect": 1,
+          "no_evidence": 308
+        },
+        "sites_total": 1134,
+        "sites_rip_mem": 2,
+        "sites_lea_rip": 1132,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 48,
+        "unlifted": 8853,
+        "rejected": {
+          "rejected_binary": 273,
+          "rejected_short": 9694,
+          "rejected_high": 126,
+          "no_nul_tail": 1
+        },
+        "coverage": {
+          "decoded_instructions": 94773,
+          "decoded_bytes": 383409,
+          "text_bytes": 478329,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.8016
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 3609,
+          "direct": 3457,
+          "indirect": 152,
+          "facts_before": 10663,
+          "facts_after": 6466,
+          "abstains": 4392,
+          "cross_facts": 78,
+          "cross_abstains": 75,
+          "cross_sites": 124,
+          "evidence": {
+            "declared": 0,
+            "observed": 17129,
+            "derived": 17129
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 78,
+            "derived": 78
+          },
+          "target_evidence": {
+            "declared": 3452,
+            "observed": 3457,
+            "derived": 402
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 3609,
+            "site_status": {
+              "no_declaration": 3457,
+              "no_target": 152
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 3609,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 3457,
+            "no_target_sites": 152,
+            "abstain_reasons": {
+              "目标没有可读的形参声明": 3457,
+              "间接调用目标不可静态确定": 152
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 1134,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 2.02
+    },
+    {
+      "id": "dyn_execstack",
+      "format": "ELF",
+      "path": "tests/fixtures/dyn_execstack",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 3,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 59,
+          "decoded_bytes": 208,
+          "text_bytes": 259,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.8031
+        },
+        "strings_zero_reason": "白名单节内没有 NUL 终止的可打印 ASCII 段（长度≥4）"
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 4,
+          "direct": 3,
+          "indirect": 1,
+          "facts_before": 13,
+          "facts_after": 2,
+          "abstains": 5,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 15,
+            "derived": 15
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 5,
+            "observed": 3,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 4,
+            "site_status": {
+              "no_target": 1,
+              "no_declaration": 3
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 4,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 3,
+            "no_target_sites": 1,
+            "abstain_reasons": {
+              "间接调用目标不可静态确定": 1,
+              "目标没有可读的形参声明": 3
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.02
+    },
+    {
+      "id": "dyn_norelro",
+      "format": "ELF",
+      "path": "tests/fixtures/dyn_norelro",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 3,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 56,
+          "decoded_bytes": 179,
+          "text_bytes": 256,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.6992
+        },
+        "strings_zero_reason": "白名单节内没有 NUL 终止的可打印 ASCII 段（长度≥4）"
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 3,
+          "direct": 2,
+          "indirect": 1,
+          "facts_before": 14,
+          "facts_after": 2,
+          "abstains": 4,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 16,
+            "derived": 16
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 3,
+            "observed": 2,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 3,
+            "site_status": {
+              "no_target": 1,
+              "no_declaration": 2
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 3,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 2,
+            "no_target_sites": 1,
+            "abstain_reasons": {
+              "间接调用目标不可静态确定": 1,
+              "目标没有可读的形参声明": 2
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "bin_ls.elf",
+      "format": "ELF",
+      "path": "tests/fixtures/bin_ls.elf",
+      "strxref": {
+        "strings_total": 420,
+        "strings_unique": 78,
+        "strings_multi": 15,
+        "strings_no_site": 327,
+        "no_site_reason": {
+          "cross_section": 66,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 261
+        },
+        "sites_total": 123,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 123,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 23,
+        "unlifted": 538,
+        "rejected": {
+          "rejected_binary": 90,
+          "rejected_short": 108,
+          "rejected_high": 7,
+          "no_nul_tail": 1
+        },
+        "coverage": {
+          "decoded_instructions": 17475,
+          "decoded_bytes": 67967,
+          "text_bytes": 91566,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.7423
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 1154,
+          "direct": 1116,
+          "indirect": 38,
+          "facts_before": 3775,
+          "facts_after": 2293,
+          "abstains": 1285,
+          "cross_facts": 9,
+          "cross_abstains": 22,
+          "cross_sites": 30,
+          "evidence": {
+            "declared": 0,
+            "observed": 6068,
+            "derived": 6068
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 9,
+            "derived": 9
+          },
+          "target_evidence": {
+            "declared": 1804,
+            "observed": 1116,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 1154,
+            "site_status": {
+              "no_declaration": 1116,
+              "no_target": 38
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 1154,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 1116,
+            "no_target_sites": 38,
+            "abstain_reasons": {
+              "目标没有可读的形参声明": 1116,
+              "间接调用目标不可静态确定": 38
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 123,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.5
+    },
+    {
+      "id": "hello_go_linux",
+      "format": "ELF",
+      "path": "work/samples/hello_go_linux",
+      "strxref": {
+        "strings_total": 7,
+        "strings_unique": 2,
+        "strings_multi": 0,
+        "strings_no_site": 5,
+        "no_site_reason": {
+          "cross_section": 4,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 1
+        },
+        "sites_total": 2,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 2,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 5200,
+        "rejected": {
+          "rejected_binary": 275,
+          "rejected_short": 1220,
+          "rejected_high": 206,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 138224,
+          "decoded_bytes": 575718,
+          "text_bytes": 626289,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.9193
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 11471,
+          "direct": 11282,
+          "indirect": 189,
+          "facts_before": 31470,
+          "facts_after": 30525,
+          "abstains": 21054,
+          "cross_facts": 3,
+          "cross_abstains": 6,
+          "cross_sites": 9,
+          "evidence": {
+            "declared": 0,
+            "observed": 61995,
+            "derived": 61995
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 3,
+            "derived": 3
+          },
+          "target_evidence": {
+            "declared": 11282,
+            "observed": 11282,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": true,
+          "counts": {
+            "sites": 11471,
+            "site_status": {
+              "bound": 2057,
+              "zero_params": 4903,
+              "partial": 3418,
+              "no_target": 189,
+              "abstained": 904
+            },
+            "params_bound": 5824,
+            "params_partial": 1696,
+            "params_abstained": 6155,
+            "bound_pieces": 8354,
+            "zero_params_sites": 4903,
+            "no_declaration_sites": 0,
+            "no_target_sites": 189,
+            "abstain_reasons": {
+              "形参的入口位置表达式为空（DWARF 未给出位置）": 2358,
+              "调用点前没有寄存器 rax 的可判定定义": 954,
+              "间接调用目标不可静态确定": 189,
+              "调用点前没有寄存器 rbx 的可判定定义": 835,
+              "调用点前没有寄存器 rcx 的可判定定义": 689,
+              "调用点前没有寄存器 rdi 的可判定定义": 409,
+              "调用点前没有寄存器 rcx,rdi 的可判定定义": 8,
+              "调用点前没有寄存器 rax,rbx,rcx 的可判定定义": 84,
+              "调用点前没有寄存器 rax,rbx 的可判定定义": 107,
+              "调用点前没有寄存器 reg17 的可判定定义": 23,
+              "调用点前没有寄存器 rsi 的可判定定义": 157,
+              "形参入口位置在栈/帧基址（DW_OP_fbreg/CFA）": 99,
+              "调用点前没有寄存器 rsi,r8,r9 的可判定定义": 2,
+              "调用点前没有寄存器 r10 的可判定定义": 15,
+              "调用点前没有寄存器 r11 的可判定定义": 10,
+              "调用点前没有寄存器 r8 的可判定定义": 63,
+              "调用点前没有寄存器 r9 的可判定定义": 40,
+              "调用点前没有寄存器 rbx,rcx,rdi 的可判定定义": 16,
+              "调用点前没有寄存器 rdi,rsi,r8 的可判定定义": 30,
+              "调用点前没有寄存器 rax,rbx,rcx,rdi 的可判定定义": 22,
+              "调用点前没有寄存器 rbx,rcx 的可判定定义": 23,
+              "调用点前没有寄存器 rsi,r8 的可判定定义": 1,
+              "调用点前没有寄存器 reg18 的可判定定义": 1,
+              "调用点前没有寄存器 reg19 的可判定定义": 1,
+              "位置表达式未解释（DW_OP_piece 前无位置操作）": 7,
+              "调用点前没有寄存器 rcx,rdi,rsi 的可判定定义": 2,
+              "调用点前没有寄存器 reg17,reg18 的可判定定义": 2,
+              "调用点前没有寄存器 rdi,rsi 的可判定定义": 1,
+              "形参位置不可判": 7
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 2,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 4.14
+    },
+    {
+      "id": "busybox-1.35.0-musl-x86_64",
+      "format": "ELF",
+      "path": "work/samples/busybox-1.35.0-musl-x86_64",
+      "strxref": {
+        "strings_total": 5825,
+        "strings_unique": 1,
+        "strings_multi": 0,
+        "strings_no_site": 5824,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 404,
+          "no_evidence": 5420
+        },
+        "sites_total": 1,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 1,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 5,
+        "rejected": {
+          "rejected_binary": 2097,
+          "rejected_short": 7183,
+          "rejected_high": 964,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 305,
+          "decoded_bytes": 1156,
+          "text_bytes": 890662,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.0013
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 8,
+          "direct": 8,
+          "indirect": 0,
+          "facts_before": 21,
+          "facts_after": 20,
+          "abstains": 8,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 41,
+            "derived": 41
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 0,
+            "observed": 8,
+            "derived": 8
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 8,
+            "site_status": {
+              "no_declaration": 8
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 8,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 8,
+            "no_target_sites": 0,
+            "abstain_reasons": {
+              "目标没有可读的形参声明": 8
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.13
+    },
+    {
+      "id": "upx_dyn_pie",
+      "format": "ELF",
+      "path": "tests/samples/fingerprint/upx/upx_dyn_pie",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 0,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 0,
+          "decoded_bytes": 0,
+          "text_bytes": 0,
+          "no_code": true,
+          "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定",
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.0
+        },
+        "strings_zero_reason": "白名单只读数据节缺失（本样本没有 .rodata/.rodata.str*/.rdata）"
+      },
+      "callfacts": {
+        "skipped": "no .text section",
+        "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定"
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "upx_cli-64.exe",
+      "format": "PE",
+      "path": "tests/samples/fingerprint/upx/upx_cli-64.exe",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 0,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 0,
+          "decoded_bytes": 0,
+          "text_bytes": 0,
+          "no_code": true,
+          "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定",
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.0
+        },
+        "strings_zero_reason": "白名单只读数据节缺失（本样本没有 .rodata/.rodata.str*/.rdata）"
+      },
+      "callfacts": {
+        "skipped": "no .text section",
+        "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定"
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "upx_putty-64bit.exe",
+      "format": "PE",
+      "path": "tests/samples/fingerprint/upx/upx_putty-64bit.exe",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 0,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 0,
+          "decoded_bytes": 0,
+          "text_bytes": 0,
+          "no_code": true,
+          "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定",
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.0
+        },
+        "strings_zero_reason": "白名单只读数据节缺失（本样本没有 .rodata/.rodata.str*/.rdata）"
+      },
+      "callfacts": {
+        "skipped": "no .text section",
+        "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定"
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "cli-64.exe",
+      "format": "PE",
+      "path": "tests/fixtures/cli-64.exe",
+      "strxref": {
+        "strings_total": 89,
+        "strings_unique": 1,
+        "strings_multi": 0,
+        "strings_no_site": 88,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 12,
+          "no_evidence": 76
+        },
+        "sites_total": 1,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 1,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 2,
+        "unlifted": 23,
+        "rejected": {
+          "rejected_binary": 39,
+          "rejected_short": 405,
+          "rejected_high": 18,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 1525,
+          "decoded_bytes": 5847,
+          "text_bytes": 6144,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.9517
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 153,
+          "direct": 98,
+          "indirect": 55,
+          "facts_before": 427,
+          "facts_after": 309,
+          "abstains": 248,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 736,
+            "derived": 736
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 68,
+            "observed": 133,
+            "derived": 65
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 153,
+            "site_status": {
+              "no_target": 55,
+              "no_declaration": 98
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 153,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 98,
+            "no_target_sites": 55,
+            "abstain_reasons": {
+              "间接调用目标不可静态确定": 55,
+              "目标没有可读的形参声明": 98
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 1,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.04
+    },
+    {
+      "id": "minipe.exe",
+      "format": "PE",
+      "path": "tests/fixtures/minipe.exe",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 0,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 1,
+          "decoded_bytes": 1,
+          "text_bytes": 512,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.002
+        },
+        "strings_zero_reason": "白名单只读数据节缺失（本样本没有 .rodata/.rodata.str*/.rdata）"
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 0,
+          "direct": 0,
+          "indirect": 0,
+          "facts_before": 0,
+          "facts_after": 0,
+          "abstains": 0,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 0,
+            "site_status": {},
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 0,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 0,
+            "no_target_sites": 0,
+            "abstain_reasons": {}
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.01
+    },
+    {
+      "id": "minidll.dll",
+      "format": "PE",
+      "path": "tests/fixtures/minidll.dll",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 0,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 5,
+          "decoded_bytes": 5,
+          "text_bytes": 512,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.0098
+        },
+        "strings_zero_reason": "白名单只读数据节缺失（本样本没有 .rodata/.rodata.str*/.rdata）"
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 0,
+          "direct": 0,
+          "indirect": 0,
+          "facts_before": 0,
+          "facts_after": 0,
+          "abstains": 0,
+          "cross_facts": 0,
+          "cross_abstains": 0,
+          "cross_sites": 0,
+          "evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 0,
+            "site_status": {},
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 0,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 0,
+            "no_target_sites": 0,
+            "abstain_reasons": {}
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 0,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "minipe_fakerich.exe",
+      "format": "PE",
+      "path": "tests/fixtures/minipe_fakerich.exe",
+      "strxref": {
+        "strings_total": 0,
+        "strings_unique": 0,
+        "strings_multi": 0,
+        "strings_no_site": 0,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 0
+        },
+        "sites_total": 0,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 0,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 0,
+        "rejected": {
+          "rejected_binary": 0,
+          "rejected_short": 0,
+          "rejected_high": 0,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 0,
+          "decoded_bytes": 0,
+          "text_bytes": 0,
+          "no_code": true,
+          "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定",
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.0
+        },
+        "strings_zero_reason": "白名单只读数据节缺失（本样本没有 .rodata/.rodata.str*/.rdata）"
+      },
+      "callfacts": {
+        "skipped": "no .text section",
+        "no_code_reason": "本样本没有可分析的 .text 代码节（可能已加壳/改名），引用点整体不可判定"
+      },
+      "seconds": 0.0
+    },
+    {
+      "id": "hello_go.exe",
+      "format": "PE",
+      "path": "work/samples/hello_go.exe",
+      "strxref": {
+        "strings_total": 3172,
+        "strings_unique": 2,
+        "strings_multi": 0,
+        "strings_no_site": 3170,
+        "no_site_reason": {
+          "cross_section": 1,
+          "undecoded": 0,
+          "indirect": 0,
+          "no_evidence": 3169
+        },
+        "sites_total": 2,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 2,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 0,
+        "unlifted": 4885,
+        "rejected": {
+          "rejected_binary": 22858,
+          "rejected_short": 63847,
+          "rejected_high": 16586,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 143525,
+          "decoded_bytes": 599706,
+          "text_bytes": 673280,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.8907
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 11980,
+          "direct": 11785,
+          "indirect": 195,
+          "facts_before": 33452,
+          "facts_after": 31425,
+          "abstains": 20325,
+          "cross_facts": 0,
+          "cross_abstains": 8,
+          "cross_sites": 8,
+          "evidence": {
+            "declared": 0,
+            "observed": 64877,
+            "derived": 64877
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 0,
+            "derived": 0
+          },
+          "target_evidence": {
+            "declared": 9040,
+            "observed": 11785,
+            "derived": 2745
+          }
+        },
+        "param_binding": {
+          "available": true,
+          "counts": {
+            "sites": 11980,
+            "site_status": {
+              "bound": 2101,
+              "zero_params": 4988,
+              "partial": 3777,
+              "no_target": 195,
+              "abstained": 919
+            },
+            "params_bound": 6448,
+            "params_partial": 1834,
+            "params_abstained": 6789,
+            "bound_pieces": 9152,
+            "zero_params_sites": 4988,
+            "no_declaration_sites": 0,
+            "no_target_sites": 195,
+            "abstain_reasons": {
+              "形参的入口位置表达式为空（DWARF 未给出位置）": 2754,
+              "调用点前没有寄存器 rax 的可判定定义": 1000,
+              "间接调用目标不可静态确定": 195,
+              "调用点前没有寄存器 rbx 的可判定定义": 839,
+              "调用点前没有寄存器 rcx 的可判定定义": 733,
+              "调用点前没有寄存器 rdi 的可判定定义": 432,
+              "调用点前没有寄存器 rcx,rdi 的可判定定义": 8,
+              "调用点前没有寄存器 rax,rbx 的可判定定义": 112,
+              "调用点前没有寄存器 rax,rbx,rcx 的可判定定义": 80,
+              "调用点前没有寄存器 reg17 的可判定定义": 19,
+              "调用点前没有寄存器 rsi 的可判定定义": 154,
+              "形参入口位置在栈/帧基址（DW_OP_fbreg/CFA）": 155,
+              "调用点前没有寄存器 rsi,r8,r9 的可判定定义": 2,
+              "调用点前没有寄存器 r10 的可判定定义": 17,
+              "调用点前没有寄存器 r11 的可判定定义": 10,
+              "调用点前没有寄存器 r8 的可判定定义": 48,
+              "调用点前没有寄存器 r9 的可判定定义": 37,
+              "调用点前没有寄存器 rax,rbx,rcx,rdi 的可判定定义": 22,
+              "调用点前没有寄存器 rbx,rcx,rdi 的可判定定义": 89,
+              "形参位置不可判": 14,
+              "调用点前没有寄存器 rbx,rcx 的可判定定义": 24,
+              "调用点前没有寄存器 rsi,r8 的可判定定义": 3,
+              "调用点前没有寄存器 reg18 的可判定定义": 1,
+              "调用点前没有寄存器 reg19 的可判定定义": 1,
+              "位置表达式未解释（DW_OP_piece 前无位置操作）": 7,
+              "调用点前没有寄存器 rcx,rdi,rsi 的可判定定义": 2,
+              "调用点前没有寄存器 reg17,reg18 的可判定定义": 2,
+              "调用点前没有寄存器 rdi,rsi 的可判定定义": 2,
+              "调用点前没有寄存器 rdi,rsi,r8 的可判定定义": 27
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 2,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 4.4
+    },
+    {
+      "id": "hello_rust.exe",
+      "format": "PE",
+      "path": "work/samples/hello_rust.exe",
+      "strxref": {
+        "strings_total": 158,
+        "strings_unique": 29,
+        "strings_multi": 9,
+        "strings_no_site": 120,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 11,
+          "no_evidence": 109
+        },
+        "sites_total": 80,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 80,
+        "sites_imm": 0,
+        "sites_without_function": 0,
+        "suffix_refs": 107,
+        "unlifted": 821,
+        "rejected": {
+          "rejected_binary": 750,
+          "rejected_short": 1795,
+          "rejected_high": 609,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 22582,
+          "decoded_bytes": 80735,
+          "text_bytes": 90112,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.8959
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 1029,
+          "direct": 836,
+          "indirect": 193,
+          "facts_before": 3544,
+          "facts_after": 1375,
+          "abstains": 1333,
+          "cross_facts": 12,
+          "cross_abstains": 44,
+          "cross_sites": 52,
+          "evidence": {
+            "declared": 0,
+            "observed": 4919,
+            "derived": 4919
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 12,
+            "derived": 12
+          },
+          "target_evidence": {
+            "declared": 598,
+            "observed": 894,
+            "derived": 296
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 1029,
+            "site_status": {
+              "no_target": 193,
+              "no_declaration": 836
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 1029,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 836,
+            "no_target_sites": 193,
+            "abstain_reasons": {
+              "间接调用目标不可静态确定": 193,
+              "目标没有可读的形参声明": 836
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 80,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 0.57
+    },
+    {
+      "id": "putty-64bit.exe",
+      "format": "PE",
+      "path": "work/samples/putty-64bit.exe",
+      "strxref": {
+        "strings_total": 3082,
+        "strings_unique": 1721,
+        "strings_multi": 266,
+        "strings_no_site": 1095,
+        "no_site_reason": {
+          "cross_section": 0,
+          "undecoded": 0,
+          "indirect": 86,
+          "no_evidence": 1009
+        },
+        "sites_total": 2389,
+        "sites_rip_mem": 0,
+        "sites_lea_rip": 2387,
+        "sites_imm": 2,
+        "sites_without_function": 0,
+        "suffix_refs": 376,
+        "unlifted": 9363,
+        "rejected": {
+          "rejected_binary": 5500,
+          "rejected_short": 32433,
+          "rejected_high": 4212,
+          "no_nul_tail": 0
+        },
+        "coverage": {
+          "decoded_instructions": 220287,
+          "decoded_bytes": 859011,
+          "text_bytes": 971776,
+          "no_code": false,
+          "no_code_reason": null,
+          "note": "引用点只覆盖 recdesc 已解出指令；未解码代码里的引用不计",
+          "ratio": 0.884
+        },
+        "strings_zero_reason": null
+      },
+      "callfacts": {
+        "counts": {
+          "sites": 18982,
+          "direct": 16250,
+          "indirect": 2732,
+          "facts_before": 84567,
+          "facts_after": 63432,
+          "abstains": 35057,
+          "cross_facts": 100,
+          "cross_abstains": 233,
+          "cross_sites": 324,
+          "evidence": {
+            "declared": 0,
+            "observed": 147999,
+            "derived": 147999
+          },
+          "cross_evidence": {
+            "declared": 0,
+            "observed": 100,
+            "derived": 100
+          },
+          "target_evidence": {
+            "declared": 13300,
+            "observed": 16298,
+            "derived": 2998
+          }
+        },
+        "param_binding": {
+          "available": false,
+          "counts": {
+            "sites": 18982,
+            "site_status": {
+              "no_declaration": 16250,
+              "no_target": 2732
+            },
+            "params_bound": 0,
+            "params_partial": 0,
+            "params_abstained": 18982,
+            "bound_pieces": 0,
+            "zero_params_sites": 0,
+            "no_declaration_sites": 16250,
+            "no_target_sites": 2732,
+            "abstain_reasons": {
+              "目标没有可读的形参声明": 16250,
+              "间接调用目标不可静态确定": 2732
+            }
+          }
+        },
+        "crosscheck": {
+          "ok": true,
+          "checked": 0,
+          "facts_overlap": 0,
+          "graph_overlap": 0,
+          "domain_checked": 2349,
+          "note": "引用点与调用点的交集为 0：本层引用点不是调用点，三层交集为空，本项无非空对账对象"
+        },
+        "conflicts": 0
+      },
+      "seconds": 7.43
+    }
+  ],
+  "elapsed_seconds": 19.3
+}

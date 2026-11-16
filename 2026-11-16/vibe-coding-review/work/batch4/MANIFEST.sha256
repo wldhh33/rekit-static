@@ -1,0 +1,15 @@
+# B4 规则史收敛回退清单（2026-11-16）
+# 回退 rules.json：copy batch4\rules.before_canonical.json -> pack\rules.json（sha256 见下）
+# 回退新增文件：删除 pack\02_规则库\规则库_R33-R119.md、batch4\canonical_coverage.json、batch4\human_decisions.md
+# 回退 HANDOFF：删 B4 行与 O5 行更新即可（内容已在本清单记录哈希）
+b60d5f4df52c1b3a79568ab2cd37286f313167e44e02741aedb4363c09c95c94  pack\02_规则库\规则库_R33-R119.md
+ae243712437855dc3d9a8b4eaf973b6f4b2e147a284175c9413a71d063f43e16  pack\rules.json
+a8bf28d1edf9ff94791e2c24a3e043ffcaccdc5b8fde5cca867fc594b299ec44  2026-11-16\vibe-coding-review\work\batch4\canonical_coverage.json
+5f9dd53d12b6e16c5215e0cee6e479223b12ec3d4902da1fa1afd4cb1c78f260  2026-11-16\vibe-coding-review\work\batch4\human_decisions.md
+d314f442c4e3e934b48ef8dc46d0ed46f88cf8168469bed3fc60b25ed6ee4c0f  2026-11-16\vibe-coding-review\work\batch4\rules.before_canonical.json
+2a22d9b8fb91fb32b63585d004c7633b0702e6bf2545b36c616565c2e67cdbef  2026-11-16\vibe-coding-review\work\batch4\merge_canonical.py
+81cd7e012453739ff193bfa01253a76de0ea6f67b65f98f46cb8fa235812fdbb  2026-11-16\vibe-coding-review\work\batch4\verify_merge.py
+9e32ce1fada1bdf2d224e898dc4fa3de343f6c89b406b9cbca9b5e6c99bffb2a  2026-11-16\vibe-coding-review\work\batch4\dump_baseline.py
+377fe556435105b10c1e8d6a901afb63c4b09b4dc502495748ea930651102a62  2026-11-16\vibe-coding-review\work\batch4\list_candidates.py
+842126f26c97cc6ee122c46f3b12a6cde7dfcd8cf3c81cd445e9766718243cce  2026-11-16\vibe-coding-review\work\batch4\baseline_r33_r119.txt
+87167d91e5aa1f982d7d39736d2bf97820c53a95aa133925bb5b568e5e4ba220  2026-11-15\m3-task-card\work\HANDOFF.md

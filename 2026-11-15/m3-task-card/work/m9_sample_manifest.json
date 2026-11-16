@@ -1,0 +1,196 @@
+{
+  "generated_at": "2026-11-16",
+  "task": "M9 样本线",
+  "note": "M9 专用登记表。M2 的 sample_manifest.json（含 e9_ground_truth 冻结段）不动；本表只登记 M9 新增样本。所有 sha256 由 Get-FileHash -Algorithm SHA256 现算，路径相对 m3-task-card/work。",
+  "selection_rules": {
+    "declared_before_measurement": true,
+    "rule": [
+      "R1 尺寸带：'中型' 定义为文件大小落在 [10MB, 50MB]（含）区间；按文件大小判，不看解码结果",
+      "R2 stripped：ELF 需同时无 .symtab 且无 .debug_info；PE 记 COFF 符号数，nsym=0 才算完全 stripped，nsym>0 必须如实标注",
+      "R3 跳转表密集：按程序性质先验选取（解释器主循环/字节码分发器），禁止按『我方识别出多少候选』挑样本；候选计数只作结果记录",
+      "R4 插件式无符号：ELF ET_DYN 共享对象（.so）、无 .symtab、导出接口以 .dynsym 为准",
+      "R5 来源：优先真实发行版二进制（可复核版本与许可）；本地工具链构造的标 synthetic，不得与 real 混算",
+      "R6 禁止：任何样本若因『覆盖率/命中率好看』被选入或剔除，即违反 R1–R5，本表须记违规"
+    ],
+    "violations": []
+  },
+  "samples": [
+    {
+      "id": "M9-S1",
+      "file": "samples/m9/elf_medium_cc1_stripped",
+      "sha256": "873d5b58ae1531a73b138b10299bb65e787d2541f27c01e7225acb4466534fb3",
+      "size": 33961808,
+      "format": "ELF64 x86-64 ET_EXEC",
+      "kind": "real",
+      "slot": "中型 stripped ELF #1",
+      "size_band_ok": true,
+      "structure": {
+        "symtab": false, "debug_info": false, "comment": false,
+        "eh_frame": true, "dynsym_symbols": 28923,
+        "text": {"va": 6508208, "off": 2313904, "size": 20979132}
+      },
+      "source": "Ubuntu 22.04 cpp-12 包内 /usr/lib/gcc/x86_64-linux-gnu/12/cc1",
+      "source_identity": "deb control: Package=cpp-12 Version=12.3.0-1ubuntu1~22.04.3 Architecture=amd64",
+      "source_path_hint": "archive.ubuntu.com pool/main/g/gcc-12/cpp-12_12.3.0-1ubuntu1~22.04.3_amd64.deb（版本以 control 元数据为准）",
+      "license": "GPL-3.0-or-later（GCC 运行时库例外不改变 cc1 本身许可）",
+      "redistributable": "yes（再分发须保留许可文本并提供对应源码获取方式）",
+      "local_only": false,
+      "notes": "镜像内发布的二进制自带 .gnu_debuglink 但无 .debug_info；无 .comment 段，编译器版本只能由包身份确定，不从二进制猜"
+    },
+    {
+      "id": "M9-S2",
+      "file": "samples/m9/elf_medium_lto1_stripped",
+      "sha256": "58ceb45aa0a33068e14fd16361c92037adf44d2be2b1149e236997b92edfdd0f",
+      "size": 32556080,
+      "format": "ELF64 x86-64 ET_EXEC",
+      "kind": "real",
+      "slot": "中型 stripped ELF #2",
+      "size_band_ok": true,
+      "structure": {
+        "symtab": false, "debug_info": false, "comment": false,
+        "eh_frame": true, "dynsym_symbols": 27991,
+        "text": {"va": 6442800, "off": 2248496, "size": 20165308}
+      },
+      "source": "Ubuntu 22.04 gcc-12 包内 /usr/lib/gcc/x86_64-linux-gnu/12/lto1",
+      "source_identity": "deb control: Package=gcc-12 Version=12.3.0-1ubuntu1~22.04.3 Architecture=amd64",
+      "source_path_hint": "archive.ubuntu.com pool/main/g/gcc-12/gcc-12_12.3.0-1ubuntu1~22.04.3_amd64.deb",
+      "license": "GPL-3.0-or-later",
+      "redistributable": "yes（同上义务）",
+      "local_only": false,
+      "notes": "与 M9-S1 同一源码包的另一前端程序，用于确认结论不依赖单个符号布局"
+    },
+    {
+      "id": "M9-S3",
+      "file": "samples/m9/elf_jumpdense_python310_stripped",
+      "sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+      "size": 5941864,
+      "format": "ELF64 x86-64 ET_DYN (PIE)",
+      "kind": "real",
+      "slot": "跳转表密集 #1",
+      "size_band_ok": false,
+      "structure": {
+        "symtab": false, "debug_info": false, "comment": false,
+        "eh_frame": true, "dynsym_symbols": 2190,
+        "text": {"va": 461568, "off": 461568, "size": 2824958}
+      },
+      "source": "Ubuntu 22.04 python3.10-minimal 包内 /usr/bin/python3.10",
+      "source_identity": "deb control: Package=python3.10-minimal Version=3.10.12-1~22.04.18 Architecture=amd64",
+      "source_path_hint": "archive.ubuntu.com pool/main/p/python3.10/python3.10-minimal_3.10.12-1~22.04.18_amd64.deb",
+      "license": "PSF-2.0（Python Software Foundation License）",
+      "redistributable": "yes",
+      "local_only": false,
+      "selection_basis": "先验结构判据 R3：CPython 解释器主循环以 opcode 编号做密集 switch 分发，属典型跳转表密集程序；选取时未看任何解码结果",
+      "notes": "不在 10–50MB 带（5.9MB），故只承担『跳转表密集』角色，不计入中型带达标"
+    },
+    {
+      "id": "M9-S4",
+      "file": "samples/m9/elf_plugin_liblua54_stripped.so",
+      "sha256": "4b7546b6feee8838bda664963fb00d5c8bcdbd6d6de9fc3286b06cb33ca6d594",
+      "size": 265280,
+      "format": "ELF64 x86-64 ET_DYN shared object",
+      "kind": "real",
+      "slot": "插件式无符号 #1",
+      "size_band_ok": false,
+      "structure": {
+        "symtab": false, "debug_info": false, "comment": false,
+        "eh_frame": true, "dynsym_symbols": 252,
+        "text": {"va": 31552, "off": 31552, "size": 176630}
+      },
+      "source": "Ubuntu 22.04 liblua5.4-0 包内 /usr/lib/x86_64-linux-gnu/liblua5.4.so.0.0.0",
+      "source_identity": "deb control: Package=liblua5.4-0 Version=5.4.6-3build2 Architecture=amd64",
+      "source_path_hint": "archive.ubuntu.com pool/universe/l/lua5.4/liblua5.4-0_5.4.6-3build2_amd64.deb",
+      "license": "MIT",
+      "redistributable": "yes",
+      "local_only": false,
+      "selection_basis": "R4：ET_DYN 共享库且无 .symtab，只有 .dynsym 导出表，等价于『插件式无符号』形态",
+      "notes": "体积小，只承担形态角色；函数边界几乎全部无名字，用于检验无符号下的入口推断"
+    },
+    {
+      "id": "M9-S5",
+      "file": "samples/m9/pe_medium_gdb181.exe",
+      "sha256": "64dd0adf8749e6cd9b5219f9f64e6ec3994cd46d8f05d02a77cff45abbbef0c9",
+      "size": 10764796,
+      "format": "PE32+ x86-64 console",
+      "kind": "real",
+      "slot": "中型 PE #1",
+      "size_band_ok": true,
+      "structure": {
+        "coff_symbols": 1019, "rich": null, "image_base": 5368709120,
+        "sections": [".text", ".data", ".rdata", ".pdata", ".xdata", ".bss", ".edata", ".idata", ".tls", ".rsrc", ".reloc"]
+      },
+      "source": "MSYS2 mingw-w64-x86_64-gdb 18.1-4 包内 mingw64/bin/gdb.exe",
+      "source_identity": ".PKGINFO: pkgname=mingw-w64-x86_64-gdb pkgver=18.1-4 license=spdx:GPL-3.0-or-later",
+      "source_path_hint": "repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-gdb-18.1-4-any.pkg.tar.zst（双层压缩，需先解 .zst 再解内层 .tar）",
+      "license": "GPL-3.0-or-later",
+      "redistributable": "yes（同上义务）",
+      "local_only": false,
+      "notes": "非完全 stripped：COFF 符号表 1019 项仍在（MSYS2 未 strip）。这正是 R2 要求的如实标注——本样本满足『中型 PE』角色，但不满足『完全无符号』"
+    },
+    {
+      "id": "M9-S6",
+      "file": "samples/m9/elf_medium_synth_go_stripped",
+      "sha256": "5521c245c7e0abeb8a7cf9ee3e3eef9414f8ea5d966a8cb56ccae4b272f74180",
+      "size": 7725216,
+      "format": "ELF64 x86-64 ET_EXEC",
+      "kind": "synthetic",
+      "slot": "合成对照（ELF）",
+      "size_band_ok": false,
+      "structure": {
+        "symtab": false, "debug_info": false, "comment": false,
+        "gopclntab": true, "dynsym_symbols": 0,
+        "text": {"va": 4198400, "off": 4096, "size": 3511473}
+      },
+      "build": {
+        "toolchain": "go1.27.3",
+        "command": "GOOS=linux CGO_ENABLED=0 go build -trimpath -buildvcs=false -ldflags \"-s -w\" -o elf_medium_synth_go_stripped main.go",
+        "source": "samples/m9/_gen/main.go（512 路稠密 switch + 引用 archive/tar、compress/bzip2、compress/flate、encoding/xml、go/parser、go/ast、mime/multipart、crypto/elliptic、math/big、net/rpc、net/smtp、image/gif、image/jpeg 等标准库以撑体积）"
+      },
+      "license": "自有样本（Go 工具链产物，标准库 BSD-3-Clause）",
+      "redistributable": "yes",
+      "local_only": false,
+      "notes": "**未落入 10–50MB 带（7.7MB）**。合成样本只作 real/synthetic 对照，任何结论必须标注『仅适用于合成 Go 样本，不得外推到真实二进制』；不计入中型带达标"
+    },
+    {
+      "id": "M9-S7",
+      "file": "samples/m9/pe_medium_synth_go_stripped.exe",
+      "sha256": "1267a1ab1f65e030b68e8ce3b3b73201594d042c0efa64b2ad85edabde689702",
+      "size": 7925248,
+      "format": "PE32+ x86-64 console",
+      "kind": "synthetic",
+      "slot": "合成对照（PE）",
+      "size_band_ok": false,
+      "structure": {
+        "coff_symbols": 0, "rich": null, "image_base": 5368709120,
+        "sections": [".text", ".rdata", ".data", ".pdata", ".xdata", ".idata", ".reloc", ".symtab"]
+      },
+      "build": {
+        "toolchain": "go1.27.3",
+        "command": "GOOS=windows CGO_ENABLED=0 go build -trimpath -buildvcs=false -ldflags \"-s -w\" -o pe_medium_synth_go_stripped.exe main.go",
+        "source": "同上 _gen/main.go"
+      },
+      "license": "自有样本（Go 工具链产物）",
+      "redistributable": "yes",
+      "local_only": false,
+      "notes": "**未落入 10–50MB 带（7.9MB）**。COFF nsym=0 但节表仍保留空的 .symtab 节（Go 链接器行为），如实记录；结论范围同 M9-S6"
+    }
+  ],
+  "coverage_bands": {
+    "medium_elf_stripped": {"required": "2-3", "satisfied_by": ["M9-S1", "M9-S2"], "real": 2, "synthetic": 0},
+    "medium_pe": {"required": "1-2", "satisfied_by": ["M9-S5"], "real": 1, "synthetic": 0},
+    "jump_table_dense": {"required": "1", "satisfied_by": ["M9-S3"], "real": 1, "synthetic": 0},
+    "plugin_no_symbols": {"required": "1", "satisfied_by": ["M9-S4"], "real": 1, "synthetic": 0},
+    "synthetic_contrast": {"provided": ["M9-S6", "M9-S7"], "in_band": false}
+  },
+  "redistribution_split": {
+    "redistributable": ["M9-S1", "M9-S2", "M9-S3", "M9-S4", "M9-S5", "M9-S6", "M9-S7"],
+    "local_only": [],
+    "note": "M9 新增样本全部可再分发（GPL/PSF/MIT/自有）；M2 表中 cli-64.exe 仍为 local-only，不因 M9 改变"
+  },
+  "caveats": [
+    "合成样本（M9-S6/S7）与真实样本（M9-S1..S5）必须分栏汇报；合成样本结果不得表述为真实二进制的一般结论",
+    "M9-S5 有 1019 个 COFF 符号，不满足『完全 stripped』；其角色只是『中型 PE』",
+    "M9-S3/S4 不在 10–50MB 带，只承担跳转表密集 / 插件形态角色",
+    "来源 URL 只给同版本标准池路径，权威身份以 deb control / PKGINFO 元数据为准",
+    "_downloads/ 已移出工作树（原始 deb/pkg 与解包树含不可遍历的符号链接，会干扰 pytest 收集；原始包可按登记的包身份重取），_gen/ 保留 main.go 作为合成样本源码；两者都不属于登记样本，不参与回归"
+  ]
+}

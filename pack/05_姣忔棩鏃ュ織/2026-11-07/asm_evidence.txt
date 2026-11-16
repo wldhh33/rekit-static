@@ -1,0 +1,53 @@
+# add8 调用约定实证（gcc -O0, x86-64, System V AMD64, 2026-11-07）
+```asm
+0000000000001129 <add8>:
+    1129:	push   %rbp
+    112a:	mov    %rsp,%rbp
+    112d:	mov    %edi,-0x4(%rbp)
+    1130:	mov    %esi,-0x8(%rbp)
+    1133:	mov    %edx,-0xc(%rbp)
+    1136:	mov    %ecx,-0x10(%rbp)
+    1139:	mov    %r8d,-0x14(%rbp)
+    113d:	mov    %r9d,-0x18(%rbp)
+    1141:	mov    -0x4(%rbp),%edx
+    1144:	mov    -0x8(%rbp),%eax
+    1147:	add    %eax,%edx
+    1149:	mov    -0xc(%rbp),%eax
+    114c:	add    %eax,%edx
+    114e:	mov    -0x10(%rbp),%eax
+    1151:	add    %eax,%edx
+    1153:	mov    -0x14(%rbp),%eax
+    1156:	add    %eax,%edx
+    1158:	mov    -0x18(%rbp),%eax
+    115b:	add    %eax,%edx
+    115d:	mov    0x10(%rbp),%eax
+    1160:	add    %eax,%edx
+    1162:	mov    0x18(%rbp),%eax
+    1165:	add    %edx,%eax
+    1167:	pop    %rbp
+    1168:	ret
+
+0000000000001169 <main>:
+    1169:	push   %rbp
+    116a:	mov    %rsp,%rbp
+    116d:	push   $0x8
+    116f:	push   $0x7
+    1171:	mov    $0x6,%r9d
+    1177:	mov    $0x5,%r8d
+    117d:	mov    $0x4,%ecx
+    1182:	mov    $0x3,%edx
+    1187:	mov    $0x2,%esi
+    118c:	mov    $0x1,%edi
+    1191:	call   1129 <add8>
+    1196:	add    $0x10,%rsp
+    119a:	leave
+    119b:	ret
+
+```
+
+# readelf -d /bin/ls（NEEDED 基线）
+ 0x0000000000000001 (NEEDED)             Shared library: [libselinux.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libcap.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+
+# 反证：vaddr 直用越界（dyn_nopie 文件 0x3ce8 字节，STRTAB vaddr 0x400418）

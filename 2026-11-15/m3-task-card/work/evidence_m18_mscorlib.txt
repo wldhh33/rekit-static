@@ -1,0 +1,25 @@
+file   : C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorlib.dll
+status : ok
+asm    : mscorlib 4.0.0.0
+
+[分母]
+  方法: MethodDef 29257 = 有体 25315 + 无体 3942；分析 25315 + 部分 0 + 空 0（恒等 True）
+  分支指令 51063（leave_long=194, leave_short=2663, long=3253, short=44719, switch=234）；switch 234 / case 2008
+  分支目标 52837：instruction 52837 / inside_instruction 0 / outside_method 0 / decode_error 0（恒等 True）
+  调用指令 93194（call=48838, callvirt=30516, ldftn=209, ldvirtftn=18, newobj=13613）
+  token: internal 93174 / external 0 / unresolved 20（恒等 True）
+  未解析原因: bad_parent=20
+  token 表: MemberRef=6837, MethodDef=85189, MethodSpec=1168
+  EH: 子句 2164（catch=692, fault=7, finally=1465）；坏边界 0 / 坏区间 0；catch token internal=692
+  块 108267 / 边 107765（branch=47972, fallthrough=54928, leave=2857, switch=2008）/ 不可达块 5058；leave 跳入保护区 0（从 finally/fault 跳出 0、位于 filter 内 0）
+  父解析: typespec=2527, typespec_internal=2523, typespec_unresolved=4
+
+[比例]（分母见上）
+  internal_over_tokens = 0.999785
+  external_over_tokens = 0.000000
+  unresolved_over_tokens = 0.000215
+  targets_valid_over_total = 1.000000
+  eh_boundary_ok_over_clauses = 1.000000
+  blocks_reachable_over_total = 0.953282
+
+[方法明细]（存储 0 个；--limit 只影响逐方法明细（blocks/branch_sites/call_sites/eh）；所有分母统计全部有体方法）

@@ -1,0 +1,18 @@
+=== verify_callfacts.py exit=0
+=== verify_callgraph.py exit=0
+=== verify_disasm.py exit=0
+=== verify_expr.py exit=0
+=== verify_fingerprint.py exit=2
+E9 载体：必须同时给 --all --matrix（见任务卡 E9）
+=== verify_iat.py exit=0
+=== verify_map.py exit=0
+=== verify_paramdecl.py exit=0
+=== verify_recdesc.py exit=0
+=== verify_sitejoin.py exit=0
+=== verify_struct.py exit=0
+=== verify_switchcand.py exit=0
+TOTAL_FAIL=1
+
+E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）
+=== verify_fingerprint.py --all --matrix exit=0
+注：verify_fingerprint.py 不带参数以 exit=2 提示「必须同时给 --all --matrix」；按该参数运行 exit=0（见上）。因此 12 个验证脚本全部 exit 0。

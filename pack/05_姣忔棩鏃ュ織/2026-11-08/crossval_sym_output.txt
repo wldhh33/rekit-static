@@ -1,0 +1,22 @@
+== A1 数量一致（4 样本 × 2 符号表）==
+  bin_ls.elf .dynsym: rekit=138 readelf=138 预期=138 [PASS]
+  bin_ls.elf .symtab: rekit=None readelf=None 预期=None [PASS]
+  dyn_pie .dynsym: rekit=6 readelf=6 预期=6 [PASS]
+  dyn_pie .symtab: rekit=35 readelf=35 预期=35 [PASS]
+  dyn_nopie .dynsym: rekit=3 readelf=3 预期=3 [PASS]
+  dyn_nopie .symtab: rekit=33 readelf=33 预期=33 [PASS]
+  dyn_static .dynsym: rekit=None readelf=None 预期=None [PASS]
+  dyn_static .symtab: rekit=2084 readelf=2084 预期=2084 [PASS]
+== A2 全量 (name,value) 序列一致 bin_ls.elf .dynsym ==
+  rekit=138 readelf=138 逐行一致=138/138 含第0号null符号=(('', 0),('', 0))
+  [PASS]
+== A3 关键符号抽查 ==
+  bin_ls UND 导入符号 122 个，全部 value==0: True  例: ['__ctype_toupper_loc', 'getenv', 'cap_to_text']
+  dyn_pie main=0x1129(size 11, FUNC, ndx 13)  readelf: 0x1129 size 11 FUNC ndx 13
+  dyn_pie _start=0x1040(size 34, FUNC, ndx 13)  readelf: 0x1040 size 34 FUNC ndx 13
+  [PASS]
+  nm -D dyn_pie: ['                 w _ITM_deregisterTMCloneTable', '                 w _ITM_registerTMCloneTable', '                 w __cxa_finalize@GLIBC_2.2.5', '                 w __gmon_start__', '                 U __libc_start_main@GLIBC_2.34']
+  rekit .dynsym 值与 nm -D 一致（非导入部分）: True
+== A4 vaddr 语义 + 鲁棒性 ==
+  bin_ls stripped→symtab=None: True; dyn_static→dynsym=None: True; dyn_static .symtab 仍解析 2084: True; st_value 透传不换算: True
+  [PASS]

@@ -1,0 +1,2306 @@
+{
+ "schema": 1,
+ "path": "samples\\m18\\_gen\\FlowSample.dll",
+ "status": "ok",
+ "reason": null,
+ "assembly": {
+  "name": "FlowSample",
+  "version": "0.0.0.0",
+  "culture": "",
+  "flags": 0,
+  "hash_alg": 32772,
+  "public_key_len": 0
+ },
+ "caliber": [
+  "token 目标只按声明解析：MethodDef 直接定位；MemberRef 按父（TypeDef/TypeRef/TypeSpec/ModuleRef）与签名 blob 精确匹配；MethodSpec 先解底层 MethodDef/MemberRef 再报泛型实参个数。",
+  "不加载被引程序集：external 只说明声明指向的程序集/类型/成员，没有 MethodDef 行号；不按同名把另一版本的方法代入。",
+  "未解析逐条给原因：row_out_of_range / missing_assembly / signature_mismatch / token_kind_mismatch / member_not_found / bad_parent / unsupported_parent / no_signature / invalid_token。",
+  "分支目标 = offset + size + 有符号位移（switch 为下一条指令 + 4 字节表项）；落点分 instruction / inside_instruction / outside_method，逐条单列。",
+  "基本块 leader：方法入口、每个有效分支目标、分支/switch 的下一条指令、终结指令的下一条指令、EH 子句的 try/handler/filter 边界（必须落在指令边界）。",
+  "终结指令：ret/throw/rethrow/endfinally/endfilter/jmp/br/br.s/leave/leave.s；条件分支产生 branch + fallthrough 两条边。",
+  "EH 只建模结构、不建模成边：handler/filter 入口由运行时派发，finally/fault 在 leave/异常展开时执行，IL 没有静态边；强加边会污染可达性。",
+  "IL 与 x86 的差异：栈式语义、无标志位、switch 是绝对目标表、leave 退出保护区、endfinally/endfilter 无静态后继；块规则不能照搬 x86。",
+  "分母先行：所有比例在分母之后；分母为 0 时比例写 None。"
+ ],
+ "caveats": [
+  "受控样本是 csc 编译的 C# 与 ilasm 手写 IL；只覆盖本机编译器实际生成的 IL 子集（C# 5 无 filter，filter/fault/calli 由手写 IL 补），不能代表真实程序集分布。",
+  "external 目标未加载被引程序集：没有目标 MethodDef 行号，也不验证版本/重定向。",
+  "MemberRef 签名按 blob 字节精确比较；泛型实例化的签名可能与定义不同，此时记 signature_mismatch，不按名字猜目标。",
+  "calli 的 token 是 StandAloneSig（签名），本轮不按签名推断调用目标。",
+  "EH 是结构信息，不是边；块的 reachable_from_entry 只统计显式分支/顺序流。",
+  "不可达块保留并单列，不丢弃；静态块/边不等于运行时执行路径。",
+  "IL 在 undecodable_at 之后不分析，方法记 partial；其余分母只统计已解出前缀。"
+ ],
+ "cross_layer": [
+  {
+   "layer": "dotnet",
+   "status": "upstream",
+   "reason": "本层消费 M17 的 CLI 头/元数据表/MethodDef.RVA/IL 边界；token 解析复用同一份表，不重新猜布局"
+  },
+  {
+   "layer": "map",
+   "status": "applicable",
+   "reason": "方法体代码区仍用节表 RVA→文件偏移定位；IL 目标本身是 code offset"
+  },
+  {
+   "layer": "pe",
+   "status": "applicable",
+   "reason": "PE 头/节/数据目录是上游输入"
+  },
+  {
+   "layer": "iat",
+   "status": "not_applicable",
+   "reason": "IL 调用目标是元数据 token，不是 IAT thunk；P/Invoke 另走 ImplMap"
+  },
+  {
+   "layer": "disasm",
+   "status": "not_applicable",
+   "reason": "方法体是 CLI 字节码，不是 x86"
+  },
+  {
+   "layer": "recdesc",
+   "status": "not_applicable",
+   "reason": "递归下降/基本块以 x86 指令为输入；IL 的块规则不同（栈式/EH 声明）"
+  },
+  {
+   "layer": "expr",
+   "status": "not_applicable",
+   "reason": "表达式恢复建立在 x86 指令与操作数上"
+  },
+  {
+   "layer": "callgraph",
+   "status": "not_applicable",
+   "reason": "x86 调用图以代码地址为点；本层以 MethodDef/MemberRef token 为点，两者不能直接拼接"
+  },
+  {
+   "layer": "callfacts",
+   "status": "not_applicable",
+   "reason": "参数传递事实来自 x86 调用点；IL 调用体内没有寄存器/栈帧实参"
+  },
+  {
+   "layer": "sitejoin",
+   "status": "not_applicable",
+   "reason": "拼接对象是 x86 调用图/参数/文本，IL 没有这些层"
+  },
+  {
+   "layer": "strxref",
+   "status": "not_applicable",
+   "reason": "字面量在 #US，ldstr 用 token；不在数据节"
+  },
+  {
+   "layer": "datarefs",
+   "status": "not_applicable",
+   "reason": "对象声明来自 ELF/DWARF；IL 的字段/类型引用是 token"
+  },
+  {
+   "layer": "coverage",
+   "status": "not_applicable",
+   "reason": "覆盖率分母是 x86 指令"
+  },
+  {
+   "layer": "switchcand",
+   "status": "not_applicable",
+   "reason": "x86 跳转表候选识别不适用于 IL switch（自带绝对目标表）"
+  },
+  {
+   "layer": "vexaudit",
+   "status": "not_applicable",
+   "reason": "VEX 前缀是 x86 编码"
+  },
+  {
+   "layer": "paramdecl",
+   "status": "not_applicable",
+   "reason": "DWARF 形参声明；.NET 参数在签名 blob，本层不解码签名语义"
+  },
+  {
+   "layer": "struct",
+   "status": "not_applicable",
+   "reason": "DWARF 类型层；.NET 类型在 TypeDef/签名 blob"
+  },
+  {
+   "layer": "gopclntab",
+   "status": "not_applicable",
+   "reason": "Go 专用"
+  },
+  {
+   "layer": "funcreport",
+   "status": "not_applicable",
+   "reason": "六层 x86 合成入口；对 .NET 返回 not_applicable"
+  }
+ ],
+ "scope": {
+  "methods_stored": 19,
+  "limit": 40,
+  "note": "--limit 只影响逐方法明细（blocks/branch_sites/call_sites/eh）；所有分母统计全部有体方法"
+ },
+ "denominators": {
+  "branch_total": 6,
+  "switch_count": 0,
+  "switch_cases": 0,
+  "targets_total": 6,
+  "leave_inside_region": 0,
+  "call_total": 17,
+  "eh_clauses": 3,
+  "eh_bad_boundary": 0,
+  "eh_bad_range": 0,
+  "blocks_total": 30,
+  "edges_total": 12,
+  "unreachable_blocks": 3,
+  "methods_total": 20,
+  "methods_with_body": 19,
+  "methods_analyzed": 19,
+  "methods_partial": 0,
+  "methods_empty": 0,
+  "methods_identity_ok": true,
+  "methods_with_eh": 1,
+  "eh_clauses_declared": 3,
+  "tokens_internal": 8,
+  "tokens_external": 9,
+  "tokens_unresolved": 0,
+  "targets_valid": 6,
+  "targets_inside_instruction": 0,
+  "targets_outside_method": 0,
+  "targets_decode_error": 0,
+  "token_identity_ok": true,
+  "target_identity_ok": true,
+  "eh_identity_ok": true,
+  "block_identity_ok": true,
+  "edge_identity_ok": true,
+  "identity_ok": true,
+  "method_errors": 0,
+  "ratios": {
+   "internal_over_tokens": 0.47058823529411764,
+   "external_over_tokens": 0.5294117647058824,
+   "unresolved_over_tokens": 0.0,
+   "targets_valid_over_total": 1.0,
+   "eh_boundary_ok_over_clauses": 1.0,
+   "blocks_reachable_over_total": 0.9
+  },
+  "call_by_opcode": {
+   "call": 9,
+   "ldftn": 1,
+   "newobj": 3,
+   "callvirt": 4
+  },
+  "token_by_table": {
+   "MethodDef": 6,
+   "MemberRef": 10,
+   "MethodSpec": 1
+  },
+  "unresolved_by_reason": {},
+  "branch_by_form": {
+   "short": 3,
+   "long": 1,
+   "leave_short": 2
+  },
+  "target_checks": {
+   "instruction": 6,
+   "inside_instruction": 0,
+   "outside_method": 0
+  },
+  "eh_by_kind": {
+   "catch": 2,
+   "finally": 1
+  },
+  "catch_tokens_by_status": {
+   "external": 2
+  },
+  "edges_by_kind": {
+   "branch": 4,
+   "fallthrough": 6,
+   "leave": 2
+  },
+  "parent_counts": {
+   "typespec": 5,
+   "typespec_external": 4,
+   "typeref": 3,
+   "typeref_external": 3,
+   "typespec_internal": 1
+  }
+ },
+ "methods": [
+  {
+   "row": 1,
+   "token": "0x06000001",
+   "name": "Callee",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 4,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 4,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 2,
+   "token": "0x06000002",
+   "name": "Caller",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 9,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 5,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 1,
+     "opcode": "call",
+     "token": "0x06000001",
+     "token_table": "MethodDef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 1,
+      "token": "0x06000001",
+      "name": "Callee",
+      "owner_row": 2,
+      "owner_type": "Rekit.Flow.Ops",
+      "rva": 8272,
+      "has_body": true
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MethodDef[1]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 9,
+     "insn_count": 5,
+     "insns": [
+      0,
+      1,
+      6,
+      7,
+      8
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 3,
+   "token": "0x06000003",
+   "name": "TakeFunc",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 13,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 1,
+     "opcode": "ldftn",
+     "token": "0x06000001",
+     "token_table": "MethodDef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 1,
+      "token": "0x06000001",
+      "name": "Callee",
+      "owner_row": 2,
+      "owner_type": "Rekit.Flow.Ops",
+      "rva": 8272,
+      "has_body": true
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MethodDef[1]"
+     ]
+    },
+    {
+     "offset": 7,
+     "opcode": "newobj",
+     "token": "0x0a000003",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Func`2",
+      "member": ".ctor",
+      "parent_kind": "TypeSpec"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[3]",
+      "TypeSpec[1]",
+      "TypeRef[2]",
+      "TypeRef[2]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 13,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      7,
+      12
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 4,
+   "token": "0x06000004",
+   "name": "Loop",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 25,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 19,
+   "branches": {
+    "total": 2,
+    "by_form": {
+     "short": 2
+    },
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 2,
+    "target_checks": {
+     "instruction": 2,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [
+    {
+     "offset": 4,
+     "opcode": "br.s",
+     "form": "short",
+     "next": 6,
+     "targets": [
+      {
+       "case_index": null,
+       "value": 19,
+       "check": "instruction",
+       "insn_offset": 19,
+       "containing_offset": null
+      }
+     ],
+     "error": null
+    },
+    {
+     "offset": 21,
+     "opcode": "blt.s",
+     "form": "short",
+     "next": 23,
+     "targets": [
+      {
+       "case_index": null,
+       "value": 6,
+       "check": "instruction",
+       "insn_offset": 6,
+       "containing_offset": null
+      }
+     ],
+     "error": null
+    }
+   ],
+   "call_sites": [
+    {
+     "offset": 8,
+     "opcode": "call",
+     "token": "0x06000001",
+     "token_table": "MethodDef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 1,
+      "token": "0x06000001",
+      "name": "Callee",
+      "owner_row": 2,
+      "owner_type": "Rekit.Flow.Ops",
+      "rva": 8272,
+      "has_body": true
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MethodDef[1]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 6,
+     "insn_count": 5,
+     "insns": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ],
+     "terminator": "br.s",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 6,
+     "end": 19,
+     "insn_count": 9,
+     "insns": [
+      6,
+      7,
+      8,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+     ],
+     "terminator": null,
+     "regions": [],
+     "entry": "branch",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 19,
+     "end": 23,
+     "insn_count": 3,
+     "insns": [
+      19,
+      20,
+      21
+     ],
+     "terminator": null,
+     "regions": [],
+     "entry": "branch",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 23,
+     "end": 25,
+     "insn_count": 2,
+     "insns": [
+      23,
+      24
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "after_terminator",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [
+    {
+     "from": 0,
+     "to": 19,
+     "kind": "branch",
+     "case": null
+    },
+    {
+     "from": 0,
+     "to": 6,
+     "kind": "fallthrough",
+     "case": null
+    },
+    {
+     "from": 6,
+     "to": 19,
+     "kind": "fallthrough",
+     "case": null
+    },
+    {
+     "from": 19,
+     "to": 6,
+     "kind": "branch",
+     "case": null
+    },
+    {
+     "from": 19,
+     "to": 23,
+     "kind": "fallthrough",
+     "case": null
+    }
+   ],
+   "reachability": {
+    "blocks": 4,
+    "reachable": 4,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 5,
+   "token": "0x06000005",
+   "name": "LongBranch",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 328,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 260,
+   "branches": {
+    "total": 1,
+    "by_form": {
+     "long": 1
+    },
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 1,
+    "target_checks": {
+     "instruction": 1,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [
+    {
+     "offset": 1,
+     "opcode": "brfalse",
+     "form": "long",
+     "next": 6,
+     "targets": [
+      {
+       "case_index": null,
+       "value": 326,
+       "check": "instruction",
+       "insn_offset": 326,
+       "containing_offset": null
+      }
+     ],
+     "error": null
+    }
+   ],
+   "call_sites": [],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 6,
+     "insn_count": 2,
+     "insns": [
+      0,
+      1
+     ],
+     "terminator": null,
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 6,
+     "end": 326,
+     "insn_count": 256,
+     "insns": [
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24,
+      26,
+      27,
+      28,
+      29,
+      31,
+      32,
+      33,
+      34,
+      36,
+      37,
+      38,
+      39,
+      41,
+      42,
+      43,
+      44,
+      46,
+      47,
+      48,
+      49,
+      51,
+      52,
+      53,
+      54,
+      56,
+      57,
+      58,
+      59,
+      61,
+      62,
+      63,
+      64,
+      66,
+      67,
+      68,
+      69,
+      71,
+      72,
+      73,
+      74,
+      76,
+      77,
+      78,
+      79,
+      81,
+      82,
+      83,
+      84,
+      86,
+      87,
+      88,
+      89,
+      91,
+      92,
+      93,
+      94,
+      96,
+      97,
+      98,
+      99,
+      101,
+      102,
+      103,
+      104,
+      106,
+      107,
+      108,
+      109,
+      111,
+      112,
+      113,
+      114,
+      116,
+      117,
+      118,
+      119,
+      121,
+      122,
+      123,
+      124,
+      126,
+      127,
+      128,
+      129,
+      131,
+      132,
+      133,
+      134,
+      136,
+      137,
+      138,
+      139,
+      141,
+      142,
+      143,
+      144,
+      146,
+      147,
+      148,
+      149,
+      151,
+      152,
+      153,
+      154,
+      156,
+      157,
+      158,
+      159,
+      161,
+      162,
+      163,
+      164,
+      166,
+      167,
+      168,
+      169,
+      171,
+      172,
+      173,
+      174,
+      176,
+      177,
+      178,
+      179,
+      181,
+      182,
+      183,
+      184,
+      186,
+      187,
+      188,
+      189,
+      191,
+      192,
+      193,
+      194,
+      196,
+      197,
+      198,
+      199,
+      201,
+      202,
+      203,
+      204,
+      206,
+      207,
+      208,
+      209,
+      211,
+      212,
+      213,
+      214,
+      216,
+      217,
+      218,
+      219,
+      221,
+      222,
+      223,
+      224,
+      226,
+      227,
+      228,
+      229,
+      231,
+      232,
+      233,
+      234,
+      236,
+      237,
+      238,
+      239,
+      241,
+      242,
+      243,
+      244,
+      246,
+      247,
+      248,
+      249,
+      251,
+      252,
+      253,
+      254,
+      256,
+      257,
+      258,
+      259,
+      261,
+      262,
+      263,
+      264,
+      266,
+      267,
+      268,
+      269,
+      271,
+      272,
+      273,
+      274,
+      276,
+      277,
+      278,
+      279,
+      281,
+      282,
+      283,
+      284,
+      286,
+      287,
+      288,
+      289,
+      291,
+      292,
+      293,
+      294,
+      296,
+      297,
+      298,
+      299,
+      301,
+      302,
+      303,
+      304,
+      306,
+      307,
+      308,
+      309,
+      311,
+      312,
+      313,
+      314,
+      316,
+      317,
+      318,
+      319,
+      321,
+      322,
+      323,
+      324
+     ],
+     "terminator": null,
+     "regions": [],
+     "entry": "after_terminator",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 326,
+     "end": 328,
+     "insn_count": 2,
+     "insns": [
+      326,
+      327
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "branch",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [
+    {
+     "from": 0,
+     "to": 326,
+     "kind": "branch",
+     "case": null
+    },
+    {
+     "from": 0,
+     "to": 6,
+     "kind": "fallthrough",
+     "case": null
+    },
+    {
+     "from": 6,
+     "to": 326,
+     "kind": "fallthrough",
+     "case": null
+    }
+   ],
+   "reachability": {
+    "blocks": 3,
+    "reachable": 3,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 6,
+   "token": "0x06000006",
+   "name": "CallExternal",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 25,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 9,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 0,
+     "opcode": "newobj",
+     "token": "0x0a000004",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Collections.Generic.List`1",
+      "member": ".ctor",
+      "parent_kind": "TypeSpec"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[4]",
+      "TypeSpec[2]",
+      "TypeRef[5]",
+      "TypeRef[5]"
+     ]
+    },
+    {
+     "offset": 8,
+     "opcode": "callvirt",
+     "token": "0x0a000005",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Collections.Generic.List`1",
+      "member": "Add",
+      "parent_kind": "TypeSpec"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[5]",
+      "TypeSpec[2]",
+      "TypeRef[5]",
+      "TypeRef[5]"
+     ]
+    },
+    {
+     "offset": 14,
+     "opcode": "callvirt",
+     "token": "0x0a000006",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Collections.Generic.List`1",
+      "member": "get_Count",
+      "parent_kind": "TypeSpec"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[6]",
+      "TypeSpec[2]",
+      "TypeRef[5]",
+      "TypeRef[5]"
+     ]
+    },
+    {
+     "offset": 19,
+     "opcode": "call",
+     "token": "0x0a000007",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Console",
+      "member": "WriteLine",
+      "parent_kind": "TypeRef"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[7]",
+      "TypeRef[6]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 25,
+     "insn_count": 9,
+     "insns": [
+      0,
+      5,
+      6,
+      7,
+      8,
+      13,
+      14,
+      19,
+      24
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 7,
+   "token": "0x06000007",
+   "name": "Forward",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 8,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 2,
+     "opcode": "callvirt",
+     "token": "0x0a000008",
+     "token_table": "MemberRef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 10,
+      "token": "0x0600000a",
+      "name": "Put",
+      "owner_row": 3,
+      "owner_type": "Rekit.Flow.Box`1",
+      "rva": 8828,
+      "has_body": true
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[8]",
+      "TypeSpec[3]",
+      "TypeDef[3]",
+      "TypeDef[3]",
+      "MethodDef[10]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 8,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      7
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 8,
+   "token": "0x06000008",
+   "name": "ForwardInt",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 8,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 2,
+     "opcode": "call",
+     "token": "0x2b000001",
+     "token_table": "MethodSpec",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 7,
+      "token": "0x06000007",
+      "name": "Forward",
+      "owner_row": 2,
+      "owner_type": "Rekit.Flow.Ops",
+      "rva": 8721,
+      "has_body": true
+     },
+     "external": null,
+     "generic": {
+      "method_spec_row": 1,
+      "generic_arg_count": 10,
+      "underlying_status": "internal"
+     },
+     "resolution_path": [
+      "MethodSpec[1]",
+      "MethodDef[7]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 8,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      7
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 9,
+   "token": "0x06000009",
+   "name": "Guarded",
+   "owner_row": 2,
+   "owner_type": "Rekit.Flow.Ops",
+   "code_size": 35,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 22,
+   "branches": {
+    "total": 3,
+    "by_form": {
+     "short": 1,
+     "leave_short": 2
+    },
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 3,
+    "target_checks": {
+     "instruction": 3,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [
+    {
+     "offset": 2,
+     "opcode": "bge.s",
+     "form": "short",
+     "next": 4,
+     "targets": [
+      {
+       "case_index": null,
+       "value": 15,
+       "check": "instruction",
+       "insn_offset": 15,
+       "containing_offset": null
+      }
+     ],
+     "error": null
+    },
+    {
+     "offset": 19,
+     "opcode": "leave.s",
+     "form": "leave_short",
+     "next": 21,
+     "targets": [
+      {
+       "case_index": null,
+       "value": 33,
+       "check": "instruction",
+       "insn_offset": 33,
+       "containing_offset": null,
+       "exits_regions": [
+        0,
+        1,
+        2
+       ],
+       "inside_exited_region": false
+      }
+     ],
+     "error": null
+    },
+    {
+     "offset": 24,
+     "opcode": "leave.s",
+     "form": "leave_short",
+     "next": 26,
+     "targets": [
+      {
+       "case_index": null,
+       "value": 33,
+       "check": "instruction",
+       "insn_offset": 33,
+       "containing_offset": null,
+       "exits_regions": [
+        0,
+        2
+       ],
+       "inside_exited_region": false
+      }
+     ],
+     "error": null
+    }
+   ],
+   "call_sites": [
+    {
+     "offset": 9,
+     "opcode": "newobj",
+     "token": "0x0a000009",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.InvalidOperationException",
+      "member": ".ctor",
+      "parent_kind": "TypeRef"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[9]",
+      "TypeRef[7]"
+     ]
+    }
+   ],
+   "eh": [
+    {
+     "id": 0,
+     "kind": "catch",
+     "flags": 0,
+     "try": [
+      0,
+      21
+     ],
+     "handler": [
+      21,
+      26
+     ],
+     "filter": null,
+     "boundary_ok": true,
+     "range_ok": true,
+     "nesting_depth": 1,
+     "catch": {
+      "token": "0x01000007",
+      "status": "external",
+      "reason": null,
+      "type": {
+       "namespace": "System",
+       "name": "System.InvalidOperationException",
+       "full_name": "System.InvalidOperationException"
+      },
+      "external": {
+       "assembly": "mscorlib",
+       "module": null
+      },
+      "resolution_path": [
+       "TypeRef[7]"
+      ]
+     }
+    },
+    {
+     "id": 1,
+     "kind": "catch",
+     "flags": 0,
+     "try": [
+      0,
+      21
+     ],
+     "handler": [
+      26,
+      29
+     ],
+     "filter": null,
+     "boundary_ok": true,
+     "range_ok": true,
+     "nesting_depth": 1,
+     "catch": {
+      "token": "0x01000008",
+      "status": "external",
+      "reason": null,
+      "type": {
+       "namespace": "System",
+       "name": "System.Exception",
+       "full_name": "System.Exception"
+      },
+      "external": {
+       "assembly": "mscorlib",
+       "module": null
+      },
+      "resolution_path": [
+       "TypeRef[8]"
+      ]
+     }
+    },
+    {
+     "id": 2,
+     "kind": "finally",
+     "flags": 2,
+     "try": [
+      0,
+      29
+     ],
+     "handler": [
+      29,
+      33
+     ],
+     "filter": null,
+     "boundary_ok": true,
+     "range_ok": true,
+     "nesting_depth": 0,
+     "catch": null
+    }
+   ],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 4,
+     "insn_count": 3,
+     "insns": [
+      0,
+      1,
+      2
+     ],
+     "terminator": null,
+     "regions": [
+      0,
+      1,
+      2
+     ],
+     "entry": "method",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 4,
+     "end": 15,
+     "insn_count": 3,
+     "insns": [
+      4,
+      9,
+      14
+     ],
+     "terminator": "throw",
+     "regions": [
+      0,
+      1,
+      2
+     ],
+     "entry": "after_terminator",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 15,
+     "end": 21,
+     "insn_count": 5,
+     "insns": [
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "terminator": "leave.s",
+     "regions": [
+      0,
+      1,
+      2
+     ],
+     "entry": "branch",
+     "reachable_from_entry": true
+    },
+    {
+     "start": 21,
+     "end": 26,
+     "insn_count": 4,
+     "insns": [
+      21,
+      22,
+      23,
+      24
+     ],
+     "terminator": "leave.s",
+     "regions": [
+      0,
+      2
+     ],
+     "entry": "eh_handler",
+     "reachable_from_entry": false
+    },
+    {
+     "start": 26,
+     "end": 29,
+     "insn_count": 2,
+     "insns": [
+      26,
+      27
+     ],
+     "terminator": "rethrow",
+     "regions": [
+      1,
+      2
+     ],
+     "entry": "eh_handler",
+     "reachable_from_entry": false
+    },
+    {
+     "start": 29,
+     "end": 33,
+     "insn_count": 3,
+     "insns": [
+      29,
+      30,
+      32
+     ],
+     "terminator": "endfinally",
+     "regions": [
+      2
+     ],
+     "entry": "eh_handler",
+     "reachable_from_entry": false
+    },
+    {
+     "start": 33,
+     "end": 35,
+     "insn_count": 2,
+     "insns": [
+      33,
+      34
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "branch",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [
+    {
+     "from": 0,
+     "to": 15,
+     "kind": "branch",
+     "case": null
+    },
+    {
+     "from": 0,
+     "to": 4,
+     "kind": "fallthrough",
+     "case": null
+    },
+    {
+     "from": 15,
+     "to": 33,
+     "kind": "leave",
+     "case": null
+    },
+    {
+     "from": 21,
+     "to": 33,
+     "kind": "leave",
+     "case": null
+    }
+   ],
+   "reachability": {
+    "blocks": 7,
+    "reachable": 4,
+    "unreachable": 3
+   }
+  },
+  {
+   "row": 10,
+   "token": "0x0600000a",
+   "name": "Put",
+   "owner_row": 3,
+   "owner_type": "Rekit.Flow.Box`1",
+   "code_size": 8,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 8,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      7
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 11,
+   "token": "0x0600000b",
+   "name": "Get",
+   "owner_row": 3,
+   "owner_type": "Rekit.Flow.Box`1",
+   "code_size": 7,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 3,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 7,
+     "insn_count": 3,
+     "insns": [
+      0,
+      1,
+      6
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 12,
+   "token": "0x0600000c",
+   "name": ".ctor",
+   "owner_row": 3,
+   "owner_type": "Rekit.Flow.Box`1",
+   "code_size": 7,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 3,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 1,
+     "opcode": "call",
+     "token": "0x0a00000b",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Object",
+      "member": ".ctor",
+      "parent_kind": "TypeRef"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[11]",
+      "TypeRef[1]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 7,
+     "insn_count": 3,
+     "insns": [
+      0,
+      1,
+      6
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 13,
+   "token": "0x0600000d",
+   "name": "M",
+   "owner_row": 4,
+   "owner_type": "Rekit.Flow.Base",
+   "code_size": 4,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 4,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 14,
+   "token": "0x0600000e",
+   "name": ".ctor",
+   "owner_row": 4,
+   "owner_type": "Rekit.Flow.Base",
+   "code_size": 7,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 3,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 1,
+     "opcode": "call",
+     "token": "0x0a00000b",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Object",
+      "member": ".ctor",
+      "parent_kind": "TypeRef"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[11]",
+      "TypeRef[1]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 7,
+     "insn_count": 3,
+     "insns": [
+      0,
+      1,
+      6
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 15,
+   "token": "0x0600000f",
+   "name": "M",
+   "owner_row": 5,
+   "owner_type": "Rekit.Flow.Derived",
+   "code_size": 10,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 6,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 2,
+     "opcode": "call",
+     "token": "0x0600000d",
+     "token_table": "MethodDef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 13,
+      "token": "0x0600000d",
+      "name": "M",
+      "owner_row": 4,
+      "owner_type": "Rekit.Flow.Base",
+      "rva": 8853,
+      "has_body": true
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MethodDef[13]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 10,
+     "insn_count": 6,
+     "insns": [
+      0,
+      1,
+      2,
+      7,
+      8,
+      9
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 16,
+   "token": "0x06000010",
+   "name": ".ctor",
+   "owner_row": 5,
+   "owner_type": "Rekit.Flow.Derived",
+   "code_size": 7,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 3,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 1,
+     "opcode": "call",
+     "token": "0x0600000e",
+     "token_table": "MethodDef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 14,
+      "token": "0x0600000e",
+      "name": ".ctor",
+      "owner_row": 4,
+      "owner_type": "Rekit.Flow.Base",
+      "rva": 8858,
+      "has_body": true
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MethodDef[14]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 7,
+     "insn_count": 3,
+     "insns": [
+      0,
+      1,
+      6
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 18,
+   "token": "0x06000012",
+   "name": "Apply",
+   "owner_row": 7,
+   "owner_type": "Rekit.Flow.Calc",
+   "code_size": 4,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 4,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 19,
+   "token": "0x06000013",
+   "name": "Use",
+   "owner_row": 7,
+   "owner_type": "Rekit.Flow.Calc",
+   "code_size": 8,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 4,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 2,
+     "opcode": "callvirt",
+     "token": "0x06000011",
+     "token_table": "MethodDef",
+     "status": "internal",
+     "reason": null,
+     "detail": null,
+     "target": {
+      "kind": "MethodDef",
+      "row": 17,
+      "token": "0x06000011",
+      "name": "Apply",
+      "owner_row": 6,
+      "owner_type": "Rekit.Flow.ICalc",
+      "rva": 0,
+      "has_body": false
+     },
+     "external": null,
+     "generic": false,
+     "resolution_path": [
+      "MethodDef[17]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 8,
+     "insn_count": 4,
+     "insns": [
+      0,
+      1,
+      2,
+      7
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  },
+  {
+   "row": 20,
+   "token": "0x06000014",
+   "name": ".ctor",
+   "owner_row": 7,
+   "owner_type": "Rekit.Flow.Calc",
+   "code_size": 7,
+   "partial": false,
+   "undecodable_at": null,
+   "instruction_count": 3,
+   "branches": {
+    "total": 0,
+    "by_form": {},
+    "switch": 0,
+    "switch_cases": 0,
+    "targets": 0,
+    "target_checks": {
+     "instruction": 0,
+     "inside_instruction": 0,
+     "outside_method": 0
+    },
+    "leave_inside_region": 0
+   },
+   "branch_sites": [],
+   "call_sites": [
+    {
+     "offset": 1,
+     "opcode": "call",
+     "token": "0x0a00000b",
+     "token_table": "MemberRef",
+     "status": "external",
+     "reason": null,
+     "detail": "声明指向外部程序集/模块；本轮不加载，没有目标 MethodDef 行号",
+     "target": null,
+     "external": {
+      "assembly": "mscorlib",
+      "module": null,
+      "type": "System.Object",
+      "member": ".ctor",
+      "parent_kind": "TypeRef"
+     },
+     "generic": false,
+     "resolution_path": [
+      "MemberRef[11]",
+      "TypeRef[1]"
+     ]
+    }
+   ],
+   "eh": [],
+   "blocks": [
+    {
+     "start": 0,
+     "end": 7,
+     "insn_count": 3,
+     "insns": [
+      0,
+      1,
+      6
+     ],
+     "terminator": "ret",
+     "regions": [],
+     "entry": "method",
+     "reachable_from_entry": true
+    }
+   ],
+   "edges": [],
+   "reachability": {
+    "blocks": 1,
+    "reachable": 1,
+    "unreachable": 0
+   }
+  }
+ ],
+ "method_errors": []
+}

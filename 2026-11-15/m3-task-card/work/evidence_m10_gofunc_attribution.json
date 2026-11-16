@@ -1,0 +1,148 @@
+{
+ "task": "M10-1 同一 Go 源码 ELF/PE 覆盖率十倍差归因",
+ "reference_tools": [
+  "objdump 2.47（外部指令边界与助记符；--insn-width=16 -M intel）",
+  "Go 1.27.3 debug/gosym + debug/elf + debug/pe（函数清单；ELF=.gopclntab 节，PE=.rdata 内 pcHeader magic）",
+  "PE .pdata RUNTIME_FUNCTION（链接器写死的函数区间；RVA）"
+ ],
+ "samples": {
+  "elf": "samples/m9/elf_medium_synth_go_stripped",
+  "pe": "samples/m9/pe_medium_synth_go_stripped.exe",
+  "same_source": "samples/m9/_gen/main.go（512 路 switch + 标准库引用）"
+ },
+ "seed_asymmetry": {
+  "elf": {
+   "seeds": 1,
+   "sources": [
+    "entry"
+   ],
+   "notes": "无 .symtab/.dynsym/.eh_frame；仅 e_entry=0x491bc0"
+  },
+  "pe": {
+   "seeds": 7153,
+   "sources": [
+    "entry",
+    "pdata"
+   ],
+   "notes": ".pdata RUNTIME_FUNCTION 7152 条 + AddressOfEntryPoint"
+  },
+  "conclusion": "同源码同编译器，ELF 侧种子源为 1，PE 侧为 7153；十倍差在种子层面已成立"
+ },
+ "per_function": {
+  "elf": {
+   "independent_func_list": "debug/gosym（.gopclntab）8908 个",
+   "classes": {
+    "matched": 3,
+    "partial": 846,
+    "seed_missing": 8059,
+    "len_conflict": 0,
+    "empty_ext": 0
+   },
+   "instructions": {
+    "matched_ours": 67,
+    "matched_ext": 67,
+    "partial_ours": 76101,
+    "partial_ext": 90564,
+    "seed_missing_ext": 833323,
+    "len_conflict_ours": 0,
+    "len_conflict_ext": 0
+   },
+   "len_conflict": 0,
+   "ours_only": 0,
+   "seed_missing_direct_ref_BUG": 0,
+   "note": "len_conflict=0 且 ours_only=0：所有解出的指令与 objdump 同址同长；8059 个缺失函数无一被已解出代码直接 call/jmp 命中"
+  },
+  "pe": {
+   "independent_func_list": "debug/gosym（.rdata 内 pclntab）8895 个；.pdata 7152 个区间",
+   "classes": {
+    "matched": 6388,
+    "partial": 764,
+    "seed_missing": 0,
+    "len_conflict": 0,
+    "empty_ext": 0
+   },
+   "instructions": {
+    "matched_ours": 550443,
+    "matched_ext": 550443,
+    "partial_ours": 175846,
+    "partial_ext": 201124,
+    "seed_missing_ext": 0,
+    "len_conflict_ours": 0,
+    "len_conflict_ext": 0
+   },
+   "len_conflict": 0,
+   "seed_missing": 0
+  }
+ },
+ "external_reachability_replication": {
+  "method": "只用 objdump 指令边界+助记符，从 e_entry 重新做一遍递归下降（不调用 rekit 解码/分类）",
+  "ext_reachable_instructions": 76168,
+  "ours_instructions": 76168,
+  "ext_reachable_ratio": 0.08243557691267032,
+  "ours_only": 0,
+  "ext_only": 0,
+  "ext_reachable_functions": 849,
+  "conclusion": "外部独立下降得到与我方完全相同的 76168 条指令、849 个函数；对称差 0 —— 排除「我方解码/调度漏了」"
+ },
+ "function_dossiers": [
+  {
+   "name": "main.main",
+   "kind": "seed_missing",
+   "entry": "0x6f91a0",
+   "objdump_insns": 571,
+   "ours_elf": 0,
+   "ours_pe": 559,
+   "evidence": "全 .text 内无任何直接 call/jmp 指向 0x6f91a0（直接调用者 0 个）；Go 运行时用 `fn := main_main; fn()` 形式的函数值调用，目标只在数据里",
+   "chain_break": "runtime.main 未到达 → main.main 只可能经其函数值间接调用"
+  },
+  {
+   "name": "runtime.main",
+   "kind": "seed_missing",
+   "entry": "0x453520",
+   "objdump_insns": 278,
+   "ours_elf": 0,
+   "ours_pe": 252,
+   "evidence": "runtime.rt0_go 在 0x48ecfd: lea rax,[rip+0x2eebec] # 0x77d8f0；0x77d8f0 处 qword = 0x453520（= runtime.main 入口）；随后 call 0x492e00（newproc）。即入口函数的地址以【数据】形式交给 newproc，.text 内不存在指向 0x453520 的直接转移",
+   "chain_break": "种子只有 e_entry；静态直接边在 newproc 的函数值参数处断开"
+  },
+  {
+   "name": "crypto/internal/fips140/sha3.keccakF1600",
+   "kind": "seed_missing",
+   "entry": "0x6feba0",
+   "objdump_insns": 5121,
+   "ours_elf": 0,
+   "ours_pe": 5119,
+   "direct_callers": [
+    "crypto/internal/fips140/sha3.(*Digest).padAndPermute",
+    "crypto/internal/fips140/sha3.(*Digest).writeGeneric",
+    "crypto/internal/fips140/sha3.(*Digest).readGeneric"
+   ],
+   "evidence": "3 个直接调用者自身均不可达（不在 849 个已达函数内）；缺失是上游整棵子树不可达，而非本函数解码失败"
+  },
+  {
+   "name": "runtime.typesEqual",
+   "kind": "partial",
+   "entry": "0x47e7c0",
+   "objdump_insns": 721,
+   "ours_elf": 171,
+   "ours_pe": 171,
+   "boundary": "0x47e909 ja 0x47e949（guard）→ 0x47e90b lea rcx,[rip+0x3070ce] # 0x7859e0 → 0x47e912 jmp QWORD PTR [rcx+rdx*8]（绝对跳转表，jmp_ind）",
+   "evidence": "首个缺口 0x47e915 紧跟在间接跳转之后；recdesc 按 R45 不跟随间接目标，故 8 个 case 块不可达。PE 同函数同样 171/721，说明这是同一解码器的一致行为，缺口来自间接跳转而非格式差异"
+  },
+  {
+   "name": "runtime.asminit",
+   "kind": "partial（伪缺口：尾部填充）",
+   "entry": "0x48ed60",
+   "objdump_insns": 32,
+   "ours_elf": 1,
+   "ours_pe": 1,
+   "evidence": "函数体仅 1 条 ret，其余 31 字节是 int3 填充；objdump 也把填充当指令计数。这类 partial 不是代码漏解，是分母含填充"
+  }
+ ],
+ "verdict": {
+  "decode_defect": "排除（ELF len_conflict=0、ours_only=0；外部独立下降结果完全一致）",
+  "seed_or_reachability": "确认：ELF 无 .eh_frame/.symtab，唯一种子 e_entry；Go 引导链经函数值（数据）调用 runtime.main，静态直接边中断，8059 个函数/833323 条指令结构性不可达",
+  "impact_scope": "只影响“可达性口径”的覆盖率数值，不影响 M9 的分子/分母定义；对已往 ELF 结论：凡以“覆盖率=已解出/全节”表述的地方需加注“该样本为 stripped Go ELF，覆盖率为 entry 可达域，非全二进制可执行域”；凡关于解码正确性的结论（同址同长、VEX 归因）不受影响",
+  "pe_side": "PE 因 .pdata 直接给出 7152 个函数起点，同一解码器覆盖 79.81%；PE 的 typesEqual/asminit 数字与 ELF 完全相同，进一步证明解码器行为一致"
+ }
+}

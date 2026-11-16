@@ -1,0 +1,6913 @@
+{
+ "coverage": {
+  "new7": {
+   "delta_numerator": 683182,
+   "delta_pp": 4.782590129207542,
+   "denominator": 14284770,
+   "numerator": 11664826,
+   "old_denominator": 14284770,
+   "old_numerator": 10981644,
+   "old_ratio": 0.7687658954256876,
+   "ratio": 0.816591796717763,
+   "samples": 7
+  },
+  "old18": {
+   "delta_numerator": 3894,
+   "delta_pp": 0.37870057271897073,
+   "denominator": 1028253,
+   "numerator": 642777,
+   "old_denominator": 1028253,
+   "old_numerator": 638883,
+   "old_ratio": 0.6213286029800059,
+   "ratio": 0.6251156087071956,
+   "samples": 14
+  },
+  "rows": [
+   {
+    "delta_numerator": 0,
+    "denominator": 64,
+    "elapsed_s": 0.06,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 56,
+    "numerator": 56,
+    "objdump_only": 8,
+    "old_denominator": 64,
+    "old_numerator": 56,
+    "ours_only": 0,
+    "path": "tests/fixtures/dyn_pie",
+    "ratio": 0.875,
+    "sha256": "953b2278a4ef5fecee0be9d1fed9c02b7d60dd79be2c37a0bd05b853fdffaa57",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 65,
+    "elapsed_s": 0.06,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 53,
+    "numerator": 53,
+    "objdump_only": 12,
+    "old_denominator": 65,
+    "old_numerator": 53,
+    "ours_only": 0,
+    "path": "tests/fixtures/dyn_nopie",
+    "ratio": 0.8153846153846154,
+    "sha256": "7efb75c940639eba3128f18aee08ddc0877dcba0c76874eda5ab189a5d276e01",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 113924,
+    "elapsed_s": 1.27,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 94765,
+    "numerator": 94765,
+    "objdump_only": 19159,
+    "old_denominator": 113924,
+    "old_numerator": 94765,
+    "ours_only": 8,
+    "path": "tests/fixtures/dyn_static",
+    "ratio": 0.8318264808117692,
+    "sha256": "6961ddb33e8e1b80f75173260372219f90f556b57edfa6a3d2203001f7d6d0eb",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 67,
+    "elapsed_s": 0.06,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 59,
+    "numerator": 59,
+    "objdump_only": 8,
+    "old_denominator": 67,
+    "old_numerator": 59,
+    "ours_only": 0,
+    "path": "tests/fixtures/dyn_execstack",
+    "ratio": 0.8805970149253731,
+    "sha256": "c2d4297966b7758c8e0417ca00a3bc23a74b81f815c59f497a742e7fa85339ef",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 68,
+    "elapsed_s": 0.06,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 56,
+    "numerator": 56,
+    "objdump_only": 12,
+    "old_denominator": 68,
+    "old_numerator": 56,
+    "ours_only": 0,
+    "path": "tests/fixtures/dyn_norelro",
+    "ratio": 0.8235294117647058,
+    "sha256": "568471010a80d3c8f60cc85ce1ad6a1de5a67261369add6ce1fd4e8dc279cadb",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 22523,
+    "elapsed_s": 0.25,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 17475,
+    "numerator": 17475,
+    "objdump_only": 5048,
+    "old_denominator": 22523,
+    "old_numerator": 17475,
+    "ours_only": 0,
+    "path": "tests/fixtures/bin_ls.elf",
+    "ratio": 0.7758735514807086,
+    "sha256": "833d6f9cf3ede2225d80eaa159ef78a141c92842a691179aec37d182cc808a5c",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 68,
+    "denominator": 171832,
+    "elapsed_s": 1.82,
+    "gopclntab": {
+     "n_markers": 2,
+     "nfunc": 1796,
+     "status": "ok",
+     "version": "go1.20+"
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 138292,
+    "numerator": 138292,
+    "objdump_only": 33540,
+    "old_denominator": 171832,
+    "old_numerator": 138224,
+    "ours_only": 0,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/hello_go_linux",
+    "ratio": 0.8048093486661391,
+    "sha256": "7ff3272d225417b105c07fd33c7eb2b48357286a502bfb167e4cb9d1771c7a05",
+    "status": "ok",
+    "unchanged": false
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 245678,
+    "elapsed_s": 1.32,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 305,
+    "numerator": 305,
+    "objdump_only": 245373,
+    "old_denominator": 245678,
+    "old_numerator": 305,
+    "ours_only": 0,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/busybox-1.35.0-musl-x86_64",
+    "ratio": 0.0012414624020058776,
+    "sha256": "6e123e7f3202a8c1e9b1f94d8941580a25135382b99e8d3e34fb858bba311348",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "denominator": null,
+    "elapsed_s": 0.0,
+    "gopclntab": null,
+    "identity_ok": null,
+    "len_conflict": null,
+    "matched": null,
+    "numerator": null,
+    "objdump_only": null,
+    "old_denominator": null,
+    "old_numerator": null,
+    "ours_only": null,
+    "path": "tests/samples/fingerprint/upx/upx_dyn_pie",
+    "ratio": null,
+    "sha256": "aa147bd7b0c0cfe59d5a7a8546e776955a98c3e0941bff7a27b4f1c535d6b7cd",
+    "status": "no_section"
+   },
+   {
+    "denominator": null,
+    "elapsed_s": 0.0,
+    "gopclntab": null,
+    "identity_ok": null,
+    "len_conflict": null,
+    "matched": null,
+    "numerator": null,
+    "objdump_only": null,
+    "old_denominator": null,
+    "old_numerator": null,
+    "ours_only": null,
+    "path": "tests/samples/fingerprint/upx/upx_cli-64.exe",
+    "ratio": null,
+    "sha256": "ed4073759ea5a0cf71496354aa7c01848e420d8c074fdce30bb61e55f13ff974",
+    "status": "no_section"
+   },
+   {
+    "denominator": null,
+    "elapsed_s": 0.0,
+    "gopclntab": null,
+    "identity_ok": null,
+    "len_conflict": null,
+    "matched": null,
+    "numerator": null,
+    "objdump_only": null,
+    "old_denominator": null,
+    "old_numerator": null,
+    "ours_only": null,
+    "path": "tests/samples/fingerprint/upx/upx_putty-64bit.exe",
+    "ratio": null,
+    "sha256": "59389e309325b4124d02521c49bc9efb3021fa0d875c5dd2c64c2f711ee10944",
+    "status": "no_section"
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 1694,
+    "elapsed_s": 0.11,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 1525,
+    "numerator": 1525,
+    "objdump_only": 169,
+    "old_denominator": 1694,
+    "old_numerator": 1525,
+    "ours_only": 0,
+    "path": "tests/fixtures/cli-64.exe",
+    "ratio": 0.9002361275088547,
+    "sha256": "bbb3de5707629e6a60a0c238cd477b28f07f0066982fda953fa6fcec39073a4a",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 1,
+    "elapsed_s": 0.06,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 1,
+    "numerator": 1,
+    "objdump_only": 0,
+    "old_denominator": 1,
+    "old_numerator": 1,
+    "ours_only": 0,
+    "path": "tests/fixtures/minipe.exe",
+    "ratio": 1.0,
+    "sha256": "8bcd9510b9002f9aa15c0387b90b8b6067d915fe435a6a944bfd36154acad4d0",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 9,
+    "elapsed_s": 0.06,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 1,
+    "numerator": 1,
+    "objdump_only": 8,
+    "old_denominator": 9,
+    "old_numerator": 1,
+    "ours_only": 4,
+    "path": "tests/fixtures/minidll.dll",
+    "ratio": 0.1111111111111111,
+    "sha256": "c8677289f37a30a78a8369fb4843a07eaf53678edca01748d0782ce12e3ef2aa",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "denominator": null,
+    "elapsed_s": 0.0,
+    "gopclntab": null,
+    "identity_ok": null,
+    "len_conflict": null,
+    "matched": null,
+    "numerator": null,
+    "objdump_only": null,
+    "old_denominator": null,
+    "old_numerator": null,
+    "ours_only": null,
+    "path": "tests/fixtures/minipe_fakerich.exe",
+    "ratio": null,
+    "sha256": "bad43079916e1360c3b1bb26f57ba201bfbe7a0b315dc029bceb62302569961d",
+    "status": "no_section"
+   },
+   {
+    "delta_numerator": 3826,
+    "denominator": 182854,
+    "elapsed_s": 2.14,
+    "gopclntab": {
+     "n_markers": 3,
+     "nfunc": 1887,
+     "status": "ok",
+     "version": "go1.20+"
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 147351,
+    "numerator": 147351,
+    "objdump_only": 35503,
+    "old_denominator": 182854,
+    "old_numerator": 143525,
+    "ours_only": 0,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/hello_go.exe",
+    "ratio": 0.8058396316186685,
+    "sha256": "0ae6b7a2da2217e580671f094ec3cb548194dc504bf7103ccefd5a6cb87b60fe",
+    "status": "ok",
+    "unchanged": false
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 26353,
+    "elapsed_s": 0.34,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 22582,
+    "numerator": 22582,
+    "objdump_only": 3771,
+    "old_denominator": 26353,
+    "old_numerator": 22582,
+    "ours_only": 0,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/hello_rust.exe",
+    "ratio": 0.8569043372671044,
+    "sha256": "6b58b7c50a3416ff5298963a2f8694f992d6bce3ddc3d393f06a652a09b229ca",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 263121,
+    "elapsed_s": 2.96,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 220256,
+    "numerator": 220256,
+    "objdump_only": 42865,
+    "old_denominator": 263121,
+    "old_numerator": 220256,
+    "ours_only": 31,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/putty-64bit.exe",
+    "ratio": 0.8370901600404377,
+    "sha256": "d01fdb5aae8f112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 47339,
+    "elapsed_s": 0.47,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 36574,
+    "numerator": 36574,
+    "objdump_only": 10765,
+    "old_denominator": 47339,
+    "old_numerator": 36574,
+    "ours_only": 0,
+    "path": "samples/m9/elf_plugin_liblua54_stripped.so",
+    "ratio": 0.772597646760599,
+    "sha256": "4b7546b6feee8838bda664963fb00d5c8bcdbd6d6de9fc3286b06cb33ca6d594",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 684728,
+    "elapsed_s": 10.17,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 627658,
+    "numerator": 627658,
+    "objdump_only": 57070,
+    "old_denominator": 684728,
+    "old_numerator": 627658,
+    "ours_only": 0,
+    "path": "samples/m9/elf_jumpdense_python310_stripped",
+    "ratio": 0.9166530359500414,
+    "sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 5063038,
+    "elapsed_s": 145.48,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 4049517,
+    "numerator": 4049517,
+    "objdump_only": 1013521,
+    "old_denominator": 5063038,
+    "old_numerator": 4049517,
+    "ours_only": 0,
+    "path": "samples/m9/elf_medium_cc1_stripped",
+    "ratio": 0.799819594480626,
+    "sha256": "873d5b58ae1531a73b138b10299bb65e787d2541f27c01e7225acb4466534fb3",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 4863491,
+    "elapsed_s": 132.69,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 3910063,
+    "numerator": 3910063,
+    "objdump_only": 953428,
+    "old_denominator": 4863491,
+    "old_numerator": 3910063,
+    "ours_only": 0,
+    "path": "samples/m9/elf_medium_lto1_stripped",
+    "ratio": 0.8039622156183696,
+    "sha256": "58ceb45aa0a33068e14fd16361c92037adf44d2be2b1149e236997b92edfdd0f",
+    "status": "ok",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 671925,
+    "denominator": 923970,
+    "elapsed_s": 11.01,
+    "gopclntab": {
+     "n_markers": 2,
+     "nfunc": 8908,
+     "status": "ok",
+     "version": "go1.20+"
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 748093,
+    "numerator": 748093,
+    "objdump_only": 175877,
+    "old_denominator": 923970,
+    "old_numerator": 76168,
+    "ours_only": 1,
+    "path": "samples/m9/elf_medium_synth_go_stripped",
+    "ratio": 0.8096507462363497,
+    "sha256": "5521c245c7e0abeb8a7cf9ee3e3eef9414f8ea5d966a8cb56ccae4b272f74180",
+    "status": "ok",
+    "unchanged": false
+   },
+   {
+    "delta_numerator": 11257,
+    "denominator": 925712,
+    "elapsed_s": 12.77,
+    "gopclntab": {
+     "n_markers": 3,
+     "nfunc": 8895,
+     "status": "ok",
+     "version": "go1.20+"
+    },
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 750109,
+    "numerator": 750109,
+    "objdump_only": 175603,
+    "old_denominator": 925712,
+    "old_numerator": 738852,
+    "ours_only": 1,
+    "path": "samples/m9/pe_medium_synth_go_stripped.exe",
+    "ratio": 0.810304932851686,
+    "sha256": "1267a1ab1f65e030b68e8ce3b3b73201594d042c0efa64b2ad85edabde689702",
+    "status": "ok",
+    "unchanged": false
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 1776492,
+    "elapsed_s": 30.32,
+    "gopclntab": {
+     "n_markers": null,
+     "nfunc": 0,
+     "status": "missing",
+     "version": null
+    },
+    "identity_ok": true,
+    "len_conflict": 2,
+    "matched": 1542812,
+    "numerator": 1542812,
+    "objdump_only": 233678,
+    "old_denominator": 1776492,
+    "old_numerator": 1542812,
+    "ours_only": 2,
+    "path": "samples/m9/pe_medium_gdb181.exe",
+    "ratio": 0.8684598635963461,
+    "sha256": "64dd0adf8749e6cd9b5219f9f64e6ec3994cd46d8f05d02a77cff45abbbef0c9",
+    "status": "ok",
+    "unchanged": true
+   }
+  ],
+  "union25": {
+   "delta_numerator": 687076,
+   "delta_pp": 4.486873689146808,
+   "denominator": 15313023,
+   "numerator": 12307603,
+   "old_denominator": 15313023,
+   "old_numerator": 11620527,
+   "old_ratio": 0.7588656400503023,
+   "ratio": 0.8037343769417704,
+   "samples": 21
+  }
+ },
+ "criterion_issues": [
+  {
+   "action": "类别常量改为 CAT_NOT_START=\"not_objdump_insn_start\"；audit() 新增 declared_ranges 参数并强制同报 domain.in_domain_ratio；渲染文本写明「不等于数据/不在代码里」。",
+   "fix": "rekit/vexaudit.py：CAT_DATA→CAT_NOT_START、CRITERION 常量、domain_accounting()、audit(declared_ranges=)、render 打印域内比例；tests/verify_vexaudit.py 对 cli-64.exe 实报 37/38（97.37%）。",
+   "id": "C1",
+   "impact": "计数不变；结论必须写成「不是 objdump 指令起点（非指令边界）」，并同报域内比例。",
+   "issue": "data_not_instruction 的判据是「该地址不是 objdump 的指令起点」，等价于「落在上一条指令的操作数/立即数内部」或「真数据」；不等于「不在代码里」。",
+   "measurement": "M13 实测：Go ELF 16,332 个弃权点全部（16,332/16,332）位于声明函数域内；Go PE 16,177/16,179 在域内。它们不是函数外数据，而是函数体内指令的非边界字节。",
+   "not_a_relaxation": "判据一字未改（仍只看 objdump 指令起点表）；改的是名字与解释，并新增了此前缺失的域内比例报告。要求更强，不是更弱。",
+   "status": "fixed",
+   "target": "VEX 206,541「全是数据」",
+   "test": "tests/test_vexaudit.py::test_category_name_is_criterion_not_data_semantics + ::test_classification_ignores_declared_domain + ::test_domain_accounting_reports_inside_and_outside；tests/verify_vexaudit.py（PASS，cli-64 域内 37/38）"
+  },
+  {
+   "action": "预算报告新增 run_status（ok/no_run）、functions_no_run、status_semantics；skipped_detail 每条加 skip_type=skipped_budget；禁止裸键 \"skipped\"。sitejoin 的 status \"skipped\" 改名为 no_decoded_instructions；verify 快照的 expr.skip 改名为 skipped_undeclared_boundary。",
+   "fix": "rekit/switchcand.py（RUN_STATUS_*/SKIP_TYPE_BUDGET、budget 字段与渲染）、rekit/sitejoin.py、tests/verify_switchcand.py、tests/baselines/definite_baseline.json；全项目同名不同义清单见 status_field_inventory。",
+   "id": "C2",
+   "impact": "总账条目「cc1 / lto1 / gdb 仍 skipped」已失效，不是种子造成的；lto1 正确状态是 no_run（无统计量），cc1/gdb 是 analyzed 全量、skipped_budget=0。",
+   "issue": "历史文档把两件事都叫 skipped：(a) M9 因超时整层未运行；(b) M10 引入的预算跳过 functions_skipped_budget。两者性质不同，前者没有分母。",
+   "measurement": "M10 修复性能后 cc1/gdb 全量运行（skipped=0、analysis_coverage=1.0）；lto1 至今未运行。",
+   "not_a_relaxation": "不改任何计数与跳过条件，只把两个不同状态拆成不同名字，并加机器可检的 status_semantics；拿掉的是歧义，不是约束。",
+   "status": "fixed",
+   "target": "switchcand「skipped」",
+   "test": "tests/test_switchcand.py::test_status_names_distinguish_no_run_from_budget_skip（断言 budget 无裸 \"skipped\"、run_status=ok、skip_type=skipped_budget）；tests/test_sitejoin.py::test_struct_index_status_names_are_self_describing；tests/verify_switchcand.py（PASS）"
+  },
+  {
+   "action": "总账改为「未解码代码里可外部证实的引用点 5,039 / 涉及字符串 276」；lower_bounds 中该条 bound_type=complement_measure、is_lower_bound=false；verify 输出与模块头加补集口径声明。",
+   "fix": "rekit/strxref.py 头注「度量的性质（C3）」；tests/verify_strxref.py 打印口径行；lower_bounds.strxref 增加 bound_type/complement_of 字段。",
+   "id": "C3",
+   "impact": "数值可用，但解释必须写成「补集」，不能写成「外部世界共有 5,039 个引用」。",
+   "issue": "5,039 是「只在我们没解码的代码里可见的引用点」，会随可达域变化；它不是某个稳定分母的下界，而是「我们已解出 3,732 个引用点」的补集度量。且 Go 字符串不是 NUL 终止，该指标对 Go 近乎盲（两 Go 样本均为 0）。",
+   "measurement": "M13 A/B：Go 样本关/开 gopclntab，该补集恒为 0；聚合 5,039 全部来自 16 个非 Go 样本。",
+   "not_a_relaxation": "数字不变，也不改引用点判定；只是不再把它称为「下界」（原来的称呼是更强的说法）。去掉的是错误强度，不是证据要求。",
+   "status": "fixed",
+   "target": "strxref 5,039「下界」",
+   "test": "tests/test_ledger_criteria.py::test_strxref_is_complement_measure（断言 bound_type=complement_measure 且 is_lower_bound=false）；tests/verify_strxref.py（PASS，5,039/276 不变）"
+  },
+  {
+   "action": "文档与总账改用「域内未达的 objdump 指令（含对齐）」；lower_bounds.go_domain 增加 includes_alignment_bytes=true 与对齐占比字段。",
+   "fix": "新增 evidence_m14_c4_alignment.json：逐条统计 in_range_other 里 nop 族指令；rekit 无代码改动（该桶不在模块内产出，属于测量口径）。",
+   "id": "C4",
+   "impact": "2.88% 是「域内未达字节的 objdump 指令化计数」，不是「漏解的指令数」。",
+   "issue": "in_range_other 含间接跳转后的对齐字节（如 cc/90 以外的多字节 nop），不全是「真实代码目标」。",
+   "measurement": "M14 实测（evidence_m14_c4_alignment.json）：ELF 26,652 中 nop 族 1,067（4.0034%），PE 26,702 中 1,066（3.9922%）；其余为 mov/lea/call/jmp/ret 等真实指令。对齐确实存在，但不是主体，故不能把整桶叫「对齐」，也不能叫「漏解指令」。",
+   "not_a_relaxation": "三分法计数一字未改（26,652/26,702 不变）；只是把「漏解指令数」这个更强的说法降级为证据支持的「含对齐的未达 objdump 指令」，并给出对齐占比。",
+   "status": "fixed",
+   "target": "Go 2.88%「函数域内未达指令」",
+   "test": "tests/test_ledger_criteria.py::test_go_domain_declares_alignment_share（断言 includes_alignment_bytes=true 且 nop_like>0、share∈(0,1)）；evidence_m14_c4_alignment.json 可重跑"
+  },
+  {
+   "action": "把 switchcand 条目从 lower_bounds 移出，单列到 analysis_coverage；新增 bound_table_policy，规定 bound_type 白名单与 analysis_coverage 不得入表。",
+   "fix": "evidence_m13_ledger.json：lower_bounds 删除 switchcand；新增顶层 analysis_coverage（含 run_status/functions_skipped_budget/说明）；tests/test_ledger_criteria.py 机器校验。",
+   "id": "C5",
+   "impact": "旧总账把 skipped 列入「仍为下界」的表，属类别错误；现在它只出现在覆盖率章节。",
+   "issue": "skipped 是分析覆盖率属性，不是候选数的下界：被跳过的函数可能本来就没有候选。",
+   "measurement": "step_budget=0 时候选=0、skipped_budget=417；不能推出「至少还有 X 个候选」。",
+   "not_a_relaxation": "不是删掉不利数字：分析覆盖率数字完整保留在 analysis_coverage，且新增 bound_type 白名单校验；去掉的是类别错配，不是数据。",
+   "status": "fixed",
+   "target": "把 switchcand skipped 当下界",
+   "test": "tests/test_ledger_criteria.py::test_no_analysis_coverage_in_lower_bounds（断言 lower_bounds 无 switchcand/skipped，analysis_coverage 存在且字段齐全）"
+  }
+ ],
+ "evidence": [
+  "evidence_m13_recompute.json（本轮的逐项测量：domain / vex / strxref A-B / switchcand）",
+  "evidence_m12_ledger.json（覆盖率 25 样本、A/B、逐函数、缝隙；M13 回归复核）",
+  "evidence_m12_union25.json、evidence_m12_gap_and_funcclasses.json",
+  "evidence_m11_coverage.json（26,652/26,702 三分法原始明细）",
+  "evidence_m9_vexaudit_old4.json、evidence_m9_coverage_summary.json（VEX 与 Go A/B 旧值）",
+  "evidence_m10_switchcand_budget.json、evidence_m10_switchcand_perf.json",
+  "evidence_m8u3_numbers.log、evidence_m8u3_verify.log（strxref 旧值 5,039/276）",
+  "evidence_m13_pytest.log、evidence_m13_verify.log（回归）"
+ ],
+ "go_ab": {
+  "elf_synth": {
+   "delta": {
+    "matched_gain": 671925,
+    "matched_lost": 0,
+    "numerator_gain": 671925,
+    "ours_gain": 671926,
+    "ours_lost": 0,
+    "ratio_gain": 0.7272151693236794,
+    "same_addr_len_changed": 0
+   },
+   "gopclntab": {
+    "n_markers": 2,
+    "nfunc": 8908,
+    "status": "ok",
+    "version": "go1.20+",
+    "where": "elf_section:.gopclntab"
+   },
+   "objdump_instructions": 923970,
+   "objdump_only_breakdown": {
+    "classes": {
+     "in_range_other": 26652,
+     "outside_range": 0,
+     "padding_all_cc90": 149225
+    },
+    "declared_ranges": 8906,
+    "samples": {
+     "in_range_other": [
+      [
+       "0x4017a3",
+       "add    rax,0x48",
+       "4883c048"
+      ],
+      [
+       "0x4017a7",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x4017a8",
+       "add    rax,0x40",
+       "4883c040"
+      ],
+      [
+       "0x4017ac",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x4017ad",
+       "add    rax,0x38",
+       "4883c038"
+      ],
+      [
+       "0x4017b1",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x4017b2",
+       "add    rax,0x50",
+       "4883c050"
+      ],
+      [
+       "0x4017b6",
+       "ret",
+       "c3"
+      ]
+     ],
+     "outside_range": [],
+     "padding_all_cc90": [
+      [
+       "0x40128f",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401290",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401291",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401292",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401293",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401294",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401295",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401296",
+       "int3",
+       "cc"
+      ]
+     ]
+    },
+    "section_end_va": "0x75a4b1",
+    "tail_gap_bytes": 16,
+    "text_end_va": "0x75a4a1",
+    "total": 175877,
+    "total_note": "total = sum(classes) = coverage.objdump_only（原字段误用 len(obj)-len(ours)，我方多解出的 1 条 ours_only 被重复扣减，已更正）",
+    "total_prev": 175876
+   },
+   "objdump_s": 4.03,
+   "objdump_status": "ok",
+   "ours_only_detail": [
+    [
+     "0x55177f",
+     1,
+     "c3"
+    ]
+   ],
+   "path": "samples/m9/elf_medium_synth_go_stripped",
+   "rows": {
+    "off": {
+     "coverage": {
+      "byte_coverage_ours": 0.08988193843438352,
+      "denominator": 923970,
+      "identity_ok": true,
+      "len_conflict": 0,
+      "matched": 76168,
+      "matched_bytes": 315618,
+      "numerator": 76168,
+      "objdump_only": 847802,
+      "ours_only": 0,
+      "ours_only_inside_objdump": 0,
+      "ours_total": 76168,
+      "ratio": 0.08243557691267032
+     },
+     "descend_s": 0.37,
+     "end_conflicts": {
+      "by_pair": {},
+      "delta_hist": {},
+      "delta_max": null,
+      "delta_min": null,
+      "pairs_total": 0,
+      "seeds": 0
+     },
+     "len_conflict_recomputed": 0,
+     "matched_set_size": 76168,
+     "recdesc": {
+      "abstains": 0,
+      "blocks": 14302,
+      "bytes_covered": 315618,
+      "coverage": 0.08988193843438352,
+      "edges_cross_function": 7,
+      "edges_definite": 0,
+      "edges_speculative": 19198,
+      "instructions": 76168,
+      "outside": 0
+     },
+     "seeds_authoritative": {
+      "hit": 1,
+      "misses": [],
+      "ratio": 1.0,
+      "total": 1
+     },
+     "seeds_declared_by_source": {
+      "entry": 1
+     },
+     "seeds_declared_only_by_source": {
+      "entry": 1
+     }
+    },
+    "on": {
+     "coverage": {
+      "byte_coverage_ours": 0.9230522347744095,
+      "byte_coverage_ours_pct": 92.3052,
+      "denominator": 923970,
+      "identity_ok": true,
+      "len_conflict": 0,
+      "matched": 748093,
+      "matched_bytes": 3241272,
+      "numerator": 748093,
+      "objdump_only": 175877,
+      "ours_only": 1,
+      "ours_only_inside_objdump": 1,
+      "ours_total": 748094,
+      "ratio": 0.8096507462363497
+     },
+     "descend_s": 4.07,
+     "end_conflicts": {
+      "by_pair": {},
+      "delta_hist": {},
+      "delta_max": null,
+      "delta_min": null,
+      "pairs_total": 0,
+      "seeds": 0
+     },
+     "len_conflict_recomputed": 0,
+     "matched_set_size": 748093,
+     "recdesc": {
+      "abstains": 0,
+      "blocks": 130738,
+      "bytes_covered": 3241273,
+      "coverage": 0.9230522347744095,
+      "edges_cross_function": 197,
+      "edges_definite": 172987,
+      "edges_speculative": 0,
+      "instructions": 748094,
+      "outside": 0
+     },
+     "seeds_authoritative": {
+      "hit": 8906,
+      "misses": [],
+      "ratio": 1.0,
+      "total": 8906
+     },
+     "seeds_declared_by_source": {
+      "entry": 1,
+      "gopclntab": 8906
+     },
+     "seeds_declared_only_by_source": {
+      "gopclntab": 8905
+     }
+    }
+   }
+  },
+  "hello_go_exe": {
+   "gain": 3826,
+   "gopclntab": {
+    "n_markers": 3,
+    "nfunc": 1887,
+    "reason": null,
+    "status": "ok",
+    "version": "go1.20+",
+    "warnings": [
+     "pcHeader.textStart=0（未重定位）；与 Go 官方 gosym 一致，采用 .text 基址 0x140001000",
+     "3 条链接器标记（go:buildid/textfips*）不是函数，应作为 marker 排除"
+    ],
+    "where": "magic_scan@0xb5ea8"
+   },
+   "m9_row": {
+    "denominator": 182854,
+    "numerator": 143525
+   },
+   "matched_lost": 0,
+   "off": {
+    "denominator": 182854,
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 143525,
+    "numerator": 143525,
+    "objdump_only": 39329,
+    "ours_only": 0,
+    "ratio": 0.7849158344909053
+   },
+   "on": {
+    "denominator": 182854,
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 147351,
+    "numerator": 147351,
+    "objdump_only": 35503,
+    "ours_only": 0,
+    "ratio": 0.8058396316186685
+   },
+   "path": "tests/samples/fingerprint/hello_go.exe",
+   "reproduced_off": true,
+   "same_addr_len_changed": 0,
+   "seed_stats_off": {
+    "entry": 1,
+    "pdata": 1587
+   },
+   "seed_stats_on": {
+    "entry": 1,
+    "gopclntab": 1884,
+    "pdata": 1587
+   }
+  },
+  "hello_go_linux": {
+   "gain": 68,
+   "gopclntab": {
+    "n_markers": 2,
+    "nfunc": 1796,
+    "reason": null,
+    "status": "ok",
+    "version": "go1.20+",
+    "warnings": [
+     "pcHeader.textStart=0（未重定位）；与 Go 官方 gosym 一致，采用 .text 基址 0x401000",
+     "2 条链接器标记（go:buildid/textfips*）不是函数，应作为 marker 排除"
+    ],
+    "where": "elf_section:.gopclntab"
+   },
+   "m9_row": {
+    "denominator": 171832,
+    "numerator": 138224
+   },
+   "matched_lost": 0,
+   "off": {
+    "denominator": 171832,
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 138224,
+    "numerator": 138224,
+    "objdump_only": 33608,
+    "ours_only": 0,
+    "ratio": 0.8044136132967085
+   },
+   "on": {
+    "denominator": 171832,
+    "identity_ok": true,
+    "len_conflict": 0,
+    "matched": 138292,
+    "numerator": 138292,
+    "objdump_only": 33540,
+    "ours_only": 0,
+    "ratio": 0.8048093486661391
+   },
+   "path": "tests/samples/fingerprint/hello_go_linux",
+   "reproduced_off": true,
+   "same_addr_len_changed": 0,
+   "seed_stats_off": {
+    "entry": 1,
+    "symtab_func": 1797
+   },
+   "seed_stats_on": {
+    "entry": 1,
+    "gopclntab": 1794,
+    "symtab_func": 1797
+   }
+  },
+  "pe_synth": {
+   "delta": {
+    "matched_gain": 11257,
+    "matched_lost": 0,
+    "numerator_gain": 11257,
+    "ours_gain": 11257,
+    "ours_lost": 0,
+    "ratio_gain": 0.012160369531776571,
+    "same_addr_len_changed": 0
+   },
+   "gopclntab": {
+    "n_markers": 3,
+    "nfunc": 8895,
+    "status": "ok",
+    "version": "go1.20+",
+    "where": "magic_scan@0x3a1180"
+   },
+   "objdump_instructions": 925712,
+   "objdump_only_breakdown": {
+    "classes": {
+     "in_range_other": 26702,
+     "outside_range": 40,
+     "padding_all_cc90": 148861
+    },
+    "declared_ranges": 8892,
+    "samples": {
+     "in_range_other": [
+      [
+       "0x1823",
+       "add    rax,0x48",
+       "4883c048"
+      ],
+      [
+       "0x1827",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x1828",
+       "add    rax,0x40",
+       "4883c040"
+      ],
+      [
+       "0x182c",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x182d",
+       "add    rax,0x38",
+       "4883c038"
+      ],
+      [
+       "0x1831",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x1832",
+       "add    rax,0x50",
+       "4883c050"
+      ],
+      [
+       "0x1836",
+       "ret",
+       "c3"
+      ]
+     ],
+     "outside_range": [
+      [
+       "0x1000",
+       "jmp    QWORD PTR [rax]",
+       "ff20"
+      ],
+      [
+       "0x1002",
+       "rex.RXB outs dx,DWORD PTR [rsi]",
+       "476f"
+      ],
+      [
+       "0x1004",
+       "and    BYTE PTR [rdx+0x75],ah",
+       "206275"
+      ],
+      [
+       "0x1007",
+       "imul   ebp,DWORD PTR [rsp+riz*2+0x20],0x203a4449",
+       "696c642049443a20"
+      ],
+      [
+       "0x100f",
+       "and    dh,BYTE PTR [rsi+0x48]",
+       "227648"
+      ],
+      [
+       "0x1012",
+       "outs   dx,DWORD PTR [rsi]",
+       "6f"
+      ],
+      [
+       "0x1013",
+       "xor    al,0x7a",
+       "347a"
+      ],
+      [
+       "0x1015",
+       "pop    rcx",
+       "59"
+      ]
+     ],
+     "padding_all_cc90": [
+      [
+       "0x1067",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x1068",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x1069",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106a",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106b",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106c",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106d",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106e",
+       "int3",
+       "cc"
+      ]
+     ]
+    },
+    "section_end_va": "0x35da51",
+    "tail_gap_bytes": 16,
+    "text_end_va": "0x35da41",
+    "total": 175603,
+    "total_note": "total = sum(classes) = coverage.objdump_only（原字段误用 len(obj)-len(ours)，我方多解出的 1 条 ours_only 被重复扣减，已更正）",
+    "total_prev": 175602
+   },
+   "objdump_s": 4.43,
+   "objdump_status": "ok",
+   "ours_only_detail": [
+    [
+     "0x152edf",
+     1,
+     "c3"
+    ]
+   ],
+   "path": "samples/m9/pe_medium_synth_go_stripped.exe",
+   "rows": {
+    "off": {
+     "coverage": {
+      "byte_coverage_ours": 0.9115312857337781,
+      "denominator": 925712,
+      "identity_ok": true,
+      "len_conflict": 0,
+      "matched": 738852,
+      "matched_bytes": 3213330,
+      "numerator": 738852,
+      "objdump_only": 186860,
+      "ours_only": 1,
+      "ours_only_inside_objdump": 1,
+      "ours_total": 738853,
+      "ratio": 0.7981445633199095
+     },
+     "descend_s": 4.53,
+     "end_conflicts": {
+      "by_pair": {},
+      "delta_hist": {},
+      "delta_max": null,
+      "delta_min": null,
+      "pairs_total": 0,
+      "seeds": 0
+     },
+     "len_conflict_recomputed": 0,
+     "matched_set_size": 738852,
+     "recdesc": {
+      "abstains": 0,
+      "blocks": 127152,
+      "bytes_covered": 3213331,
+      "coverage": 0.9115312857337781,
+      "edges_cross_function": 25,
+      "edges_definite": 167403,
+      "edges_speculative": 2662,
+      "instructions": 738853,
+      "outside": 0
+     },
+     "seeds_authoritative": {
+      "hit": 7153,
+      "misses": [],
+      "ratio": 1.0,
+      "total": 7153
+     },
+     "seeds_declared_by_source": {
+      "entry": 1,
+      "pdata": 7152
+     },
+     "seeds_declared_only_by_source": {
+      "entry": 1,
+      "pdata": 7152
+     }
+    },
+    "on": {
+     "coverage": {
+      "byte_coverage_ours": 0.9233805391522356,
+      "byte_coverage_ours_pct": 92.3381,
+      "denominator": 925712,
+      "identity_ok": true,
+      "len_conflict": 0,
+      "matched": 750109,
+      "matched_bytes": 3255101,
+      "numerator": 750109,
+      "objdump_only": 175603,
+      "ours_only": 1,
+      "ours_only_inside_objdump": 1,
+      "ours_total": 750110,
+      "ratio": 0.810304932851686
+     },
+     "descend_s": 5.5,
+     "end_conflicts": {
+      "by_pair": {
+       "pdata <gopclntab": 7139
+      },
+      "delta_hist": {
+       "14": 375,
+       "17": 303,
+       "20": 288,
+       "25": 289,
+       "26": 258,
+       "27": 870,
+       "7": 277,
+       "8": 256
+      },
+      "delta_max": 31,
+      "delta_min": 1,
+      "pairs_total": 1,
+      "seeds": 7139
+     },
+     "len_conflict_recomputed": 0,
+     "matched_set_size": 750109,
+     "recdesc": {
+      "abstains": 0,
+      "blocks": 129851,
+      "bytes_covered": 3255102,
+      "coverage": 0.9233805391522356,
+      "edges_cross_function": 194,
+      "edges_definite": 171802,
+      "edges_speculative": 0,
+      "instructions": 750110,
+      "outside": 0
+     },
+     "seeds_authoritative": {
+      "hit": 8892,
+      "misses": [],
+      "ratio": 1.0,
+      "total": 8892
+     },
+     "seeds_declared_by_source": {
+      "entry": 1,
+      "gopclntab": 8892,
+      "pdata": 7152
+     },
+     "seeds_declared_only_by_source": {
+      "gopclntab": 1739
+     }
+    }
+   }
+  }
+ },
+ "go_samples": [
+  {
+   "delta_numerator": 68,
+   "numerator": 138292,
+   "old_numerator": 138224,
+   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/hello_go_linux"
+  },
+  {
+   "delta_numerator": 3826,
+   "numerator": 147351,
+   "old_numerator": 143525,
+   "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/hello_go.exe"
+  },
+  {
+   "delta_numerator": 671925,
+   "numerator": 748093,
+   "old_numerator": 76168,
+   "path": "samples/m9/elf_medium_synth_go_stripped"
+  },
+  {
+   "delta_numerator": 11257,
+   "numerator": 750109,
+   "old_numerator": 738852,
+   "path": "samples/m9/pe_medium_synth_go_stripped.exe"
+  }
+ ],
+ "lower_bounds": [
+  {
+   "bound_type": "complement_measure",
+   "complement_of": "已解出指令里的外部可见引用点（不是全量引用点）",
+   "criterion": "只统计落在「我方未解码的 objdump 指令」里的引用点；判据见 verify_strxref.check_sites",
+   "denominator": "18 样本中 recdesc 已解出指令集合之外的 objdump 指令；与可达域相关，可达域变大则本值变小",
+   "evidence": "M13 A/B：两 Go 样本 gopclntab 关→开，undecoded 引用点 0→0、字符串 0→0；M12 回归中 verify_strxref 已在新种子下重跑，聚合仍 5,039/276",
+   "id": "strxref",
+   "is_lower_bound": false,
+   "name": "strxref 未解码代码里可外部证实的引用点 / 字符串（18 样本）",
+   "new_value": "5,039 引用点 / 276 条字符串",
+   "note": "旧总账写「本轮未重跑该专项」不准确：M12 回归的 verify_strxref 就是在 M13 同款新种子下跑的；M13 另做了关/开 A/B 归因。本值是补集度量，不是下界（C3）。",
+   "old_value": "5,039 引用点 / 276 条字符串（未解码代码里可见）",
+   "seed_affected": "原理上受影响（分子 = 未解码代码里的引用）；18 样本中只有 hello_go_linux / hello_go.exe 是 Go",
+   "verdict": "作为补集度量仍成立；不得表述为下界"
+  },
+  {
+   "bound_type": "seed_invariant_count",
+   "category_label": "not_objdump_insn_start（M14 起；M9–M13 旧名 data_not_instruction 仅作历史）",
+   "criterion": "逐字节找 C4/C5/62，对每个位置用外部 objdump 同址文本判四类；data 类的判据 = 不是 objdump 指令起点（不等于数据/不在代码里）",
+   "denominator": "objdump 线性扫描的指令起点（11 样本 .text 内的 C4/C5/62 字节逐点试解）",
+   "evidence": "M13 用同一 classify_one 复算 go_elf/go_pe：lead 20,459/20,299、弃权 16,332/16,179、defect=0，与 M9 逐项相等；弃权地址中成为新可达域已解出指令起点的数量 = 0 / 0",
+   "id": "vex",
+   "in_domain_ratio": {
+    "elf_synth": "16,332 / 16,332 = 1.0000",
+    "note": "非边界字节落在声明函数域内的比例；M14 起必须同报（C1）",
+    "pe_synth": "16,177 / 16,179 = 0.9999"
+   },
+   "name": "VEX/EVEX 弃权点（11 样本，非指令边界）",
+   "new_value": "206,541 点（Go 两样本复算为 16,332 / 16,179，逐样本相等）",
+   "old_value": "206,541 点，decoder_defect=0、illegal=0、data_not_instruction=206,541",
+   "seed_affected": "不受影响：分类器只读 objdump 指令起点与原始字节，不读 recdesc 种子",
+   "verdict": "仍成立（数字不变）；措辞按 C1 修正为「非指令边界」并同报域内比例"
+  },
+  {
+   "alignment_share": {
+    "elf_synth": 0.04003451898544199,
+    "pe_synth": 0.03992210321324245
+   },
+   "bound_type": "count_with_alignment",
+   "criterion": "objdump_only 指令是否落在 gopclntab 声明域 [entry,end) 内；桶内含对齐/填充指令，且不等于「我方漏解的指令数」",
+   "denominator": "objdump_only 指令；判定是否落在 gopclntab 声明域 [entry,end) 内",
+   "evidence": "M13 复算：padding 149,225/148,861、in_range_other 26,652/26,702、outside 0/40，与 M11 三分法逐项相等；declared_ranges 8,906/8,892。M14 逐条测对齐：nop 族 1,067/26,652、1,066/26,702（evidence_m14_c4_alignment.json）",
+   "id": "go_domain",
+   "includes_alignment_bytes": true,
+   "name": "Go 函数域内未达的 objdump 指令（含对齐）",
+   "new_value": "ELF 26,652 / PE 26,702（完全相同；其中 nop 族 1,067 / 1,066）",
+   "not_equivalent_to": "漏解的指令数；也不同于 padding_all_cc90 桶（149,225 / 148,861）",
+   "old_value": "ELF 26,652 / PE 26,702（各占 .text 2.88%）",
+   "seed_affected": "受影响（域由种子决定）；但该数字本来就是种子扩大后的 M11 值，M13 逐项复现",
+   "verdict": "仍成立（作为「域内未达的 objdump 指令（含对齐）」计数）"
+  },
+  {
+   "bound_type": "stability_check",
+   "criterion": "gopclntab 缺失样本在新旧种子下的覆盖率分子差；delta=0 表示种子集未变",
+   "denominator": "各样本 .text 全节 objdump 指令数",
+   "evidence": "evidence_m12_ledger.json rows：gopclntab=missing 的 17 个可测样本 unchanged=true、delta=0",
+   "id": "non_go_reach",
+   "name": "非 Go 样本可达域（种子稳定性）",
+   "new_value": "17 个可测非 Go 样本 delta_numerator 全为 0（M12 实测）",
+   "old_value": "旧 18 / 新 7 的其余样本覆盖率（M9/M10）",
+   "seed_affected": "不受影响：17 个样本 gopclntab 均为 missing，种子集逐条不变",
+   "verdict": "仍成立"
+  },
+  {
+   "bound_type": "count",
+   "criterion": "DWARF 形参声明计数；与代码种子无关",
+   "denominator": "DWARF 形参声明，不是代码种子",
+   "evidence": "M13 未改动 paramdecl 层；M12 回归 verify_paramdecl exit=0",
+   "id": "paramdecl",
+   "name": "M8 paramdecl（DWARF 形参）",
+   "new_value": "12,272 / 3,530 / 37,891（未重算，无重算对象）",
+   "old_value": "12,272 / 3,530 / 37,891",
+   "seed_affected": "不受影响：形参信息不在 gopclntab",
+   "verdict": "仍成立"
+  }
+ ],
+ "analysis_coverage": [
+  {
+   "denominator": "有间接 jmp 的函数数（analysis_coverage 分母）",
+   "evidence": "M13 复测 gdb 2,081/0/317 与 M10 一致；go_elf/go_pe switchcand 首次测量 118/118/0 skipped_budget/0 candidates",
+   "id": "switchcand",
+   "name": "switchcand 分析覆盖率（cc1 / lto1 / gdb）",
+   "new_value": "cc1: analyzed 1,974 / skipped_budget 0 / candidates 64；gdb: analyzed 2,081 / skipped_budget 0 / candidates 317；lto1: run_status=no_run（未运行，无统计量）",
+   "not_a_bound": "分析覆盖率不是候选数的下界：被跳过的函数可能本来就没有候选；step_budget=0 时候选=0、skipped_budget=417",
+   "old_value": "cc1 / lto1 / gdb 记为 skipped（M9 因超时整层未运行）",
+   "run_status": {"cc1": "ok", "gdb": "ok", "lto1": "no_run"},
+   "seed_affected": "不受影响：cc1 / lto1 / gdb 均无 gopclntab，种子集未变；Go 样本为本轮新增测量（各 118 个间接 jmp 函数，analyzed=118、skipped_budget=0、candidates=0）",
+   "verdict": "条目已失效（cc1/gdb 早已全量跑完）；lto1 状态修正为 no_run，不是 skipped"
+  }
+ ],
+ "bound_table_policy": {
+  "allowed_bound_types": ["lower_bound", "complement_measure", "count_with_alignment", "seed_invariant_count", "stability_check", "count"],
+  "excluded": {
+   "analysis_coverage": "skipped/no_run 属覆盖率属性，只进 analysis_coverage，不进 lower_bounds（C5）"
+  },
+  "rule": "R107",
+  "required_fields": ["id", "bound_type", "criterion", "denominator", "evidence", "verdict"]
+ },
+ "status_field_inventory": {
+  "policy": "状态名必须在自己的对象命名空间内自解释；同一份输出里不得让两个不同含义共用同一字段名。裸 \"skipped\" 禁用（2026-11-16 起）。",
+  "items": [
+   {
+    "field": "expr.lift_binary()[\"functions_skipped\"] / [\"skipped\"]",
+    "meaning": "提升层跳过的函数：函数边界未声明（无 .pdata/FDE/st_size），拒绝把推断域当函数域",
+    "collision": "旧版与 switchcand 的预算跳过同名；现 switchcand 已改名为 functions_skipped_budget",
+    "action": "字段保留（expr 命名空间内由 reason 自解释）；测试快照改用 skipped_undeclared_boundary",
+    "status": "scoped_ok"
+   },
+   {
+    "field": "expr.lift_function()[\"skipped\"]（struct.sitejoin 逐层透传）",
+    "meaning": "该函数没有已解出指令，无法提升；注意此处是字符串原因，lift_binary 的 skipped 是记录列表，同一个键在不同函数里类型不同",
+    "collision": "与边界未声明不是同一原因；与预算跳过无关；struct.py:607 也原样透传该键",
+    "action": "sitejoin 引用该值的 status 改名 no_decoded_instructions；struct 仅透传、不新增语义",
+    "status": "fixed"
+   },
+   {
+    "field": "sitejoin.struct_index[fn][\"status\"]",
+    "meaning": "旧值 \"skipped\" 实际表示“没有已解出指令”",
+    "collision": "与 switchcand 预算跳过、expr 边界未声明三者同名不同义",
+    "action": "更名为 no_decoded_instructions；vocab 固定为 ok / not_declared / no_decoded_instructions / no_function",
+    "status": "fixed"
+   },
+   {
+    "field": "switchcand.budget",
+    "meaning": "run_status=ok/no_run；functions_skipped_budget=预算跳过；functions_no_run=整层未运行",
+    "collision": "旧版把“整层未运行”和“预算跳过”都叫 skipped",
+    "action": "拆成上述三个字段 + status_semantics；skipped_detail 每条带 skip_type=skipped_budget",
+    "status": "fixed"
+   },
+   {
+    "field": "switchcand.promotion[\"status\"]",
+    "meaning": "候选升格状态：not_checked / promoted / blocked",
+    "collision": "与运行状态/覆盖状态不同对象；已由 promotion 命名空间限定",
+    "action": "不改",
+    "status": "scoped_ok"
+   },
+   {
+    "field": "coverage[\"status\"]",
+    "meaning": "外部 objdump 可用性：ok / unavailable / error / no_section",
+    "collision": "与“代码是否解码”“分析是否运行”无关；不同对象",
+    "action": "不改；渲染时明确写“分母不可得”",
+    "status": "scoped_ok"
+   },
+   {
+    "field": "gopclntab[\"status\"]",
+    "meaning": "Go 符号表：ok / missing（确认没有）/ unknown（无法确认）",
+    "collision": "missing 与 unknown 语义不同，已分开；与 no_run 无关",
+    "action": "不改",
+    "status": "scoped_ok"
+   },
+   {
+    "field": "disasm 指令 [\"status\"]",
+    "meaning": "单条指令解码：ok / unsupported（附 opcode_map 状态）",
+    "collision": "与 coverage 的模块级 status 同名但对象不同（单条指令 vs 工具可用性）",
+    "action": "不改；禁止跨对象比较 status",
+    "status": "scoped_ok"
+   },
+   {
+    "field": "iat[\"status\"]（模块级）与 iat.slots[][\"status\"]（槽级）",
+    "meaning": "模块：ok / no_imports / invalid；槽：unresolved / repaired",
+    "collision": "同一模块内两级对象共用字段名，词表不相交",
+    "action": "不改；读取时必须带对象路径（loc.status vs slot.status）",
+    "status": "scoped_ok"
+   },
+   {
+    "field": "callfacts 边 [\"state\"] / [\"graph_state\"] vs callgraph 边 [\"state\"]",
+    "meaning": "callfacts：found/absent/barrier/def/entry/loop/depth/breadth/disagree/ambiguous/nondet/same_block；callgraph：自己的边状态词表",
+    "collision": "同名字段来自两层；callfacts 额外提供 graph_state 并做逐边冲突比对",
+    "action": "不改；冲突由 contradiction 检查显式列出，不静默取舍",
+    "status": "scoped_ok"
+   }
+  ]
+ },
+ "meta": {
+  "code_sha256": {
+   "coverage": "3d0c0272a14c66a25a5b455e274e9cb307554b9232e1cd6bbfd4af674f518156",
+   "disasm": "699d74abb80688d40d1ff65526b42024df3d0f44b2548c29022f3d7b7cd61b07",
+   "gopclntab": "578b40a9a4189813e21c7439ae04945cdc81953d2fab5b0f97725aa49703bfe1",
+   "recdesc": "73a8f020a5208bc8222caff5a1286f94d189983da5423004060615875dfe2d84",
+   "sitejoin": "9b59d8fda31b88a56fa5cdd59c944879311e16734eefa72326533d02099adaf1",
+   "strxref": "b0729990a270a61146b3fe876fff462dfddb85799f1e095fea9829e0870cba1f",
+   "switchcand": "aeaa1101ee5409cccc11b73035c4904ab484ab64a541c197311ca7bca8f664f8",
+   "vexaudit": "d571eccc88a7f0d4728671af8e20da390535d2160494a49e89d1da93eb19e57d"
+  },
+  "c4_alignment_evidence": "evidence_m14_c4_alignment.json",
+  "criteria_patched": ["C1", "C2", "C3", "C4", "C5"],
+  "criterion_policy": "重算沿用 M9–M11 原判据；判据本身的问题单列在 criterion_issues，不并入重算值；M13-patch 起每条修复必须绑定可证伪测试",
+  "denominator_scope": "与 M12 相同：GNU objdump 2.47 同节 [VA, VA+size) 指令数；R91 未变",
+  "generated_at": "2026-11-16（M13-patch）",
+  "milestone": "M13-patch（C1–C5 判据修复）",
+  "note": "本文件为 M13 起唯一权威数字源；M13-patch 只改判据命名/分类/校验，不改任何分母与计数；覆盖率等 M12 数字经 M13 回归复核后原样引用",
+  "objdump": "GNU objdump (GNU Binutils) 2.47.20260726",
+  "python": "3.14.0",
+  "regression": {
+   "logs": [
+    "evidence_m14_pytest.log",
+    "evidence_m14_verify.log"
+   ],
+   "note": "M13-patch 回归；M13/M12 日志仅作历史对照",
+   "pytest": "475 passed in 68.54s (exit 0, driver 72.01s)",
+   "verify": "17/17 exit 0（新增 verify_c4_alignment.py）"
+  },
+  "strxref_aggregate_m13_verify": "未解码代码里的引用点 5039 个，涉及字符串 276 条",
+  "task": "种子扩大后的下界重算（用原判据，不改口径）",
+  "task_patch": "C1–C5 判据修复：改命名/分类/校验强度，不改任何分母与计数"
+ },
+ "non_go_reach": {
+  "count": 17,
+  "delta_numerator_sum": 0,
+  "rows": [
+   {
+    "delta_numerator": 0,
+    "denominator": 64,
+    "numerator": 56,
+    "path": "tests/fixtures/dyn_pie",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 65,
+    "numerator": 53,
+    "path": "tests/fixtures/dyn_nopie",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 113924,
+    "numerator": 94765,
+    "path": "tests/fixtures/dyn_static",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 67,
+    "numerator": 59,
+    "path": "tests/fixtures/dyn_execstack",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 68,
+    "numerator": 56,
+    "path": "tests/fixtures/dyn_norelro",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 22523,
+    "numerator": 17475,
+    "path": "tests/fixtures/bin_ls.elf",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 245678,
+    "numerator": 305,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/busybox-1.35.0-musl-x86_64",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 1694,
+    "numerator": 1525,
+    "path": "tests/fixtures/cli-64.exe",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 1,
+    "numerator": 1,
+    "path": "tests/fixtures/minipe.exe",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 9,
+    "numerator": 1,
+    "path": "tests/fixtures/minidll.dll",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 26353,
+    "numerator": 22582,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/hello_rust.exe",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 263121,
+    "numerator": 220256,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work/samples/putty-64bit.exe",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 47339,
+    "numerator": 36574,
+    "path": "samples/m9/elf_plugin_liblua54_stripped.so",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 684728,
+    "numerator": 627658,
+    "path": "samples/m9/elf_jumpdense_python310_stripped",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 5063038,
+    "numerator": 4049517,
+    "path": "samples/m9/elf_medium_cc1_stripped",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 4863491,
+    "numerator": 3910063,
+    "path": "samples/m9/elf_medium_lto1_stripped",
+    "unchanged": true
+   },
+   {
+    "delta_numerator": 0,
+    "denominator": 1776492,
+    "numerator": 1542812,
+    "path": "samples/m9/pe_medium_gdb181.exe",
+    "unchanged": true
+   }
+  ],
+  "unchanged": 17
+ },
+ "pe_gap": {
+  "blocks_crossing_pdata_end": 372,
+  "cfg_edges_targeting_gaps": {
+   "cross_function": 0,
+   "definite": 0,
+   "speculative": 0,
+   "undecoded": 0,
+   "unresolved": 0
+  },
+  "cfg_edges_targeting_gaps_total": 0,
+  "decoded_in_gap_all_cc90": true,
+  "decoded_in_gap_at_gap_start": 372,
+  "decoded_in_gap_by_text": {
+   "int3": 372
+  },
+  "decoded_in_gap_detail": [
+   {
+    "addr": "0x13e6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*IntArgRegBitmap).Set",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x13a0"
+   },
+   {
+    "addr": "0x143e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*IntArgRegBitmap).Get",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1400"
+   },
+   {
+    "addr": "0x15fd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.Kind.String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15c0"
+   },
+   {
+    "addr": "0x1c36",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*FuncType).Out",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1bc0"
+   },
+   {
+    "addr": "0x1ce7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*FuncType).OutSlice",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1c80"
+   },
+   {
+    "addr": "0x1e36",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.Name.ReadVarint",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1de0"
+   },
+   {
+    "addr": "0x1ea7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.Name.IsBlank",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1e40"
+   },
+   {
+    "addr": "0x268b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Kind).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2640"
+   },
+   {
+    "addr": "0x26b8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Name).Data",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x26a0"
+   },
+   {
+    "addr": "0x26d8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Name).DataChecked",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x26c0"
+   },
+   {
+    "addr": "0x26fd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Name).HasTag",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x26e0"
+   },
+   {
+    "addr": "0x275d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Name).IsEmbedded",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2740"
+   },
+   {
+    "addr": "0x277a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Name).IsExported",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2760"
+   },
+   {
+    "addr": "0x281d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/abi.(*Name).ReadVarint",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27c0"
+   },
+   {
+    "addr": "0xd871",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/runtime/maps.(*unhashableTypeError).RuntimeError",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xd860"
+   },
+   {
+    "addr": "0x10375",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.(*decimal).set",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x10160"
+   },
+   {
+    "addr": "0x10c66",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.atof64exact",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x10b20"
+   },
+   {
+    "addr": "0x1217a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.(*decimal).Assign",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12060"
+   },
+   {
+    "addr": "0x12338",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.rightShift",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12180"
+   },
+   {
+    "addr": "0x12535",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.leftShift",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12340"
+   },
+   {
+    "addr": "0x12709",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.(*decimal).Round",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12600"
+   },
+   {
+    "addr": "0x155c6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.formatBase10",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15380"
+   },
+   {
+    "addr": "0x1576a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.fixedWidthFloat",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x155e0"
+   },
+   {
+    "addr": "0x1593a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.parseFloat64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15780"
+   },
+   {
+    "addr": "0x15adc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.parseFloat32",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15940"
+   },
+   {
+    "addr": "0x15e1a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.shortFloat[go.shape.float64]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15ba0"
+   },
+   {
+    "addr": "0x160b3",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.shortFloat[go.shape.float32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15e20"
+   },
+   {
+    "addr": "0x16146",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/strconv.(*Error).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x160c0"
+   },
+   {
+    "addr": "0x18659",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.cgocallbackg",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x18400"
+   },
+   {
+    "addr": "0x261f8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.typePointers.fastForward",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x25fa0"
+   },
+   {
+    "addr": "0x26566",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.bulkBarrierPreWrite",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x26200"
+   },
+   {
+    "addr": "0x2672c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.bulkBarrierPreWriteSrcOnly",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x26580"
+   },
+   {
+    "addr": "0x27337",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.typeBitsBulkBarrier",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27140"
+   },
+   {
+    "addr": "0x289b7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.getCheckmark",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x28920"
+   },
+   {
+    "addr": "0x2a66b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.sysFreeOS",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2a5a0"
+   },
+   {
+    "addr": "0x30cbd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.fmtNSAsMS",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x30b20"
+   },
+   {
+    "addr": "0x34ff7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.gcmarknewobject",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x34e40"
+   },
+   {
+    "addr": "0x38d46",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*gcControllerState).addIdleMarkWorker",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x38c80"
+   },
+   {
+    "addr": "0x3a808",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*scavengeIndex).find",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x3a680"
+   },
+   {
+    "addr": "0x3ab8b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*scavengeIndex).setEmpty",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x3aae0"
+   },
+   {
+    "addr": "0x3ee50",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*mheap).setSpans",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x3ed80"
+   },
+   {
+    "addr": "0x44866",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.mergeSummaries",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x44720"
+   },
+   {
+    "addr": "0x45a5c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*pageBits).setRange",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x459a0"
+   },
+   {
+    "addr": "0x480b2",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*addrRanges).findSucc",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x48000"
+   },
+   {
+    "addr": "0x48dc6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*sysMemStat).add",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x48d20"
+   },
+   {
+    "addr": "0x48e97",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*consistentHeapStats).acquire",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x48de0"
+   },
+   {
+    "addr": "0x48f26",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*consistentHeapStats).release",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x48ea0"
+   },
+   {
+    "addr": "0x4b4ea",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.readRandom",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x4b480"
+   },
+   {
+    "addr": "0x4b94d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.write1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x4b780"
+   },
+   {
+    "addr": "0x4d9fb",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.deferprocStack",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x4d9a0"
+   },
+   {
+    "addr": "0x50cff",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.xRegRestore",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x50c60"
+   },
+   {
+    "addr": "0x52a3d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.releaseSudog",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x52740"
+   },
+   {
+    "addr": "0x58c8d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.checkTimersNoP",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x58c00"
+   },
+   {
+    "addr": "0x5a4bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.save",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x5a460"
+   },
+   {
+    "addr": "0x5bccc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.LockOSThread",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x5bc60"
+   },
+   {
+    "addr": "0x5f43d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.globrunqgetbatch",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x5f320"
+   },
+   {
+    "addr": "0x64f93",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.sigtrampgo",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x64e40"
+   },
+   {
+    "addr": "0x6bf6b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*moduledata).textAddr",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x6be60"
+   },
+   {
+    "addr": "0x6cd50",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.step",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x6cc00"
+   },
+   {
+    "addr": "0x7383a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.isExportedRuntime",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x73700"
+   },
+   {
+    "addr": "0x749da",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.traceWriter.event",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x74800"
+   },
+   {
+    "addr": "0x74e86",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*traceBuf).varintAt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x74e00"
+   },
+   {
+    "addr": "0x78f0e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.traceWriter.writeGoStatus",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x78e00"
+   },
+   {
+    "addr": "0x7906e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.traceWriter.writeProcStatusForP",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x78f20"
+   },
+   {
+    "addr": "0x79146",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.traceWriter.writeProcStatus",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x79080"
+   },
+   {
+    "addr": "0x791f7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.goStatusToTraceGoStatus",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x79160"
+   },
+   {
+    "addr": "0x7c598",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.encoderune",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x7c4a0"
+   },
+   {
+    "addr": "0x8371d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.cgocall",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x83600"
+   },
+   {
+    "addr": "0x8695f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.exitsyscall",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x866c0"
+   },
+   {
+    "addr": "0x8867a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.morestackc",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x88660"
+   },
+   {
+    "addr": "0x89a3e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "syscall.syscalln",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x899c0"
+   },
+   {
+    "addr": "0x8b313",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.systemstack",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x8b280"
+   },
+   {
+    "addr": "0x911b5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*errorAddressString).Addr",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x911a0"
+   },
+   {
+    "addr": "0x91231",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*errorAddressString).RuntimeError",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x91220"
+   },
+   {
+    "addr": "0x91258",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*plainError).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x91240"
+   },
+   {
+    "addr": "0x91271",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*plainError).RuntimeError",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x91260"
+   },
+   {
+    "addr": "0x912f1",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*boundsError).RuntimeError",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x912e0"
+   },
+   {
+    "addr": "0x91373",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*lockRank).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x91300"
+   },
+   {
+    "addr": "0x913bb",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*waitReason).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x91380"
+   },
+   {
+    "addr": "0x91431",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "runtime.(*errorString).RuntimeError",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x91420"
+   },
+   {
+    "addr": "0x93f1c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/reflectlite.(*rtype).Comparable",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x93f00"
+   },
+   {
+    "addr": "0x94994",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/reflectlite.(*rtype).common",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x94980"
+   },
+   {
+    "addr": "0x95010",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode/utf8.decodeRuneSlow",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x94ec0"
+   },
+   {
+    "addr": "0x95170",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode/utf8.decodeRuneInStringSlow",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x95020"
+   },
+   {
+    "addr": "0x954d6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode/utf8.encodeRuneNonASCII",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x953e0"
+   },
+   {
+    "addr": "0x984bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "strconv.IsPrint",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x98240"
+   },
+   {
+    "addr": "0xa21e6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode.is16",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xa20e0"
+   },
+   {
+    "addr": "0xa22df",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode.is32",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xa2200"
+   },
+   {
+    "addr": "0xa24fc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode.to",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xa2460"
+   },
+   {
+    "addr": "0xa26fe",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unicode.SimpleFold",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xa25c0"
+   },
+   {
+    "addr": "0xc5af9",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*StructField).IsExported",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5ae0"
+   },
+   {
+    "addr": "0xc5d5c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).CanAddr",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5d40"
+   },
+   {
+    "addr": "0xc5d8c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).CanComplex",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5d60"
+   },
+   {
+    "addr": "0xc5e4c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).CanFloat",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5e20"
+   },
+   {
+    "addr": "0xc5e8c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).CanInt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5e60"
+   },
+   {
+    "addr": "0xc5f66",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).CanSet",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5f40"
+   },
+   {
+    "addr": "0xc5fac",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).CanUint",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc5f80"
+   },
+   {
+    "addr": "0xc6a19",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).IsValid",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc6a00"
+   },
+   {
+    "addr": "0xc6a99",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Value).Kind",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc6a80"
+   },
+   {
+    "addr": "0xc7f99",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "reflect.(*Method).IsExported",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xc7f80"
+   },
+   {
+    "addr": "0xcc59d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io.(*discard).Write",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xcc580"
+   },
+   {
+    "addr": "0xcc5bd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io.(*discard).WriteString",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xcc5a0"
+   },
+   {
+    "addr": "0xcc5d5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io.(*nopCloser).Close",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xcc5c0"
+   },
+   {
+    "addr": "0xcc695",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io.(*nopCloserWriterTo).Close",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xcc680"
+   },
+   {
+    "addr": "0xd5470",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "syscall.(*Errno).Temporary",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xd5420"
+   },
+   {
+    "addr": "0xd54b7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "syscall.(*Errno).Timeout",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xd5480"
+   },
+   {
+    "addr": "0xe0566",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.Duration.format",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe0100"
+   },
+   {
+    "addr": "0xe28d0",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.div",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe26c0"
+   },
+   {
+    "addr": "0xe2f31",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Location).lookupFirstZone",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe2e80"
+   },
+   {
+    "addr": "0xe6be6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.nextStdChunk",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe5f60"
+   },
+   {
+    "addr": "0xe89c6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).IsZero",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe89a0"
+   },
+   {
+    "addr": "0xe8a67",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).Local",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe89e0"
+   },
+   {
+    "addr": "0xe8aa6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).Location",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe8a80"
+   },
+   {
+    "addr": "0xe8d5d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).Nanosecond",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe8d40"
+   },
+   {
+    "addr": "0xe8ff5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).UTC",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe8f80"
+   },
+   {
+    "addr": "0xe9046",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).Unix",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9000"
+   },
+   {
+    "addr": "0xe90cc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).UnixMicro",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9060"
+   },
+   {
+    "addr": "0xe914c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).UnixMilli",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe90e0"
+   },
+   {
+    "addr": "0xe91b7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Time).UnixNano",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9160"
+   },
+   {
+    "addr": "0xe969c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Abs",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9660"
+   },
+   {
+    "addr": "0xe9707",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Hours",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe96a0"
+   },
+   {
+    "addr": "0xe9752",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Microseconds",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9720"
+   },
+   {
+    "addr": "0xe9792",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Milliseconds",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9760"
+   },
+   {
+    "addr": "0xe9806",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Minutes",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe97a0"
+   },
+   {
+    "addr": "0xe9834",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Nanoseconds",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9820"
+   },
+   {
+    "addr": "0xe98fc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Seconds",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe98a0"
+   },
+   {
+    "addr": "0xe99a7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "time.(*Duration).Truncate",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xe9980"
+   },
+   {
+    "addr": "0xedf3a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io/fs.(*FileMode).IsDir",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xedf20"
+   },
+   {
+    "addr": "0xedf5c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io/fs.(*FileMode).IsRegular",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xedf40"
+   },
+   {
+    "addr": "0xedf78",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io/fs.(*FileMode).Perm",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xedf60"
+   },
+   {
+    "addr": "0xedfd8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io/fs.(*FileMode).Type",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xedfc0"
+   },
+   {
+    "addr": "0xedffc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "io/fs.(*dirInfo).Info",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xedfe0"
+   },
+   {
+    "addr": "0xf3066",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.rotateLeft[go.shape.uint8]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xf2fc0"
+   },
+   {
+    "addr": "0xff6bd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/poll.(*errNetClosing).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xff6a0"
+   },
+   {
+    "addr": "0xff6d3",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/poll.(*errNetClosing).Temporary",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xff6c0"
+   },
+   {
+    "addr": "0xff6f3",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "internal/poll.(*errNetClosing).Timeout",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0xff6e0"
+   },
+   {
+    "addr": "0x10923f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "os.(*dirEntry).Info",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x109220"
+   },
+   {
+    "addr": "0x1092bc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "os.(*dirEntry).Name",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1092a0"
+   },
+   {
+    "addr": "0x1133ba",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "fmt.intFromArg",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x113260"
+   },
+   {
+    "addr": "0x11a04b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.partitionOrdered[go.shape.int]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x119ea0"
+   },
+   {
+    "addr": "0x11a275",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.partialInsertionSortOrdered[go.shape.int]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x11a120"
+   },
+   {
+    "addr": "0x11a646",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.breakPatternsOrdered[go.shape.int]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x11a580"
+   },
+   {
+    "addr": "0x11a875",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.siftDownOrdered[go.shape.int]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x11a7c0"
+   },
+   {
+    "addr": "0x11a8e6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.insertionSortOrdered[go.shape.int]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x11a880"
+   },
+   {
+    "addr": "0x11b3a9",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "strings.(*Reader).ReadByte",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x11b360"
+   },
+   {
+    "addr": "0x122077",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bytes.(*Buffer).Bytes",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x122040"
+   },
+   {
+    "addr": "0x1221c6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bytes.(*Buffer).Peek",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x122140"
+   },
+   {
+    "addr": "0x122f46",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bytes.(*Buffer).Next",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x122ee0"
+   },
+   {
+    "addr": "0x122fbb",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bytes.(*Buffer).ReadByte",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x122f60"
+   },
+   {
+    "addr": "0x1253e9",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bytes.(*Reader).ReadByte",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1253a0"
+   },
+   {
+    "addr": "0x12ead8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/tar.(*headerFileInfo).Size",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12eac0"
+   },
+   {
+    "addr": "0x12eb5b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/tar.(*headerFileInfo).Sys",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12eb40"
+   },
+   {
+    "addr": "0x12eb75",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/tar.(*regFileWriter).logicalRemaining",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12eb60"
+   },
+   {
+    "addr": "0x12f915",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bufio.(*Reader).UnreadByte",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x12f8a0"
+   },
+   {
+    "addr": "0x130df7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "bufio.(*Writer).AvailableBuffer",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x130dc0"
+   },
+   {
+    "addr": "0x133f94",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.bulkHash4",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x133f20"
+   },
+   {
+    "addr": "0x136a7a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.matchLen",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1369a0"
+   },
+   {
+    "addr": "0x136d78",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.(*huffmanBitWriter).canReuse",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x136cc0"
+   },
+   {
+    "addr": "0x137415",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.(*huffmanBitWriter).generateCodegen",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x137060"
+   },
+   {
+    "addr": "0x1374f5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.(*huffmanBitWriter).headerSize",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x137420"
+   },
+   {
+    "addr": "0x13758d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.(*huffmanBitWriter).dynamicReuseSize",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x137500"
+   },
+   {
+    "addr": "0x13a635",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.histogramSplit",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x13a500"
+   },
+   {
+    "addr": "0x14407c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.(*tokens).AddMatch",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x143fe0"
+   },
+   {
+    "addr": "0x144159",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/flate.(*tokens).AddMatchLong",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x144080"
+   },
+   {
+    "addr": "0x145b06",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.breakPatternsCmpFunc[go.shape.struct { compress/flate.literal uint16; compress/flate.freq uint16 }]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x145a40"
+   },
+   {
+    "addr": "0x147066",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/zip.headerFileInfo.Name",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x146fc0"
+   },
+   {
+    "addr": "0x14b0bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/zip.(*headerFileInfo).Info",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x14b0a0"
+   },
+   {
+    "addr": "0x14b27b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/zip.(*headerFileInfo).Sys",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x14b260"
+   },
+   {
+    "addr": "0x14b7f5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "archive/zip.(*nopCloser).Close",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x14b7e0"
+   },
+   {
+    "addr": "0x14c0e6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "compress/bzip2.(*reader).readFromBlock",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x14bfc0"
+   },
+   {
+    "addr": "0x14f0f5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.breakPatternsCmpFunc[go.shape.struct { compress/bzip2.code uint32; compress/bzip2.codeLen uint8; compress/bzip2.value uint16 }]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x14efc0"
+   },
+   {
+    "addr": "0x154666",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/rand.(*rngSource).Int63",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1545e0"
+   },
+   {
+    "addr": "0x1546fe",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/rand.(*rngSource).Uint64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x154680"
+   },
+   {
+    "addr": "0x158046",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.(*Int).TrailingZeroBits",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x158000"
+   },
+   {
+    "addr": "0x158d50",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.lehmerSimulate",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x158be0"
+   },
+   {
+    "addr": "0x15eb66",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.cmp",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15eae0"
+   },
+   {
+    "addr": "0x15f726",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.(*stack).restore",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x15f700"
+   },
+   {
+    "addr": "0x16d22a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.expNNWindowed.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d200"
+   },
+   {
+    "addr": "0x16d2ea",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.rem.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d2c0"
+   },
+   {
+    "addr": "0x16d36a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.divLarge.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d340"
+   },
+   {
+    "addr": "0x16d3aa",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.divBasic.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d380"
+   },
+   {
+    "addr": "0x16d3ea",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.divRecursiveStep.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d3c0"
+   },
+   {
+    "addr": "0x16d42a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.nat.mul.deferwrap2",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d400"
+   },
+   {
+    "addr": "0x16d4ea",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.basicSqr.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d4c0"
+   },
+   {
+    "addr": "0x16d52a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.karatsuba.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d500"
+   },
+   {
+    "addr": "0x16d56a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "math/big.karatsubaSqr.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x16d540"
+   },
+   {
+    "addr": "0x171fdd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*deadlineExceededError).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x171fc0"
+   },
+   {
+    "addr": "0x171ff6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*deadlineExceededError).Temporary",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x171fe0"
+   },
+   {
+    "addr": "0x172016",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*deadlineExceededError).Timeout",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172000"
+   },
+   {
+    "addr": "0x172039",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*emptyCtx).Deadline",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172020"
+   },
+   {
+    "addr": "0x172053",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*emptyCtx).Done",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172040"
+   },
+   {
+    "addr": "0x172075",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*emptyCtx).Err",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172060"
+   },
+   {
+    "addr": "0x172095",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*emptyCtx).Value",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172080"
+   },
+   {
+    "addr": "0x17217d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "context.(*backgroundCtx).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172160"
+   },
+   {
+    "addr": "0x1730bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/hex.Decode",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x172fc0"
+   },
+   {
+    "addr": "0x189b19",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "database/sql.(*dsnConnector).Driver",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x189b00"
+   },
+   {
+    "addr": "0x18a131",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/internal/jsonflags.(*Bools).JSONOptions",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x18a120"
+   },
+   {
+    "addr": "0x18a15b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/internal/jsonflags.(*Flags).Get",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x18a140"
+   },
+   {
+    "addr": "0x18a17a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/internal/jsonflags.(*Flags).Has",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x18a160"
+   },
+   {
+    "addr": "0x18f29b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/internal/jsonwire.(*ValueFlags).IsCanonical",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x18f280"
+   },
+   {
+    "addr": "0x18f2ba",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/internal/jsonwire.(*ValueFlags).IsVerbatim",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x18f2a0"
+   },
+   {
+    "addr": "0x195946",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*Decoder).UnreadBuffer",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x195900"
+   },
+   {
+    "addr": "0x1959fd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*Decoder).StackIndex",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x195980"
+   },
+   {
+    "addr": "0x19c31d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*Encoder).StackIndex",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x19c2a0"
+   },
+   {
+    "addr": "0x19dd6a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.Pointer.Parent",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x19dd20"
+   },
+   {
+    "addr": "0x19e930",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*stateMachine).InvalidateDisabledNamespaces",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x19e8e0"
+   },
+   {
+    "addr": "0x19ea86",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*objectNameStack).ReplaceLastQuotedOffset",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x19ea60"
+   },
+   {
+    "addr": "0x19eee7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.objectNamespaceStack.Last",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x19eec0"
+   },
+   {
+    "addr": "0x1a2b07",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.Value.Kind",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a2aa0"
+   },
+   {
+    "addr": "0x1a3ba6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*decoderState).consumeObject.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a3b80"
+   },
+   {
+    "addr": "0x1a3be6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*encoderState).reformatObject.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a3bc0"
+   },
+   {
+    "addr": "0x1a7226",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*stateEntry).Length",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a7200"
+   },
+   {
+    "addr": "0x1a726e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*stateEntry).NeedObjectName",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a7240"
+   },
+   {
+    "addr": "0x1a72d8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*stateMachine).Depth",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a72c0"
+   },
+   {
+    "addr": "0x1a730b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*stateMachine).DepthLength",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a72e0"
+   },
+   {
+    "addr": "0x1a74f2",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*objectNamespaceStack).Last",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a74c0"
+   },
+   {
+    "addr": "0x1a7ab6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*Value).Kind",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a7a40"
+   },
+   {
+    "addr": "0x1a7e55",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json/jsontext.(*Pointer).Parent",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a7e00"
+   },
+   {
+    "addr": "0x1a85bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/base32.(*Encoding).Encode",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a8380"
+   },
+   {
+    "addr": "0x1a951f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/base64.(*Encoding).Encode",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1a9340"
+   },
+   {
+    "addr": "0x1e78d8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/json.(*Number).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1e78c0"
+   },
+   {
+    "addr": "0x1f4346",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/xml.(*StartElement).End",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f4320"
+   },
+   {
+    "addr": "0x1f4458",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/xml.(*UnmarshalError).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f4440"
+   },
+   {
+    "addr": "0x1f7006",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/token.(*Token).IsKeyword",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f6fe0"
+   },
+   {
+    "addr": "0x1f7046",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/token.(*Token).IsLiteral",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f7020"
+   },
+   {
+    "addr": "0x1f708c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/token.(*Token).IsOperator",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f7060"
+   },
+   {
+    "addr": "0x1f7127",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/token.(*Token).Precedence",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f70a0"
+   },
+   {
+    "addr": "0x1f71f8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/token.(*Pos).IsValid",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1f71e0"
+   },
+   {
+    "addr": "0x1fa91a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/scanner.invalidSep",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1fa840"
+   },
+   {
+    "addr": "0x1fbe55",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/scanner.(*ErrorList).Len",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1fbe40"
+   },
+   {
+    "addr": "0x1fc0fc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/ast.(*CommentGroup).Pos",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1fc0e0"
+   },
+   {
+    "addr": "0x1fc128",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/ast.(*CommentGroup).End",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1fc100"
+   },
+   {
+    "addr": "0x1fdd9d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/ast.(*ValueSpec).Pos",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1fdd80"
+   },
+   {
+    "addr": "0x1fe789",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/ast.ObjKind.String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x1fe760"
+   },
+   {
+    "addr": "0x202bf3",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "go/ast.(*ObjKind).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x202bc0"
+   },
+   {
+    "addr": "0x22007d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*Gray16).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220060"
+   },
+   {
+    "addr": "0x22009a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*Alpha16).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220080"
+   },
+   {
+    "addr": "0x2200dc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*RGBA).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2200a0"
+   },
+   {
+    "addr": "0x220106",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*RGBA64).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2200e0"
+   },
+   {
+    "addr": "0x220190",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*NRGBA).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220120"
+   },
+   {
+    "addr": "0x2201ef",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*NRGBA64).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2201a0"
+   },
+   {
+    "addr": "0x220226",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*Alpha).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220200"
+   },
+   {
+    "addr": "0x220266",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*Gray).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220240"
+   },
+   {
+    "addr": "0x2204c6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/color.(*CMYK).RGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220420"
+   },
+   {
+    "addr": "0x2208e7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.Point.Div",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2208a0"
+   },
+   {
+    "addr": "0x220992",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.Point.Mod",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x220920"
+   },
+   {
+    "addr": "0x2210fa",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA).RGBA64At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x221060"
+   },
+   {
+    "addr": "0x22117e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA).RGBAAt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x221100"
+   },
+   {
+    "addr": "0x22136b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA).SetRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2212e0"
+   },
+   {
+    "addr": "0x2213f6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA).SetRGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x221380"
+   },
+   {
+    "addr": "0x22163e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA).Opaque",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2215c0"
+   },
+   {
+    "addr": "0x2218ae",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA64).RGBA64At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x221820"
+   },
+   {
+    "addr": "0x221b06",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA64).SetRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x221a60"
+   },
+   {
+    "addr": "0x221d7e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*RGBA64).Opaque",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x221ce0"
+   },
+   {
+    "addr": "0x22209e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA).NRGBAAt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222020"
+   },
+   {
+    "addr": "0x22230e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA).SetRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222200"
+   },
+   {
+    "addr": "0x222396",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA).SetNRGBA",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222320"
+   },
+   {
+    "addr": "0x2225de",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA).Opaque",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222560"
+   },
+   {
+    "addr": "0x2228ee",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA64).NRGBA64At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222860"
+   },
+   {
+    "addr": "0x222bc6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA64).SetRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222aa0"
+   },
+   {
+    "addr": "0x222c86",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA64).SetNRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222be0"
+   },
+   {
+    "addr": "0x222efe",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*NRGBA64).Opaque",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x222e60"
+   },
+   {
+    "addr": "0x2230ea",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray).At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223080"
+   },
+   {
+    "addr": "0x223168",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray).RGBA64At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223100"
+   },
+   {
+    "addr": "0x2231d8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray).GrayAt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223180"
+   },
+   {
+    "addr": "0x22339d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray).SetRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223320"
+   },
+   {
+    "addr": "0x2233f6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray).SetGray",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2233a0"
+   },
+   {
+    "addr": "0x22386e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray16).Gray16At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223800"
+   },
+   {
+    "addr": "0x223aac",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray16).SetRGBA64",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223a00"
+   },
+   {
+    "addr": "0x223b3c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Gray16).SetGray16",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x223ac0"
+   },
+   {
+    "addr": "0x22407e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*CMYK).CMYKAt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x224000"
+   },
+   {
+    "addr": "0x224396",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*CMYK).SetCMYK",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x224320"
+   },
+   {
+    "addr": "0x2247ab",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Paletted).At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x224720"
+   },
+   {
+    "addr": "0x224b58",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Paletted).ColorIndexAt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x224b00"
+   },
+   {
+    "addr": "0x224bb6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Paletted).SetColorIndex",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x224b60"
+   },
+   {
+    "addr": "0x225d3e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Point).Add",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225d20"
+   },
+   {
+    "addr": "0x225da6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Point).Div",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225d40"
+   },
+   {
+    "addr": "0x225de6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Point).Eq",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225dc0"
+   },
+   {
+    "addr": "0x225e31",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Point).In",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225e00"
+   },
+   {
+    "addr": "0x225ee6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Point).Mul",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225ec0"
+   },
+   {
+    "addr": "0x225f86",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Point).Sub",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225f60"
+   },
+   {
+    "addr": "0x225fd6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Add",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x225fa0"
+   },
+   {
+    "addr": "0x2260a6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Bounds",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226080"
+   },
+   {
+    "addr": "0x226106",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Canon",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2260c0"
+   },
+   {
+    "addr": "0x22613f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).ColorModel",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226120"
+   },
+   {
+    "addr": "0x22615b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Dx",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226140"
+   },
+   {
+    "addr": "0x22617c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Dy",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226160"
+   },
+   {
+    "addr": "0x2261af",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Empty",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226180"
+   },
+   {
+    "addr": "0x226226",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Eq",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2261c0"
+   },
+   {
+    "addr": "0x22628d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).In",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226240"
+   },
+   {
+    "addr": "0x2263f0",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Overlaps",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2263a0"
+   },
+   {
+    "addr": "0x226446",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).RGBA64At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226400"
+   },
+   {
+    "addr": "0x226486",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Size",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226460"
+   },
+   {
+    "addr": "0x226535",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*Rectangle).Sub",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x226500"
+   },
+   {
+    "addr": "0x22668d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image.(*YCbCrSubsampleRatio).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2265e0"
+   },
+   {
+    "addr": "0x2288b5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/internal/imageutil.DrawYCbCr",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x228060"
+   },
+   {
+    "addr": "0x22f2bc",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/gif.(*blockWriter).Flush",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x22f2a0"
+   },
+   {
+    "addr": "0x2356c8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/jpeg.grayToY",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x235620"
+   },
+   {
+    "addr": "0x235bb9",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/jpeg.scale",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x235b00"
+   },
+   {
+    "addr": "0x2386dd",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "image/png.filterPaeth",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x238600"
+   },
+   {
+    "addr": "0x249b52",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.Prefix.Contains",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x249a20"
+   },
+   {
+    "addr": "0x24c5bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "unique.(*Handle[net/netip.addrDetail]).Value",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24c5a0"
+   },
+   {
+    "addr": "0x24cb66",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).As16",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24cb20"
+   },
+   {
+    "addr": "0x24cd5d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).BitLen",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24cd20"
+   },
+   {
+    "addr": "0x24cdff",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Is4",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24cde0"
+   },
+   {
+    "addr": "0x24ce46",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Is4In6",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24ce00"
+   },
+   {
+    "addr": "0x24ce8c",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Is6",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24ce60"
+   },
+   {
+    "addr": "0x24d1c6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).IsUnspecified",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d160"
+   },
+   {
+    "addr": "0x24d1ff",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).IsValid",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d1e0"
+   },
+   {
+    "addr": "0x24d39b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Next",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d340"
+   },
+   {
+    "addr": "0x24d455",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Prev",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d400"
+   },
+   {
+    "addr": "0x24d56f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Unmap",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d520"
+   },
+   {
+    "addr": "0x24d62d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Addr).Zone",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d600"
+   },
+   {
+    "addr": "0x24d65f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Prefix).Addr",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d640"
+   },
+   {
+    "addr": "0x24d858",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Prefix).Bits",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d840"
+   },
+   {
+    "addr": "0x24d9ec",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Prefix).IsSingleIP",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24d9a0"
+   },
+   {
+    "addr": "0x24da18",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*Prefix).IsValid",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24da00"
+   },
+   {
+    "addr": "0x24dcbf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*AddrPort).Addr",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24dca0"
+   },
+   {
+    "addr": "0x24e035",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/netip.(*AddrPort).Port",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24e020"
+   },
+   {
+    "addr": "0x24fbd7",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/net/dns/dnsmessage.(*Parser).AResource",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x24fac0"
+   },
+   {
+    "addr": "0x27dd71",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*IP).IsInterfaceLocalMulticast",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27dd40"
+   },
+   {
+    "addr": "0x27e252",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*IP).To4",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27e1e0"
+   },
+   {
+    "addr": "0x27e2e6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*IPMask).Size",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27e260"
+   },
+   {
+    "addr": "0x27e63d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*canceledError).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27e620"
+   },
+   {
+    "addr": "0x27ecb3",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*UnknownNetworkError).Temporary",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27eca0"
+   },
+   {
+    "addr": "0x27ecd3",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*UnknownNetworkError).Timeout",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x27ecc0"
+   },
+   {
+    "addr": "0x28073d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net.(*addrPortUDPAddr).Network",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x280720"
+   },
+   {
+    "addr": "0x2886a8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/asn1.BitString.At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x288660"
+   },
+   {
+    "addr": "0x288e18",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/asn1.(*BitString).At",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x288dc0"
+   },
+   {
+    "addr": "0x288ec8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "encoding/asn1.(*ObjectIdentifier).Equal",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x288e80"
+   },
+   {
+    "addr": "0x29679f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/text/unicode/bidi.Lookup",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x296540"
+   },
+   {
+    "addr": "0x2969ff",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/text/unicode/bidi.LookupString",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2967a0"
+   },
+   {
+    "addr": "0x298906",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/text/unicode/norm.compInfo",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x298720"
+   },
+   {
+    "addr": "0x29d550",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/text/unicode/norm.(*sparseBlocks).lookup",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x29d480"
+   },
+   {
+    "addr": "0x29d615",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/text/unicode/norm.Form.IsNormalString.func1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x29d560"
+   },
+   {
+    "addr": "0x2a1390",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/net/idna.(*sparseBlocks).lookup",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2a12c0"
+   },
+   {
+    "addr": "0x2a3176",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "vendor/golang.org/x/net/http/httpproxy.(*allMatch).match",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2a3160"
+   },
+   {
+    "addr": "0x2a50f5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/http.(*noBody).Close",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2a50e0"
+   },
+   {
+    "addr": "0x2a5126",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/http.(*noBody).Read",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2a5100"
+   },
+   {
+    "addr": "0x2a5157",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "net/http.(*noBody).WriteTo",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2a5140"
+   },
+   {
+    "addr": "0x2c9fbf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template/parse.(*Tree).popVars",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2c9fa0"
+   },
+   {
+    "addr": "0x2ca247",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template/parse.(*Tree).parseControl.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2ca220"
+   },
+   {
+    "addr": "0x2ca7d4",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template/parse.(*Pos).Position",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2ca7c0"
+   },
+   {
+    "addr": "0x2ca854",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template/parse.(*NodeType).Type",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2ca840"
+   },
+   {
+    "addr": "0x2d482b",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*parser).parseInt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2d4760"
+   },
+   {
+    "addr": "0x2d78de",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.ranges.Less",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2d7860"
+   },
+   {
+    "addr": "0x2d7970",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.ranges.Swap",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2d7900"
+   },
+   {
+    "addr": "0x2d7e8f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*Prog).StartCond",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2d7e20"
+   },
+   {
+    "addr": "0x2db897",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*InstOp).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2db860"
+   },
+   {
+    "addr": "0x2db8b8",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*ErrorCode).String",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2db8a0"
+   },
+   {
+    "addr": "0x2db8db",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*ranges).Len",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2db8c0"
+   },
+   {
+    "addr": "0x2db966",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*ranges).Less",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2db8e0"
+   },
+   {
+    "addr": "0x2db9fb",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "regexp/syntax.(*ranges).Swap",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2db980"
+   },
+   {
+    "addr": "0x2e99da",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.partitionOrdered[go.shape.int32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2e9840"
+   },
+   {
+    "addr": "0x2e9bf5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.partialInsertionSortOrdered[go.shape.int32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2e9aa0"
+   },
+   {
+    "addr": "0x2e9efa",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.medianOrdered[go.shape.int32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2e9e40"
+   },
+   {
+    "addr": "0x2e9fc6",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.breakPatternsOrdered[go.shape.int32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2e9f00"
+   },
+   {
+    "addr": "0x2ea1f5",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.siftDownOrdered[go.shape.int32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2ea140"
+   },
+   {
+    "addr": "0x2ea266",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "slices.insertionSortOrdered[go.shape.int32]",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2ea200"
+   },
+   {
+    "addr": "0x2ea619",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template.(*state).pop",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2ea600"
+   },
+   {
+    "addr": "0x2f9346",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template.(*state).walkIfOrWith.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2f9320"
+   },
+   {
+    "addr": "0x2f9926",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template.(*state).walkRange.func2.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2f9900"
+   },
+   {
+    "addr": "0x2f9966",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template.(*state).walkRange.deferwrap1",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2f9940"
+   },
+   {
+    "addr": "0x2f9d59",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "text/template.(*ExecError).Unwrap",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x2f9d40"
+   },
+   {
+    "addr": "0x30a19d",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/hmac.(*errCloneUnsupported).Error",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x30a180"
+   },
+   {
+    "addr": "0x30a1bf",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/hmac.(*errCloneUnsupported).Unwrap",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x30a1a0"
+   },
+   {
+    "addr": "0x33453e",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/bigmod.(*Nat).Equal",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x3344e0"
+   },
+   {
+    "addr": "0x346866",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/mldsa.ntt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x3461e0"
+   },
+   {
+    "addr": "0x346e9f",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/mldsa.inverseNTT",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x346880"
+   },
+   {
+    "addr": "0x34acf0",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/mldsa.pkDecode",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x34ab20"
+   },
+   {
+    "addr": "0x3548f0",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/mlkem.ntt",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x354700"
+   },
+   {
+    "addr": "0x354b5a",
+    "at_gap_start": true,
+    "bytes": "cc",
+    "func": "crypto/internal/fips140/mlkem.inverseNTT",
+    "in_gopclntab_range": true,
+    "in_pdata_range": false,
+    "len": 1,
+    "objdump": "int3",
+    "origin": "0x354900"
+   }
+  ],
+  "decoded_insns_in_gaps": 372,
+  "decoded_insns_straddling_pdata_end": 0,
+  "delta_bins": {
+   "1-3": 609,
+   "16-31": 3704,
+   "4-7": 955,
+   "8-15": 1871
+  },
+  "delta_hist": {
+   "1": 207,
+   "10": 211,
+   "11": 184,
+   "12": 255,
+   "13": 219,
+   "14": 375,
+   "15": 192,
+   "16": 211,
+   "17": 303,
+   "18": 197,
+   "19": 241,
+   "2": 242,
+   "20": 288,
+   "21": 163,
+   "22": 208,
+   "23": 172,
+   "24": 223,
+   "25": 289,
+   "26": 258,
+   "27": 870,
+   "28": 34,
+   "29": 90,
+   "3": 160,
+   "30": 148,
+   "31": 9,
+   "4": 248,
+   "5": 204,
+   "6": 226,
+   "7": 277,
+   "8": 256,
+   "9": 179
+  },
+  "file": "samples/m9/pe_medium_synth_go_stripped.exe",
+  "functions_gopclntab_le_pdata": 13,
+  "functions_with_both_ends": 7139,
+  "gap_bytes_max": 31,
+  "gap_bytes_mean": 15.931,
+  "gap_bytes_min": 1,
+  "gap_bytes_share_of_text_pct": 3.2262,
+  "gap_bytes_total": 113731,
+  "gap_insn_share_of_numerator_pct": 0.0496,
+  "image_base": "0x140000000",
+  "numerator_if_pdata_end_limit": 749737,
+  "objdump_bytes_in_gaps": 113731,
+  "objdump_insns_all_cc90": 113731,
+  "objdump_insns_in_gaps": 113731,
+  "padding_bucket_m11": 148861,
+  "ratio_delta_pp_if_pdata_end": -0.0402,
+  "ratio_if_pdata_end_limit": 0.809903,
+  "ratio_now": 0.810305,
+  "sample_gaps": [
+   {
+    "decoded": [],
+    "delta": 17,
+    "entry": "0x1080",
+    "func": "internal/abi.(*RegArgs).Dump",
+    "gopclntab_end": "0x1320",
+    "objdump": [
+     [
+      "0x130f",
+      "int3"
+     ],
+     [
+      "0x1310",
+      "int3"
+     ],
+     [
+      "0x1311",
+      "int3"
+     ],
+     [
+      "0x1312",
+      "int3"
+     ],
+     [
+      "0x1313",
+      "int3"
+     ],
+     [
+      "0x1314",
+      "int3"
+     ],
+     [
+      "0x1315",
+      "int3"
+     ],
+     [
+      "0x1316",
+      "int3"
+     ],
+     [
+      "0x1317",
+      "int3"
+     ],
+     [
+      "0x1318",
+      "int3"
+     ],
+     [
+      "0x1319",
+      "int3"
+     ],
+     [
+      "0x131a",
+      "int3"
+     ],
+     [
+      "0x131b",
+      "int3"
+     ],
+     [
+      "0x131c",
+      "int3"
+     ],
+     [
+      "0x131d",
+      "int3"
+     ],
+     [
+      "0x131e",
+      "int3"
+     ],
+     [
+      "0x131f",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x130f"
+   },
+   {
+    "decoded": [],
+    "delta": 10,
+    "entry": "0x1320",
+    "func": "internal/abi.(*RegArgs).IntRegArgAddr",
+    "gopclntab_end": "0x13a0",
+    "objdump": [
+     [
+      "0x1396",
+      "int3"
+     ],
+     [
+      "0x1397",
+      "int3"
+     ],
+     [
+      "0x1398",
+      "int3"
+     ],
+     [
+      "0x1399",
+      "int3"
+     ],
+     [
+      "0x139a",
+      "int3"
+     ],
+     [
+      "0x139b",
+      "int3"
+     ],
+     [
+      "0x139c",
+      "int3"
+     ],
+     [
+      "0x139d",
+      "int3"
+     ],
+     [
+      "0x139e",
+      "int3"
+     ],
+     [
+      "0x139f",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x1396"
+   },
+   {
+    "decoded": [
+     "0x13e6"
+    ],
+    "delta": 26,
+    "entry": "0x13a0",
+    "func": "internal/abi.(*IntArgRegBitmap).Set",
+    "gopclntab_end": "0x1400",
+    "objdump": [
+     [
+      "0x13e6",
+      "int3"
+     ],
+     [
+      "0x13e7",
+      "int3"
+     ],
+     [
+      "0x13e8",
+      "int3"
+     ],
+     [
+      "0x13e9",
+      "int3"
+     ],
+     [
+      "0x13ea",
+      "int3"
+     ],
+     [
+      "0x13eb",
+      "int3"
+     ],
+     [
+      "0x13ec",
+      "int3"
+     ],
+     [
+      "0x13ed",
+      "int3"
+     ],
+     [
+      "0x13ee",
+      "int3"
+     ],
+     [
+      "0x13ef",
+      "int3"
+     ],
+     [
+      "0x13f0",
+      "int3"
+     ],
+     [
+      "0x13f1",
+      "int3"
+     ],
+     [
+      "0x13f2",
+      "int3"
+     ],
+     [
+      "0x13f3",
+      "int3"
+     ],
+     [
+      "0x13f4",
+      "int3"
+     ],
+     [
+      "0x13f5",
+      "int3"
+     ],
+     [
+      "0x13f6",
+      "int3"
+     ],
+     [
+      "0x13f7",
+      "int3"
+     ],
+     [
+      "0x13f8",
+      "int3"
+     ],
+     [
+      "0x13f9",
+      "int3"
+     ],
+     [
+      "0x13fa",
+      "int3"
+     ],
+     [
+      "0x13fb",
+      "int3"
+     ],
+     [
+      "0x13fc",
+      "int3"
+     ],
+     [
+      "0x13fd",
+      "int3"
+     ],
+     [
+      "0x13fe",
+      "int3"
+     ],
+     [
+      "0x13ff",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x13e6"
+   },
+   {
+    "decoded": [
+     "0x143e"
+    ],
+    "delta": 2,
+    "entry": "0x1400",
+    "func": "internal/abi.(*IntArgRegBitmap).Get",
+    "gopclntab_end": "0x1440",
+    "objdump": [
+     [
+      "0x143e",
+      "int3"
+     ],
+     [
+      "0x143f",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x143e"
+   },
+   {
+    "decoded": [],
+    "delta": 2,
+    "entry": "0x1440",
+    "func": "internal/abi.BoundsDecode",
+    "gopclntab_end": "0x1520",
+    "objdump": [
+     [
+      "0x151e",
+      "int3"
+     ],
+     [
+      "0x151f",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x151e"
+   }
+  ],
+  "section_size": 3525201,
+  "sha256": "1267a1ab1f65e030b68e8ce3b3b73201594d042c0efa64b2ad85edabde689702",
+  "share_of_padding_bucket_pct": 76.4008,
+  "top_gaps": [
+   {
+    "decoded": 0,
+    "delta": 31,
+    "entry": "0x25c60",
+    "func": "runtime.(*mspan).typePointersOf",
+    "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "gopclntab_end": "0x25d00",
+    "objdump": [
+     [
+      "0x25ce1",
+      "int3"
+     ],
+     [
+      "0x25ce2",
+      "int3"
+     ],
+     [
+      "0x25ce3",
+      "int3"
+     ],
+     [
+      "0x25ce4",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x25ce1"
+   },
+   {
+    "decoded": 0,
+    "delta": 31,
+    "entry": "0x52b00",
+    "func": "runtime.badmorestackg0",
+    "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "gopclntab_end": "0x52b40",
+    "objdump": [
+     [
+      "0x52b21",
+      "int3"
+     ],
+     [
+      "0x52b22",
+      "int3"
+     ],
+     [
+      "0x52b23",
+      "int3"
+     ],
+     [
+      "0x52b24",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x52b21"
+   },
+   {
+    "decoded": 0,
+    "delta": 31,
+    "entry": "0x52b40",
+    "func": "runtime.badmorestackgsignal",
+    "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "gopclntab_end": "0x52b80",
+    "objdump": [
+     [
+      "0x52b61",
+      "int3"
+     ],
+     [
+      "0x52b62",
+      "int3"
+     ],
+     [
+      "0x52b63",
+      "int3"
+     ],
+     [
+      "0x52b64",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x52b61"
+   },
+   {
+    "decoded": 0,
+    "delta": 31,
+    "entry": "0x6b120",
+    "func": "runtime.badsystemstack",
+    "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "gopclntab_end": "0x6b160",
+    "objdump": [
+     [
+      "0x6b141",
+      "int3"
+     ],
+     [
+      "0x6b142",
+      "int3"
+     ],
+     [
+      "0x6b143",
+      "int3"
+     ],
+     [
+      "0x6b144",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x6b141"
+   },
+   {
+    "decoded": 0,
+    "delta": 31,
+    "entry": "0x8b1e0",
+    "func": "runtime.mcall",
+    "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "gopclntab_end": "0x8b260",
+    "objdump": [
+     [
+      "0x8b241",
+      "int3"
+     ],
+     [
+      "0x8b242",
+      "int3"
+     ],
+     [
+      "0x8b243",
+      "int3"
+     ],
+     [
+      "0x8b244",
+      "int3"
+     ]
+    ],
+    "pdata_end": "0x8b241"
+   }
+  ]
+ },
+ "per_function": {
+  "elf": {
+   "classes": {
+    "full": 35,
+    "partial": 8871,
+    "zero": 0
+   },
+   "file": "samples/m9/elf_medium_synth_go_stripped",
+   "funcs": 8906,
+   "m10_classes": {
+    "full": 3,
+    "partial": 846,
+    "zero": 8059
+   },
+   "matched_in_funcs": 748093,
+   "obj_insns_in_funcs": 923921,
+   "partial_pct_hist": {
+    "0.2": 1,
+    "1.4": 1,
+    "1.6": 1,
+    "1.9": 1,
+    "10.0": 32,
+    "3.1": 39,
+    "3.6": 2,
+    "4.4": 1,
+    "6.5": 44,
+    "6.7": 110,
+    "6.9": 117,
+    "7.1": 49,
+    "7.4": 57,
+    "7.7": 52,
+    "8.0": 5,
+    "8.3": 2,
+    "8.7": 8,
+    "9.1": 1,
+    "9.5": 1,
+    "9.7": 2
+   },
+   "partial_pct_max": 99.9,
+   "partial_pct_min": 0.2,
+   "range_convention": "gopclntab [entry, next_entry)",
+   "sum_matched_equals_coverage_numerator": 748093,
+   "zero_samples": []
+  },
+  "pe": {
+   "classes": {
+    "full": 32,
+    "partial": 8860,
+    "zero": 0
+   },
+   "file": "samples/m9/pe_medium_synth_go_stripped.exe",
+   "funcs": 8892,
+   "m10_classes": {
+    "full": 6388,
+    "partial": 764,
+    "zero": 0
+   },
+   "matched_in_funcs": 750109,
+   "obj_insns_in_funcs": 925598,
+   "partial_pct_hist": {
+    "0.2": 1,
+    "1.4": 1,
+    "1.6": 1,
+    "1.9": 1,
+    "10.0": 32,
+    "3.1": 39,
+    "3.6": 2,
+    "4.4": 1,
+    "6.5": 44,
+    "6.7": 108,
+    "6.9": 114,
+    "7.1": 49,
+    "7.4": 57,
+    "7.7": 49,
+    "8.0": 5,
+    "8.3": 5,
+    "8.7": 8,
+    "9.1": 2,
+    "9.5": 1,
+    "9.7": 2
+   },
+   "partial_pct_max": 99.9,
+   "partial_pct_min": 0.2,
+   "range_convention": "gopclntab [entry, next_entry)",
+   "sum_matched_equals_coverage_numerator": 750109,
+   "zero_samples": []
+  },
+  "pe_pdata_range": {
+   "classes": {
+    "full": 6388,
+    "partial": 764,
+    "zero": 0
+   },
+   "funcs": 7152,
+   "m10_classes": {
+    "full": 6388,
+    "partial": 764,
+    "zero": 0
+   },
+   "matched_in_funcs": 726289,
+   "note": "与 M10 的 7,152 行同口径；缝隙内 372 条不在任何 pdata 范围内",
+   "obj_insns_in_funcs": 751567,
+   "range_convention": ".pdata [BeginAddress, EndAddress)"
+  }
+ },
+ "reader_guide": [
+  {
+   "doc": "outputs/NUMBERS_LEDGER.md",
+   "see": "§0 指向 evidence_m13_ledger.json；§6 为 M13 下界判定表",
+   "status": "已更新为 M13 版；这是人读总账入口"
+  },
+  {
+   "doc": "work/evidence_m12_ledger.json",
+   "see": "仅其 still_lower_bounds 列表作废，改看 evidence_m13_ledger.json 的 lower_bounds",
+   "status": "覆盖率 / Go A/B / 逐函数 / PE 缝隙 数字仍有效（M13 回归逐条复核）"
+  },
+  {
+   "doc": "outputs/TASK_m11_gopclntab.md §8–§9",
+   "see": "TASK_m13_lowerbounds.md §2",
+   "status": "下界表已被 M13 取代（数字多数不变，状态需按 M13 判定读）"
+  },
+  {
+   "doc": "outputs/TASK_m10_closeout.md",
+   "see": "TASK_m13_lowerbounds.md §2.3",
+   "status": "switchcand 的 cc1/gdb 数字有效；「skipped」措辞作废（见 C2）"
+  },
+  {
+   "doc": "outputs/TASK_m9_closeout.md §3.2",
+   "see": "TASK_m13_lowerbounds.md §2.2",
+   "status": "VEX 206,541 与四分类计数有效；「全是数据」措辞作废（见 C1）"
+  },
+  {
+   "doc": "outputs/TASK_m8u3_strxref.md",
+   "see": "TASK_m13_lowerbounds.md §2.1",
+   "status": "文件不存在（只有 evidence_m8u3_numbers.log / verify.log）；5,039/276 有效"
+  },
+  {
+   "doc": "work/evidence_m11_coverage.json",
+   "see": "evidence_m13_recompute.json 的 go_domain",
+   "status": "26,652 / 26,702 三分法明细有效（M13 逐项复现）"
+  }
+ ],
+ "recompute": {
+  "generated": "2026-11-16 05:20:33",
+  "go_domain": {
+   "go_elf": {
+    "classes": {
+     "in_range_other": 26652,
+     "outside_range": 0,
+     "padding_all_cc90": 149225
+    },
+    "declared_ranges": 8906,
+    "elapsed_s": 8.52,
+    "match_old": true,
+    "objdump_instructions": 923970,
+    "objdump_only": 175877,
+    "old": {
+     "in_range_other": 26652,
+     "outside": 0,
+     "padding": 149225,
+     "total": 175877
+    },
+    "our_instructions": 748094,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\elf_medium_synth_go_stripped",
+    "ratio_in_range_other_to_section": 0.028845092373129,
+    "sample": "samples\\m9\\elf_medium_synth_go_stripped",
+    "samples": {
+     "in_range_other": [
+      [
+       "0x4017a3",
+       "add    rax,0x48",
+       "4883c048"
+      ],
+      [
+       "0x4017a7",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x4017a8",
+       "add    rax,0x40",
+       "4883c040"
+      ],
+      [
+       "0x4017ac",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x4017ad",
+       "add    rax,0x38",
+       "4883c038"
+      ],
+      [
+       "0x4017b1",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x4017b2",
+       "add    rax,0x50",
+       "4883c050"
+      ],
+      [
+       "0x4017b6",
+       "ret",
+       "c3"
+      ]
+     ],
+     "outside_range": [],
+     "padding_all_cc90": [
+      [
+       "0x40128f",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401290",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401291",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401292",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401293",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401294",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401295",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x401296",
+       "int3",
+       "cc"
+      ]
+     ]
+    },
+    "seeds": 8906,
+    "total": 175877
+   },
+   "go_pe": {
+    "classes": {
+     "in_range_other": 26702,
+     "outside_range": 40,
+     "padding_all_cc90": 148861
+    },
+    "declared_ranges": 8892,
+    "elapsed_s": 8.87,
+    "match_old": true,
+    "objdump_instructions": 925712,
+    "objdump_only": 175603,
+    "old": {
+     "in_range_other": 26702,
+     "outside": 40,
+     "padding": 148861,
+     "total": 175603
+    },
+    "our_instructions": 750110,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "ratio_in_range_other_to_section": 0.02884482430820817,
+    "sample": "samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "samples": {
+     "in_range_other": [
+      [
+       "0x1823",
+       "add    rax,0x48",
+       "4883c048"
+      ],
+      [
+       "0x1827",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x1828",
+       "add    rax,0x40",
+       "4883c040"
+      ],
+      [
+       "0x182c",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x182d",
+       "add    rax,0x38",
+       "4883c038"
+      ],
+      [
+       "0x1831",
+       "ret",
+       "c3"
+      ],
+      [
+       "0x1832",
+       "add    rax,0x50",
+       "4883c050"
+      ],
+      [
+       "0x1836",
+       "ret",
+       "c3"
+      ]
+     ],
+     "outside_range": [
+      [
+       "0x1000",
+       "jmp    QWORD PTR [rax]",
+       "ff20"
+      ],
+      [
+       "0x1002",
+       "rex.RXB outs dx,DWORD PTR [rsi]",
+       "476f"
+      ],
+      [
+       "0x1004",
+       "and    BYTE PTR [rdx+0x75],ah",
+       "206275"
+      ],
+      [
+       "0x1007",
+       "imul   ebp,DWORD PTR [rsp+riz*2+0x20],0x203a4449",
+       "696c642049443a20"
+      ],
+      [
+       "0x100f",
+       "and    dh,BYTE PTR [rsi+0x48]",
+       "227648"
+      ],
+      [
+       "0x1012",
+       "outs   dx,DWORD PTR [rsi]",
+       "6f"
+      ],
+      [
+       "0x1013",
+       "xor    al,0x7a",
+       "347a"
+      ],
+      [
+       "0x1015",
+       "pop    rcx",
+       "59"
+      ]
+     ],
+     "padding_all_cc90": [
+      [
+       "0x1067",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x1068",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x1069",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106a",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106b",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106c",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106d",
+       "int3",
+       "cc"
+      ],
+      [
+       "0x106e",
+       "int3",
+       "cc"
+      ]
+     ]
+    },
+    "seeds": 8892,
+    "total": 175603
+   }
+  },
+  "objdump": "GNU objdump (GNU Binutils) 2.47.20260726",
+  "old": {
+   "go_domain": {
+    "go_elf": {
+     "in_range_other": 26652,
+     "outside": 0,
+     "padding": 149225,
+     "total": 175877
+    },
+    "go_pe": {
+     "in_range_other": 26702,
+     "outside": 40,
+     "padding": 148861,
+     "total": 175603
+    }
+   },
+   "strxref": {
+    "undecoded_hits": 5039,
+    "undecoded_strings": 276
+   },
+   "vex": {
+    "go_elf": {
+     "abstain": 16332,
+     "lead": 20459
+    },
+    "go_pe": {
+     "abstain": 16179,
+     "lead": 20299
+    }
+   }
+  },
+  "python": "3.14.0",
+  "strxref": {
+   "hello_go_exe": {
+    "delta_sites": 0,
+    "delta_undecoded_hits": 0,
+    "delta_undecoded_strings": 0,
+    "elapsed_s": 17.87,
+    "off": {
+     "fails": [],
+     "instructions": 143525,
+     "sites": 2,
+     "strings": 3172,
+     "undecoded_hits": 0,
+     "undecoded_strings": 0,
+     "unlifted": 4885,
+     "unlifted_hits": 0
+    },
+    "on": {
+     "fails": [],
+     "instructions": 147351,
+     "sites": 2,
+     "strings": 3172,
+     "undecoded_hits": 0,
+     "undecoded_strings": 0,
+     "unlifted": 5496,
+     "unlifted_hits": 0
+    },
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work\\samples\\hello_go.exe",
+    "sample": "samples\\hello_go.exe"
+   },
+   "hello_go_linux": {
+    "delta_sites": 0,
+    "delta_undecoded_hits": 0,
+    "delta_undecoded_strings": 0,
+    "elapsed_s": 7.95,
+    "off": {
+     "fails": [],
+     "instructions": 138224,
+     "sites": 2,
+     "strings": 7,
+     "undecoded_hits": 0,
+     "undecoded_strings": 0,
+     "unlifted": 5200,
+     "unlifted_hits": 0
+    },
+    "on": {
+     "fails": [],
+     "instructions": 138292,
+     "sites": 2,
+     "strings": 7,
+     "undecoded_hits": 0,
+     "undecoded_strings": 0,
+     "unlifted": 5200,
+     "unlifted_hits": 0
+    },
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m2-task-card\\work\\samples\\hello_go_linux",
+    "sample": "samples\\hello_go_linux"
+   }
+  },
+  "switchcand": {
+   "gdb": {
+    "budget": {
+     "analysis_coverage": 1.0,
+     "cost_model": "len(insns)+len(blocks)，与机器速度无关",
+     "functions_analyzed": 2081,
+     "functions_skipped_budget": 0,
+     "max_functions": null,
+     "scope_note": "stats 中候选/升格比率的分母只含 functions_analyzed；skipped 单列，不当作“无候选”，也不并入确定集",
+     "skipped_detail": [],
+     "step_budget": null,
+     "steps_used": 198175
+    },
+    "elapsed_s": 12.97,
+    "functions_with_indirect_jmp": 2081,
+    "n_function_reports": 2081,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\pe_medium_gdb181.exe",
+    "sample": "samples\\m9\\pe_medium_gdb181.exe",
+    "stats": {
+     "blocked": 0,
+     "candidates": 317,
+     "high": 200,
+     "low": 109,
+     "medium": 8,
+     "new_blocks": 17850,
+     "new_insns": 97478,
+     "not_checked": 317,
+     "promoted": 0,
+     "rejected": 2,
+     "unmatched": 2025
+    }
+   },
+   "go_elf": {
+    "budget": {
+     "analysis_coverage": 1.0,
+     "cost_model": "len(insns)+len(blocks)，与机器速度无关",
+     "functions_analyzed": 118,
+     "functions_skipped_budget": 0,
+     "max_functions": null,
+     "scope_note": "stats 中候选/升格比率的分母只含 functions_analyzed；skipped 单列，不当作“无候选”，也不并入确定集",
+     "skipped_detail": [],
+     "step_budget": null,
+     "steps_used": 14474
+    },
+    "elapsed_s": 4.58,
+    "functions_with_indirect_jmp": 118,
+    "n_function_reports": 118,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\elf_medium_synth_go_stripped",
+    "sample": "samples\\m9\\elf_medium_synth_go_stripped",
+    "stats": {
+     "blocked": 0,
+     "candidates": 0,
+     "high": 0,
+     "low": 0,
+     "medium": 0,
+     "new_blocks": 0,
+     "new_insns": 0,
+     "not_checked": 0,
+     "promoted": 0,
+     "rejected": 0,
+     "unmatched": 158
+    }
+   },
+   "go_pe": {
+    "budget": {
+     "analysis_coverage": 1.0,
+     "cost_model": "len(insns)+len(blocks)，与机器速度无关",
+     "functions_analyzed": 118,
+     "functions_skipped_budget": 0,
+     "max_functions": null,
+     "scope_note": "stats 中候选/升格比率的分母只含 functions_analyzed；skipped 单列，不当作“无候选”，也不并入确定集",
+     "skipped_detail": [],
+     "step_budget": null,
+     "steps_used": 14454
+    },
+    "elapsed_s": 4.98,
+    "functions_with_indirect_jmp": 118,
+    "n_function_reports": 118,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "sample": "samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "stats": {
+     "blocked": 0,
+     "candidates": 0,
+     "high": 0,
+     "low": 0,
+     "medium": 0,
+     "new_blocks": 0,
+     "new_insns": 0,
+     "not_checked": 0,
+     "promoted": 0,
+     "rejected": 0,
+     "unmatched": 157
+    }
+   }
+  },
+  "vex": {
+   "go_elf": {
+    "abstain_addr_in_new_decoded_set": [],
+    "abstain_in_declared_domain": 16332,
+    "abstain_sites": 16332,
+    "counts": {
+     "data_not_instruction": 16332
+    },
+    "data_not_instruction": 16332,
+    "decoded": 4126,
+    "decoded_len_differs": 1,
+    "decoder_defect": 0,
+    "elapsed_s": 8.45,
+    "illegal_encoding": 0,
+    "lead_bytes": 20459,
+    "match_old": true,
+    "n_abstain_addr_in_new_decoded_set": 0,
+    "objdump_starts_in_declared_domain": 923921,
+    "old": {
+     "abstain": 16332,
+     "lead": 20459
+    },
+    "other_abstains": 0,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\elf_medium_synth_go_stripped",
+    "sample": "samples\\m9\\elf_medium_synth_go_stripped",
+    "section_bytes": 3511473
+   },
+   "go_pe": {
+    "abstain_addr_in_new_decoded_set": [],
+    "abstain_in_declared_domain": 16177,
+    "abstain_sites": 16179,
+    "counts": {
+     "data_not_instruction": 16179
+    },
+    "data_not_instruction": 16179,
+    "decoded": 4119,
+    "decoded_len_differs": 1,
+    "decoder_defect": 0,
+    "elapsed_s": 8.92,
+    "illegal_encoding": 0,
+    "lead_bytes": 20299,
+    "match_old": true,
+    "n_abstain_addr_in_new_decoded_set": 0,
+    "objdump_starts_in_declared_domain": 925598,
+    "old": {
+     "abstain": 16179,
+     "lead": 20299
+    },
+    "other_abstains": 0,
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "sample": "samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "section_bytes": 3525201
+   }
+  }
+ }
+}

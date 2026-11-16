@@ -1,0 +1,448 @@
+{
+  "go_elf": {
+    "status": "ok",
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\elf_medium_synth_go_stripped",
+    "declared_ranges": 8906,
+    "objdump_instructions": 923970,
+    "ours_decoded": 748094,
+    "classes": {
+      "padding_all_cc90": 149225,
+      "in_range_other": 26652,
+      "outside_range": 0
+    },
+    "in_range_other_total": 26652,
+    "mnem_top": [
+      [
+        "mov",
+        10481
+      ],
+      [
+        "lea",
+        1960
+      ],
+      [
+        "call",
+        1848
+      ],
+      [
+        "jmp",
+        1533
+      ],
+      [
+        "cmp",
+        1494
+      ],
+      [
+        "nop",
+        1067
+      ],
+      [
+        "ret",
+        1061
+      ],
+      [
+        "xor",
+        838
+      ],
+      [
+        "add",
+        790
+      ],
+      [
+        "jne",
+        756
+      ],
+      [
+        "pop",
+        539
+      ],
+      [
+        "je",
+        506
+      ],
+      [
+        "test",
+        495
+      ],
+      [
+        "movzx",
+        330
+      ],
+      [
+        "xchg",
+        326
+      ]
+    ],
+    "nop_like": 1067,
+    "nop_like_share": 0.04003451898544199,
+    "multi_byte_nop": 1067,
+    "nop_samples": [
+      [
+        4202620,
+        4,
+        "nop",
+        "0f1f4000",
+        "nop    DWORD PTR [rax+0x0]"
+      ],
+      [
+        4203643,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4224091,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4252306,
+        9,
+        "nop",
+        "660f1f840000000000",
+        "nop    WORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4252315,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4252968,
+        8,
+        "nop",
+        "0f1f840000000000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4254220,
+        4,
+        "nop",
+        "0f1f4000",
+        "nop    DWORD PTR [rax+0x0]"
+      ],
+      [
+        4255419,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4256667,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        4265116,
+        4,
+        "nop",
+        "0f1f4000",
+        "nop    DWORD PTR [rax+0x0]"
+      ]
+    ],
+    "other_samples": [
+      [
+        4200355,
+        4,
+        "add",
+        "4883c048",
+        "add    rax,0x48"
+      ],
+      [
+        4200359,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        4200360,
+        4,
+        "add",
+        "4883c040",
+        "add    rax,0x40"
+      ],
+      [
+        4200364,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        4200365,
+        4,
+        "add",
+        "4883c038",
+        "add    rax,0x38"
+      ],
+      [
+        4200369,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        4200370,
+        4,
+        "add",
+        "4883c050",
+        "add    rax,0x50"
+      ],
+      [
+        4200374,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        4200375,
+        6,
+        "add",
+        "480588000000",
+        "add    rax,0x88"
+      ],
+      [
+        4200381,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ]
+    ],
+    "elapsed_s": 8.32
+  },
+  "go_pe": {
+    "status": "ok",
+    "path": "d:\\数据\\下载\\逆向学习工作体系_2026-11-15\\2026-11-15\\m3-task-card\\work\\samples\\m9\\pe_medium_synth_go_stripped.exe",
+    "declared_ranges": 8892,
+    "objdump_instructions": 925712,
+    "ours_decoded": 750110,
+    "classes": {
+      "padding_all_cc90": 148861,
+      "in_range_other": 26702,
+      "outside_range": 40
+    },
+    "in_range_other_total": 26702,
+    "mnem_top": [
+      [
+        "mov",
+        10484
+      ],
+      [
+        "lea",
+        1973
+      ],
+      [
+        "call",
+        1845
+      ],
+      [
+        "jmp",
+        1534
+      ],
+      [
+        "cmp",
+        1505
+      ],
+      [
+        "nop",
+        1066
+      ],
+      [
+        "ret",
+        1056
+      ],
+      [
+        "xor",
+        839
+      ],
+      [
+        "add",
+        791
+      ],
+      [
+        "jne",
+        758
+      ],
+      [
+        "pop",
+        534
+      ],
+      [
+        "je",
+        507
+      ],
+      [
+        "test",
+        495
+      ],
+      [
+        "movzx",
+        331
+      ],
+      [
+        "xchg",
+        330
+      ]
+    ],
+    "nop_like": 1066,
+    "nop_like_share": 0.03992210321324245,
+    "multi_byte_nop": 1066,
+    "nop_samples": [
+      [
+        8444,
+        4,
+        "nop",
+        "0f1f4000",
+        "nop    DWORD PTR [rax+0x0]"
+      ],
+      [
+        9467,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        29947,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        58066,
+        9,
+        "nop",
+        "660f1f840000000000",
+        "nop    WORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        58075,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        58664,
+        8,
+        "nop",
+        "0f1f840000000000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        59916,
+        4,
+        "nop",
+        "0f1f4000",
+        "nop    DWORD PTR [rax+0x0]"
+      ],
+      [
+        66235,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        67483,
+        5,
+        "nop",
+        "0f1f440000",
+        "nop    DWORD PTR [rax+rax*1+0x0]"
+      ],
+      [
+        75932,
+        4,
+        "nop",
+        "0f1f4000",
+        "nop    DWORD PTR [rax+0x0]"
+      ]
+    ],
+    "other_samples": [
+      [
+        6179,
+        4,
+        "add",
+        "4883c048",
+        "add    rax,0x48"
+      ],
+      [
+        6183,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        6184,
+        4,
+        "add",
+        "4883c040",
+        "add    rax,0x40"
+      ],
+      [
+        6188,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        6189,
+        4,
+        "add",
+        "4883c038",
+        "add    rax,0x38"
+      ],
+      [
+        6193,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        6194,
+        4,
+        "add",
+        "4883c050",
+        "add    rax,0x50"
+      ],
+      [
+        6198,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ],
+      [
+        6199,
+        6,
+        "add",
+        "480588000000",
+        "add    rax,0x88"
+      ],
+      [
+        6205,
+        1,
+        "ret",
+        "c3",
+        "ret"
+      ]
+    ],
+    "elapsed_s": 9.43
+  }
+}

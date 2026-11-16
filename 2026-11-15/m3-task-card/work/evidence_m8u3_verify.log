@@ -1,0 +1,27 @@
+== 分母（先分母后结果）：18 样本 · 白名单只读数据节 ==
+  dyn_pie                      字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 79.1%
+  dyn_nopie                    字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 68.0%
+  dyn_static                   字符串 1076 (u432/m144/n500)  引用点 1134 (rip1134/imm  0)  无归属  0  suffix 48  unlifted 8853  对账 0/1134  覆盖 80.2%
+  dyn_execstack                字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 80.3%
+  dyn_norelro                  字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 69.9%
+  bin_ls.elf                   字符串  420 (u 78/m 15/n327)  引用点  123 (rip 123/imm  0)  无归属  0  suffix 23  unlifted  538  对账 0/123  覆盖 74.2%
+  hello_go_linux               字符串    7 (u  2/m  0/n  5)  引用点    2 (rip   2/imm  0)  无归属  0  suffix  0  unlifted 5200  对账 0/2  覆盖 91.9%
+  busybox-1.35.0-musl-x86_64   字符串 5825 (u  1/m  0/n5824)  引用点    1 (rip   0/imm  1)  无归属  0  suffix  0  unlifted    5  对账 0/0  覆盖 0.1%
+  upx_dyn_pie                  字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  upx_cli-64.exe               字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  upx_putty-64bit.exe          字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  cli-64.exe                   字符串   89 (u  1/m  0/n 88)  引用点    1 (rip   1/imm  0)  无归属  0  suffix  2  unlifted   23  对账 0/1  覆盖 95.2%
+  minipe.exe                   字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.2%
+  minidll.dll                  字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 1.0%
+  minipe_fakerich.exe          字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  hello_go.exe                 字符串 3172 (u  2/m  0/n3170)  引用点    2 (rip   2/imm  0)  无归属  0  suffix  0  unlifted 4885  对账 0/2  覆盖 89.1%
+  hello_rust.exe               字符串  158 (u 29/m  9/n120)  引用点   80 (rip  80/imm  0)  无归属  0  suffix 107  unlifted  821  对账 0/80  覆盖 89.6%
+  putty-64bit.exe              字符串 3082 (u1721/m266/n1095)  引用点 2389 (rip2387/imm  2)  无归属  0  suffix 376  unlifted 9363  对账 0/2349  覆盖 88.4%
+== 合计 ==
+  字符串 13829 = unique 2266 + multi 434 + no_site 11129
+  no_site 归因: 跨界 262 / 未解出 0 / 间接 514 / 无证据 10353
+  引用点 3732 = rip 3729 + imm 3；无函数归属 0；suffix 556
+  对账: 交集 0 / 函数域核对 3691
+  代码层覆盖缺口（外部 objdump 判定，模块不可知）：未解码代码里的引用点 5039 个，涉及字符串 276 条；表达式层 unlifted 命中 19 个
+
+OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突

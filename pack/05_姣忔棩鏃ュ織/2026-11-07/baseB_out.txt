@@ -1,0 +1,12 @@
+Machine:    AMD64
+Magic:      0x20B (PE32+)
+EntryPoint: 0x1000 (RVA)
+ImageBase:  0x140000000
+Subsystem:  Console
+SizeOfImage: 0x3000  SizeOfHeaders: 0x200
+ImportDir:  RVA 0x2000 size 0x50
+Sections (2):
+  .text    VA=0x00001000 VSize=0x100 RawPtr=0x400 RawSize=0x200
+  .idata   VA=0x00002000 VSize=0x140 RawPtr=0x600 RawSize=0x200
+Imports:
+  KERNEL32.dll: ExitProcess

@@ -1,0 +1,24 @@
+==========================================================================
+M3 IAT 验收（真值 map_ground_truth.json）
+==========================================================================
+
+[unpacked] 未加壳
+  cli-64.exe                                     decode 278格 失配0  repair slots=64  regions=10 区间等=10 unresolved=0   幂等=True 原样本不动=True
+  minidll.dll                                    decode   1格 失配0  repair slots=0   regions=0 区间等=0 unresolved=0   幂等=None 原样本不动=None
+  minipe.exe                                     decode   8格 失配0  repair slots=1   regions=1 区间等=1 unresolved=0   幂等=True 原样本不动=True
+  minipe_fakerich.exe                            decode   0格 失配0  repair slots=0   regions=0 区间等=0 unresolved=0   幂等=None 原样本不动=None  abstain=畸形导入目录（真值侧忽略）
+  hello_go.exe                                   decode 143格 失配0  repair slots=47  regions=1 区间等=1 unresolved=0   幂等=True 原样本不动=True
+  hello_rust.exe                                 decode 362格 失配0  repair slots=85  regions=10 区间等=10 unresolved=0   幂等=True 原样本不动=True
+  putty-64bit.exe                                decode 1410格 失配0  repair slots=348 regions=8 区间等=8 unresolved=0   幂等=True 原样本不动=True
+  小计：slots 545，区间逐字节全等 30/30
+
+[packed] 加壳（单列，不计入未加壳成功率）
+  upx_cli-64.exe                                 decode  74格 失配0  repair slots=13  regions=10 区间等=0 unresolved=13  幂等=True 原样本不动=True
+  upx_putty-64bit.exe                            decode  62格 失配0  repair slots=11  regions=8 区间等=0 unresolved=11  幂等=True 原样本不动=True
+  小计：slots 24，区间逐字节全等 0/18
+  说明：加壳组「区间等」预期为 0——按纪律一个字节都不写，伪指针原样保留；判定看 unresolved==slots 且 wrote_any=False
+
+[反例] 篡改 1 slot → status=unresolved bytes_untouched=True reason=槽值 0x41414141 < ImageBase 0x140000000，不像加载态地址
+
+结论：失配 0 项
+VERDICT: PASS

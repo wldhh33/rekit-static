@@ -1,0 +1,75 @@
+== 权威期望（readelf/pefile 现场采集）==
+  type=DYN entry=0x6760 phdrs=14 sections=30 arch=x86-64
+  nx=enabled relro=full pie=yes interp=/lib64/ld-linux-x86-64.so.2
+  needed=['libselinux.so.1', 'libcap.so.2', 'libc.so.6']
+  段类型序列(14): ['PHDR', 'INTERP', 'LOAD', 'LOAD', 'LOAD', 'LOAD', 'DYNAMIC', 'NOTE', 'NOTE', 'NOTE', 'GNU_PROPERTY', 'GNU_EH_FRAME', 'GNU_STACK', 'GNU_RELRO']
+  pefile 节表: ['.text', '.edata']
+
+== E1 协议握手 ==
+[PASS] E1.1 protocolVersion 回显 2025-06-18  | '2025-06-18'
+[PASS] E1.2 capabilities.tools 存在
+[PASS] E1.3 serverInfo.name == rekit
+[PASS] E1.4 initialized 通知零响应（下一响应 id=102）
+[PASS] E1.5 未知客户端版本回退服务器最新版  | '2025-06-18'
+
+== E2 工具清单 ==
+[PASS] E2.1 工具数 ≥ 2  | ['rekit_info', 'rekit_map']
+[PASS] E2.2 rekit_info description 非空
+[PASS] E2.3 rekit_info inputSchema.type=object 且 required 含 path
+[PASS] E2.2 rekit_map description 非空
+[PASS] E2.3 rekit_map inputSchema.type=object 且 required 含 path
+
+== E3 rekit_info(bin_ls.elf) × readelf ==
+[PASS] E3.0 工具调用无错误  | {
+  "format": "ELF",
+  "arch": "x86-64",
+  "bits": 64,
+  "endian": "little",
+  "type": "DYN",
+  "entry": "0x6760",
+  "phdrs": 14,
+  "sections": 30,
+  "security": {
+    "nx": "enabled",
+    "relro": "f
+[PASS] E3.1 type == DYN  | 'DYN'
+[PASS] E3.2 entry == 0x6760  | '0x6760'
+[PASS] E3.3 phdrs == 14  | 14
+[PASS] E3.4 sections == 30  | 30
+[PASS] E3.5 arch == x86-64  | 'x86-64'
+[PASS] E3.6 nx == enabled  | 'enabled'
+[PASS] E3.7 relro == full  | 'full'
+[PASS] E3.8 pie == yes  | 'yes'
+[PASS] E3.9 needed 全等  | ['libselinux.so.1', 'libcap.so.2', 'libc.so.6']
+[PASS] E3.10 interpreter == /lib64/ld-linux-x86-64.so.2  | '/lib64/ld-linux-x86-64.so.2'
+
+== E4 rekit_map × readelf/pefile ==
+[PASS] E4.0 segments 调用无错误  | {
+  "format": "ELF",
+  "kind": "segments",
+  "count": 14,
+  "entries": [
+    {
+      "index": 0,
+      "type": "PHDR",
+      "flags": "R",
+      "vaddr": "0x40",
+      "offset": "0x40",
+      "filesz"
+[PASS] E4.1 段数 == 14  | 14
+[PASS] E4.2 段类型序列全等  | ['PHDR', 'INTERP', 'LOAD', 'LOAD', 'LOAD', 'LOAD', 'DYNAMIC', 'NOTE', 'NOTE', 'NOTE', 'GNU_PROPERTY', 'GNU_EH_FRAME', 'GNU_STACK', 'GNU_RELRO'] vs ['PHDR', 'INTERP', 'LOAD', 'LOAD', 'LOAD', 'LOAD', 'DYNAMIC', 'NOTE', 'NOTE', 'NOTE', 'GNU_PROPERTY', 'GNU_EH_FRAME', 'GNU_STACK', 'GNU_RELRO']
+[PASS] E4.3 段 flags 序列全等(readelf 风格)  | ['R', 'R', 'R', 'RE', 'R', 'RW', 'RW', 'R', 'R', 'R', 'R', 'R', 'RW', 'R'] vs ['R', 'R', 'R', 'RE', 'R', 'RW', 'RW', 'R', 'R', 'R', 'R', 'R', 'RW', 'R']
+[PASS] E4.4 节数 == 30 (readelf -SW)  | 30
+[PASS] E4.5 PE 节名序列 == pefile (['.text', '.edata'])  | ['.text', '.edata']
+[PASS] E4.6 kind 缺省为 segments
+
+== E5 负路径 ==
+[PASS] E5.1 不存在路径 → isError  | 文件不存在: /no/such/file
+[PASS] E5.2 文本文件 → isError  | 无法识别的格式（非 ELF / 非 PE）: <旧项目根>/artifacts/2026-11-15/verify_mcp.py
+[PASS] E5.3 缺 path 参数 → isError  | 缺少必需参数 path
+[PASS] E5.4 非法 kind → isError  | kind 必须是 segments 或 sections，收到: 'bogus'
+[PASS] E5.5 连续错误后连接存活且结果正确
+[PASS] E5.6 未知方法 → -32601
+[PASS] E5.7 未知通知零响应 + ping 正常
+
+== 汇总: 35/35 PASS ==

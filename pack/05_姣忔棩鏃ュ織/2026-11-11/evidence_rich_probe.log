@@ -1,0 +1,23 @@
+== 样本探测（Rich 限于 DOS stub 区，防 .NET 元数据误匹配）==
+  cli-64.exe                               e_lfanew=0x0100 Rich@0xe8
+  gui-64.exe                               e_lfanew=0x0100 Rich@0xe8
+  cli-32.exe                               e_lfanew=0x0100 Rich@0xe8
+  minipe.exe                               e_lfanew=0x0040 Rich@NONE
+  Aspose.Words.dll                         e_lfanew=0x0080 Rich@NONE
+  Autofac.dll                              e_lfanew=0x0080 Rich@NONE
+  Microsoft.Extensions.DependencyInjection.Abstractions.dll e_lfanew=0x0080 Rich@NONE
+
+== pefile 权威输出：cli-64.exe Rich 头 ==
+key(checksum): 0x31a563a3 | values: 22 dwords
+clear_data[0:8] = 44616e5300000000 (DanS 536e6144 + pad)
+comp.id 对数: 9
+  id=0x01017ea4  count=2
+  id=0x00fd7ea4  count=4
+  id=0x01057ea4  count=19
+  id=0x01047ea4  count=10
+  id=0x01037ea4  count=3
+  id=0x0101784b  count=3
+  id=0x00010000  count=69
+  id=0x01047f14  count=1
+  id=0x00ff7f14  count=1
+尾部: values[-2]=0x1027f14 (Rich) values[-1]=0x1 (key)

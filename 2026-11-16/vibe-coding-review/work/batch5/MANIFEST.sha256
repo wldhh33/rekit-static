@@ -1,0 +1,9 @@
+405dbb9181c92bbbdf445e7dd9e1a29c5a6c10ba52cc03ddf3d9877f1b2d9efa  pack\rules.json
+b325773c63952c16ecb11ea6bcd26bf7dac267179ba69343dbd94ad7aa667838  pack\02_规则库\规则库_R33-R119.md
+210141972f48bac3b23908021f5e65b22127e98ca13dd8c8714bcbbea048fab2  2026-11-16\vibe-coding-review\work\batch4\canonical_coverage.json
+20c4e87d0cb1d0b65928b5212120a6135e00f30fe142d16ca2f0bc85426d5dfb  2026-11-16\vibe-coding-review\work\batch4\human_decisions.md
+2339799ce0887c80a390b3500f7c2c998c3516ca6cfad2e3dd95a689c2de7f66  2026-11-16\vibe-coding-review\work\batch5\RULE_ADJUDICATIONS.md
+a53658d985b5aa2fa99f1745c2016dc8584234242f5b87e811bef4bb29ec34f4  2026-11-16\vibe-coding-review\work\batch5\apply_adjudications.py
+4247e4f91edd40f23f6200c2ff93f54f2b9f6bab7223bd6a440c5e206d33481c  2026-11-16\vibe-coding-review\work\batch5\patch_authority.py
+0d383258e3f71940a08f1d9d1cfc010cb7ac2e0ed27b40f6673dcdfa1aa49dda  2026-11-16\vibe-coding-review\work\batch5\sync_coverage.py
+5427ee93ec7e423b52ddce3ae9b87a84d01f3c0c28b8491d38200f818d2051c3  2026-11-16\vibe-coding-review\work\batch5\check_r95_manifest.py

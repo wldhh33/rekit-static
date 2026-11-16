@@ -1,0 +1,21 @@
+verify_c4_alignment.py: exit=0
+verify_callfacts.py: exit=0
+verify_callgraph.py: exit=0
+verify_coverage.py: exit=0
+verify_datarefs.py: exit=0
+verify_disasm.py: exit=0
+verify_expr.py: exit=0
+verify_fingerprint.py: exit=0
+verify_funcreport.py: exit=0
+verify_gopclntab.py: exit=0
+verify_iat.py: exit=0
+verify_map.py: exit=0
+verify_paramdecl.py: exit=0
+verify_recdesc.py: exit=0
+verify_sitejoin.py: exit=0
+verify_struct.py: exit=0
+verify_strxref.py: exit=0
+verify_switchcand.py: exit=0
+verify_vexaudit.py: exit=0
+
+FAILED=0 []

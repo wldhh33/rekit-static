@@ -1,0 +1,97 @@
+# AGENTS.md · rekit 项目工作入口
+
+> 本文件是任何 AI 会话进入本项目的**第一份必读**。目标：让新会话在 5 分钟内知道"现在在哪、下一步做什么、什么不能做"，而不必加载 226 KB 历史文档。
+> 维护规则：只写稳定事实与硬约束；进度与半成品写在 `2026-11-15\m3-task-card\work\HANDOFF.md`。本文件 ≤150 行。
+
+## 1. 这是什么
+
+- `rekit`：纯 Python 标准库实现的二进制静态分诊/分析工具（PE / ELF / .NET），提供 CLI、Python 模块、MCP 三种用法。
+- 项目性质：每日逆向学习的**载体**。当天没有回流成 `rekit` 模块/规则/测试，当天不算达标。
+- 规模（2026-11-16 实测）：25 个模块 / 16,939 行；25 个测试文件 / 6,386 行；21 个独立验证脚本 / 8,343 行。
+
+## 2. 硬约束（不可协商）
+
+1. **结论必须可核**：没有证据链的结论不写；不确定就写不确定。
+2. **证据必须能复跑**：每个数字都要有命令、样本集、口径；推算值不得进入正式总账。
+3. **不许为好看的数字放宽判据**：阈值、分母、口径一律不得迁就结果。
+4. **不改原始样本**：写回必须生成新文件，二次执行幂等，并用 sha256 证明。
+
+## 3. 当前状态与下一条命令
+
+- 进度、未完成清单、已否决方案、待确认问题：**以 `work\HANDOFF.md` 为准**（每次会话结束必须更新）。
+- 会话开工第一条命令：
+
+```powershell
+python "pack\tools\status.py"
+```
+
+## 4. 常用命令
+
+| 目的 | 命令 |
+|---|---|
+| 状态摘要（≤20 行） | `python pack\tools\status.py` |
+| 全量门禁（21 套 verify + pytest） | `python pack\tools\verify_gate.py --run`（`--list` 只看计划） |
+| 全量单测 | `python -m pytest "2026-11-15\m3-task-card\work\tests" -q` |
+| 单个验证脚本 | `python "2026-11-15\m3-task-card\work\tests\verify_disasm.py" --all` |
+| 指纹混淆矩阵 | `python "...\tests\verify_fingerprint.py" --all --matrix` |
+| 运行 CLI | `python -m rekit.cli <file>`（在 `rekit` 的父目录下） |
+
+验证结果统一落在 `work\verification\<run_id>\`（每套一个日志 + `summary.json`，`latest\` 为副本）。
+
+注意：21 个验证脚本的参数面不统一（8 个无参数，13 个 1–6 个参数），调用前先 `--help` 或读脚本头部。
+
+## 5. 目录地图（真实路径）
+
+根目录：`d:\数据\下载\逆向学习工作体系_2026-11-15`
+
+| 逻辑名 | 真实路径 | 说明 |
+|---|---|---|
+| 项目包 | `pack\` | git 预期的仓库根（当前尚未初始化） |
+| 源码 | `pack\04_rekit椤圭洰婧愮爜\rekit\` | 目录名是 mojibake，见 `pack\PATH_MAP.md` |
+| 测试/验证 | `pack\04_rekit椤圭洰婧愮爜\tests\` | 25 个 `test_*.py` + 21 个 `verify_*.py` + fixtures |
+| 方法论 | `pack\01_方法论文档\` | 2026-11-16 从 `tmp\pack` 恢复 |
+| 规则库（旧） | `pack\02_规则库\` | R01–R32，2026-11-16 恢复；R33–R119 只有日志出处 |
+| 规则登记（机器） | `pack\rules.json` | R01–R119 逐条摘录 + 出处 + 互证状态；缺口分析见 `2026-11-16\vibe-coding-review\work\batch3\rules_gap_report.md` |
+| 数字总账（人读） | `work\outputs\NUMBERS_LEDGER.md` | **唯一权威是 `work\evidence_numbers_ledger.json`**（M13–M18，`ledger_check.py --check` 硬校验）；`evidence_m13_ledger.json` 已降级为历史源，冲突以新 JSON 为准 |
+| 章程/进度 | `pack\03_璺\ue21c嚎鍥句笌绔犵▼\` | mojibake 目录；内含 CHARTER/PROGRESS/CHANGELOG/RE-ROADMAP |
+| 每日日志 | `pack\05_姣忔棩鏃ュ織\` | 2026-11-06 ~ 11-15 |
+| 日报 | `pack\06_鏃ユ姤docx\` | 10 期 docx |
+| 工作目录 | `2026-11-15\m3-task-card\work\` | 证据、样本、任务卡、`pack03` 文档的**权威副本** |
+| 工作目录里的源码 | `work\rekit`、`work\tests` | 指向 `pack` 的目录联接（junction），不是副本 |
+| 样本 | `work\samples\` | 约 99 MB；`tests\samples`、`tests\fixtures` 另有小样本 |
+
+`pack` 与 `work\pack03` 的 CHARTER/PROGRESS/CHANGELOG：**内容相同**，编辑时先确认改哪一份，改完同步另一份。
+
+## 6. 环境怪癖（已知，不是 bug）
+
+- 本机 Python 3.14；`rekit` 运行时纯标准库。
+- GNU binutils 2.47 在 `2026-11-15\m2-task-card\work\tools\binutils-2.47\`，未加入 PATH，测试脚本内临时注入。
+- objdump 打开含中文的绝对路径会报 `Illegal byte sequence`：先设 `LC_ALL=C`。
+- 系统策略拦截 MSI/安装器；外部工具只用免安装 zip，单包 <500 MB，来源与许可须清楚。
+- `cli-64.exe` 出处不明，**不可再分发**，只在本机测试。
+- `pack` 下 4 个中文目录名是 GBK/UTF-8 混淆（磁盘名已损坏），不要按 README 里的中文名直接 `cd`。
+- Windows 终端显示中文可能乱码；路径操作优先用 Python，不要依赖 PowerShell 的字符串编码。
+
+## 7. 禁止事项
+
+- 不得修改任何已公布数字的口径来"对齐结果"；发现偏低按 R72 就地标注。
+- 不得删除证据文件；失败日志改名保留。
+- 不得把推算值（estimated）写进 CHARTER/PROGRESS/README/NUMBERS_LEDGER。
+- 不得在被测模块与校验器之间共用同一段判据实现（R73）。
+- 不得让对拍分母为 0 却判 PASS（R119）。
+- 不得并行跑多个会写同一日志的验证脚本。
+- 不得复制整个 `work` 目录来"开分支"（会复制 99 MB 样本并制造第 N 份副本）。
+- **本工作树另有会话在改 `rekit` 源码**：其他会话只能读、不能写 `rekit\*.py`；需要改源码时写进 `HANDOFF.md` 的"未完成清单"，由源码会话执行。
+
+## 8. 证据与提交约定
+
+- 证据命名：`work\evidence_<milestone>_<suite>.<log|json>`；全量验证结果放 `work\verification\<run_id>\`。
+- 每次收口必须有：pytest 结果、全部验证脚本的 exit code、更新后的 `HANDOFF.md`。
+- git 初始化后：一次提交只做一件事；提交信息格式 `[O2] verify_all: 包装 verify_map`。
+- 代码风格：标准库优先，不引入运行时依赖；注释只在逻辑不自明处写。
+
+## 9. 当前冻结条款（提案执行期）
+
+- 提案执行期间**不改判据、不改期望值来源、不改已公布数字**。
+- 发现提案与现有规则冲突：写入 `HANDOFF.md` 的"待确认问题"，停下来等人裁决。
+- 任何"顺手优化"单独提交，并在提交信息里标明"非提案范围"。

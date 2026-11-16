@@ -1,0 +1,9 @@
+{
+ "scope": "work\\*.json + work\\*.log (顶层，不含 verification/ 子目录)",
+ "before_total": 112,
+ "after_total": 112,
+ "changed": [],
+ "new": [],
+ "gone": [],
+ "conclusion": "门禁全量运行未修改任何既有证据文件"
+}

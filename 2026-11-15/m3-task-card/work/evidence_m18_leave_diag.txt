@@ -1,0 +1,46 @@
+methods_with_leave_inside=19
+
+0x060005da 124.RestoreExceptionDispatchInfo
+  leave@130 next=132 target=143 enters=[] kinds=['finally', 'try']
+    eh0 finally try=[78, 132] handler=[132, 143] filter=None
+    eh1 finally try=[16, 21] handler=[21, 156] filter=None
+
+0x06000e4e 222.GetEnvironmentCharArray
+  leave@103 next=105 target=122 enters=[] kinds=['finally', 'try']
+    eh0 finally try=[65, 105] handler=[105, 109] filter=None
+    eh1 finally try=[12, 109] handler=[109, 122] filter=None
+    eh2 finally try=[7, 9] handler=[9, 123] filter=None
+
+0x060017ed 386.FillAttributeInfo
+  leave@123 next=125 target=137 enters=[] kinds=['finally', 'try']
+    eh0 catch try=[116, 125] handler=[125, 137] filter=None
+    eh1 finally try=[65, 115] handler=[115, 138] filter=None
+    eh2 finally try=[52, 138] handler=[138, 146] filter=None
+    eh3 finally try=[167, 179] handler=[179, 188] filter=None
+
+0x060017ed 386.FillAttributeInfo
+  leave@135 next=137 target=137 enters=[] kinds=['catch', 'finally', 'try']
+    eh0 catch try=[116, 125] handler=[125, 137] filter=None
+    eh1 finally try=[65, 115] handler=[115, 138] filter=None
+    eh2 finally try=[52, 138] handler=[138, 146] filter=None
+    eh3 finally try=[167, 179] handler=[179, 188] filter=None
+
+0x060019f0 419.Dispose
+  leave@97 next=99 target=149 enters=[] kinds=['finally', 'try']
+    eh0 finally try=[83, 99] handler=[99, 149] filter=None
+    eh1 finally try=[0, 67] handler=[67, 150] filter=None
+
+0x0600200e 554.ToggleState
+  leave@240 next=242 target=347 enters=[] kinds=['finally', 'try']
+    eh0 finally try=[71, 332] handler=[332, 347] filter=None
+    eh1 finally try=[65, 70] handler=[70, 348] filter=None
+
+0x0600200e 554.ToggleState
+  leave@260 next=262 target=347 enters=[] kinds=['finally', 'try']
+    eh0 finally try=[71, 332] handler=[332, 347] filter=None
+    eh1 finally try=[65, 70] handler=[70, 348] filter=None
+
+0x0600200e 554.ToggleState
+  leave@330 next=332 target=347 enters=[] kinds=['finally', 'try']
+    eh0 finally try=[71, 332] handler=[332, 347] filter=None
+    eh1 finally try=[65, 70] handler=[70, 348] filter=None

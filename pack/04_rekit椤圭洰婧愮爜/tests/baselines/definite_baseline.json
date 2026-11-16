@@ -1,0 +1,102 @@
+{
+ "tests/fixtures/bin_ls.elf": {
+  "expr": {
+   "abstained": 608,
+   "functions_total": 331,
+   "insns": 17475,
+   "lifted": 331,
+   "lifted_insns": 16867,
+   "skipped_undeclared_boundary": 0,
+   "statements": 19176,
+   "text_sha256": "66c385b075ad8c07d2fc4607a9cee377159b5d92a64cd551e3ec4f5344a59199"
+  },
+  "recdesc": {
+   "abstains": 0,
+   "blocks": 3821,
+   "bytes_covered": 67967,
+   "calls_definite": 49,
+   "calls_undecoded": 112,
+   "calls_unresolved": 4,
+   "coverage": 0.74227333289649,
+   "edges_cross_function": 82,
+   "edges_definite": 5340,
+   "edges_speculative": 0,
+   "edges_undecoded": 80,
+   "edges_unresolved": 9,
+   "instruction_bytes": 67967,
+   "instructions": 17475,
+   "outside": 0,
+   "overlaps": 0,
+   "section_size": 91566
+  }
+ },
+ "tests/fixtures/cli-64.exe": {
+  "expr": {
+   "abstained": 30,
+   "functions_total": 85,
+   "insns": 1463,
+   "lifted": 41,
+   "lifted_insns": 1433,
+   "skipped_undeclared_boundary": 44,
+   "statements": 1594,
+   "text_sha256": "03219a0a18f943fcbbaea1c513d889b48d84e3598124615528aa831cf089995b"
+  },
+  "recdesc": {
+   "abstains": 0,
+   "blocks": 338,
+   "bytes_covered": 5847,
+   "calls_definite": 8,
+   "calls_undecoded": 0,
+   "calls_unresolved": 5,
+   "coverage": 0.9623107307439105,
+   "edges_cross_function": 9,
+   "edges_definite": 394,
+   "edges_speculative": 0,
+   "edges_undecoded": 0,
+   "edges_unresolved": 33,
+   "instruction_bytes": 5847,
+   "instructions": 1525,
+   "outside": 0,
+   "overlaps": 0,
+   "section_size": 6076
+  }
+ },
+ "tests/fixtures/dyn_static": {
+  "expr": {
+   "abstained": 9258,
+   "functions_total": 1089,
+   "insns": 94722,
+   "lifted": 1084,
+   "lifted_insns": 85464,
+   "skipped_undeclared_boundary": 5,
+   "statements": 105342,
+   "text_sha256": "72cb6520cff2893541b155b4c0a0c40e6ea18ac526b0699eabfcf462c59072c2"
+  },
+  "f_401870": {
+   "abstained": 0,
+   "blocks": 23,
+   "insns": 80,
+   "statements": 92,
+   "text_sha256": "608ed531f2a9284899e9623cdf50563e30d8790032f964445ca3da0b02f80401"
+  },
+  "recdesc": {
+   "abstains": 0,
+   "blocks": 21105,
+   "bytes_covered": 383375,
+   "calls_definite": 702,
+   "calls_undecoded": 16,
+   "calls_unresolved": 11,
+   "coverage": 0.8014880971047125,
+   "edges_cross_function": 339,
+   "edges_definite": 30202,
+   "edges_speculative": 15,
+   "edges_undecoded": 18,
+   "edges_unresolved": 123,
+   "instruction_bytes": 383409,
+   "instructions": 94773,
+   "outside": 0,
+   "overlaps": 6,
+   "section_size": 478329
+  }
+ }
+}

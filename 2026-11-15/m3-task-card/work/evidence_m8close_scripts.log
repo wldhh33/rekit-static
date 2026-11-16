@@ -1,0 +1,1757 @@
+=== M8 closeout verify scripts 2026-11-16T02:41:56.3514356+08:00 ===
+--- verify_disasm --all exit=0
+==============================================================================
+x86-64 线性扫描 vs objdump 2.47：指令边界逐行对齐
+==============================================================================
+
+[tests/fixtures/cli-64.exe] PE/MSVC x64  .text VA=0x1000 off=0x400 size=0x17bc
+  我方边界 1694 条 / objdump 1694 条 / 已对齐 1694 条
+  停止: 无（扫到节尾）
+  文件落点: hit=1694 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/samples/fingerprint/hello_rust.exe] PE/rustc  .text VA=0x1000 off=0x400 size=0x15e0e
+  我方边界 26353 条 / objdump 26353 条 / 已对齐 26353 条
+  停止: 无（扫到节尾）
+  文件落点: hit=26353 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/fixtures/bin_ls.elf] ELF/glibc PIE  .text VA=0x4740 off=0x4740 size=0x165ae
+  我方边界 22523 条 / objdump 22523 条 / 已对齐 22523 条
+  停止: 无（扫到节尾）
+  文件落点: hit=22523 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/fixtures/dyn_pie] ELF GCC PIE  .text VA=0x1040 off=0x1040 size=0xf4
+  我方边界 64 条 / objdump 64 条 / 已对齐 64 条
+  停止: 无（扫到节尾）
+  文件落点: hit=64 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+[tests/samples/avx/avx_dense.exe] PE/自建 AVX 密集（VEX2/VEX3）  .text VA=0x1000 off=0x400 size=0xc0
+  我方边界 53 条 / objdump 53 条 / 已对齐 53 条
+  停止: 无（扫到节尾）
+  文件落点: hit=53 not_in_file=0 unmapped=0 multi=0 / 不一致 0 条
+
+caveats（线性扫描盲区，扫出来的不都是指令）:
+  ! 线性扫描无法区分代码与数据：跳转表/对齐填充/内联字面量会被当作指令
+  ! 不跟踪跳转、不做递归下降：函数尾部的交错数据区会被继续当作指令
+  ! VEX/EVEX（AVX/AVX-512）已按前缀+map+ModRM/SIB/disp+imm 计长，但仍不解助记符；保留位非法的伪 VEX/EVEX 编码一律 abstain（不猜长度）
+  ! x87/3DNow 仅按长度表计长，不校验语义
+  ! 超过 15 字节的非法前缀序列不单独报错（按表继续）
+
+判定：分歧 0 项 / 环境错误 0 项
+
+VERDICT: PASS
+--- verify_recdesc exit=0
+==================================================================================
+递归下降 + 基本块：种子分级 / 边界真指令性 / 线性↔递归差集 / VEX abstain 代价
+==================================================================================
+覆盖判定（本脚本实际验证了什么）:
+  · 权威种子：PE 导出 EAT / .pdata BeginAddress / EntryPoint；ELF e_entry /
+    symtab·dynsym STT_FUNC / .eh_frame FDE initial_location（CIE/FDE 手解）
+  · 启发式种子：55 48 89 e5 等函数序言模式，单独一组统计，不与权威合并
+  · 每条自研边界：objdump 2.47(-z) 同址同长 + capstone 5 同址同长；
+    不同起点必须归属到 overlap（分支跳进指令内部）或 seed（种子声明）
+  · 函数范围：FDE range / symtab st_size / .pdata EndAddress 内逐条点名覆盖
+  · CFG 边：确定/疑似/跨函数/目标未解出/未解析五类互斥，跨函数单列、
+    间接 jmp/call 目标写 None（不猜）；确定边必须有权威声明的函数边界
+漏检判定（本脚本不能验证什么）:
+  · 种子不可达的代码（无符号无 FDE 的函数、间接 jmp/call 目标、跳转表分支）
+  · VEX/EVEX 之后的函数尾部（abstain 停止，代价按样本单列）
+  · 节内数据/对齐填充会被线性扫描当成指令；递归只走可达路径，故差值单列
+  · objdump 若与自研解码以同样方式出错则无法互相发现（capstone 作为第三票）
+
+[tests/fixtures/cli-64.exe] PE/MSVC · .pdata 41 条
+  节: VA=0x1000 off=0x400 size=0x17bc ｜ 指令 1525 条 / 块 338 ｜ 覆盖 5847/6076 字节 (96.2%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 41/41 (100.0%) ｜ objdump 对齐 41 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+    启发式      heuristic     解出 1/1 (100.0%) ｜ objdump 对齐 1 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+  函数范围验证: 41 段 ｜ 全覆 37 / 部分 4 / 起点未解 0 ｜ 范围内 objdump 指令 1474，覆盖 1463 (99.3%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 11 条 ｜ 间接 jmp 33 处 / 间接 call 55 处（目标无法静态确定，其后代码不可达）
+      · 0x1bc4..0x1d40 漏 8/102 条
+      · 0x1fe4..0x207c 漏 1/48 条
+      · 0x2786..0x27a4 漏 1/12 条
+      · 0x27a4..0x27bc 漏 1/10 条
+  CFG（函数内边分级，不合并；调用边单列）: 确定 394 ｜ 疑似 0 ｜ 跨函数 9 ｜ 目标未解出 0 ｜ 未解析 33
+    函数: 声明边界 41 / 边界未知 44 ｜ 调用边: 确定 8 / 目标未解出 0 / 未解析 5（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 1694 条 ｜ 交集 1525 ｜ 递归独有 0 ｜ 线性独有 169
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 0 条（必须逐条有归属）
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 0/1694 (0.0%)
+
+[tests/fixtures/minidll.dll] PE/导出表 4 条（含纯序号）
+  节: VA=0x1000 off=0x400 size=0x100 ｜ 指令 5 条 / 块 5 ｜ 覆盖 5/256 字节 (2.0%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 5/5 (100.0%) ｜ objdump 对齐 1 (20.0%) ｜ 非 objdump 线性(但 capstone 认可) 4 ｜ abstain 0 ｜ 未调度 0
+        · 0x1010 种子起点不在 objdump 线性边界（capstone=ret ）
+        · 0x1020 种子起点不在 objdump 线性边界（capstone=ret ）
+    启发式      heuristic     0 条（未启用/样本无此来源）
+  函数范围验证: 0 段 ｜ 全覆 0 / 部分 0 / 起点未解 0 ｜ 范围内 objdump 指令 0，覆盖 0 (0.0%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 0 条 ｜ 间接 jmp 0 处 / 间接 call 0 处（目标无法静态确定，其后代码不可达）
+  CFG（函数内边分级，不合并；调用边单列）: 确定 0 ｜ 疑似 0 ｜ 跨函数 0 ｜ 目标未解出 0 ｜ 未解析 0
+    函数: 声明边界 0 / 边界未知 5 ｜ 调用边: 确定 0 / 目标未解出 0 / 未解析 0（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 128 条（停在 0x10ff: 越界：需要 1 字节，只剩 0） ｜ 交集 1 ｜ 递归独有 4 ｜ 线性独有 127
+    递归独有样例: 0x1010, 0x1020, 0x1030, 0x1040
+    线性停止点之后递归仍解出 0 条（线性扫描永远到不了）
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 4 条（必须逐条有归属）
+    归属: seed_declared=4
+      · 0x1010 我方 len=1 capstone len=1 ret 
+      · 0x1020 我方 len=1 capstone len=1 ret 
+      · 0x1030 我方 len=1 capstone len=1 ret 
+      · 0x1040 我方 len=1 capstone len=1 ret 
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 0/129 (0.0%)
+    伪范围(无 pdata/size 时按下一 seed 切): 预期 33，覆盖 1 (3.0%)，abstain 归因漏 0，其它漏 32
+
+[tests/fixtures/bin_ls.elf] ELF/stripped PIE · 仅 FDE
+  节: VA=0x4740 off=0x4740 size=0x165ae ｜ 指令 17475 条 / 块 3821 ｜ 覆盖 67967/91566 字节 (74.2%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 331/331 (100.0%) ｜ objdump 对齐 331 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+    启发式      heuristic     0 条（未启用/样本无此来源）
+  函数范围验证: 331 段 ｜ 全覆 145 / 部分 186 / 起点未解 0 ｜ 范围内 objdump 指令 22076，覆盖 17475 (79.2%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 4601 条 ｜ 间接 jmp 9 处 / 间接 call 38 处（目标无法静态确定，其后代码不可达）
+      · 0x6920..0x6bb1 漏 81/171 条
+      · 0x6bc0..0x6cc1 漏 10/70 条
+      · 0x6d10..0x6dd1 漏 12/45 条
+      · 0x6de0..0x6e44 漏 1/26 条
+      · 0x6e50..0x6e7c 漏 1/13 条
+  CFG（函数内边分级，不合并；调用边单列）: 确定 5340 ｜ 疑似 0 ｜ 跨函数 82 ｜ 目标未解出 80 ｜ 未解析 9
+    函数: 声明边界 331 / 边界未知 0 ｜ 调用边: 确定 49 / 目标未解出 112 / 未解析 4（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 22523 条 ｜ 交集 17475 ｜ 递归独有 0 ｜ 线性独有 5048
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 0 条（必须逐条有归属）
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 0/22523 (0.0%)
+
+[tests/fixtures/dyn_pie] ELF GCC PIE
+  节: VA=0x1040 off=0x1040 size=0xf4 ｜ 指令 56 条 / 块 16 ｜ 覆盖 193/244 字节 (79.1%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 6/6 (100.0%) ｜ objdump 对齐 6 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+    启发式      heuristic     0 条（未启用/样本无此来源）
+  函数范围验证: 2 段 ｜ 全覆 2 / 部分 0 / 起点未解 0 ｜ 范围内 objdump 指令 17，覆盖 17 (100.0%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 0 条 ｜ 间接 jmp 2 处 / 间接 call 1 处（目标无法静态确定，其后代码不可达）
+  CFG（函数内边分级，不合并；调用边单列）: 确定 0 ｜ 疑似 13 ｜ 跨函数 1 ｜ 目标未解出 0 ｜ 未解析 2
+    函数: 声明边界 2 / 边界未知 4 ｜ 调用边: 确定 0 / 目标未解出 1 / 未解析 0（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 64 条 ｜ 交集 56 ｜ 递归独有 0 ｜ 线性独有 8
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 0 条（必须逐条有归属）
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 0/64 (0.0%)
+
+[tests/fixtures/dyn_nopie] ELF GCC no-PIE
+  节: VA=0x401020 off=0x1020 size=0xf1 ｜ 指令 53 条 / 块 15 ｜ 覆盖 164/241 字节 (68.0%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 7/7 (100.0%) ｜ objdump 对齐 7 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+    启发式      heuristic     解出 1/1 (100.0%) ｜ objdump 对齐 1 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+  函数范围验证: 3 段 ｜ 全覆 3 / 部分 0 / 起点未解 0 ｜ 范围内 objdump 指令 18，覆盖 18 (100.0%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 0 条 ｜ 间接 jmp 2 处 / 间接 call 1 处（目标无法静态确定，其后代码不可达）
+  CFG（函数内边分级，不合并；调用边单列）: 确定 0 ｜ 疑似 10 ｜ 跨函数 1 ｜ 目标未解出 0 ｜ 未解析 2
+    函数: 声明边界 3 / 边界未知 4 ｜ 调用边: 确定 0 / 目标未解出 0 / 未解析 0（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 65 条 ｜ 交集 53 ｜ 递归独有 0 ｜ 线性独有 12
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 0 条（必须逐条有归属）
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 0/65 (0.0%)
+
+[tests/fixtures/dyn_static] ELF static · 含真实 AVX
+  节: VA=0x401100 off=0x1100 size=0x74c79 ｜ 指令 94773 条 / 块 21105 ｜ 覆盖 383375/478329 字节 (80.1%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 1090/1090 (100.0%) ｜ objdump 对齐 1089 (99.9%) ｜ 非 objdump 线性(但 capstone 认可) 1 ｜ abstain 0 ｜ 未调度 0
+        · 0x44bd1f 种子起点不在 objdump 线性边界（capstone=add byte ptr [rax - 0x39], cl）
+    启发式      heuristic     解出 6/6 (100.0%) ｜ objdump 对齐 6 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+  函数范围验证: 1085 段 ｜ 全覆 401 / 部分 684 / 起点未解 0 ｜ 范围内 objdump 指令 112408，覆盖 94718 (84.3%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 17690 条 ｜ 间接 jmp 123 处 / 间接 call 152 处（目标无法静态确定，其后代码不可达）
+      · 0x41ca80..0x41cbc7 漏 5/84 条
+      · 0x41cbd0..0x41cdf1 漏 7/127 条
+      · 0x41ce00..0x41cfaf 漏 2/92 条
+      · 0x44d5c0..0x44d704 漏 6/95 条
+      · 0x44d710..0x44f877 漏 43/1833 条
+  CFG（函数内边分级，不合并；调用边单列）: 确定 30202 ｜ 疑似 15 ｜ 跨函数 339 ｜ 目标未解出 18 ｜ 未解析 123
+    函数: 声明边界 1084 / 边界未知 5 ｜ 调用边: 确定 702 / 目标未解出 16 / 未解析 11（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 113924 条 ｜ 交集 94765 ｜ 递归独有 8 ｜ 线性独有 19159
+    递归独有样例: 0x40623b, 0x406467, 0x406fb9, 0x407f6f, 0x4080af, 0x44bd1f, 0x44bd22, 0x44bd25
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 8 条（必须逐条有归属）
+    归属: overlap=5, seed_declared=1, seed_path=2
+      · 0x40623b 我方 len=8 capstone len=8 cmpxchg qword ptr [rip + 0x9cee5], rcx
+      · 0x406467 我方 len=7 capstone len=7 dec qword ptr [rip + 0x9ccba]
+      · 0x406fb9 我方 len=4 capstone len=4 cmpxchg qword ptr [rcx], rbx
+      · 0x407f6f 我方 len=4 capstone len=4 cmpxchg qword ptr [rcx], rdi
+      · 0x4080af 我方 len=4 capstone len=4 cmpxchg qword ptr [rcx], rdi
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 4367/113924 (3.8%)
+
+[tests/samples/avx/avx_dense.exe] 自建 AVX/VEX 密集 PE
+  节: VA=0x1000 off=0x400 size=0xc0 ｜ 指令 43 条 / 块 7 ｜ 覆盖 182/192 字节 (94.8%)
+  种子成功率（分列，不合并）:
+    权威       authoritative 解出 5/5 (100.0%) ｜ objdump 对齐 5 (100.0%) ｜ 非 objdump 线性(但 capstone 认可) 0 ｜ abstain 0 ｜ 未调度 0
+    启发式      heuristic     0 条（未启用/样本无此来源）
+  函数范围验证: 0 段 ｜ 全覆 0 / 部分 0 / 起点未解 0 ｜ 范围内 objdump 指令 0，覆盖 0 (0.0%)
+    漏检归因: abstain 范围 0 条 / 其它(数据·填充·不可达) 0 条 ｜ 间接 jmp 0 处 / 间接 call 0 处（目标无法静态确定，其后代码不可达）
+  CFG（函数内边分级，不合并；调用边单列）: 确定 0 ｜ 疑似 4 ｜ 跨函数 0 ｜ 目标未解出 0 ｜ 未解析 0
+    函数: 声明边界 0 / 边界未知 4 ｜ 调用边: 确定 0 / 目标未解出 0 / 未解析 0（间接，不猜目标）
+  线性 vs 递归（单列）: 线性 53 条 ｜ 交集 43 ｜ 递归独有 0 ｜ 线性独有 10
+  边界硬检查: 长度不一致 0 条 ｜ 不在 objdump 线性起点 0 条（必须逐条有归属）
+  abstain: 唯一弃权点 0 个 ｜ 受影响函数范围漏检 0 条 ｜ VEX 指令 25/53 (47.2%)
+    伪范围(无 pdata/size 时按下一 seed 切): 预期 53，覆盖 43 (81.1%)，abstain 归因漏 0，其它漏 10
+
+==================================================================================
+汇总（abstain 代价按样本单列）
+==================================================================================
+tests/fixtures/cli-64.exe          指令   1525 ｜ 覆盖  96.2% ｜ 权威种子 41/41 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+tests/fixtures/minidll.dll         指令      5 ｜ 覆盖   2.0% ｜ 权威种子 5/5 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+tests/fixtures/bin_ls.elf          指令  17475 ｜ 覆盖  74.2% ｜ 权威种子 331/331 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+tests/fixtures/dyn_pie             指令     56 ｜ 覆盖  79.1% ｜ 权威种子 6/6 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+tests/fixtures/dyn_nopie           指令     53 ｜ 覆盖  68.0% ｜ 权威种子 7/7 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+tests/fixtures/dyn_static          指令  94773 ｜ 覆盖  80.1% ｜ 权威种子 1090/1090 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+tests/samples/avx/avx_dense.exe    指令     43 ｜ 覆盖  94.8% ｜ 权威种子 5/5 ｜ abstain 点  0 ｜ 丢了     0 条 (0.0%)
+
+缺失/不可解释边界 0 项
+
+VERDICT: PASS
+--- verify_expr exit=0
+D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_expr.py:123: DeprecationWarning: open_program() is deprecated, use open_project() and program_context() or program_loader() instead.
+  with pyghidra.open_program(path, analyze=True,
+==============================================================================
+M5-U1 表达式恢复验收：抽样规则 + Ghidra 弱参照对读
+==============================================================================
+
+[样本] tests/fixtures/cli-64.exe  PE/MSVC
+  声明边界函数池: 41 个
+  分层规模: S1=12, S2=15, S3=10, S4=4
+  类别覆盖: indirect_call=0x1010, loop=0x10a0, indirect_jmp=0x1d54, simd=0x12d0, largest=0x164c
+  抽样函数: 18 个（去重后）
+
+[样本] tests/fixtures/bin_ls.elf  ELF/PIE
+  声明边界函数池: 331 个
+  分层规模: S1=83, S2=76, S3=144, S4=28
+  类别覆盖: indirect_call=0x48cf, loop=0x4c00, indirect_jmp=0x4c00, simd=0x4932, largest=0x4c00
+  抽样函数: 18 个（去重后）
+
+[样本] tests/fixtures/dyn_static  ELF/static
+  声明边界函数池: 1084 个
+  分层规模: S1=270, S2=235, S3=311, S4=268
+  类别覆盖: indirect_call=0x40139d, loop=0x401193, indirect_jmp=0x401870, simd=0x402b00, largest=0x44d710
+  抽样函数: 21 个（去重后）
+
+抽样总量: 57 个函数（规则见文件头；等距取点，无随机数）
+
+[对读] tests/fixtures/cli-64.exe
+  0x199a     我方: 指令  3 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x1ac0     我方: 指令  8 块 5 abstain 0 complete | Ghidra: 有 块5 大小30
+      - Ghidra 以调用呈现 0x1d88：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x1d40     我方: 指令  4 块 1 abstain 0 complete | Ghidra: 有 块1 大小18
+      - Ghidra 以调用呈现 0x1bc4：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x2760     我方: 指令  1 块 1 abstain 0 complete | Ghidra: 有 块1 大小2
+  0x1010     我方: 指令 11 块 4 abstain 0 complete | Ghidra: 有 块4 大小36
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  0x1a50     我方: 指令 28 块 5 abstain 0 complete | Ghidra: 有 块5 大小91
+      - Ghidra 以调用呈现 0x1ac0：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x207c     我方: 指令 13 块 4 abstain 0 complete | Ghidra: 有 块4 大小36
+  0x23f8     我方: 指令 27 块 6 abstain 0 complete | Ghidra: 有 块6 大小90
+  0x1200     我方: 指令 66 块14 abstain 0 complete | Ghidra: 有 块14 大小208
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  0x1ae0     我方: 指令 48 块 9 abstain 0 complete | Ghidra: 有 块9 大小182
+  0x1e5c     我方: 指令 33 块 4 abstain 0 complete | Ghidra: 有 块4 大小113
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x1fe4     我方: 指令 47 块16 abstain 0 complete | Ghidra: 有 块16 大小150
+  0x10a0     我方: 指令111 块25 abstain 0 complete | Ghidra: 有 块25 大小348
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+  0x1401     我方: 指令127 块26 abstain 3 partial | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x164c     我方: 指令222 块44 abstain 9 partial | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x24cc     我方: 指令106 块20 abstain11 partial | Ghidra: 有 块20 大小428
+  0x1d54     我方: 指令 13 块 1 abstain 0 complete | Ghidra: 有 块1 大小52
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x12d0     我方: 指令 75 块 9 abstain 2 partial | Ghidra: 有 块81 大小1790
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 14 个（thunk/导入）；不参与判等，单列
+      - 仅 Ghidra 有调用目标 0x10a0, 0x1200, 0x19d0, 0x1ac0：Ghidra 函数域 1790 字节 > 我方 305 字节，多为其把相邻/内联段并入本函数后引入的调用
+      - 基本块数不一致（我方 9 块/305 字节，Ghidra 81 块/1790 字节）：Ghidra 函数域更大，块数差来自并入的相邻函数
+  -- 汇总: 入口存在 15/18（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 14/15 ｜ 重叠集内调用集相等 8/15
+  -- 抽样函数弃权原因（按指令计，共 25 条）:
+        9 × 0F 11 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        5 × 条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        4 × 0F ba 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        2 × 0F 10 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 0F 57 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × cmov 前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        1 × 0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        1 × 0F 01 系统/描述符指令未建模 ｜ 缺: 系统寄存器与描述符表语义（不在函数内表达式范围）
+
+  ── 人工对读样本（我方伪 C / Ghidra C 并列）──
+
+  ### FUNC 0x1ac0  类别=-
+  --- 我方 ---
+  | // FUNC sub_0x1ac0  0x1ac0..0x1ade  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 8 / 已提升 8 / abstain 0（0.00%）/ 语句 10
+  | L_0x1ac0:
+  |   flags = cmp(rcx, *(u64 *)data_0x5008);
+  |   if (rcx != *(u64 *)data_0x5008) goto L_0x1ad9;
+  |   goto L_0x1ac9;  /* 未取分支 */
+  | L_0x1ac9:
+  |   rcx = rol(rcx, 0x10);
+  |   flags = test(cx, -0x1);
+  |   if ((cx & -0x1) != 0) goto L_0x1ad5;
+  |   goto L_0x1ad4;  /* 未取分支 */
+  | L_0x1ad4:
+  |   return;
+  | L_0x1ad5:
+  |   rcx = ror(rcx, 0x10);
+  | L_0x1ad9:
+  |   goto L_0x1d88;
+  --- Ghidra（__security_check_cookie）---
+  | 
+  | /* WARNING: This is an inlined function */
+  | 
+  | void __cdecl __security_check_cookie(uintptr_t _StackCookie)
+  | 
+  | {
+  |   if ((_StackCookie == DAT_140005008) && ((short)(_StackCookie >> 0x30) == 0)) {
+  |     return;
+  |   }
+  |   FUN_140001d88();
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x1d40  类别=-
+  --- 我方 ---
+  | // FUNC AddressOfEntryPoint  0x1d40..0x1d52  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 4 / 已提升 4 / abstain 0（0.00%）/ 语句 4
+  | L_0x1d40:
+  |   rsp -= 0x28;
+  |   sub_0x2120();
+  |   rsp += 0x28;
+  |   goto L_0x1bc4;
+  --- Ghidra（entry）---
+  | 
+  | void entry(void)
+  | 
+  | {
+  |   __security_init_cookie();
+  |   FUN_140001bc4();
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x2760  类别=indirect_jmp
+  --- 我方 ---
+  | // FUNC sub_0x2760  0x2760..0x2762  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 1 / 已提升 1 / abstain 0（0.00%）/ 语句 1
+  | L_0x2760:
+  |   /* jmp 间接：目标不可静态确定（不猜） */
+  --- Ghidra（_guard_dispatch_icall）---
+  | 
+  | /* WARNING: This is an inlined function */
+  | 
+  | void _guard_dispatch_icall(void)
+  | 
+  | {
+  |   code *UNRECOVERED_JUMPTABLE;
+  |   
+  |                     /* WARNING: Could not recover jumptable at 0x000140002760. Too many branches */
+  |                     /* WARNING: Treating indirect jump as call */
+  |   (*UNRECOVERED_JUMPTABLE)();
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x1010  类别=indirect_call
+  --- 我方 ---
+  | // FUNC sub_0x1010  0x1010..0x1034  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 11 / 已提升 11 / abstain 0（0.00%）/ 语句 13
+  | L_0x1010:
+  |   rsp -= 0x28;
+  |   flags = test(ecx, ecx);
+  |   if ((ecx & ecx) != 0) goto L_0x102a;
+  |   goto L_0x1018;  /* 未取分支 */
+  | L_0x1018:
+  |   ecx = *(u32 *)data_0x5040;
+  |   flags = test(ecx, ecx);
+  |   if ((ecx & ecx) == 0) goto L_0x102a;
+  |   goto L_0x1022;  /* 未取分支 */
+  | L_0x1022:
+  |   edx ^= edx;
+  |   KERNEL32.dll!GenerateConsoleCtrlEvent();  /* 导入调用 IAT */
+  | L_0x102a:
+  |   eax = 0x1;
+  |   rsp += 0x28;
+  |   return;
+  --- Ghidra（FUN_140001010）---
+  | 
+  | undefined8 FUN_140001010(int param_1)
+  | 
+  | {
+  |   if ((param_1 == 0) && (DAT_140005040 != 0)) {
+  |     GenerateConsoleCtrlEvent(DAT_140005040,0);
+  |   }
+  |   return 1;
+  | }
+  | 
+
+  ### FUNC 0x1a50  类别=-
+  --- 我方 ---
+  | // FUNC sub_0x1a50  0x1a50..0x1aab  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 28 / 已提升 28 / abstain 0（0.00%）/ 语句 30
+  | L_0x1a50:
+  |   push(rbx);
+  |   r11d = *(u32 *)(r8);
+  |   rbx = rdx;
+  |   r11d &= -0x8;
+  |   r9 = rcx;
+  |   flags = test(*(u8 *)(r8), 0x4);
+  |   r10 = rcx;
+  |   if ((*(u8 *)(r8) & 0x4) == 0) goto L_0x1a7b;
+  |   goto L_0x1a68;  /* 未取分支 */
+  | L_0x1a68:
+  |   eax = *(u32 *)(r8 + 0x8);
+  |   r10 = *(u32 *)(r8 + 0x4);  /* movsxd */
+  |   eax = -eax;
+  |   r10 += rcx;
+  |   rcx = eax;  /* movsxd */
+  |   r10 &= rcx;
+  | L_0x1a7b:
+  |   rax = r11d;  /* movsxd */
+  |   rdx = *(u64 *)(rax + r10 * 1);
+  |   rax = *(u64 *)(rbx + 0x10);
+  |   ecx = *(u32 *)(rax + 0x8);
+  |   rax = *(u64 *)(rbx + 0x8);
+  |   flags = test(*(u8 *)(rcx + rax * 1 + 0x3), 0xf);
+  |   if ((*(u8 *)(rcx + rax * 1 + 0x3) & 0xf) == 0) goto L_0x1a9f;
+  |   goto L_0x1a94;  /* 未取分支 */
+  | L_0x1a94:
+  |   eax = *(u8 *)(rcx + rax * 1 + 0x3);  /* movzx */
+  |   eax &= -0x10;
+  |   r9 += rax;
+  | L_0x1a9f:
+  |   r9 ^= rdx;
+  |   rcx = r9;
+  |   rbx = pop();
+  |   goto L_0x1ac0;
+  --- Ghidra（__GSHandlerCheckCommon）---
+  | 
+  | /* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+  | /* Library Function - Single Match
+  |     __GSHandlerCheckCommon
+  |    
+  |    Libraries: Visual Studio 2017 Release, Visual Studio 2019 Release */
+  | 
+  | ulonglong __GSHandlerCheckCommon(undefined8 param_1,longlong param_2)
+  | 
+  | {
+  |   ulonglong uVar1;
+  |   ulonglong uVar2;
+  |   
+  |   uVar2 = (ulonglong)*(uint *)(*(longlong *)(param_2 + 0x10) + 8);
+  |   uVar1 = *(ulonglong *)(param_2 + 8);
+  |   if ((*(byte *)(uVar2 + 3 + uVar1) & 0xf) != 0) {
+  |     uVar1 = (ulonglong)(*(byte *)(uVar2 + 3 + uVar1) & 0xfffffff0);
+  |   }
+  |   return uVar1;
+  | }
+  | 
+
+  ### FUNC 0x207c  类别=-
+  --- 我方 ---
+  | // FUNC sub_0x207c  0x207c..0x20a0  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 13 / 已提升 13 / abstain 0（0.00%）/ 语句 15
+  | L_0x207c:
+  |   push(rbx);
+  |   rsp -= 0x20;
+  |   bl = cl;
+  |   sub_0x2678();
+  |   edx ^= edx;
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) == 0) goto L_0x209a;
+  |   goto L_0x208f;  /* 未取分支 */
+  | L_0x208f:
+  |   flags = test(bl, bl);
+  |   if ((bl & bl) != 0) goto L_0x209a;
+  |   goto L_0x2093;  /* 未取分支 */
+  | L_0x2093:
+  |   swap(*(u64 *)data_0x55c8, rdx);
+  | L_0x209a:
+  |   rsp += 0x20;
+  |   rbx = pop();
+  |   return;
+  --- Ghidra（__scrt_release_startup_lock）---
+  | 
+  | /* Library Function - Single Match
+  |     __scrt_release_startup_lock
+  |    
+  |    Libraries: Visual Studio 2015 Release, Visual Studio 2017 Release, Visual Studio 2019 Release */
+  | 
+  | void __scrt_release_startup_lock(char param_1)
+  | 
+  | {
+  |   bool bVar1;
+  |   undefined3 extraout_var;
+  |   
+  |   bVar1 = __scrt_is_ucrt_dll_in_use();
+  |   if ((CONCAT31(extraout_var,bVar1) != 0) && (param_1 == '\0')) {
+  |     LOCK();
+  |     DAT_1400055c8 = 0;
+  |     UNLOCK();
+  |   }
+  |   return;
+  | }
+  | 
+
+[对读] tests/fixtures/bin_ls.elf
+  0x4740     我方: 指令  5 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x6d10（FUN_00106d10）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x4bde     我方: 指令  1 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x11270    我方: 指令  3 块 1 abstain 0 complete | Ghidra: 有 块1 大小12
+  0x18490    我方: 指令  6 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x475f     我方: 指令 15 块 3 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x88e0     我方: 指令 14 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x11dc0    我方: 指令 19 块 4 abstain 1 partial | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x18840    我方: 指令 26 块 3 abstain 6 partial | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x483d     我方: 指令 33 块 8 abstain 0 complete | Ghidra: 有 块8 大小109
+      - .text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 4 个（thunk/导入）；不参与判等，单列
+  0x98a0     我方: 指令 33 块11 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0xf1d0     我方: 指令 65 块10 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x16460    我方: 指令 47 块11 abstain 0 complete | Ghidra: 有 块11 大小176
+      - .text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 4 个（thunk/导入）；不参与判等，单列
+  0x4c00     我方: 指令1103 块243 abstain18 partial | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0xb1e0     我方: 指令343 块107 abstain 2 partial | Ghidra: 有 块107 大小1498
+      - .text 外调用目标：我方 2 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+  0xf460     我方: 指令546 块135 abstain 0 complete | Ghidra: 有 块135 大小2367
+      - .text 外调用目标：我方 24 个（PLT/GOT 桩）、Ghidra 14 个（thunk/导入）；不参与判等，单列
+  0x13490    我方: 指令107 块26 abstain 0 complete | Ghidra: 有 块26 大小433
+      - .text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+  0x48cf     我方: 指令 33 块 4 abstain 0 complete | Ghidra: 有 块4 大小99
+      - .text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+      - Ghidra 以调用呈现 0x483d：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x4932     我方: 指令 32 块 5 abstain 8 partial | Ghidra: 有 块5 大小176
+      - .text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  -- 汇总: 入口存在 8/18（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 8/8 ｜ 重叠集内调用集相等 5/8
+  -- 抽样函数弃权原因（按指令计，共 35 条）:
+       16 × 0F 29 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        5 × 0F 6f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        4 × mul/imul/div/idiv（隐式 rax/rdx 双寄存器结果）未建模 ｜ 缺: 隐式操作数 rax/rdx 与商余数语义
+        3 × 0F 6e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        3 × 0F 6c SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        1 × 0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        1 × 0F 7e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+
+  ── 人工对读样本（我方伪 C / Ghidra C 并列）──
+
+  ### FUNC 0x11270  类别=-
+  --- 我方 ---
+  | // FUNC fde@0x22900  0x11270..0x1127c  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 3 / 已提升 3 / abstain 0（0.00%）/ 语句 2
+  | L_0x11270:
+  |   rax = *(u64 *)data_0x27280;
+  |   return;
+  --- Ghidra（FUN_00111270）---
+  | 
+  | undefined8 FUN_00111270(void)
+  | 
+  | {
+  |   return program_invocation_short_name;
+  | }
+  | 
+
+  ### FUNC 0x483d  类别=-
+  --- 我方 ---
+  | // FUNC fde@0x224ac  0x483d..0x48aa  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 33 / 已提升 33 / abstain 0（0.00%）/ 语句 36
+  | L_0x483d:
+  |   push(rbp);
+  |   ebp = esi;
+  |   esi = 0x1;
+  |   push(rbx);
+  |   ebx = edi;
+  |   push(r8);
+  |   rdi = *(u64 *)data_0x272c0;
+  |   sub_0x40a0();
+  |   *(u32 *)data_0x28404 += 1;
+  |   flags = test(ebp, ebp);
+  |   if ((ebp & ebp) == 0) goto L_0x4867;
+  |   goto L_0x4860;  /* 未取分支 */
+  | L_0x4860:
+  |   edi = ebp;
+  |   sub_0x47bc();
+  | L_0x4867:
+  |   rdi = *(u64 *)data_0x272c0;
+  |   rax = *(u64 *)(rdi + 0x28);
+  |   flags = cmp(rax, *(u64 *)(rdi + 0x30));
+  |   if (rax <u *(u64 *)(rdi + 0x30)) goto L_0x4884;
+  |   goto L_0x4878;  /* 未取分支 */
+  | L_0x4878:
+  |   esi = 0xa;
+  |   sub_0x42b0();
+  |   goto L_0x488f;
+  | L_0x4884:
+  |   rdx = addr(rax + 0x1);
+  |   *(u64 *)(rdi + 0x28) = rdx;
+  |   *(u8 *)(rax) = 0xa;
+  | L_0x488f:
+  |   rdi = *(u64 *)data_0x272c0;
+  |   sub_0x4680();
+  |   flags = test(ebx, ebx);
+  |   if ((ebx & ebx) == 0) goto L_0x48a6;
+  |   goto L_0x489f;  /* 未取分支 */
+  | L_0x489f:
+  --- Ghidra（FUN_0010483d）---
+  | 
+  | undefined8
+  | FUN_0010483d(int param_1,int param_2,undefined8 param_3,undefined8 param_4,undefined8 param_5)
+  | 
+  | {
+  |   char *pcVar1;
+  |   
+  |   __vfprintf_chk(stderr,1);
+  |   error_message_count = error_message_count + 1;
+  |   if (param_2 != 0) {
+  |     FUN_001047bc(param_2);
+  |   }
+  |   pcVar1 = stderr->_IO_write_ptr;
+  |   if (pcVar1 < stderr->_IO_write_end) {
+  |     stderr->_IO_write_ptr = pcVar1 + 1;
+  |     *pcVar1 = '\n';
+  |   }
+  |   else {
+  |     __overflow(stderr,10);
+  |   }
+  |   fflush_unlocked(stderr);
+  |   if (param_1 != 0) {
+  |                     /* WARNING: Subroutine does not return */
+  |     exit(param_1);
+  |   }
+  |   return param_5;
+  | }
+  | 
+
+  ### FUNC 0x16460  类别=-
+  --- 我方 ---
+  | // FUNC fde@0x23498  0x16460..0x16517  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 47 / 已提升 47 / abstain 0（0.00%）/ 语句 53
+  | L_0x16460:
+  |   push(r12);
+  |   push(rbp);
+  |   push(rbx);
+  |   flags = test(rdi, rdi);
+  |   if ((rdi & rdi) == 0) goto L_0x164f5;
+  |   goto L_0x16471;  /* 未取分支 */
+  | L_0x16471:
+  |   esi = 0x2f;
+  |   rbx = rdi;
+  |   sub_0x42c0();
+  |   r12 = rbx;
+  |   rbp = rax;
+  |   flags = test(rax, rax);
+  |   if ((rax & rax) == 0) goto L_0x164cf;
+  |   goto L_0x16489;  /* 未取分支 */
+  | L_0x16489:
+  |   r12 = addr(rax + 0x1);
+  |   rax = r12;
+  |   rax -= rbx;
+  |   flags = cmp(rax, 0x6);
+  |   if (rax <= 0x6) goto L_0x164cf;
+  |   goto L_0x16499;  /* 未取分支 */
+  | L_0x16499:
+  |   rdi = addr(rbp + -0x6);
+  |   edx = 0x7;
+  |   rsi = addr(data_0x1d662);
+  |   sub_0x40e0();
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) != 0) goto L_0x164cf;
+  |   goto L_0x164b2;  /* 未取分支 */
+  | L_0x164b2:
+  |   flags = cmp(stk_1, 0x6c);
+  |   if (stk_1 != 0x6c) goto L_0x164f0;
+  |   goto L_0x164b8;  /* 未取分支 */
+  | L_0x164b8:
+  |   flags = cmp(*(u8 *)(r12 + 0x1), 0x74);
+  --- Ghidra（FUN_00116460）---
+  | 
+  | void FUN_00116460(char *param_1)
+  | 
+  | {
+  |   int iVar1;
+  |   char *pcVar2;
+  |   char *pcVar3;
+  |   
+  |   if (param_1 == (char *)0x0) {
+  |     fwrite("A NULL argv[0] was passed through an exec system call.\n",1,0x37,stderr);
+  |                     /* WARNING: Subroutine does not return */
+  |     abort();
+  |   }
+  |   pcVar2 = strrchr(param_1,0x2f);
+  |   pcVar3 = param_1;
+  |   if ((pcVar2 != (char *)0x0) && (pcVar3 = pcVar2 + 1, 6 < (long)pcVar3 - (long)param_1)) {
+  |     iVar1 = strncmp(pcVar2 + -6,"/.libs/",7);
+  |     if (iVar1 == 0) {
+  |       if (((pcVar2[1] == 'l') && (pcVar2[2] == 't')) && (pcVar2[3] == '-')) {
+  |         pcVar3 = pcVar2 + 4;
+  |         param_1 = pcVar3;
+  |       }
+  |       else {
+  |         param_1 = pcVar3;
+  |       }
+  |     }
+  |   }
+  |   DAT_00128448 = param_1;
+  |   program_invocation_name = param_1;
+  |   program_invocation_short_name = pcVar3;
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0xb1e0  类别=loop
+  --- 我方 ---
+  | // FUNC fde@0x21d38  0xb1e0..0xb81b  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 343 / 已提升 341 / abstain 2（0.58%）/ 语句 419
+  | L_0xb1e0:
+  |   push(r15);
+  |   r15d = esi;
+  |   push(r14);
+  |   r14 = rdi;
+  |   push(r13);
+  |   push(r12);
+  |   r12 = rdx;
+  |   push(rbp);
+  |   push(rbx);
+  |   rsp -= 0x18;
+  |   eax = *(u8 *)data_0x28332;  /* movzx */
+  |   *(u64 *)(rsp + 0x8) = rcx;
+  |   flags = test(sil, sil);
+  |   if ((sil & sil) == 0) goto L_0xb260;
+  |   goto L_0xb208;  /* 未取分支 */
+  | L_0xb208:
+  |   r13 = *(u64 *)(rdi + 0x8);
+  |   flags = test(al, al);
+  |   if ((al & al) != 0) goto L_0xb318;
+  |   goto L_0xb214;  /* 未取分支 */
+  | L_0xb214:
+  |   edx = *(u32 *)(r14 + 0xc4);
+  |   rsi = *(u64 *)data_0x282f0;
+  | L_0xb222:
+  |   rsp -= 0x8;
+  |   push(*(u64 *)(r14 + 0x10));
+  |   r15d ^= 0x1;
+  |   ecx ^= ecx;
+  |   r9 = r12;
+  |   r8d = r15b;  /* movzx */
+  |   rdi = r13;
+  |   sub_0xadd0();
+  |   rbx = rax;
+  |   sub_0x8670();
+  |   rcx = pop();
+  |   rsi = pop();
+  --- Ghidra（FUN_0010b1e0）---
+  | 
+  | long FUN_0010b1e0(undefined8 *param_1,byte param_2,undefined8 param_3,ulong param_4)
+  | 
+  | {
+  |   ulong uVar1;
+  |   char cVar2;
+  |   char cVar3;
+  |   uint uVar4;
+  |   int iVar5;
+  |   long lVar6;
+  |   size_t sVar7;
+  |   ulong *puVar8;
+  |   undefined4 uVar9;
+  |   uint uVar10;
+  |   uint uVar11;
+  |   char *__s;
+  |   
+  |   if (param_2 == 0) {
+  |     __s = (char *)*param_1;
+  |     if (DAT_00128332 != '\0') {
+  |       uVar4 = (uint)*(byte *)((long)param_1 + 0xb9);
+  |       if ((DAT_001283b0 == '\0') || (*(byte *)((long)param_1 + 0xb9) == 0)) {
+  |         uVar10 = *(uint *)(param_1 + 6);
+  |       }
+  |       else {
+  |         uVar10 = *(uint *)((long)param_1 + 0xac);
+  |       }
+  | LAB_0010b27f:
+  |       if (*(char *)(param_1 + 0x17) == '\0') goto LAB_0010b28d;
+  | LAB_0010b390:
+  |       uVar11 = uVar10 & 0xf000;
+  |       if (uVar11 == 0x8000) {
+  |         if ((((uVar10 & 0x800) == 0) || (DAT_00127160 == 0)) ||
+  |            ((DAT_00127160 < 3 &&
+  |             ((PTR_DAT_00127168[DAT_00127160 - 1] == '0' && (*PTR_DAT_00127168 == '0')))))) {
+  |           if (((uVar10 & 0x400) == 0) ||
+  |              ((DAT_00127170 == 0 ||
+  |               (((DAT_00127170 < 3 && (PTR_DAT_00127178[DAT_00127170 - 1] == '0')) &&
+  |                (*PTR_DAT_00127178 == '0')))))) {
+  |             if (*(char *)(param_1 + 0x18) == '\0') {
+
+  ### FUNC 0xf460  类别=loop
+  --- 我方 ---
+  | // FUNC fde@0x223f0  0xf460..0xfdd2  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 546 / 已提升 546 / abstain 0（0.00%）/ 语句 620
+  | L_0xf460:
+  |   push(r15);
+  |   push(r14);
+  |   r14d = esi;
+  |   push(r13);
+  |   r14d &= 0x3;
+  |   push(r12);
+  |   eax = addr(r14 + -0x1);
+  |   push(rbp);
+  |   push(rbx);
+  |   rsp -= 0xd38;
+  |   rbp = *(u64 *)(fs:[0x28]);
+  |   *(u64 *)(rsp + 0xd28) = rbp;
+  |   rbp = addr(rsp + 0x100);
+  |   r12 = addr(rsp + 0x510);
+  |   r13 = addr(rsp + 0x920);
+  |   *(u64 *)(rsp + 0xf8) = 0x400;
+  |   *(u64 *)(rsp + 0x500) = r12;
+  |   *(u64 *)(rsp + 0x508) = 0x400;
+  |   *(u64 *)(rsp + 0x910) = r13;
+  |   *(u64 *)(rsp + 0x918) = 0x400;
+  |   *(u64 *)(rsp + 0xf0) = rbp;
+  |   flags = test(eax, r14d);
+  |   if ((eax & r14d) != 0) goto L_0xf648;
+  |   goto L_0xf4ee;  /* 未取分支 */
+  | L_0xf4ee:
+  |   r11 = rdi;
+  |   flags = test(rdi, rdi);
+  |   if ((rdi & rdi) == 0) goto L_0xf648;
+  |   goto L_0xf4fa;  /* 未取分支 */
+  | L_0xf4fa:
+  |   ecx = *(u8 *)(rdi);  /* movzx */
+  |   flags = test(cl, cl);
+  |   if ((cl & cl) == 0) goto L_0xf7e0;
+  |   goto L_0xf505;  /* 未取分支 */
+  | L_0xf505:
+  |   ebx = esi;
+  --- Ghidra（FUN_0010f460）---
+  | 
+  | void * FUN_0010f460(char *param_1,uint param_2)
+  | 
+  | {
+  |   char *pcVar1;
+  |   ulong uVar2;
+  |   char cVar3;
+  |   bool bVar4;
+  |   char cVar5;
+  |   int iVar6;
+  |   char *pcVar7;
+  |   int *piVar8;
+  |   char *pcVar9;
+  |   void *pvVar10;
+  |   size_t __n;
+  |   char *pcVar11;
+  |   char *pcVar12;
+  |   long lVar13;
+  |   uint uVar14;
+  |   char *pcVar15;
+  |   size_t sVar16;
+  |   long in_FS_OFFSET;
+  |   bool bVar17;
+  |   long local_d58;
+  |   int local_d2c;
+  |   long local_d18;
+  |   stat local_d08;
+  |   char *local_c78;
+  |   size_t local_c70;
+  |   char local_c68;
+  |   char local_c67 [1023];
+  |   char *local_868;
+  |   ulong local_860;
+  |   char local_858 [1024];
+  |   char *local_458;
+  |   long local_450;
+  |   char local_448 [1032];
+  |   long local_40;
+  |   
+  |   uVar14 = param_2 & 3;
+
+  ### FUNC 0x13490  类别=loop
+  --- 我方 ---
+  | // FUNC fde@0x22fd8  0x13490..0x1365b  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 107 / 已提升 107 / abstain 0（0.00%）/ 语句 119
+  | L_0x13490:
+  |   push(r14);
+  |   push(r13);
+  |   r13 = rsi;
+  |   push(r12);
+  |   push(rbp);
+  |   push(rbx);
+  |   rbx = rdi;
+  |   rsp -= 0x10;
+  |   rbp = *(u64 *)(fs:[0x28]);
+  |   *(u64 *)(rsp + 0x8) = rbp;
+  |   rbp = rdx;
+  |   flags = test(rdi, rdi);
+  |   if ((rdi & rdi) == 0) goto L_0x135e0;
+  |   goto L_0x134c0;  /* 未取分支 */
+  | L_0x134c0:
+  |   r12d ^= r12d;
+  |   flags = cmp(*(u8 *)(rbx), 0x27);
+  |   if (*(u8 *)(rbx) != 0x27) goto L_0x134d2;
+  |   goto L_0x134c8;  /* 未取分支 */
+  | L_0x134c8:
+  |   rbx += 0x1;
+  |   r12d = 0x4;
+  | L_0x134d2:
+  |   r14 = addr(data_0x1fce0);
+  |   ecx = 0x4;
+  |   rsi = addr(data_0x26980);
+  |   rdi = rbx;
+  |   rdx = r14;
+  |   sub_0xee80();
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) <0) goto L_0x13530;
+  |   goto L_0x134f4;  /* 未取分支 */
+  | L_0x134f4:
+  |   /* cdqe（隐式 rax/rdx 扩展） */
+  |   *(u64 *)(rbp) = 0x1;
+  |   r12d |= *(u32 *)(r14 + rax * 4);
+  --- Ghidra（FUN_00113490）---
+  | 
+  | undefined8 FUN_00113490(char *param_1,uint *param_2,long *param_3)
+  | 
+  | {
+  |   char cVar1;
+  |   int iVar2;
+  |   undefined8 uVar3;
+  |   char *pcVar4;
+  |   long lVar5;
+  |   uint uVar6;
+  |   long in_FS_OFFSET;
+  |   char *local_38;
+  |   long local_30;
+  |   
+  |   local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  |   if (((param_1 == (char *)0x0) && (param_1 = getenv("BLOCK_SIZE"), param_1 == (char *)0x0)) &&
+  |      (param_1 = getenv("BLOCKSIZE"), param_1 == (char *)0x0)) {
+  |     pcVar4 = getenv("POSIXLY_CORRECT");
+  |     *param_3 = (ulong)(-(uint)(pcVar4 == (char *)0x0) & 0x200) + 0x200;
+  |     *param_2 = 0;
+  |   }
+  |   else {
+  |     uVar6 = 0;
+  |     if (*param_1 == '\'') {
+  |       param_1 = param_1 + 1;
+  |       uVar6 = 4;
+  |     }
+  |     iVar2 = FUN_0010ee80(param_1,&PTR_s_human_readable_00126980,&DAT_0011fce0,4);
+  |     if (iVar2 < 0) {
+  |       uVar3 = FUN_0011a540(param_1,&local_38,0,param_3,"eEgGkKmMpPtTyYzZ0");
+  |       if ((int)uVar3 == 0) {
+  |         cVar1 = *param_1;
+  |         while (9 < (byte)(cVar1 - 0x30U)) {
+  |           if (local_38 == param_1) {
+  |             if (local_38[-1] == 'B') {
+  |               uVar6 = uVar6 | 0x180;
+  |               if (local_38[-2] != 'i') break;
+  |             }
+  |             else {
+  |               uVar6 = uVar6 | 0x80;
+
+[对读] tests/fixtures/dyn_static
+  0x401100   我方: 指令  1 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x404760（__libc_message_impl）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x40cf00   我方: 指令  3 块 1 abstain 0 complete | Ghidra: 有 块1 大小8
+  0x421550   我方: 指令  2 块 1 abstain 0 complete | Ghidra: 有 块1 大小8
+  0x44a5c0   我方: 指令  6 块 1 abstain 0 complete | Ghidra: 有 块1 大小32
+  0x40110b   我方: 指令 26 块 1 abstain 1 partial | Ghidra: 有 块1 大小126
+  0x415ef0   我方: 指令 29 块 7 abstain 3 partial | Ghidra: 有 块7 大小127
+      - Ghidra 以调用呈现 0x404a60：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x432d90   我方: 指令 25 块 7 abstain 0 complete | Ghidra: 有 块7 大小92
+  0x45cf20   我方: 指令 17 块 7 abstain 0 complete | Ghidra: 有 块7 大小47
+  0x401480   我方: 指令 32 块 6 abstain 2 partial | Ghidra: 有 块6 大小99
+      - Ghidra 以调用呈现 0x471490：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x417100   我方: 指令 71 块14 abstain 0 complete | Ghidra: 有 块14 大小211
+  0x445770   我方: 指令 69 块 6 abstain 0 complete | Ghidra: 有 块6 大小253
+      - .text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x45f920   我方: 指令 33 块 9 abstain 0 complete | Ghidra: 有 块9 大小146
+  0x401e70   我方: 指令241 块68 abstain 7 partial | Ghidra: 有 块68 大小875
+  0x4216e0   我方: 指令111 块12 abstain 0 complete | Ghidra: 有 块12 大小377
+      - .text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  0x438850   我方: 指令167 块35 abstain 0 complete | Ghidra: 有 块35 大小717
+      - .text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x45c7a0   我方: 指令195 块27 abstain91 partial | Ghidra: 有 块27 大小806
+  0x40139d   我方: 指令 15 块 5 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x401193   我方: 指令 26 块 9 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x401870   我方: 指令 80 块23 abstain 0 complete | Ghidra: 有 块55 大小704
+      - 基本块数不一致（我方 23 块/704 字节，Ghidra 55 块/704 字节）：函数域相同，块数差主要来自 1 处间接 jmp 目标未解析（R45 不猜），其后 case 块不可达；Ghidra 可能恢复了跳转表
+  0x402b00   我方: 指令832 块142 abstain23 partial | Ghidra: 有 块149 大小4393
+      - 基本块数不一致（我方 142 块/4399 字节，Ghidra 149 块/4393 字节）：函数域相同，差异较小（尾跳转/不可达填充）；另有 1 处间接 jmp 目标未解析（不猜）
+  0x44d710   我方: 指令1790 块384 abstain63 partial | Ghidra: 有 块385 大小8314
+      - .text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+      - 仅 Ghidra 有调用目标 0x40110b：其 thunk/IAT 解析，或我方在该块 abstain
+      - 基本块数不一致（我方 384 块/8551 字节，Ghidra 385 块/8314 字节）：函数域相同，差异来自块切分口径（尾跳转/不可达填充）
+  -- 汇总: 入口存在 18/21（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 15/18 ｜ 重叠集内调用集相等 12/18
+  -- 抽样函数弃权原因（按指令计，共 190 条）:
+       20 × 0F 28 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       19 × 0F 7f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       16 × 0F 74 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       16 × 0F d7 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       16 × 0F bc 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+       14 × 0F 6f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       13 × 条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        9 × 0F 6e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        8 × 0F bd 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        6 × 0F da SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        6 × 0F 7e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        6 × x87 浮点指令（opcode 0xd9）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        5 × mul/imul/div/idiv（隐式 rax/rdx 双寄存器结果）未建模 ｜ 缺: 隐式操作数 rax/rdx 与商余数语义
+        4 × 0F ef SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        4 × 0F 50 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        4 × x87 浮点指令（opcode 0xdb）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        3 × lock 前缀：原子语义未建模 ｜ 缺: 带 lock 的内存序/原子性语义
+        3 × 0F 29 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        3 × x87 浮点指令（opcode 0xdf）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        3 × x87 浮点指令（opcode 0xdd）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        2 × 0F d6 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 0F db SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 0F 2e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × 字符串指令（opcode 0xab）未建模 ｜ 缺: rep/隐式 rsi/rdi 更新与方向标志语义（M5-U1 白名单之外）
+        1 × 0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        1 × 0F 62 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × 0F 10 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × 0F 54 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × cmov 前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+
+  ── 人工对读样本（我方伪 C / Ghidra C 并列）──
+
+  ### FUNC 0x40cf00  类别=-
+  --- 我方 ---
+  | // FUNC __mempcpy_avx512_unaligned  0x40cf00..0x40cf08  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 3 / 已提升 3 / abstain 0（0.00%）/ 语句 3
+  | L_0x40cf00:
+  |   rax = rdi;
+  |   rax += rdx;
+  |   goto L_0x40cf13;
+  --- Ghidra（__mempcpy_avx512_unaligned）---
+  | 
+  | undefined1 *
+  | __mempcpy_avx512_unaligned(undefined1 (*param_1) [64],undefined1 (*param_2) [64],ulong param_3)
+  | 
+  | {
+  |   undefined1 uVar1;
+  |   undefined4 uVar2;
+  |   undefined8 uVar3;
+  |   undefined8 uVar4;
+  |   undefined8 uVar5;
+  |   ulong uVar6;
+  |   undefined1 *puVar7;
+  |   int iVar8;
+  |   ulong uVar9;
+  |   undefined1 (*pauVar10) [64];
+  |   uint uVar11;
+  |   undefined1 (*pauVar12) [64];
+  |   undefined1 (*pauVar13) [64];
+  |   long lVar14;
+  |   undefined1 auVar15 [32];
+  |   undefined1 auVar16 [32];
+  |   undefined1 auVar17 [64];
+  |   undefined1 auVar18 [64];
+  |   undefined1 auVar19 [64];
+  |   undefined1 auVar20 [64];
+  |   undefined1 auVar21 [64];
+  |   undefined1 auVar22 [64];
+  |   undefined1 auVar23 [64];
+  |   undefined1 auVar24 [64];
+  |   undefined1 auVar25 [64];
+  |   
+  |   uVar6 = __x86_shared_non_temporal_threshold;
+  |   puVar7 = *param_1 + param_3;
+  |   if (param_3 < 0x40) {
+  |     uVar11 = (uint)param_3;
+  |     if (0x1f < uVar11) {
+  |       auVar15 = vmovdqu64_avx512vl(*(undefined1 (*) [32])*param_2);
+  |       auVar16 = vmovdqu64_avx512vl(*(undefined1 (*) [32])(param_2[-1] + param_3 + 0x20));
+  |       auVar15 = vmovdqu64_avx512vl(auVar15);
+  |       *(undefined1 (*) [32])*param_1 = auVar15;
+
+  ### FUNC 0x421550  类别=-
+  --- 我方 ---
+  | // FUNC _IO_default_read  0x421550..0x421558  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 2 / 已提升 2 / abstain 0（0.00%）/ 语句 2
+  | L_0x421550:
+  |   rax = -0x1;
+  |   return;
+  --- Ghidra（_IO_default_read）---
+  | 
+  | undefined8 _IO_default_read(void)
+  | 
+  | {
+  |   return 0xffffffffffffffff;
+  | }
+  | 
+
+  ### FUNC 0x44a5c0  类别=-
+  --- 我方 ---
+  | // FUNC __libc_localealias_freemem  0x44a5c0..0x44a5e0  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 6 / 已提升 6 / abstain 0（0.00%）/ 语句 6
+  | L_0x44a5c0:
+  |   rsp -= 0x8;
+  |   rdi = *(u64 *)data_0x4aa010;
+  |   sub_0x409bc0();
+  |   rdi = *(u64 *)data_0x4a9ff8;
+  |   rsp += 0x8;
+  |   goto L_0x409bc0;
+  --- Ghidra（__libc_localealias_freemem）---
+  | 
+  | void __libc_localealias_freemem(void)
+  | 
+  | {
+  |   free(string_space);
+  |   free(map);
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x40110b  类别=-
+  --- 我方 ---
+  | // FUNC abort  0x40110b..0x401193  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 26 / 已提升 25 / abstain 1（3.85%）/ 语句 26
+  | L_0x40110b:
+  |   rsp -= 0xb8;
+  |   rdi = *(u64 *)(fs:[0x28]);
+  |   *(u64 *)(rsp + 0xa8) = rdi;
+  |   edi = 0x6;
+  |   sub_0x44bcd0();
+  |   edi ^= edi;
+  |   sub_0x415820();
+  |   eax ^= eax;
+  |   rdi = addr(rsp + 0x10);
+  |   edx ^= edx;
+  |   ecx = 0x26;
+  |   rsi = addr(rsp + 0x10);
+  |   /* abstain @0x401147: 字符串指令（opcode 0xab）未建模（缺：rep/隐式 rsi/rdi 更新与方向标志语义（M5-U1 白名单之外）） */
+  |   edi = 0x6;
+  |   *(u64 *)(rsp + 0x18) = -0x1;
+  |   sub_0x44bd30();
+  |   edi = 0x6;
+  |   sub_0x4223d0();
+  |   rsi = addr(rsp + 0x8);
+  |   r10d = 0x8;
+  |   *(u64 *)(rsp + 0x8) = 0x20;
+  |   edx ^= edx;
+  |   edi = 0x1;
+  |   eax = 0xe;
+  |   syscall();
+  |   __halt();
+  --- Ghidra（abort）---
+  | 
+  | /* WARNING: Unknown calling convention -- yet parameter storage is locked */
+  | 
+  | void abort(void)
+  | 
+  | {
+  |   long lVar1;
+  |   undefined4 *puVar2;
+  |   long in_FS_OFFSET;
+  |   byte bVar3;
+  |   undefined4 local_a8 [2];
+  |   undefined8 local_a0;
+  |   undefined8 local_10;
+  |   
+  |   bVar3 = 0;
+  |   local_10 = *(undefined8 *)(in_FS_OFFSET + 0x28);
+  |   raise(6);
+  |   __abort_lock_wrlock(0);
+  |   puVar2 = local_a8;
+  |   for (lVar1 = 0x26; lVar1 != 0; lVar1 = lVar1 + -1) {
+  |     *puVar2 = 0;
+  |     puVar2 = puVar2 + (ulong)bVar3 * -2 + 1;
+  |   }
+  |   local_a0 = 0xffffffffffffffff;
+  |   __libc_sigaction(6,local_a8,0);
+  |   __pthread_raise_internal(6);
+  |   syscall();
+  |   do {
+  |                     /* WARNING: Do nothing block with infinite loop */
+  |   } while( true );
+  | }
+  | 
+
+  ### FUNC 0x415ef0  类别=-
+  --- 我方 ---
+  | // FUNC __getrandom_vdso_release  0x415ef0..0x415f7e  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 29 / 已提升 26 / abstain 3（10.34%）/ 语句 32
+  | L_0x415ef0:
+  |   flags = cmp(*(u64 *)(rdi + 0x918), 0x1);
+  |   if (*(u64 *)(rdi + 0x918) <=u 0x1) goto L_0x415f58;
+  |   goto L_0x415efa;  /* 未取分支 */
+  | L_0x415efa:
+  |   push(rbx);
+  |   eax ^= eax;
+  |   rbx = rdi;
+  |   edx = 0x1;
+  |   /* abstain @0x415f05: lock 前缀：原子语义未建模（缺：带 lock 的内存序/原子性语义） */
+  |   /* abstain @0x415f0d: 条件跳转前没有可跟踪的标志位来源（缺：跨块标志数据流） */
+  |   goto L_0x415f0f;  /* 未取分支 */
+  | L_0x415f0f:
+  |   rax = *(u64 *)data_0x4a9cd0;
+  |   rcx = *(u64 *)(rbx + 0x918);
+  |   rdx = *(u64 *)data_0x4a9cc8;
+  |   *(u64 *)(rdx + rax * 8) = rcx;
+  |   rax += 0x1;
+  |   *(u64 *)(rbx + 0x918) = 0x0;
+  |   /* abstain @0x415f37: lock 前缀：原子语义未建模（缺：带 lock 的内存序/原子性语义） */
+  |   *(u64 *)data_0x4a9cd0 = rax;
+  |   eax ^= eax;
+  |   swap(*(u32 *)data_0x4a9cc0, eax);
+  |   flags = cmp(eax, 0x1);
+  |   if (eax > 0x1) goto L_0x415f60;
+  |   goto L_0x415f51;  /* 未取分支 */
+  | L_0x415f51:
+  |   rbx = pop();
+  |   return;
+  | L_0x415f58:
+  |   return;
+  | L_0x415f60:
+  |   rdi = addr(data_0x4a9cc0);
+  |   rbx = pop();
+  |   goto L_0x404a60;
+  | L_0x415f70:
+  |   rdi = addr(data_0x4a9cc0);
+  --- Ghidra（__getrandom_vdso_release）---
+  | 
+  | void __getrandom_vdso_release(long param_1)
+  | 
+  | {
+  |   int iVar1;
+  |   bool bVar2;
+  |   
+  |   if (*(ulong *)(param_1 + 0x918) < 2) {
+  |     return;
+  |   }
+  |   LOCK();
+  |   bVar2 = grnd_alloc == 0;
+  |   if (bVar2) {
+  |     grnd_alloc = 1;
+  |   }
+  |   UNLOCK();
+  |   if (!bVar2) {
+  |     __lll_lock_wait_private(&grnd_alloc);
+  |   }
+  |   *(undefined8 *)(DAT_004a9cc8 + DAT_004a9cd0 * 8) = *(undefined8 *)(param_1 + 0x918);
+  |   DAT_004a9cd0 = DAT_004a9cd0 + 1;
+  |   *(undefined8 *)(param_1 + 0x918) = 0;
+  |   iVar1 = grnd_alloc;
+  |   LOCK();
+  |   UNLOCK();
+  |   LOCK();
+  |   grnd_alloc = 0;
+  |   UNLOCK();
+  |   if (iVar1 < 2) {
+  |     return;
+  |   }
+  |   __lll_lock_wake_private(&grnd_alloc);
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x432d90  类别=loop
+  --- 我方 ---
+  | // FUNC _dl_handle_execstack_tunable  0x432d90..0x432df7  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 25 / 已提升 25 / abstain 0（0.00%）/ 语句 28
+  | L_0x432d90:
+  |   rsp -= 0x18;
+  |   edx ^= edx;
+  |   edi = 0x28;
+  |   rsi = addr(rsp + 0xc);
+  |   sub_0x413a20();
+  |   eax = *(u32 *)(rsp + 0xc);
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) == 0) goto L_0x432de0;
+  |   goto L_0x432dad;  /* 未取分支 */
+  | L_0x432dad:
+  |   flags = cmp(eax, 0x2);
+  |   if (eax == 0x2) goto L_0x432dc0;
+  |   goto L_0x432db2;  /* 未取分支 */
+  | L_0x432db2:
+  |   rsp += 0x18;
+  |   return;
+  | L_0x432dc0:
+  |   rdi = *(u64 *)data_0x4a1ff8;
+  |   sub_0x45f670();
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) == 0) goto L_0x432db2;
+  |   goto L_0x432dd0;  /* 未取分支 */
+  | L_0x432dd0:
+  |   rdi = addr(data_0x47a148);
+  |   eax ^= eax;
+  |   sub_0x4396c0();
+  | L_0x432de0:
+  |   flags = test(*(u8 *)data_0x4a3b28, 0x1);
+  |   if ((*(u8 *)data_0x4a3b28 & 0x1) == 0) goto L_0x432db2;
+  |   goto L_0x432de9;  /* 未取分支 */
+  | L_0x432de9:
+  |   rdi = addr(data_0x47a110);
+  |   eax ^= eax;
+  |   sub_0x4396c0();
+  --- Ghidra（_dl_handle_execstack_tunable）---
+  | 
+  | void _dl_handle_execstack_tunable(void)
+  | 
+  | {
+  |   int iVar1;
+  |   int local_c [3];
+  |   
+  |   __tunable_get_val(0x28,local_c,0);
+  |   if (local_c[0] == 0) {
+  |     if (((byte)_dl_stack_flags & 1) != 0) {
+  |                     /* WARNING: Subroutine does not return */
+  |       _dl_fatal_printf("Fatal glibc error: executable stack is not allowed\n");
+  |     }
+  |   }
+  |   else if (local_c[0] == 2) {
+  |     iVar1 = _dl_make_stack_executable(__libc_stack_end);
+  |     if (iVar1 != 0) {
+  |                     /* WARNING: Subroutine does not return */
+  |       _dl_fatal_printf("Fatal glibc error: cannot enable executable stack as tunable requires");
+  |     }
+  |   }
+  |   return;
+  | }
+  | 
+
+PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）
+--- verify_map exit=0
+
+==============================================================================
+M3 映射混淆矩阵（真值快照 map_ground_truth.json）
+==============================================================================
+
+[elf_sec] 格数 170
+  expected\got    hit    nif  unmap
+  nif               0      9      0
+  命中 169 / 失配 0
+  误报FP 0
+
+[elf_seg] 格数 163
+  expected\got    hit    nif  unmap
+  hit              62      0      0
+  nif               0      8      0
+  命中 163 / 失配 0
+  误报FP 0
+
+[iat] 格数 1702
+  expected\got    hit    nif  unmap
+  命中 1701 / 失配 0
+  误报FP 0
+
+[iat_packed] 格数 110
+  expected\got    hit    nif  unmap
+  命中 110 / 失配 0
+  误报FP 0
+
+[pe_hdr] 格数 18
+  expected\got    hit    nif  unmap
+  hit              18      0      0
+  命中 18 / 失配 0
+  误报FP 0
+
+[pe_sec] 格数 241
+  expected\got    hit    nif  unmap
+  hit              90      0      0
+  nif               0     12      0
+  命中 241 / 失配 0
+  误报FP 0
+
+[abstain] 弃权格 2（不计入可判定格分母）
+
+可判定格 2402：命中 2402（100.00%）/ 失配 0 / 误报 0 / 解析异常 0
+
+VERDICT: PASS
+--- verify_iat exit=0
+==========================================================================
+M3 IAT 验收（真值 map_ground_truth.json）
+==========================================================================
+
+[unpacked] 未加壳
+  cli-64.exe                                     decode 278格 失配0  repair slots=64  regions=10 区间等=10 unresolved=0   幂等=True 原样本不动=True
+  minidll.dll                                    decode   1格 失配0  repair slots=0   regions=0 区间等=0 unresolved=0   幂等=None 原样本不动=None
+  minipe.exe                                     decode   8格 失配0  repair slots=1   regions=1 区间等=1 unresolved=0   幂等=True 原样本不动=True
+  minipe_fakerich.exe                            decode   0格 失配0  repair slots=0   regions=0 区间等=0 unresolved=0   幂等=None 原样本不动=None  abstain=畸形导入目录（真值侧忽略）
+  hello_go.exe                                   decode 143格 失配0  repair slots=47  regions=1 区间等=1 unresolved=0   幂等=True 原样本不动=True
+  hello_rust.exe                                 decode 362格 失配0  repair slots=85  regions=10 区间等=10 unresolved=0   幂等=True 原样本不动=True
+  putty-64bit.exe                                decode 1410格 失配0  repair slots=348 regions=8 区间等=8 unresolved=0   幂等=True 原样本不动=True
+  小计：slots 545，区间逐字节全等 30/30
+
+[packed] 加壳（单列，不计入未加壳成功率）
+  upx_cli-64.exe                                 decode  74格 失配0  repair slots=13  regions=10 区间等=0 unresolved=13  幂等=True 原样本不动=True
+  upx_putty-64bit.exe                            decode  62格 失配0  repair slots=11  regions=8 区间等=0 unresolved=11  幂等=True 原样本不动=True
+  小计：slots 24，区间逐字节全等 0/18
+  说明：加壳组「区间等」预期为 0——按纪律一个字节都不写，伪指针原样保留；判定看 unresolved==slots 且 wrote_any=False
+
+[反例] 篡改 1 slot → status=unresolved bytes_untouched=True reason=槽值 0x41414141 < ImageBase 0x140000000，不像加载态地址
+
+结论：失配 0 项
+VERDICT: PASS
+--- verify_fingerprint --all --matrix exit=0
+E9 fingerprint 混淆矩阵 · 真值冻结于 2026-11-15（E9 执行前冻结；冻结后不再改动，除非另立修正记录并注明证据）
+清单: D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\sample_manifest.json
+样本数: 18（正样本 upx=3，负样本=15）
+
+[1] 逐样本矩阵（✓ 命中 / ○ 正确弃权 / ✗ 未命中 / ‼ 违规）
+sample                         fmt  role     pack   compiler           stripped/coff  mitigations
+-------------------------------------------------------------------------------------------------
+dyn_pie                        ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=yes
+dyn_nopie                      ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=no
+dyn_static                     ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=no
+dyn_execstack                  ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=disabled,relro=partial,pie=yes
+dyn_norelro                    ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=none,pie=no
+bin_ls.elf                     ELF  negative ✓none ○unknown                  ✓true         ✓nx=enabled,relro=full,pie=yes
+hello_go_linux                 ELF  negative ✓none ✓go 1.27.3                ✓false        ✓nx=enabled,relro=none,pie=no
+busybox-1.35.0-musl-x86_64     ELF  negative ✓none ○unknown                  ✓true         ✓nx=enabled,relro=partial,pie=no
+upx_dyn_pie                    ELF  positive ✓upx  ○unknown                  ○unknown      ○nx=unknown,relro=unknown,pie=unknown
+upx_cli-64.exe                 PE   positive ✓upx  ✓msvc 19.29               ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+upx_putty-64bit.exe            PE   positive ✓upx  ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+cli-64.exe                     PE   negative ✓none ✓msvc 19.29               ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minipe.exe                     PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minidll.dll                    PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minipe_fakerich.exe            PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+hello_go.exe                   PE   negative ✓none ✓go 1.27.3                ✓n/a / present ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+hello_rust.exe                 PE   negative ✓none ✓rust                     ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+putty-64bit.exe                PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+
+[2] packer 混淆矩阵（only 可判定格）
+  GT \ 实际                none       upx       
+  none                   15         0         
+  upx                    0          3         
+
+[2] compiler.family 混淆矩阵（only 可判定格）
+  GT \ 实际                gcc        go         msvc       rust      
+  gcc                    5          0          0          0         
+  go                     0          2          0          0         
+  msvc                   0          0          2          0         
+  rust                   0          0          0          1         
+
+[2] compiler.version 混淆矩阵（only GT 有明确版本的格）
+  GT \ 实际                1.27.3     14.2.0     19.29     
+  1.27.3                 2          0          0         
+  14.2.0                 0          5          0         
+  19.29                  0          0          2         
+
+[2] stripped 混淆矩阵（ELF true/false；PE 固定 n/a）
+  GT \ 实际                False      True       n/a       
+  False                  6          0          0         
+  True                   0          2          0         
+  n/a                    0          0          9         
+
+[2] COFF 符号表混淆矩阵（PE）
+  GT \ 实际                absent     present   
+  absent                 8          0         
+  present                0          1         
+
+[2] mitigations 分项（only 可判定格；弃权格单独计数）
+
+  nx：可判定 17 格，命中 17；弃权格 1，正确弃权 1
+    GT=True           实际=True           ×9
+    GT=disabled       实际=disabled       ×1
+    GT=enabled        实际=enabled        ×7
+
+  relro：可判定 8 格，命中 8；弃权格 1，正确弃权 1
+    GT=full           实际=full           ×1
+    GT=none           实际=none           ×2
+    GT=partial        实际=partial        ×5
+
+  pie：可判定 8 格，命中 8；弃权格 1，正确弃权 1
+    GT=no             实际=no             ×5
+    GT=yes            实际=yes            ×3
+
+  dynamicbase：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=True           实际=True           ×9
+
+  high_entropy_va：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=True           实际=True           ×9
+
+  cfg：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=False          实际=False          ×9
+
+  dll_characteristics：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=0x8160         实际=0x8160         ×9
+
+[3] 汇总
+  样本分母           : 18（异常 0）
+  可判定格           : 132，命中 132，命中率 100.00%
+  不可判定格（弃权） : 12，正确弃权 12（100%），误报 0
+  未命中 / 误报 / 违规: 0 / 0 / 0
+
+E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）
+--- verify_switchcand exit=0
+D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_switchcand.py:85: DeprecationWarning: open_program() is deprecated, use open_project() and program_context() or program_loader() instead.
+  with pyghidra.open_program(
+==============================================================================
+A) 负向基线：候选层关闭/开启逐项对照 definite_baseline.json
+  [OK] recdesc        abstains               baseline=0 now=0 
+  [OK] recdesc        blocks                 baseline=21105 now=21105 
+  [OK] recdesc        bytes_covered          baseline=383375 now=383375 
+  [OK] recdesc        calls_definite         baseline=702 now=702 
+  [OK] recdesc        calls_undecoded        baseline=16 now=16 
+  [OK] recdesc        calls_unresolved       baseline=11 now=11 
+  [OK] recdesc        coverage               baseline=0.8014880971047125 now=0.8014880971047125 
+  [OK] recdesc        edges_cross_function   baseline=339 now=339 
+  [OK] recdesc        edges_definite         baseline=30202 now=30202 
+  [OK] recdesc        edges_speculative      baseline=15 now=15 
+  [OK] recdesc        edges_undecoded        baseline=18 now=18 
+  [OK] recdesc        edges_unresolved       baseline=123 now=123 
+  [OK] recdesc        instruction_bytes      baseline=383409 now=383409 
+  [OK] recdesc        instructions           baseline=94773 now=94773 
+  [OK] recdesc        outside                baseline=0 now=0 
+  [OK] recdesc        overlaps               baseline=6 now=6 
+  [OK] recdesc        section_size           baseline=478329 now=478329 
+  [OK] expr           abstained              baseline=9258 now=9258 
+  [OK] expr           functions_total        baseline=1089 now=1089 
+  [OK] expr           insns                  baseline=94722 now=94722 
+  [OK] expr           lifted                 baseline=1084 now=1084 
+  [OK] expr           lifted_insns           baseline=85464 now=85464 
+  [OK] expr           skipped                baseline=5 now=5 
+  [OK] expr           statements             baseline=105342 now=105342 
+  [OK] expr           text_sha256            baseline=72cb6520cff2893541 now=72cb6520cff2893541 
+  [OK] switchcand     res.blocks             baseline=21105 now=21105 
+  [OK] switchcand     res.instructions       baseline=94773 now=94773 
+  [OK] switchcand     snapshot(before/after) baseline=identical now=identical 
+  结论: 确定数字逐项不变（候选层未污染确定集）
+
+B) 候选（0x401870）：
+  rel32 jmp@0x40192b 表 0x476020 证据 high ｜ 目标 8 项 ｜ 拒绝表项 0 项
+
+C) 收益量化（弱参照 Ghidra）:
+  我方既有块 23 ｜ 候选口径 43（新增起点 20）｜ Ghidra 55 ｜ 差距 32
+  补回 recovered = 20
+  补错 wrong     = 0（在体内但非块起点 0；不在体内 0）
+  我方既有块起点命中 Ghidra: 23/23（多出 0）
+  剩余差距 = 12 个 Ghidra 块起点仍缺（= 55 - 20 - 既有命中 23）
+  剩余明细（候选层未覆盖，属既有块切分口径差异）: 0x40192b, 0x401a44, 0x401a5c, 0x401a93, 0x401a9d, 0x401aa7, 0x401ab1, 0x401abb, 0x401ac5, 0x401acf, 0x401ad9, 0x401aef
+  我方多出 Ghidra 之外的块起点 = 0
+  补回明细: 0x401953, 0x40195a, 0x40198e, 0x4019a0, 0x4019b0, 0x4019b9, 0x4019cf, 0x4019e2, 0x4019f3, 0x401a00, 0x401a0d, 0x401a2e, 0x401a46, 0x401a5e, 0x401a69, 0x401a79, 0x401a84, 0x401a8c, 0x401b17, 0x401b29
+
+D) 拒绝理由可见: 是
+
+PASS（负向基线 通过；收益数字见上，不静默取舍）
+--- verify_struct exit=0
+
+=== tests/fixtures/cli-64.exe ===
+函数 41 ｜ 块 294 ｜ 可达/输出 294/294 ｜ 可回溯违规 0
+结构: if 88 / else 17 / while 20 / do-while 2 / for 0 / switch 0（证据不足降级 0，无候选 3）
+控制转移: goto 60 / break 3 / continue 1 / 条件不可判 3
+不可结构: 不可约 0 块（0 函数）/ 不可达 0 块 / goto 密集 9 函数
+候选去向: high 0 = switch 0 + 未展开块(label) 0 + 降级 0 + 跳过域 0 + 无去向 0
+goto 密集代表: 0x1bc4(21 块), 0x24cc(20 块), 0x1fe4(16 块), 0x1f58(12 块), 0x2394(8 块)
+耗时 0.1s
+
+=== tests/fixtures/bin_ls.elf ===
+函数 331 ｜ 块 3821 ｜ 可达/输出 3821/3821 ｜ 可回溯违规 0
+结构: if 1193 / else 334 / while 50 / do-while 1 / for 1 / switch 3（证据不足降级 2，无候选 2）
+控制转移: goto 887 / break 11 / continue 2 / 条件不可判 21
+不可结构: 不可约 441 块（12 函数）/ 不可达 0 块 / goto 密集 79 函数
+候选去向: high 3 = switch 3 + 未展开块(label) 0 + 降级 0 + 跳过域 0 + 无去向 0
+goto 密集代表: 0xca80(231 块), 0xb820(108 块), 0xb1e0(107 块), 0xdc80(74 块), 0xadd0(45 块)
+耗时 1.2s
+
+=== tests/fixtures/dyn_static ===
+函数 1084 ｜ 块 21088 ｜ 可达/输出 21088/21088 ｜ 可回溯违规 0
+结构: if 5905 / else 1560 / while 425 / do-while 21 / for 9 / switch 9（证据不足降级 5，无候选 73）
+控制转移: goto 4347 / break 85 / continue 27 / 条件不可判 206
+不可结构: 不可约 2407 块（77 函数）/ 不可达 24 块 / goto 密集 240 函数
+候选去向: high 29 = switch 9 + 未展开块(label) 20 + 降级 0 + 跳过域 0 + 无去向 0
+goto 密集代表: 0x44fdd0(185 块), 0x402b00(142 块), 0x4607c0(123 块), 0x4070b0(120 块), 0x41bb30(109 块)
+耗时 17.4s
+
+结果: PASS
+--- verify_callgraph exit=0
+
+=== tests/fixtures/cli-64.exe ===
+调用点 153（直接 98 ｜ 间接 55；不合并）
+三态（分母=直接 98）: decoded 63 (64.29%) ｜ plt_or_import 35 (35.71%) ｜ unresolved 0 (0.00%)
+间接候选层: 默认关闭 ｜ 开启后 high 52 / medium 3 / low 0
+函数节点 85 ｜ 环 0 组（自递归 0 / 互递归 0）
+观察: 调用点 153 ｜ before 定义 464 ｜ after 使用 309 ｜ 窗口截断 3 ｜ rsp 改写 34
+渲染 2199 字节 ｜ 负向基线 17 项 ｜ 耗时 0.0s
+
+=== tests/fixtures/bin_ls.elf ===
+调用点 1154（直接 1116 ｜ 间接 38；不合并）
+三态（分母=直接 1116）: decoded 428 (38.35%) ｜ plt_or_import 688 (61.65%) ｜ unresolved 0 (0.00%)
+间接候选层: 默认关闭 ｜ 开启后 high 1 / medium 2 / low 35
+函数节点 331 ｜ 环 2 组（自递归 2 / 互递归 0）
+  · self: 0x7990
+  · self: 0x13dd0
+观察: 调用点 1154 ｜ before 定义 3817 ｜ after 使用 2293 ｜ 窗口截断 51 ｜ rsp 改写 168
+渲染 3620 字节 ｜ 负向基线 17 项 ｜ 耗时 0.3s
+
+=== tests/fixtures/dyn_static ===
+调用点 3609（直接 3457 ｜ 间接 152；不合并）
+三态（分母=直接 3457）: decoded 3050 (88.23%) ｜ plt_or_import 402 (11.63%) ｜ unresolved 5 (0.14%)
+间接候选层: 默认关闭 ｜ 开启后 high 0 / medium 1 / low 151
+函数节点 1089 ｜ 环 17 组（自递归 15 / 互递归 2）
+  · mutual: 0x404760, 0x411af0, 0x411fd0, 0x4120b0
+  · mutual: 0x447220, 0x448800
+  · self: 0x401480
+  · self: 0x431840
+  · self: 0x4318d0
+观察: 调用点 3609 ｜ before 定义 11125 ｜ after 使用 6466 ｜ 窗口截断 164 ｜ rsp 改写 372
+渲染 6229 字节 ｜ 负向基线 17 项 ｜ 耗时 0.9s
+
+结果: PASS
+--- verify_callfacts exit=0
+
+=== tests/fixtures/cli-64.exe ===
+站点 153（直接 98 ｜ 间接 55）
+事实 before 427 / after 309 ｜ abstain 248
+操作数证据 declared 0 / observed 736 / derived 736 ｜ 目标证据 declared 68 / observed 133 / derived 65
+函数域: declared 153 站 ｜ derived 0 站 ｜ 栈槽事实 73 ｜ 槽弃权 37 ｜ 窗口截断 3
+独立判据（objdump）: 窗口内查写 273 次 ｜ 未建模 0 ｜ 违规 0
+跨块（只走确定边）: 事实 0 ｜ 弃权 0 ｜ 站点 0 ｜ 分支 0 ｜ 逐跳 复核 0 ｜ 定义指令经 objdump 确认 0 ｜ 未建模 0 ｜ 前驱不完整 0
+一致性: checked 153 ｜ 矛盾 0 ｜ 调用图渲染只读 OK
+
+=== tests/fixtures/bin_ls.elf ===
+站点 1154（直接 1116 ｜ 间接 38）
+事实 before 3775 / after 2293 ｜ abstain 1285
+操作数证据 declared 0 / observed 6068 / derived 6068 ｜ 目标证据 declared 1804 / observed 1116 / derived 0
+函数域: declared 1154 站 ｜ derived 0 站 ｜ 栈槽事实 350 ｜ 槽弃权 42 ｜ 窗口截断 51
+独立判据（objdump）: 窗口内查写 352 次 ｜ 未建模 0 ｜ 违规 0
+跨块（只走确定边）: 事实 9 ｜ 弃权 22 ｜ 站点 30 ｜ 分支 11 ｜ 逐跳 复核 45 ｜ 定义指令经 objdump 确认 9 ｜ 未建模 0 ｜ 前驱不完整 0
+一致性: checked 1154 ｜ 矛盾 0 ｜ 调用图渲染只读 OK
+
+=== tests/fixtures/dyn_static ===
+站点 3609（直接 3457 ｜ 间接 152）
+事实 before 10663 / after 6466 ｜ abstain 4392
+操作数证据 declared 0 / observed 17129 / derived 17129 ｜ 目标证据 declared 3452 / observed 3457 / derived 402
+函数域: declared 3606 站 ｜ derived 3 站 ｜ 栈槽事实 2571 ｜ 槽弃权 462 ｜ 窗口截断 164
+独立判据（objdump）: 窗口内查写 2224 次 ｜ 未建模 0 ｜ 违规 0
+跨块（只走确定边）: 事实 78 ｜ 弃权 75 ｜ 站点 124 ｜ 分支 139 ｜ 逐跳 复核 216 ｜ 定义指令经 objdump 确认 78 ｜ 未建模 0 ｜ 前驱不完整 0
+一致性: checked 3609 ｜ 矛盾 0 ｜ 调用图渲染只读 OK
+
+结果: PASS
+--- verify_callfacts --selftest exit=0
+[selftest] 正例 tests/fixtures/cli-64.exe 伪造槽事实 [rsp-0x8] @0x1040（0x104f 已改写基址）
+[selftest] 已检出（独立化后仍能失败）→ 通过
+[selftest] R76 正例 0x1077 窗口内含 call 0x1061，伪造 [rsp-0x8] 槽事实→ 已检出（call 的 rsp 写按持久写）
+[selftest] 负例 0x1024 干净窗口未误报 → 通过
+--- verify_sitejoin exit=0
+
+=== tests/fixtures/cli-64.exe ===
+键: 153（唯一 153 ｜ 重复 0）｜ 已解出 call 153 ｜ 两层都漏 0 ｜ 覆盖 完整
+结构化: aligned=153
+冲突: 0（硬 0 ｜ 口径差异 0）: 无
+注入自证: state=检出, edge=检出, struct=检出, coverage=检出 ｜ 只读: OK
+
+=== tests/fixtures/bin_ls.elf ===
+键: 1154（唯一 1154 ｜ 重复 0）｜ 已解出 call 1154 ｜ 两层都漏 0 ｜ 覆盖 完整
+结构化: aligned=1154
+冲突: 0（硬 0 ｜ 口径差异 0）: 无
+注入自证: state=检出, edge=检出, struct=检出, coverage=检出 ｜ 只读: OK
+
+=== tests/fixtures/dyn_static ===
+键: 3609（唯一 3609 ｜ 重复 0）｜ 已解出 call 3609 ｜ 两层都漏 0 ｜ 覆盖 完整
+结构化: aligned=3606 ｜ function_not_structured=3
+冲突: 3（硬 0 ｜ 口径差异 3）: struct_function_absent=3
+注入自证: state=检出, edge=检出, struct=检出, coverage=检出 ｜ 只读: OK
+
+结果: PASS
+--- verify_sitejoin --selftest exit=0
+[selftest] 打断文本行定位后：struct_line_count_mismatch=98
+[selftest] 已检出（能失败）→ 通过
+--- verify_paramdecl exit=0
+== A) 分母先行：18 样本 × 声明来源 ==
+来源类别             present  readable        形参声明数  语义（CLASS_DECLARES）
+dwarf               2/18      2/18        10338  formal_parameters
+pdb                 1/18      0/18            0  types_only_undecoded
+export_table        1/18      1/18            0  function_identity_only
+coff_symbols        1/18      1/18            0  function_identity_only
+elf_symtab          6/18      6/18            0  function_identity_only
+elf_dynsym          5/18      5/18            0  function_identity_only
+gnu_debuglink       1/18      0/18            0  external_reference_only
+eh_frame            7/18      7/18            0  function_range_only
+pdata               6/18      6/18            0  function_range_only
+  [无法验证] pdb：present 1/18 但 readable 0/18 → 定位到了、读不出声明，本轮无法验证
+  [结构性] export_table：present 1/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] coff_symbols：present 1/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] elf_symtab：present 6/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] elf_dynsym：present 5/18，语义=function_identity_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [无法验证] gnu_debuglink：present 1/18 但 readable 0/18 → 定位到了、读不出声明，本轮无法验证
+  [结构性] eh_frame：present 7/18，语义=function_range_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  [结构性] pdata：present 6/18，语义=function_range_only，不含形参位置 → 不能用于绑定（不是样本碰巧为 0）
+  DWARF 版本分布（有可读 DWARF 的样本）：v5×120
+  [无法验证] DWARF v2：18 样本中 0 条 → 真实样本无法验证（仅有合成单测；不得写成「v2 不支持/没有形参」）
+  [无法验证] DWARF v3：18 样本中 0 条 → 真实样本无法验证（仅有合成单测；不得写成「v3 不支持/没有形参」）
+
+== 样本矩阵（先 present，再结果；无声明来源的样本单列分母）==
+样本                           格式   DWARF(可读/声明)      站点   bound partial    zero     无声明     无目标     形参弃权
+dyn_pie                      ELF  ELF/-          未构建       -       -       -       -       -        -
+dyn_nopie                    ELF  ELF/-          未构建       -       -       -       -       -        -
+dyn_static                   ELF  ELF/-         3609       0       0       0    3457     152     3609
+dyn_execstack                ELF  ELF/-          未构建       -       -       -       -       -        -
+dyn_norelro                  ELF  ELF/-          未构建       -       -       -       -       -        -
+bin_ls.elf                   ELF  ELF/-         1154       0       0       0    1116      38     1154
+hello_go_linux               ELF  ELF/5077     11471    2057    3418    4903       0     189     6155
+busybox-1.35.0-musl-x86_64   ELF  ELF/-          未构建       -       -       -       -       -        -
+upx_dyn_pie                  ELF  ELF/-          未构建       -       -       -       -       -        -
+upx_cli-64.exe               PE   PE/-           未构建       -       -       -       -       -        -
+upx_putty-64bit.exe          PE   PE/-           未构建       -       -       -       -       -        -
+cli-64.exe                   PE   PE/-           153       0       0       0      98      55      153
+minipe.exe                   PE   PE/-           未构建       -       -       -       -       -        -
+minidll.dll                  PE   PE/-             0       0       0       0       0       0        0
+  [无可绑定对象] minidll.dll：0 个调用点 → 本样本不构成参数绑定的分母；不能读成「0 个参数」
+minipe_fakerich.exe          PE   PE/-           未构建       -       -       -       -       -        -
+hello_go.exe                 PE   PE/5261      11980    2101    3777    4988       0     195     6789
+hello_rust.exe               PE   PE/-          1029       0       0       0     836     193     1029
+putty-64bit.exe              PE   PE/-           未构建       -       -       -       -       -        -
+
+== 结果分列（只统计声明来源可读的样本）==
+  hello_go_linux：站点 11471 ｜ 因声明绑定：形参 5824、寄存器段 8354（bound 站点 2057） ｜ 部分绑定形参 1696（partial 站点 3418） ｜ 因证据不足弃权：形参 6155（abstained 站点 904） ｜ 零形参声明站点 4903 ｜ objdump 写核对 8354 段（未建模 0）
+  hello_go.exe：站点 11980 ｜ 因声明绑定：形参 6448、寄存器段 9152（bound 站点 2101） ｜ 部分绑定形参 1834（partial 站点 3777） ｜ 因证据不足弃权：形参 6789（abstained 站点 919） ｜ 零形参声明站点 4988 ｜ objdump 写核对 9152 段（未建模 0）
+
+结果: PASS
+--- verify_paramdecl --selftest exit=0
+[selftest] 三类注入（声明外寄存器 / 缺 declared 证据 / 无声明伪造绑定）全部被检出 → 通过
+[selftest] 基线（真实 hello_go_linux）零失败，检查器不是空转的
+--- verify_strxref exit=0
+== 分母（先分母后结果）：18 样本 · 白名单只读数据节 ==
+  dyn_pie                      字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 79.1%
+  dyn_nopie                    字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 68.0%
+  dyn_static                   字符串 1076 (u432/m144/n500)  引用点 1134 (rip1134/imm  0)  无归属  0  suffix 48  unlifted 8853  对账 0/1134  覆盖 80.2%
+  dyn_execstack                字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 80.3%
+  dyn_norelro                  字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 69.9%
+  bin_ls.elf                   字符串  420 (u 78/m 15/n327)  引用点  123 (rip 123/imm  0)  无归属  0  suffix 23  unlifted  538  对账 0/123  覆盖 74.2%
+  hello_go_linux               字符串    7 (u  2/m  0/n  5)  引用点    2 (rip   2/imm  0)  无归属  0  suffix  0  unlifted 5200  对账 0/2  覆盖 91.9%
+  busybox-1.35.0-musl-x86_64   字符串 5825 (u  1/m  0/n5824)  引用点    1 (rip   0/imm  1)  无归属  0  suffix  0  unlifted    5  对账 0/0  覆盖 0.1%
+  upx_dyn_pie                  字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  upx_cli-64.exe               字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  upx_putty-64bit.exe          字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  cli-64.exe                   字符串   89 (u  1/m  0/n 88)  引用点    1 (rip   1/imm  0)  无归属  0  suffix  2  unlifted   23  对账 0/1  覆盖 95.2%
+  minipe.exe                   字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.2%
+  minidll.dll                  字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 1.0%
+  minipe_fakerich.exe          字符串    0 (u  0/m  0/n  0)  引用点    0 (rip   0/imm  0)  无归属  0  suffix  0  unlifted    0  对账 0/0  覆盖 0.0%
+  hello_go.exe                 字符串 3172 (u  2/m  0/n3170)  引用点    2 (rip   2/imm  0)  无归属  0  suffix  0  unlifted 4885  对账 0/2  覆盖 89.1%
+  hello_rust.exe               字符串  158 (u 29/m  9/n120)  引用点   80 (rip  80/imm  0)  无归属  0  suffix 107  unlifted  821  对账 0/80  覆盖 89.6%
+  putty-64bit.exe              字符串 3082 (u1721/m266/n1095)  引用点 2389 (rip2387/imm  2)  无归属  0  suffix 376  unlifted 9363  对账 0/2349  覆盖 88.4%
+== 合计 ==
+  字符串 13829 = unique 2266 + multi 434 + no_site 11129
+  no_site 归因: 跨界 262 / 未解出 0 / 间接 514 / 无证据 10353
+  引用点 3732 = rip 3729 + imm 3；无函数归属 0；suffix 556
+  对账: 交集 0 / 函数域核对 3691
+  代码层覆盖缺口（外部 objdump 判定，模块不可知）：未解码代码里的引用点 5039 个，涉及字符串 276 条；表达式层 unlifted 命中 19 个
+
+OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突
+--- verify_strxref --selftest exit=0
+[selftest] 五类注入（篡改目标 / 删除引用点 / 伪造字符串 / 函数归属矛盾 / 函数域越界）全部被检出
+[selftest] 基线（真实 bin_ls.elf）零失败，检查器不是空转的
+FAILED_COUNT=0

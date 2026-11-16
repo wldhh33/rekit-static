@@ -1,0 +1,4700 @@
+{
+  "pe_gap": {
+    "file": "samples/m9/pe_medium_synth_go_stripped.exe",
+    "sha256": "1267a1ab1f65e030b68e8ce3b3b73201594d042c0efa64b2ad85edabde689702",
+    "image_base": "0x140000000",
+    "section_size": 3525201,
+    "functions_with_both_ends": 7139,
+    "functions_gopclntab_le_pdata": 13,
+    "gap_bytes_total": 113731,
+    "gap_bytes_min": 1,
+    "gap_bytes_max": 31,
+    "gap_bytes_mean": 15.931,
+    "gap_bytes_share_of_text_pct": 3.2262,
+    "delta_hist": {
+      "1": 207,
+      "2": 242,
+      "3": 160,
+      "4": 248,
+      "5": 204,
+      "6": 226,
+      "7": 277,
+      "8": 256,
+      "9": 179,
+      "10": 211,
+      "11": 184,
+      "12": 255,
+      "13": 219,
+      "14": 375,
+      "15": 192,
+      "16": 211,
+      "17": 303,
+      "18": 197,
+      "19": 241,
+      "20": 288,
+      "21": 163,
+      "22": 208,
+      "23": 172,
+      "24": 223,
+      "25": 289,
+      "26": 258,
+      "27": 870,
+      "28": 34,
+      "29": 90,
+      "30": 148,
+      "31": 9
+    },
+    "delta_bins": {
+      "1-3": 609,
+      "4-7": 955,
+      "8-15": 1871,
+      "16-31": 3704
+    },
+    "objdump_insns_in_gaps": 113731,
+    "objdump_bytes_in_gaps": 113731,
+    "objdump_insns_all_cc90": 113731,
+    "decoded_insns_in_gaps": 372,
+    "decoded_insns_straddling_pdata_end": 0,
+    "blocks_crossing_pdata_end": 372,
+    "cfg_edges_targeting_gaps": {
+      "definite": 0,
+      "speculative": 0,
+      "unresolved": 0,
+      "cross_function": 0,
+      "undecoded": 0
+    },
+    "cfg_edges_targeting_gaps_total": 0,
+    "top_gaps": [
+      {
+        "entry": "0x25c60",
+        "pdata_end": "0x25ce1",
+        "gopclntab_end": "0x25d00",
+        "delta": 31,
+        "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "objdump": [
+          [
+            "0x25ce1",
+            "int3"
+          ],
+          [
+            "0x25ce2",
+            "int3"
+          ],
+          [
+            "0x25ce3",
+            "int3"
+          ],
+          [
+            "0x25ce4",
+            "int3"
+          ]
+        ],
+        "decoded": 0,
+        "func": "runtime.(*mspan).typePointersOf"
+      },
+      {
+        "entry": "0x52b00",
+        "pdata_end": "0x52b21",
+        "gopclntab_end": "0x52b40",
+        "delta": 31,
+        "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "objdump": [
+          [
+            "0x52b21",
+            "int3"
+          ],
+          [
+            "0x52b22",
+            "int3"
+          ],
+          [
+            "0x52b23",
+            "int3"
+          ],
+          [
+            "0x52b24",
+            "int3"
+          ]
+        ],
+        "decoded": 0,
+        "func": "runtime.badmorestackg0"
+      },
+      {
+        "entry": "0x52b40",
+        "pdata_end": "0x52b61",
+        "gopclntab_end": "0x52b80",
+        "delta": 31,
+        "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "objdump": [
+          [
+            "0x52b61",
+            "int3"
+          ],
+          [
+            "0x52b62",
+            "int3"
+          ],
+          [
+            "0x52b63",
+            "int3"
+          ],
+          [
+            "0x52b64",
+            "int3"
+          ]
+        ],
+        "decoded": 0,
+        "func": "runtime.badmorestackgsignal"
+      },
+      {
+        "entry": "0x6b120",
+        "pdata_end": "0x6b141",
+        "gopclntab_end": "0x6b160",
+        "delta": 31,
+        "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "objdump": [
+          [
+            "0x6b141",
+            "int3"
+          ],
+          [
+            "0x6b142",
+            "int3"
+          ],
+          [
+            "0x6b143",
+            "int3"
+          ],
+          [
+            "0x6b144",
+            "int3"
+          ]
+        ],
+        "decoded": 0,
+        "func": "runtime.badsystemstack"
+      },
+      {
+        "entry": "0x8b1e0",
+        "pdata_end": "0x8b241",
+        "gopclntab_end": "0x8b260",
+        "delta": 31,
+        "gap_bytes": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "objdump": [
+          [
+            "0x8b241",
+            "int3"
+          ],
+          [
+            "0x8b242",
+            "int3"
+          ],
+          [
+            "0x8b243",
+            "int3"
+          ],
+          [
+            "0x8b244",
+            "int3"
+          ]
+        ],
+        "decoded": 0,
+        "func": "runtime.mcall"
+      }
+    ],
+    "sample_gaps": [
+      {
+        "entry": "0x1080",
+        "pdata_end": "0x130f",
+        "gopclntab_end": "0x1320",
+        "delta": 17,
+        "objdump": [
+          [
+            "0x130f",
+            "int3"
+          ],
+          [
+            "0x1310",
+            "int3"
+          ],
+          [
+            "0x1311",
+            "int3"
+          ],
+          [
+            "0x1312",
+            "int3"
+          ],
+          [
+            "0x1313",
+            "int3"
+          ],
+          [
+            "0x1314",
+            "int3"
+          ],
+          [
+            "0x1315",
+            "int3"
+          ],
+          [
+            "0x1316",
+            "int3"
+          ],
+          [
+            "0x1317",
+            "int3"
+          ],
+          [
+            "0x1318",
+            "int3"
+          ],
+          [
+            "0x1319",
+            "int3"
+          ],
+          [
+            "0x131a",
+            "int3"
+          ],
+          [
+            "0x131b",
+            "int3"
+          ],
+          [
+            "0x131c",
+            "int3"
+          ],
+          [
+            "0x131d",
+            "int3"
+          ],
+          [
+            "0x131e",
+            "int3"
+          ],
+          [
+            "0x131f",
+            "int3"
+          ]
+        ],
+        "decoded": [],
+        "func": "internal/abi.(*RegArgs).Dump"
+      },
+      {
+        "entry": "0x1320",
+        "pdata_end": "0x1396",
+        "gopclntab_end": "0x13a0",
+        "delta": 10,
+        "objdump": [
+          [
+            "0x1396",
+            "int3"
+          ],
+          [
+            "0x1397",
+            "int3"
+          ],
+          [
+            "0x1398",
+            "int3"
+          ],
+          [
+            "0x1399",
+            "int3"
+          ],
+          [
+            "0x139a",
+            "int3"
+          ],
+          [
+            "0x139b",
+            "int3"
+          ],
+          [
+            "0x139c",
+            "int3"
+          ],
+          [
+            "0x139d",
+            "int3"
+          ],
+          [
+            "0x139e",
+            "int3"
+          ],
+          [
+            "0x139f",
+            "int3"
+          ]
+        ],
+        "decoded": [],
+        "func": "internal/abi.(*RegArgs).IntRegArgAddr"
+      },
+      {
+        "entry": "0x13a0",
+        "pdata_end": "0x13e6",
+        "gopclntab_end": "0x1400",
+        "delta": 26,
+        "objdump": [
+          [
+            "0x13e6",
+            "int3"
+          ],
+          [
+            "0x13e7",
+            "int3"
+          ],
+          [
+            "0x13e8",
+            "int3"
+          ],
+          [
+            "0x13e9",
+            "int3"
+          ],
+          [
+            "0x13ea",
+            "int3"
+          ],
+          [
+            "0x13eb",
+            "int3"
+          ],
+          [
+            "0x13ec",
+            "int3"
+          ],
+          [
+            "0x13ed",
+            "int3"
+          ],
+          [
+            "0x13ee",
+            "int3"
+          ],
+          [
+            "0x13ef",
+            "int3"
+          ],
+          [
+            "0x13f0",
+            "int3"
+          ],
+          [
+            "0x13f1",
+            "int3"
+          ],
+          [
+            "0x13f2",
+            "int3"
+          ],
+          [
+            "0x13f3",
+            "int3"
+          ],
+          [
+            "0x13f4",
+            "int3"
+          ],
+          [
+            "0x13f5",
+            "int3"
+          ],
+          [
+            "0x13f6",
+            "int3"
+          ],
+          [
+            "0x13f7",
+            "int3"
+          ],
+          [
+            "0x13f8",
+            "int3"
+          ],
+          [
+            "0x13f9",
+            "int3"
+          ],
+          [
+            "0x13fa",
+            "int3"
+          ],
+          [
+            "0x13fb",
+            "int3"
+          ],
+          [
+            "0x13fc",
+            "int3"
+          ],
+          [
+            "0x13fd",
+            "int3"
+          ],
+          [
+            "0x13fe",
+            "int3"
+          ],
+          [
+            "0x13ff",
+            "int3"
+          ]
+        ],
+        "decoded": [
+          "0x13e6"
+        ],
+        "func": "internal/abi.(*IntArgRegBitmap).Set"
+      },
+      {
+        "entry": "0x1400",
+        "pdata_end": "0x143e",
+        "gopclntab_end": "0x1440",
+        "delta": 2,
+        "objdump": [
+          [
+            "0x143e",
+            "int3"
+          ],
+          [
+            "0x143f",
+            "int3"
+          ]
+        ],
+        "decoded": [
+          "0x143e"
+        ],
+        "func": "internal/abi.(*IntArgRegBitmap).Get"
+      },
+      {
+        "entry": "0x1440",
+        "pdata_end": "0x151e",
+        "gopclntab_end": "0x1520",
+        "delta": 2,
+        "objdump": [
+          [
+            "0x151e",
+            "int3"
+          ],
+          [
+            "0x151f",
+            "int3"
+          ]
+        ],
+        "decoded": [],
+        "func": "internal/abi.BoundsDecode"
+      }
+    ],
+    "decoded_in_gap_detail": [
+      {
+        "addr": "0x13e6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x13a0",
+        "func": "internal/abi.(*IntArgRegBitmap).Set",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x143e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1400",
+        "func": "internal/abi.(*IntArgRegBitmap).Get",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x15fd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15c0",
+        "func": "internal/abi.Kind.String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1c36",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1bc0",
+        "func": "internal/abi.(*FuncType).Out",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1ce7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1c80",
+        "func": "internal/abi.(*FuncType).OutSlice",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1e36",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1de0",
+        "func": "internal/abi.Name.ReadVarint",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1ea7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1e40",
+        "func": "internal/abi.Name.IsBlank",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x268b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2640",
+        "func": "internal/abi.(*Kind).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x26b8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x26a0",
+        "func": "internal/abi.(*Name).Data",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x26d8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x26c0",
+        "func": "internal/abi.(*Name).DataChecked",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x26fd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x26e0",
+        "func": "internal/abi.(*Name).HasTag",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x275d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2740",
+        "func": "internal/abi.(*Name).IsEmbedded",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x277a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2760",
+        "func": "internal/abi.(*Name).IsExported",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x281d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27c0",
+        "func": "internal/abi.(*Name).ReadVarint",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xd871",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xd860",
+        "func": "internal/runtime/maps.(*unhashableTypeError).RuntimeError",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x10375",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x10160",
+        "func": "internal/strconv.(*decimal).set",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x10c66",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x10b20",
+        "func": "internal/strconv.atof64exact",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1217a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12060",
+        "func": "internal/strconv.(*decimal).Assign",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12338",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12180",
+        "func": "internal/strconv.rightShift",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12535",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12340",
+        "func": "internal/strconv.leftShift",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12709",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12600",
+        "func": "internal/strconv.(*decimal).Round",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x155c6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15380",
+        "func": "internal/strconv.formatBase10",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1576a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x155e0",
+        "func": "internal/strconv.fixedWidthFloat",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1593a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15780",
+        "func": "internal/strconv.parseFloat64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x15adc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15940",
+        "func": "internal/strconv.parseFloat32",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x15e1a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15ba0",
+        "func": "internal/strconv.shortFloat[go.shape.float64]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x160b3",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15e20",
+        "func": "internal/strconv.shortFloat[go.shape.float32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16146",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x160c0",
+        "func": "internal/strconv.(*Error).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x18659",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x18400",
+        "func": "runtime.cgocallbackg",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x261f8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x25fa0",
+        "func": "runtime.typePointers.fastForward",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x26566",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x26200",
+        "func": "runtime.bulkBarrierPreWrite",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2672c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x26580",
+        "func": "runtime.bulkBarrierPreWriteSrcOnly",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27337",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27140",
+        "func": "runtime.typeBitsBulkBarrier",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x289b7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x28920",
+        "func": "runtime.getCheckmark",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2a66b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2a5a0",
+        "func": "runtime.sysFreeOS",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x30cbd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x30b20",
+        "func": "runtime.fmtNSAsMS",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x34ff7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x34e40",
+        "func": "runtime.gcmarknewobject",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x38d46",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x38c80",
+        "func": "runtime.(*gcControllerState).addIdleMarkWorker",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x3a808",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x3a680",
+        "func": "runtime.(*scavengeIndex).find",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x3ab8b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x3aae0",
+        "func": "runtime.(*scavengeIndex).setEmpty",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x3ee50",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x3ed80",
+        "func": "runtime.(*mheap).setSpans",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x44866",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x44720",
+        "func": "runtime.mergeSummaries",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x45a5c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x459a0",
+        "func": "runtime.(*pageBits).setRange",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x480b2",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x48000",
+        "func": "runtime.(*addrRanges).findSucc",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x48dc6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x48d20",
+        "func": "runtime.(*sysMemStat).add",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x48e97",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x48de0",
+        "func": "runtime.(*consistentHeapStats).acquire",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x48f26",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x48ea0",
+        "func": "runtime.(*consistentHeapStats).release",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x4b4ea",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x4b480",
+        "func": "runtime.readRandom",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x4b94d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x4b780",
+        "func": "runtime.write1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x4d9fb",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x4d9a0",
+        "func": "runtime.deferprocStack",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x50cff",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x50c60",
+        "func": "runtime.xRegRestore",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x52a3d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x52740",
+        "func": "runtime.releaseSudog",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x58c8d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x58c00",
+        "func": "runtime.checkTimersNoP",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x5a4bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x5a460",
+        "func": "runtime.save",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x5bccc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x5bc60",
+        "func": "runtime.LockOSThread",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x5f43d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x5f320",
+        "func": "runtime.globrunqgetbatch",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x64f93",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x64e40",
+        "func": "runtime.sigtrampgo",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x6bf6b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x6be60",
+        "func": "runtime.(*moduledata).textAddr",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x6cd50",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x6cc00",
+        "func": "runtime.step",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x7383a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x73700",
+        "func": "runtime.isExportedRuntime",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x749da",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x74800",
+        "func": "runtime.traceWriter.event",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x74e86",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x74e00",
+        "func": "runtime.(*traceBuf).varintAt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x78f0e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x78e00",
+        "func": "runtime.traceWriter.writeGoStatus",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x7906e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x78f20",
+        "func": "runtime.traceWriter.writeProcStatusForP",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x79146",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x79080",
+        "func": "runtime.traceWriter.writeProcStatus",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x791f7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x79160",
+        "func": "runtime.goStatusToTraceGoStatus",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x7c598",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x7c4a0",
+        "func": "runtime.encoderune",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x8371d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x83600",
+        "func": "runtime.cgocall",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x8695f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x866c0",
+        "func": "runtime.exitsyscall",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x8867a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x88660",
+        "func": "runtime.morestackc",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x89a3e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x899c0",
+        "func": "syscall.syscalln",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x8b313",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x8b280",
+        "func": "runtime.systemstack",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x911b5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x911a0",
+        "func": "runtime.(*errorAddressString).Addr",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x91231",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x91220",
+        "func": "runtime.(*errorAddressString).RuntimeError",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x91258",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x91240",
+        "func": "runtime.(*plainError).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x91271",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x91260",
+        "func": "runtime.(*plainError).RuntimeError",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x912f1",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x912e0",
+        "func": "runtime.(*boundsError).RuntimeError",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x91373",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x91300",
+        "func": "runtime.(*lockRank).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x913bb",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x91380",
+        "func": "runtime.(*waitReason).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x91431",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x91420",
+        "func": "runtime.(*errorString).RuntimeError",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x93f1c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x93f00",
+        "func": "internal/reflectlite.(*rtype).Comparable",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x94994",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x94980",
+        "func": "internal/reflectlite.(*rtype).common",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x95010",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x94ec0",
+        "func": "unicode/utf8.decodeRuneSlow",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x95170",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x95020",
+        "func": "unicode/utf8.decodeRuneInStringSlow",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x954d6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x953e0",
+        "func": "unicode/utf8.encodeRuneNonASCII",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x984bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x98240",
+        "func": "strconv.IsPrint",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xa21e6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xa20e0",
+        "func": "unicode.is16",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xa22df",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xa2200",
+        "func": "unicode.is32",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xa24fc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xa2460",
+        "func": "unicode.to",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xa26fe",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xa25c0",
+        "func": "unicode.SimpleFold",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5af9",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5ae0",
+        "func": "reflect.(*StructField).IsExported",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5d5c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5d40",
+        "func": "reflect.(*Value).CanAddr",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5d8c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5d60",
+        "func": "reflect.(*Value).CanComplex",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5e4c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5e20",
+        "func": "reflect.(*Value).CanFloat",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5e8c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5e60",
+        "func": "reflect.(*Value).CanInt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5f66",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5f40",
+        "func": "reflect.(*Value).CanSet",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc5fac",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc5f80",
+        "func": "reflect.(*Value).CanUint",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc6a19",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc6a00",
+        "func": "reflect.(*Value).IsValid",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc6a99",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc6a80",
+        "func": "reflect.(*Value).Kind",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xc7f99",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xc7f80",
+        "func": "reflect.(*Method).IsExported",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xcc59d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xcc580",
+        "func": "io.(*discard).Write",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xcc5bd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xcc5a0",
+        "func": "io.(*discard).WriteString",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xcc5d5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xcc5c0",
+        "func": "io.(*nopCloser).Close",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xcc695",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xcc680",
+        "func": "io.(*nopCloserWriterTo).Close",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xd5470",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xd5420",
+        "func": "syscall.(*Errno).Temporary",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xd54b7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xd5480",
+        "func": "syscall.(*Errno).Timeout",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe0566",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe0100",
+        "func": "time.Duration.format",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe28d0",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe26c0",
+        "func": "time.div",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe2f31",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe2e80",
+        "func": "time.(*Location).lookupFirstZone",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe6be6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe5f60",
+        "func": "time.nextStdChunk",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe89c6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe89a0",
+        "func": "time.(*Time).IsZero",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe8a67",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe89e0",
+        "func": "time.(*Time).Local",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe8aa6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe8a80",
+        "func": "time.(*Time).Location",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe8d5d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe8d40",
+        "func": "time.(*Time).Nanosecond",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe8ff5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe8f80",
+        "func": "time.(*Time).UTC",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe9046",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9000",
+        "func": "time.(*Time).Unix",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe90cc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9060",
+        "func": "time.(*Time).UnixMicro",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe914c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe90e0",
+        "func": "time.(*Time).UnixMilli",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe91b7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9160",
+        "func": "time.(*Time).UnixNano",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe969c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9660",
+        "func": "time.(*Duration).Abs",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe9707",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe96a0",
+        "func": "time.(*Duration).Hours",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe9752",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9720",
+        "func": "time.(*Duration).Microseconds",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe9792",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9760",
+        "func": "time.(*Duration).Milliseconds",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe9806",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe97a0",
+        "func": "time.(*Duration).Minutes",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe9834",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9820",
+        "func": "time.(*Duration).Nanoseconds",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe98fc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe98a0",
+        "func": "time.(*Duration).Seconds",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xe99a7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xe9980",
+        "func": "time.(*Duration).Truncate",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xedf3a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xedf20",
+        "func": "io/fs.(*FileMode).IsDir",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xedf5c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xedf40",
+        "func": "io/fs.(*FileMode).IsRegular",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xedf78",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xedf60",
+        "func": "io/fs.(*FileMode).Perm",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xedfd8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xedfc0",
+        "func": "io/fs.(*FileMode).Type",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xedffc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xedfe0",
+        "func": "io/fs.(*dirInfo).Info",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xf3066",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xf2fc0",
+        "func": "slices.rotateLeft[go.shape.uint8]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xff6bd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xff6a0",
+        "func": "internal/poll.(*errNetClosing).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xff6d3",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xff6c0",
+        "func": "internal/poll.(*errNetClosing).Temporary",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0xff6f3",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0xff6e0",
+        "func": "internal/poll.(*errNetClosing).Timeout",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x10923f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x109220",
+        "func": "os.(*dirEntry).Info",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1092bc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1092a0",
+        "func": "os.(*dirEntry).Name",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1133ba",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x113260",
+        "func": "fmt.intFromArg",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x11a04b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x119ea0",
+        "func": "slices.partitionOrdered[go.shape.int]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x11a275",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x11a120",
+        "func": "slices.partialInsertionSortOrdered[go.shape.int]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x11a646",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x11a580",
+        "func": "slices.breakPatternsOrdered[go.shape.int]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x11a875",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x11a7c0",
+        "func": "slices.siftDownOrdered[go.shape.int]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x11a8e6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x11a880",
+        "func": "slices.insertionSortOrdered[go.shape.int]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x11b3a9",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x11b360",
+        "func": "strings.(*Reader).ReadByte",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x122077",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x122040",
+        "func": "bytes.(*Buffer).Bytes",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1221c6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x122140",
+        "func": "bytes.(*Buffer).Peek",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x122f46",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x122ee0",
+        "func": "bytes.(*Buffer).Next",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x122fbb",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x122f60",
+        "func": "bytes.(*Buffer).ReadByte",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1253e9",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1253a0",
+        "func": "bytes.(*Reader).ReadByte",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12ead8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12eac0",
+        "func": "archive/tar.(*headerFileInfo).Size",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12eb5b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12eb40",
+        "func": "archive/tar.(*headerFileInfo).Sys",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12eb75",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12eb60",
+        "func": "archive/tar.(*regFileWriter).logicalRemaining",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x12f915",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x12f8a0",
+        "func": "bufio.(*Reader).UnreadByte",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x130df7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x130dc0",
+        "func": "bufio.(*Writer).AvailableBuffer",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x133f94",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x133f20",
+        "func": "compress/flate.bulkHash4",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x136a7a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1369a0",
+        "func": "compress/flate.matchLen",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x136d78",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x136cc0",
+        "func": "compress/flate.(*huffmanBitWriter).canReuse",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x137415",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x137060",
+        "func": "compress/flate.(*huffmanBitWriter).generateCodegen",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1374f5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x137420",
+        "func": "compress/flate.(*huffmanBitWriter).headerSize",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x13758d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x137500",
+        "func": "compress/flate.(*huffmanBitWriter).dynamicReuseSize",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x13a635",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x13a500",
+        "func": "compress/flate.histogramSplit",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x14407c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x143fe0",
+        "func": "compress/flate.(*tokens).AddMatch",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x144159",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x144080",
+        "func": "compress/flate.(*tokens).AddMatchLong",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x145b06",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x145a40",
+        "func": "slices.breakPatternsCmpFunc[go.shape.struct { compress/flate.literal uint16; compress/flate.freq uint16 }]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x147066",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x146fc0",
+        "func": "archive/zip.headerFileInfo.Name",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x14b0bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x14b0a0",
+        "func": "archive/zip.(*headerFileInfo).Info",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x14b27b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x14b260",
+        "func": "archive/zip.(*headerFileInfo).Sys",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x14b7f5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x14b7e0",
+        "func": "archive/zip.(*nopCloser).Close",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x14c0e6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x14bfc0",
+        "func": "compress/bzip2.(*reader).readFromBlock",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x14f0f5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x14efc0",
+        "func": "slices.breakPatternsCmpFunc[go.shape.struct { compress/bzip2.code uint32; compress/bzip2.codeLen uint8; compress/bzip2.value uint16 }]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x154666",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1545e0",
+        "func": "math/rand.(*rngSource).Int63",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1546fe",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x154680",
+        "func": "math/rand.(*rngSource).Uint64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x158046",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x158000",
+        "func": "math/big.(*Int).TrailingZeroBits",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x158d50",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x158be0",
+        "func": "math/big.lehmerSimulate",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x15eb66",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15eae0",
+        "func": "math/big.nat.cmp",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x15f726",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x15f700",
+        "func": "math/big.(*stack).restore",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d22a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d200",
+        "func": "math/big.nat.expNNWindowed.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d2ea",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d2c0",
+        "func": "math/big.nat.rem.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d36a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d340",
+        "func": "math/big.nat.divLarge.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d3aa",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d380",
+        "func": "math/big.nat.divBasic.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d3ea",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d3c0",
+        "func": "math/big.nat.divRecursiveStep.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d42a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d400",
+        "func": "math/big.nat.mul.deferwrap2",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d4ea",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d4c0",
+        "func": "math/big.basicSqr.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d52a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d500",
+        "func": "math/big.karatsuba.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x16d56a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x16d540",
+        "func": "math/big.karatsubaSqr.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x171fdd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x171fc0",
+        "func": "context.(*deadlineExceededError).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x171ff6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x171fe0",
+        "func": "context.(*deadlineExceededError).Temporary",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x172016",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172000",
+        "func": "context.(*deadlineExceededError).Timeout",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x172039",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172020",
+        "func": "context.(*emptyCtx).Deadline",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x172053",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172040",
+        "func": "context.(*emptyCtx).Done",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x172075",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172060",
+        "func": "context.(*emptyCtx).Err",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x172095",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172080",
+        "func": "context.(*emptyCtx).Value",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x17217d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172160",
+        "func": "context.(*backgroundCtx).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1730bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x172fc0",
+        "func": "encoding/hex.Decode",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x189b19",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x189b00",
+        "func": "database/sql.(*dsnConnector).Driver",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x18a131",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x18a120",
+        "func": "encoding/json/internal/jsonflags.(*Bools).JSONOptions",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x18a15b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x18a140",
+        "func": "encoding/json/internal/jsonflags.(*Flags).Get",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x18a17a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x18a160",
+        "func": "encoding/json/internal/jsonflags.(*Flags).Has",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x18f29b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x18f280",
+        "func": "encoding/json/internal/jsonwire.(*ValueFlags).IsCanonical",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x18f2ba",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x18f2a0",
+        "func": "encoding/json/internal/jsonwire.(*ValueFlags).IsVerbatim",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x195946",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x195900",
+        "func": "encoding/json/jsontext.(*Decoder).UnreadBuffer",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1959fd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x195980",
+        "func": "encoding/json/jsontext.(*Decoder).StackIndex",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x19c31d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x19c2a0",
+        "func": "encoding/json/jsontext.(*Encoder).StackIndex",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x19dd6a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x19dd20",
+        "func": "encoding/json/jsontext.Pointer.Parent",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x19e930",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x19e8e0",
+        "func": "encoding/json/jsontext.(*stateMachine).InvalidateDisabledNamespaces",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x19ea86",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x19ea60",
+        "func": "encoding/json/jsontext.(*objectNameStack).ReplaceLastQuotedOffset",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x19eee7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x19eec0",
+        "func": "encoding/json/jsontext.objectNamespaceStack.Last",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a2b07",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a2aa0",
+        "func": "encoding/json/jsontext.Value.Kind",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a3ba6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a3b80",
+        "func": "encoding/json/jsontext.(*decoderState).consumeObject.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a3be6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a3bc0",
+        "func": "encoding/json/jsontext.(*encoderState).reformatObject.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a7226",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a7200",
+        "func": "encoding/json/jsontext.(*stateEntry).Length",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a726e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a7240",
+        "func": "encoding/json/jsontext.(*stateEntry).NeedObjectName",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a72d8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a72c0",
+        "func": "encoding/json/jsontext.(*stateMachine).Depth",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a730b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a72e0",
+        "func": "encoding/json/jsontext.(*stateMachine).DepthLength",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a74f2",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a74c0",
+        "func": "encoding/json/jsontext.(*objectNamespaceStack).Last",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a7ab6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a7a40",
+        "func": "encoding/json/jsontext.(*Value).Kind",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a7e55",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a7e00",
+        "func": "encoding/json/jsontext.(*Pointer).Parent",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a85bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a8380",
+        "func": "encoding/base32.(*Encoding).Encode",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1a951f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1a9340",
+        "func": "encoding/base64.(*Encoding).Encode",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1e78d8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1e78c0",
+        "func": "encoding/json.(*Number).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f4346",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f4320",
+        "func": "encoding/xml.(*StartElement).End",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f4458",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f4440",
+        "func": "encoding/xml.(*UnmarshalError).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f7006",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f6fe0",
+        "func": "go/token.(*Token).IsKeyword",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f7046",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f7020",
+        "func": "go/token.(*Token).IsLiteral",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f708c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f7060",
+        "func": "go/token.(*Token).IsOperator",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f7127",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f70a0",
+        "func": "go/token.(*Token).Precedence",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1f71f8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1f71e0",
+        "func": "go/token.(*Pos).IsValid",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1fa91a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1fa840",
+        "func": "go/scanner.invalidSep",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1fbe55",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1fbe40",
+        "func": "go/scanner.(*ErrorList).Len",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1fc0fc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1fc0e0",
+        "func": "go/ast.(*CommentGroup).Pos",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1fc128",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1fc100",
+        "func": "go/ast.(*CommentGroup).End",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1fdd9d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1fdd80",
+        "func": "go/ast.(*ValueSpec).Pos",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x1fe789",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x1fe760",
+        "func": "go/ast.ObjKind.String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x202bf3",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x202bc0",
+        "func": "go/ast.(*ObjKind).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22007d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220060",
+        "func": "image/color.(*Gray16).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22009a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220080",
+        "func": "image/color.(*Alpha16).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2200dc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2200a0",
+        "func": "image/color.(*RGBA).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x220106",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2200e0",
+        "func": "image/color.(*RGBA64).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x220190",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220120",
+        "func": "image/color.(*NRGBA).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2201ef",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2201a0",
+        "func": "image/color.(*NRGBA64).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x220226",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220200",
+        "func": "image/color.(*Alpha).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x220266",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220240",
+        "func": "image/color.(*Gray).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2204c6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220420",
+        "func": "image/color.(*CMYK).RGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2208e7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2208a0",
+        "func": "image.Point.Div",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x220992",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x220920",
+        "func": "image.Point.Mod",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2210fa",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x221060",
+        "func": "image.(*RGBA).RGBA64At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22117e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x221100",
+        "func": "image.(*RGBA).RGBAAt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22136b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2212e0",
+        "func": "image.(*RGBA).SetRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2213f6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x221380",
+        "func": "image.(*RGBA).SetRGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22163e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2215c0",
+        "func": "image.(*RGBA).Opaque",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2218ae",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x221820",
+        "func": "image.(*RGBA64).RGBA64At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x221b06",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x221a60",
+        "func": "image.(*RGBA64).SetRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x221d7e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x221ce0",
+        "func": "image.(*RGBA64).Opaque",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22209e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222020",
+        "func": "image.(*NRGBA).NRGBAAt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22230e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222200",
+        "func": "image.(*NRGBA).SetRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x222396",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222320",
+        "func": "image.(*NRGBA).SetNRGBA",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2225de",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222560",
+        "func": "image.(*NRGBA).Opaque",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2228ee",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222860",
+        "func": "image.(*NRGBA64).NRGBA64At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x222bc6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222aa0",
+        "func": "image.(*NRGBA64).SetRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x222c86",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222be0",
+        "func": "image.(*NRGBA64).SetNRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x222efe",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x222e60",
+        "func": "image.(*NRGBA64).Opaque",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2230ea",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223080",
+        "func": "image.(*Gray).At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x223168",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223100",
+        "func": "image.(*Gray).RGBA64At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2231d8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223180",
+        "func": "image.(*Gray).GrayAt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22339d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223320",
+        "func": "image.(*Gray).SetRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2233f6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2233a0",
+        "func": "image.(*Gray).SetGray",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22386e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223800",
+        "func": "image.(*Gray16).Gray16At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x223aac",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223a00",
+        "func": "image.(*Gray16).SetRGBA64",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x223b3c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x223ac0",
+        "func": "image.(*Gray16).SetGray16",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22407e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x224000",
+        "func": "image.(*CMYK).CMYKAt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x224396",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x224320",
+        "func": "image.(*CMYK).SetCMYK",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2247ab",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x224720",
+        "func": "image.(*Paletted).At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x224b58",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x224b00",
+        "func": "image.(*Paletted).ColorIndexAt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x224bb6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x224b60",
+        "func": "image.(*Paletted).SetColorIndex",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225d3e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225d20",
+        "func": "image.(*Point).Add",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225da6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225d40",
+        "func": "image.(*Point).Div",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225de6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225dc0",
+        "func": "image.(*Point).Eq",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225e31",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225e00",
+        "func": "image.(*Point).In",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225ee6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225ec0",
+        "func": "image.(*Point).Mul",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225f86",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225f60",
+        "func": "image.(*Point).Sub",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x225fd6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x225fa0",
+        "func": "image.(*Rectangle).Add",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2260a6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226080",
+        "func": "image.(*Rectangle).Bounds",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x226106",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2260c0",
+        "func": "image.(*Rectangle).Canon",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22613f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226120",
+        "func": "image.(*Rectangle).ColorModel",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22615b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226140",
+        "func": "image.(*Rectangle).Dx",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22617c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226160",
+        "func": "image.(*Rectangle).Dy",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2261af",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226180",
+        "func": "image.(*Rectangle).Empty",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x226226",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2261c0",
+        "func": "image.(*Rectangle).Eq",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22628d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226240",
+        "func": "image.(*Rectangle).In",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2263f0",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2263a0",
+        "func": "image.(*Rectangle).Overlaps",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x226446",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226400",
+        "func": "image.(*Rectangle).RGBA64At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x226486",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226460",
+        "func": "image.(*Rectangle).Size",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x226535",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x226500",
+        "func": "image.(*Rectangle).Sub",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22668d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2265e0",
+        "func": "image.(*YCbCrSubsampleRatio).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2288b5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x228060",
+        "func": "image/internal/imageutil.DrawYCbCr",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x22f2bc",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x22f2a0",
+        "func": "image/gif.(*blockWriter).Flush",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2356c8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x235620",
+        "func": "image/jpeg.grayToY",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x235bb9",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x235b00",
+        "func": "image/jpeg.scale",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2386dd",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x238600",
+        "func": "image/png.filterPaeth",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x249b52",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x249a20",
+        "func": "net/netip.Prefix.Contains",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24c5bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24c5a0",
+        "func": "unique.(*Handle[net/netip.addrDetail]).Value",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24cb66",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24cb20",
+        "func": "net/netip.(*Addr).As16",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24cd5d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24cd20",
+        "func": "net/netip.(*Addr).BitLen",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24cdff",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24cde0",
+        "func": "net/netip.(*Addr).Is4",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24ce46",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24ce00",
+        "func": "net/netip.(*Addr).Is4In6",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24ce8c",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24ce60",
+        "func": "net/netip.(*Addr).Is6",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d1c6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d160",
+        "func": "net/netip.(*Addr).IsUnspecified",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d1ff",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d1e0",
+        "func": "net/netip.(*Addr).IsValid",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d39b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d340",
+        "func": "net/netip.(*Addr).Next",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d455",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d400",
+        "func": "net/netip.(*Addr).Prev",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d56f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d520",
+        "func": "net/netip.(*Addr).Unmap",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d62d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d600",
+        "func": "net/netip.(*Addr).Zone",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d65f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d640",
+        "func": "net/netip.(*Prefix).Addr",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d858",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d840",
+        "func": "net/netip.(*Prefix).Bits",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24d9ec",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24d9a0",
+        "func": "net/netip.(*Prefix).IsSingleIP",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24da18",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24da00",
+        "func": "net/netip.(*Prefix).IsValid",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24dcbf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24dca0",
+        "func": "net/netip.(*AddrPort).Addr",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24e035",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24e020",
+        "func": "net/netip.(*AddrPort).Port",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x24fbd7",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x24fac0",
+        "func": "vendor/golang.org/x/net/dns/dnsmessage.(*Parser).AResource",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27dd71",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27dd40",
+        "func": "net.(*IP).IsInterfaceLocalMulticast",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27e252",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27e1e0",
+        "func": "net.(*IP).To4",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27e2e6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27e260",
+        "func": "net.(*IPMask).Size",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27e63d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27e620",
+        "func": "net.(*canceledError).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27ecb3",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27eca0",
+        "func": "net.(*UnknownNetworkError).Temporary",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x27ecd3",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x27ecc0",
+        "func": "net.(*UnknownNetworkError).Timeout",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x28073d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x280720",
+        "func": "net.(*addrPortUDPAddr).Network",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2886a8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x288660",
+        "func": "encoding/asn1.BitString.At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x288e18",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x288dc0",
+        "func": "encoding/asn1.(*BitString).At",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x288ec8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x288e80",
+        "func": "encoding/asn1.(*ObjectIdentifier).Equal",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x29679f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x296540",
+        "func": "vendor/golang.org/x/text/unicode/bidi.Lookup",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2969ff",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2967a0",
+        "func": "vendor/golang.org/x/text/unicode/bidi.LookupString",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x298906",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x298720",
+        "func": "vendor/golang.org/x/text/unicode/norm.compInfo",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x29d550",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x29d480",
+        "func": "vendor/golang.org/x/text/unicode/norm.(*sparseBlocks).lookup",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x29d615",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x29d560",
+        "func": "vendor/golang.org/x/text/unicode/norm.Form.IsNormalString.func1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2a1390",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2a12c0",
+        "func": "vendor/golang.org/x/net/idna.(*sparseBlocks).lookup",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2a3176",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2a3160",
+        "func": "vendor/golang.org/x/net/http/httpproxy.(*allMatch).match",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2a50f5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2a50e0",
+        "func": "net/http.(*noBody).Close",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2a5126",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2a5100",
+        "func": "net/http.(*noBody).Read",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2a5157",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2a5140",
+        "func": "net/http.(*noBody).WriteTo",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2c9fbf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2c9fa0",
+        "func": "text/template/parse.(*Tree).popVars",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2ca247",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2ca220",
+        "func": "text/template/parse.(*Tree).parseControl.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2ca7d4",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2ca7c0",
+        "func": "text/template/parse.(*Pos).Position",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2ca854",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2ca840",
+        "func": "text/template/parse.(*NodeType).Type",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2d482b",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2d4760",
+        "func": "regexp/syntax.(*parser).parseInt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2d78de",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2d7860",
+        "func": "regexp/syntax.ranges.Less",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2d7970",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2d7900",
+        "func": "regexp/syntax.ranges.Swap",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2d7e8f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2d7e20",
+        "func": "regexp/syntax.(*Prog).StartCond",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2db897",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2db860",
+        "func": "regexp/syntax.(*InstOp).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2db8b8",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2db8a0",
+        "func": "regexp/syntax.(*ErrorCode).String",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2db8db",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2db8c0",
+        "func": "regexp/syntax.(*ranges).Len",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2db966",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2db8e0",
+        "func": "regexp/syntax.(*ranges).Less",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2db9fb",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2db980",
+        "func": "regexp/syntax.(*ranges).Swap",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2e99da",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2e9840",
+        "func": "slices.partitionOrdered[go.shape.int32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2e9bf5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2e9aa0",
+        "func": "slices.partialInsertionSortOrdered[go.shape.int32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2e9efa",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2e9e40",
+        "func": "slices.medianOrdered[go.shape.int32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2e9fc6",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2e9f00",
+        "func": "slices.breakPatternsOrdered[go.shape.int32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2ea1f5",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2ea140",
+        "func": "slices.siftDownOrdered[go.shape.int32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2ea266",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2ea200",
+        "func": "slices.insertionSortOrdered[go.shape.int32]",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2ea619",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2ea600",
+        "func": "text/template.(*state).pop",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2f9346",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2f9320",
+        "func": "text/template.(*state).walkIfOrWith.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2f9926",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2f9900",
+        "func": "text/template.(*state).walkRange.func2.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2f9966",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2f9940",
+        "func": "text/template.(*state).walkRange.deferwrap1",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x2f9d59",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x2f9d40",
+        "func": "text/template.(*ExecError).Unwrap",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x30a19d",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x30a180",
+        "func": "crypto/internal/fips140/hmac.(*errCloneUnsupported).Error",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x30a1bf",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x30a1a0",
+        "func": "crypto/internal/fips140/hmac.(*errCloneUnsupported).Unwrap",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x33453e",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x3344e0",
+        "func": "crypto/internal/fips140/bigmod.(*Nat).Equal",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x346866",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x3461e0",
+        "func": "crypto/internal/fips140/mldsa.ntt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x346e9f",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x346880",
+        "func": "crypto/internal/fips140/mldsa.inverseNTT",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x34acf0",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x34ab20",
+        "func": "crypto/internal/fips140/mldsa.pkDecode",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x3548f0",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x354700",
+        "func": "crypto/internal/fips140/mlkem.ntt",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      },
+      {
+        "addr": "0x354b5a",
+        "bytes": "cc",
+        "len": 1,
+        "objdump": "int3",
+        "at_gap_start": true,
+        "origin": "0x354900",
+        "func": "crypto/internal/fips140/mlkem.inverseNTT",
+        "in_gopclntab_range": true,
+        "in_pdata_range": false
+      }
+    ],
+    "decoded_in_gap_by_text": {
+      "int3": 372
+    },
+    "decoded_in_gap_all_cc90": true,
+    "decoded_in_gap_at_gap_start": 372,
+    "gap_insn_share_of_numerator_pct": 0.0496,
+    "numerator_if_pdata_end_limit": 749737,
+    "ratio_if_pdata_end_limit": 0.809903,
+    "ratio_now": 0.810305,
+    "ratio_delta_pp_if_pdata_end": -0.0402,
+    "padding_bucket_m11": 148861,
+    "share_of_padding_bucket_pct": 76.4008
+  },
+  "per_function": {
+    "elf": {
+      "file": "samples/m9/elf_medium_synth_go_stripped",
+      "funcs": 8906,
+      "range_convention": "gopclntab [entry, next_entry)",
+      "classes": {
+        "full": 35,
+        "partial": 8871,
+        "zero": 0
+      },
+      "m10_classes": {
+        "full": 3,
+        "partial": 846,
+        "zero": 8059
+      },
+      "obj_insns_in_funcs": 923921,
+      "matched_in_funcs": 748093,
+      "sum_matched_equals_coverage_numerator": 748093,
+      "partial_pct_hist": {
+        "0.2": 1,
+        "1.4": 1,
+        "1.6": 1,
+        "1.9": 1,
+        "3.1": 39,
+        "3.6": 2,
+        "4.4": 1,
+        "6.5": 44,
+        "6.7": 110,
+        "6.9": 117,
+        "7.1": 49,
+        "7.4": 57,
+        "7.7": 52,
+        "8.0": 5,
+        "8.3": 2,
+        "8.7": 8,
+        "9.1": 1,
+        "9.5": 1,
+        "9.7": 2,
+        "10.0": 32
+      },
+      "partial_pct_min": 0.2,
+      "partial_pct_max": 99.9,
+      "zero_samples": []
+    },
+    "pe": {
+      "file": "samples/m9/pe_medium_synth_go_stripped.exe",
+      "funcs": 8892,
+      "range_convention": "gopclntab [entry, next_entry)",
+      "classes": {
+        "full": 32,
+        "partial": 8860,
+        "zero": 0
+      },
+      "m10_classes": {
+        "full": 6388,
+        "partial": 764,
+        "zero": 0
+      },
+      "obj_insns_in_funcs": 925598,
+      "matched_in_funcs": 750109,
+      "sum_matched_equals_coverage_numerator": 750109,
+      "partial_pct_hist": {
+        "0.2": 1,
+        "1.4": 1,
+        "1.6": 1,
+        "1.9": 1,
+        "3.1": 39,
+        "3.6": 2,
+        "4.4": 1,
+        "6.5": 44,
+        "6.7": 108,
+        "6.9": 114,
+        "7.1": 49,
+        "7.4": 57,
+        "7.7": 49,
+        "8.0": 5,
+        "8.3": 5,
+        "8.7": 8,
+        "9.1": 2,
+        "9.5": 1,
+        "9.7": 2,
+        "10.0": 32
+      },
+      "partial_pct_min": 0.2,
+      "partial_pct_max": 99.9,
+      "zero_samples": []
+    },
+    "pe_pdata_range": {
+      "range_convention": ".pdata [BeginAddress, EndAddress)",
+      "funcs": 7152,
+      "classes": {
+        "full": 6388,
+        "partial": 764,
+        "zero": 0
+      },
+      "m10_classes": {
+        "full": 6388,
+        "partial": 764,
+        "zero": 0
+      },
+      "obj_insns_in_funcs": 751567,
+      "matched_in_funcs": 726289,
+      "note": "与 M10 的 7,152 行同口径；缝隙内 372 条不在任何 pdata 范围内"
+    }
+  }
+}

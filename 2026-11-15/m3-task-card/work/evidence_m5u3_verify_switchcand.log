@@ -1,0 +1,50 @@
+D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_switchcand.py:85: DeprecationWarning: open_program() is deprecated, use open_project() and program_context() or program_loader() instead.
+  with pyghidra.open_program(
+==============================================================================
+A) 负向基线：候选层关闭/开启逐项对照 definite_baseline.json
+  [OK] recdesc        abstains               baseline=0 now=0 
+  [OK] recdesc        blocks                 baseline=21105 now=21105 
+  [OK] recdesc        bytes_covered          baseline=383375 now=383375 
+  [OK] recdesc        calls_definite         baseline=702 now=702 
+  [OK] recdesc        calls_undecoded        baseline=16 now=16 
+  [OK] recdesc        calls_unresolved       baseline=11 now=11 
+  [OK] recdesc        coverage               baseline=0.8014880971047125 now=0.8014880971047125 
+  [OK] recdesc        edges_cross_function   baseline=339 now=339 
+  [OK] recdesc        edges_definite         baseline=30202 now=30202 
+  [OK] recdesc        edges_speculative      baseline=15 now=15 
+  [OK] recdesc        edges_undecoded        baseline=18 now=18 
+  [OK] recdesc        edges_unresolved       baseline=123 now=123 
+  [OK] recdesc        instruction_bytes      baseline=383409 now=383409 
+  [OK] recdesc        instructions           baseline=94773 now=94773 
+  [OK] recdesc        outside                baseline=0 now=0 
+  [OK] recdesc        overlaps               baseline=6 now=6 
+  [OK] recdesc        section_size           baseline=478329 now=478329 
+  [OK] expr           abstained              baseline=9258 now=9258 
+  [OK] expr           functions_total        baseline=1089 now=1089 
+  [OK] expr           insns                  baseline=94722 now=94722 
+  [OK] expr           lifted                 baseline=1084 now=1084 
+  [OK] expr           lifted_insns           baseline=85464 now=85464 
+  [OK] expr           skipped                baseline=5 now=5 
+  [OK] expr           statements             baseline=105342 now=105342 
+  [OK] expr           text_sha256            baseline=72cb6520cff2893541 now=72cb6520cff2893541 
+  [OK] switchcand     res.blocks             baseline=21105 now=21105 
+  [OK] switchcand     res.instructions       baseline=94773 now=94773 
+  [OK] switchcand     snapshot(before/after) baseline=identical now=identical 
+  结论: 确定数字逐项不变（候选层未污染确定集）
+
+B) 候选（0x401870）：
+  rel32 jmp@0x40192b 表 0x476020 证据 high ｜ 目标 8 项 ｜ 拒绝表项 0 项
+
+C) 收益量化（弱参照 Ghidra）:
+  我方既有块 23 ｜ 候选口径 43（新增起点 20）｜ Ghidra 55 ｜ 差距 32
+  补回 recovered = 20
+  补错 wrong     = 0（在体内但非块起点 0；不在体内 0）
+  我方既有块起点命中 Ghidra: 23/23（多出 0）
+  剩余差距 = 12 个 Ghidra 块起点仍缺（= 55 - 20 - 既有命中 23）
+  剩余明细（候选层未覆盖，属既有块切分口径差异）: 0x40192b, 0x401a44, 0x401a5c, 0x401a93, 0x401a9d, 0x401aa7, 0x401ab1, 0x401abb, 0x401ac5, 0x401acf, 0x401ad9, 0x401aef
+  我方多出 Ghidra 之外的块起点 = 0
+  补回明细: 0x401953, 0x40195a, 0x40198e, 0x4019a0, 0x4019b0, 0x4019b9, 0x4019cf, 0x4019e2, 0x4019f3, 0x401a00, 0x401a0d, 0x401a2e, 0x401a46, 0x401a5e, 0x401a69, 0x401a79, 0x401a84, 0x401a8c, 0x401b17, 0x401b29
+
+D) 拒绝理由可见: 是
+
+PASS（负向基线 通过；收益数字见上，不静默取舍）

@@ -1,0 +1,48 @@
+rekit M2 · E2/E3 证据日志（2026-11-15）
+========================================================================
+工具：upx 5.3.0 win64（用户上传包）
+  zip  sha256 = d127996c76615e431be810e9c8d2910dbe3dd400600c5c0c50276fc5a17a9705
+  upx.exe sha256 = ff30a651c9e41a2bbb363825fac9e7e23d92871c1ac82813a264e3b8d1cd302b
+  upx --version: upx 5.3.0
+  安装位置：work/tools/upx-5.3.0-win64（不在 pack 内）
+
+== E2 正样本：upx 本体对拍 ==
+样本                     upx格式          rekit    证据数     upx -t
+upx_cli-64.exe         win64/pe       upx      2       OK  
+    · 节名命中 UPX 打包节: UPX0,UPX1
+    · 文件偏移 0x3e0 处发现 UPX! 魔数（共 1 处）
+upx_putty-64bit.exe    win64/pe       upx      2       OK  
+    · 节名命中 UPX 打包节: UPX0,UPX1
+    · 文件偏移 0x1fd 处发现 UPX! 魔数（共 1 处）
+upx_dyn_pie            linux/amd64    upx      2       OK  
+    · 文件偏移 0x1f8, 0xa22, 0x17be, 0x17c8 处发现 UPX! 魔数（共 4 处）
+    · ELF 节表被移除（e_shnum=0, e_shoff=0）
+E2：3/3 正样本判对且完整性通过
+
+== E3 零误报：未加壳样本全量实测 ==
+样本                             packer   conf  
+dyn_pie                        none     0.90  
+dyn_nopie                      none     0.90  
+dyn_static                     none     0.90  
+dyn_execstack                  none     0.90  
+dyn_norelro                    none     0.90  
+bin_ls.elf                     none     0.90  
+cli-64.exe                     none     0.90  
+minipe.exe                     none     0.90  
+minidll.dll                    none     0.90  
+minipe_fakerich.exe            none     0.90  
+hello_go.exe                   none     0.90  
+hello_go_linux                 none     0.90  
+hello_rust.exe                 none     0.90  
+busybox-1.35.0-musl-x86_64     none     0.90  
+putty-64bit.exe                none     0.90  
+E3：负样本 15 个，误报 0 个，异常 0 个
+
+== 往返验证（upx -d 还原后与原始输入比对）==
+upx_cli-64.exe         解包sha256==原始: False  (size 14336 vs 14336)
+upx_putty-64bit.exe    解包sha256==原始: False  (size 1706136 vs 1706136)
+upx_dyn_pie            解包sha256==原始: True  (size 15832 vs 15832)
+说明：PE 经 UPX 重写头部/对齐填充，解包后与原始文件不逐字节相同；
+      实测 cli-64 差异 145/14336 字节、putty 差异 1606/1706136 字节，
+      但节表逐项全等、文件大小全等、Rich 头保留 → 以 upx -l 自报原始大小 + -t 完整性为准；
+      ELF 解包后与原始逐字节全等（sha256 相同）。

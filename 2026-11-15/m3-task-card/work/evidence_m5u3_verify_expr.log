@@ -1,0 +1,1135 @@
+D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_expr.py:123: DeprecationWarning: open_program() is deprecated, use open_project() and program_context() or program_loader() instead.
+  with pyghidra.open_program(path, analyze=True,
+==============================================================================
+M5-U1 表达式恢复验收：抽样规则 + Ghidra 弱参照对读
+==============================================================================
+
+[样本] tests/fixtures/cli-64.exe  PE/MSVC
+  声明边界函数池: 41 个
+  分层规模: S1=12, S2=15, S3=10, S4=4
+  类别覆盖: indirect_call=0x1010, loop=0x10a0, indirect_jmp=0x1d54, simd=0x12d0, largest=0x164c
+  抽样函数: 18 个（去重后）
+
+[样本] tests/fixtures/bin_ls.elf  ELF/PIE
+  声明边界函数池: 331 个
+  分层规模: S1=83, S2=76, S3=144, S4=28
+  类别覆盖: indirect_call=0x48cf, loop=0x4c00, indirect_jmp=0x4c00, simd=0x4932, largest=0x4c00
+  抽样函数: 18 个（去重后）
+
+[样本] tests/fixtures/dyn_static  ELF/static
+  声明边界函数池: 1084 个
+  分层规模: S1=270, S2=235, S3=311, S4=268
+  类别覆盖: indirect_call=0x40139d, loop=0x401193, indirect_jmp=0x401870, simd=0x402b00, largest=0x44d710
+  抽样函数: 21 个（去重后）
+
+抽样总量: 57 个函数（规则见文件头；等距取点，无随机数）
+
+[对读] tests/fixtures/cli-64.exe
+  0x199a     我方: 指令  3 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x1ac0     我方: 指令  8 块 5 abstain 0 complete | Ghidra: 有 块5 大小30
+      - Ghidra 以调用呈现 0x1d88：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x1d40     我方: 指令  4 块 1 abstain 0 complete | Ghidra: 有 块1 大小18
+      - Ghidra 以调用呈现 0x1bc4：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x2760     我方: 指令  1 块 1 abstain 0 complete | Ghidra: 有 块1 大小2
+  0x1010     我方: 指令 11 块 4 abstain 0 complete | Ghidra: 有 块4 大小36
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  0x1a50     我方: 指令 28 块 5 abstain 0 complete | Ghidra: 有 块5 大小91
+      - Ghidra 以调用呈现 0x1ac0：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x207c     我方: 指令 13 块 4 abstain 0 complete | Ghidra: 有 块4 大小36
+  0x23f8     我方: 指令 27 块 6 abstain 0 complete | Ghidra: 有 块6 大小90
+  0x1200     我方: 指令 66 块14 abstain 0 complete | Ghidra: 有 块14 大小208
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  0x1ae0     我方: 指令 48 块 9 abstain 0 complete | Ghidra: 有 块9 大小182
+  0x1e5c     我方: 指令 33 块 4 abstain 0 complete | Ghidra: 有 块4 大小113
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x1fe4     我方: 指令 47 块16 abstain 0 complete | Ghidra: 有 块16 大小150
+  0x10a0     我方: 指令111 块25 abstain 0 complete | Ghidra: 有 块25 大小348
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+  0x1401     我方: 指令127 块26 abstain 3 partial | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x164c     我方: 指令222 块44 abstain 9 partial | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x24cc     我方: 指令106 块20 abstain11 partial | Ghidra: 有 块20 大小428
+  0x1d54     我方: 指令 13 块 1 abstain 0 complete | Ghidra: 有 块1 大小52
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x12d0     我方: 指令 75 块 9 abstain 2 partial | Ghidra: 有 块81 大小1790
+      - .text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 14 个（thunk/导入）；不参与判等，单列
+      - 仅 Ghidra 有调用目标 0x10a0, 0x1200, 0x19d0, 0x1ac0：Ghidra 函数域 1790 字节 > 我方 305 字节，多为其把相邻/内联段并入本函数后引入的调用
+      - 基本块数不一致（我方 9 块/305 字节，Ghidra 81 块/1790 字节）：Ghidra 函数域更大，块数差来自并入的相邻函数
+  -- 汇总: 入口存在 15/18（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 14/15 ｜ 重叠集内调用集相等 8/15
+  -- 抽样函数弃权原因（按指令计，共 25 条）:
+        9 × 0F 11 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        5 × 条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        4 × 0F ba 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        2 × 0F 10 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 0F 57 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × cmov 前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        1 × 0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        1 × 0F 01 系统/描述符指令未建模 ｜ 缺: 系统寄存器与描述符表语义（不在函数内表达式范围）
+
+  ── 人工对读样本（我方伪 C / Ghidra C 并列）──
+
+  ### FUNC 0x1ac0  类别=-
+  --- 我方 ---
+  | // FUNC sub_0x1ac0  0x1ac0..0x1ade  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 8 / 已提升 8 / abstain 0（0.00%）/ 语句 10
+  | L_0x1ac0:
+  |   flags = cmp(rcx, *(u64 *)data_0x5008);
+  |   if (rcx != *(u64 *)data_0x5008) goto L_0x1ad9;
+  |   goto L_0x1ac9;  /* 未取分支 */
+  | L_0x1ac9:
+  |   rcx = rol(rcx, 0x10);
+  |   flags = test(cx, -0x1);
+  |   if ((cx & -0x1) != 0) goto L_0x1ad5;
+  |   goto L_0x1ad4;  /* 未取分支 */
+  | L_0x1ad4:
+  |   return;
+  | L_0x1ad5:
+  |   rcx = ror(rcx, 0x10);
+  | L_0x1ad9:
+  |   goto L_0x1d88;
+  --- Ghidra（__security_check_cookie）---
+  | 
+  | /* WARNING: This is an inlined function */
+  | 
+  | void __cdecl __security_check_cookie(uintptr_t _StackCookie)
+  | 
+  | {
+  |   if ((_StackCookie == DAT_140005008) && ((short)(_StackCookie >> 0x30) == 0)) {
+  |     return;
+  |   }
+  |   FUN_140001d88();
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x1d40  类别=-
+  --- 我方 ---
+  | // FUNC AddressOfEntryPoint  0x1d40..0x1d52  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 4 / 已提升 4 / abstain 0（0.00%）/ 语句 4
+  | L_0x1d40:
+  |   rsp -= 0x28;
+  |   sub_0x2120();
+  |   rsp += 0x28;
+  |   goto L_0x1bc4;
+  --- Ghidra（entry）---
+  | 
+  | void entry(void)
+  | 
+  | {
+  |   __security_init_cookie();
+  |   FUN_140001bc4();
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x2760  类别=indirect_jmp
+  --- 我方 ---
+  | // FUNC sub_0x2760  0x2760..0x2762  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 1 / 已提升 1 / abstain 0（0.00%）/ 语句 1
+  | L_0x2760:
+  |   /* jmp 间接：目标不可静态确定（不猜） */
+  --- Ghidra（_guard_dispatch_icall）---
+  | 
+  | /* WARNING: This is an inlined function */
+  | 
+  | void _guard_dispatch_icall(void)
+  | 
+  | {
+  |   code *UNRECOVERED_JUMPTABLE;
+  |   
+  |                     /* WARNING: Could not recover jumptable at 0x000140002760. Too many branches */
+  |                     /* WARNING: Treating indirect jump as call */
+  |   (*UNRECOVERED_JUMPTABLE)();
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x1010  类别=indirect_call
+  --- 我方 ---
+  | // FUNC sub_0x1010  0x1010..0x1034  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 11 / 已提升 11 / abstain 0（0.00%）/ 语句 13
+  | L_0x1010:
+  |   rsp -= 0x28;
+  |   flags = test(ecx, ecx);
+  |   if ((ecx & ecx) != 0) goto L_0x102a;
+  |   goto L_0x1018;  /* 未取分支 */
+  | L_0x1018:
+  |   ecx = *(u32 *)data_0x5040;
+  |   flags = test(ecx, ecx);
+  |   if ((ecx & ecx) == 0) goto L_0x102a;
+  |   goto L_0x1022;  /* 未取分支 */
+  | L_0x1022:
+  |   edx ^= edx;
+  |   KERNEL32.dll!GenerateConsoleCtrlEvent();  /* 导入调用 IAT */
+  | L_0x102a:
+  |   eax = 0x1;
+  |   rsp += 0x28;
+  |   return;
+  --- Ghidra（FUN_140001010）---
+  | 
+  | undefined8 FUN_140001010(int param_1)
+  | 
+  | {
+  |   if ((param_1 == 0) && (DAT_140005040 != 0)) {
+  |     GenerateConsoleCtrlEvent(DAT_140005040,0);
+  |   }
+  |   return 1;
+  | }
+  | 
+
+  ### FUNC 0x1a50  类别=-
+  --- 我方 ---
+  | // FUNC sub_0x1a50  0x1a50..0x1aab  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 28 / 已提升 28 / abstain 0（0.00%）/ 语句 30
+  | L_0x1a50:
+  |   push(rbx);
+  |   r11d = *(u32 *)(r8);
+  |   rbx = rdx;
+  |   r11d &= -0x8;
+  |   r9 = rcx;
+  |   flags = test(*(u8 *)(r8), 0x4);
+  |   r10 = rcx;
+  |   if ((*(u8 *)(r8) & 0x4) == 0) goto L_0x1a7b;
+  |   goto L_0x1a68;  /* 未取分支 */
+  | L_0x1a68:
+  |   eax = *(u32 *)(r8 + 0x8);
+  |   r10 = *(u32 *)(r8 + 0x4);  /* movsxd */
+  |   eax = -eax;
+  |   r10 += rcx;
+  |   rcx = eax;  /* movsxd */
+  |   r10 &= rcx;
+  | L_0x1a7b:
+  |   rax = r11d;  /* movsxd */
+  |   rdx = *(u64 *)(rax + r10 * 1);
+  |   rax = *(u64 *)(rbx + 0x10);
+  |   ecx = *(u32 *)(rax + 0x8);
+  |   rax = *(u64 *)(rbx + 0x8);
+  |   flags = test(*(u8 *)(rcx + rax * 1 + 0x3), 0xf);
+  |   if ((*(u8 *)(rcx + rax * 1 + 0x3) & 0xf) == 0) goto L_0x1a9f;
+  |   goto L_0x1a94;  /* 未取分支 */
+  | L_0x1a94:
+  |   eax = *(u8 *)(rcx + rax * 1 + 0x3);  /* movzx */
+  |   eax &= -0x10;
+  |   r9 += rax;
+  | L_0x1a9f:
+  |   r9 ^= rdx;
+  |   rcx = r9;
+  |   rbx = pop();
+  |   goto L_0x1ac0;
+  --- Ghidra（__GSHandlerCheckCommon）---
+  | 
+  | /* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+  | /* Library Function - Single Match
+  |     __GSHandlerCheckCommon
+  |    
+  |    Libraries: Visual Studio 2017 Release, Visual Studio 2019 Release */
+  | 
+  | ulonglong __GSHandlerCheckCommon(undefined8 param_1,longlong param_2)
+  | 
+  | {
+  |   ulonglong uVar1;
+  |   ulonglong uVar2;
+  |   
+  |   uVar2 = (ulonglong)*(uint *)(*(longlong *)(param_2 + 0x10) + 8);
+  |   uVar1 = *(ulonglong *)(param_2 + 8);
+  |   if ((*(byte *)(uVar2 + 3 + uVar1) & 0xf) != 0) {
+  |     uVar1 = (ulonglong)(*(byte *)(uVar2 + 3 + uVar1) & 0xfffffff0);
+  |   }
+  |   return uVar1;
+  | }
+  | 
+
+  ### FUNC 0x207c  类别=-
+  --- 我方 ---
+  | // FUNC sub_0x207c  0x207c..0x20a0  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 13 / 已提升 13 / abstain 0（0.00%）/ 语句 15
+  | L_0x207c:
+  |   push(rbx);
+  |   rsp -= 0x20;
+  |   bl = cl;
+  |   sub_0x2678();
+  |   edx ^= edx;
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) == 0) goto L_0x209a;
+  |   goto L_0x208f;  /* 未取分支 */
+  | L_0x208f:
+  |   flags = test(bl, bl);
+  |   if ((bl & bl) != 0) goto L_0x209a;
+  |   goto L_0x2093;  /* 未取分支 */
+  | L_0x2093:
+  |   swap(*(u64 *)data_0x55c8, rdx);
+  | L_0x209a:
+  |   rsp += 0x20;
+  |   rbx = pop();
+  |   return;
+  --- Ghidra（__scrt_release_startup_lock）---
+  | 
+  | /* Library Function - Single Match
+  |     __scrt_release_startup_lock
+  |    
+  |    Libraries: Visual Studio 2015 Release, Visual Studio 2017 Release, Visual Studio 2019 Release */
+  | 
+  | void __scrt_release_startup_lock(char param_1)
+  | 
+  | {
+  |   bool bVar1;
+  |   undefined3 extraout_var;
+  |   
+  |   bVar1 = __scrt_is_ucrt_dll_in_use();
+  |   if ((CONCAT31(extraout_var,bVar1) != 0) && (param_1 == '\0')) {
+  |     LOCK();
+  |     DAT_1400055c8 = 0;
+  |     UNLOCK();
+  |   }
+  |   return;
+  | }
+  | 
+
+[对读] tests/fixtures/bin_ls.elf
+  0x4740     我方: 指令  5 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x6d10（FUN_00106d10）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x4bde     我方: 指令  1 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x11270    我方: 指令  3 块 1 abstain 0 complete | Ghidra: 有 块1 大小12
+  0x18490    我方: 指令  6 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x475f     我方: 指令 15 块 3 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x88e0     我方: 指令 14 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x11dc0    我方: 指令 19 块 4 abstain 1 partial | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x18840    我方: 指令 26 块 3 abstain 6 partial | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x483d     我方: 指令 33 块 8 abstain 0 complete | Ghidra: 有 块8 大小109
+      - .text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 4 个（thunk/导入）；不参与判等，单列
+  0x98a0     我方: 指令 33 块11 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0xf1d0     我方: 指令 65 块10 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x16460    我方: 指令 47 块11 abstain 0 complete | Ghidra: 有 块11 大小176
+      - .text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 4 个（thunk/导入）；不参与判等，单列
+  0x4c00     我方: 指令1103 块243 abstain18 partial | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0xb1e0     我方: 指令343 块107 abstain 2 partial | Ghidra: 有 块107 大小1498
+      - .text 外调用目标：我方 2 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+  0xf460     我方: 指令546 块135 abstain 0 complete | Ghidra: 有 块135 大小2367
+      - .text 外调用目标：我方 24 个（PLT/GOT 桩）、Ghidra 14 个（thunk/导入）；不参与判等，单列
+  0x13490    我方: 指令107 块26 abstain 0 complete | Ghidra: 有 块26 大小433
+      - .text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+  0x48cf     我方: 指令 33 块 4 abstain 0 complete | Ghidra: 有 块4 大小99
+      - .text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+      - Ghidra 以调用呈现 0x483d：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x4932     我方: 指令 32 块 5 abstain 8 partial | Ghidra: 有 块5 大小176
+      - .text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  -- 汇总: 入口存在 8/18（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 8/8 ｜ 重叠集内调用集相等 5/8
+  -- 抽样函数弃权原因（按指令计，共 35 条）:
+       16 × 0F 29 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        5 × 0F 6f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        4 × mul/imul/div/idiv（隐式 rax/rdx 双寄存器结果）未建模 ｜ 缺: 隐式操作数 rax/rdx 与商余数语义
+        3 × 0F 6e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        3 × 0F 6c SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        1 × 0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        1 × 0F 7e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+
+  ── 人工对读样本（我方伪 C / Ghidra C 并列）──
+
+  ### FUNC 0x11270  类别=-
+  --- 我方 ---
+  | // FUNC fde@0x22900  0x11270..0x1127c  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 3 / 已提升 3 / abstain 0（0.00%）/ 语句 2
+  | L_0x11270:
+  |   rax = *(u64 *)data_0x27280;
+  |   return;
+  --- Ghidra（FUN_00111270）---
+  | 
+  | undefined8 FUN_00111270(void)
+  | 
+  | {
+  |   return program_invocation_short_name;
+  | }
+  | 
+
+  ### FUNC 0x483d  类别=-
+  --- 我方 ---
+  | // FUNC fde@0x224ac  0x483d..0x48aa  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 33 / 已提升 33 / abstain 0（0.00%）/ 语句 36
+  | L_0x483d:
+  |   push(rbp);
+  |   ebp = esi;
+  |   esi = 0x1;
+  |   push(rbx);
+  |   ebx = edi;
+  |   push(r8);
+  |   rdi = *(u64 *)data_0x272c0;
+  |   sub_0x40a0();
+  |   *(u32 *)data_0x28404 += 1;
+  |   flags = test(ebp, ebp);
+  |   if ((ebp & ebp) == 0) goto L_0x4867;
+  |   goto L_0x4860;  /* 未取分支 */
+  | L_0x4860:
+  |   edi = ebp;
+  |   sub_0x47bc();
+  | L_0x4867:
+  |   rdi = *(u64 *)data_0x272c0;
+  |   rax = *(u64 *)(rdi + 0x28);
+  |   flags = cmp(rax, *(u64 *)(rdi + 0x30));
+  |   if (rax <u *(u64 *)(rdi + 0x30)) goto L_0x4884;
+  |   goto L_0x4878;  /* 未取分支 */
+  | L_0x4878:
+  |   esi = 0xa;
+  |   sub_0x42b0();
+  |   goto L_0x488f;
+  | L_0x4884:
+  |   rdx = addr(rax + 0x1);
+  |   *(u64 *)(rdi + 0x28) = rdx;
+  |   *(u8 *)(rax) = 0xa;
+  | L_0x488f:
+  |   rdi = *(u64 *)data_0x272c0;
+  |   sub_0x4680();
+  |   flags = test(ebx, ebx);
+  |   if ((ebx & ebx) == 0) goto L_0x48a6;
+  |   goto L_0x489f;  /* 未取分支 */
+  | L_0x489f:
+  --- Ghidra（FUN_0010483d）---
+  | 
+  | undefined8
+  | FUN_0010483d(int param_1,int param_2,undefined8 param_3,undefined8 param_4,undefined8 param_5)
+  | 
+  | {
+  |   char *pcVar1;
+  |   
+  |   __vfprintf_chk(stderr,1);
+  |   error_message_count = error_message_count + 1;
+  |   if (param_2 != 0) {
+  |     FUN_001047bc(param_2);
+  |   }
+  |   pcVar1 = stderr->_IO_write_ptr;
+  |   if (pcVar1 < stderr->_IO_write_end) {
+  |     stderr->_IO_write_ptr = pcVar1 + 1;
+  |     *pcVar1 = '\n';
+  |   }
+  |   else {
+  |     __overflow(stderr,10);
+  |   }
+  |   fflush_unlocked(stderr);
+  |   if (param_1 != 0) {
+  |                     /* WARNING: Subroutine does not return */
+  |     exit(param_1);
+  |   }
+  |   return param_5;
+  | }
+  | 
+
+  ### FUNC 0x16460  类别=-
+  --- 我方 ---
+  | // FUNC fde@0x23498  0x16460..0x16517  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 47 / 已提升 47 / abstain 0（0.00%）/ 语句 53
+  | L_0x16460:
+  |   push(r12);
+  |   push(rbp);
+  |   push(rbx);
+  |   flags = test(rdi, rdi);
+  |   if ((rdi & rdi) == 0) goto L_0x164f5;
+  |   goto L_0x16471;  /* 未取分支 */
+  | L_0x16471:
+  |   esi = 0x2f;
+  |   rbx = rdi;
+  |   sub_0x42c0();
+  |   r12 = rbx;
+  |   rbp = rax;
+  |   flags = test(rax, rax);
+  |   if ((rax & rax) == 0) goto L_0x164cf;
+  |   goto L_0x16489;  /* 未取分支 */
+  | L_0x16489:
+  |   r12 = addr(rax + 0x1);
+  |   rax = r12;
+  |   rax -= rbx;
+  |   flags = cmp(rax, 0x6);
+  |   if (rax <= 0x6) goto L_0x164cf;
+  |   goto L_0x16499;  /* 未取分支 */
+  | L_0x16499:
+  |   rdi = addr(rbp + -0x6);
+  |   edx = 0x7;
+  |   rsi = addr(data_0x1d662);
+  |   sub_0x40e0();
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) != 0) goto L_0x164cf;
+  |   goto L_0x164b2;  /* 未取分支 */
+  | L_0x164b2:
+  |   flags = cmp(stk_1, 0x6c);
+  |   if (stk_1 != 0x6c) goto L_0x164f0;
+  |   goto L_0x164b8;  /* 未取分支 */
+  | L_0x164b8:
+  |   flags = cmp(*(u8 *)(r12 + 0x1), 0x74);
+  --- Ghidra（FUN_00116460）---
+  | 
+  | void FUN_00116460(char *param_1)
+  | 
+  | {
+  |   int iVar1;
+  |   char *pcVar2;
+  |   char *pcVar3;
+  |   
+  |   if (param_1 == (char *)0x0) {
+  |     fwrite("A NULL argv[0] was passed through an exec system call.\n",1,0x37,stderr);
+  |                     /* WARNING: Subroutine does not return */
+  |     abort();
+  |   }
+  |   pcVar2 = strrchr(param_1,0x2f);
+  |   pcVar3 = param_1;
+  |   if ((pcVar2 != (char *)0x0) && (pcVar3 = pcVar2 + 1, 6 < (long)pcVar3 - (long)param_1)) {
+  |     iVar1 = strncmp(pcVar2 + -6,"/.libs/",7);
+  |     if (iVar1 == 0) {
+  |       if (((pcVar2[1] == 'l') && (pcVar2[2] == 't')) && (pcVar2[3] == '-')) {
+  |         pcVar3 = pcVar2 + 4;
+  |         param_1 = pcVar3;
+  |       }
+  |       else {
+  |         param_1 = pcVar3;
+  |       }
+  |     }
+  |   }
+  |   DAT_00128448 = param_1;
+  |   program_invocation_name = param_1;
+  |   program_invocation_short_name = pcVar3;
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0xb1e0  类别=loop
+  --- 我方 ---
+  | // FUNC fde@0x21d38  0xb1e0..0xb81b  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 343 / 已提升 341 / abstain 2（0.58%）/ 语句 419
+  | L_0xb1e0:
+  |   push(r15);
+  |   r15d = esi;
+  |   push(r14);
+  |   r14 = rdi;
+  |   push(r13);
+  |   push(r12);
+  |   r12 = rdx;
+  |   push(rbp);
+  |   push(rbx);
+  |   rsp -= 0x18;
+  |   eax = *(u8 *)data_0x28332;  /* movzx */
+  |   *(u64 *)(rsp + 0x8) = rcx;
+  |   flags = test(sil, sil);
+  |   if ((sil & sil) == 0) goto L_0xb260;
+  |   goto L_0xb208;  /* 未取分支 */
+  | L_0xb208:
+  |   r13 = *(u64 *)(rdi + 0x8);
+  |   flags = test(al, al);
+  |   if ((al & al) != 0) goto L_0xb318;
+  |   goto L_0xb214;  /* 未取分支 */
+  | L_0xb214:
+  |   edx = *(u32 *)(r14 + 0xc4);
+  |   rsi = *(u64 *)data_0x282f0;
+  | L_0xb222:
+  |   rsp -= 0x8;
+  |   push(*(u64 *)(r14 + 0x10));
+  |   r15d ^= 0x1;
+  |   ecx ^= ecx;
+  |   r9 = r12;
+  |   r8d = r15b;  /* movzx */
+  |   rdi = r13;
+  |   sub_0xadd0();
+  |   rbx = rax;
+  |   sub_0x8670();
+  |   rcx = pop();
+  |   rsi = pop();
+  --- Ghidra（FUN_0010b1e0）---
+  | 
+  | long FUN_0010b1e0(undefined8 *param_1,byte param_2,undefined8 param_3,ulong param_4)
+  | 
+  | {
+  |   ulong uVar1;
+  |   char cVar2;
+  |   char cVar3;
+  |   uint uVar4;
+  |   int iVar5;
+  |   long lVar6;
+  |   size_t sVar7;
+  |   ulong *puVar8;
+  |   undefined4 uVar9;
+  |   uint uVar10;
+  |   uint uVar11;
+  |   char *__s;
+  |   
+  |   if (param_2 == 0) {
+  |     __s = (char *)*param_1;
+  |     if (DAT_00128332 != '\0') {
+  |       uVar4 = (uint)*(byte *)((long)param_1 + 0xb9);
+  |       if ((DAT_001283b0 == '\0') || (*(byte *)((long)param_1 + 0xb9) == 0)) {
+  |         uVar10 = *(uint *)(param_1 + 6);
+  |       }
+  |       else {
+  |         uVar10 = *(uint *)((long)param_1 + 0xac);
+  |       }
+  | LAB_0010b27f:
+  |       if (*(char *)(param_1 + 0x17) == '\0') goto LAB_0010b28d;
+  | LAB_0010b390:
+  |       uVar11 = uVar10 & 0xf000;
+  |       if (uVar11 == 0x8000) {
+  |         if ((((uVar10 & 0x800) == 0) || (DAT_00127160 == 0)) ||
+  |            ((DAT_00127160 < 3 &&
+  |             ((PTR_DAT_00127168[DAT_00127160 - 1] == '0' && (*PTR_DAT_00127168 == '0')))))) {
+  |           if (((uVar10 & 0x400) == 0) ||
+  |              ((DAT_00127170 == 0 ||
+  |               (((DAT_00127170 < 3 && (PTR_DAT_00127178[DAT_00127170 - 1] == '0')) &&
+  |                (*PTR_DAT_00127178 == '0')))))) {
+  |             if (*(char *)(param_1 + 0x18) == '\0') {
+
+  ### FUNC 0xf460  类别=loop
+  --- 我方 ---
+  | // FUNC fde@0x223f0  0xf460..0xfdd2  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 546 / 已提升 546 / abstain 0（0.00%）/ 语句 620
+  | L_0xf460:
+  |   push(r15);
+  |   push(r14);
+  |   r14d = esi;
+  |   push(r13);
+  |   r14d &= 0x3;
+  |   push(r12);
+  |   eax = addr(r14 + -0x1);
+  |   push(rbp);
+  |   push(rbx);
+  |   rsp -= 0xd38;
+  |   rbp = *(u64 *)(fs:[0x28]);
+  |   *(u64 *)(rsp + 0xd28) = rbp;
+  |   rbp = addr(rsp + 0x100);
+  |   r12 = addr(rsp + 0x510);
+  |   r13 = addr(rsp + 0x920);
+  |   *(u64 *)(rsp + 0xf8) = 0x400;
+  |   *(u64 *)(rsp + 0x500) = r12;
+  |   *(u64 *)(rsp + 0x508) = 0x400;
+  |   *(u64 *)(rsp + 0x910) = r13;
+  |   *(u64 *)(rsp + 0x918) = 0x400;
+  |   *(u64 *)(rsp + 0xf0) = rbp;
+  |   flags = test(eax, r14d);
+  |   if ((eax & r14d) != 0) goto L_0xf648;
+  |   goto L_0xf4ee;  /* 未取分支 */
+  | L_0xf4ee:
+  |   r11 = rdi;
+  |   flags = test(rdi, rdi);
+  |   if ((rdi & rdi) == 0) goto L_0xf648;
+  |   goto L_0xf4fa;  /* 未取分支 */
+  | L_0xf4fa:
+  |   ecx = *(u8 *)(rdi);  /* movzx */
+  |   flags = test(cl, cl);
+  |   if ((cl & cl) == 0) goto L_0xf7e0;
+  |   goto L_0xf505;  /* 未取分支 */
+  | L_0xf505:
+  |   ebx = esi;
+  --- Ghidra（FUN_0010f460）---
+  | 
+  | void * FUN_0010f460(char *param_1,uint param_2)
+  | 
+  | {
+  |   char *pcVar1;
+  |   ulong uVar2;
+  |   char cVar3;
+  |   bool bVar4;
+  |   char cVar5;
+  |   int iVar6;
+  |   char *pcVar7;
+  |   int *piVar8;
+  |   char *pcVar9;
+  |   void *pvVar10;
+  |   size_t __n;
+  |   char *pcVar11;
+  |   char *pcVar12;
+  |   long lVar13;
+  |   uint uVar14;
+  |   char *pcVar15;
+  |   size_t sVar16;
+  |   long in_FS_OFFSET;
+  |   bool bVar17;
+  |   long local_d58;
+  |   int local_d2c;
+  |   long local_d18;
+  |   stat local_d08;
+  |   char *local_c78;
+  |   size_t local_c70;
+  |   char local_c68;
+  |   char local_c67 [1023];
+  |   char *local_868;
+  |   ulong local_860;
+  |   char local_858 [1024];
+  |   char *local_458;
+  |   long local_450;
+  |   char local_448 [1032];
+  |   long local_40;
+  |   
+  |   uVar14 = param_2 & 3;
+
+  ### FUNC 0x13490  类别=loop
+  --- 我方 ---
+  | // FUNC fde@0x22fd8  0x13490..0x1365b  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 107 / 已提升 107 / abstain 0（0.00%）/ 语句 119
+  | L_0x13490:
+  |   push(r14);
+  |   push(r13);
+  |   r13 = rsi;
+  |   push(r12);
+  |   push(rbp);
+  |   push(rbx);
+  |   rbx = rdi;
+  |   rsp -= 0x10;
+  |   rbp = *(u64 *)(fs:[0x28]);
+  |   *(u64 *)(rsp + 0x8) = rbp;
+  |   rbp = rdx;
+  |   flags = test(rdi, rdi);
+  |   if ((rdi & rdi) == 0) goto L_0x135e0;
+  |   goto L_0x134c0;  /* 未取分支 */
+  | L_0x134c0:
+  |   r12d ^= r12d;
+  |   flags = cmp(*(u8 *)(rbx), 0x27);
+  |   if (*(u8 *)(rbx) != 0x27) goto L_0x134d2;
+  |   goto L_0x134c8;  /* 未取分支 */
+  | L_0x134c8:
+  |   rbx += 0x1;
+  |   r12d = 0x4;
+  | L_0x134d2:
+  |   r14 = addr(data_0x1fce0);
+  |   ecx = 0x4;
+  |   rsi = addr(data_0x26980);
+  |   rdi = rbx;
+  |   rdx = r14;
+  |   sub_0xee80();
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) <0) goto L_0x13530;
+  |   goto L_0x134f4;  /* 未取分支 */
+  | L_0x134f4:
+  |   /* cdqe（隐式 rax/rdx 扩展） */
+  |   *(u64 *)(rbp) = 0x1;
+  |   r12d |= *(u32 *)(r14 + rax * 4);
+  --- Ghidra（FUN_00113490）---
+  | 
+  | undefined8 FUN_00113490(char *param_1,uint *param_2,long *param_3)
+  | 
+  | {
+  |   char cVar1;
+  |   int iVar2;
+  |   undefined8 uVar3;
+  |   char *pcVar4;
+  |   long lVar5;
+  |   uint uVar6;
+  |   long in_FS_OFFSET;
+  |   char *local_38;
+  |   long local_30;
+  |   
+  |   local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  |   if (((param_1 == (char *)0x0) && (param_1 = getenv("BLOCK_SIZE"), param_1 == (char *)0x0)) &&
+  |      (param_1 = getenv("BLOCKSIZE"), param_1 == (char *)0x0)) {
+  |     pcVar4 = getenv("POSIXLY_CORRECT");
+  |     *param_3 = (ulong)(-(uint)(pcVar4 == (char *)0x0) & 0x200) + 0x200;
+  |     *param_2 = 0;
+  |   }
+  |   else {
+  |     uVar6 = 0;
+  |     if (*param_1 == '\'') {
+  |       param_1 = param_1 + 1;
+  |       uVar6 = 4;
+  |     }
+  |     iVar2 = FUN_0010ee80(param_1,&PTR_s_human_readable_00126980,&DAT_0011fce0,4);
+  |     if (iVar2 < 0) {
+  |       uVar3 = FUN_0011a540(param_1,&local_38,0,param_3,"eEgGkKmMpPtTyYzZ0");
+  |       if ((int)uVar3 == 0) {
+  |         cVar1 = *param_1;
+  |         while (9 < (byte)(cVar1 - 0x30U)) {
+  |           if (local_38 == param_1) {
+  |             if (local_38[-1] == 'B') {
+  |               uVar6 = uVar6 | 0x180;
+  |               if (local_38[-2] != 'i') break;
+  |             }
+  |             else {
+  |               uVar6 = uVar6 | 0x80;
+
+[对读] tests/fixtures/dyn_static
+  0x401100   我方: 指令  1 块 1 abstain 0 complete | Ghidra: 无 块None 大小None
+      - 入口落在 Ghidra 函数 0x404760（__libc_message_impl）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧
+  0x40cf00   我方: 指令  3 块 1 abstain 0 complete | Ghidra: 有 块1 大小8
+  0x421550   我方: 指令  2 块 1 abstain 0 complete | Ghidra: 有 块1 大小8
+  0x44a5c0   我方: 指令  6 块 1 abstain 0 complete | Ghidra: 有 块1 大小32
+  0x40110b   我方: 指令 26 块 1 abstain 1 partial | Ghidra: 有 块1 大小126
+  0x415ef0   我方: 指令 29 块 7 abstain 3 partial | Ghidra: 有 块7 大小127
+      - Ghidra 以调用呈现 0x404a60：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x432d90   我方: 指令 25 块 7 abstain 0 complete | Ghidra: 有 块7 大小92
+  0x45cf20   我方: 指令 17 块 7 abstain 0 complete | Ghidra: 有 块7 大小47
+  0x401480   我方: 指令 32 块 6 abstain 2 partial | Ghidra: 有 块6 大小99
+      - Ghidra 以调用呈现 0x471490：我方对应尾跳转（jmp），同一控制转移、呈现不同
+  0x417100   我方: 指令 71 块14 abstain 0 complete | Ghidra: 有 块14 大小211
+  0x445770   我方: 指令 69 块 6 abstain 0 complete | Ghidra: 有 块6 大小253
+      - .text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x45f920   我方: 指令 33 块 9 abstain 0 complete | Ghidra: 有 块9 大小146
+  0x401e70   我方: 指令241 块68 abstain 7 partial | Ghidra: 有 块68 大小875
+  0x4216e0   我方: 指令111 块12 abstain 0 complete | Ghidra: 有 块12 大小377
+      - .text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列
+  0x438850   我方: 指令167 块35 abstain 0 complete | Ghidra: 有 块35 大小717
+      - .text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列
+  0x45c7a0   我方: 指令195 块27 abstain91 partial | Ghidra: 有 块27 大小806
+  0x40139d   我方: 指令 15 块 5 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x401193   我方: 指令 26 块 9 abstain 0 complete | Ghidra: 无 块None 大小None
+      - Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变
+  0x401870   我方: 指令 80 块23 abstain 0 complete | Ghidra: 有 块55 大小704
+      - 基本块数不一致（我方 23 块/704 字节，Ghidra 55 块/704 字节）：函数域相同，块数差主要来自 1 处间接 jmp 目标未解析（R45 不猜），其后 case 块不可达；Ghidra 可能恢复了跳转表
+  0x402b00   我方: 指令832 块142 abstain23 partial | Ghidra: 有 块149 大小4393
+      - 基本块数不一致（我方 142 块/4399 字节，Ghidra 149 块/4393 字节）：函数域相同，差异较小（尾跳转/不可达填充）；另有 1 处间接 jmp 目标未解析（不猜）
+  0x44d710   我方: 指令1790 块384 abstain63 partial | Ghidra: 有 块385 大小8314
+      - .text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列
+      - 仅 Ghidra 有调用目标 0x40110b：其 thunk/IAT 解析，或我方在该块 abstain
+      - 基本块数不一致（我方 384 块/8551 字节，Ghidra 385 块/8314 字节）：函数域相同，差异来自块切分口径（尾跳转/不可达填充）
+  -- 汇总: 入口存在 18/21（Ghidra 未切分不算我方错）｜ 重叠集内块数相等 15/18 ｜ 重叠集内调用集相等 12/18
+  -- 抽样函数弃权原因（按指令计，共 190 条）:
+       20 × 0F 28 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       19 × 0F 7f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       16 × 0F 74 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       16 × 0F d7 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       16 × 0F bc 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+       14 × 0F 6f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+       13 × 条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+        9 × 0F 6e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        8 × 0F bd 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        6 × 0F da SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        6 × 0F 7e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        6 × x87 浮点指令（opcode 0xd9）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        5 × mul/imul/div/idiv（隐式 rax/rdx 双寄存器结果）未建模 ｜ 缺: 隐式操作数 rax/rdx 与商余数语义
+        4 × 0F ef SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        4 × 0F 50 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        4 × x87 浮点指令（opcode 0xdb）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        3 × lock 前缀：原子语义未建模 ｜ 缺: 带 lock 的内存序/原子性语义
+        3 × 0F 29 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        3 × x87 浮点指令（opcode 0xdf）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        3 × x87 浮点指令（opcode 0xdd）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）
+        2 × 0F d6 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 0F db SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        2 × 0F 2e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × 字符串指令（opcode 0xab）未建模 ｜ 缺: rep/隐式 rsi/rdi 更新与方向标志语义（M5-U1 白名单之外）
+        1 × 0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）
+        1 × 0F 62 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × 0F 10 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × 0F 54 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）
+        1 × cmov 前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流
+
+  ── 人工对读样本（我方伪 C / Ghidra C 并列）──
+
+  ### FUNC 0x40cf00  类别=-
+  --- 我方 ---
+  | // FUNC __mempcpy_avx512_unaligned  0x40cf00..0x40cf08  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 3 / 已提升 3 / abstain 0（0.00%）/ 语句 3
+  | L_0x40cf00:
+  |   rax = rdi;
+  |   rax += rdx;
+  |   goto L_0x40cf13;
+  --- Ghidra（__mempcpy_avx512_unaligned）---
+  | 
+  | undefined1 *
+  | __mempcpy_avx512_unaligned(undefined1 (*param_1) [64],undefined1 (*param_2) [64],ulong param_3)
+  | 
+  | {
+  |   undefined1 uVar1;
+  |   undefined4 uVar2;
+  |   undefined8 uVar3;
+  |   undefined8 uVar4;
+  |   undefined8 uVar5;
+  |   ulong uVar6;
+  |   undefined1 *puVar7;
+  |   int iVar8;
+  |   ulong uVar9;
+  |   undefined1 (*pauVar10) [64];
+  |   uint uVar11;
+  |   undefined1 (*pauVar12) [64];
+  |   undefined1 (*pauVar13) [64];
+  |   long lVar14;
+  |   undefined1 auVar15 [32];
+  |   undefined1 auVar16 [32];
+  |   undefined1 auVar17 [64];
+  |   undefined1 auVar18 [64];
+  |   undefined1 auVar19 [64];
+  |   undefined1 auVar20 [64];
+  |   undefined1 auVar21 [64];
+  |   undefined1 auVar22 [64];
+  |   undefined1 auVar23 [64];
+  |   undefined1 auVar24 [64];
+  |   undefined1 auVar25 [64];
+  |   
+  |   uVar6 = __x86_shared_non_temporal_threshold;
+  |   puVar7 = *param_1 + param_3;
+  |   if (param_3 < 0x40) {
+  |     uVar11 = (uint)param_3;
+  |     if (0x1f < uVar11) {
+  |       auVar15 = vmovdqu64_avx512vl(*(undefined1 (*) [32])*param_2);
+  |       auVar16 = vmovdqu64_avx512vl(*(undefined1 (*) [32])(param_2[-1] + param_3 + 0x20));
+  |       auVar15 = vmovdqu64_avx512vl(auVar15);
+  |       *(undefined1 (*) [32])*param_1 = auVar15;
+
+  ### FUNC 0x421550  类别=-
+  --- 我方 ---
+  | // FUNC _IO_default_read  0x421550..0x421558  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 2 / 已提升 2 / abstain 0（0.00%）/ 语句 2
+  | L_0x421550:
+  |   rax = -0x1;
+  |   return;
+  --- Ghidra（_IO_default_read）---
+  | 
+  | undefined8 _IO_default_read(void)
+  | 
+  | {
+  |   return 0xffffffffffffffff;
+  | }
+  | 
+
+  ### FUNC 0x44a5c0  类别=-
+  --- 我方 ---
+  | // FUNC __libc_localealias_freemem  0x44a5c0..0x44a5e0  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 6 / 已提升 6 / abstain 0（0.00%）/ 语句 6
+  | L_0x44a5c0:
+  |   rsp -= 0x8;
+  |   rdi = *(u64 *)data_0x4aa010;
+  |   sub_0x409bc0();
+  |   rdi = *(u64 *)data_0x4a9ff8;
+  |   rsp += 0x8;
+  |   goto L_0x409bc0;
+  --- Ghidra（__libc_localealias_freemem）---
+  | 
+  | void __libc_localealias_freemem(void)
+  | 
+  | {
+  |   free(string_space);
+  |   free(map);
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x40110b  类别=-
+  --- 我方 ---
+  | // FUNC abort  0x40110b..0x401193  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 26 / 已提升 25 / abstain 1（3.85%）/ 语句 26
+  | L_0x40110b:
+  |   rsp -= 0xb8;
+  |   rdi = *(u64 *)(fs:[0x28]);
+  |   *(u64 *)(rsp + 0xa8) = rdi;
+  |   edi = 0x6;
+  |   sub_0x44bcd0();
+  |   edi ^= edi;
+  |   sub_0x415820();
+  |   eax ^= eax;
+  |   rdi = addr(rsp + 0x10);
+  |   edx ^= edx;
+  |   ecx = 0x26;
+  |   rsi = addr(rsp + 0x10);
+  |   /* abstain @0x401147: 字符串指令（opcode 0xab）未建模（缺：rep/隐式 rsi/rdi 更新与方向标志语义（M5-U1 白名单之外）） */
+  |   edi = 0x6;
+  |   *(u64 *)(rsp + 0x18) = -0x1;
+  |   sub_0x44bd30();
+  |   edi = 0x6;
+  |   sub_0x4223d0();
+  |   rsi = addr(rsp + 0x8);
+  |   r10d = 0x8;
+  |   *(u64 *)(rsp + 0x8) = 0x20;
+  |   edx ^= edx;
+  |   edi = 0x1;
+  |   eax = 0xe;
+  |   syscall();
+  |   __halt();
+  --- Ghidra（abort）---
+  | 
+  | /* WARNING: Unknown calling convention -- yet parameter storage is locked */
+  | 
+  | void abort(void)
+  | 
+  | {
+  |   long lVar1;
+  |   undefined4 *puVar2;
+  |   long in_FS_OFFSET;
+  |   byte bVar3;
+  |   undefined4 local_a8 [2];
+  |   undefined8 local_a0;
+  |   undefined8 local_10;
+  |   
+  |   bVar3 = 0;
+  |   local_10 = *(undefined8 *)(in_FS_OFFSET + 0x28);
+  |   raise(6);
+  |   __abort_lock_wrlock(0);
+  |   puVar2 = local_a8;
+  |   for (lVar1 = 0x26; lVar1 != 0; lVar1 = lVar1 + -1) {
+  |     *puVar2 = 0;
+  |     puVar2 = puVar2 + (ulong)bVar3 * -2 + 1;
+  |   }
+  |   local_a0 = 0xffffffffffffffff;
+  |   __libc_sigaction(6,local_a8,0);
+  |   __pthread_raise_internal(6);
+  |   syscall();
+  |   do {
+  |                     /* WARNING: Do nothing block with infinite loop */
+  |   } while( true );
+  | }
+  | 
+
+  ### FUNC 0x415ef0  类别=-
+  --- 我方 ---
+  | // FUNC __getrandom_vdso_release  0x415ef0..0x415f7e  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 29 / 已提升 26 / abstain 3（10.34%）/ 语句 32
+  | L_0x415ef0:
+  |   flags = cmp(*(u64 *)(rdi + 0x918), 0x1);
+  |   if (*(u64 *)(rdi + 0x918) <=u 0x1) goto L_0x415f58;
+  |   goto L_0x415efa;  /* 未取分支 */
+  | L_0x415efa:
+  |   push(rbx);
+  |   eax ^= eax;
+  |   rbx = rdi;
+  |   edx = 0x1;
+  |   /* abstain @0x415f05: lock 前缀：原子语义未建模（缺：带 lock 的内存序/原子性语义） */
+  |   /* abstain @0x415f0d: 条件跳转前没有可跟踪的标志位来源（缺：跨块标志数据流） */
+  |   goto L_0x415f0f;  /* 未取分支 */
+  | L_0x415f0f:
+  |   rax = *(u64 *)data_0x4a9cd0;
+  |   rcx = *(u64 *)(rbx + 0x918);
+  |   rdx = *(u64 *)data_0x4a9cc8;
+  |   *(u64 *)(rdx + rax * 8) = rcx;
+  |   rax += 0x1;
+  |   *(u64 *)(rbx + 0x918) = 0x0;
+  |   /* abstain @0x415f37: lock 前缀：原子语义未建模（缺：带 lock 的内存序/原子性语义） */
+  |   *(u64 *)data_0x4a9cd0 = rax;
+  |   eax ^= eax;
+  |   swap(*(u32 *)data_0x4a9cc0, eax);
+  |   flags = cmp(eax, 0x1);
+  |   if (eax > 0x1) goto L_0x415f60;
+  |   goto L_0x415f51;  /* 未取分支 */
+  | L_0x415f51:
+  |   rbx = pop();
+  |   return;
+  | L_0x415f58:
+  |   return;
+  | L_0x415f60:
+  |   rdi = addr(data_0x4a9cc0);
+  |   rbx = pop();
+  |   goto L_0x404a60;
+  | L_0x415f70:
+  |   rdi = addr(data_0x4a9cc0);
+  --- Ghidra（__getrandom_vdso_release）---
+  | 
+  | void __getrandom_vdso_release(long param_1)
+  | 
+  | {
+  |   int iVar1;
+  |   bool bVar2;
+  |   
+  |   if (*(ulong *)(param_1 + 0x918) < 2) {
+  |     return;
+  |   }
+  |   LOCK();
+  |   bVar2 = grnd_alloc == 0;
+  |   if (bVar2) {
+  |     grnd_alloc = 1;
+  |   }
+  |   UNLOCK();
+  |   if (!bVar2) {
+  |     __lll_lock_wait_private(&grnd_alloc);
+  |   }
+  |   *(undefined8 *)(DAT_004a9cc8 + DAT_004a9cd0 * 8) = *(undefined8 *)(param_1 + 0x918);
+  |   DAT_004a9cd0 = DAT_004a9cd0 + 1;
+  |   *(undefined8 *)(param_1 + 0x918) = 0;
+  |   iVar1 = grnd_alloc;
+  |   LOCK();
+  |   UNLOCK();
+  |   LOCK();
+  |   grnd_alloc = 0;
+  |   UNLOCK();
+  |   if (iVar1 < 2) {
+  |     return;
+  |   }
+  |   __lll_lock_wake_private(&grnd_alloc);
+  |   return;
+  | }
+  | 
+
+  ### FUNC 0x432d90  类别=loop
+  --- 我方 ---
+  | // FUNC _dl_handle_execstack_tunable  0x432d90..0x432df7  boundary=declared  authority=authoritative
+  | // 约定: addr(x)=x 的地址（非解引用）；*(uN *)p 解引用；local_/sp_ 为栈负偏移，stk_ 为 rbp 正偏移；flags 行为标志位快照；fs:/gs: 为段基址未展开的段相对地址（不是绝对地址）
+  | // 指令 25 / 已提升 25 / abstain 0（0.00%）/ 语句 28
+  | L_0x432d90:
+  |   rsp -= 0x18;
+  |   edx ^= edx;
+  |   edi = 0x28;
+  |   rsi = addr(rsp + 0xc);
+  |   sub_0x413a20();
+  |   eax = *(u32 *)(rsp + 0xc);
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) == 0) goto L_0x432de0;
+  |   goto L_0x432dad;  /* 未取分支 */
+  | L_0x432dad:
+  |   flags = cmp(eax, 0x2);
+  |   if (eax == 0x2) goto L_0x432dc0;
+  |   goto L_0x432db2;  /* 未取分支 */
+  | L_0x432db2:
+  |   rsp += 0x18;
+  |   return;
+  | L_0x432dc0:
+  |   rdi = *(u64 *)data_0x4a1ff8;
+  |   sub_0x45f670();
+  |   flags = test(eax, eax);
+  |   if ((eax & eax) == 0) goto L_0x432db2;
+  |   goto L_0x432dd0;  /* 未取分支 */
+  | L_0x432dd0:
+  |   rdi = addr(data_0x47a148);
+  |   eax ^= eax;
+  |   sub_0x4396c0();
+  | L_0x432de0:
+  |   flags = test(*(u8 *)data_0x4a3b28, 0x1);
+  |   if ((*(u8 *)data_0x4a3b28 & 0x1) == 0) goto L_0x432db2;
+  |   goto L_0x432de9;  /* 未取分支 */
+  | L_0x432de9:
+  |   rdi = addr(data_0x47a110);
+  |   eax ^= eax;
+  |   sub_0x4396c0();
+  --- Ghidra（_dl_handle_execstack_tunable）---
+  | 
+  | void _dl_handle_execstack_tunable(void)
+  | 
+  | {
+  |   int iVar1;
+  |   int local_c [3];
+  |   
+  |   __tunable_get_val(0x28,local_c,0);
+  |   if (local_c[0] == 0) {
+  |     if (((byte)_dl_stack_flags & 1) != 0) {
+  |                     /* WARNING: Subroutine does not return */
+  |       _dl_fatal_printf("Fatal glibc error: executable stack is not allowed\n");
+  |     }
+  |   }
+  |   else if (local_c[0] == 2) {
+  |     iVar1 = _dl_make_stack_executable(__libc_stack_end);
+  |     if (iVar1 != 0) {
+  |                     /* WARNING: Subroutine does not return */
+  |       _dl_fatal_printf("Fatal glibc error: cannot enable executable stack as tunable requires");
+  |     }
+  |   }
+  |   return;
+  | }
+  | 
+
+PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）

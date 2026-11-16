@@ -1,0 +1,22 @@
+# M17 全量 verify 回归 2026-11-16 10:04:57
+[PASS] tests\verify_c4_alignment.py rc=0 20.5s | ============================================================================== / OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑
+[PASS] tests\verify_callfacts.py rc=0 2.6s | 一致性: checked 3609 ｜ 矛盾 0 ｜ 调用图渲染只读 OK / 结果: PASS
+[PASS] tests\verify_callgraph.py rc=0 1.4s | 渲染 6229 字节 ｜ 负向基线 17 项 ｜ 耗时 0.9s / 结果: PASS
+[PASS] tests\verify_coverage.py rc=0 2.8s | 判定：失败 0 项 / VERDICT: PASS
+[PASS] tests\verify_datarefs.py rc=0 22.2s | [PASS] scarce-e data_refs 状态 :: data_refs=missing_source（允许 missing_source）；absence 覆盖=True；缺证据='没有任何能给出尺寸的声明来源（ELF 符号表 / DWARF 变量）；PE COFF 符号与导出表没有尺寸字段。这不是“没有数据引用”，是没有可交叉对象'；层错误=无 / == 汇总 ==  检查=12 PASS=12 FAIL=0 SKIP=0 → PASS
+[PASS] tests\verify_disasm.py rc=0 0.7s | 判定：分歧 0 项 / 环境错误 0 项 / VERDICT: PASS
+[PASS] tests\verify_dotnet.py rc=0 3.9s | [PASS] funcreport-na funcreport 对 .NET 显式 not_applicable :: status=not_applicable 全节非present=True absence 覆盖 8 行；reason='该文件是 .NET 程序集（PE DataDirectory[14] 非空，CLI 头 RVA=0x2008）：方法体是' / == 汇总 ==  检查=27 PASS=27 FAIL=0 SKIP=0 → PASS
+[PASS] tests\verify_expr.py rc=0 43.7s | D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_expr.py:123: DeprecationWarning: open_program() is deprecated, use open_project() and program_context() or program_loader() instead. /   with pyghidra.open_program(path, analyze=True,
+[PASS] tests\verify_fingerprint.py rc=0 0.1s |   未命中 / 误报 / 违规: 0 / 0 / 0 / E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）
+[PASS] tests\verify_funcreport.py rc=0 37.9s | [PASS] scarce-f 缺失语义 :: parameters=missing_source，人读含“缺：”=True / == 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS
+[PASS] tests\verify_gopclntab.py rc=0 12.6s | 判定：失败 0 项 / VERDICT: PASS
+[PASS] tests\verify_iat.py rc=0 0.7s | 结论：失配 0 项 / VERDICT: PASS
+[PASS] tests\verify_map.py rc=0 0.1s | 可判定格 2402：命中 2402（100.00%）/ 失配 0 / 误报 0 / 解析异常 0 / VERDICT: PASS
+[PASS] tests\verify_paramdecl.py rc=0 20.0s |   hello_go.exe：站点 13986 ｜ 因声明绑定：形参 6448、寄存器段 9152（bound 站点 2101） ｜ 部分绑定形参 1834（partial 站点 3777） ｜ 因证据不足弃权：形参 6789（abstained 站点 919） ｜ 零形参声明站点 6994 ｜ objdump 写核对 9152 段（未建模 0） / 结果: PASS
+[PASS] tests\verify_recdesc.py rc=0 6.0s | 缺失/不可解释边界 0 项 / VERDICT: PASS
+[PASS] tests\verify_sitejoin.py rc=0 9.2s | 注入自证: state=检出, edge=检出, struct=检出, coverage=检出 ｜ 只读: OK / 结果: PASS
+[PASS] tests\verify_struct.py rc=0 17.8s | 耗时 16.4s / 结果: PASS
+[PASS] tests\verify_strxref.py rc=0 35.4s |   口径: 上面两项是**补集度量**（只在未解码代码里可见），不是下界；可达域变大它变小，且对 Go（非 NUL 终止字符串）近乎盲 / OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突
+[PASS] tests\verify_switchcand.py rc=0 40.3s | D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_switchcand.py:90: DeprecationWarning: open_program() is deprecated, use open_project() and program_context() or program_loader() instead. /   with pyghidra.open_program(
+[PASS] tests\verify_vexaudit.py rc=0 2.1s | 判定：失败 0 项 / VERDICT: PASS
+SUMMARY 20/20 PASS

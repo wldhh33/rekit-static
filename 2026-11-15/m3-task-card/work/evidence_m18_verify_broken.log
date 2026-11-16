@@ -1,0 +1,21 @@
+[PASS] flow-status 状态与分母恒等式 :: status=ok 方法=20 有体=19 分析=19 失败=0；调用=17(internal=8 external=9 unresolved=0)；分支=6 目标=6；EH=3；块=30 边=12
+[PASS] flow-branch dncil 独立算分支目标 :: 分支目标逐方法比对 0 个方法 / 0 个目标（全量）；全部一致
+[PASS] flow-eh dncil 独立 EH 结构 :: EH 子句逐方法比对 0 个方法 / 0 条子句（全量）；全部一致
+[PASS] flow-token dnfile 独立 token 解析 :: token 独立核对 0 个方法 / 0 个调用点（去重 0 个 token；表行数 {'MethodDef': 20, 'MemberRef': 11, 'MethodSpec': 1, 'TypeRef': 8}）；全部一致
+[PASS] flow-unres 未解析行号越界复核 :: row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致
+[PASS] filter-status 状态与分母恒等式 :: status=ok 方法=5 有体=5 分析=5 失败=0；调用=2(internal=1 external=0 unresolved=1)；分支=5 目标=5；EH=2；块=15 边=8
+[PASS] filter-branch dncil 独立算分支目标 :: 分支目标逐方法比对 0 个方法 / 0 个目标（全量）；全部一致
+[PASS] filter-eh dncil 独立 EH 结构 :: EH 子句逐方法比对 0 个方法 / 0 条子句（全量）；全部一致
+Traceback (most recent call last):
+  File "D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_ilflow.py", line 534, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_ilflow.py", line 513, in main
+    rep = run_sample(tag, path, limit)
+  File "D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_ilflow.py", line 451, in run_sample
+    o3, x3 = _cmp_tokens(rep, path, limit, tagtxt)
+             ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m3-task-card\work\tests\verify_ilflow.py", line 247, in _cmp_tokens
+    ms_rows = _rows(md.MethodSpec)
+                    ^^^^^^^^^^^^^
+AttributeError: 'MetaDataTables' object has no attribute 'MethodSpec'. Did you mean: 'MethodDef'?

@@ -1,0 +1,90 @@
+E9 fingerprint 混淆矩阵 · 真值冻结于 2026-11-15（E9 执行前冻结；冻结后不再改动，除非另立修正记录并注明证据）
+清单: D:\数据\下载\逆向学习工作体系_2026-11-15\2026-11-15\m2-task-card\work\sample_manifest.json
+样本数: 18（正样本 upx=3，负样本=15）
+
+[1] 逐样本矩阵（✓ 命中 / ○ 正确弃权 / ✗ 未命中 / ‼ 违规）
+sample                         fmt  role     pack   compiler           stripped/coff  mitigations
+-------------------------------------------------------------------------------------------------
+dyn_pie                        ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=yes
+dyn_nopie                      ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=no
+dyn_static                     ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=partial,pie=no
+dyn_execstack                  ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=disabled,relro=partial,pie=yes
+dyn_norelro                    ELF  negative ✓none ✓gcc 14.2.0               ✓false        ✓nx=enabled,relro=none,pie=no
+bin_ls.elf                     ELF  negative ✓none ○unknown                  ✓true         ✓nx=enabled,relro=full,pie=yes
+hello_go_linux                 ELF  negative ✓none ✓go 1.27.3                ✓false        ✓nx=enabled,relro=none,pie=no
+busybox-1.35.0-musl-x86_64     ELF  negative ✓none ○unknown                  ✓true         ✓nx=enabled,relro=partial,pie=no
+upx_dyn_pie                    ELF  positive ✓upx  ○unknown                  ○unknown      ○nx=unknown,relro=unknown,pie=unknown
+upx_cli-64.exe                 PE   positive ✓upx  ✓msvc 19.29               ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+upx_putty-64bit.exe            PE   positive ✓upx  ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+cli-64.exe                     PE   negative ✓none ✓msvc 19.29               ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minipe.exe                     PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minidll.dll                    PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+minipe_fakerich.exe            PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+hello_go.exe                   PE   negative ✓none ✓go 1.27.3                ✓n/a / present ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+hello_rust.exe                 PE   negative ✓none ✓rust                     ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+putty-64bit.exe                PE   negative ✓none ○unknown                  ✓n/a / absent ✓nx=True,dynamicbase=True,high_entropy_va=True,cfg=False
+
+[2] packer 混淆矩阵（only 可判定格）
+  GT \ 实际                none       upx       
+  none                   15         0         
+  upx                    0          3         
+
+[2] compiler.family 混淆矩阵（only 可判定格）
+  GT \ 实际                gcc        go         msvc       rust      
+  gcc                    5          0          0          0         
+  go                     0          2          0          0         
+  msvc                   0          0          2          0         
+  rust                   0          0          0          1         
+
+[2] compiler.version 混淆矩阵（only GT 有明确版本的格）
+  GT \ 实际                1.27.3     14.2.0     19.29     
+  1.27.3                 2          0          0         
+  14.2.0                 0          5          0         
+  19.29                  0          0          2         
+
+[2] stripped 混淆矩阵（ELF true/false；PE 固定 n/a）
+  GT \ 实际                False      True       n/a       
+  False                  6          0          0         
+  True                   0          2          0         
+  n/a                    0          0          9         
+
+[2] COFF 符号表混淆矩阵（PE）
+  GT \ 实际                absent     present   
+  absent                 8          0         
+  present                0          1         
+
+[2] mitigations 分项（only 可判定格；弃权格单独计数）
+
+  nx：可判定 17 格，命中 17；弃权格 1，正确弃权 1
+    GT=True           实际=True           ×9
+    GT=disabled       实际=disabled       ×1
+    GT=enabled        实际=enabled        ×7
+
+  relro：可判定 8 格，命中 8；弃权格 1，正确弃权 1
+    GT=full           实际=full           ×1
+    GT=none           实际=none           ×2
+    GT=partial        实际=partial        ×5
+
+  pie：可判定 8 格，命中 8；弃权格 1，正确弃权 1
+    GT=no             实际=no             ×5
+    GT=yes            实际=yes            ×3
+
+  dynamicbase：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=True           实际=True           ×9
+
+  high_entropy_va：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=True           实际=True           ×9
+
+  cfg：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=False          实际=False          ×9
+
+  dll_characteristics：可判定 9 格，命中 9；弃权格 0，正确弃权 0
+    GT=0x8160         实际=0x8160         ×9
+
+[3] 汇总
+  样本分母           : 18（异常 0）
+  可判定格           : 132，命中 132，命中率 100.00%
+  不可判定格（弃权） : 12，正确弃权 12（100%），误报 0
+  未命中 / 误报 / 违规: 0 / 0 / 0
+
+E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）

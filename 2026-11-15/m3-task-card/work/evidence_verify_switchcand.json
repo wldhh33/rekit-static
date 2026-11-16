@@ -1,0 +1,409 @@
+{
+  "negative": {
+    "ok": true,
+    "rows": [
+      {
+        "group": "recdesc",
+        "key": "abstains",
+        "baseline": 0,
+        "now": 0,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "blocks",
+        "baseline": 21105,
+        "now": 21105,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "bytes_covered",
+        "baseline": 383375,
+        "now": 383375,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "calls_definite",
+        "baseline": 702,
+        "now": 702,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "calls_undecoded",
+        "baseline": 16,
+        "now": 16,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "calls_unresolved",
+        "baseline": 11,
+        "now": 11,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "coverage",
+        "baseline": 0.8014880971047125,
+        "now": 0.8014880971047125,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "edges_cross_function",
+        "baseline": 339,
+        "now": 339,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "edges_definite",
+        "baseline": 30202,
+        "now": 30202,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "edges_speculative",
+        "baseline": 15,
+        "now": 15,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "edges_undecoded",
+        "baseline": 18,
+        "now": 18,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "edges_unresolved",
+        "baseline": 123,
+        "now": 123,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "instruction_bytes",
+        "baseline": 383409,
+        "now": 383409,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "instructions",
+        "baseline": 94773,
+        "now": 94773,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "outside",
+        "baseline": 0,
+        "now": 0,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "overlaps",
+        "baseline": 6,
+        "now": 6,
+        "same": true
+      },
+      {
+        "group": "recdesc",
+        "key": "section_size",
+        "baseline": 478329,
+        "now": 478329,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "abstained",
+        "baseline": 9258,
+        "now": 9258,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "functions_total",
+        "baseline": 1089,
+        "now": 1089,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "insns",
+        "baseline": 94722,
+        "now": 94722,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "lifted",
+        "baseline": 1084,
+        "now": 1084,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "lifted_insns",
+        "baseline": 85464,
+        "now": 85464,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "skipped",
+        "baseline": 5,
+        "now": 5,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "statements",
+        "baseline": 105342,
+        "now": 105342,
+        "same": true
+      },
+      {
+        "group": "expr",
+        "key": "text_sha256",
+        "baseline": "72cb6520cff2893541b155b4c0a0c40e6ea18ac526b0699eabfcf462c59072c2",
+        "now": "72cb6520cff2893541b155b4c0a0c40e6ea18ac526b0699eabfcf462c59072c2",
+        "same": true
+      },
+      {
+        "group": "switchcand",
+        "key": "res.blocks",
+        "baseline": 21105,
+        "now": 21105,
+        "same": true
+      },
+      {
+        "group": "switchcand",
+        "key": "res.instructions",
+        "baseline": 94773,
+        "now": 94773,
+        "same": true
+      },
+      {
+        "group": "switchcand",
+        "key": "snapshot(before/after)",
+        "baseline": "identical",
+        "now": "identical",
+        "same": true
+      }
+    ],
+    "report": {
+      "function": 4200560,
+      "range": [
+        4200560,
+        4201264
+      ],
+      "boundary": "declared",
+      "blocks_before": 23,
+      "block_starts_before": [
+        4200560,
+        4200576,
+        4200594,
+        4200607,
+        4200620,
+        4200631,
+        4200645,
+        4200670,
+        4200677,
+        4200683,
+        4200688,
+        4200701,
+        4200708,
+        4200718,
+        4200733,
+        4200749,
+        4200753,
+        4200766,
+        4200773,
+        4200780,
+        4200799,
+        4200831,
+        4201223
+      ],
+      "candidates": [
+        {
+          "jmp": 4200747,
+          "kind": "rel32",
+          "table": 4677664,
+          "entry_size": 4,
+          "count": 8,
+          "guard": 4200724,
+          "index_reg": 6,
+          "jmp_reg": 0,
+          "evidence": "high",
+          "basis": [
+            "形态 rel32：0x40191d → 0x401924 → 0x401928 → 0x40192b",
+            "表基址 0x476020（lea rip 相对）",
+            "表项 4 字节，目标 = 表基址 + s32 偏移",
+            "表长 8（guard 0x401914：0x401914 `cmp idx,0x7` + `ja`）"
+          ],
+          "targets": [
+            4200846,
+            4200794,
+            4201054,
+            4201030,
+            4200787,
+            4200880,
+            4201006,
+            4201081
+          ],
+          "rejected_entries": [],
+          "truncated": false,
+          "new_insns": 77,
+          "new_block_starts": [
+            4200787,
+            4200794,
+            4200846,
+            4200864,
+            4200880,
+            4200889,
+            4200911,
+            4200930,
+            4200947,
+            4200960,
+            4200973,
+            4201006,
+            4201030,
+            4201054,
+            4201065,
+            4201081,
+            4201092,
+            4201100,
+            4201239,
+            4201257
+          ],
+          "blocks_before": 23,
+          "blocks_candidate": 43,
+          "conflicts": []
+        }
+      ],
+      "unmatched": [],
+      "rejected": [],
+      "caveats": [
+        "候选层默认关闭，仅在 --switch-candidates 下输出；不进入确定边/表达式/CFG 口径",
+        "表长优先取 cmp/ja 上界；无 guard 时表长未证明，证据最多 medium，且扫描有上限",
+        "候选目标必须落在该函数权威声明的域内；跨函数/落在指令内部/不可解一律拒绝并记理由",
+        "候选展开是独立 BFS，不改写 recdesc 的 res；候选块数单独记为 blocks_candidate",
+        "Pattern A（绝对 8 字节表）只在非 PIE 时语义成立；PIE 下该形态视为证据不足"
+      ],
+      "blocks_candidate": 43
+    }
+  },
+  "quantify": {
+    "ours_base": 23,
+    "ours_new_starts": [
+      4200787,
+      4200794,
+      4200846,
+      4200864,
+      4200880,
+      4200889,
+      4200911,
+      4200930,
+      4200947,
+      4200960,
+      4200973,
+      4201006,
+      4201030,
+      4201054,
+      4201065,
+      4201081,
+      4201092,
+      4201100,
+      4201239,
+      4201257
+    ],
+    "ours_candidate_blocks": 43,
+    "ghidra_found": true,
+    "ghidra_blocks": 55,
+    "gap": 32,
+    "recovered": [
+      4200787,
+      4200794,
+      4200846,
+      4200864,
+      4200880,
+      4200889,
+      4200911,
+      4200930,
+      4200947,
+      4200960,
+      4200973,
+      4201006,
+      4201030,
+      4201054,
+      4201065,
+      4201081,
+      4201092,
+      4201100,
+      4201239,
+      4201257
+    ],
+    "wrong_in_body": [],
+    "wrong_out_body": [],
+    "base_hit": [
+      4200560,
+      4200576,
+      4200594,
+      4200607,
+      4200620,
+      4200631,
+      4200645,
+      4200670,
+      4200677,
+      4200683,
+      4200688,
+      4200701,
+      4200708,
+      4200718,
+      4200733,
+      4200749,
+      4200753,
+      4200766,
+      4200773,
+      4200780,
+      4200799,
+      4200831,
+      4201223
+    ],
+    "base_extra": [],
+    "missing_after": [
+      4200747,
+      4201028,
+      4201052,
+      4201107,
+      4201117,
+      4201127,
+      4201137,
+      4201147,
+      4201157,
+      4201167,
+      4201177,
+      4201199
+    ],
+    "extra_after": [],
+    "remaining": 12,
+    "remaining_gap": 12
+  },
+  "ghidra": {
+    "found": true,
+    "name": "handle_amd",
+    "body": [
+      4200560,
+      4201264
+    ],
+    "delta": 0
+  }
+}

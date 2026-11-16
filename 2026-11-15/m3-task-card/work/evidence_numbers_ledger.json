@@ -1,0 +1,168 @@
+{
+  "schema": "numbers-ledger/1",
+  "authority": "本文件；人读镜像为 work/outputs/NUMBERS_LEDGER.md",
+  "scope": "M13 收口（含 M13-patch）至 M18 收口；M12 及更早见 evidence_m12_ledger.json",
+  "effective_from": "M13-patch",
+  "mirror": "2026-11-15/m3-task-card/work/outputs/NUMBERS_LEDGER.md",
+  "freshness_rule": "以字节为准：任一登记证据文件的当前 sha256 与本文件登记值不等 → 检查 FAIL（必须 --write 重登记并复核数字）；证据被原样重写（sha256 相同、仅 mtime 变新）不算权威落后，只记 note",
+  "residual_rule": "M5 表达式层残差（objdump 线性全扫 vs expr CFG 可达子集）单列于 evidence_m5_expr_residual.json，不入任何已公布比率的分子分母",
+  "sections": [
+    {
+      "milestone": "M13",
+      "heading": "## 6. 下界结论",
+      "numbers": [
+        "5,039 / 276",
+        "206,541",
+        "26,652 / 26,702",
+        "12,272 / 3,530 / 37,891",
+        "1,974",
+        "2,081",
+        "16,332",
+        "16,179",
+        "17 个可测样本"
+      ]
+    },
+    {
+      "milestone": "M13-pe_gap",
+      "heading": "## 5. PE：`.pdata` end 与 gopclntab 下一入口之间 1–31 字节缝隙的量化",
+      "numbers": [
+        "113,731",
+        "3.2262%",
+        "-0.0402pp",
+        "7,139 / 7,152",
+        "148,861",
+        "76.40%",
+        "15.93",
+        "372 条",
+        "750,109",
+        "80.9903%",
+        "0.0496%"
+      ]
+    },
+    {
+      "milestone": "M14",
+      "heading": "## 9. M14 对齐实测（C4）",
+      "numbers": [
+        "149,225",
+        "26,652",
+        "1,067",
+        "1,066",
+        "923,970",
+        "26,702",
+        "3.9922%",
+        "4.0034%",
+        "8,906"
+      ]
+    },
+    {
+      "milestone": "M15",
+      "heading": "## 10. M15 报告层不产生新数字",
+      "numbers": [
+        "485 passed",
+        "18/18",
+        "5,039/276",
+        "206,541",
+        "26,652"
+      ]
+    },
+    {
+      "milestone": "M16",
+      "heading": "## 11. M16 数据引用层（新分母：声明对象）",
+      "numbers": [
+        "86.3354%",
+        "417 / 51 / 39",
+        "25,941",
+        "8,853 / 22,067",
+        "509 passed",
+        "483"
+      ]
+    },
+    {
+      "milestone": "M17",
+      "heading": "## 12. M17 .NET 程序集结构层（新对象：CLI 程序集）",
+      "numbers": [
+        "6,592",
+        "592,206",
+        "27/27",
+        "528 passed",
+        "25,315",
+        "29,257",
+        "396",
+        "433"
+      ]
+    },
+    {
+      "milestone": "M18",
+      "heading": "## 13. M18 .NET IL 控制流层（新分母：方法体/IL 指令）",
+      "numbers": [
+        "108,267",
+        "107,765",
+        "41/41",
+        "554 passed",
+        "1,372",
+        "1,245",
+        "1,133",
+        "2,164",
+        "93,194",
+        "51,063",
+        "52,837",
+        "5,058"
+      ]
+    },
+    {
+      "milestone": "M5",
+      "heading": "## 14. M5 表达式层验收补强（补记，跨里程碑）",
+      "numbers": [
+        "57 个抽样函数",
+        "403",
+        "390",
+        "2.47.20260726",
+        "1/18",
+        "7/18",
+        "13/21"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m13_ledger.json",
+      "role": "M13 逐样本权威快照（历史源，判定表/代码 sha256）",
+      "sha256": "5371f3dd9d45757e06467563c71a59613eb877e3ac247f4dcb9c59835fc3813c"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m13_recompute.json",
+      "role": "M13 下界重算四组测量",
+      "sha256": "f6a2bf1144d4d74d255a61715c6dbac183e40fb01c7be14354d3802cc5bb4a9a"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m14_c4_alignment.json",
+      "role": "M14 C4 对齐实测（nop 族/类分布/样例地址）",
+      "sha256": "f2ce0fd77b037a8043ea4a7db837ab7040559da214ad0a0ccec98f370475136e"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m15_funcreport.json",
+      "role": "M15 报告层同址合并快照",
+      "sha256": "e26c86608fb86fbbe8ba185dff83176a3bd16decbfe1c2e48f8a8872eb7da369"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m16_datarefs.json",
+      "role": "M16 数据引用层外部重算",
+      "sha256": "a1d7961f1b3faaff26f123401d73566c44beabb70e19d897daeb4b6b23f750e9"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m17_dotnet.json",
+      "role": "M17 .NET 结构层 dnfile/dncil 对账",
+      "sha256": "c3300c5b8e7b4a871146a9de0578fb735baef01d52fe7a834085ac15ace76dbe"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m18_ilflow.json",
+      "role": "M18 IL 控制流层 dncil 全量对账",
+      "sha256": "eca5ee510cf40cca677d35c6c8e87c273989682dc5ffb72c93115d298ae8fd79"
+    },
+    {
+      "path": "2026-11-15/m3-task-card/work/evidence_m5_expr_residual.json",
+      "role": "M5 表达式层 objdump oracle 残差逐地址",
+      "sha256": "f4543ef63965a44e2789266f805009816280172807f4e8a168535285535d317b"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+# MANIFEST_ALL · 本次会话全部改动（2026-11-16，B1–B3）
+# 生成方式: hashlib.sha256 逐文件现算；本文件是"当前真实状态"，优先于 batch1/2 各自的清单
+# 说明: AGENTS.md / HANDOFF.md / status.py 在 B2、B3 有增量编辑，故 batch1 MANIFEST 里它们的旧哈希已作废
+#
+# 未改动（可自证）: rekit\*.py、tests\*.py、samples\*、已有 evidence_*.log|json
+#   证明: batch1\work_hashes_before_gate.json 与跑后对照 112 个文件全等（见 batch2\no_side_effects.json）
+#   证明: 门禁全量 21/21 PASS + pytest 554（work\verification\20261116T213155\summary.json）
+#
+# 回退（按批独立）:
+#   B1: 见 batch1\MANIFEST.sha256 的 4 步
+#   B2: 删 pack\tools\verify_gate.py、batch2\、work\verification\
+#   B3: 删 pack\rules.json、batch3\；还原 AGENTS.md/HANDOFF.md 的指针行需手工（无旧副本，见下）
+#   注意: B1 之后对 AGENTS.md/HANDOFF.md 的编辑没有旧副本可回滚——若需回到 B1 状态，删掉
+#         「规则登记/数字总账」两行与 B2/B3 的进度条目即可，均为纯增量文本
+#
+# sha256                                                           相对工作区根路径
+
+
+# ---- 项目文件（新建/恢复） ----
+ae00f907e426d5b2cc30fcf511c3fb19616e4815a5618b0249aef5b6a3f71c5f  pack\AGENTS.md
+e57a1d869caedfbf25c1fac023b5d2c0717c024876a9f10f89d6ff41e783a5b6  pack\PATH_MAP.md
+8ba6fa66a30ccca679b2c9e39e6fb982a6905658194949b523f7e582b146caea  pack\tools\status.py
+8add5ccf93ad4482d77060ee7f6f682a5f4bccd2a5df075305b1121a298932a8  pack\tools\verify_gate.py
+d314f442c4e3e934b48ef8dc46d0ed46f88cf8168469bed3fc60b25ed6ee4c0f  pack\rules.json
+032a617fa15f2dd498a386100a249a44c0bf6a24c8e3d167f78ee8a131b6b34e  pack\README.md
+eefc21396bc6a566680af75c4691aac4c9a2abdd57eebf9fde7807c9a13b15bf  pack\01_方法论文档\工作逻辑与思考流程.md
+0594a5320d72f6f5fde3ea8d32fd952f15d59f56726a61d008df1e05f15b605e  pack\02_规则库\规则库_R01-R32.md
+09f74848c73d704518f401f9255d18707bde3725783d4c4dd472ec055b34e668  2026-11-15\m3-task-card\work\HANDOFF.md
+
+# ---- B1 证据 ----
+7337cd0d27089a1b5c2c34af128a2f949f7c35deb8089b7318288b421600b608  2026-11-16\vibe-coding-review\work\batch1\status_output.txt
+ba2f4c0c40b9df5c57875ed9714d51d3358426339d2051152d8aef5821355745  2026-11-16\vibe-coding-review\work\batch1\status_selfproof.txt
+b54abf8b70a4b1f30a6068ee95299ab9fe914ce971e69fb53c9cc5c8d816be68  2026-11-16\vibe-coding-review\work\batch1\selfproof_status.py
+3e8f2fc6df198df23ab6ea67d9df930632ca1fc9f1e9084b78a54ef4f4d687f5  2026-11-16\vibe-coding-review\work\batch1\MANIFEST.sha256
+a63b0decbad30dd17b55ceb5af449f8bc2d7e7adf5ec1a6ffbfd8b3a2c6bb88e  2026-11-16\vibe-coding-review\work\batch1\work_hashes_before_gate.json
+
+# ---- B2 证据 ----
+6ed4fff13724932f650e4fe2f4fd4cad6e01995156baa44e37e86b49a5fd7b0d  2026-11-16\vibe-coding-review\work\batch2\gate_run.txt
+ce308ab7654af32a24f0fa5c9a1a460c60e4ac806567c3b6a91aa7348327ae7e  2026-11-16\vibe-coding-review\work\batch2\no_side_effects.json
+b2e00dc480094580779d9ce7b703ec554de034e71d3ccfceafebb4c6b232d625  2026-11-16\vibe-coding-review\work\batch2\MANIFEST.sha256
+
+# ---- B3 证据 ----
+d6a3a39561e53aef198e89e0695cd9ce4861cc41fb1ccebb15bcbdb5ee3754ea  2026-11-16\vibe-coding-review\work\batch3\rules_gap_report.md
+acc1872b27731dac6a2a844a93870e31ff3b018c8ce66e8fce7f558de3996700  2026-11-16\vibe-coding-review\work\batch3\rules_coverage.json
+0597620b6a8fbb762ed51de1be963473cd54bf3990f34629c01798debde433a5  2026-11-16\vibe-coding-review\work\batch3\rules_extracted.json
+b06df848e960ccc71943d5eb7c81fcd85c6cebc53258495163d54c4eccb3244a  2026-11-16\vibe-coding-review\work\batch3\mine_rules.py
+
+# ---- B2 门禁日志（22 个） ----
+7006c9babc5c83aa53c841c558cdaa5016ae4b22643d750406a60fc2e60d253a  2026-11-15\m3-task-card\work\verification\20261116T213155\pytest.log
+efb0166223df99716c3f8152efa54b610859d22693306e46112e7c7d79a2752a  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_c4_alignment.log
+e7174bff682843e6a641d5b669fbdf3e944f8adcd5778512044ecd018be559b6  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_callfacts.log
+8cddffdab243fa68e03b9794fb8e325f40367924b6200933e72e67a7ecf093eb  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_callgraph.log
+e2a02725a416940148a27f0d7110e160cc2daf2ff1448d285da449805ef65524  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_coverage.log
+7eb9da4bc69c27409f76cc2329b937310e4b79057f09d8e65068d254ae56abdc  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_datarefs.log
+d65e180573822e0003d22c56159be993a825b4b442369a51858270d20858b277  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_disasm.log
+f730d294baa6b453ed1656f2379d5c28309ff48dd0d9e741371aca54c4953fc8  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_dotnet.log
+c138c3fc7e95df618e268db44ce2c5a0001cb21367f91fb92846f96c55f94583  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_expr.log
+256567d2e20eabd6a40b1c17109cdc9d93750e129063f15c08c0205565f71e94  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_fingerprint.log
+f350483ba97518fa7c038b8cf2cd5796357f15e85181012d16874a8cbe0f7f5b  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_funcreport.log
+4b3fe96a781839b8a1ccbfc2a3fc2bdd389c39034297ca06b86b1d141eed2643  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_gopclntab.log
+5ce70c441640a3e8a1ecca270152e45b66e85e16a58e647899133ea8e4b73b4e  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_iat.log
+92a679f5c42c9a359635434a35862eb7a5c63530e89c15dcbee9b7796e677834  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_ilflow.log
+11a3c3d102f0964bf07f70587905391b62461fb1a43add1a9036a4c924609ed7  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_map.log
+4079a89ccca1ea59752d5f362cc56a01152ba2a053938ebbdebbe7b7870424eb  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_paramdecl.log
+dde7f1d45603594f57527e052a40fce1f2cb941e2a41cb1220dff95806e372f2  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_recdesc.log
+51778e10f5a003b2fbee2b0a83604ea90e00527bfd1f79bdf21a473f7a180a72  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_sitejoin.log
+73c20eeefa02e077e7687d78d1e78754796504b6a519a8c973e6d23aa00a857d  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_struct.log
+199c95afb4f9e035a398a6f287afc9c791fa97bbe3e04c4ade2e96ffc9e99c52  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_strxref.log
+12b23a9a894c4d058b24b108f80351652038d002012bd99a953847c628a4f6bf  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_switchcand.log
+7c51f67715bef201b34b4ec5d468f577875578a6158ef73b8ec28c66612b8b94  2026-11-15\m3-task-card\work\verification\20261116T213155\verify_vexaudit.log

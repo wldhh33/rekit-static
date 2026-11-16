@@ -1,0 +1,2148 @@
+{
+  "plan": {},
+  "results": {
+    "tests/fixtures/cli-64.exe": [
+      {
+        "addr": 6554,
+        "ours": {
+          "insns": 3,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 24,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧"
+        ]
+      },
+      {
+        "addr": 6848,
+        "ours": {
+          "insns": 8,
+          "blocks": 5,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 30,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 5,
+          "size": 30,
+          "name": "__security_check_cookie"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [
+            7560
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": [
+          "Ghidra 以调用呈现 0x1d88：我方对应尾跳转（jmp），同一控制转移、呈现不同"
+        ]
+      },
+      {
+        "addr": 7488,
+        "ours": {
+          "insns": 4,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 18,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 18,
+          "name": "entry"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            8480
+          ],
+          "calls_ghidra": [
+            7108,
+            8480
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": [
+          "Ghidra 以调用呈现 0x1bc4：我方对应尾跳转（jmp），同一控制转移、呈现不同"
+        ]
+      },
+      {
+        "addr": 10080,
+        "ours": {
+          "insns": 1,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 2,
+          "cats": [
+            "indirect_jmp"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 2,
+          "name": "_guard_dispatch_icall"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4112,
+        "ours": {
+          "insns": 11,
+          "blocks": 4,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 36,
+          "cats": [
+            "indirect_call"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 4,
+          "size": 36,
+          "name": "FUN_140001010"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 1,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 6736,
+        "ours": {
+          "insns": 28,
+          "blocks": 5,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 91,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 5,
+          "size": 91,
+          "name": "__GSHandlerCheckCommon"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [
+            6848
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": [
+          "Ghidra 以调用呈现 0x1ac0：我方对应尾跳转（jmp），同一控制转移、呈现不同"
+        ]
+      },
+      {
+        "addr": 8316,
+        "ours": {
+          "insns": 13,
+          "blocks": 4,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 36,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 4,
+          "size": 36,
+          "name": "__scrt_release_startup_lock"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            9848
+          ],
+          "calls_ghidra": [
+            9848
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 9208,
+        "ours": {
+          "insns": 27,
+          "blocks": 6,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 91,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 6,
+          "size": 90,
+          "name": "FUN_1400023f8"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            9884,
+            9890,
+            10028
+          ],
+          "calls_ghidra": [
+            9884,
+            9890,
+            10028
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4608,
+        "ours": {
+          "insns": 66,
+          "blocks": 14,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 208,
+          "cats": [
+            "indirect_call",
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 14,
+          "size": 208,
+          "name": "FUN_140001200"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            9872,
+            9872
+          ],
+          "calls_ghidra": [
+            9872
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 1,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 6880,
+        "ours": {
+          "insns": 48,
+          "blocks": 9,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 182,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 9,
+          "size": 182,
+          "name": "FUN_140001ae0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            8024,
+            8456,
+            8652,
+            8652,
+            8652,
+            8656,
+            8664,
+            8672,
+            8688,
+            8692,
+            8692,
+            8732,
+            8768,
+            9100,
+            9300,
+            9914,
+            9920,
+            9926,
+            9932,
+            9968,
+            9992,
+            10004
+          ],
+          "calls_ghidra": [
+            8024,
+            8456,
+            8652,
+            8656,
+            8664,
+            8672,
+            8688,
+            8692,
+            8732,
+            8768,
+            9100,
+            9300,
+            9914,
+            9920,
+            9926,
+            9932,
+            9968,
+            9992,
+            10004
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": []
+      },
+      {
+        "addr": 7772,
+        "ours": {
+          "insns": 33,
+          "blocks": 4,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 113,
+          "cats": [
+            "indirect_call",
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 4,
+          "size": 113,
+          "name": "capture_previous_context"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 3,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 8164,
+        "ours": {
+          "insns": 47,
+          "blocks": 16,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 152,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 16,
+          "size": 150,
+          "name": "FUN_140001fe4"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4256,
+        "ours": {
+          "insns": 111,
+          "blocks": 25,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 348,
+          "cats": [
+            "indirect_call",
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 25,
+          "size": 348,
+          "name": "FUN_1400010a0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            9872,
+            9872
+          ],
+          "calls_ghidra": [
+            9872
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 2,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 5121,
+        "ours": {
+          "insns": 127,
+          "blocks": 26,
+          "abstained": 3,
+          "verdict": "partial",
+          "size": 587,
+          "cats": [
+            "indirect_call",
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧"
+        ]
+      },
+      {
+        "addr": 5708,
+        "ours": {
+          "insns": 222,
+          "blocks": 44,
+          "abstained": 9,
+          "verdict": "partial",
+          "size": 846,
+          "cats": [
+            "indirect_call",
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "入口落在 Ghidra 函数 0x12d0（FUN_1400012d0）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧"
+        ]
+      },
+      {
+        "addr": 9420,
+        "ours": {
+          "insns": 106,
+          "blocks": 20,
+          "abstained": 11,
+          "verdict": "partial",
+          "size": 428,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 20,
+          "size": 428,
+          "name": "FUN_1400024cc"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 7508,
+        "ours": {
+          "insns": 13,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 52,
+          "cats": [
+            "indirect_call",
+            "indirect_jmp"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 52,
+          "name": "__raise_securityfailure"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 3,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 4816,
+        "ours": {
+          "insns": 75,
+          "blocks": 9,
+          "abstained": 2,
+          "verdict": "partial",
+          "size": 305,
+          "cats": [
+            "indirect_call",
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 81,
+          "size": 1790,
+          "name": "FUN_1400012d0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": false,
+          "blocks_delta": 72,
+          "calls_mine": [
+            4160,
+            10034
+          ],
+          "calls_ghidra": [
+            4160,
+            4256,
+            4608,
+            6608,
+            6848,
+            9872,
+            10034,
+            10040,
+            10046
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 14,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 0 个（PLT/GOT 桩）、Ghidra 14 个（thunk/导入）；不参与判等，单列",
+          "仅 Ghidra 有调用目标 0x10a0, 0x1200, 0x19d0, 0x1ac0：Ghidra 函数域 1790 字节 > 我方 305 字节，多为其把相邻/内联段并入本函数后引入的调用",
+          "基本块数不一致（我方 9 块/305 字节，Ghidra 81 块/1790 字节）：Ghidra 函数域更大，块数差来自并入的相邻函数"
+        ]
+      }
+    ],
+    "tests/fixtures/bin_ls.elf": [
+      {
+        "addr": 18240,
+        "ours": {
+          "insns": 5,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 31,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "入口落在 Ghidra 函数 0x6d10（FUN_00106d10）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧"
+        ]
+      },
+      {
+        "addr": 19422,
+        "ours": {
+          "insns": 1,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 5,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 70256,
+        "ours": {
+          "insns": 3,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 12,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 12,
+          "name": "FUN_00111270"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 99472,
+        "ours": {
+          "insns": 6,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 24,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 18271,
+        "ours": {
+          "insns": 15,
+          "blocks": 3,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 93,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 35040,
+        "ours": {
+          "insns": 14,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 44,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 73152,
+        "ours": {
+          "insns": 19,
+          "blocks": 4,
+          "abstained": 1,
+          "verdict": "partial",
+          "size": 65,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 100416,
+        "ours": {
+          "insns": 26,
+          "blocks": 3,
+          "abstained": 6,
+          "verdict": "partial",
+          "size": 129,
+          "cats": [
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 18493,
+        "ours": {
+          "insns": 33,
+          "blocks": 8,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 109,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 8,
+          "size": 109,
+          "name": "FUN_0010483d"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            18364
+          ],
+          "calls_ghidra": [
+            18364
+          ],
+          "calls_mine_out_of_text": 4,
+          "calls_ghidra_out_of_text": 4,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 4 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 39072,
+        "ours": {
+          "insns": 33,
+          "blocks": 11,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 132,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 61904,
+        "ours": {
+          "insns": 65,
+          "blocks": 10,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 205,
+          "cats": [
+            "indirect_call",
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 91232,
+        "ours": {
+          "insns": 47,
+          "blocks": 11,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 183,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 11,
+          "size": 176,
+          "name": "FUN_00116460"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 4,
+          "calls_ghidra_out_of_text": 4,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 4 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 19456,
+        "ours": {
+          "insns": 1103,
+          "blocks": 243,
+          "abstained": 18,
+          "verdict": "partial",
+          "size": 7008,
+          "cats": [
+            "indirect_jmp",
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 45536,
+        "ours": {
+          "insns": 343,
+          "blocks": 107,
+          "abstained": 2,
+          "verdict": "partial",
+          "size": 1595,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 107,
+          "size": 1498,
+          "name": "FUN_0010b1e0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            31120,
+            31120,
+            31120,
+            31120,
+            31120,
+            34416,
+            34416,
+            34416,
+            44496,
+            44496,
+            44496,
+            62400
+          ],
+          "calls_ghidra": [
+            31120,
+            34416,
+            44496,
+            62400
+          ],
+          "calls_mine_out_of_text": 2,
+          "calls_ghidra_out_of_text": 2,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 2 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 62560,
+        "ours": {
+          "insns": 546,
+          "blocks": 135,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 2418,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 135,
+          "size": 2367,
+          "name": "FUN_0010f460"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            67568,
+            67712,
+            70368,
+            70368,
+            70480,
+            70480,
+            73264,
+            73712,
+            73712,
+            73712,
+            106944
+          ],
+          "calls_ghidra": [
+            67568,
+            67712,
+            70368,
+            70480,
+            73264,
+            73712,
+            106944
+          ],
+          "calls_mine_out_of_text": 24,
+          "calls_ghidra_out_of_text": 14,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 24 个（PLT/GOT 桩）、Ghidra 14 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 78992,
+        "ours": {
+          "insns": 107,
+          "blocks": 26,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 459,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 26,
+          "size": 433,
+          "name": "FUN_00113490"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            61056,
+            107840
+          ],
+          "calls_ghidra": [
+            61056,
+            107840
+          ],
+          "calls_mine_out_of_text": 5,
+          "calls_ghidra_out_of_text": 2,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 18639,
+        "ours": {
+          "insns": 33,
+          "blocks": 4,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 99,
+          "cats": [
+            "indirect_call"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 4,
+          "size": 99,
+          "name": "FUN_001048cf"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            18602,
+            70256
+          ],
+          "calls_ghidra": [
+            18493,
+            18602,
+            70256
+          ],
+          "calls_mine_out_of_text": 1,
+          "calls_ghidra_out_of_text": 1,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列",
+          "Ghidra 以调用呈现 0x483d：我方对应尾跳转（jmp），同一控制转移、呈现不同"
+        ]
+      },
+      {
+        "addr": 18738,
+        "ours": {
+          "insns": 32,
+          "blocks": 5,
+          "abstained": 8,
+          "verdict": "partial",
+          "size": 176,
+          "cats": [
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 5,
+          "size": 176,
+          "name": "error"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            18639
+          ],
+          "calls_ghidra": [
+            18639
+          ],
+          "calls_mine_out_of_text": 1,
+          "calls_ghidra_out_of_text": 1,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列"
+        ]
+      }
+    ],
+    "tests/fixtures/dyn_static": [
+      {
+        "addr": 4198656,
+        "ours": {
+          "insns": 1,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 5,
+          "cats": []
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "入口落在 Ghidra 函数 0x404760（__libc_message_impl）内部：Ghidra 把该段并入更大函数/未单独切分；我方按权威声明边界单列，此项不是表达式分歧"
+        ]
+      },
+      {
+        "addr": 4247296,
+        "ours": {
+          "insns": 3,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 8,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 8,
+          "name": "__mempcpy_avx512_unaligned"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4330832,
+        "ours": {
+          "insns": 2,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 8,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 8,
+          "name": "_IO_default_read"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4498880,
+        "ours": {
+          "insns": 6,
+          "blocks": 1,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 32,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 32,
+          "name": "__libc_localealias_freemem"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4234176
+          ],
+          "calls_ghidra": [
+            4234176
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4198667,
+        "ours": {
+          "insns": 26,
+          "blocks": 1,
+          "abstained": 1,
+          "verdict": "partial",
+          "size": 136,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 1,
+          "size": 126,
+          "name": "abort"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4282400,
+            4334544,
+            4504784,
+            4504880
+          ],
+          "calls_ghidra": [
+            4282400,
+            4334544,
+            4504784,
+            4504880
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4284144,
+        "ours": {
+          "insns": 29,
+          "blocks": 7,
+          "abstained": 3,
+          "verdict": "partial",
+          "size": 142,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 7,
+          "size": 127,
+          "name": "__getrandom_vdso_release"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4213168
+          ],
+          "calls_ghidra": [
+            4213168,
+            4213344
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": [
+          "Ghidra 以调用呈现 0x404a60：我方对应尾跳转（jmp），同一控制转移、呈现不同"
+        ]
+      },
+      {
+        "addr": 4402576,
+        "ours": {
+          "insns": 25,
+          "blocks": 7,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 103,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 7,
+          "size": 92,
+          "name": "_dl_handle_execstack_tunable"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4274720,
+            4429504,
+            4429504,
+            4585072
+          ],
+          "calls_ghidra": [
+            4274720,
+            4429504,
+            4585072
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": []
+      },
+      {
+        "addr": 4575008,
+        "ours": {
+          "insns": 17,
+          "blocks": 7,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 67,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 7,
+          "size": 47,
+          "name": "__strcasecmp_l_nonascii"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4199552,
+        "ours": {
+          "insns": 32,
+          "blocks": 6,
+          "abstained": 2,
+          "verdict": "partial",
+          "size": 99,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 6,
+          "size": 99,
+          "name": "btree_release_tree_recursively"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4199552,
+            4657120
+          ],
+          "calls_ghidra": [
+            4199552,
+            4657120,
+            4658320
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": [
+          "Ghidra 以调用呈现 0x471490：我方对应尾跳转（jmp），同一控制转移、呈现不同"
+        ]
+      },
+      {
+        "addr": 4288768,
+        "ours": {
+          "insns": 71,
+          "blocks": 14,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 215,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 14,
+          "size": 211,
+          "name": "group_number"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4509792,
+            4509792,
+            4510160,
+            4510256,
+            4510256,
+            4510256
+          ],
+          "calls_ghidra": [
+            4509792,
+            4510160,
+            4510256
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": []
+      },
+      {
+        "addr": 4478832,
+        "ours": {
+          "insns": 69,
+          "blocks": 6,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 253,
+          "cats": [
+            "indirect_call"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 6,
+          "size": 253,
+          "name": "find_module.constprop.0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4268208,
+            4481312
+          ],
+          "calls_ghidra": [
+            4268208,
+            4481312
+          ],
+          "calls_mine_out_of_text": 4,
+          "calls_ghidra_out_of_text": 3,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 4 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 4585760,
+        "ours": {
+          "insns": 33,
+          "blocks": 9,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 161,
+          "cats": []
+        },
+        "gh": {
+          "found": true,
+          "blocks": 9,
+          "size": 146,
+          "name": "__libc_dlopen_mode"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4268208,
+            4401184,
+            4401312
+          ],
+          "calls_ghidra": [
+            4268208,
+            4401184,
+            4401312
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4202096,
+        "ours": {
+          "insns": 241,
+          "blocks": 68,
+          "abstained": 7,
+          "verdict": "partial",
+          "size": 885,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 68,
+          "size": 875,
+          "name": "get_common_cache_info.constprop.0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4331232,
+        "ours": {
+          "insns": 111,
+          "blocks": 12,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 384,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 12,
+          "size": 377,
+          "name": "enlarge_userbuf"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4210672,
+            4232400,
+            4234176,
+            4324672,
+            4400576
+          ],
+          "calls_ghidra": [
+            4210672,
+            4232400,
+            4234176,
+            4324672,
+            4400576
+          ],
+          "calls_mine_out_of_text": 1,
+          "calls_ghidra_out_of_text": 1,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 1 个（PLT/GOT 桩）、Ghidra 1 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 4425808,
+        "ours": {
+          "insns": 167,
+          "blocks": 35,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 753,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 35,
+          "size": 717,
+          "name": "_dl_new_object"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [
+            4232400,
+            4234176,
+            4235008,
+            4237024,
+            4582368
+          ],
+          "calls_ghidra": [
+            4232400,
+            4234176,
+            4235008,
+            4237024,
+            4582368
+          ],
+          "calls_mine_out_of_text": 5,
+          "calls_ghidra_out_of_text": 3,
+          "calls_equal": true
+        },
+        "notes": [
+          ".text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 3 个（thunk/导入）；不参与判等，单列"
+        ]
+      },
+      {
+        "addr": 4573088,
+        "ours": {
+          "insns": 195,
+          "blocks": 27,
+          "abstained": 91,
+          "verdict": "partial",
+          "size": 1571,
+          "cats": [
+            "indirect_jmp",
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 27,
+          "size": 806,
+          "name": "__strcpy_sse2_unaligned"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": true,
+          "blocks_delta": 0,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": []
+      },
+      {
+        "addr": 4199325,
+        "ours": {
+          "insns": 15,
+          "blocks": 5,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 60,
+          "cats": [
+            "indirect_call"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 4198803,
+        "ours": {
+          "insns": 26,
+          "blocks": 9,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 79,
+          "cats": [
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": false,
+          "blocks": null,
+          "size": null,
+          "name": null
+        },
+        "ok": {
+          "entry": false
+        },
+        "notes": [
+          "Ghidra 在该地址完全没有函数：入口落在 Ghidra 未识别区段；我方边界来自 .pdata/FDE，不因 Ghidra 缺失而改变"
+        ]
+      },
+      {
+        "addr": 4200560,
+        "ours": {
+          "insns": 80,
+          "blocks": 23,
+          "abstained": 0,
+          "verdict": "complete",
+          "size": 704,
+          "cats": [
+            "indirect_jmp",
+            "loop"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 55,
+          "size": 704,
+          "name": "handle_amd"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": false,
+          "blocks_delta": 32,
+          "calls_mine": [],
+          "calls_ghidra": [],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": true
+        },
+        "notes": [
+          "基本块数不一致（我方 23 块/704 字节，Ghidra 55 块/704 字节）：函数域相同，块数差主要来自 1 处间接 jmp 目标未解析（R45 不猜），其后 case 块不可达；Ghidra 可能恢复了跳转表"
+        ]
+      },
+      {
+        "addr": 4205312,
+        "ours": {
+          "insns": 832,
+          "blocks": 142,
+          "abstained": 23,
+          "verdict": "partial",
+          "size": 4399,
+          "cats": [
+            "indirect_jmp",
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 149,
+          "size": 4393,
+          "name": "init_cpu_features.constprop.0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": false,
+          "blocks_delta": 7,
+          "calls_mine": [
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200256,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4200560,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201264,
+            4201568,
+            4201568,
+            4201568,
+            4201568,
+            4201696,
+            4201696,
+            4201696,
+            4201696,
+            4201696,
+            4202096,
+            4202096,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203648,
+            4203872,
+            4203872,
+            4203872,
+            4203872,
+            4203872,
+            4273120,
+            4273152,
+            4273152,
+            4273152,
+            4273152,
+            4273152,
+            4273152,
+            4274720,
+            4274720,
+            4274720,
+            4274720,
+            4274720,
+            4274720,
+            4274720,
+            4274720,
+            4274720
+          ],
+          "calls_ghidra": [
+            4200256,
+            4200560,
+            4201264,
+            4201568,
+            4201696,
+            4202096,
+            4203648,
+            4203872,
+            4273120,
+            4273152,
+            4274720
+          ],
+          "calls_mine_out_of_text": 0,
+          "calls_ghidra_out_of_text": 0,
+          "calls_equal": false
+        },
+        "notes": [
+          "基本块数不一致（我方 142 块/4399 字节，Ghidra 149 块/4393 字节）：函数域相同，差异较小（尾跳转/不可达填充）；另有 1 处间接 jmp 目标未解析（不猜）"
+        ]
+      },
+      {
+        "addr": 4511504,
+        "ours": {
+          "insns": 1790,
+          "blocks": 384,
+          "abstained": 63,
+          "verdict": "partial",
+          "size": 8551,
+          "cats": [
+            "loop",
+            "simd"
+          ]
+        },
+        "gh": {
+          "found": true,
+          "blocks": 385,
+          "size": 8314,
+          "name": "__printf_fp_buffer_1.isra.0"
+        },
+        "ok": {
+          "entry": true,
+          "blocks_equal": false,
+          "blocks_delta": 1,
+          "calls_mine": [
+            4210672,
+            4210672,
+            4210672,
+            4210672,
+            4210672,
+            4210672,
+            4210672,
+            4210672,
+            4232400,
+            4234176,
+            4268208,
+            4400576,
+            4400608,
+            4509600,
+            4509792,
+            4510000,
+            4510000,
+            4510000,
+            4510000,
+            4510000,
+            4510160,
+            4510160,
+            4510160,
+            4510160,
+            4510160,
+            4510160,
+            4510160,
+            4510160,
+            4510992,
+            4510992,
+            4511168,
+            4511168,
+            4511168,
+            4511168,
+            4542624,
+            4596000,
+            4597216,
+            4597216,
+            4597216,
+            4597216,
+            4597216,
+            4597216,
+            4597216,
+            4597216,
+            4597504,
+            4597504,
+            4597504,
+            4598464,
+            4601568,
+            4601568,
+            4601568,
+            4601568,
+            4601568,
+            4601568,
+            4602256,
+            4602400,
+            4602592,
+            4639232,
+            4639232,
+            4639712
+          ],
+          "calls_ghidra": [
+            4198667,
+            4210672,
+            4232400,
+            4234176,
+            4268208,
+            4400576,
+            4400608,
+            4509600,
+            4509792,
+            4510000,
+            4510160,
+            4510992,
+            4511168,
+            4542624,
+            4596000,
+            4597216,
+            4597504,
+            4598464,
+            4601568,
+            4602256,
+            4602400,
+            4602592,
+            4639232,
+            4639712
+          ],
+          "calls_mine_out_of_text": 5,
+          "calls_ghidra_out_of_text": 2,
+          "calls_equal": false
+        },
+        "notes": [
+          ".text 外调用目标：我方 5 个（PLT/GOT 桩）、Ghidra 2 个（thunk/导入）；不参与判等，单列",
+          "仅 Ghidra 有调用目标 0x40110b：其 thunk/IAT 解析，或我方在该块 abstain",
+          "基本块数不一致（我方 384 块/8551 字节，Ghidra 385 块/8314 字节）：函数域相同，差异来自块切分口径（尾跳转/不可达填充）"
+        ]
+      }
+    ]
+  },
+  "summary": {
+    "tests/fixtures/cli-64.exe": {
+      "n": 18,
+      "entry": 15,
+      "blocks_eq": 14,
+      "calls_eq": 8,
+      "total": 18
+    },
+    "tests/fixtures/bin_ls.elf": {
+      "n": 18,
+      "entry": 8,
+      "blocks_eq": 8,
+      "calls_eq": 5,
+      "total": 18
+    },
+    "tests/fixtures/dyn_static": {
+      "n": 21,
+      "entry": 18,
+      "blocks_eq": 15,
+      "calls_eq": 12,
+      "total": 21
+    }
+  },
+  "abstain_reasons": {
+    "tests/fixtures/cli-64.exe": {
+      "0F 10 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 2,
+      "0F 11 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 9,
+      "cmov 前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流": 1,
+      "0F 57 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 2,
+      "0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）": 1,
+      "条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流": 5,
+      "0F ba 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）": 4,
+      "0F 01 系统/描述符指令未建模 ｜ 缺: 系统寄存器与描述符表语义（不在函数内表达式范围）": 1
+    },
+    "tests/fixtures/bin_ls.elf": {
+      "mul/imul/div/idiv（隐式 rax/rdx 双寄存器结果）未建模 ｜ 缺: 隐式操作数 rax/rdx 与商余数语义": 4,
+      "0F 6f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 5,
+      "0F 29 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 16,
+      "0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）": 1,
+      "条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流": 2,
+      "0F 6e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 3,
+      "0F 6c SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 3,
+      "0F 7e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 1
+    },
+    "tests/fixtures/dyn_static": {
+      "字符串指令（opcode 0xab）未建模 ｜ 缺: rep/隐式 rsi/rdi 更新与方向标志语义（M5-U1 白名单之外）": 1,
+      "lock 前缀：原子语义未建模 ｜ 缺: 带 lock 的内存序/原子性语义": 3,
+      "条件跳转前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流": 13,
+      "mul/imul/div/idiv（隐式 rax/rdx 双寄存器结果）未建模 ｜ 缺: 隐式操作数 rax/rdx 与商余数语义": 5,
+      "0F bd 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）": 8,
+      "0F a3 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）": 1,
+      "0F ef SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 4,
+      "0F 74 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 16,
+      "0F d7 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 16,
+      "0F 6f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 14,
+      "0F 7f SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 19,
+      "0F 28 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 20,
+      "0F da SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 6,
+      "0F bc 位操作指令（bt/bts/btr/btc/bsf/bsr 组）未建模 ｜ 缺: 位测试/扫描语义与 CF 输出（M5-U1 白名单之外）": 16,
+      "0F 6e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 9,
+      "0F 62 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 1,
+      "0F d6 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 2,
+      "0F 7e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 6,
+      "0F db SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 2,
+      "0F 29 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 3,
+      "0F 50 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 4,
+      "x87 浮点指令（opcode 0xdb）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）": 4,
+      "x87 浮点指令（opcode 0xd9）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）": 6,
+      "x87 浮点指令（opcode 0xdf）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）": 3,
+      "x87 浮点指令（opcode 0xdd）未建模 ｜ 缺: x87 栈式浮点寄存器与舍入语义（M5-U1 只做标量整数表达式）": 3,
+      "0F 10 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 1,
+      "0F 2e SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 2,
+      "0F 54 SIMD/浮点指令未建模 ｜ 缺: 向量寄存器/浮点语义（M5-U1 只做标量整数表达式）": 1,
+      "cmov 前没有可跟踪的标志位来源 ｜ 缺: 跨块标志数据流": 1
+    }
+  }
+}

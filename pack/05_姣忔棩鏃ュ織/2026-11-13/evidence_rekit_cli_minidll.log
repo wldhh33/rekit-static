@@ -1,0 +1,17 @@
+Machine:    AMD64
+Magic:      0x20B (PE32+)
+EntryPoint: 0x1000 (RVA)
+ImageBase:  0x140000000
+Subsystem:  Console
+SizeOfImage: 0x3000  SizeOfHeaders: 0x200
+ImportDir:  RVA 0x0 size 0x0
+Exports:    minidll.dll (base=1, 4 funcs)
+  ord 1     RVA 0x1010  Add
+  ord 2     RVA 0x1020  Sub
+  ord 3     RVA 0x1030  Mul
+  ord 4     RVA 0x1040  (ordinal-only)
+Sections (2):
+  .text    VA=0x00001000 VSize=0x100 RawPtr=0x400 RawSize=0x200
+  .edata   VA=0x00002000 VSize=0x140 RawPtr=0x600 RawSize=0x200
+Imports:
+Rich:       (none)

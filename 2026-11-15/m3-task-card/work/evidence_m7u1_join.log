@@ -1,0 +1,76 @@
+======================================================================
+tests/fixtures/cli-64.exe
+== 三层拼接（tests/fixtures/cli-64.exe，节 .text）==
+对齐键: 主键 = 调用指令虚拟地址（from）；结构化侧用 (函数, 块起始) + 块内第 j 个调用语句定位，j 由 expr.events.calls 的同块顺序确定
+唯一性: unique=153 / keys=153 / duplicate_keys=0
+键覆盖: decoded_calls=153 / keys=153 / both_layers_missing=0 / facts_extra=0 / graph_extra=0（完整）
+站点: 事实层 153 ｜ 调用图直接边 98 ｜ 键 153
+结构化定位: aligned 153 ｜ 函数未结构化 0 ｜ 块不可达 0 ｜ abstain 行 0 ｜ 定位失败 0
+冲突: 0（硬冲突 0 / 口径差异 0）：无
+-- 对齐样例 --
+  0x001024  indirect graph=indirect_no_edge facts=None           struct=block:第 1 行
+  0x001061  direct   graph=decoded        facts=decoded        struct=block:第 10 行
+  0x001077  indirect graph=indirect_no_edge facts=None           struct=block:第 16 行
+  0x0010de  indirect graph=indirect_no_edge facts=None           struct=block:第 1 行
+  0x0010f7  indirect graph=indirect_no_edge facts=None           struct=block:第 9 行
+  0x001108  indirect graph=indirect_no_edge facts=None           struct=block:第 2 行
+  0x001121  indirect graph=indirect_no_edge facts=None           struct=label:第 1 行
+  0x001167  direct   graph=plt_or_import  facts=plt_or_import  struct=label:第 3 行
+======================================================================
+tests/fixtures/bin_ls.elf
+== 三层拼接（tests/fixtures/bin_ls.elf，节 .text）==
+对齐键: 主键 = 调用指令虚拟地址（from）；结构化侧用 (函数, 块起始) + 块内第 j 个调用语句定位，j 由 expr.events.calls 的同块顺序确定
+唯一性: unique=1141 / keys=1141 / duplicate_keys=0
+键覆盖: decoded_calls=1154 / keys=1141 / both_layers_missing=13 / facts_extra=0 / graph_extra=0（有缺口，见冲突）
+站点: 事实层 1141 ｜ 调用图直接边 1116 ｜ 键 1141
+结构化定位: aligned 1141 ｜ 函数未结构化 0 ｜ 块不可达 0 ｜ abstain 行 0 ｜ 定位失败 0
+冲突: 13（硬冲突 13 / 口径差异 0）：call_site_missing=13
+-- 硬冲突（不以任何一方为准，单列待查）--
+  ! [call_site_missing/layer_bug] key=0xf235 已解出的 call 指令 0xf235（41 ff d6，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x1155b 已解出的 call 指令 0x1155b（41 ff 54 24 30，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x1158d 已解出的 call 指令 0x1158d（41 ff 54 24 38，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x115ab 已解出的 call 指令 0x115ab（41 ff 54 24 38，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x117ea 已解出的 call 指令 0x117ea（41 ff 57 30，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x11848 已解出的 call 指令 0x11848（41 ff 57 30，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x11b65 已解出的 call 指令 0x11b65（41 ff 54 24 30，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x11b93 已解出的 call 指令 0x11b93（41 ff 54 24 38，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  … 另有 5 条硬冲突（--json 查看全部）
+-- 对齐样例 --
+  0x00475a  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 4 行
+  0x004779  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 4 行
+  0x004798  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 4 行
+  0x0047b7  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 4 行
+  0x0047de  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 5 行
+  0x0047fb  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 3 行
+  0x004818  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 5 行
+  0x004830  direct   graph=plt_or_import  facts=plt_or_import  struct=block:第 0 行
+======================================================================
+tests/fixtures/dyn_static
+== 三层拼接（tests/fixtures/dyn_static，节 .text）==
+对齐键: 主键 = 调用指令虚拟地址（from）；结构化侧用 (函数, 块起始) + 块内第 j 个调用语句定位，j 由 expr.events.calls 的同块顺序确定
+唯一性: unique=3556 / keys=3556 / duplicate_keys=0
+键覆盖: decoded_calls=3609 / keys=3556 / both_layers_missing=53 / facts_extra=0 / graph_extra=0（有缺口，见冲突）
+站点: 事实层 3556 ｜ 调用图直接边 3456 ｜ 键 3556
+结构化定位: aligned 3553 ｜ 函数未结构化 3 ｜ 块不可达 0 ｜ abstain 行 0 ｜ 定位失败 0
+冲突: 56（硬冲突 53 / 口径差异 3）：call_site_missing=53, struct_function_absent=3
+-- 硬冲突（不以任何一方为准，单列待查）--
+  ! [call_site_missing/layer_bug] key=0x4015db 已解出的 call 指令 0x4015db（67 e8 4f 26 00 00，跳过 1 个前缀后 opcode=0xe8）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x403d98 已解出的 call 指令 0x403d98（43 ff 14 fe，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x403dd8 已解出的 call 指令 0x403dd8（43 ff 14 fe，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x41752b 已解出的 call 指令 0x41752b（41 ff 14 c1，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x419266 已解出的 call 指令 0x419266（43 ff 54 c8 c0，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x41c771 已解出的 call 指令 0x41c771（41 ff 55 38，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x41c938 已解出的 call 指令 0x41c938（41 ff 57 38，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  ! [call_site_missing/layer_bug] key=0x41d146 已解出的 call 指令 0x41d146（41 ff 54 24 48，跳过 1 个前缀后 opcode=0xff）在事实层与调用图里都没有记录；两层共用的 call 枚举按首字节 e8/ff 过滤，带前缀（REX 0x4x / 地址长度 0x67）的 call 会被漏掉
+  … 另有 45 条硬冲突（--json 查看全部）
+-- 口径差异（非错误，逐类计数）--
+  ~ [struct_function_absent] 3 条：结构化层只覆盖 declared 函数（默认），该函数未结构化
+-- 对齐样例 --
+  0x401100  direct   graph=decoded        facts=decoded        struct=block:第 0 行
+  0x401106  direct   graph=decoded        facts=decoded        struct=block:第 1 行
+  0x401128  direct   graph=decoded        facts=decoded        struct=block:第 4 行
+  0x40112f  direct   graph=decoded        facts=decoded        struct=block:第 6 行
+  0x401157  direct   graph=decoded        facts=decoded        struct=block:第 15 行
+  0x401161  direct   graph=decoded        facts=decoded        struct=block:第 17 行
+  0x4011bd  direct   graph=decoded        facts=decoded        struct=block:第 1 行
+  0x4011d3  direct   graph=decoded        facts=decoded        struct=block:第 0 行

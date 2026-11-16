@@ -1,0 +1,44 @@
+[PASS] flow-status 状态与分母恒等式 :: status=ok 方法=20 有体=19 分析=19 部分=0 空=0 失败=0；调用=17(internal=8 external=9 unresolved=0)；分支=6 目标=6；EH=3；块=30 边=11
+[PASS] flow-branch-denom dncil 全量分支分母 :: dncil 全量：分支形态 {'short': 3, 'long': 1, 'leave_short': 2} / 目标 6（{'instruction': 6}） vs 本层 {'short': 3, 'long': 1, 'leave_short': 2} / 6（{'instruction': 6, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致
+[PASS] flow-branch dncil 逐方法分支目标 :: 逐方法比对 19 个方法 / 6 个目标（全量存储）；全部一致
+[PASS] flow-blocks-denom dncil 独立切块分母 :: dncil 独立切块：块 30 / 边 11（{'branch': 4, 'fallthrough': 5, 'leave': 2}）/ 不可达 3 vs 本层 30 / 11 / 3（{'branch': 4, 'fallthrough': 5, 'leave': 2}）；部分方法排除 0；全部一致
+[PASS] flow-blocks dncil 逐方法块/边/可达 :: 块/边逐方法比对 19 个方法 / 30 块（全量存储）；全部一致
+[PASS] flow-eh-denom dncil 全量 EH 分母 :: dncil 全量：EH 子句 3（{'catch': 2, 'finally': 1}） vs 本层 3（{'catch': 2, 'finally': 1}）；空体方法排除 0；全部一致
+[PASS] flow-eh dncil 逐方法 EH 结构 :: EH 逐方法比对 19 个方法 / 3 条子句（全量存储）；全部一致
+[PASS] flow-call-denom dncil 全量调用分母 :: dncil 全量：调用 17（{'call': 9, 'ldftn': 1, 'newobj': 3, 'callvirt': 4}）/ token 表 {'MethodDef': 6, 'MemberRef': 10, 'MethodSpec': 1} vs 本层 17（{'call': 9, 'ldftn': 1, 'newobj': 3, 'callvirt': 4}）/ {'MethodDef': 6, 'MemberRef': 10, 'MethodSpec': 1}；部分方法排除 0；全部一致
+[PASS] flow-token dnfile 独立 token 解析 :: token 独立核对 19 个方法 / 17 个调用点（去重 13 个 token；表行数 {'MethodDef': 20, 'MemberRef': 11, 'MethodSpec': 1, 'TypeRef': 8}）；全部一致
+[PASS] flow-unres 未解析行号越界复核 :: row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致
+[PASS] filter-status 状态与分母恒等式 :: status=ok 方法=5 有体=5 分析=5 部分=0 空=0 失败=0；调用=2(internal=1 external=0 unresolved=1)；分支=5 目标=5；EH=2；块=15 边=8
+[PASS] filter-branch-denom dncil 全量分支分母 :: dncil 全量：分支形态 {'short': 1, 'leave_short': 4} / 目标 5（{'instruction': 5}） vs 本层 {'short': 1, 'leave_short': 4} / 5（{'instruction': 5, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致
+[PASS] filter-branch dncil 逐方法分支目标 :: 逐方法比对 5 个方法 / 5 个目标（全量存储）；全部一致
+[PASS] filter-blocks-denom dncil 独立切块分母 :: dncil 独立切块：块 15 / 边 8（{'branch': 1, 'fallthrough': 3, 'leave': 4}）/ 不可达 6 vs 本层 15 / 8 / 6（{'branch': 1, 'fallthrough': 3, 'leave': 4}）；部分方法排除 0；全部一致
+[PASS] filter-blocks dncil 逐方法块/边/可达 :: 块/边逐方法比对 5 个方法 / 15 块（全量存储）；全部一致
+[PASS] filter-eh-denom dncil 全量 EH 分母 :: dncil 全量：EH 子句 2（{'filter': 1, 'fault': 1}） vs 本层 2（{'filter': 1, 'fault': 1}）；空体方法排除 0；全部一致
+[PASS] filter-eh dncil 逐方法 EH 结构 :: EH 逐方法比对 5 个方法 / 2 条子句（全量存储）；全部一致
+[PASS] filter-call-denom dncil 全量调用分母 :: dncil 全量：调用 2（{'ldftn': 1, 'calli': 1}）/ token 表 {'MethodDef': 1, 'StandAloneSig': 1} vs 本层 2（{'ldftn': 1, 'calli': 1}）/ {'MethodDef': 1, 'StandAloneSig': 1}；部分方法排除 0；全部一致
+[PASS] filter-token dnfile 独立 token 解析 :: token 独立核对 5 个方法 / 2 个调用点（去重 2 个 token；表行数 {'MethodDef': 5, 'MemberRef': 0, 'MethodSpec': 0, 'TypeRef': 1}）；全部一致
+[PASS] filter-unres 未解析行号越界复核 :: row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致
+[PASS] console-status 状态与分母恒等式 :: status=ok 方法=433 有体=396 分析=396 部分=0 空=0 失败=0；调用=1133(internal=572 external=561 unresolved=0)；分支=596 目标=599；EH=23；块=1372 边=1245
+[PASS] console-branch-denom dncil 全量分支分母 :: dncil 全量：分支形态 {'short': 556, 'leave_short': 24, 'leave_long': 2, 'long': 13, 'switch': 1} / 目标 599（{'instruction': 599}） vs 本层 {'short': 556, 'leave_short': 24, 'leave_long': 2, 'long': 13, 'switch': 1} / 599（{'instruction': 599, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致
+[PASS] console-branch dncil 逐方法分支目标 :: 逐方法比对 396 个方法 / 599 个目标（存储前 2000 个有体方法）；全部一致
+[PASS] console-blocks-denom dncil 独立切块分母 :: dncil 独立切块：块 1372 / 边 1245（{'branch': 569, 'fallthrough': 646, 'leave': 26, 'switch': 4}）/ 不可达 63 vs 本层 1372 / 1245 / 63（{'branch': 569, 'fallthrough': 646, 'leave': 26, 'switch': 4}）；部分方法排除 0；全部一致
+[PASS] console-blocks dncil 逐方法块/边/可达 :: 块/边逐方法比对 396 个方法 / 1372 块（存储前 2000 个有体方法）；全部一致
+[PASS] console-eh-denom dncil 全量 EH 分母 :: dncil 全量：EH 子句 23（{'finally': 20, 'catch': 3}） vs 本层 23（{'finally': 20, 'catch': 3}）；空体方法排除 0；全部一致
+[PASS] console-eh dncil 逐方法 EH 结构 :: EH 逐方法比对 396 个方法 / 23 条子句（存储前 2000 个有体方法）；全部一致
+[PASS] console-call-denom dncil 全量调用分母 :: dncil 全量：调用 1133（{'call': 862, 'callvirt': 140, 'newobj': 130, 'ldftn': 1}）/ token 表 {'MemberRef': 514, 'MethodDef': 572, 'MethodSpec': 47} vs 本层 1133（{'call': 862, 'callvirt': 140, 'newobj': 130, 'ldftn': 1}）/ {'MemberRef': 514, 'MethodDef': 572, 'MethodSpec': 47}；部分方法排除 0；全部一致
+[PASS] console-token dnfile 独立 token 解析 :: token 独立核对 396 个方法 / 1133 个调用点（去重 438 个 token；表行数 {'MethodDef': 433, 'MemberRef': 237, 'MethodSpec': 19, 'TypeRef': 116}）；全部一致
+[PASS] console-unres 未解析行号越界复核 :: row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致
+[PASS] mscorlib-status 状态与分母恒等式 :: status=ok 方法=29257 有体=25315 分析=25315 部分=0 空=0 失败=0；调用=93194(internal=93174 external=0 unresolved=20)；分支=51063 目标=52837；EH=2164；块=108267 边=107765
+[PASS] mscorlib-branch-denom dncil 全量分支分母 :: dncil 全量：分支形态 {'short': 44719, 'long': 3253, 'leave_short': 2663, 'switch': 234, 'leave_long': 194} / 目标 52837（{'instruction': 52837}） vs 本层 {'short': 44719, 'long': 3253, 'leave_short': 2663, 'switch': 234, 'leave_long': 194} / 52837（{'instruction': 52837, 'inside_instruction': 0, 'outside_method': 0}）；部分方法排除 0；全部一致
+[PASS] mscorlib-branch dncil 逐方法分支目标 :: 逐方法比对 2000 个方法 / 4100 个目标（存储前 2000 个有体方法）；全部一致
+[PASS] mscorlib-blocks-denom dncil 独立切块分母 :: dncil 独立切块：块 108267 / 边 107765（{'branch': 47972, 'fallthrough': 54928, 'leave': 2857, 'switch': 2008}）/ 不可达 5058 vs 本层 108267 / 107765 / 5058（{'branch': 47972, 'fallthrough': 54928, 'leave': 2857, 'switch': 2008}）；部分方法排除 0；全部一致
+[PASS] mscorlib-blocks dncil 逐方法块/边/可达 :: 块/边逐方法比对 2000 个方法 / 8291 块（存储前 2000 个有体方法）；全部一致
+[PASS] mscorlib-eh-denom dncil 全量 EH 分母 :: dncil 全量：EH 子句 2164（{'finally': 1465, 'catch': 692, 'fault': 7}） vs 本层 2164（{'finally': 1465, 'catch': 692, 'fault': 7}）；空体方法排除 0；全部一致
+[PASS] mscorlib-eh dncil 逐方法 EH 结构 :: EH 逐方法比对 2000 个方法 / 83 条子句（存储前 2000 个有体方法）；全部一致
+[PASS] mscorlib-call-denom dncil 全量调用分母 :: dncil 全量：调用 93194（{'call': 48838, 'callvirt': 30516, 'newobj': 13613, 'ldftn': 209, 'ldvirtftn': 18}）/ token 表 {'MethodDef': 85189, 'MemberRef': 6837, 'MethodSpec': 1168} vs 本层 93194（{'call': 48838, 'callvirt': 30516, 'newobj': 13613, 'ldftn': 209, 'ldvirtftn': 18}）/ {'MethodDef': 85189, 'MemberRef': 6837, 'MethodSpec': 1168}；部分方法排除 0；全部一致
+[PASS] mscorlib-token dnfile 独立 token 解析 :: token 独立核对 2000 个方法 / 7926 个调用点（去重 2012 个 token；表行数 {'MethodDef': 29257, 'MemberRef': 3429, 'MethodSpec': 656, 'TypeRef': 0}）；全部一致
+[PASS] mscorlib-unres 未解析行号越界复核 :: row_out_of_range 独立复核 0 个（同表行数已计入）；全部一致
+  !! 空比对：selfproof-empty 的分母为 0，不得判 PASS
+[PASS] selfproof 比对器可失败自证 :: 分支 干净=True 目标+1=False；token 干净=True 改名=True；EH 干净=True 删一条=False；块 干净=True 少一块=True；空比对保护=True；字节篡改 inside=True row_oob=True methoddef_row=True（期望 T/F/T/T/T/F/T/T/T/T/T/T）
+
+== 汇总 ==  检查=41 PASS=41 FAIL=0 SKIP=0 → PASS

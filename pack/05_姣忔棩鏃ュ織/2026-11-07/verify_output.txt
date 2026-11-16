@@ -1,0 +1,14 @@
+== /bin/ls ==
+  S1/S2 NEEDED: rekit=['libselinux.so.1', 'libcap.so.2', 'libc.so.6'] readelf=['libselinux.so.1', 'libcap.so.2', 'libc.so.6'] -> PASS
+  S3 段字段: off 0x259f8/0x259f8 va 0x269f8/0x269f8 fsz 0x210/0x210 -> PASS
+  S4 STRTAB: vaddr 0x1150 -> off 0x1150 -> PASS
+== /tmp/re_daily/dyn_pie ==
+  S1/S2 NEEDED: rekit=['libc.so.6'] readelf=['libc.so.6'] -> PASS
+  S3 段字段: off 0x2e10/0x2e10 va 0x3e10/0x3e10 fsz 0x1b0/0x1b0 -> PASS
+  S4 STRTAB: vaddr 0x468 -> off 0x468 -> PASS
+== /tmp/re_daily/dyn_nopie ==
+  S1/S2 NEEDED: rekit=['libc.so.6'] readelf=['libc.so.6'] -> PASS
+  S3 段字段: off 0x2e48/0x2e48 va 0x403e48/0x403e48 fsz 0x190/0x190 -> PASS
+  S4 STRTAB: vaddr 0x400418 -> off 0x418 -> PASS
+
+==== 总判定: ALL PASS ====

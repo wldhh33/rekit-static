@@ -1,0 +1,24 @@
+PASS verify_c4_alignment          19.1s exit=0   OK: 三分法计数与对齐占比均与存档一致；「含对齐」有实测支撑
+PASS verify_callfacts              2.5s exit=0   结果: PASS
+PASS verify_callgraph              1.4s exit=0   结果: PASS
+PASS verify_coverage               2.5s exit=0   VERDICT: PASS
+PASS verify_datarefs              22.2s exit=0   == 汇总 ==  检查=12 PASS=12 FAIL=0 SKIP=0 → PASS
+PASS verify_disasm                 0.7s exit=0   VERDICT: PASS
+PASS verify_dotnet                 4.0s exit=0   == 汇总 ==  检查=27 PASS=27 FAIL=0 SKIP=0 → PASS
+PASS verify_expr                  44.2s exit=0   PASS（本脚本只报事实与分歧归因；分歧不静默丢弃）
+PASS verify_fingerprint            0.1s exit=0   E9 VERDICT: PASS（可判定格 132/132，误报 0，违规 0，异常 0）
+PASS verify_funcreport            38.0s exit=0   == 汇总 ==  检查=16 PASS=16 FAIL=0 SKIP=0  → PASS
+PASS verify_gopclntab             10.8s exit=0   VERDICT: PASS
+PASS verify_iat                    0.9s exit=0   VERDICT: PASS
+PASS verify_ilflow                18.0s exit=0   == 汇总 ==  检查=41 PASS=41 FAIL=0 SKIP=0 → PASS
+PASS verify_map                    0.1s exit=0   VERDICT: PASS
+PASS verify_paramdecl             19.9s exit=0   结果: PASS
+PASS verify_recdesc                5.8s exit=0   VERDICT: PASS
+PASS verify_sitejoin               8.8s exit=0   结果: PASS
+PASS verify_struct                18.6s exit=0   结果: PASS
+PASS verify_strxref               34.5s exit=0   OK: 18 样本字符串集合与外部 objdump 引用点全部一致，账目对平，三层对账零冲突
+PASS verify_switchcand            40.8s exit=0   PASS（负向基线 通过；收益数字见上，不静默取舍）
+PASS verify_vexaudit               1.9s exit=0   VERDICT: PASS
+PASS pytest                       74.8s exit=0   passed=554 failed=0
+summary: 2026-11-15\m3-task-card\work\verification\20261116T224118\summary.json
+VERDICT: PASS suites=21 pytest=554 exit=0

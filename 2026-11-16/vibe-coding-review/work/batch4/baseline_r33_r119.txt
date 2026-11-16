@@ -1,0 +1,87 @@
+R33 | terse | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:58 | GT 标注须独立证据复核
+R34 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:58 | 矩阵分键与分母：family/version 不混表、弃权格单列
+R35 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:58 | unknown 三态裁决：对不可判定格给确定值即误报
+R36 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:74 | 写回类操作最小纪律：只产新文件
+R37 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:75 | 幂等必须可证：同一输入两次写同一产物路径，比对两次 dst_sha256
+R38 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:76 | 修复正确性用原件字节证明：区间 sha256 / 逐 slot 字节 / 产物整文件 sha256 三层，"能启动/看起来对"不作判据
+R39 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:77 | 名称源缺失时一律 unresolved：PE OriginalFirstThunk=0 时 INT 与 IAT 同址，拿 IAT 充当 INT 会把伪地址写入名称源区（测一次即自毁），不许用"猜测回填"换成功率。
+R40 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:78 | 加壳/未加壳分维度：成功率分母按 iat 与 iat_packed 拆开，加壳样本只报"结构上不可修复"的条数，不并入未加壳成功率。
+R41 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:79 | 参照工具自身被证伪时：弃用该参照但保留样本格数（如 objdump 对 Go 长节名 RVA→节错位），并在真值里标 *_reliable=False
+R42 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:80 | 弃权必须可解释：结构性做不到的弃权要随结果带 repairable=false + 人话 caveats（CLI/MCP 都要），只给状态枚举等于让使用者自己猜
+R43 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:73 | 种子权威性分列（权威/启发式/派生成功率不得合并，权威分不得被启发式补分
+R44 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:73 | 边置信分级（确定/疑似/跨函数/未解出/未解析互斥，猜的边不得进确定集
+R45 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:32 | 拆成两句话：禁止「把猜测当已知」——候选目标不得写进 definite/speculative、不得当作确定边或表达式 case
+R46 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:73 | 函数边界硬约束（.pdata/FDE/st_size 为界，越界不并函数，跨函数边单列
+R47 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:73 | 弃权代价量化（abstain 必须给条数与占比，不许写“未量化”
+R48 | suspect | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:68 | 补强）：“确定边为 0”原来把真零（minidll 全是单条 ret 桩，确实无控制流）和标签性零（dyn_pie 有 13 条边但无声明边界）用同一句话收尾，易被误读。现按“有无跳转/分支指令”三分支输出，并新增断言 test_true_zero_edges_told_apart_from_label_zero（243→244）。
+R49 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:29 | 抽样规则先写定（分层等距 + 5 类强制覆盖，无随机数
+R50 | terse | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:29 | 弱参照只判可机械项并逐条归因
+R51 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:29 | 表达式 abstain 必须带 missing，禁止占位表达式
+R52 | terse | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:29 | 段覆盖前缀不得展开为绝对地址
+R53 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:34 | 候选层默认关闭且不写回（独立模块 + 显式开关 + 单列输出
+R54 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:34 | 候选必须带证据等级与依据，表长须由 cmp idx,imm + ja/jae 证明，无 guard 不得给 high
+R55 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:34 | 候选被拒必须带理由（跨函数/落在已解出指令内部/不可解），首个非法项即截止、不静默续扫
+R56 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:40 | 结构化只允许 --structured 显式开启，默认输出逐字节不变
+R57 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:40 | 每个节点必须带 block/edges/join，且每个可达块在文本中出现且仅出现一次（缺失即判不可回溯，不得输出
+R58 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:40 | switch 只认 high，其余保留 goto 并写明证据等级
+R59 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:46 | 调用点必须来自全量已解出 call 指令，cfg.calls（块末）不得当全量
+R60 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:46 | 三态逐点归因、占比分母=直接调用点，PLT/导入名字无回指不得给
+R61 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:46 | 间接调用候选层默认关闭/单列/带证据等级，high 只描述操作数事实
+R62 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:46 | 跨过程观察只报同块窗口事实，禁止 ABI/参数个数/参数名推断，窗口截断与 rsp 改写必须显式标注
+R63 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:51 | 事实层每条证据必须且只能标 declared/observed/derived 之一，操作数事实不得出现 declared，目标证据与操作数证据分开计数
+R64 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:51 | 不产出参数列表、不猜个数与名称，证据不足一律 abstain 且写 missing
+R65 | single_source | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:51 | 跨块不追（例外须先给可验证判据并先测后开），同块窗口在未解码指令处必须截断，栈槽基址改写必须转 abstain
+R66 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:56 | 某等级证据计数为 0 时必须写明"结构性恒等 / 缺失"及由此 abstain 的结论，不得只留数字
+R67 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:130 | 回归依赖外部工具时，PATH / 编码 / locale 前置必须写入文档环境记录，不得只留在日志。
+R68 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:60 | 三层对齐以调用指令虚拟地址为主键，键重复不得合并或取其一（报 data_anomaly 回 recdesc 复核
+R69 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:60 | 冲突必须逐条归因（layer_bug / caliber_difference / data_anomaly），归因须由可复现的字节或字段比对支撑，禁止只写"疑似"
+R70 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:60 | 拼接层只读，任何未列入快照证明的副作用视为违约，下层缺陷只单列不在本层修补
+R71 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:151 | 指令类别必须按「跳 legacy 前缀 + REX 后的 opcode」判定，ff 还须核 ModRM.reg
+R72 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:63 | 已公布数字发现偏低必须就地标注「已知偏低 + 差额 + 修正单元」
+R73 | single_source | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:151 | 校验器不得与被测模块共用同一判据实现，且每条"恒成立"不变量至少要有一次注入/反向验证，否则「同错」会互相背书（本轮 verify_callgraph 即实例）。
+R74 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:68 | 每条硬不变量至少一条独立来源路径且须写入文档，R75 判据修正后必须全量重跑校验器并做前后 diff（校验器 FAIL 优先怀疑校验器同错
+R75 | suspect | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:79 | 已定「硬不变量须有独立来源」，本轮把「期望值来源」也纳入：读 objdump 注释或复用被测解析等于自证
+R76 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:71 | 由「call 不算写 rsp」的口径升级为可判定定义：w 对 (r,t) 是暂态写 ⇔ 存在同一函数内已解出的 b（a<b≤t）把 r 复原，且 (a,b)、(b,t) 内无其它写
+R77 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:180 | 验收脚本引用被测私有符号按「取输入 / 取被测输出 / 仅定位自证 / 当期望值」四类定性
+R78 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:206 | 判据的证据集合为空时只能当负向约束，不得输出肯定结论，文档须显式写「可判定证据集合为空」
+R79 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:206 | 声明来源必须能定位到文件偏移与解析路径，读不到即 abstain，禁止用 ABI 惯例补齐
+R80 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:206 | 分母先行：先报来源 present/readable/样本覆盖，0 覆盖只能报「本轮无法验证」，并区分结构性缺失/本轮缺失/真零
+R81 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:206 | 站点级状态不得把部分绑定或弃权说成绑定，数字必须按形参级 bound/partial/abstained 分列。
+R82 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:218 | 字符串识别必须给「编码/最短长度/终止条件/重叠处理」四要素，默认只认 NUL 终止可打印 ASCII，UTF-8 与长度分界不报（宁可少报
+R83 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:78 | 引用点只在已解出指令集合内认定，必须同时报代码覆盖率与「外部工具量化的未解码漏报数」，refs 在输出里声明为下界
+R84 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:79 | 引用点期望值必须由外部工具独立算出——verify_strxref.py 不 import rekit.expr/elf/pe，也不用 strxref 中间结果
+R85 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:80 | 「无白名单数据节 / 有白名单节但零字符串 / 无代码节」三种零值必须分别给结构性原因（strings_zero_reason / no_code_reason），不得共用一句 0
+R86 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:80 | 三层对账交集为 0 时必须写明「无非空对账对象」，并给出非零替代核对项（本轮函数域核对 3691 条、冲突 0），不得把空交集当对账通过
+R87 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:228 | 收口对账必须「判据 → 实测 → 证据文件」三列成对，无可复跑入口就写「无」，不得用「基本完成」代替结论
+R88 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:228 | 更正台账独立成节，四列「旧结论/新结论/证据/以哪版为准」，被推翻的旧段落必须显式撤销
+R89 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:228 | 「能/不能回答」不得合并成"暂不支持"，必须二分归因为「信息不在文件里」与「还没做」并给判定依据
+R90 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:228 | 收口必须有机器快照（逐样本 + 合计 + 被测代码 sha256），文档数字与快照不一致即收口失败。
+R91 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:85 | 覆盖率分母一律由外部 objdump 对同一节 [VA, VA+size) 独立计数，分子必须同起始地址、同长度
+R92 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:86 | 汇总只允许 scope=full（清单全部样本都跑）与 scope=sampled（分层子集，必须附样本名单
+R93 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:87 | 跳转表候选升格只能以外部 objdump 的指令起点集合为边界判据，recdesc 自身解码结果不得参与
+R94 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:88 | 伪 VEX/EVEX 弃权必须逐条归入 decoder_defect（objdump 同址解出 v* 指令）/ illegal_encoding（同址 (bad)）/ data_not_instruction（不是指令起点）/ objdump_nonvex_at_addr 之一并给计数
+R95 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:89 | 样本选取必须在测量前以结构判据声明（尺寸带 / stripped 判据 / 程序性质 / 插件形态 / 来源），禁止按覆盖率结果挑选或剔除
+R96 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:90 | 因规模/时限未跑完的分析层，必须在结果里显式记 skipped 并给中止证据（CPU 秒/墙钟），不得写 0、不得省略、不得用部分结果冒充全量
+R97 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:247 | stripped Go ELF 的覆盖率必须标注种子源（仅 e_entry）与可达函数数/总数，写明“可达域”，函数清单必须来自外部工具
+R98 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:247 | 超时类层必须给确定性预算（指令步数/函数批次，不按墙钟），skipped 作第三类单列，任何比率分母只含 analyzed 且并列 analysis_coverage。
+R99 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:93 | declared 级种子必须逐源单列（inclusive declared_by_source + exclusive declared_only_by_source 两口径），禁止合并成一个不区分的「已声明」总数
+R100 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:94 | 报告覆盖率变化必须拆成「种子来源新增（可达域扩大）」与「解码本身」两部分
+R101 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:95 | 新增 declared 来源必须双源独立对拍（官方解析器 + 外部 objdump 边界），不一致按 only_ours/only_official/end_diff/name_diff 单列归因
+R102 | suspect | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:264 | 推算值不得进总账，总账只收实测（可复现命令 + 机器快照 + 逐样本 sha256），推算只能出现在过程文档且必须标注前提，实测出来立即替换
+R103 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:264 | 多源 end 之间的缝隙必须量化到「字节数 / 指令数 / 归属 / 换口径后的分子与比率 / 边与块的影响」，缝隙若全是填充必须写明当前口径下多少填充被计入分子。
+R104 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:276 | 下界结论必须绑定分母来源，分母不随种子变的标 seed_invariant 并给结构证明，随种子变的必须用同一判据复算且逐项复现旧值（match_old=true
+R105 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:99 | 分类名不得替代判据。VEX 的 data_not_instruction 只能写成“非 objdump 指令起点”，不得简写为“数据 / 不在代码里”
+R106 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:100 | skipped 只用于分析覆盖率。整层未运行标 no_run，预算跳过标 skipped_budget，二者不得混用，且都不得进入下界表
+R107 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:286 | 结论措辞强度必须与证据强度匹配，不得用更强的说法替代——分类名不得暗示判据没证明的东西
+R108 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:102 | 面向人的报告层只能合成既有层结论，每个可证伪条目必须带 source={layer,field,text}
+R109 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:103 | 对象分母必须是 声明候选 = 接受 + 拒收 + 去重
+R110 | suspect | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:306 | 三档归因不合并、after_object 只表示邻接
+R111 | corroborated | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:306 | “没有声明来源”与“声明存在但不可解析”分开报，且过程缓存不得以对象地址为键。
+R112 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:105 | .NET 方法体不是 x86，既有 x86 各层必须显式 not_applicable 并写原因，不得返回空列表/0
+R113 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:318 | .NET 分母逐级二分恒等式、RVA=0 原因逐类计数（unclassified 单列
+R114 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:105 | IL 边界必须由独立 opcode 表/解码器逐条证伪（真实样本全量）并用 code_size 尾部字节对账
+R115 | corroborated | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:106 | IL 分支目标/指令偏移基准写死——dncil 的 offset 与分支操作数都含方法体头，校验器统一减 header_size
+R116 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:106 | 基本块终结符分两层——条件跳转与 switch 不终结（保留 fallthrough），br/br.s、leave/leave.s、ret/throw/rethrow/endfinally/endfilter/jmp 终结，call/callvirt/newobj 不终结，EH 边界切块，越界分支目标不切块但必须单列。R117：EH 只单列结构信息、不建 CFG 边（运行时异常传播不是静态转移
+R117 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:330 | EH 只单列、leave 建边并检查越区
+R118 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\CHANGELOG.md:106 | token 未解析原因必须可追问到表行与分类（method_missing/row_out_of_range/bad_parent/unsupported_parent/token_kind_mismatch），bad_parent 是规范三类之外的必要补充，不得为凑三类改归因为“签名不匹配”。R119：任何对拍分母为 0 一律 FAIL（空对空不等于通过
+R119 | multi_candidate | 2026-11-15\m3-task-card\work\pack03\PROGRESS.md:330 | 空比对一律 FAIL + 可失败自证。

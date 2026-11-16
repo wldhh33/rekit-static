@@ -1,0 +1,528 @@
+{
+  "generated": "2026-11-16 04:16:54",
+  "samples": {
+    "elf": {
+      "path": "samples/m9/elf_medium_synth_go_stripped",
+      "objdump_s": 4.03,
+      "objdump_instructions": 923970,
+      "objdump_status": "ok",
+      "gopclntab": {
+        "status": "ok",
+        "version": "go1.20+",
+        "nfunc": 8908,
+        "n_markers": 2,
+        "where": "elf_section:.gopclntab"
+      },
+      "rows": {
+        "off": {
+          "descend_s": 0.37,
+          "seeds_declared_by_source": {
+            "entry": 1
+          },
+          "seeds_declared_only_by_source": {
+            "entry": 1
+          },
+          "seeds_authoritative": {
+            "total": 1,
+            "hit": 1,
+            "ratio": 1.0,
+            "misses": []
+          },
+          "end_conflicts": {
+            "seeds": 0,
+            "by_pair": {},
+            "pairs_total": 0,
+            "delta_min": null,
+            "delta_max": null,
+            "delta_hist": {}
+          },
+          "recdesc": {
+            "instructions": 76168,
+            "bytes_covered": 315618,
+            "coverage": 0.08988193843438352,
+            "blocks": 14302,
+            "edges_definite": 0,
+            "edges_speculative": 19198,
+            "edges_cross_function": 7,
+            "abstains": 0,
+            "outside": 0
+          },
+          "coverage": {
+            "numerator": 76168,
+            "denominator": 923970,
+            "ratio": 0.08243557691267032,
+            "ours_total": 76168,
+            "matched": 76168,
+            "len_conflict": 0,
+            "ours_only": 0,
+            "objdump_only": 847802,
+            "ours_only_inside_objdump": 0,
+            "identity_ok": true,
+            "byte_coverage_ours": 0.08988193843438352,
+            "matched_bytes": 315618
+          },
+          "matched_set_size": 76168,
+          "len_conflict_recomputed": 0
+        },
+        "on": {
+          "descend_s": 4.07,
+          "seeds_declared_by_source": {
+            "entry": 1,
+            "gopclntab": 8906
+          },
+          "seeds_declared_only_by_source": {
+            "gopclntab": 8905
+          },
+          "seeds_authoritative": {
+            "total": 8906,
+            "hit": 8906,
+            "ratio": 1.0,
+            "misses": []
+          },
+          "end_conflicts": {
+            "seeds": 0,
+            "by_pair": {},
+            "pairs_total": 0,
+            "delta_min": null,
+            "delta_max": null,
+            "delta_hist": {}
+          },
+          "recdesc": {
+            "instructions": 748094,
+            "bytes_covered": 3241273,
+            "coverage": 0.9230522347744095,
+            "blocks": 130738,
+            "edges_definite": 172987,
+            "edges_speculative": 0,
+            "edges_cross_function": 197,
+            "abstains": 0,
+            "outside": 0
+          },
+          "coverage": {
+            "numerator": 748093,
+            "denominator": 923970,
+            "ratio": 0.8096507462363497,
+            "ours_total": 748094,
+            "matched": 748093,
+            "len_conflict": 0,
+            "ours_only": 1,
+            "objdump_only": 175877,
+            "ours_only_inside_objdump": 1,
+            "identity_ok": true,
+            "byte_coverage_ours": 0.9230522347744095,
+            "matched_bytes": 3241272,
+            "byte_coverage_ours_pct": 92.3052
+          },
+          "matched_set_size": 748093,
+          "len_conflict_recomputed": 0
+        }
+      },
+      "delta": {
+        "matched_gain": 671925,
+        "matched_lost": 0,
+        "ours_gain": 671926,
+        "ours_lost": 0,
+        "same_addr_len_changed": 0,
+        "ratio_gain": 0.7272151693236794,
+        "numerator_gain": 671925
+      },
+      "objdump_only_breakdown": {
+        "total": 175877,
+        "classes": {
+          "padding_all_cc90": 149225,
+          "in_range_other": 26652,
+          "outside_range": 0
+        },
+        "samples": {
+          "padding_all_cc90": [
+            [
+              "0x40128f",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401290",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401291",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401292",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401293",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401294",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401295",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x401296",
+              "int3",
+              "cc"
+            ]
+          ],
+          "in_range_other": [
+            [
+              "0x4017a3",
+              "add    rax,0x48",
+              "4883c048"
+            ],
+            [
+              "0x4017a7",
+              "ret",
+              "c3"
+            ],
+            [
+              "0x4017a8",
+              "add    rax,0x40",
+              "4883c040"
+            ],
+            [
+              "0x4017ac",
+              "ret",
+              "c3"
+            ],
+            [
+              "0x4017ad",
+              "add    rax,0x38",
+              "4883c038"
+            ],
+            [
+              "0x4017b1",
+              "ret",
+              "c3"
+            ],
+            [
+              "0x4017b2",
+              "add    rax,0x50",
+              "4883c050"
+            ],
+            [
+              "0x4017b6",
+              "ret",
+              "c3"
+            ]
+          ],
+          "outside_range": []
+        },
+        "declared_ranges": 8906,
+        "text_end_va": "0x75a4a1",
+        "section_end_va": "0x75a4b1",
+        "tail_gap_bytes": 16,
+        "total_prev": 175876,
+        "total_note": "total = sum(classes) = coverage.objdump_only（原字段误用 len(obj)-len(ours)，我方多解出的 1 条 ours_only 被重复扣减，已更正）"
+      },
+      "ours_only_detail": [
+        [
+          "0x55177f",
+          1,
+          "c3"
+        ]
+      ]
+    },
+    "pe": {
+      "path": "samples/m9/pe_medium_synth_go_stripped.exe",
+      "objdump_s": 4.43,
+      "objdump_instructions": 925712,
+      "objdump_status": "ok",
+      "gopclntab": {
+        "status": "ok",
+        "version": "go1.20+",
+        "nfunc": 8895,
+        "n_markers": 3,
+        "where": "magic_scan@0x3a1180"
+      },
+      "rows": {
+        "off": {
+          "descend_s": 4.53,
+          "seeds_declared_by_source": {
+            "entry": 1,
+            "pdata": 7152
+          },
+          "seeds_declared_only_by_source": {
+            "entry": 1,
+            "pdata": 7152
+          },
+          "seeds_authoritative": {
+            "total": 7153,
+            "hit": 7153,
+            "ratio": 1.0,
+            "misses": []
+          },
+          "end_conflicts": {
+            "seeds": 0,
+            "by_pair": {},
+            "pairs_total": 0,
+            "delta_min": null,
+            "delta_max": null,
+            "delta_hist": {}
+          },
+          "recdesc": {
+            "instructions": 738853,
+            "bytes_covered": 3213331,
+            "coverage": 0.9115312857337781,
+            "blocks": 127152,
+            "edges_definite": 167403,
+            "edges_speculative": 2662,
+            "edges_cross_function": 25,
+            "abstains": 0,
+            "outside": 0
+          },
+          "coverage": {
+            "numerator": 738852,
+            "denominator": 925712,
+            "ratio": 0.7981445633199095,
+            "ours_total": 738853,
+            "matched": 738852,
+            "len_conflict": 0,
+            "ours_only": 1,
+            "objdump_only": 186860,
+            "ours_only_inside_objdump": 1,
+            "identity_ok": true,
+            "byte_coverage_ours": 0.9115312857337781,
+            "matched_bytes": 3213330
+          },
+          "matched_set_size": 738852,
+          "len_conflict_recomputed": 0
+        },
+        "on": {
+          "descend_s": 5.5,
+          "seeds_declared_by_source": {
+            "entry": 1,
+            "gopclntab": 8892,
+            "pdata": 7152
+          },
+          "seeds_declared_only_by_source": {
+            "gopclntab": 1739
+          },
+          "seeds_authoritative": {
+            "total": 8892,
+            "hit": 8892,
+            "ratio": 1.0,
+            "misses": []
+          },
+          "end_conflicts": {
+            "seeds": 7139,
+            "by_pair": {
+              "pdata <gopclntab": 7139
+            },
+            "pairs_total": 1,
+            "delta_min": 1,
+            "delta_max": 31,
+            "delta_hist": {
+              "27": 870,
+              "14": 375,
+              "17": 303,
+              "25": 289,
+              "20": 288,
+              "7": 277,
+              "26": 258,
+              "8": 256
+            }
+          },
+          "recdesc": {
+            "instructions": 750110,
+            "bytes_covered": 3255102,
+            "coverage": 0.9233805391522356,
+            "blocks": 129851,
+            "edges_definite": 171802,
+            "edges_speculative": 0,
+            "edges_cross_function": 194,
+            "abstains": 0,
+            "outside": 0
+          },
+          "coverage": {
+            "numerator": 750109,
+            "denominator": 925712,
+            "ratio": 0.810304932851686,
+            "ours_total": 750110,
+            "matched": 750109,
+            "len_conflict": 0,
+            "ours_only": 1,
+            "objdump_only": 175603,
+            "ours_only_inside_objdump": 1,
+            "identity_ok": true,
+            "byte_coverage_ours": 0.9233805391522356,
+            "matched_bytes": 3255101,
+            "byte_coverage_ours_pct": 92.3381
+          },
+          "matched_set_size": 750109,
+          "len_conflict_recomputed": 0
+        }
+      },
+      "delta": {
+        "matched_gain": 11257,
+        "matched_lost": 0,
+        "ours_gain": 11257,
+        "ours_lost": 0,
+        "same_addr_len_changed": 0,
+        "ratio_gain": 0.012160369531776571,
+        "numerator_gain": 11257
+      },
+      "objdump_only_breakdown": {
+        "total": 175603,
+        "classes": {
+          "padding_all_cc90": 148861,
+          "in_range_other": 26702,
+          "outside_range": 40
+        },
+        "samples": {
+          "padding_all_cc90": [
+            [
+              "0x1067",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x1068",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x1069",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x106a",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x106b",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x106c",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x106d",
+              "int3",
+              "cc"
+            ],
+            [
+              "0x106e",
+              "int3",
+              "cc"
+            ]
+          ],
+          "in_range_other": [
+            [
+              "0x1823",
+              "add    rax,0x48",
+              "4883c048"
+            ],
+            [
+              "0x1827",
+              "ret",
+              "c3"
+            ],
+            [
+              "0x1828",
+              "add    rax,0x40",
+              "4883c040"
+            ],
+            [
+              "0x182c",
+              "ret",
+              "c3"
+            ],
+            [
+              "0x182d",
+              "add    rax,0x38",
+              "4883c038"
+            ],
+            [
+              "0x1831",
+              "ret",
+              "c3"
+            ],
+            [
+              "0x1832",
+              "add    rax,0x50",
+              "4883c050"
+            ],
+            [
+              "0x1836",
+              "ret",
+              "c3"
+            ]
+          ],
+          "outside_range": [
+            [
+              "0x1000",
+              "jmp    QWORD PTR [rax]",
+              "ff20"
+            ],
+            [
+              "0x1002",
+              "rex.RXB outs dx,DWORD PTR [rsi]",
+              "476f"
+            ],
+            [
+              "0x1004",
+              "and    BYTE PTR [rdx+0x75],ah",
+              "206275"
+            ],
+            [
+              "0x1007",
+              "imul   ebp,DWORD PTR [rsp+riz*2+0x20],0x203a4449",
+              "696c642049443a20"
+            ],
+            [
+              "0x100f",
+              "and    dh,BYTE PTR [rsi+0x48]",
+              "227648"
+            ],
+            [
+              "0x1012",
+              "outs   dx,DWORD PTR [rsi]",
+              "6f"
+            ],
+            [
+              "0x1013",
+              "xor    al,0x7a",
+              "347a"
+            ],
+            [
+              "0x1015",
+              "pop    rcx",
+              "59"
+            ]
+          ]
+        },
+        "declared_ranges": 8892,
+        "text_end_va": "0x35da41",
+        "section_end_va": "0x35da51",
+        "tail_gap_bytes": 16,
+        "total_prev": 175602,
+        "total_note": "total = sum(classes) = coverage.objdump_only（原字段误用 len(obj)-len(ours)，我方多解出的 1 条 ours_only 被重复扣减，已更正）"
+      },
+      "ours_only_detail": [
+        [
+          "0x152edf",
+          1,
+          "c3"
+        ]
+      ]
+    }
+  }
+}

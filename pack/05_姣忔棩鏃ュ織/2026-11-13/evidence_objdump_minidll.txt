@@ -1,0 +1,20 @@
+	Export Address Table 		00000004
+	[Name Pointer/Ordinal] Table	00000003
+Table Addresses
+	Export Address Table 		0000000000002040
+	Name Pointer Table 		0000000000002050
+	Ordinal Table 			000000000000205c
+
+Export Address Table -- Ordinal Base 1
+	          Ordinal  Address  Type
+	[   0] +base[   1] 00001010 Export RVA
+	[   1] +base[   2] 00001020 Export RVA
+	[   2] +base[   3] 00001030 Export RVA
+	[   3] +base[   4] 00001040 Export RVA
+
+[Ordinal/Name Pointer] Table -- Ordinal Base 1
+	          Ordinal   Hint Name
+	[   0] +base[   1]  0000 Add
+	[   2] +base[   3]  0001 Mul
+	[   1] +base[   2]  0002 Sub
+

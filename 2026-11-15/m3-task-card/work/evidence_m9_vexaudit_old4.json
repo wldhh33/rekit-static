@@ -1,0 +1,34 @@
+{
+ "tests/fixtures/cli-64.exe": {
+  "lead_bytes": 39,
+  "abstain_sites": 38,
+  "other_abstains": 0,
+  "decoder_defect": 0,
+  "illegal_encoding": 0,
+  "data_not_instruction": 38
+ },
+ "tests/fixtures/bin_ls.elf": {
+  "lead_bytes": 509,
+  "abstain_sites": 313,
+  "other_abstains": 0,
+  "decoder_defect": 0,
+  "illegal_encoding": 0,
+  "data_not_instruction": 313
+ },
+ "tests/fixtures/dyn_static": {
+  "lead_bytes": 6911,
+  "abstain_sites": 1199,
+  "other_abstains": 0,
+  "decoder_defect": 0,
+  "illegal_encoding": 0,
+  "data_not_instruction": 1199
+ },
+ "tests/samples/avx/avx_dense.exe": {
+  "lead_bytes": 25,
+  "abstain_sites": 0,
+  "other_abstains": 0,
+  "decoder_defect": 0,
+  "illegal_encoding": 0,
+  "data_not_instruction": 0
+ }
+}

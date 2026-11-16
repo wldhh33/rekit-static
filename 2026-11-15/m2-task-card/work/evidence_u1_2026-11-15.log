@@ -1,0 +1,61 @@
+rekit M2 · U1 证据日志（2026-11-15）
+说明：E2/E3 的 UPX 正判挂起（G1），本日志不构成 M2 完成证据。
+权威对拍：本机无 readelf/objdump/file/upx/gcc → pyelftools + 2026-11-10 readelf 期望表，属实现独立非进程独立。
+
+== 全量回归（cwd 经 <旧仓库根> 联接，规避 test_elf/test_pe 硬编码 Linux 路径）==
+
+C:\Python314\Lib\subprocess.py:1552: FileNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_pe.py::test_minidll_crosscheck_objdump - FileNotFoundError: [WinError 2] 系统找不到指定的文件。
+1 failed, 84 passed, 4 skipped in 4.69s
+
+== 达标集指纹结论 ==
+--- tests\fixtures\dyn_pie
+Fingerprint: tests\fixtures\dyn_pie
+Format:      ELF
+Packer:      none (confidence 0.90)
+Compiler:    gcc 14.2.0 (confidence 0.95)
+Stripped:    no
+Mitigations: NX enabled | RELRO partial | PIE yes | W+X none
+--- tests\fixtures\bin_ls.elf
+Fingerprint: tests\fixtures\bin_ls.elf
+Format:      ELF
+Packer:      none (confidence 0.90)
+Compiler:    unknown (confidence 0.20)
+Stripped:    yes
+Mitigations: NX enabled | RELRO full | PIE yes | W+X none
+--- tests\fixtures\cli-64.exe
+Fingerprint: tests\fixtures\cli-64.exe
+Format:      PE
+Packer:      none (confidence 0.90)
+Compiler:    msvc 19.29 (confidence 0.90)
+COFF syms:   absent（PE 不适用 stripped 语义）
+Mitigations: NX True | ASLR True | HighEntropyVA True | CFG False | DllChar 0x8160
+--- tests\samples\fingerprint\hello_go.exe
+Fingerprint: tests\samples\fingerprint\hello_go.exe
+Format:      PE
+Packer:      none (confidence 0.90)
+Compiler:    go 1.27.3 (confidence 0.90)
+COFF syms:   present（PE 不适用 stripped 语义）
+Mitigations: NX True | ASLR True | HighEntropyVA True | CFG False | DllChar 0x8160
+--- tests\samples\fingerprint\hello_go_linux
+Fingerprint: tests\samples\fingerprint\hello_go_linux
+Format:      ELF
+Packer:      none (confidence 0.90)
+Compiler:    go 1.27.3 (confidence 0.90)
+Stripped:    no
+Mitigations: NX enabled | RELRO none | PIE no | W+X none
+--- tests\samples\fingerprint\hello_rust.exe
+Fingerprint: tests\samples\fingerprint\hello_rust.exe
+Format:      PE
+Packer:      none (confidence 0.90)
+Compiler:    rust (confidence 0.85)
+COFF syms:   absent（PE 不适用 stripped 语义）
+Mitigations: NX True | ASLR True | HighEntropyVA True | CFG False | DllChar 0x8160
+--- tests\samples\fingerprint\busybox-1.35.0-musl-x86_64
+Fingerprint: tests\samples\fingerprint\busybox-1.35.0-musl-x86_64
+Format:      ELF
+Packer:      none (confidence 0.90)
+Compiler:    unknown (confidence 0.20)
+Stripped:    yes
+Mitigations: NX enabled | RELRO partial | PIE no | W+X none

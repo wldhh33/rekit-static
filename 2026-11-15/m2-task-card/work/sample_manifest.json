@@ -1,0 +1,330 @@
+{
+  "generated_at": "2026-11-15",
+  "note": "M2 fingerprint 样本登记表（任务卡阶段）。dims 中的值为【实测/构造已知】的权威判定，执行日必须逐字比对；标记 undeterminable 的维度，工具答 unknown 才算命中。",
+  "samples": [
+    {
+      "id": "S1",
+      "file": "tests/fixtures/dyn_pie",
+      "sha256": "（执行日补录）",
+      "source": "自构造：tests/hello.c + gcc (Debian 14.2.0-19) 14.2.0 -pie",
+      "license": "自有样本",
+      "redistributable": "yes",
+      "authority": "构造命令 + pyelftools 读 .comment【实测 2026-11-15】",
+      "dims": {
+        "packer": "none",
+        "compiler": "gcc 14.2.0",
+        "stripped": false,
+        "mitigations": "nx=enabled, relro=partial, pie=yes"
+      }
+    },
+    {
+      "id": "S2",
+      "file": "tests/fixtures/bin_ls.elf",
+      "sha256": "（执行日补录）",
+      "source": "Ubuntu 系统 /bin/ls（coreutils）",
+      "license": "GPL-3.0",
+      "redistributable": "yes（保留许可与出处）",
+      "authority": "发行版包版本 + pyelftools 实测：无 .comment、无 .symtab【实测 2026-11-15】",
+      "dims": {
+        "packer": "none",
+        "compiler": "undeterminable",
+        "stripped": true,
+        "mitigations": "nx=enabled, relro=full, pie=yes"
+      }
+    },
+    {
+      "id": "S3",
+      "file": "tests/fixtures/cli-64.exe",
+      "sha256": "（执行日补录）",
+      "source": "既有 fixture（MSVC 构建；原始出处待追溯）",
+      "license": "未知",
+      "redistributable": "no（仅本地回归，不对外再分发）",
+      "authority": "Rich 头 11 对 + pefile 交叉【2026-11-12 已固化】",
+      "dims": {
+        "packer": "none",
+        "compiler": "msvc (Rich)",
+        "stripped": "n/a(PE)",
+        "mitigations": "nx=yes, dynamicbase=yes, highentropyva=yes, cfg=no"
+      }
+    },
+    {
+      "id": "S4",
+      "file": "work/samples/hello_go.exe",
+      "sha256": "0ae6b7a2da2217e580671f094ec3cb548194dc504bf7103ccefd5a6cb87b60fe",
+      "size": 2494464,
+      "source": "本机构造：go1.27.3，go build hello.go",
+      "license": "自有样本（BSD-3-Clause 工具链产物）",
+      "redistributable": "yes",
+      "authority": "`go version -m` 输出 go1.27.3【实测 2026-11-15】",
+      "dims": {
+        "packer": "none",
+        "compiler": "go 1.27.3",
+        "stripped": "n/a(PE)",
+        "mitigations": "nx=yes, dynamicbase=yes, highentropyva=yes, cfg=no"
+      }
+    },
+    {
+      "id": "S5",
+      "file": "work/samples/hello_go_linux",
+      "sha256": "7ff3272d225417b105c07fd33c7eb2b48357286a502bfb167e4cb9d1771c7a05",
+      "size": 2342697,
+      "source": "本机构造：GOOS=linux GOARCH=amd64 go build hello.go",
+      "license": "自有样本",
+      "redistributable": "yes",
+      "authority": "`go version -m` + 节名 .go.buildinfo/.note.go.buildid/.gopclntab；nx/relro 由 pyelftools + readelf -lW 复核【2026-11-15】",
+      "dims": {
+        "packer": "none",
+        "compiler": "go 1.27.3",
+        "stripped": false,
+        "mitigations": "nx=enabled, relro=none(静态), pie=no"
+      }
+    },
+    {
+      "id": "S6",
+      "file": "work/samples/hello_rust.exe",
+      "sha256": "6b58b7c50a3416ff5298963a2f8694f992d6bce3ddc3d393f06a652a09b229ca",
+      "size": 130560,
+      "source": "本机构造：rustc 1.99.1 -O hello.rs",
+      "license": "自有样本",
+      "redistributable": "yes",
+      "authority": "rustc --version + 二进制内含 rustc 路径/panic 串 + 同名 .pdb【实测】",
+      "dims": {
+        "packer": "none",
+        "compiler": "rust (msvc 后端)",
+        "stripped": "n/a(PE)",
+        "mitigations": "nx=yes, dynamicbase=yes, highentropyva=yes, cfg=no"
+      }
+    },
+    {
+      "id": "S7",
+      "file": "work/samples/busybox-1.35.0-musl-x86_64",
+      "sha256": "6e123e7f3202a8c1e9b1f94d8941580a25135382b99e8d3e34fb858bba311348",
+      "size": 1131168,
+      "source": "https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox",
+      "license": "GPL-2.0",
+      "redistributable": "yes（保留许可与出处）",
+      "authority": "官方下载页 + 实测：无 .comment、无 .symtab、静态无 interp；**2026-11-15 修正：readelf -lW 显示存在 PT_GNU_RELRO（0x711fe0, 0x20 字节），原记 relro=none 系标注错误**",
+      "dims": {
+        "packer": "none",
+        "compiler": "undeterminable",
+        "stripped": true,
+        "mitigations": "nx=enabled, relro=partial, pie=no"
+      }
+    },
+    {
+      "id": "S8",
+      "file": "work/samples/putty-64bit.exe",
+      "sha256": "d01fdb5aae8f112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87",
+      "size": 1706136,
+      "source": "https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe",
+      "license": "MIT",
+      "redistributable": "yes（保留许可）",
+      "authority": "实测：无 Rich、DllChar=0x8160、节名含 .00cfg/.gxfg/_RDATA；构建工具链【待核实】",
+      "dims": {
+        "packer": "none",
+        "compiler": "undeterminable",
+        "stripped": "n/a(PE)",
+        "mitigations": "nx=yes, dynamicbase=yes, highentropyva=yes, cfg=no"
+      },
+      "role": "备选负控（编译器维度不计入达标）"
+    },
+    {
+      "id": "S9",
+      "file": "work/samples/upx/upx_cli-64.exe（副本：tests/samples/fingerprint/upx/）",
+      "sha256": "ed4073759ea5a0cf71496354aa7c01848e420d8c074fdce30bb61e55f13ff974",
+      "size": 9728,
+      "source": "upx 5.3.0 win64 压缩 S3 得到（14336 -> 9728，67.86%）",
+      "license": "UPX GPL-2.0-or-later（工具）；样本派生自 S3",
+      "redistributable": "no（派生自不可再分发的 S3；仅本地回归）",
+      "authority": "upx -l 自报 win64/pe 且原始大小 14336；upx -t OK；rekit 判定 upx（证据 2 条）",
+      "dims": {
+        "packer": "upx",
+        "compiler": "msvc (Rich 头保留，19.29)",
+        "stripped": "n/a(PE)",
+        "mitigations": "nx=yes, dynamicbase=yes, highentropyva=yes, cfg=no, dllchar=0x8160"
+      },
+      "status": "已生成并验证（2026-11-15）",
+      "caveat": "PE 往返解包与原始不逐字节相同（145/14336 字节差异，头部/对齐填充重写），节表逐项全等、Rich 保留"
+    },
+    {
+      "id": "S10",
+      "file": "work/samples/upx/upx_dyn_pie（副本：tests/samples/fingerprint/upx/）",
+      "sha256": "aa147bd7b0c0cfe59d5a7a8546e776955a98c3e0941bff7a27b4f1c535d6b7cd",
+      "size": 6124,
+      "source": "upx 5.3.0 win64 交叉压缩 S1 得到（15832 -> 6124，38.68%，upx -l 报 linux/amd64）",
+      "license": "UPX GPL-2.0-or-later（工具）；样本自有",
+      "redistributable": "yes",
+      "authority": "upx -l 自报 linux/amd64；upx -t OK；upx -d 解包后 sha256 与 S1 全等；rekit 判定 upx（证据 2 条）",
+      "dims": {
+        "packer": "upx",
+        "compiler": "undeterminable（.comment 已压缩；禁止猜测）",
+        "stripped": "unknown（节表被移除，e_shnum=0）",
+        "mitigations": "unknown（加壳态不可靠，须先脱壳）"
+      },
+      "status": "已生成并验证（2026-11-15）；**upx.exe 交叉压缩 ELF 已证实可行**（G3 关闭）"
+    },
+    {
+      "id": "S11",
+      "file": "work/samples/upx/upx_putty-64bit.exe（副本：tests/samples/fingerprint/upx/）",
+      "sha256": "59389e309325b4124d02521c49bc9efb3021fa0d875c5dd2c64c2f711ee10944",
+      "size": 960664,
+      "source": "upx 5.3.0 win64 压缩 S8 得到（1706136 -> 960664，56.31%）",
+      "license": "MIT（原样本）/ UPX GPL-2.0-or-later（工具）",
+      "redistributable": "yes（保留 PuTTY 许可）",
+      "authority": "upx -l 自报 win64/pe 且原始大小 1706136；upx -t OK；rekit 判定 upx（证据 2 条）",
+      "dims": {
+        "packer": "upx",
+        "compiler": "undeterminable（无 Rich，加壳态）",
+        "stripped": "n/a(PE)",
+        "mitigations": "nx=yes, dynamicbase=yes, highentropyva=yes, cfg=no"
+      },
+      "status": "已生成并验证（2026-11-15）",
+      "role": "可再分发的 UPX PE 正样本（替代不可再分发的 S9 用于对外产物）"
+    }
+  ],
+  "e9_ground_truth": {
+    "frozen_at": "2026-11-15（E9 执行前冻结；冻结后不再改动，除非另立修正记录并注明证据）",
+    "corrections_before_freeze": [
+      "S5 hello_go_linux：nx 由『?』改为 enabled（pyelftools PT_GNU_STACK RW + readelf -lW 复核）",
+      "S7 busybox：relro 由『none(静态)』改为 partial（readelf -lW 显示 PT_GNU_RELRO 0x711fe0/0x20，原为标注错误，非判据问题）"
+    ],
+    "dimensions": {
+      "packer": "upx / none（none 为可判定的负向真值）",
+      "compiler": "family + 可选 version；family=unknown 表示 undeterminable",
+      "stripped": "true / false / unknown（unknown 仅 UPX-ELF）",
+      "mitigations": "ELF: nx/relro/pie；PE: nx/dynamicbase/high_entropy_va/cfg + dll_characteristics"
+    },
+    "samples": [
+      {"id": "dyn_pie", "path": "tests/fixtures/dyn_pie", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "gcc", "version": "14.2.0"}, "stripped": false,
+       "mitigations": {"nx": "enabled", "relro": "partial", "pie": "yes"},
+       "authority": "自构造 gcc 14.2.0 -pie；.comment + pyelftools/readelf 加固位"},
+      {"id": "dyn_nopie", "path": "tests/fixtures/dyn_nopie", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "gcc", "version": "14.2.0"}, "stripped": false,
+       "mitigations": {"nx": "enabled", "relro": "partial", "pie": "no"},
+       "authority": "自构造 gcc 14.2.0 -no-pie"},
+      {"id": "dyn_static", "path": "tests/fixtures/dyn_static", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "gcc", "version": "14.2.0"}, "stripped": false,
+       "mitigations": {"nx": "enabled", "relro": "partial", "pie": "no"},
+       "authority": "自构造 gcc 14.2.0 -static"},
+      {"id": "dyn_execstack", "path": "tests/fixtures/dyn_execstack", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "gcc", "version": "14.2.0"}, "stripped": false,
+       "mitigations": {"nx": "disabled", "relro": "partial", "pie": "yes"},
+       "authority": "自构造 gcc -z execstack"},
+      {"id": "dyn_norelro", "path": "tests/fixtures/dyn_norelro", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "gcc", "version": "14.2.0"}, "stripped": false,
+       "mitigations": {"nx": "enabled", "relro": "none", "pie": "no"},
+       "authority": "自构造 gcc -z norelro"},
+      {"id": "bin_ls.elf", "path": "tests/fixtures/bin_ls.elf", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "unknown"}, "stripped": true,
+       "mitigations": {"nx": "enabled", "relro": "full", "pie": "yes"},
+       "authority": "Ubuntu /bin/ls：无 .comment、无 .symtab；readelf 加固位（2026-11-10 固化表）"},
+      {"id": "hello_go_linux", "path": "work/samples/hello_go_linux", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "go", "version": "1.27.3"}, "stripped": false,
+       "mitigations": {"nx": "enabled", "relro": "none", "pie": "no"},
+       "authority": "go version -m；.go.buildinfo；readelf -lW（2026-11-15 复核）"},
+      {"id": "busybox-1.35.0-musl-x86_64", "path": "work/samples/busybox-1.35.0-musl-x86_64", "role": "negative", "format": "ELF",
+       "packer": "none", "compiler": {"family": "unknown"}, "stripped": true,
+       "mitigations": {"nx": "enabled", "relro": "partial", "pie": "no"},
+       "authority": "官方二进制：无 .comment/.symtab；readelf -lW 有 PT_GNU_RELRO（2026-11-15 修正）"},
+      {"id": "upx_dyn_pie", "path": "tests/samples/fingerprint/upx/upx_dyn_pie", "role": "positive", "format": "ELF",
+       "packer": "upx", "compiler": {"family": "unknown"}, "stripped": "unknown",
+       "mitigations": {"nx": "unknown", "relro": "unknown", "pie": "unknown"},
+       "authority": "upx -l 报 linux/amd64、upx -t OK、upx -d 往返 sha256 全等；加壳态节表移除"},
+      {"id": "upx_cli-64.exe", "path": "tests/samples/fingerprint/upx/upx_cli-64.exe", "role": "positive", "format": "PE",
+       "packer": "upx", "compiler": {"family": "msvc", "version": "19.29"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "upx -l 报 win64/pe、原始 14336；pefile 复核 Rich 11 对、DllChar 0x8160、符号表指针 0"},
+      {"id": "upx_putty-64bit.exe", "path": "tests/samples/fingerprint/upx/upx_putty-64bit.exe", "role": "positive", "format": "PE",
+       "packer": "upx", "compiler": {"family": "unknown"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "upx -l 报 win64/pe、原始 1706136；pefile 无 Rich、DllChar 0x8160"},
+      {"id": "cli-64.exe", "path": "tests/fixtures/cli-64.exe", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "msvc", "version": "19.29"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "Rich 11 对（2026-11-12 固化）+ pefile 交叉；DllChar 0x8160"},
+      {"id": "minipe.exe", "path": "tests/fixtures/minipe.exe", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "unknown"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "自构造最小 PE：无 Rich、无编译器标记（构造参数）"},
+      {"id": "minidll.dll", "path": "tests/fixtures/minidll.dll", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "unknown"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "自构造导出 DLL（构造参数）；无 Rich"},
+      {"id": "minipe_fakerich.exe", "path": "tests/fixtures/minipe_fakerich.exe", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "unknown"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "Rich 伪造陷阱样本：stub 区 Rich+key 无 DanS 锚 → Rich=None（2026-11-12 固化）"},
+      {"id": "hello_go.exe", "path": "work/samples/hello_go.exe", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "go", "version": "1.27.3"}, "stripped": null, "coff": "present",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "go version -m；Go buildinf + /nn 长节名 + COFF 符号表；pefile 复核 DllChar"},
+      {"id": "hello_rust.exe", "path": "work/samples/hello_rust.exe", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "rust", "version": null}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "rustc 1.99.1 产物含 rustc/<commit> 路径；有 Rich 但不得据此判 msvc；版本串不嵌"},
+      {"id": "putty-64bit.exe", "path": "work/samples/putty-64bit.exe", "role": "negative", "format": "PE",
+       "packer": "none", "compiler": {"family": "unknown"}, "stripped": null, "coff": "absent",
+       "mitigations": {"nx": true, "dynamicbase": true, "high_entropy_va": true, "cfg": false, "dll_characteristics": "0x8160"},
+       "authority": "官方 PuTTY：无 Rich、无 rustc/go 标记；pefile 复核 DllChar"}
+    ]
+  },
+  "tools": [
+    {
+      "name": "upx",
+      "version": "5.3.0",
+      "platform": "win64",
+      "zip_sha256": "d127996c76615e431be810e9c8d2910dbe3dd400600c5c0c50276fc5a17a9705",
+      "zip_size": 687595,
+      "upx_exe_sha256": "ff30a651c9e41a2bbb363825fac9e7e23d92871c1ac82813a264e3b8d1cd302b",
+      "source": "用户上传 c:\\Users\\<user>\\.trae-cn\\attachments\\...upx-5.3.0-win64.zip（结构：COPYING/LICENSE/NEWS/README/upx.exe/upx-doc.*，与官方 win64 发布一致）",
+      "license": "GPL-2.0-or-later（见包内 LICENSE/COPYING）",
+      "install_path": "work/tools/upx-5.3.0-win64（不在 pack 内）",
+      "verified": "upx --version → 'upx 5.3.0'；NRV 0.84 / UCL 1.03",
+      "caveat": "upx.exe 不处理非 ASCII 路径（本工作区路径含中文时读不到文件），需在 ASCII 临时目录内压缩"
+    },
+    {
+      "name": "binutils（objdump / readelf / nm）",
+      "version": "2.47（objdump 自报 2.47.20260726）",
+      "platform": "win64 / mingw64（MSYS2 包，免安装解压）",
+      "packages": [
+        {
+          "file": "mingw-w64-x86_64-binutils-2.47-4-any.pkg.tar.zst",
+          "sha256": "e36c52a7fe1d104c2efd97dc74162386eabf8323f6aeb9b83aeb574b291a7da0",
+          "size": 6632105,
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/mingw64/mingw-w64-x86_64-binutils-2.47-4-any.pkg.tar.zst"
+        },
+        {
+          "file": "mingw-w64-x86_64-zlib-ng-compat-2.3.3-2-any.pkg.tar.zst（提供 zlib1.dll）",
+          "sha256": "4ab8ceca5131272225023759fbc7999ccde8dd55b681fcd6787177f75aba9954",
+          "size": 155892,
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/mingw64/mingw-w64-x86_64-zlib-ng-compat-2.3.3-2-any.pkg.tar.zst"
+        },
+        {
+          "file": "mingw-w64-x86_64-zstd-1.5.7-2-any.pkg.tar.zst（提供 libzstd.dll）",
+          "sha256": "1add6705b344664f6aca108c85f79ab5bdd9e1162662bb06a4cf40a34f6e0907",
+          "size": 669879,
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/mingw64/mingw-w64-x86_64-zstd-1.5.7-2-any.pkg.tar.zst"
+        },
+        {
+          "file": "mingw-w64-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst（提供 libintl-8.dll）",
+          "sha256": "be68d7f260633284b910c588c6d82ee304a81c8817a686d2cd9df83f872c27af",
+          "size": 427276,
+          "url": "https://repo.msys2.org/mingw/mingw64/mingw-w64-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst"
+        },
+        {
+          "file": "mingw-w64-x86_64-libiconv-1.19.1-1-any.pkg.tar.zst（libintl 依赖 libiconv-2.dll）",
+          "sha256": "50e915aa36fdbe6c84acc8954e939275609ba051cdb4eeeff3884453c28efde0",
+          "size": 742982,
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/msys2/mingw/mingw64/mingw-w64-x86_64-libiconv-1.19.1-1-any.pkg.tar.zst"
+        }
+      ],
+      "objdump_sha256": "c56162ea2a35f001accedce647456d296a768f457f7f1803668f8b72f6f473a8",
+      "install_path": "work/tools/binutils-2.47/mingw64（不在 pack 内；整目录 76.6 MB，单包均 <7 MB）",
+      "license": "binutils GPL-3.0-or-later；gettext-runtime / libiconv LGPL-2.1-or-later；zlib-ng zlib License；zstd BSD-3-Clause OR GPL-2.0；许可原文随包落在 mingw64/share/licenses/（binutils/gettext-runtime/libiconv/zlib-ng-compat/zstd 五项）",
+      "verified": "objdump --version → 'GNU objdump (GNU Binutils) 2.47.20260726'；minidll.dll 导出表对拍全等；全量 pytest 92 passed / 0 skipped / 0 failed",
+      "path_change": "已把 ...\\mingw64\\bin 追加到【用户级】PATH（HKCU\\Environment，639→729 字符，未动机器级 PATH）；回退方式 = 从用户 PATH 删除该目录。当前已打开的终端/IDE 需重启才继承",
+      "caveat": "1) gettext-runtime 在清华镜像返回拒访 HTML 页（15,350 B），改从官方 repo.msys2.org 取得；2) D:\\tools\\go*\\pkg\\tool\\windows_amd64\\objdump.exe 是 Go 自带 objdump，参数与输出格式均不同于 GNU，不能替代；3) objdump.exe 依赖同目录 4 个 DLL（zlib1/libzstd/libintl-8/libiconv-2），已随包落盘；4) 该目录同时含 readelf.exe，PATH 生效后 4 条 readelf 交叉验证由 skip 转为真跑（实测 4 passed）；5) objdump 读取非 ASCII 路径不稳，测试输入走 ASCII 目录联接 <旧仓库根>"
+    }
+  ]
+}

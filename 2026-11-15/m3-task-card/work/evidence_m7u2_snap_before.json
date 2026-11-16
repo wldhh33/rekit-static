@@ -1,0 +1,151 @@
+[
+ {
+  "sample": "tests/fixtures/cli-64.exe",
+  "graph_counts": {
+   "call_sites": 153,
+   "direct": 98,
+   "indirect": 55,
+   "decoded": 63,
+   "plt_or_import": 35,
+   "unresolved": 0
+  },
+  "cycles": 0,
+  "nodes": 85,
+  "facts_sites": 153,
+  "facts_stats": null,
+  "join_counts": {
+   "facts_sites": 153,
+   "graph_edges": 98,
+   "keys": 153,
+   "key_unique": 153,
+   "duplicate_keys": 0,
+   "decoded_calls": 153,
+   "call_site_missing": 0,
+   "facts_site_not_call": 0,
+   "graph_edge_not_call": 0,
+   "key_coverage_ok": true,
+   "graph_direct_edge": 98,
+   "graph_indirect_no_edge": 55,
+   "graph_missing": 0,
+   "struct": {
+    "aligned": 153
+   },
+   "aligned": 153,
+   "conflicts": 0,
+   "hard_conflicts": 0,
+   "caliber_differences": 0,
+   "conflict_kinds": {},
+   "sites_with_hard_conflict": 0
+  },
+  "conflict_kinds": {},
+  "expr": {
+   "functions": 85,
+   "skipped": 0,
+   "abstains": 30,
+   "text_sha256": "60029159536730d603e385d8b05617dda9feed51db6652ab0c1bb3bad71a79c0"
+  }
+ },
+ {
+  "sample": "tests/fixtures/bin_ls.elf",
+  "graph_counts": {
+   "call_sites": 1141,
+   "direct": 1116,
+   "indirect": 25,
+   "decoded": 428,
+   "plt_or_import": 688,
+   "unresolved": 0
+  },
+  "cycles": 2,
+  "nodes": 331,
+  "facts_sites": 1141,
+  "facts_stats": null,
+  "join_counts": {
+   "facts_sites": 1141,
+   "graph_edges": 1116,
+   "keys": 1141,
+   "key_unique": 1141,
+   "duplicate_keys": 0,
+   "decoded_calls": 1154,
+   "call_site_missing": 13,
+   "facts_site_not_call": 0,
+   "graph_edge_not_call": 0,
+   "key_coverage_ok": false,
+   "graph_direct_edge": 1116,
+   "graph_indirect_no_edge": 25,
+   "graph_missing": 0,
+   "struct": {
+    "aligned": 1141
+   },
+   "aligned": 1141,
+   "conflicts": 13,
+   "hard_conflicts": 13,
+   "caliber_differences": 0,
+   "conflict_kinds": {
+    "call_site_missing": 13
+   },
+   "sites_with_hard_conflict": 13
+  },
+  "conflict_kinds": {
+   "call_site_missing": 13
+  },
+  "expr": {
+   "functions": 331,
+   "skipped": 0,
+   "abstains": 608,
+   "text_sha256": "ca75e956b2397d2fd1a686d60d60d35a8f17c180c7af85483df0390397b3eb8e"
+  }
+ },
+ {
+  "sample": "tests/fixtures/dyn_static",
+  "graph_counts": {
+   "call_sites": 3556,
+   "direct": 3456,
+   "indirect": 100,
+   "decoded": 3049,
+   "plt_or_import": 402,
+   "unresolved": 5
+  },
+  "cycles": 17,
+  "nodes": 1089,
+  "facts_sites": 3556,
+  "facts_stats": null,
+  "join_counts": {
+   "facts_sites": 3556,
+   "graph_edges": 3456,
+   "keys": 3556,
+   "key_unique": 3556,
+   "duplicate_keys": 0,
+   "decoded_calls": 3609,
+   "call_site_missing": 53,
+   "facts_site_not_call": 0,
+   "graph_edge_not_call": 0,
+   "key_coverage_ok": false,
+   "graph_direct_edge": 3456,
+   "graph_indirect_no_edge": 100,
+   "graph_missing": 0,
+   "struct": {
+    "aligned": 3553,
+    "function_not_structured": 3
+   },
+   "aligned": 3553,
+   "conflicts": 56,
+   "hard_conflicts": 53,
+   "caliber_differences": 3,
+   "conflict_kinds": {
+    "call_site_missing": 53,
+    "struct_function_absent": 3
+   },
+   "sites_with_hard_conflict": 53
+  },
+  "conflict_kinds": {
+   "call_site_missing": 53,
+   "struct_function_absent": 3
+  },
+  "expr": {
+   "functions": 1089,
+   "skipped": 0,
+   "abstains": 9258,
+   "text_sha256": "59959b868a4b3cd5dec6cda553602a7b3892b856f1e1be7e066403b1955c3516"
+  }
+ }
+]
