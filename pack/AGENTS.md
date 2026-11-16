@@ -46,16 +46,16 @@ python "pack\tools\status.py"
 
 | 逻辑名 | 真实路径 | 说明 |
 |---|---|---|
-| 项目包 | `pack\` | git 预期的仓库根（当前尚未初始化） |
-| 源码 | `pack\04_rekit椤圭洰婧愮爜\rekit\` | 目录名是 mojibake，见 `pack\PATH_MAP.md` |
-| 测试/验证 | `pack\04_rekit椤圭洰婧愮爜\tests\` | 25 个 `test_*.py` + 21 个 `verify_*.py` + fixtures |
+| 项目包 | `pack\` | git 仓库根（2026-11-17 初始化，基线 tag `baseline-pre-rename`） |
+| 源码 | `pack\04_rekit项目源码\rekit\` | 2026-11-17 由 mojibake 名改回，见 `pack\PATH_MAP.md` |
+| 测试/验证 | `pack\04_rekit项目源码\tests\` | 25 个 `test_*.py` + 21 个 `verify_*.py` + fixtures |
 | 方法论 | `pack\01_方法论文档\` | 2026-11-16 从 `tmp\pack` 恢复 |
 | 规则库（旧） | `pack\02_规则库\` | R01–R32，2026-11-16 恢复；R33–R119 只有日志出处 |
 | 规则登记（机器） | `pack\rules.json` | R01–R119 逐条摘录 + 出处 + 互证状态；缺口分析见 `2026-11-16\vibe-coding-review\work\batch3\rules_gap_report.md` |
 | 数字总账（人读） | `work\outputs\NUMBERS_LEDGER.md` | **唯一权威是 `work\evidence_numbers_ledger.json`**（M13–M18，`ledger_check.py --check` 硬校验）；`evidence_m13_ledger.json` 已降级为历史源，冲突以新 JSON 为准 |
-| 章程/进度 | `pack\03_璺\ue21c嚎鍥句笌绔犵▼\` | mojibake 目录；内含 CHARTER/PROGRESS/CHANGELOG/RE-ROADMAP |
-| 每日日志 | `pack\05_姣忔棩鏃ュ織\` | 2026-11-06 ~ 11-15 |
-| 日报 | `pack\06_鏃ユ姤docx\` | 10 期 docx |
+| 章程/进度 | `pack\03_路线图与章程\` | 内含 CHARTER/PROGRESS/CHANGELOG/RE-ROADMAP（2026-11-17 改名） |
+| 每日日志 | `pack\05_每日日志\` | 2026-11-06 ~ 11-15 |
+| 日报 | `pack\06_日报docx\` | 10 期 docx |
 | 工作目录 | `2026-11-15\m3-task-card\work\` | 证据、样本、任务卡、`pack03` 文档的**权威副本** |
 | 工作目录里的源码 | `work\rekit`、`work\tests` | 指向 `pack` 的目录联接（junction），不是副本 |
 | 样本 | `work\samples\` | 约 99 MB；`tests\samples`、`tests\fixtures` 另有小样本 |
@@ -69,7 +69,9 @@ python "pack\tools\status.py"
 - objdump 打开含中文的绝对路径会报 `Illegal byte sequence`：先设 `LC_ALL=C`。
 - 系统策略拦截 MSI/安装器；外部工具只用免安装 zip，单包 <500 MB，来源与许可须清楚。
 - `cli-64.exe` 出处不明，**不可再分发**，只在本机测试。
-- `pack` 下 4 个中文目录名是 GBK/UTF-8 混淆（磁盘名已损坏），不要按 README 里的中文名直接 `cd`。
+- 部分旧测试硬编码 `<旧仓库根>`（Linux 路径），Windows 上靠 junction
+  `<旧仓库根> → pack\04_rekit项目源码` 垫片工作；移动 `04_` 目录后必须同步重建该垫片，否则 pytest 会大面积 `FileNotFoundError`。
+- `pack` 下 4 个目录名已于 2026-11-17 由 mojibake 改回可读名（`03_路线图与章程` / `04_rekit项目源码` / `05_每日日志` / `06_日报docx`），`work` 下 6 个 junction 已同步重建；`2026-11-16\vibe-coding-review` 的调研快照保留旧名，作为当日记录。
 - Windows 终端显示中文可能乱码；路径操作优先用 Python，不要依赖 PowerShell 的字符串编码。
 
 ## 7. 禁止事项
