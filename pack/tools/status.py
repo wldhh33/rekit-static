@@ -1,17 +1,51 @@
 #!/usr/bin/env python3
-r"""会话开工自检：10 秒内看清"现在在哪、缺什么"。纯标准库，只读，不写任何文件。
+r"""会话开工自检：10 秒内看清"现在在哪、缺什么"。
 
 用法:  python "pack\tools\status.py"
 退出码: 0 = 无阻断问题 / 1 = HANDOFF 缺失或不完整 / 2 = 找不到工作区
+
+纯标准库、只读：规模段现算模块/测试/验证文件数与行数（行数同时给总行与非空行，
+避免"含不含空行"两种口径各写一个数），pytest 条数用 --collect-only -p no:cacheprovider
+获取，不写缓存。文档里的规模数字一律指回本脚本，不硬编码。
 """
 import json
 import os
+import re
 import subprocess
 import sys
 
 SECTIONS = ["1. 当前进度", "2. 未完成清单", "3. 已否决方案",
             "4. 待确认问题", "5. 新增证据文件", "6. 下一位第一条命令"]
 MOJIBAKE = set("鍥椤婧爜姣鏃璺笌绔犵▼")
+
+
+def _py_stats(folder: str, prefix: str = ""):
+    """返回 (文件数, 总行数, 非空行数)。行数两种口径都报，防止"含不含空行"各写一个数。"""
+    names = [x for x in os.listdir(folder) if x.endswith(".py") and x.startswith(prefix)]
+    total = nonblank = 0
+    for n in names:
+        with open(os.path.join(folder, n), encoding="utf-8", errors="replace") as f:
+            for ln in f:
+                total += 1
+                if ln.strip():
+                    nonblank += 1
+    return len(names), total, nonblank
+
+
+def _pytest_collected(work: str):
+    """pytest 收集条数；缺 pytest / 超时 / 解析失败返回 None，只降级不阻断开工。"""
+    try:
+        p = subprocess.run([sys.executable, "-m", "pytest", "tests", "--collect-only", "-q",
+                            "-p", "no:cacheprovider"],
+                           cwd=work, capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", timeout=180)
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    for ln in reversed((p.stdout or "").splitlines()):
+        m = re.search(r"(\d+) tests? collected", ln)
+        if m:
+            return int(m.group(1))
+    return None
 
 
 def main() -> int:
@@ -158,15 +192,19 @@ def main() -> int:
     else:
         rows.append(f"[PASS] pack 目录: {total} 个均可访问")
 
-    # ---- 5. 规模计数（只数文件名，不读内容）
+    # ---- 5. 规模计数（现算；文档不得硬编码这些数字，一律指回本段输出）
     tests = os.path.join(work, "tests")
     src = os.path.join(work, "rekit")
     try:
-        names = os.listdir(tests)
-        nt = sum(1 for x in names if x.startswith("test_") and x.endswith(".py"))
-        nv = sum(1 for x in names if x.startswith("verify_") and x.endswith(".py"))
-        nm = sum(1 for x in os.listdir(src) if x.endswith(".py"))
-        rows.append(f"[info] 规模: rekit 模块 {nm} / 测试 {nt} / 验证脚本 {nv}")
+        nm, ml, mn = _py_stats(src)
+        nt, tl, tn = _py_stats(tests, "test_")
+        nv, vl, vn = _py_stats(tests, "verify_")
+        ng = nv - (1 if "verify_gate.py" in os.listdir(tests) else 0)
+        pc = _pytest_collected(work)
+        rows.append(f"[info] 规模: rekit 模块 {nm} / {ml:,} 行（非空 {mn:,}）")
+        rows.append(f"[info] 规模: test {nt} 文件 / {tl:,} 行（非空 {tn:,}）/ pytest 收集 "
+                    f"{pc if pc is not None else 'n/a（采集失败，不阻断）'}")
+        rows.append(f"[info] 规模: verify {nv} 文件 / {vl:,} 行（非空 {vn:,}）/ 门禁 {ng} 套")
     except OSError as e:
         rows.append(f"[WARN] 规模统计失败: {e}")
 

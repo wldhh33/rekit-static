@@ -16,7 +16,7 @@
 01_方法论文档/          工作逻辑与思考流程（总纲）
 02_规则库/              R01–R32 规范定义；R33–R119 规范 + rules.json 机器登记
 03_路线图与章程/        RE-ROADMAP / CHARTER / PROGRESS / CHANGELOG / JSON_CONTRACT（★ PROGRESS 最详实）
-04_rekit项目源码/       rekit 源码 + tests（27 模块 / 25 个 test_*.py / 23 个 verify_*.py）+ pyproject.toml
+04_rekit项目源码/       rekit 源码 + tests（模块数/测试数/verify 套数现算见 pack\tools\status.py）+ pyproject.toml
 05_每日日志/            2026-11-06 ~ 11-15 每日任务卡/知识卡/验证脚本/执行证据
 06_日报docx/            10 期排版日报
 ```
@@ -74,7 +74,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 
 `gate.ps1` 先做前置检查（缺样本 / M19 样本 manifest / 工具链 / junction / dnfile 直接 exit 2，不静默跳过），再按固定顺序执行：
 `ledger_check.py --check` → `tests\evidence_index.py --check` → `verify_gate.py --run`
-（23 套 verify + pytest + ledger）。`-List` 只看计划，`-Only verify_map,verify_iat` 跑子集。
+（全部 verify 套 + pytest + ledger；套数以 `pack\tools\status.py` 现算为准）。`-List` 只看计划，`-Only verify_map,verify_iat` 跑子集。
 
 手动等价步骤：
 

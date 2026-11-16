@@ -7,7 +7,7 @@
 
 - `rekit`：纯 Python 标准库实现的二进制静态分诊/分析工具（PE / ELF / .NET），提供 CLI、Python 模块、MCP 三种用法。
 - 项目性质：每日逆向学习的**载体**。当天没有回流成 `rekit` 模块/规则/测试，当天不算达标。
-- 规模（2026-11-17 U1 交付批次实测）：27 个模块 / 18,720 行；25 个测试文件 / 6,386 行；23 个独立验证脚本 / 9,976 行。
+- 规模（模块数 / 行数 / 测试数 / verify 套数）：**一律现算，本文件不写数字**（R127）。看 `python "pack\tools\status.py"` 的“规模”三行；行数同时给“总行 / 非空行”，避免两种口径各写一个数。
 
 ## 2. 硬约束（不可协商）
 
@@ -32,7 +32,7 @@ python "pack\tools\status.py"
 | 状态摘要（≤20 行） | `python pack\tools\status.py` |
 | 干净克隆恢复（junction + 样本/工具链） | `powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\setup.ps1" -AssetsSource <原工作区根>` |
 | 单命令门禁（推荐，含前置检查） | `powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"`（`-List` 只看计划；前置缺失 exit 2） |
-| 全量门禁（23 套 verify + pytest） | `python pack\tools\verify_gate.py --run`（`--list` 只看计划） |
+| 全量门禁（全部 verify 套 + pytest） | `python pack\tools\verify_gate.py --run`（`--list` 只看计划；套数见 `status.py`） |
 | 全量单测 | `cd "2026-11-15\m3-task-card\work"` 后 `python -m pytest tests -q`（fixture 路径按 cwd 解析，必须在 work 目录跑） |
 | 单个验证脚本 | `python "2026-11-15\m3-task-card\work\tests\verify_disasm.py" --all` |
 | 指纹混淆矩阵 | `python "...\tests\verify_fingerprint.py" --all --matrix` |
@@ -40,7 +40,7 @@ python "pack\tools\status.py"
 
 验证结果统一落在 `work\verification\<run_id>\`（每套一个日志 + `summary.json`，`latest\` 为副本）。
 
-注意：23 个验证脚本的参数面不统一（多数零参数，部分需 `--all` / `--matrix` / `--selftest`），调用前先 `--help` 或读脚本头部。
+注意：各验证脚本的参数面不统一（多数零参数，部分需 `--all` / `--matrix` / `--selftest`），调用前先 `--help` 或读脚本头部。
 
 ## 5. 目录地图（真实路径）
 
@@ -50,10 +50,10 @@ python "pack\tools\status.py"
 |---|---|---|
 | 项目包 | `pack\` | git 仓库根是**工作区根目录** `d:\数据\下载\逆向学习工作体系_2026-11-15`（2026-11-17 初始化，基线 tag `baseline-pre-rename`）；`pack\` 只是其中一目录 |
 | 源码 | `pack\04_rekit项目源码\rekit\` | 2026-11-17 由 mojibake 名改回，见 `pack\PATH_MAP.md` |
-| 测试/验证 | `pack\04_rekit项目源码\tests\` | 25 个 `test_*.py` + 23 个 `verify_*.py` + fixtures |
+| 测试/验证 | `pack\04_rekit项目源码\tests\` | `test_*.py` + `verify_*.py` + fixtures（文件数/行数见 `status.py` 现算） |
 | 方法论 | `pack\01_方法论文档\` | 2026-11-16 从 `tmp\pack` 恢复 |
 | 规则库（旧） | `pack\02_规则库\` | R01–R32，2026-11-16 恢复；R33–R119 只有日志出处 |
-| 规则登记（机器） | `pack\rules.json` | R01–R119 逐条摘录 + 出处 + 互证状态；缺口分析见 `2026-11-16\vibe-coding-review\work\batch3\rules_gap_report.md` |
+| 规则登记（机器） | `pack\rules.json` | R01–R119 摘录 + R120–R127 补录，含出处与互证状态；**条数以 `status.py` 的 `rules registry` 行为准**；缺口分析见 `2026-11-16\vibe-coding-review\work\batch3\rules_gap_report.md` |
 | 数字总账（人读） | `work\outputs\NUMBERS_LEDGER.md` | **唯一权威是 `work\evidence_numbers_ledger.json`**（M13–M20，`ledger_check.py --check` 硬校验）；`evidence_m13_ledger.json` 已降级为历史源，冲突以新 JSON 为准 |
 | 章程/进度 | `pack\03_路线图与章程\` | 内含 CHARTER/PROGRESS/CHANGELOG/RE-ROADMAP（2026-11-17 改名） |
 | 每日日志 | `pack\05_每日日志\` | 2026-11-06 ~ 11-15 |

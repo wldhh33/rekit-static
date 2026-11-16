@@ -9,7 +9,7 @@
 | 磁盘上的旧名（mojibake） | 现用名 | 内容 | 状态 |
 |---|---|---|---|
 | `03_璺?嚎鍥句笌绔犵▼`（`?` 为私用区控制字符 U+E21C） | `03_路线图与章程` | CHARTER / PROGRESS / CHANGELOG / RE-ROADMAP / JSON_CONTRACT | 已改名 2026-11-17 |
-| `04_rekit椤圭洰婧愮爜` | `04_rekit项目源码` | `rekit/`（27 模块）+ `tests/`（25 个 `test_*.py` + 23 个 `verify_*.py` + fixtures）+ `pyproject.toml` / `README.md` | 已改名 2026-11-17 |
+| `04_rekit椤圭洰婧愮爜` | `04_rekit项目源码` | `rekit/` + `tests/`（`test_*.py` / `verify_*.py` / fixtures；数量与行数见 `pack\tools\status.py` 现算）+ `pyproject.toml` / `README.md` | 已改名 2026-11-17 |
 | `05_姣忔棩鏃ュ織` | `05_每日日志` | 2026-11-06 ~ 11-15 | 已改名 2026-11-17 |
 | `06_鏃ユ姤docx` | `06_日报docx` | 10 期 docx | 已改名 2026-11-17 |
 
