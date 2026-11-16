@@ -205,7 +205,7 @@
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m19_sigblob.json",
       "role": "M19 签名语义层 dnfile 字节 + SRM canonical 对账",
-      "sha256": "e46e4a577e92ee3bd045aee549225c350c4a2623e71574fcbd0c22977fd7b85a"
+      "sha256": "4696d19c3a4d3768b4795acc92681fb248f8d83da698a340850614e79110f7cf"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m20_layout.json",

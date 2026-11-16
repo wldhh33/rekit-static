@@ -48,6 +48,18 @@ SAMPLES = (("rekit", REKIT), ("flow", FLOW),
 LIST_OF = (("methods", "MethodDef"), ("memberrefs", "MemberRef"),
            ("standalonesigs", "StandAloneSig"), ("fields", "Field"))
 
+
+def _evidence_path(p):
+    """证据里的路径必须与克隆位置无关：work 内写相对路径（/ 分隔）；
+    仓库外样本（mscorlib / System.Console）保留绝对路径。绝对路径进证据会让
+    sha256 随克隆目录变化，ledger_check 在异地克隆必然 FAIL。"""
+    try:
+        rel = os.path.relpath(p, WORK)
+    except ValueError:
+        return p
+    return rel.replace(os.sep, "/") if not rel.startswith("..") else p
+
+
 CHECKS = []
 
 
@@ -464,7 +476,7 @@ def main():
                                  else " 首条=" + mprobs[0]["line"]))
         den = rep["denominators"]
         evidence[tag] = {
-            "path": path,
+            "path": _evidence_path(path),
             "denominators": {k: den[k] for k in
                              ("MethodDef", "MemberRef", "StandAloneSig",
                               "Field", "identity_ok", "ratios")},

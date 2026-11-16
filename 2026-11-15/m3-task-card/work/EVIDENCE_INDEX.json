@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_at": "2026-11-17T02:55:23",
+ "generated_at": "2026-11-17T03:03:52",
  "work_dir": "2026-11-15/m3-task-card/work",
  "rules": {
   "coverage": "work/evidence_* 每个文件都必须在 entries 中",
@@ -1015,9 +1015,9 @@
    "sections_kind": "text_headings"
   },
   "evidence_m19_sigblob.json": {
-   "sha256": "e46e4a577e92ee3bd045aee549225c350c4a2623e71574fcbd0c22977fd7b85a",
-   "size": 17329,
-   "mtime": "2026-11-17T02:36:33",
+   "sha256": "4696d19c3a4d3768b4795acc92681fb248f8d83da698a340850614e79110f7cf",
+   "size": 17145,
+   "mtime": "2026-11-17T03:03:44",
    "run_id": null,
    "run_ids": [
     "20261117T010924-0a7b",
@@ -2158,9 +2158,9 @@
    "sections_kind": "text_headings"
   },
   "evidence_numbers_ledger.json": {
-   "sha256": "6f42a214b5ce16ff39ca005ed25e202409cbcf935d1763ffcac0fb1e9655f9a2",
+   "sha256": "9a8c6881dd1da5f307b168c272b8e9e5373be4846d8e1cb908aae4a398f9bded",
    "size": 6640,
-   "mtime": "2026-11-17T02:55:19",
+   "mtime": "2026-11-17T03:03:48",
    "run_id": "20261116T235937-c6ff",
    "run_ids": [
     "20261116T235937-c6ff"
