@@ -10,28 +10,26 @@
 - 独立对拍（期望值不取被测实现）：dnfile 三表原始列值 287 行、dnfile RVA→文件偏移 131 行、源码真值 16 项（`.il` 的 `.pack/.size/.field [N]/.data`、`.cs` 的 `[FieldOffset]/[StructLayout]`/数组初始化器）、`__StaticArrayInitTypeSize=N` 与 ClassSize/推导长度 121 行，**全部 0 不一致**。
 - `tests\verify_layout.py` 首版即带可失败自证（工件=注入 ID + 基线 + 观察到失败行），5 类注入全检出 + 空比对判 FAIL；**28 项（PASS 27 / SKIP 1）**。证据 `work\evidence_m20_layout.json`。
 - **M19（.NET 签名语义层 `sigblob`）已收口（2026-11-17）**：方法签名 32,518 / 字段 911 / 局部 3,974；可读 blob 37,403，解码率 100.0000%，unknown 0；dnfile 字节边界 52,403 行、SRM canonical 37,403 行、M17 交叉 29,728 行全 0 不一致。定标②偏离已登记：dnfile 无签名 API，改 SRM（`tests\sigref.ps1`，pwsh 缺失即 `env_missing` exit 2）。证据 `work\evidence_m19_sigblob.json`。
-- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（run `20261117T014558-2b7c`，`VERDICT: PASS exit=0`；收口 run 为 `20261117T013424-1713`）。总账 **10 小节 / 98 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`。
+- **门禁当前态**：全量 **23 套 PASS**、pytest **554 passed**、`ledger_check --check` PASS（U1 收口 run `20261117T023235-f180`，经 `gate.ps1` 实跑，`GATE: PASS exit=0`）。总账 **10 小节 / 98 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`。
 - **治理当前态**：`pack\` 已 git 初始化（基线 tag `baseline-pre-rename`）；4 个 mojibake 目录已改名、`work` 下 junction 已重建（`pack` 7 个目录均可访问）；`pack\rules.json` 119 条；`pack\tools\status.py` 硬判 HANDOFF/verification/ledger。
 - 文档漂移已修（本轮实测）：`pack\AGENTS.md` 规模改 **27 模块 / 18,600 行**；`CHARTER.md` 补 M20 行与转段触发器 T1–T5（**T1/T4 已命中**，T1 曾被误读为需两个条件同时满足，已更正并留记录）。
+- **U1 收口（2026-11-17）**：`v0.1.0` 由 `5fbb421` 移至 `d63d244`（含 U1-a + U1-b；worktree 检出该提交后 ledger/evidence_index 双 PASS）；新增单命令门禁 `pack\tools\gate.ps1`（preflight fail-fast + ledger → evidence_index → verify_gate）；`.github\workflows\gate.yml` 为**未验证**草稿（仅手动触发，从未运行）；新增规则 **R126**；`evidence_index.repo_root()` 修掉 junction 入口多算一级目录的 bug。
 
 ## 2. 未完成清单
 
-M20 之后**不再开下一层**，下一步是交付型批次，由用户另排：
+U1 交付批次已全部落地（打包 / console entry / 示例 / 证据索引 / R95 7 样本 / `v0.1.0`）。仍未做：
 
-| 批次项 | 内容 | 前置 |
-|---|---|---|
-| 打包 | 可安装/可分发形态（纯标准库，不引运行时依赖） | 需先定"包子集"（`cli.py` 入口 + 被 import 的模块闭包） |
-| console entry | 安装后 `rekit` 命令可用；当前只有 `python -m rekit.cli` | 同上 |
-| 示例 | 命令行示例与输出样例（含 .NET 纵切面：`dotnet`/`ilflow`/`sigblob`/`layout`） | 交付形态定稿后 |
-| 证据索引 | 把 `work\evidence_*.json|log` 按里程碑建索引，标明可复跑命令 | 无 |
-| R95 七个样本登记 | R95 要求的 7 个样本补进 `m9_sample_manifest.json`（sha256/许可/可再分发） | 需确认样本来源 |
-| 打 v0.1.0 | tag 与发布说明 | 以上完成且全量门禁绿 |
+| 项 | 状态 / 前置 |
+|---|---|
+| 真 CI | `.github\workflows\gate.yml` 只是未验证草稿（无远端、从未触发）；启用与远端推送留 U2 |
+| 122 条 null run_id | **不回填**（不猜来源）；新证据按 `AGENTS.md` §8 的 run_id 约定落盘，避免缺口扩大 |
+| v0.1.0 覆盖范围 | tag 停在 `d63d244`；U1 收口补件（`gate.ps1`、文档、R126）在其后提交，**未包含在 tag 内** |
+| 下一条命令 | 本文件 §6；全量用 `gate.ps1`（约 8 分钟） |
 
 非源码类、尚未做：
 
-- `pack\README.md` 过期内容（"73 断言 / 5 模块 / `cd 04_rekit项目源码`"）未修 —— 交付批次一并处理，避免与包结构改动打架。
-- `pack\02_规则库\规则库_R33-R119.md` 余 3 条「材料不足」（R49/R93/R110）与 6 条待确认，见 `2026-11-16\vibe-coding-review\work\batch4\human_decisions.md`。
-- 工作树有 5 个与本轮无关的既有改动（`2026-11-16\vibe-coding-review\...`、`pack\02_规则库\规则库_R33-R119.md`、`pack\rules.json`），属 R103/B4 前序工作，**不要夹带进 M20 提交**。
+- `pack\02_规则库\规则库_R33-R119.md` 余 3 条「材料不足」（R49/R93/R110）与 6 条待确认，见 `2026-11-16\vibe-coding-review\work\batch4\human_decisions.md`；R120–R126 已建索引（附录 E），尚未回填主表。
+- 工作树有 4 个与本轮无关的既有改动（`2026-11-16\vibe-coding-review\...`），属 R103/B4 前序工作，**不要夹带进收口提交**。
 
 ## 3. 已否决方案
 
@@ -46,15 +44,17 @@ M20 之后**不再开下一层**，下一步是交付型批次，由用户另排
 ## 4. 待确认问题
 
 1. **T4 已命中**（CHARTER 转段触发器）：本轮已出现"要给别人一条可复现命令"的需求雏形——`verify_layout.py` 依赖 `powershell` 跑运行期 oracle，别人拿到仓库无法直接复跑；交付批次必须给出可复现命令或明确标注环境前置。
-2. R95 七个样本的口径：是指定 7 个具体样本（哪 7 个？），还是 7 类样本（中型 ELF/PE/跳板密集/插件式/未 strip MSVC+PDB…）？登记前需确认。
+2. R95 七个样本的口径：**已定案**为 7 个具体 fixture（`dyn_nopie`/`dyn_static`/`dyn_execstack`/`dyn_norelro`/`minipe.exe`/`minidll.dll`/`minipe_fakerich.exe`），见 `work\fixtures_sample_manifest.json`；18/25 → 25/25。
 3. v0.1.0 的"可分发"边界：`tests\fixtures\cli-64.exe` 出处不明（`AGENTS.md` 已标"不可再分发"），发布包必须排除，但仓库是否保留待定。
 4. `verify_layout.py` 的 SKIP 1（System.Console 的 `FieldRVA=0`）是否需要在交付批次补一个"零行表"负样本，目前由聚合分母兜底。
+5. tag 覆盖范围：`v0.1.0` 停在 `d63d244`，U1 收口补件（`gate.ps1`/文档/R126）在 tag 之后。若要把补件纳入发布，只能再移一次 tag（会覆盖本次重定位记录，不建议）；当前口径是"tag 标代码交付，收口补件单列"。
 
 ## 5. 新增证据文件
 
 - `work\evidence_m20_layout.json` —— M20 三表逐行明细、分母恒等式、长度来源、运行期 oracle、静态结论边界。
 - `work\evidence_m19_sigblob.json` —— M19 签名解码与三方对拍（dnfile 字节 / SRM canonical / M17 交叉）。
 - `work\verification\20261117T013424-1713\`、`work\verification\20261117T014558-2b7c\` —— M20 收口与文档定稿后复跑的全量门禁（23 套日志 + vharness.json + pytest.log + summary.json）。
+- `work\verification\20261117T023235-f180\` —— U1 收口后经 `pack\tools\gate.ps1` 实跑的全量门禁（23 套日志 + vharness.json + pytest.log + summary.json）。
 - `work\outputs\NUMBERS_LEDGER.md` §15/§16 —— M19/M20 数字人读镜像；权威 `work\evidence_numbers_ledger.json`。
 - `work\outputs\TASK_m18_ilflow.md`、`outputs\m19_sigblob\`、`outputs\m20_layout\` —— 任务卡与受控样本源码（`.il`/`.cs`/`gen.ps1`）+ `spec.md`（静态/运行期边界）。
 - `2026-11-16\vibe-coding-review\work\batch1..batch4\` —— 治理批次（HANDOFF 协议/门禁/规则/总账）证据，未受本轮影响。
@@ -63,9 +63,9 @@ M20 之后**不再开下一层**，下一步是交付型批次，由用户另排
 
 ```powershell
 python "pack\tools\status.py"
-python "pack\tools\verify_gate.py" --list
+powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1" -List
 ```
 
-期望：`HANDOFF: 6/6 段非空`、`pack 目录: 7 个均可访问`、`verification/latest: PASS scope=all`、`numbers ledger: PASS`、`git: 已初始化`、末行 `VERDICT: PASS exit=0`。
-要跑全量再执行 `python "pack\tools\verify_gate.py" --run`（约 8 分钟，23 套 + pytest + ledger）。
+期望：`HANDOFF: 6/6 段非空`、`pack 目录: 7 个均可访问`、`verification/latest: PASS scope=all`、`numbers ledger: PASS`、`git: 已初始化`、`GATE: PASS exit=0`。
+要跑全量再执行不带 `-List` 的同一条命令（约 8 分钟，23 套 + pytest + ledger；preflight 缺项会 exit 2，先恢复样本/工具链，不要绕过）。
 若退出码为 1：先按本文件模板补齐 HANDOFF、修 ledger 漂移或重跑门禁，不要绕过。

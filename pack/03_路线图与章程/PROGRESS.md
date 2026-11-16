@@ -385,4 +385,15 @@
 - R95 补登记：`work/fixtures_sample_manifest.json` 登记 7 个 `tests/fixtures`（`dyn_nopie`/`dyn_static`/`dyn_execstack`/`dyn_norelro`/`minipe.exe`/`minidll.dll`/`minipe_fakerich.exe`），sha256/size 现算；仓库内无许可文件 → 一律 `license=unknown` + `redistributable=false` + `local_only=true`；来源未留档的写「构造方式未经本表验证」，不编造 gcc 参数。R95 口径由 **18/25 改为 25/25**（`rules.json` 与规则库三处同步，同时保留 2026-11-16 的 18/25 历史观测）。
 - 回归：`--write` 后 `--check` PASS（129/129，sha 全一致）；全量门禁保持 23/23 + pytest 554 + ledger PASS（本步只新增脚本与登记表，未改任何既有 verify 判据）。
 
+### 2026-11-17 U1 收口 — tag 重定位 / 单命令门禁 / R126（不占里程碑号）
+
+- **`v0.1.0` 重定位**：原指向 `5fbb421`（仅 U1-a），移至 `d63d244`（U1-a + U1-b 完整交付）。仓库无远端、未推送，无下游影响；原指向与原因写进 tag 说明，本文件与 `CHANGELOG.md` 同时留痕，未抹除。用 `git worktree` 检出 `d63d244` 实跑：`ledger_check --check` PASS（10 小节/10 证据/98 数字）、`evidence_index --check` PASS（129/129），即 tag 树可跑门禁。
+- **单命令门禁 `pack\tools\gate.ps1`**：按脚本自身位置定位仓库根，preflight 检查 Python 3.8+、`work` 与 3 个 junction、samples（m9/m17/m18/m20）、binutils、`powershell`+`pwsh`；缺任一即 exit 2 且**不执行任何验证**。通过后固定顺序：`ledger_check --check` → `evidence_index --check` → `verify_gate --run`。`-List`/`-Only` 透传。实测 `-List` 在 Windows PowerShell 5.1 与 pwsh 7 下均 exit 0。
+- **README 三条事实**：样本与工具链被 `.gitignore` 排除需先恢复（不提供假的自动下载）；pytest 必须在 `work` 目录跑；.NET 运行期 oracle 仅 Windows（`verify_layout` 用 Windows PowerShell CLR、`verify_sigblob` 用 pwsh 7 SRM，另需 `dnfile`）。
+- **`.github/workflows/gate.yml`**：仅 `workflow_dispatch`，文件头与 README 均标注「**未验证**：无远端、从未被 GitHub Actions 触发」；只跑不依赖样本的 `ledger_check` 与 `evidence_index`，不冒充全量 CI。
+- **门禁前置暴露并修掉一个真 bug**：`evidence_index.repo_root()` 从 `work\tests` junction 入口进入时会多算一级 `2026-11-15`；改为先 `realpath` 再取四层父目录，两种入口均 129/129 PASS。
+- **R126**：把「环境脏导致假通过」写成规则——`test_ilflow` 调 `python -m rekit` 而源码缺 `__main__.py`，此前靠残留旧安装偶然通过；检测手段=干净安装后立即跑测试 / 显式断言入口可执行。用户建议的 R123 已被 M20 占用，落号 **R126**（规则库附录 E 留痕）。
+- **run_id 落盘约定**：历史 122 条 `null` 维持不回填；新证据首行写 `run_id: <id>`，或出现在 `work/verification/<run_id>/summary.json` 清单里，`evidence_index` 据此归因。约定写入 `HANDOFF.md` 与 `AGENTS.md`。
+- 回归：`gate.ps1` 实跑 run `20261117T023235-f180` = **23/23 套 + pytest 554 passed + ledger PASS + `GATE: PASS exit=0`**；preflight 16 项全 OK。
+
 

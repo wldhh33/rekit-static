@@ -36,8 +36,9 @@ MAX_SECTIONS = 100
 
 def repo_root():
     # tests/ -> 04_rekit项目源码/ -> pack/ -> 工作区根
-    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
+    # 先 realpath 解析目录联接：work\tests 是 junction，从该入口进来会多一级 2026-11-15
+    here = os.path.realpath(os.path.abspath(__file__))
+    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(here))))
 
 
 def work_dir(root):

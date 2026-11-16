@@ -30,6 +30,7 @@ python "pack\tools\status.py"
 | 目的 | 命令 |
 |---|---|
 | 状态摘要（≤20 行） | `python pack\tools\status.py` |
+| 单命令门禁（推荐，含前置检查） | `powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"`（`-List` 只看计划；前置缺失 exit 2） |
 | 全量门禁（23 套 verify + pytest） | `python pack\tools\verify_gate.py --run`（`--list` 只看计划） |
 | 全量单测 | `cd "2026-11-15\m3-task-card\work"` 后 `python -m pytest tests -q`（fixture 路径按 cwd 解析，必须在 work 目录跑） |
 | 单个验证脚本 | `python "2026-11-15\m3-task-card\work\tests\verify_disasm.py" --all` |
@@ -61,6 +62,7 @@ python "pack\tools\status.py"
 | 样本 | `work\samples\` | 约 99 MB；`tests\samples`、`tests\fixtures` 另有小样本 |
 
 `pack` 与 `work\pack03` 的 CHARTER/PROGRESS/CHANGELOG：**内容相同**，编辑时先确认改哪一份，改完同步另一份。
+`.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `d63d244`，其后是 U1 收口补件。
 
 ## 6. 环境怪癖（已知，不是 bug）
 
@@ -88,6 +90,7 @@ python "pack\tools\status.py"
 ## 8. 证据与提交约定
 
 - 证据命名：`work\evidence_<milestone>_<suite>.<log|json>`；全量验证结果放 `work\verification\<run_id>\`。
+- **新证据必须带来源 run_id**（2026-11-17 起）：文件首行写 `run_id: <YYYYMMDDTHHMMSS-xxxx>`；没有来源时写 `run_id: none` + 一句原因。凡由 `verify_gate` / `vharness` 产生的证据，还必须出现在 `work\verification\<run_id>\summary.json` 的文件清单里。`tests\evidence_index.py` 只认证据（唯一 run 归因 / 多 run 记 `ambiguous` / 无则 `null`）；**历史 122 条 `null` 不猜、不回填**。
 - 每次收口必须有：pytest 结果、全部验证脚本的 exit code、更新后的 `HANDOFF.md`。
 - git 初始化后：一次提交只做一件事；提交信息格式 `[O2] verify_all: 包装 verify_map`。
 - 代码风格：标准库优先，不引入运行时依赖；注释只在逻辑不自明处写。

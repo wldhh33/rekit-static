@@ -32,22 +32,56 @@ readelf/objdump/pefile/ildasm 等权威工具交叉验证。三种用法：CLI /
 
 ## 安装与复现验收
 
+一条命令（推荐；Windows PowerShell 5.1 或 pwsh 7 均可）：
+
 ```powershell
-# 安装（在 pack\04_rekit项目源码 目录内；之后任意目录可用 rekit 命令）
-python -m pip install -e .
-
-# 一条命令跑全部（23 套 verify + pytest），约 7.2 分钟
-python "pack\tools\verify_gate.py" --run        # --list 只看计划
-
-# 或单独跑（pytest 必须在 work 目录执行：tests 是目录联接，fixture 路径按 cwd 解析）
-cd "2026-11-15\m3-task-card\work"
-python -m pytest tests -q
-python "tests\verify_disasm.py" --all
+powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 ```
 
-依赖：Python 3.8+ 纯标准库即可跑全部功能（构建期需要 setuptools；pefile/ildasm/objdump 仅交叉验证用到，缺失自动跳过）。
-objdump 需要 GNU binutils，且含中文路径时必须 `LC_ALL=C`（`verify_gate.py` 已自动处理）。
+`gate.ps1` 先做前置检查（缺样本 / 工具链 / 目录联接直接 exit 2，不静默跳过），再按固定顺序执行：
+`ledger_check.py --check` → `tests\evidence_index.py --check` → `verify_gate.py --run`
+（23 套 verify + pytest + ledger，约 7–8 分钟）。`-List` 只看计划，`-Only verify_map,verify_iat` 跑子集。
+
+手动等价步骤：
+
+```powershell
+python -m pip install -e .          # 在 pack\04_rekit项目源码 内执行；之后任意目录可用 rekit 命令
+python "pack\tools\verify_gate.py" --run
+
+cd "2026-11-15\m3-task-card\work"   # pytest 必须在 work 目录执行：tests 是目录联接，fixture 路径按 cwd 解析
+python -m pytest tests -q
+```
+
+**跑之前必须知道的三件事（本脚本会逐项检查）**
+
+1. **样本与工具链不在仓库里**：`.gitignore` 排除了 `2026-11-15\m3-task-card\work\samples\`
+   与 `2026-11-15\m2-task-card\work\tools\`（binutils 2.47 / upx 5.3.0）。fresh clone 后必须先从
+   原始副本恢复，否则 `gate.ps1` 前置检查直接 exit 2。仓库**不提供自动恢复脚本**——这些二进制
+   没有可公开校验的来源，写一个假的下载地址不如明确说“跑不了，先恢复”。
+2. **pytest 的 cwd 是硬约束**：必须在 `2026-11-15\m3-task-card\work` 下执行；从仓库根跑会因
+   `tests/fixtures` 相对路径解析失败而大面积报错。`gate.ps1` 与 `verify_gate.py` 已代为切换。
+3. **.NET 运行期 oracle 仅 Windows**：`verify_layout.py` 需要 `powershell`（Windows PowerShell 5.1
+   的 CLR），`verify_sigblob.py` 需要 `pwsh` 7 的 `System.Reflection.Metadata`；另需 Python 包
+   `dnfile`。缺失时对应套报 `env_missing`（exit 2），不静默跳过。
+
+依赖：Python 3.8+ 纯标准库即可跑全部功能（构建期需要 setuptools；pefile / dnfile / ildasm / objdump
+仅交叉验证用到，缺失自动跳过或 `env_missing`）。objdump 需要 GNU binutils，且含中文路径时必须
+`LC_ALL=C`（`verify_gate.py` 已自动处理）。
 
 **路径垫片**：部分老测试硬编码 `<旧仓库根>`，Windows 上依赖目录联接
 `<旧仓库根> → pack\04_rekit项目源码`。没有垫片时 **pytest** 会大面积失败；
 安装后的 `rekit` 命令与 `python -m rekit.cli` **不受影响**。移动 `04_rekit项目源码` 后必须重建该垫片。
+
+## 版本与 tag
+
+- `v0.1.0` → `d63d244`（U1-a 打包 + U1-b 证据索引 / R95 补登记的完整交付）。
+- **重定位记录（2026-11-17）**：tag 最初指向 `5fbb421`（仅 U1-a）；因证据索引与 R95 样本登记在其后的
+  `d63d244`，本次移至 `d63d244`。仓库无远端、未推送，无下游影响；原指向与原因保留在 tag 说明、
+  `CHANGELOG.md` 与 `PROGRESS.md`，未抹除。
+- U1 收口补件（`pack\tools\gate.ps1`、本节文档、R126）在 tag 之后的提交里，**未包含在 `v0.1.0` 内**。
+
+## CI 状态
+
+**没有已启用的 CI**。`.github/workflows/gate.yml` 是**未验证**草稿：本仓库无 git 远端、该文件
+**从未被 GitHub Actions 实际触发过**。它只跑不依赖样本的两项（`ledger_check --check`、
+`evidence_index --check`），全量门禁仍需本机按上面的命令执行。不要把该文件当成“CI 已绿”的证据。
