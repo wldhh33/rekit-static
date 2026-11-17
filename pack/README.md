@@ -50,7 +50,8 @@ r = parse_pe(r"tests\fixtures\minipe.exe")   # dict：machine / entry / sections
 
 **前置（Windows 10/11）**
 
-- Python 3.8+；安装交叉验证依赖：`python -m pip install dnfile pefile`。
+- **支持的 Python 版本**：3.8+（实测 CPython 3.8.20 与 3.14.0；依据与复跑命令见「只装 wheel」节）。
+  安装交叉验证依赖：`python -m pip install dnfile pefile`。
   `dnfile` 是**必需**的：`verify_sigblob` / `verify_layout` 缺它即 `env_missing`（exit 2）→ 门禁 FAIL。
   `pefile` 只影响 pytest 里少量 pefile 交叉断言（缺了会 skip），建议一并装。
 - `powershell`（Windows PowerShell 5.1）与 `pwsh`（PowerShell 7）：.NET 运行期 oracle 用。
@@ -139,6 +140,18 @@ rekit ilflow <绝对路径的 .NET dll> --json
 | `samples\`（含 .NET 样本） | `dotnet`/`ilflow`/`layout`/`sigblob` 需自备 .NET 文件 | 样本被 `.gitignore` 排除，不是运行时资产 |
 | `gate.ps1` / `setup.ps1` / `work\` 脚本 | 门禁与资产恢复不可用 | 属于仓库交付物 |
 | `coverage` 命令 | 需要外部 `objdump`（GNU binutils） | 调 PATH 里的工具，不是 pip 依赖 |
+
+**Python 版本是实测的，不是扫了一遍**
+
+- `requires-python = ">=3.8"` 的依据：在 CPython **3.8.20**（uv 独立构建，非系统 Python）上新建
+  venv、装 wheel，跑通 `rekit --help`、`rekit info`（PE / ELF / .NET）、`rekit ilflow`（.NET）
+  与 `import rekit.api`，退出码均为 0。全量门禁（verify 套 + pytest）在 **3.14.0** 上跑。
+- 复跑（仓库外）：`uv python install 3.8` → `py -3.8 -m venv <dir>` →
+  `<dir>\Scripts\pip install --no-index --no-deps dist\rekit-0.1.0-py3-none-any.whl` →
+  `<dir>\Scripts\rekit info <PE> --json`（其余命令同上）。
+- `tests\verify_dist.py` 把 pyproject、本 README、`LIBRARY_API.md` 三处「支持的 Python 版本」
+  与 wheel 的 `Requires-Python` 逐字比对，不一致即 FAIL；`meta.py38scan` 的静态扫描只作参考，
+  **不作承诺**。
 
 **路径垫片（2026-11-17 起不再需要）**：旧测试曾硬编码 `<旧仓库根>`，
 依赖 `<旧仓库根>\...` 目录联接；且 Windows 上 `/home/...` 按**当前盘符根**解析，克隆在 C: 时

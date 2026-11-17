@@ -33,10 +33,28 @@
    "detail": "Requires-Dist=[]"
   },
   {
-   "id": "meta.python",
-   "name": "METADATA Requires-Python 与 pyproject 一致",
+   "id": "meta.python.doc",
+   "name": "pyproject / README / LIBRARY_API 的 Python 版本声明一致",
    "status": "PASS",
-   "detail": "Requires-Python=['>=3.8']"
+   "detail": "声明={'pyproject': '3.8', 'README': '3.8', 'LIBRARY_API': '3.8'}"
+  },
+  {
+   "id": "meta.python",
+   "name": "METADATA Requires-Python 与文档声明一致",
+   "status": "PASS",
+   "detail": "METADATA=['>=3.8'] 声明='3.8'"
+  },
+  {
+   "id": "interp.satisfies",
+   "name": "当前解释器满足文档声明的最低版本",
+   "status": "PASS",
+   "detail": "当前=3.14 声明>=3.8"
+  },
+  {
+   "id": "meta.python.selfproof",
+   "name": "版本比对器可失败自证（伪造版本/空声明必须不等）",
+   "status": "PASS",
+   "detail": "正确=匹配 伪造>=99.0=不等 空声明=不等"
   },
   {
    "id": "meta.entry",
@@ -46,7 +64,7 @@
   },
   {
    "id": "meta.py38scan",
-   "name": "requires-python>=3.8 静态扫描未发现 3.9+ 语法/API",
+   "name": "文档声明的下限之上无 3.9+ 语法/API（仅静态扫描，不作承诺）",
    "status": "PASS",
    "detail": "命中=无（范围：语法/注解/3.9+ 专属 API，不含运行时行为）"
   },
@@ -229,6 +247,12 @@
    ">=3.8"
   ],
   "requires_dist": [],
+  "declared_python": "3.8",
+  "declaration_sources": {
+   "pyproject": "3.8",
+   "README": "3.8",
+   "LIBRARY_API": "3.8"
+  },
   "cases": [
    {
     "case": "info.pe",

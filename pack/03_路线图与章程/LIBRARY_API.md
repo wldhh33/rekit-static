@@ -112,6 +112,11 @@ python "pack\04_rekit项目源码\examples\dotnet_report.py" "2026-11-15\m3-task
 所以 wheel 与 sdist 都只含 `rekit/**`（+ 元数据）。构建产物（`dist/`、`build/`）
 由 `.gitignore` 覆盖，不入库。
 
+- **支持的 Python 版本**：3.8+（实测 CPython 3.8.20：wheel 安装 + `--help` / `info`
+  （PE/ELF/.NET）/ `ilflow`（.NET）/ `import rekit.api` 全通；门禁与全量 pytest 在 3.14.0 上跑）。
+  `requires-python` 的依据是这次实测，**不是静态扫描**；`tests\verify_dist.py` 把 pyproject、
+  README、本文件的声明与 wheel 的 `Requires-Python` 逐字比对，不一致即 FAIL。
+
 ```powershell
 cd pack\04_rekit项目源码
 python -m pip install build setuptools

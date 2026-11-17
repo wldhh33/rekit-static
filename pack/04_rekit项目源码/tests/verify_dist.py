@@ -72,6 +72,12 @@ UNAVAILABLE = [
      "why": "调用 PATH 里的 objdump，不是 pip 依赖，无法写进 dependencies"},
 ]
 
+PACK = os.path.dirname(SRC)
+README = os.path.join(PACK, "README.md")
+LIBAPI = os.path.join(PACK, "03_路线图与章程", "LIBRARY_API.md")
+# 文档里唯一的版本声明行：`- **支持的 Python 版本**：3.8+（实测 …）`
+DECL_RE = re.compile(r"支持的 Python 版本\*\*[：:]\s*(\d+\.\d+)\+")
+
 CHECKS = []
 
 
@@ -189,6 +195,27 @@ def _banned(paths):
             if any(seg in parts for seg in p.replace("\\", "/").split("/"))]
 
 
+def _declared_python():
+    """从 pyproject 与两份文档读取「最低 Python 版本」，返回 {来源: '3.8'|None}。"""
+    vals = {}
+    with open(os.path.join(SRC, "pyproject.toml"), encoding="utf-8") as f:
+        m = re.search(r'requires-python\s*=\s*">=(\d+\.\d+)"', f.read())
+    vals["pyproject"] = m.group(1) if m else None
+    for label, path in (("README", README), ("LIBRARY_API", LIBAPI)):
+        try:
+            with open(path, encoding="utf-8") as f:
+                m = DECL_RE.search(f.read())
+            vals[label] = m.group(1) if m else None
+        except OSError:
+            vals[label] = None
+    return vals
+
+
+def _meta_matches(req_py, decl):
+    """METADATA 的 Requires-Python 是否等于文档声明（空声明一律不成立）。"""
+    return decl is not None and req_py == [">=" + decl]
+
+
 def main():
     missing = [p for p in (PE, ELF, DOTNET) if not os.path.isfile(p)]
     if missing:
@@ -254,13 +281,31 @@ def main():
              req_dist == [] and "dependencies = []" in open(
                  os.path.join(SRC, "pyproject.toml"), encoding="utf-8").read(),
              "Requires-Dist=%r" % (req_dist,))
-        _add("meta.python", "METADATA Requires-Python 与 pyproject 一致",
-             req_py == [">=3.8"], "Requires-Python=%r" % (req_py,))
+        decl = _declared_python()
+        minpy = decl.get("pyproject")
+        _add("meta.python.doc", "pyproject / README / LIBRARY_API 的 Python 版本声明一致",
+             None not in decl.values() and len(set(decl.values())) == 1,
+             "声明=%r" % (decl,))
+        _add("meta.python", "METADATA Requires-Python 与文档声明一致",
+             _meta_matches(req_py, minpy), "METADATA=%r 声明=%r" % (req_py, minpy))
+        try:
+            cur = tuple(int(x) for x in minpy.split("."))
+        except (AttributeError, ValueError):
+            cur = None
+        _add("interp.satisfies", "当前解释器满足文档声明的最低版本",
+             cur is not None and sys.version_info[:2] >= cur,
+             "当前=%d.%d 声明>=%s" % (sys.version_info[0], sys.version_info[1], minpy))
+        _add("meta.python.selfproof", "版本比对器可失败自证（伪造版本/空声明必须不等）",
+             _meta_matches([">=" + (minpy or "")], minpy)
+             and not _meta_matches([">=99.0"], minpy)
+             and not _meta_matches([], None),
+             "正确=匹配 伪造>=99.0=不等 空声明=不等")
         _add("meta.entry", "console script `rekit = rekit.cli:main`",
              "rekit = rekit.cli:main" in eps, eps.strip().replace("\n", " | "))
         hits = _py39_hits(os.path.join(SRC, "rekit"))
-        _add("meta.py38scan", "requires-python>=3.8 静态扫描未发现 3.9+ 语法/API",
-             not hits, "命中=%s（范围：语法/注解/3.9+ 专属 API，不含运行时行为）"
+        _add("meta.py38scan", "文档声明的下限之上无 3.9+ 语法/API（仅静态扫描，不作承诺）",
+             not hits and minpy is not None and tuple(int(x) for x in minpy.split(".")) < (3, 9),
+             "命中=%s（范围：语法/注解/3.9+ 专属 API，不含运行时行为）"
              % (hits or "无"))
 
         # ---- (c) 仓库外干净 venv 安装 wheel
@@ -366,6 +411,8 @@ def main():
             "wheel_files": len(wnames), "sdist_files": len(snames) + 1,
             "wheel_top": wtop, "sdist_top": stop,
             "requires_python": req_py, "requires_dist": req_dist,
+            "declared_python": minpy,
+            "declaration_sources": decl,
             "cases": case_ev,
         })  # noqa: E501
     finally:
