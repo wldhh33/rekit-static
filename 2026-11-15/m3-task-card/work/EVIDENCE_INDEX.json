@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_at": "2026-11-17T03:47:01",
+ "generated_at": "2026-11-17T13:14:45",
  "work_dir": "2026-11-15/m3-task-card/work",
  "rules": {
   "coverage": "work/evidence_* 每个文件都必须在 entries 中",
@@ -10,6 +10,23 @@
   "sections": "JSON 取顶层键；文本取标题行（§ / # / === 形式）"
  },
  "entries": {
+  "evidence_api_parity.json": {
+   "sha256": "0d9ecc2b9e32ceb7aa6fdb4de626599581b9d7c982e03fce330badabc2682199",
+   "size": 4854,
+   "mtime": "2026-11-17T13:13:21",
+   "run_id": null,
+   "run_ids": [],
+   "run_id_source": "not_found",
+   "sections": [
+    "schema",
+    "status",
+    "checks",
+    "samples",
+    "cli",
+    "compared"
+   ],
+   "sections_kind": "json_top_level_keys"
+  },
   "evidence_cfg_2026-11-15.log": {
    "sha256": "947c7cb0c416464d78ee985808517468b2d3b8cc28fe422e9375e0b4c615f4ee",
    "size": 8477,
@@ -633,7 +650,7 @@
   "evidence_m15_funcreport.json": {
    "sha256": "e26c86608fb86fbbe8ba185dff83176a3bd16decbfe1c2e48f8a8872eb7da369",
    "size": 3530,
-   "mtime": "2026-11-17T03:15:47",
+   "mtime": "2026-11-17T04:20:24",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -647,7 +664,10 @@
     "20261117T021100-746c",
     "20261117T021944-26c9",
     "20261117T023235-f180",
-    "20261117T031307-aa41"
+    "20261117T031307-aa41",
+    "20261117T034706-6f29",
+    "20261117T040139-2ff9",
+    "20261117T041745-7725"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -693,7 +713,7 @@
   "evidence_m16_datarefs.json": {
    "sha256": "a1d7961f1b3faaff26f123401d73566c44beabb70e19d897daeb4b6b23f750e9",
    "size": 4132,
-   "mtime": "2026-11-17T03:14:14",
+   "mtime": "2026-11-17T04:18:51",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -707,7 +727,10 @@
     "20261117T021100-746c",
     "20261117T021944-26c9",
     "20261117T023235-f180",
-    "20261117T031307-aa41"
+    "20261117T031307-aa41",
+    "20261117T034706-6f29",
+    "20261117T040139-2ff9",
+    "20261117T041745-7725"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -754,7 +777,7 @@
   "evidence_m17_dotnet.json": {
    "sha256": "c3300c5b8e7b4a871146a9de0578fb735baef01d52fe7a834085ac15ace76dbe",
    "size": 9869,
-   "mtime": "2026-11-17T03:14:18",
+   "mtime": "2026-11-17T04:18:56",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -768,7 +791,10 @@
     "20261117T021100-746c",
     "20261117T021944-26c9",
     "20261117T023235-f180",
-    "20261117T031307-aa41"
+    "20261117T031307-aa41",
+    "20261117T034706-6f29",
+    "20261117T040139-2ff9",
+    "20261117T041745-7725"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -868,7 +894,7 @@
   "evidence_m18_ilflow.json": {
    "sha256": "eca5ee510cf40cca677d35c6c8e87c273989682dc5ffb72c93115d298ae8fd79",
    "size": 20245,
-   "mtime": "2026-11-17T03:16:17",
+   "mtime": "2026-11-17T04:20:54",
    "run_id": null,
    "run_ids": [
     "20261116T235937-c6ff",
@@ -882,7 +908,10 @@
     "20261117T021100-746c",
     "20261117T021944-26c9",
     "20261117T023235-f180",
-    "20261117T031307-aa41"
+    "20261117T031307-aa41",
+    "20261117T034706-6f29",
+    "20261117T040139-2ff9",
+    "20261117T041745-7725"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -1021,7 +1050,7 @@
   "evidence_m19_sigblob.json": {
    "sha256": "abf7f631cd9f1f4f5c0b6fd73b5dc982667db66c62bfb1de6ca9bc912036169c",
    "size": 24097,
-   "mtime": "2026-11-17T03:46:36",
+   "mtime": "2026-11-17T04:21:48",
    "run_id": null,
    "run_ids": [
     "20261117T010924-0a7b",
@@ -1031,7 +1060,10 @@
     "20261117T021100-746c",
     "20261117T021944-26c9",
     "20261117T023235-f180",
-    "20261117T031307-aa41"
+    "20261117T031307-aa41",
+    "20261117T034706-6f29",
+    "20261117T040139-2ff9",
+    "20261117T041745-7725"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -1046,7 +1078,7 @@
   "evidence_m20_layout.json": {
    "sha256": "83600cb2f3657c0ff5a0d5dc8a7f0734be5732cd71ce4e1e0032932116e88eb6",
    "size": 16917,
-   "mtime": "2026-11-17T03:46:45",
+   "mtime": "2026-11-17T04:21:01",
    "run_id": null,
    "run_ids": [
     "20261117T014558-2b7c",
@@ -1054,7 +1086,10 @@
     "20261117T021100-746c",
     "20261117T021944-26c9",
     "20261117T023235-f180",
-    "20261117T031307-aa41"
+    "20261117T031307-aa41",
+    "20261117T034706-6f29",
+    "20261117T040139-2ff9",
+    "20261117T041745-7725"
    ],
    "run_id_source": "ambiguous",
    "sections": [
@@ -2167,7 +2202,7 @@
   "evidence_numbers_ledger.json": {
    "sha256": "f8af03f565173ef4d7b52ab2c99d668a5af1428dbb9162a5f3d5080de128bb1c",
    "size": 6754,
-   "mtime": "2026-11-17T03:46:56",
+   "mtime": "2026-11-17T04:10:48",
    "run_id": "20261116T235937-c6ff",
    "run_ids": [
     "20261116T235937-c6ff"

@@ -30,6 +30,22 @@
 安全防护（NX·RELRO·PIE）/导入导出清单/编译器指纹/控制流与调用关系。纯手写解析，结果一律与
 readelf/objdump/pefile/ildasm 等权威工具交叉验证。三种用法：CLI / Python 模块 / MCP 服务器。
 
+## 作为 Python 库使用（`rekit.api`）
+
+对外承诺稳定的只有 `rekit.api` 的导出符号；契约、字段清单与"不承诺什么"见
+`03_路线图与章程/LIBRARY_API.md`（与 `JSON_CONTRACT.md` 的分工也写在那里）。
+
+```python
+from rekit.api import parse_pe, parse_elf, build_dotnet, build_info
+
+r = parse_pe(r"tests\fixtures\minipe.exe")   # dict：machine / entry / sections / imports ...
+```
+
+`04_rekit项目源码/examples/` 有 PE / ELF / .NET 三个示例，全部用 `import` 调用、不依赖
+安装或固定盘符。`tests/verify_api.py` 把示例输出与 `rekit <cmd> --json` 的对应字段逐项
+对拍（空比对判 FAIL，篡改期望值必须被检出），并已纳入全量门禁。示例样本：PE/ELF 用仓库内
+`tests/fixtures`，.NET 需先恢复 m3 samples（`m17\_gen\RekitSample.dll`）。
+
 ## 安装与复现验收（干净克隆演练过，2026-11-17）
 
 **前置（Windows 10/11）**

@@ -1,0 +1,231 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "example.import-only",
+   "name": "示例不含 subprocess/chdir/getcwd",
+   "status": "PASS",
+   "detail": "命中=无"
+  },
+  {
+   "id": "example.present:pe_report.py",
+   "name": "示例存在",
+   "status": "PASS",
+   "detail": "examples\\pe_report.py"
+  },
+  {
+   "id": "example.present:elf_report.py",
+   "name": "示例存在",
+   "status": "PASS",
+   "detail": "examples\\elf_report.py"
+  },
+  {
+   "id": "example.present:dotnet_report.py",
+   "name": "示例存在",
+   "status": "PASS",
+   "detail": "examples\\dotnet_report.py"
+  },
+  {
+   "id": "api.surface",
+   "name": "rekit.api.__all__ 与契约一致",
+   "status": "PASS",
+   "detail": "公开符号 相等"
+  },
+  {
+   "id": "cwd.pe_report.py",
+   "name": "示例不依赖 cwd",
+   "status": "PASS",
+   "detail": "work vs tmp 相等"
+  },
+  {
+   "id": "cwd.elf_report.py",
+   "name": "示例不依赖 cwd",
+   "status": "PASS",
+   "detail": "work vs tmp 相等"
+  },
+  {
+   "id": "cwd.dotnet_report.py",
+   "name": "示例不依赖 cwd",
+   "status": "PASS",
+   "detail": "work vs tmp 相等"
+  },
+  {
+   "id": "pe.format",
+   "name": "PE 格式标识",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.machine",
+   "name": "PE 机器类型",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.bits",
+   "name": "PE 位数",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.entry",
+   "name": "PE 入口",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.image_base",
+   "name": "PE 镜像基址",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.subsystem",
+   "name": "PE 子系统",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.nsections",
+   "name": "PE 节数",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.sections",
+   "name": "PE 节表",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "pe.imports",
+   "name": "PE 导入 DLL 列表",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "elf.format",
+   "name": "ELF 格式标识",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "elf.entry",
+   "name": "ELF 入口",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "elf.nsections",
+   "name": "ELF 节数",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "elf.sections",
+   "name": "ELF 节表",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "elf.security",
+   "name": "ELF 安全属性",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.status",
+   "name": ".NET 状态",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.assembly",
+   "name": ".NET 程序集",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.file",
+   "name": ".NET 文件头三元组",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.denominators",
+   "name": ".NET 分母",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.ntypes",
+   "name": ".NET 类型条数",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.nmethods",
+   "name": ".NET 方法条数",
+   "status": "PASS",
+   "detail": "值 相等"
+  },
+  {
+   "id": "dn.probe",
+   "name": "probe_dotnet 与 info.dotnet.is_cli",
+   "status": "PASS",
+   "detail": "is_cli 相等"
+  },
+  {
+   "id": "guard.pe",
+   "name": "PE 比对对象非空",
+   "status": "PASS",
+   "detail": "节数=2"
+  },
+  {
+   "id": "guard.elf",
+   "name": "ELF 比对对象非空",
+   "status": "PASS",
+   "detail": "节数=30"
+  },
+  {
+   "id": "guard.dn",
+   "name": ".NET 比对对象非空",
+   "status": "PASS",
+   "detail": "类型=6 方法=18"
+  },
+  {
+   "id": "selfproof",
+   "name": "比较器可失败自证（篡改/空期望检出）",
+   "status": "PASS",
+   "detail": "基线=相等 篡改=不等 空期望=FAIL"
+  }
+ ],
+ "samples": {
+  "pe": {
+   "path": "tests/fixtures/minipe.exe",
+   "sha256": "8bcd9510b9002f9aa15c0387b90b8b6067d915fe435a6a944bfd36154acad4d0",
+   "bytes": 2048
+  },
+  "elf": {
+   "path": "tests/fixtures/bin_ls.elf",
+   "sha256": "833d6f9cf3ede2225d80eaa159ef78a141c92842a691179aec37d182cc808a5c",
+   "bytes": 158632
+  },
+  "dotnet": {
+   "path": "samples/m17/_gen/RekitSample.dll",
+   "sha256": "68142f8059b8843b9eed969f14fc96a1acfd8d8048a15899213d448c30666cb0",
+   "bytes": 4608,
+   "requires": "m3 samples（setup.ps1 恢复）"
+  }
+ },
+ "cli": {
+  "info": "rekit info <f> --json",
+  "dotnet": "rekit dotnet <f> --json"
+ },
+ "compared": {
+  "pe": 9,
+  "elf": 5,
+  "dn": 7
+ }
+}

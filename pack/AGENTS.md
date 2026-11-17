@@ -6,6 +6,7 @@
 ## 1. 这是什么
 
 - `rekit`：纯 Python 标准库实现的二进制静态分诊/分析工具（PE / ELF / .NET），提供 CLI、Python 模块、MCP 三种用法。
+- 库接口只承诺 `rekit.api` 的导出符号，契约见 `pack\03_路线图与章程\LIBRARY_API.md`（其余模块是内部实现，不承诺稳定）。
 - 项目性质：每日逆向学习的**载体**。当天没有回流成 `rekit` 模块/规则/测试，当天不算达标。
 - 规模（模块数 / 行数 / 测试数 / verify 套数）：**一律现算，本文件不写数字**（R127）。看 `python "pack\tools\status.py"` 的“规模”三行；行数同时给“总行 / 非空行”，避免两种口径各写一个数。
 
@@ -37,6 +38,8 @@ python "pack\tools\status.py"
 | 单个验证脚本 | `python "2026-11-15\m3-task-card\work\tests\verify_disasm.py" --all` |
 | 指纹混淆矩阵 | `python "...\tests\verify_fingerprint.py" --all --matrix` |
 | 运行 CLI | `rekit info <file>`（已 `pip install -e .` 后任意目录）；未安装时 `python -m rekit.cli <file>`（在 `rekit` 父目录下） |
+| 库接口示例（import，非 subprocess） | `python "pack\04_rekit项目源码\examples\pe_report.py" <pe>`（另见 `elf_report.py` / `dotnet_report.py`；契约 `pack\03_路线图与章程\LIBRARY_API.md`） |
+| 库/CLI 一致性判据 | `python "2026-11-15\m3-task-card\work\tests\verify_api.py"`（已含在全量门禁；空比对 FAIL、篡改期望值须被检出） |
 
 验证结果统一落在 `work\verification\<run_id>\`（每套一个日志 + `summary.json`，`latest\` 为副本）。
 

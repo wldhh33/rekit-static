@@ -5,7 +5,7 @@ pack\tools\gate.ps1 — 单命令门禁入口（U1 收口，2026-11-17）
 再按固定顺序执行：
   1) ledger_check.py --check          数字总账漂移
   2) tests\evidence_index.py --check  证据索引覆盖 / 存在 / sha256
-  3) verify_gate.py --run             23 套 verify + pytest + ledger 复核
+  3) verify_gate.py --run             全部 verify 套 + pytest + ledger 复核（套数见 status.py）
 
 本机事实（脚本会逐项检查）：
   - 样本（m2/m3）与 binutils 被 .gitignore 排除，fresh clone 后先跑 setup.ps1 恢复；
