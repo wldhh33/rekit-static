@@ -22,6 +22,8 @@ import json
 import struct
 import sys
 
+from .errors import RekitError
+
 CAVEATS = [
     "线性扫描无法区分代码与数据：跳转表/对齐填充/内联字面量会被当作指令",
     "不跟踪跳转、不做递归下降：函数尾部的交错数据区会被继续当作指令",
@@ -475,7 +477,7 @@ def main(argv=None):
     except ValueError as e:
         print("rekit: %s: %s" % (args.file, e), file=sys.stderr)
         return 2
-    except (struct.error, IndexError) as e:
+    except (struct.error, IndexError, RekitError) as e:
         print("rekit: %s: 解析失败(%s: %s)" % (args.file, type(e).__name__, e),
               file=sys.stderr)
         return 3

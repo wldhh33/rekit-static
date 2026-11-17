@@ -5,6 +5,8 @@
 import struct
 import sys
 
+from .errors import FormatMismatch, MalformedBinary, RekitError
+
 MACHINES = {0x014C: "i386", 0x8664: "AMD64", 0x01C0: "ARM", 0xAA64: "ARM64"}
 SUBSYS = {1: "Native", 2: "GUI", 3: "Console", 5: "OS/2", 9: "CE GUI"}
 
@@ -107,10 +109,28 @@ def parse_exports(data, dirs, sections):
 
 
 def parse(path):
-    data = open(path, "rb").read()
-    assert data[:2] == b"MZ", "no MZ"
+    """解析 PE 文件。
+
+    失败语义（库调用方按类型分支，不看消息文本）：
+      读不了 -> OSError；不是 PE -> FormatMismatch；
+      签名对但结构截断/损坏 -> MalformedBinary。均为显式 raise，`python -O` 下不变。
+    """
+    with open(path, "rb") as f:
+        data = f.read()
+    try:
+        return _parse(data)
+    except RekitError:
+        raise
+    except (struct.error, IndexError, ValueError) as e:
+        raise MalformedBinary("PE 解析失败: %s: %s" % (type(e).__name__, e)) from e
+
+
+def _parse(data):
+    if data[:2] != b"MZ":
+        raise FormatMismatch("no MZ header")
     e_lfanew = struct.unpack_from("<I", data, 0x3C)[0]
-    assert data[e_lfanew:e_lfanew + 4] == b"PE\x00\x00", "no PE sig"
+    if data[e_lfanew:e_lfanew + 4] != b"PE\x00\x00":
+        raise FormatMismatch("no PE signature")
 
     # ---- COFF header ----
     machine, nsect, _ts, _psym, _nsym, optsize, chars = \

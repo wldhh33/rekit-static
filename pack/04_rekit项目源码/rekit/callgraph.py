@@ -38,6 +38,7 @@ import sys
 from bisect import bisect_right
 
 from . import elf, expr, pe, recdesc
+from .errors import RekitError
 
 CAVEATS = [
     "调用点只覆盖已解出指令；未解码区域里的调用不可见，也不在分母里",
@@ -845,7 +846,7 @@ def main(argv=None):
     except ValueError as e:
         print("rekit: %s: %s" % (args.file, e), file=sys.stderr)
         return 2
-    except (struct.error, IndexError) as e:
+    except (struct.error, IndexError, RekitError) as e:
         print("rekit: %s: 解析失败(%s: %s)"
               % (args.file, type(e).__name__, e), file=sys.stderr)
         return 3

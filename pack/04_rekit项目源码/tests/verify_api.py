@@ -13,7 +13,10 @@
 #   (d) 公开面固定：`rekit.api.__all__` 必须等于 LIBRARY_API.md 声明的集合
 #       （新增/删除导出必须同时改契约，防止包被整体冻结成 API）；
 #   (e) 空比对一律 FAIL（expected 为 None / 空容器即失败），分母为 0 也 FAIL；
-#   (f) 可失败自证：篡改一份示例期望值、传入空期望，比较器必须报不一致。
+#   (f) 可失败自证：篡改一份示例期望值、传入空期望，比较器必须报不一致；
+#   (g) 失败语义：给错格式（parse_pe 收到 ELF / parse_elf 收到 PE）必须抛
+#       rekit.api.FormatMismatch——不是 AssertionError、不是别的；同一判据用
+#       `python -O` 再跑一次（断言被剥掉也必须照样抛），并自证该判据可失败。
 #
 # 样本：PE/ELF 用仓库内 fixtures（无需恢复）；.NET 用 m3 samples 的
 #       `samples\m17\_gen\RekitSample.dll`（fresh clone 需先跑 setup.ps1 恢复）。
@@ -35,7 +38,27 @@ DOTNET = os.path.join(WORK, "samples", "m17", "_gen", "RekitSample.dll")
 OUT_JSON = os.path.join(WORK, "evidence_api_parity.json")
 PY = sys.executable
 API_SURFACE = {"build_info", "detect_format", "parse_pe", "parse_elf",
-               "build_dotnet", "probe_dotnet"}
+               "build_dotnet", "probe_dotnet",
+               "RekitError", "FormatMismatch", "MalformedBinary"}
+
+# 子进程探针：只用 rekit.api 调用，回报异常类型；opt 字段证明 -O 真的生效。
+CHILD = (
+    "import json,sys\n"
+    "sys.path.insert(0, %r)\n"
+    "import rekit.api as api\n"
+    "kind, path = sys.argv[1], sys.argv[2]\n"
+    "fn = api.parse_pe if kind == 'pe' else api.parse_elf\n"
+    "out = {'opt': sys.flags.optimize}\n"
+    "try:\n"
+    "    fn(path)\n"
+    "except BaseException as e:\n"
+    "    out.update(exc=type(e).__name__, ours=isinstance(e, api.FormatMismatch),\n"
+    "               assertion=isinstance(e, AssertionError), msg=str(e)[:80])\n"
+    "else:\n"
+    "    out.update(exc='NO_RAISE', ours=False, assertion=False, msg='')\n"
+    "print(json.dumps(out))\n"
+) % SRC
+ERR_KEYS = ("exc", "ours", "assertion", "opt")
 
 sys.path.insert(0, WORK)
 
@@ -94,6 +117,24 @@ def _example(name, sample, cwd):
     return _run_json([PY, os.path.join(EXAMPLES, name), sample], cwd)
 
 
+def _raise_probe(kind, path, optimize):
+    """在子进程里用 rekit.api 解析错格式文件，回报异常类型与 -O 是否生效。"""
+    argv = [PY] + (["-O"] if optimize else []) + ["-c", CHILD, kind, path]
+    p = subprocess.run(argv, cwd=WORK, env=_env(), capture_output=True,
+                       text=True, encoding="utf-8", errors="replace", timeout=180)
+    lines = (p.stdout or "").strip().splitlines()
+    if p.returncode != 0 or not lines:
+        return {"exc": "rc=%d" % p.returncode, "ours": False,
+                "assertion": False, "opt": -1,
+                "stderr": (p.stderr or "").strip()[:200]}
+    return json.loads(lines[-1])
+
+
+def _norm(got):
+    """只比对判据关心的四个字段；异常消息文本不在契约里。"""
+    return {k: got.get(k) for k in ERR_KEYS}
+
+
 def _rel(p):
     """证据里的路径与克隆位置无关。"""
     return os.path.relpath(p, WORK).replace(os.sep, "/")
@@ -138,6 +179,28 @@ def main():
 
     _cmp("api.surface", "rekit.api.__all__ 与契约一致", sorted(API_SURFACE),
          sorted(api.__all__), "公开符号")
+
+    # ---- (g) 失败语义：错格式必须抛 FormatMismatch，-O 下同样成立
+    got_pe = _norm(_raise_probe("pe", ELF, False))
+    got_elf = _norm(_raise_probe("elf", PE, False))
+    want = {"exc": "FormatMismatch", "ours": True, "assertion": False, "opt": 0}
+    _cmp("err.pe-on-elf", "parse_pe 收到 ELF 抛 FormatMismatch", want, got_pe,
+         "异常类型")
+    _cmp("err.elf-on-pe", "parse_elf 收到 PE 抛 FormatMismatch", want, got_elf,
+         "异常类型")
+    want_o = dict(want, opt=1)
+    _cmp("err.opt.pe-on-elf", "python -O 下 parse_pe 仍抛 FormatMismatch", want_o,
+         _norm(_raise_probe("pe", ELF, True)), "异常类型")
+    _cmp("err.opt.elf-on-pe", "python -O 下 parse_elf 仍抛 FormatMismatch", want_o,
+         _norm(_raise_probe("elf", PE, True)), "异常类型")
+    tampered_err = dict(want, exc="AssertionError")
+    no_raise = {"exc": "NO_RAISE", "ours": False, "assertion": False, "opt": 0}
+    ok_err = (_same(want, got_pe)
+              and not _same(tampered_err, got_pe)
+              and not _same(no_raise, got_pe)
+              and not _same({}, got_pe))
+    _add("err.selfproof", "失败语义判据可失败自证（错类型/未抛出/空期望均检出）", ok_err,
+         "篡改=不等 未抛出=不等 空期望=FAIL")
 
     with tempfile.TemporaryDirectory(prefix="rekit_api_") as tmp:
         # ---- (b) cwd 无关：work 与临时目录两次输出必须相同
@@ -208,7 +271,7 @@ def main():
         _add("selfproof", "比较器可失败自证（篡改/空期望检出）", ok,
              "基线=相等 篡改=不等 空期望=FAIL")
 
-        counts = {"pe": 9, "elf": 5, "dn": 7}
+        counts = {"pe": 9, "elf": 5, "dn": 7, "errors": 5}
         payload = {
             "schema": 1,
             "status": "fail" if any(c["status"] == "FAIL" for c in CHECKS)

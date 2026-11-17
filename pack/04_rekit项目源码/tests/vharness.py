@@ -32,7 +32,7 @@ MIN_DENOM = {
     "verify_map.py": 27, "verify_paramdecl.py": 34, "verify_recdesc.py": 115,
     "verify_sigblob.py": 17,
     "verify_layout.py": 28,
-    "verify_api.py": 30,
+    "verify_api.py": 35,
     "verify_sitejoin.py": 9, "verify_struct.py": 21, "verify_strxref.py": 24,
     "verify_switchcand.py": 73, "verify_vexaudit.py": 15,
 }

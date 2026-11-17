@@ -15,6 +15,8 @@ import os
 import struct
 import sys
 
+from .errors import RekitError
+
 MAGIC_PE32, MAGIC_PE32PLUS = 0x10B, 0x20B
 MAX_THUNKS = 65536          # 防御性上限：thunk 链无终止时不死循环
 
@@ -367,7 +369,7 @@ def main(argv=None):
     except ValueError as e:
         print("rekit: %s: %s" % (args.file, e), file=sys.stderr)
         return 2
-    except (struct.error, IndexError) as e:
+    except (struct.error, IndexError, RekitError) as e:
         print("rekit: %s: 解析失败: %s" % (args.file, e), file=sys.stderr)
         return 3
     try:
@@ -397,7 +399,7 @@ def main(argv=None):
         else:
             print(render_text(args.file, loc))
         return 0
-    except (struct.error, IndexError) as e:
+    except (struct.error, IndexError, RekitError) as e:
         print("rekit: %s: 解析失败: %s" % (args.file, e), file=sys.stderr)
         return 3
 

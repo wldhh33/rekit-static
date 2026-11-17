@@ -62,6 +62,7 @@ import struct
 from bisect import bisect_right
 
 from . import disasm, elf, pe
+from .errors import RekitError
 
 CAVEATS = [
     "只覆盖从种子可达的代码：无符号/无 FDE 的函数、间接跳转目标、跳转表分支不可见",
@@ -1019,7 +1020,7 @@ def main(argv=None):
     except ValueError as e:
         print("rekit: %s: %s" % (args.file, e), file=sys.stderr)
         return 2
-    except (struct.error, IndexError) as e:
+    except (struct.error, IndexError, RekitError) as e:
         print("rekit: %s: 解析失败(%s: %s)" % (args.file, type(e).__name__, e),
               file=sys.stderr)
         return 3

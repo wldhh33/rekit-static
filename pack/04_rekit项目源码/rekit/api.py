@@ -5,13 +5,15 @@
 补一个 import 示例，并在 `tests\\verify_api.py` 加一项与 CLI 的对拍。
 
 输入一律是文件系统路径（str / os.PathLike），不读 cwd、不读环境变量；
-样本路径由调用方给出。失败语义沿用各实现：读不了抛 OSError，格式不符可能抛
-AssertionError（`python -O` 下断言被移除），所以先用 `detect_format` 判格式。
+样本路径由调用方给出。失败语义：读不了抛 OSError，格式不符抛 FormatMismatch，
+签名对但结构损坏抛 MalformedBinary（都继承 RekitError / ValueError）；这些判定是
+显式 raise，`python -O` 下同样成立，调用方不需要先 detect_format 做防御。
 """
 from .cli import build_info, detect_format
 from .dotnet import build as build_dotnet
 from .dotnet import probe as probe_dotnet
 from .elf import parse as parse_elf
+from .errors import FormatMismatch, MalformedBinary, RekitError
 from .pe import parse as parse_pe
 
 __all__ = [
@@ -21,4 +23,7 @@ __all__ = [
     "parse_elf",         # ELF 头/节/动态段/安全属性（dict）
     "build_dotnet",      # .NET 程序集结构报告（dict，CLI `rekit dotnet --json` 同一构造器）
     "probe_dotnet",      # 轻量探测 {is_cli, cli_rva, reason}
+    "RekitError",        # 自定义异常基类
+    "FormatMismatch",    # 输入不是该格式（parse_pe 收到 ELF 等）
+    "MalformedBinary",   # 格式对但结构截断/损坏
 ]

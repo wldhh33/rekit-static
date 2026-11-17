@@ -27,6 +27,7 @@ import struct
 import sys
 
 from . import disasm, pe, recdesc
+from .errors import RekitError
 
 CAVEATS = [
     "逐指令形态：不做值编号/别名分析，“同名变量”不等于已合并同一存储",
@@ -1287,7 +1288,7 @@ def main(argv=None):
     except ValueError as e:
         print("rekit: %s: %s" % (args.file, e), file=sys.stderr)
         return 2
-    except (struct.error, IndexError) as e:
+    except (struct.error, IndexError, RekitError) as e:
         print("rekit: %s: 解析失败(%s: %s)" % (args.file, type(e).__name__, e),
               file=sys.stderr)
         return 3

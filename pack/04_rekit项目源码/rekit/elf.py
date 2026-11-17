@@ -7,6 +7,8 @@
 import struct
 import sys
 
+from .errors import FormatMismatch, MalformedBinary, RekitError
+
 SH_TYPES = {0: "NULL", 1: "PROGBITS", 2: "SYMTAB", 3: "STRTAB", 4: "RELA",
             5: "HASH", 6: "DYNAMIC", 7: "NOTE", 8: "NOBITS", 9: "REL",
             10: "SHLIB", 11: "DYNSYM", 14: "INIT_ARRAY", 15: "FINI_ARRAY",
@@ -46,8 +48,25 @@ R_TYPES = {0: "R_X86_64_NONE", 1: "R_X86_64_64", 2: "R_X86_64_PC32", 3: "R_X86_6
 
 
 def parse(path):
-    data = open(path, "rb").read()
-    assert data[:4] == b"\x7fELF", "not ELF"
+    """解析 ELF 文件。
+
+    失败语义（库调用方按类型分支，不看消息文本）：
+      读不了 -> OSError；不是 ELF -> FormatMismatch；
+      签名对但结构截断/损坏 -> MalformedBinary。均为显式 raise，`python -O` 下不变。
+    """
+    with open(path, "rb") as f:
+        data = f.read()
+    try:
+        return _parse(data)
+    except RekitError:
+        raise
+    except (struct.error, IndexError, ValueError) as e:
+        raise MalformedBinary("ELF 解析失败: %s: %s" % (type(e).__name__, e)) from e
+
+
+def _parse(data):
+    if data[:4] != b"\x7fELF":
+        raise FormatMismatch("not ELF")
     ei_class, ei_data = data[4], data[5]
     end = "<" if ei_data == 1 else ">"
     (e_type, e_machine, _ver, e_entry, e_phoff, e_shoff, _flg, _ehsz,
@@ -226,8 +245,9 @@ def parse(path):
 # 故另立两个只读函数——纯增量，不改 parse() 的返回结构（92 条断言不受影响）。
 
 def program_headers(data):
-    """全部 program header（dict 列表，含 p_memsz/p_align）。"""
-    assert data[:4] == b"\x7fELF", "not ELF"
+    """全部 program header（dict 列表，含 p_memsz/p_align）。不是 ELF 抛 FormatMismatch。"""
+    if data[:4] != b"\x7fELF":
+        raise FormatMismatch("not ELF")
     end = "<" if data[5] == 1 else ">"
     (_t, _m, _v, _e, e_phoff, _so, _fl, _eh, e_phentsize, e_phnum,
      _shentsize, _shnum, _shstrndx) = struct.unpack_from(end + "HHIQQQIHHHHHH", data, 16)
@@ -246,9 +266,10 @@ def section_headers(data):
     """全部节头（dict 列表，含 sh_flags/sh_type_id）。
 
     e_shnum == 0（如 UPX 加壳后节表被移除）时返回 []，不抛异常——
-    映射层据此把节级换算判为「不可判定」而不是崩或猜 0 节。
+    映射层据此把节级换算判为「不可判定」而不是崩或猜 0 节。不是 ELF 抛 FormatMismatch。
     """
-    assert data[:4] == b"\x7fELF", "not ELF"
+    if data[:4] != b"\x7fELF":
+        raise FormatMismatch("not ELF")
     end = "<" if data[5] == 1 else ">"
     (_t, _m, _v, _e, _po, e_shoff, _fl, _eh, _pe, _pn,
      e_shentsize, e_shnum, e_shstrndx) = struct.unpack_from(end + "HHIQQQIHHHHHH", data, 16)

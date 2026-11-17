@@ -33,6 +33,36 @@
    "detail": "公开符号 相等"
   },
   {
+   "id": "err.pe-on-elf",
+   "name": "parse_pe 收到 ELF 抛 FormatMismatch",
+   "status": "PASS",
+   "detail": "异常类型 相等"
+  },
+  {
+   "id": "err.elf-on-pe",
+   "name": "parse_elf 收到 PE 抛 FormatMismatch",
+   "status": "PASS",
+   "detail": "异常类型 相等"
+  },
+  {
+   "id": "err.opt.pe-on-elf",
+   "name": "python -O 下 parse_pe 仍抛 FormatMismatch",
+   "status": "PASS",
+   "detail": "异常类型 相等"
+  },
+  {
+   "id": "err.opt.elf-on-pe",
+   "name": "python -O 下 parse_elf 仍抛 FormatMismatch",
+   "status": "PASS",
+   "detail": "异常类型 相等"
+  },
+  {
+   "id": "err.selfproof",
+   "name": "失败语义判据可失败自证（错类型/未抛出/空期望均检出）",
+   "status": "PASS",
+   "detail": "篡改=不等 未抛出=不等 空期望=FAIL"
+  },
+  {
    "id": "cwd.pe_report.py",
    "name": "示例不依赖 cwd",
    "status": "PASS",
@@ -226,6 +256,7 @@
  "compared": {
   "pe": 9,
   "elf": 5,
-  "dn": 7
+  "dn": 7,
+  "errors": 5
  }
 }

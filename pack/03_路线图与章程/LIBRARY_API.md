@@ -31,6 +31,9 @@
 | `build_dotnet(path)` | 托管程序集路径 | `status` `assembly` `file` `denominators` `types` `methods` |
 | `probe_dotnet(path)` | 任意 PE 路径 | `is_cli` `cli_rva` `reason` |
 
+异常类型（同样在 `rekit.api.__all__` 里）：`RekitError` 基类、`FormatMismatch`
+（输入不是该格式）、`MalformedBinary`（格式对但结构截断/损坏）。语义见下节。
+
 返回结构约定（与实现一致，示例即按此取值）：
 
 - `parse_pe().sections`：每项 5 元组 `(addr, vsize, offset, size, name)`（按节表顺序）；
@@ -40,8 +43,28 @@
 - `build_dotnet().file`：`format/machine/image_base/entry/cli_rva/cli_size/sections`
   （`sections` 每项含 `index/name/vaddr/vsize/rawptr/rawsize/chars`）。
 
-**失败语义**：读不了抛 `OSError`；格式不符时实现层可能用 `assert`（`python -O` 下断言
-被移除），因此**先 `detect_format` 判格式再解析**。`build_info` 对未识别格式返回 `None`。
+**失败语义**（承诺的是**类型**，不承诺异常消息文本）：
+
+| 情形 | 抛出 | 实现方式 |
+|---|---|---|
+| 路径读不了 / 不存在 / 是目录 | `OSError`（含 `FileNotFoundError`） | 标准库 |
+| 输入不是该格式（`parse_pe` 收到 ELF、`parse_elf` 收到 PE 等） | `rekit.api.FormatMismatch` | 显式 `raise` |
+| 签名对，但头部/表结构截断或损坏，底层解不下去 | `rekit.api.MalformedBinary` | 显式 `raise` |
+| 调用方参数类型用错（路径不是 `str` / `os.PathLike`） | `TypeError` | 标准库 |
+
+`FormatMismatch` / `MalformedBinary` 都继承 `RekitError`（`RekitError` 直接继承
+`Exception`，**不继承 `ValueError`**）：仓内多处 `except ValueError` 表示"格式不认识 /
+参数不合法"（CLI 退出码 2），旧实现抛的是 `AssertionError`，从不被它接住；新异常独立成族，
+`except api.RekitError` 可一次兜住格式与结构两类失败，也不会改变既有退出码分类。
+
+契约是**"解析函数在格式不符时抛出 `FormatMismatch`"**，不是"请你先自己检查"：
+`parse_pe` / `parse_elf` 自己判签名并在不符时抛出，调用方不必先 `detect_format`。
+`detect_format` 的既有语义不变（`"elf"` / `"pe"` / `None`，读不了抛 `OSError`）；
+`build_info` 对未识别格式仍返回 `None`。
+
+**不得用 `assert` 表达失败**：`python -O` 会把断言整体剥掉，失败退化为静默错值。
+`verify_api.py` 用 `python -O -c` 实跑同一组错格式输入，要求仍抛 `FormatMismatch`、
+`isinstance(e, AssertionError)` 为假；并自带"篡改期望值 / 未抛出 / 空期望"三种自证。
 
 ## 3. 不承诺的部分（内部实现）
 
