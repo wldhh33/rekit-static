@@ -165,6 +165,21 @@ if ($LASTEXITCODE -ne 0) {
     Ok "python package: pefile"
 }
 
+# 8. 分发性判据的构建依赖：verify_dist 用 `python -m build --no-isolation` 打 sdist+wheel，
+#    缺 build/setuptools 会 ENV_MISSING(exit 2)；这里提前 fail-fast 并给出安装命令。
+& python -c "import build" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Add-Problem "missing Python package build (python -m pip install build setuptools)"
+} else {
+    Ok "python package: build"
+}
+& python -c "import setuptools" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    Add-Problem "missing Python package setuptools (python -m pip install build setuptools; verify_dist 用 --no-isolation)"
+} else {
+    Ok "python package: setuptools"
+}
+
 if ($script:problems.Count -gt 0) {
     Write-Host ""
     Write-Host "GATE: FAIL exit=2 (preflight failed: $($script:problems.Count) item(s); nothing executed)" -ForegroundColor Red

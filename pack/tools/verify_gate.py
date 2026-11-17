@@ -1,7 +1,7 @@
 r"""外部门禁：唯一判定语义 = tests\vharness.py（本脚本不再维护第二份登记表/判定口径）。
 
 串行做三件事：
-  1. 委托 `vharness --all --json`（或 --only 透传）跑 21 套验证脚本，读它的 JSON 判 verdict；
+  1. 委托 `vharness --all --json`（或 --only 透传）跑全部已登记验证脚本，读它的 JSON 判 verdict；
   2. 跑 pytest（tests -q）；
   3. 跑 `ledger_check.py --check`（总账漂移/新鲜度，硬失败）。
 

@@ -1,0 +1,340 @@
+{
+ "schema": 1,
+ "status": "pass",
+ "checks": [
+  {
+   "id": "build.exit",
+   "name": "构建 sdist + wheel",
+   "status": "PASS",
+   "detail": "exit=0"
+  },
+  {
+   "id": "build.artifacts",
+   "name": "两个产物都存在",
+   "status": "PASS",
+   "detail": "wheel=['rekit-0.1.0-py3-none-any.whl'] sdist=['rekit-0.1.0.tar.gz']"
+  },
+  {
+   "id": "wheel.contents",
+   "name": "wheel 只含 rekit/** + dist-info，无异物",
+   "status": "PASS",
+   "detail": "顶层=['rekit', 'rekit-0.1.0.dist-info'] 异物=无"
+  },
+  {
+   "id": "sdist.contents",
+   "name": "sdist 只含包本体 + 元数据（tests/examples 已 prune）",
+   "status": "PASS",
+   "detail": "顶层=['MANIFEST.in', 'PKG-INFO', 'README.md', 'pyproject.toml', 'rekit', 'rekit.egg-info', 'setup.cfg'] 异物=无"
+  },
+  {
+   "id": "meta.deps",
+   "name": "METADATA 无 Requires-Dist（dependencies=[] 属实）",
+   "status": "PASS",
+   "detail": "Requires-Dist=[]"
+  },
+  {
+   "id": "meta.python",
+   "name": "METADATA Requires-Python 与 pyproject 一致",
+   "status": "PASS",
+   "detail": "Requires-Python=['>=3.8']"
+  },
+  {
+   "id": "meta.entry",
+   "name": "console script `rekit = rekit.cli:main`",
+   "status": "PASS",
+   "detail": "[console_scripts] | rekit = rekit.cli:main"
+  },
+  {
+   "id": "meta.py38scan",
+   "name": "requires-python>=3.8 静态扫描未发现 3.9+ 语法/API",
+   "status": "PASS",
+   "detail": "命中=无（范围：语法/注解/3.9+ 专属 API，不含运行时行为）"
+  },
+  {
+   "id": "venv.install",
+   "name": "仓库外 venv 装 wheel（--no-index，非 -e）",
+   "status": "PASS",
+   "detail": "pip exit=0"
+  },
+  {
+   "id": "import.file",
+   "name": "import 到的 rekit 来自 venv site-packages",
+   "status": "PASS",
+   "detail": "venv site-packages（未使用仓库源码）"
+  },
+  {
+   "id": "dist.noextras",
+   "name": "安装清单不含 samples/tests/tools/fixtures/examples",
+   "status": "PASS",
+   "detail": "文件数=69 异物=无"
+  },
+  {
+   "id": "cli.help.exit",
+   "name": "安装版 rekit --help 退出 0",
+   "status": "PASS",
+   "detail": "exit=0 首行=usage: rekit.cli [-h] [--format {auto,elf,pe}] file"
+  },
+  {
+   "id": "cli.help.equal",
+   "name": "安装版与仓库内 --help 逐字节相同",
+   "status": "PASS",
+   "detail": "repo==installed"
+  },
+  {
+   "id": "bytes.info.pe",
+   "name": "repo vs installed stdout 逐字节相同",
+   "status": "PASS",
+   "detail": "stdout 逐字节相同"
+  },
+  {
+   "id": "rc.info.pe",
+   "name": "退出码相同",
+   "status": "PASS",
+   "detail": "repo=0 installed=0"
+  },
+  {
+   "id": "stderr.info.pe",
+   "name": "stderr 相同（均为空输出）",
+   "status": "PASS",
+   "detail": "均为空"
+  },
+  {
+   "id": "path.info.pe",
+   "name": "唯一路径派生字段 path 两边相同（不排除）",
+   "status": "PASS",
+   "detail": "path=tests\\fixtures\\minipe.exe"
+  },
+  {
+   "id": "cwd.info.pe",
+   "name": "安装版两个不同 cwd 输出相同",
+   "status": "PASS",
+   "detail": "tmp vs cwd2"
+  },
+  {
+   "id": "bytes.info.elf",
+   "name": "repo vs installed stdout 逐字节相同",
+   "status": "PASS",
+   "detail": "stdout 逐字节相同"
+  },
+  {
+   "id": "rc.info.elf",
+   "name": "退出码相同",
+   "status": "PASS",
+   "detail": "repo=0 installed=0"
+  },
+  {
+   "id": "stderr.info.elf",
+   "name": "stderr 相同（均为空输出）",
+   "status": "PASS",
+   "detail": "均为空"
+  },
+  {
+   "id": "path.info.elf",
+   "name": "唯一路径派生字段 path 两边相同（不排除）",
+   "status": "PASS",
+   "detail": "path=tests\\fixtures\\bin_ls.elf"
+  },
+  {
+   "id": "cwd.info.elf",
+   "name": "安装版两个不同 cwd 输出相同",
+   "status": "PASS",
+   "detail": "tmp vs cwd2"
+  },
+  {
+   "id": "bytes.info.dotnet",
+   "name": "repo vs installed stdout 逐字节相同",
+   "status": "PASS",
+   "detail": "stdout 逐字节相同"
+  },
+  {
+   "id": "rc.info.dotnet",
+   "name": "退出码相同",
+   "status": "PASS",
+   "detail": "repo=0 installed=0"
+  },
+  {
+   "id": "stderr.info.dotnet",
+   "name": "stderr 相同（均为空输出）",
+   "status": "PASS",
+   "detail": "均为空"
+  },
+  {
+   "id": "path.info.dotnet",
+   "name": "唯一路径派生字段 path 两边相同（不排除）",
+   "status": "PASS",
+   "detail": "path=samples\\m17\\_gen\\RekitSample.dll"
+  },
+  {
+   "id": "cwd.info.dotnet",
+   "name": "安装版两个不同 cwd 输出相同",
+   "status": "PASS",
+   "detail": "tmp vs cwd2"
+  },
+  {
+   "id": "bytes.ilflow.dotnet",
+   "name": "repo vs installed stdout 逐字节相同",
+   "status": "PASS",
+   "detail": "stdout 逐字节相同"
+  },
+  {
+   "id": "rc.ilflow.dotnet",
+   "name": "退出码相同",
+   "status": "PASS",
+   "detail": "repo=0 installed=0"
+  },
+  {
+   "id": "stderr.ilflow.dotnet",
+   "name": "stderr 相同（均为空输出）",
+   "status": "PASS",
+   "detail": "均为空"
+  },
+  {
+   "id": "path.ilflow.dotnet",
+   "name": "唯一路径派生字段 path 两边相同（不排除）",
+   "status": "PASS",
+   "detail": "path=samples\\m17\\_gen\\RekitSample.dll"
+  },
+  {
+   "id": "cwd.ilflow.dotnet",
+   "name": "安装版两个不同 cwd 输出相同",
+   "status": "PASS",
+   "detail": "tmp vs cwd2"
+  },
+  {
+   "id": "selfproof",
+   "name": "逐字节比较器可失败自证（篡改/路径变化/空比对均检出）",
+   "status": "PASS",
+   "detail": "篡改=不等 path变化=不等 空比对=FAIL 差异定位=第 11 行第 311 字节: repo=b'e\",\\r\\n  \"nsections\": 2,\\r\\n  \"sections\": [\\r' installed=b'e\",\\r\\n  \"nsections\": 3,\\r\\n  \"sections\": [\\r'"
+  }
+ ],
+ "artifact": {
+  "wheel": "rekit-0.1.0-py3-none-any.whl",
+  "sdist": "rekit-0.1.0.tar.gz",
+  "wheel_files": 35,
+  "sdist_files": 43,
+  "wheel_top": [
+   "rekit",
+   "rekit-0.1.0.dist-info"
+  ],
+  "sdist_top": [
+   "MANIFEST.in",
+   "PKG-INFO",
+   "README.md",
+   "pyproject.toml",
+   "rekit",
+   "rekit.egg-info",
+   "setup.cfg"
+  ],
+  "requires_python": [
+   ">=3.8"
+  ],
+  "requires_dist": [],
+  "cases": [
+   {
+    "case": "info.pe",
+    "args": [
+     "info",
+     "<sample>",
+     "--json"
+    ],
+    "rc_repo": 0,
+    "rc_installed": 0,
+    "stdout_equal": true,
+    "stderr_equal": true,
+    "path_equal": true,
+    "cwd_independent": true
+   },
+   {
+    "case": "info.elf",
+    "args": [
+     "info",
+     "<sample>",
+     "--json"
+    ],
+    "rc_repo": 0,
+    "rc_installed": 0,
+    "stdout_equal": true,
+    "stderr_equal": true,
+    "path_equal": true,
+    "cwd_independent": true
+   },
+   {
+    "case": "info.dotnet",
+    "args": [
+     "info",
+     "<sample>",
+     "--json"
+    ],
+    "rc_repo": 0,
+    "rc_installed": 0,
+    "stdout_equal": true,
+    "stderr_equal": true,
+    "path_equal": true,
+    "cwd_independent": true
+   },
+   {
+    "case": "ilflow.dotnet",
+    "args": [
+     "ilflow",
+     "<sample>",
+     "--json"
+    ],
+    "rc_repo": 0,
+    "rc_installed": 0,
+    "stdout_equal": true,
+    "stderr_equal": true,
+    "path_equal": true,
+    "cwd_independent": true
+   }
+  ]
+ },
+ "venv": {
+  "location": "系统临时目录（每次新建，仓库外）",
+  "install": "--no-index --no-deps <wheel>（非 -e）"
+ },
+ "unavailable": [
+  {
+   "item": "examples\\（PE / ELF / .NET 三份 import 示例）",
+   "impact": "wheel 不含；脱离仓库无法运行",
+   "why": "示例按 __file__ 定位仓库源码，不是包内模块"
+  },
+  {
+   "item": "tests\\ 与 tests\\fixtures（minipe.exe / bin_ls.elf）",
+   "impact": "pip 安装后没有 fixture，pytest / verify 套不可用",
+   "why": "MANIFEST.in prune tests；判据随仓库发布，不进分发包"
+  },
+  {
+   "item": "samples\\（m17\\_gen\\RekitSample.dll 等 .NET 样本）",
+   "impact": "dotnet / ilflow / layout / sigblob 需调用方自带 .NET 文件",
+   "why": "样本被 .gitignore 排除，体积大，不是运行时资产"
+  },
+  {
+   "item": "samples\\、tools\\（binutils）、work\\ 下的门禁脚本",
+   "impact": "gate.ps1 / setup.ps1 / verify_* 不可用",
+   "why": "属于仓库交付物与资产恢复流程，不是 wheel 内容"
+  },
+  {
+   "item": "coverage 命令",
+   "impact": "运行期需要外部 objdump（GNU binutils）",
+   "why": "调用 PATH 里的 objdump，不是 pip 依赖，无法写进 dependencies"
+  }
+ ],
+ "samples": {
+  "pe": {
+   "path": "tests\\fixtures\\minipe.exe",
+   "sha256": "8bcd9510b9002f9aa15c0387b90b8b6067d915fe435a6a944bfd36154acad4d0",
+   "bytes": 2048
+  },
+  "elf": {
+   "path": "tests\\fixtures\\bin_ls.elf",
+   "sha256": "833d6f9cf3ede2225d80eaa159ef78a141c92842a691179aec37d182cc808a5c",
+   "bytes": 158632
+  },
+  "dotnet": {
+   "path": "samples\\m17\\_gen\\RekitSample.dll",
+   "sha256": "68142f8059b8843b9eed969f14fc96a1acfd8d8048a15899213d448c30666cb0",
+   "bytes": 4608,
+   "requires": "m3 samples（setup.ps1 恢复）"
+  }
+ }
+}

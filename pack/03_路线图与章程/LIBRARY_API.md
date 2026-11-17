@@ -104,3 +104,47 @@ python "pack\04_rekit项目源码\examples\dotnet_report.py" "2026-11-15\m3-task
    `CHANGELOG.md` 写明影响面，并按仓库版本规则处理（`v*` tag 批次收口后才打）。
 3. 判据本身不得放宽：`verify_api.py` 的对拍项只增不减；确实无法对拍时标 `SKIP`
    并写明原因，不允许把 FAIL 改成"跳过"。
+
+## 6. 分发形态（wheel / sdist）
+
+`pyproject.toml` 的打包口径：`packages = ["rekit"]`、`dependencies = []`、
+`requires-python = ">=3.8"`；`MANIFEST.in` 把 `tests` / `examples` prune 掉，
+所以 wheel 与 sdist 都只含 `rekit/**`（+ 元数据）。构建产物（`dist/`、`build/`）
+由 `.gitignore` 覆盖，不入库。
+
+```powershell
+cd pack\04_rekit项目源码
+python -m pip install build setuptools
+python -m build --no-isolation
+# 仓库外：python -m venv <dir>; <dir>\Scripts\pip install --no-index --no-deps dist\*.whl
+```
+
+**只装 wheel 时可用**：`rekit --help`、全部分析命令（`info` / `dotnet` / `ilflow` /
+`layout` / `sigblob` / `map` / `disasm` / `expr` / `recdesc` / `callgraph` / `callfacts` /
+`funcreport` / `datarefs` / `sitejoin` / `iat` / `fingerprint` / `mcp`）——唯一例外是
+`coverage`（见下）。`import rekit.api` 的 6 个函数 + 3 个异常类型同样可用。
+分析 .NET 需要调用方**自带** .NET 文件。
+
+**只装 wheel 时不可用**（缺的是仓库外资产，不是代码）：
+
+- `examples\`：三份示例按 `__file__` 定位仓库源码，不是包内模块；
+- `tests\` 与 `tests\fixtures`：pytest / verify 套随仓库发布，被 `MANIFEST.in` prune；
+- `samples\`（含 m17 .NET 样本）：被 `.gitignore` 排除，不属于运行时资产；
+- `gate.ps1` / `setup.ps1` / `work\` 脚本：仓库交付物，不随包分发；
+- `coverage` 命令：运行期调用外部 `objdump`，不是 pip 依赖。
+
+机械判据是 `tests\verify_dist.py`（门禁内执行）：在系统临时目录新建 venv、`--no-index`
+安装 wheel（非 `-e`），然后在仓库外跑 `--help`、`info`（PE / ELF / .NET）、`ilflow`（.NET），
+逐项检查：
+
+1. wheel / sdist 内容只含包本体，无 tests / examples / samples / tools / fixtures；
+2. METADATA 无 `Requires-Dist`、`Requires-Python` 与 pyproject 一致、console script 正确；
+   `>=3.8` 另做静态扫描（3.9+ 专属语法 / 内置泛型注解 / PEP 604 / 3.9+ 专属 API）；
+3. `import rekit` 的来源在 venv site-packages，不在仓库路径；
+4. **同一输入下，仓库内 `python -m rekit` 与安装版 `rekit` 的 `--json` stdout 逐字节相同**，
+   退出码相同；`--json` 唯一路径派生字段是 `path`，两边传入同一绝对路径，故不排除、也要求相等；
+5. 安装版在两个不同 cwd 下输出相同（不读 cwd）；
+6. 空比对判 FAIL；篡改一字节 / 改动 `path` 必须被检出，并给出首个差异位置（第 N 行第 M 字节）。
+
+这项判据可失败自证：比较器对篡改、路径变化、空比对三种输入都必须报不一致。项数现算见
+`python "…\tests\verify_dist.py"` 的汇总行。

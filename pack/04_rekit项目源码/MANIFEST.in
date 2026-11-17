@@ -1,0 +1,5 @@
+# 分发包只含包本体（rekit/**）。
+# tests/ 依赖仓库内 fixtures 与仓库外 samples，不属于运行时资产；
+# examples/ 通过 __file__ 定位源码，脱离仓库也无法独立运行。二者都不入 sdist/wheel。
+prune tests
+prune examples

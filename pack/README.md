@@ -105,6 +105,41 @@ python -m pytest tests -q
 依赖：Python 3.8+ 纯标准库即可跑全部功能（构建期需要 setuptools；pefile / dnfile / objdump
 仅交叉验证用到；`ilasm` 仅重建 M19 受控样本时用到）。objdump 需要 GNU binutils，且含中文路径时必须 `LC_ALL=C`（`verify_gate.py` 已自动处理）。
 
+### 只装 wheel（没有这个仓库的机器）
+
+分发包只含 `rekit/**` 包本体；`tests` / `examples` / `samples` / `tools` 都在 `MANIFEST.in` 里
+prune 掉，`dependencies = []`（运行期纯标准库）。构建产物由 `.gitignore` 覆盖，**不入库**。
+
+```powershell
+cd pack\04_rekit项目源码
+python -m pip install build setuptools     # 构建依赖（--no-isolation 用）
+python -m build --no-isolation             # → dist\rekit-0.1.0-py3-none-any.whl + .tar.gz
+
+# 仓库外新建干净环境，装 wheel（不是 -e）
+python -m venv D:\tmp\rekit-venv
+D:\tmp\rekit-venv\Scripts\pip install --no-index --no-deps dist\rekit-0.1.0-py3-none-any.whl
+
+# 任意目录都可用（不需要仓库、不读 cwd）
+rekit --help
+rekit info <绝对路径的 PE/ELF/.NET> --json
+rekit ilflow <绝对路径的 .NET dll> --json
+```
+
+判据（门禁内执行）：`tests\verify_dist.py` 在系统临时目录新建 venv、装 wheel，然后把
+「仓库内 `python -m rekit`」与「干净环境里的 `rekit`」对同一输入跑 `--json`，要求 **stdout
+逐字节相同**、退出码相同。`--json` 唯一的路径派生字段是 `path`；两边传入同一绝对路径，
+因此不做排除，`path` 也要求逐字节相等。空比对判 FAIL，篡改一字节必须被检出并给出首个差异位置。
+
+**装好不等于全功能**，缺的是仓库外资产，不是代码：
+
+| 装 wheel 后不可用 | 影响 | 原因 |
+|---|---|---|
+| `examples\` 三份示例 | 示例脚本跑不了 | 按 `__file__` 定位仓库源码，不是包内模块 |
+| `tests\` 与 `tests\fixtures` | pytest / verify 套跑不了 | `MANIFEST.in` prune；判据随仓库发布 |
+| `samples\`（含 .NET 样本） | `dotnet`/`ilflow`/`layout`/`sigblob` 需自备 .NET 文件 | 样本被 `.gitignore` 排除，不是运行时资产 |
+| `gate.ps1` / `setup.ps1` / `work\` 脚本 | 门禁与资产恢复不可用 | 属于仓库交付物 |
+| `coverage` 命令 | 需要外部 `objdump`（GNU binutils） | 调 PATH 里的工具，不是 pip 依赖 |
+
 **路径垫片（2026-11-17 起不再需要）**：旧测试曾硬编码 `<旧仓库根>`，
 依赖 `<旧仓库根>\...` 目录联接；且 Windows 上 `/home/...` 按**当前盘符根**解析，克隆在 C: 时
 需要 `<旧仓库根>\...`（普通用户通常无权限）。本次演练已把 5 个测试与 3 个生成器改为按
