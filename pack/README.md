@@ -201,7 +201,7 @@ wheel 的 METADATA 带 `License-Expression: MIT` 与 `License-File: LICENSE`，w
 
 ## 版本与 tag
 
-- `v0.1.0` → `d63d244`（U1-a 打包 + U1-b 证据索引 / R95 补登记的完整交付），**保持不动**。
+- `v0.1.0` → `85cf36f`（U1-a 打包 + U1-b 证据索引 / R95 补登记的完整交付；2026-11-21 历史改写后重建，旧哈希 `d63d244`），**保持不动**。
 - `v0.1.1` → 干净克隆演练后的补件提交，覆盖：`gate.ps1`（preflight）、`setup.ps1`（资产恢复 +
   junction）、R126、路径垫片去除、`verify_layout` / `verify_sigblob` 证据路径改为 work 相对路径、
   本 README 与 CHANGELOG / PROGRESS / HANDOFF 的演练记录。tag 说明写明覆盖范围。
