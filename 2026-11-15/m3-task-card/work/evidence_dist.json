@@ -75,6 +75,18 @@
    "detail": "缺条款=无 版权行=Copyright (c) 2026 WLDHH33"
   },
   {
+   "id": "license.root",
+   "name": "仓库根 LICENSE 与包内 LICENSE 逐字节相同",
+   "status": "PASS",
+   "detail": "root=1064B package=1064B 逐字相同"
+  },
+  {
+   "id": "license.root.selfproof",
+   "name": "根/包 LICENSE 一致性判据可失败自证（篡改一字节 / 空文件均不等）",
+   "status": "PASS",
+   "detail": "同文=相等 多一字节=不等 空文件=不等"
+  },
+  {
    "id": "license.pyproject",
    "name": "pyproject license 是 SPDX 字符串（非 table）且 license-files 含 LICENSE",
    "status": "PASS",
