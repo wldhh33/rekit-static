@@ -116,6 +116,14 @@ python "pack\04_rekit项目源码\examples\dotnet_report.py" "2026-11-15\m3-task
   （PE/ELF/.NET）/ `ilflow`（.NET）/ `import rekit.api` 全通；门禁与全量 pytest 在 3.14.0 上跑）。
   `requires-python` 的依据是这次实测，**不是静态扫描**；`tests\verify_dist.py` 把 pyproject、
   README、本文件的声明与 wheel 的 `Requires-Python` 逐字比对，不一致即 FAIL。
+- **许可**：**MIT**（2026-11-21 用户裁决，已定案）。仓库根 `LICENSE` 为 MIT 正文，
+  版权行 `Copyright (c) 2026 WLDHH33`（取自可核实的 git 身份）。`pyproject.toml` 按
+  PEP 639：`license = "MIT"`、`license-files = ["LICENSE"]`（无自由文本 table、无弃用
+  classifier）；wheel METADATA 出 `License-Expression: MIT` 与 `License-File: LICENSE`，
+  wheel（`*.dist-info/licenses/LICENSE`）与 sdist（顶层 `LICENSE`）各含一份。
+  收到 wheel 的人被授予使用、复制、修改、合并、发布、分发、再许可和/或销售本软件及副本的
+  权利，条件是保留版权与许可声明；软件按“原样”提供，不附带担保。构建产物 `dist/`、`build/`
+  不入库，**分发前必须重建**，旧的自定义文本 wheel 不得外发。
 
 ```powershell
 cd pack\04_rekit项目源码
@@ -149,7 +157,11 @@ python -m build --no-isolation
 4. **同一输入下，仓库内 `python -m rekit` 与安装版 `rekit` 的 `--json` stdout 逐字节相同**，
    退出码相同；`--json` 唯一路径派生字段是 `path`，两边传入同一绝对路径，故不排除、也要求相等；
 5. 安装版在两个不同 cwd 下输出相同（不读 cwd）；
-6. 空比对判 FAIL；篡改一字节 / 改动 `path` 必须被检出，并给出首个差异位置（第 N 行第 M 字节）。
+6. 空比对判 FAIL；篡改一字节 / 改动 `path` 必须被检出，并给出首个差异位置（第 N 行第 M 字节）；
+7. 许可：`LICENSE` 正文含 MIT 关键条款句与版权行；pyproject 的 `license` 是 SPDX 字符串
+   （不是 table）且 `license-files` 含 `LICENSE`；wheel METADATA 的 `License-Expression`
+   与 pyproject 逐字相等且有 `License-File: LICENSE`；wheel 与 sdist 各含一份 `LICENSE`。
 
-这项判据可失败自证：比较器对篡改、路径变化、空比对三种输入都必须报不一致。项数现算见
+这项判据可失败自证：比较器对篡改、路径变化、空比对三种输入都必须报不一致；许可四项另有
+自证——篡改 SPDX 值、删除 `LICENSE`、伪造空声明都必须判 FAIL。项数现算见
 `python "…\tests\verify_dist.py"` 的汇总行。

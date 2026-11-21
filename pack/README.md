@@ -131,6 +131,22 @@ rekit ilflow <绝对路径的 .NET dll> --json
 逐字节相同**、退出码相同。`--json` 唯一的路径派生字段是 `path`；两边传入同一绝对路径，
 因此不做排除，`path` 也要求逐字节相等。空比对判 FAIL，篡改一字节必须被检出并给出首个差异位置。
 
+**许可：MIT**。全文见 `LICENSE`，版权行 `Copyright (c) 2026 WLDHH33`（取自仓库可核实的 git
+身份，未编造个人姓名）。`pyproject.toml` 用 PEP 639 口径：`license = "MIT"`、
+`license-files = ["LICENSE"]`，不再使用已弃用的 `license = { text = ... }` 与 classifier。
+wheel 的 METADATA 带 `License-Expression: MIT` 与 `License-File: LICENSE`，wheel 与 sdist
+各自内含 `LICENSE`。**收到 wheel 的人被授予**：使用、复制、修改、合并、发布、分发、再许可
+和/或销售本软件及副本的权利；条件是保留版权声明与许可声明。软件按“原样”提供，不附带任何
+明示或暗示的担保（完整条款以 `LICENSE` 正文为准）。`tests\verify_dist.py` 机械核对
+「仓库 LICENSE 正文是 MIT」「pyproject 的 license 是 SPDX 字符串且 `license-files` 含 LICENSE」
+「METADATA 的 `License-Expression` 与 pyproject 逐字相等」「wheel / sdist 各含 LICENSE」，
+并自证篡改 SPDX 值、删除 `LICENSE`、伪造空声明三种情况都会 FAIL。
+
+**旧产物不要误发**：`dist\`、`build\` 被 `.gitignore` 覆盖、不入库；旧版 wheel 的 `license`
+是自由文本，METADATA 里只有 `License: 内部学习项目，未声明开源许可`，没有 `License-Expression`。
+分发前必须用上面的 `python -m build --no-isolation` 重建，并清掉 `dist\` 里的旧文件；
+判据会拒绝缺 `LICENSE` 或缺 `License-Expression: MIT` 的产物。
+
 **装好不等于全功能**，缺的是仓库外资产，不是代码：
 
 | 装 wheel 后不可用 | 影响 | 原因 |

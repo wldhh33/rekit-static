@@ -75,8 +75,16 @@ UNAVAILABLE = [
 PACK = os.path.dirname(SRC)
 README = os.path.join(PACK, "README.md")
 LIBAPI = os.path.join(PACK, "03_路线图与章程", "LIBRARY_API.md")
+LIC = os.path.join(SRC, "LICENSE")
 # 文档里唯一的版本声明行：`- **支持的 Python 版本**：3.8+（实测 …）`
 DECL_RE = re.compile(r"支持的 Python 版本\*\*[：:]\s*(\d+\.\d+)\+")
+# 判定 LICENSE 正文是否为 MIT：关键条款句 + 版权行（不比对全文，允许换行差异）
+MIT_MARKERS = (
+    "MIT License",
+    "Permission is hereby granted, free of charge",
+    'THE SOFTWARE IS PROVIDED "AS IS"',
+)
+CPR_RE = re.compile(r"Copyright \(c\) (\d{4}) (\S+)")
 
 CHECKS = []
 
@@ -216,6 +224,20 @@ def _meta_matches(req_py, decl):
     return decl is not None and req_py == [">=" + decl]
 
 
+def _mit_ok(text):
+    """LICENSE 正文是否为 MIT：关键条款句齐全 + 有版权行（年份 + 持有人）。"""
+    missing = [m for m in MIT_MARKERS if m not in (text or "")]
+    m = CPR_RE.search(text or "")
+    ok = not missing and m is not None
+    return ok, "缺条款=%s 版权行=%s" % (
+        missing or "无", m.group(0) if m else "无")
+
+
+def _spdx_ok(value, expected="MIT"):
+    """许可表达式的唯一判据：逐字相等；空值/None 一律不成立。"""
+    return value is not None and value == expected
+
+
 def main():
     missing = [p for p in (PE, ELF, DOTNET) if not os.path.isfile(p)]
     if missing:
@@ -266,8 +288,8 @@ def main():
             snames = [m.name for m in t.getmembers() if "/" in m.name]
         srel = [n.split("/", 1)[1] for n in snames]
         stop = sorted({r.split("/")[0] for r in srel})
-        sallowed = {"rekit", "rekit.egg-info", "rekit-0.1.0.egg-info", "PKG-INFO",
-                    "README.md", "pyproject.toml", "setup.cfg", "MANIFEST.in"}
+        sallowed = {"rekit", "rekit.egg-info", "rekit-0.1.0.egg-info", "LICENSE",
+                    "PKG-INFO", "README.md", "pyproject.toml", "setup.cfg", "MANIFEST.in"}
         _add("sdist.contents", "sdist 只含包本体 + 元数据（tests/examples 已 prune）",
              set(stop) <= sallowed and not _banned(srel),
              "顶层=%s 异物=%s" % (stop, _banned(srel) or "无"))
@@ -307,6 +329,48 @@ def main():
              not hits and minpy is not None and tuple(int(x) for x in minpy.split(".")) < (3, 9),
              "命中=%s（范围：语法/注解/3.9+ 专属 API，不含运行时行为）"
              % (hits or "无"))
+
+        # ---- (i) 许可：LICENSE 正文 / pyproject SPDX / wheel METADATA / 两个产物含 LICENSE
+        try:
+            with open(LIC, encoding="utf-8") as f:
+                lic_text = f.read()
+        except OSError:
+            lic_text = ""
+        lok, ldetail = _mit_ok(lic_text)
+        _add("license.file", "仓库 LICENSE 存在且正文是 MIT（关键条款 + 版权行）", lok, ldetail)
+
+        with open(os.path.join(SRC, "pyproject.toml"), encoding="utf-8") as f:
+            pytxt = f.read()
+        m_str = re.search(r'(?m)^license\s*=\s*"([^"]*)"\s*$', pytxt)
+        m_tab = re.search(r'(?m)^license\s*=\s*\{', pytxt)
+        py_lic = m_str.group(1) if m_str else None
+        lf = re.search(r'(?m)^license-files\s*=\s*\[([^\]]*)\]', pytxt)
+        lf_ok = bool(lf) and '"LICENSE"' in lf.group(1)
+        _add("license.pyproject",
+             "pyproject license 是 SPDX 字符串（非 table）且 license-files 含 LICENSE",
+             m_tab is None and _spdx_ok(py_lic) and lf_ok,
+             "license=%r 自由文本 table=%s license-files=%s"
+             % (py_lic, "有" if m_tab else "无", lf.group(1).strip() if lf else "无"))
+
+        expr = [l.split(":", 1)[1].strip() for l in lines
+                if l.lower().startswith("license-expression:")]
+        lfiles = [l.split(":", 1)[1].strip() for l in lines
+                  if l.lower().startswith("license-file:")]
+        _add("license.meta",
+             "wheel METADATA 的 License-Expression 与 pyproject 逐字相等，且有 License-File",
+             py_lic is not None and expr == [py_lic] and "LICENSE" in lfiles,
+             "License-Expression=%r pyproject=%r License-File=%r"
+             % (expr, py_lic, lfiles))
+
+        wl = [n for n in wnames if n.upper().endswith("LICENSE")]
+        _add("license.wheel", "wheel 内含 LICENSE", len(wl) == 1, "命中=%s" % (wl or "无"))
+        sl = [r for r in srel if r == "LICENSE" or r.upper().endswith("/LICENSE")]
+        _add("license.sdist", "sdist 内含 LICENSE", len(sl) == 1, "命中=%s" % (sl or "无"))
+        _add("license.selfproof",
+             "许可判据可失败自证（篡改 SPDX / 删除 LICENSE / 空声明均 FAIL）",
+             _spdx_ok("MIT") and not _spdx_ok("Apache-2.0") and not _spdx_ok("")
+             and not _mit_ok("")[0] and not _mit_ok("MIT License\n")[0],
+             "SPDX: MIT=PASS Apache-2.0=FAIL 空=FAIL；LICENSE: 空=FAIL 残缺=FAIL")
 
         # ---- (c) 仓库外干净 venv 安装 wheel
         venv = os.path.join(tmp, "venv")
@@ -413,6 +477,10 @@ def main():
             "requires_python": req_py, "requires_dist": req_dist,
             "declared_python": minpy,
             "declaration_sources": decl,
+            "license": {"spdx": py_lic,
+                        "meta_expression": expr,
+                        "wheel_license": bool(wl),
+                        "sdist_license": bool(sl)},
             "cases": case_ev,
         })  # noqa: E501
     finally:

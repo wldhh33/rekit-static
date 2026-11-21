@@ -24,7 +24,7 @@
    "id": "sdist.contents",
    "name": "sdist 只含包本体 + 元数据（tests/examples 已 prune）",
    "status": "PASS",
-   "detail": "顶层=['MANIFEST.in', 'PKG-INFO', 'README.md', 'pyproject.toml', 'rekit', 'rekit.egg-info', 'setup.cfg'] 异物=无"
+   "detail": "顶层=['LICENSE', 'MANIFEST.in', 'PKG-INFO', 'README.md', 'pyproject.toml', 'rekit', 'rekit.egg-info', 'setup.cfg'] 异物=无"
   },
   {
    "id": "meta.deps",
@@ -69,6 +69,42 @@
    "detail": "命中=无（范围：语法/注解/3.9+ 专属 API，不含运行时行为）"
   },
   {
+   "id": "license.file",
+   "name": "仓库 LICENSE 存在且正文是 MIT（关键条款 + 版权行）",
+   "status": "PASS",
+   "detail": "缺条款=无 版权行=Copyright (c) 2026 WLDHH33"
+  },
+  {
+   "id": "license.pyproject",
+   "name": "pyproject license 是 SPDX 字符串（非 table）且 license-files 含 LICENSE",
+   "status": "PASS",
+   "detail": "license='MIT' 自由文本 table=无 license-files=\"LICENSE\""
+  },
+  {
+   "id": "license.meta",
+   "name": "wheel METADATA 的 License-Expression 与 pyproject 逐字相等，且有 License-File",
+   "status": "PASS",
+   "detail": "License-Expression=['MIT'] pyproject='MIT' License-File=['LICENSE']"
+  },
+  {
+   "id": "license.wheel",
+   "name": "wheel 内含 LICENSE",
+   "status": "PASS",
+   "detail": "命中=['rekit-0.1.0.dist-info/licenses/LICENSE']"
+  },
+  {
+   "id": "license.sdist",
+   "name": "sdist 内含 LICENSE",
+   "status": "PASS",
+   "detail": "命中=['LICENSE']"
+  },
+  {
+   "id": "license.selfproof",
+   "name": "许可判据可失败自证（篡改 SPDX / 删除 LICENSE / 空声明均 FAIL）",
+   "status": "PASS",
+   "detail": "SPDX: MIT=PASS Apache-2.0=FAIL 空=FAIL；LICENSE: 空=FAIL 残缺=FAIL"
+  },
+  {
    "id": "venv.install",
    "name": "仓库外 venv 装 wheel（--no-index，非 -e）",
    "status": "PASS",
@@ -84,7 +120,7 @@
    "id": "dist.noextras",
    "name": "安装清单不含 samples/tests/tools/fixtures/examples",
    "status": "PASS",
-   "detail": "文件数=69 异物=无"
+   "detail": "文件数=70 异物=无"
   },
   {
    "id": "cli.help.exit",
@@ -228,13 +264,14 @@
  "artifact": {
   "wheel": "rekit-0.1.0-py3-none-any.whl",
   "sdist": "rekit-0.1.0.tar.gz",
-  "wheel_files": 35,
-  "sdist_files": 43,
+  "wheel_files": 36,
+  "sdist_files": 44,
   "wheel_top": [
    "rekit",
    "rekit-0.1.0.dist-info"
   ],
   "sdist_top": [
+   "LICENSE",
    "MANIFEST.in",
    "PKG-INFO",
    "README.md",
@@ -252,6 +289,14 @@
    "pyproject": "3.8",
    "README": "3.8",
    "LIBRARY_API": "3.8"
+  },
+  "license": {
+   "spdx": "MIT",
+   "meta_expression": [
+    "MIT"
+   ],
+   "wheel_license": true,
+   "sdist_license": true
   },
   "cases": [
    {
