@@ -16,7 +16,7 @@
   PE 缝隙量化、M13 的 6 条下界判定、5 条判据问题、代码 sha256 **仍然有效**，但**不再单独作为总账权威**；
   它与新权威的关系由 `evidence_numbers_ledger.json` 的 `sources` 条目（sha256）固定。
 - **未受保护数字（显式清单，不是隐性漏洞）**：`python "pack\tools\ledger_check.py" --audit --audit-json "2026-11-15\m3-task-card\work\evidence_ledger_unprotected.json"`。
-  审计只对小节正文（排除标题行）取数，逐节列出「已公布但未进 `numbers` 登记」的数值。当前 10 个小节、已登记 98 个、去重后未登记 127 个；
+  审计只对小节正文（排除标题行）取数，逐节列出「已公布但未进 `numbers` 登记」的数值。当前 10 个小节、已登记 103 个、去重后未登记 141 个；
   不登记的原因分五类：①**区间/分布描述**（如 `1–3: 609`，登记的是区间端点与总数）②**派生百分比**（分子分母已登记，
   如 `0.0496%`、`76.40%`）③**旧值/对照值**（R102 禁止入账，只作 `match_old` 证据）④**地址与样例字节**
   ⑤**逐样本细分格**（登记表已保头部数字，细分格由证据 JSON 承担）。凡「可被单独改动且会改变结论」的数字必须登记。
@@ -247,14 +247,23 @@ python %TEMP%/m12_ledger.py      # 汇总为 evidence_m12_ledger.json（M12 快�
 
 ### 11.2 `datarefs_full.exe`（PE，DWARF）
 
+> **2026-11-21 重生成**：样本改由固定构建目录（`%TEMP%\rekit_m16_build`）+
+> `-fdebug-prefix-map=<构建目录>=.` + PE 时间戳归零生成，产物不再含本机用户名/随机临时目录，
+> 连续两次生成逐字节相同（`tests/test_repro.py`）。旧样本由另一套 MinGW（winlibs，本机已无）
+> 编译且带 CRT 调试信息，无法复现；重生成后编译器与调试信息范围都变了，下表数字随样本重算。
+> 旧值 → 新值：候选 9→5、接受 7→5、拒收 2→0（旧的两条 `location_not_static` 来自 CRT
+> 调试信息，新样本无）、COFF 720→592、有引用/无引用 5/2→5/0、比例 71.4286%→100.0000%、
+> `after_object` 6→8、`data_unattributed` 190→91、指针槽 `0x4030/0x4010`→`0x2020/0x2000`、
+> 内部值 `0x4038/0x9084`→`0x2028/0x6024`。判据、拒收分类代码与 `MIN_SIZE` 均未改。
+
 | 项 | 实测 |
 |---|---|
-| 声明候选 / 接受 / 拒收 / 去重 | 9 / **7** / 2 / 0（9 = 7+2+0 ✓） |
-| 拒收逐类 | `location_not_static=2`（`__CTOR_LIST__`/`__DTOR_LIST__`） |
-| 格式层拒收（不进分母） | `coff_symbols=720, export_table=0` |
-| 有代码引用 / 有指针槽 / 无引用 | 5 / 1 / 2；比例 **71.4286%**（5/7） |
-| 归因分档 | `object_start=3, inside_object=3, after_object=6, data_unattributed=190, not_data=6` |
-| 指针槽 | `0x4030→0x4010`；内部值 `0x4038→0x9084`（`g_zero+4`，单列） |
+| 声明候选 / 接受 / 拒收 / 去重 | 5 / **5** / 0 / 0（5 = 5+0+0 ✓） |
+| 拒收逐类 | 无（单 CU、无 CRT 调试信息；分类判据由 `test_static_addr_classification` 直接覆盖） |
+| 格式层拒收（不进分母） | `coff_symbols=592, export_table=0` |
+| 有代码引用 / 有指针槽 / 无引用 | 5 / 1 / 0；比例 **100.0000%**（5/5） |
+| 归因分档 | `object_start=3, inside_object=3, after_object=8, data_unattributed=91, not_data=6` |
+| 指针槽 | `0x2020→0x2000`；内部值 `0x2028→0x6024`（`g_zero+4`，单列） |
 | `.bss` | `g_zero` 无文件字节、仍被引用与归因（`file_backed=false`） |
 
 ### 11.3 外部重算与可失败自证（`tests/verify_datarefs.py`）
@@ -262,8 +271,8 @@ python %TEMP%/m12_ledger.py      # 汇总为 evidence_m12_ledger.json（M12 快�
 | 检查 | 结果 |
 |---|---|
 | `readelf -sW` 对象对账 | 501 条符号对象，无不一致；2 条落在更大对象内部 |
-| `objdump --dwarf=info` 对象对账（含类型链） | 7 条，`g_table=16` / `g_msg=11` / `g_zero=32` 一致 |
-| `objdump -d` 引用点目标 | fix **207/207**、dyn **3854/3855** 一致 |
+| `objdump --dwarf=info` 对象对账（含类型链） | 5 条，`g_table=16` / `g_msg=11` / `g_zero=32` 一致（旧样本 7 条，多出的 2 条是无名 CRT 变量） |
+| `objdump -d` 引用点目标 | fix **111/111**、dyn **3854/3855** 一致（fix 旧值 207/207，随样本重算） |
 | `objdump -s` 指针槽 | 2/2 一致 |
 | 可失败自证 | 目标 +4 → FAIL、删 `g_table` → FAIL（干净输入 PASS） |
 

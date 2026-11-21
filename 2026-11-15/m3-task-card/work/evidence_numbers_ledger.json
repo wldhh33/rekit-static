@@ -195,7 +195,7 @@
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m16_datarefs.json",
       "role": "M16 数据引用层外部重算",
-      "sha256": "a1d7961f1b3faaff26f123401d73566c44beabb70e19d897daeb4b6b23f750e9"
+      "sha256": "5cf796cee7e90097ea34bdb9adb7ec5725f8642fc587356fd92ccf0751b32522"
     },
     {
       "path": "2026-11-15/m3-task-card/work/evidence_m17_dotnet.json",

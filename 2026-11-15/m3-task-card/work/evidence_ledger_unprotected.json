@@ -180,6 +180,18 @@
           "occurrences": 4
         },
         {
+          "token": "100.0000%",
+          "occurrences": 2
+        },
+        {
+          "token": "11",
+          "occurrences": 2
+        },
+        {
+          "token": "111",
+          "occurrences": 2
+        },
+        {
           "token": "12",
           "occurrences": 2
         },
@@ -208,11 +220,15 @@
           "occurrences": 2
         },
         {
-          "token": "1001",
-          "occurrences": 1
+          "token": "592",
+          "occurrences": 2
         },
         {
-          "token": "11",
+          "token": "91",
+          "occurrences": 2
+        },
+        {
+          "token": "1001",
           "occurrences": 1
         },
         {
@@ -229,6 +245,14 @@
         },
         {
           "token": "190",
+          "occurrences": 1
+        },
+        {
+          "token": "2026",
+          "occurrences": 1
+        },
+        {
+          "token": "21",
           "occurrences": 1
         },
         {
@@ -292,7 +316,7 @@
           "occurrences": 1
         }
       ],
-      "unprotected_distinct": 29
+      "unprotected_distinct": 35
     },
     "M17": {
       "heading": "## 12. M17 .NET 程序集结构层（新对象：CLI 程序集）",
@@ -570,15 +594,31 @@
         "1,020",
         "100.0000%",
         "22 套",
-        "554 passed"
+        "554 passed",
+        "27 项",
+        "4/4",
+        "63 个 `[]`",
+        "64 个 `[]`"
       ],
       "unprotected": [
         {
           "token": "17",
-          "occurrences": 1
+          "occurrences": 2
         },
         {
           "token": "20261117",
+          "occurrences": 2
+        },
+        {
+          "token": "0,0",
+          "occurrences": 1
+        },
+        {
+          "token": "2026",
+          "occurrences": 1
+        },
+        {
+          "token": "23",
           "occurrences": 1
         },
         {
@@ -614,7 +654,7 @@
           "occurrences": 1
         }
       ],
-      "unprotected_distinct": 10
+      "unprotected_distinct": 13
     },
     "M20": {
       "heading": "## 16. M20 .NET 类型布局与字段 RVA（.NET 纵切面封口）",
@@ -632,13 +672,30 @@
         "121",
         "100.0000%",
         "0.7576%",
-        "28 项",
+        "33 项",
         "23 套",
-        "554 passed"
+        "554 passed",
+        "10 个字段偏移"
       ],
       "unprotected": [
         {
+          "token": "20261117",
+          "occurrences": 2
+        },
+        {
+          "token": "24",
+          "occurrences": 2
+        },
+        {
+          "token": "-1",
+          "occurrences": 1
+        },
+        {
           "token": "0102",
+          "occurrences": 1
+        },
+        {
+          "token": "11",
           "occurrences": 1
         },
         {
@@ -646,15 +703,15 @@
           "occurrences": 1
         },
         {
+          "token": "17",
+          "occurrences": 1
+        },
+        {
           "token": "1713",
           "occurrences": 1
         },
         {
-          "token": "20261117",
-          "occurrences": 1
-        },
-        {
-          "token": "24",
+          "token": "2026",
           "occurrences": 1
         },
         {
@@ -663,6 +720,10 @@
         },
         {
           "token": "27",
+          "occurrences": 1
+        },
+        {
+          "token": "335",
           "occurrences": 1
         },
         {
@@ -686,8 +747,8 @@
           "occurrences": 1
         }
       ],
-      "unprotected_distinct": 12
+      "unprotected_distinct": 17
     }
   },
-  "unprotected_distinct_total": 127
+  "unprotected_distinct_total": 141
 }

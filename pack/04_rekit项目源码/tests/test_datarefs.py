@@ -128,9 +128,30 @@ def test_dwarf_type_chain_size(pe):
 
 def test_rejections_counted_by_class(pe):
     d = pe["denominator"]
-    assert d["by_rejection"] == {"location_not_static": 2}
     assert set(d["by_rejection"]) <= set(DR.REJECT_CLASSES)
-    assert d["rejected_total"] == 2
+    assert d["rejected_total"] == sum(d["by_rejection"].values())
+    # 2026-11-21 起样本由固定构建目录 + -fdebug-prefix-map 生成：单 CU、
+    # 无 CRT 调试信息，声明候选全部可接受，故拒收为 0。拒收**分类**判据
+    # 不依赖样本的偶然构成，由下面 test_static_addr_classification 直接覆盖。
+    assert d["by_rejection"] == {}
+    assert d["rejected_total"] == 0
+
+
+def test_static_addr_classification():
+    """位置形式判据：只有 DW_OP_addr 能当静态地址；其余分类逐类可查。"""
+    ok = DR._static_addr({"location": {"kind": "expr",
+                                       "expr": b"\x03" + (0x2010).to_bytes(8, "little")},
+                          "addr_size": 8})
+    assert ok[0] == 0x2010 and ok[1] == "DW_OP_addr"
+    for kind in ("loclist", "implicit", "absent"):
+        got = DR._static_addr({"location": {"kind": kind}, "addr_size": 8})
+        assert got[0] is None and got[1] == "location_not_static", kind
+    empty = DR._static_addr({"location": {"kind": "expr", "expr": b""},
+                             "addr_size": 8})
+    assert empty[1] == "location_unresolved"
+    fbreg = DR._static_addr({"location": {"kind": "expr", "expr": b"\x91\x04"},
+                             "addr_size": 8})
+    assert fbreg[1] == "location_unresolved"
 
 
 def test_format_rejections_not_in_denominator(pe):
@@ -138,7 +159,7 @@ def test_format_rejections_not_in_denominator(pe):
     # PE COFF 符号没有尺寸字段：单列，不进对象分母
     assert d["format_rejections"]["coff_symbols"] > 0
     assert d["format_rejections"]["export_table"] == 0
-    assert d["declared_candidates"] == 9
+    assert d["declared_candidates"] == 5
     assert "不进对象分母" in d["format_rejections_note"]
 
 
@@ -187,8 +208,8 @@ def test_register_forms_have_no_static_target(pe):
 def test_pointer_slots_separated(pe):
     edges = pe["pointer_edges"]
     inside = pe["pointer_values_inside"]
-    assert any(e["from"] == 0x4030 and e["to"] == 0x4010 for e in edges)
-    assert any(v["from"] == 0x4038 and v["to"] == 0x9084 for v in inside)
+    assert any(e["from"] == 0x2020 and e["to"] == 0x2000 for e in edges)
+    assert any(v["from"] == 0x2028 and v["to"] == 0x6024 for v in inside)
     assert all(e["to"] in {o["start"] for o in pe["objects"]} for e in edges)
 
 

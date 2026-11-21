@@ -2,13 +2,19 @@
 # tests/make_funcreport_full.py — M15 验收样本：完整声明的小函数
 #
 # 用内联 C 编出 add3/twice/main，带 -g 以产生 DWARF（形参声明来源）。
-# 约束：
-#   - 仓库路径含中文，gcc 在 Windows 上对非 ASCII 路径不可靠，故在 ASCII
-#     临时目录编译，成功后复制回 tests/fixtures/funcreport_full；
+# 可复现性约束（2026-11-21 修复）：
+#   - 仓库路径含中文，gcc 在 Windows 上对非 ASCII 路径不可靠，故在 ASCII 的
+#     **固定**构建目录（tempfile.gettempdir()/rekit_m15_build，每次清空）里编译，
+#     不再用 tempfile.mkdtemp 的随机目录；
+#   - 用 -fdebug-prefix-map 把构建目录映射为 "."，使 DWARF 的 comp_dir/源路径与
+#     机器、用户名无关；
+#   - PE 时间戳归零（-Wl,--no-insert-timestamp，且脚本再兜底清零 4 字节），
+#     保证同一机器两次、及换用户名的机器生成，产物逐字节相同；
 #   - gcc 缺失 → 打印 SKIP、退出 0（verify 侧记账为 SKIP，不算 PASS）；
 #   - 编译失败 → 退出 1（这是真问题，不伪装成 SKIP）。
 import os
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
@@ -17,7 +23,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "m15_fixtures", "funcreport_full")
 GCC_CANDIDATES = [os.environ.get("CC", ""),
                   r"C:\msys64\ucrt64\bin\gcc.exe",
-                  r"C:\msys64\mingw64\bin\gcc.exe"]
+                  r"C:\msys64\mingw64\bin\gcc.exe",
+                  r"D:\msys64\ucrt64\bin\gcc.exe",
+                  r"D:\msys64\mingw64\bin\gcc.exe"]
+# 固定的 ASCII 构建目录（含用户名也无妨：debug-prefix-map 会把它映射掉）。
+BUILD_DIR = os.path.join(tempfile.gettempdir(), "rekit_m15_build")
+SRC_NAME = "funcreport_full.c"
+OUT_NAME = "funcreport_full.exe"
 SRC = """\
 int add3(int a, int b, int c) { return a + b * c; }
 int twice(int x) { return x * 2; }
@@ -27,6 +39,7 @@ int main(void) { return add3(1, 2, 3) + twice(4); }
 # MinGW 的部分版本不认 -no-pie，故保留退化命令。
 VARIANTS = [["-g", "-O0", "-fno-pie", "-no-pie"],
             ["-g", "-O0"]]
+NO_TIMESTAMP = ["-Wl,--no-insert-timestamp"]
 
 
 def find_gcc():
@@ -34,42 +47,74 @@ def find_gcc():
     if w:
         return w
     for c in GCC_CANDIDATES:
-        if os.path.exists(c):
+        if c and os.path.exists(c):
             return c
     return None
 
 
-def main():
+def _zero_pe_timestamp(data):
+    """把 PE COFF 头 TimeDateStamp 置 0（等长 4 字节，不改任何偏移）。
+
+    -Wl,--no-insert-timestamp 已能归零；这里再兜底一次，保证老 ld 也确定。
+    非 PE（如 ELF）原样返回。
+    """
+    if len(data) < 0x40 or data[:2] != b"MZ":
+        return data
+    e = struct.unpack_from("<I", data, 0x3C)[0]
+    if e + 0x18 > len(data) or data[e:e + 4] != b"PE\0\0":
+        return data
+    buf = bytearray(data)
+    struct.pack_into("<I", buf, e + 8, 0)
+    return bytes(buf)
+
+
+def build(out_path):
+    """确定性编译到 out_path。返回 (status, detail)，status ∈ OK/SKIP/FAIL。"""
     exe = find_gcc()
     if exe is None:
-        print("SKIP: 找不到 gcc（PATH 与 msys64 候选目录均无）")
-        return 0
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    tmp = tempfile.mkdtemp(prefix="rekit_m15_")
-    try:
-        cpath = os.path.join(tmp, "funcreport_full.c")
-        with open(cpath, "w", encoding="ascii") as f:
-            f.write(SRC)
-        env = dict(os.environ)
-        env["LC_ALL"] = "C"
-        last = None
+        return ("SKIP", "找不到 gcc（PATH 与候选目录均无）")
+    shutil.rmtree(BUILD_DIR, ignore_errors=True)
+    os.makedirs(BUILD_DIR, exist_ok=True)
+    with open(os.path.join(BUILD_DIR, SRC_NAME), "w", encoding="ascii") as f:
+        f.write(SRC)
+    env = dict(os.environ)
+    env["LC_ALL"] = "C"
+    # gcc 调 as/ld 依赖 PATH；把工具链 bin 前置，避免“静默 rc=1”。
+    env["PATH"] = os.path.dirname(exe) + os.pathsep + env.get("PATH", "")
+    prefix_map = "-fdebug-prefix-map=%s=." % BUILD_DIR
+    obj = os.path.join(BUILD_DIR, OUT_NAME)
+    last = None
+    # 先试带 --no-insert-timestamp，失败再退回不带该链接选项（时间戳由 Python 清零）。
+    for linker in (NO_TIMESTAMP, []):
         for flags in VARIANTS:
-            obj = os.path.join(tmp, "funcreport_full.exe")
             if os.path.exists(obj):
                 os.remove(obj)
-            cmd = [exe] + flags + ["-o", obj, cpath]
-            r = subprocess.run(cmd, capture_output=True, env=env, timeout=180)
+            cmd = ([exe] + flags + [prefix_map] + linker +
+                   ["-o", OUT_NAME, SRC_NAME])
+            r = subprocess.run(cmd, capture_output=True, env=env,
+                               cwd=BUILD_DIR, timeout=180)
             if r.returncode == 0 and os.path.exists(obj):
-                shutil.copyfile(obj, OUT)
-                print("OK: %s (%d bytes, flags=%s)"
-                      % (OUT, os.path.getsize(OUT), " ".join(flags)))
-                return 0
+                data = _zero_pe_timestamp(open(obj, "rb").read())
+                os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+                with open(out_path, "wb") as f:
+                    f.write(data)
+                detail = ("%d bytes, flags=%s %s"
+                          % (len(data), " ".join(flags), " ".join(linker)))
+                return ("OK", detail.strip())
             last = (r.returncode, r.stderr.decode("utf-8", "replace")[:400])
-        print("ERROR: gcc 编译失败（%s）：%s" % (last[0], last[1]),
-              file=sys.stderr)
-        return 1
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+    return ("FAIL", str(last))
+
+
+def main():
+    status, detail = build(OUT)
+    if status == "SKIP":
+        print("SKIP: %s" % detail)
+        return 0
+    if status == "OK":
+        print("OK: %s (%s)" % (OUT, detail))
+        return 0
+    print("ERROR: gcc 编译失败（%s）" % detail, file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":

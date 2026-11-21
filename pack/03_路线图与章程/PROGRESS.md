@@ -299,10 +299,10 @@
 
 - 新增 `rekit/datarefs.py` + `rekit datarefs`：对象只认声明（ELF `STT_OBJECT.st_size`、DWARF 变量 + 类型链），引用点按 7 种寻址形态分列，归因三档不合并，指针槽首地址/内部值分列；分母先行（声明候选 = 接受 + 拒收 + 去重），PE COFF/导出表无尺寸字段单列 `format_rejections`、不进对象分母。
 - 实测 `dyn_static`：539 = 483 + 41 + 15；形态 25,941（`seg_disp` 853 / `base_disp` 18,519 / `base_index` 2,695）；分档 `object_start=1709, inside_object=669, after_object=259, data_unattributed=1001, not_data=236`；有代码引用 417（86.3354%）；指针槽首地址 92、内部 30。
-- 正样本 `tests/m16_fixtures/datarefs_full.exe`（PE，DWARF）：9 = 7 + 2 + 0；COFF 格式层拒收 720；`g_table` 内部命中 offset=4/12，`g_zero`（.bss，无文件字节）offset=8；指针槽 `0x4030→0x4010`、内部值 `0x4038→0x9084`。
+- 正样本 `tests/m16_fixtures/datarefs_full.exe`（PE，DWARF）：5 = 5 + 0 + 0；COFF 格式层拒收 592；`g_table` 内部命中 offset=4/12，`g_zero`（.bss，无文件字节）offset=8；指针槽 `0x2020→0x2000`、内部值 `0x2028→0x6024`。（2026-11-21 样本重生成：旧 winlibs 样本为 9 = 7 + 2 + 0、COFF 720、`0x4030→0x4010`、`0x4038→0x9084`；差因见 `NUMBERS_LEDGER.md` §11.2 的重生成说明。）
 - 修复四处会制造假归因的实现错误：ELF `shndx` 按节头 index 查（不是列表位置）；`fs:`/`gs:` 段前缀不按绝对地址归因（dyn 有 853 条栈保护）；算术文本的指令长度取指令而非操作数；TLS 节 VMA 与普通节重叠导致 `.data.rel.ro` 起点对象被误拒收。
 - `funcreport` `SCHEMA=2`，七层白名单 + `data_refs` 真实来源：`funcreport_full` → `absent_measured`（确实没有可交叉对象），Go 0x401320 / minidll 0x1000 → `missing_source`（缺证据）；正样本 6 个用户函数 5 `present` + main `absent_measured`。
-- 外部重算（`tests/verify_datarefs.py`）：readelf 对象 501 条、objdump DWARF 7 条、objdump -d 引用点 fix 207/207 与 dyn 3854/3855、objdump -s 指针槽 2/2；可失败自证（目标 +4、删 `g_table`）均 PASS。
+- 外部重算（`tests/verify_datarefs.py`）：readelf 对象 501 条、objdump DWARF 5 条、objdump -d 引用点 fix 111/111 与 dyn 3854/3855、objdump -s 指针槽 2/2；可失败自证（目标 +4、删 `g_table`）均 PASS。（2026-11-21 重生成后 fix 由 207/207 变 111/111、DWARF 由 7 条变 5 条；dyn 未变。）
 - 回归：pytest **509 passed（70.33s）** + **18/18 verify exit 0** + fingerprint E9 PASS（132/132）；`verify_datarefs.py` 连续 12 次新鲜进程全 PASS。
 - 规则：**R109** 对象分母与格式层拒收分账；**R110** 三档归因不合并、`after_object` 只表示邻接；**R111** “没有声明来源”与“声明存在但不可解析”分开报，且过程缓存不得以对象地址为键。
 - 回归期修掉一个偶发失败（约 1/15）：`paramdecl._abbrev_table` 以 `id(data)` 作缓存键，两个 DWARF 样本的 `.debug_abbrev` 切片同为 512 B，`bytes` 大批释放后 `id` 复用导致命中别人的表 → `funcreport_full` 被误报 `missing_source`。缓存改按内容作键；同时把`no_declaration_source` 的 reason 拆成“无 DWARF 节”与“有节但解析失败”。护栏：`tests/test_datarefs.py` 新增 2 项。

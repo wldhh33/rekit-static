@@ -123,19 +123,24 @@ size_unresolved, overlaps_object`
 
 ### 5.2 `datarefs_full.exe`（PE，DWARF）
 
+> **2026-11-21 样本重生成**：固定构建目录 + `-fdebug-prefix-map` + PE 时间戳归零后重编，
+> 产物不含本机路径、两次生成逐字节相同（`tests/test_repro.py`）。旧样本由本机已无的 winlibs
+> 编译器产出且带 CRT 调试信息，无法复现；下表为**重算后**的值，旧值写在括号里。
+
 | 项 | 值 |
 |---|---|
-| 声明候选 | 9 |
-| 接受对象 | **7**（`g_counter=4, g_table=16, g_ptrs=16, g_msg=11, g_zero=32, 2 个匿名 16`） |
-| 拒收 | 2（均为 `location_not_static`：`__CTOR_LIST__`/`__DTOR_LIST__`） |
-| 去重 | 0；恒等式 9 = 7 + 2 + 0 ✓ |
-| 格式层拒收 | `coff_symbols=720, export_table=0`（不进对象分母） |
-| 有代码引用 / 有指针槽 / 无引用 | 5 / 1 / 2 |
-| 比例（分母=7） | 71.4286% |
-| 归因分档 | `object_start=3, inside_object=3, after_object=6, data_unattributed=190, not_data=6` |
-| 指针槽 | `0x4030 → 0x4010`（`g_ptrs[0]=&g_counter`）；内部值 `0x4038 → 0x9084`（`g_zero+4`，单列） |
+| 声明候选 | 5（旧 9） |
+| 接受对象 | **5**（`g_counter=4, g_table=16, g_ptrs=16, g_msg=11, g_zero=32`；旧 7，多出的 2 条是无名 CRT 变量） |
+| 拒收 | 0（旧 2：`location_not_static` 的 `__CTOR_LIST__`/`__DTOR_LIST__`，来自 CRT 调试信息） |
+| 去重 | 0；恒等式 5 = 5 + 0 + 0 ✓ |
+| 格式层拒收 | `coff_symbols=592, export_table=0`（不进对象分母；旧 720） |
+| 有代码引用 / 有指针槽 / 无引用 | 5 / 1 / 0（旧 5 / 1 / 2） |
+| 比例（分母=5） | 100.0000%（旧 71.4286%，分母 7） |
+| 形态 | `rip_mem=91, lea_rip=20, abs_mem=0, abs_imm=0, seg_disp=1, base_disp=137, base_index=16`（合计 265；旧 954） |
+| 归因分档 | `object_start=3, inside_object=3, after_object=8, data_unattributed=91, not_data=6`（旧 `after_object=6, data_unattributed=190`） |
+| 指针槽 | `0x2020 → 0x2000`（`g_ptrs[0]=&g_counter`）；内部值 `0x2028 → 0x6024`（`g_zero+4`，单列；旧 `0x4030/0x4010`、`0x4038/0x9084`） |
 | `.bss` | `g_zero` 无文件字节（`file_backed=false`，`content_hex=null`），仍可被引用与归因 |
-| 未解出 / 不可静态确定 | 22 / 746 |
+| 未解出 / 不可静态确定 | 2 / 154（旧 22 / 746） |
 
 ## 6. 外部独立重算与可失败自证
 
@@ -144,8 +149,8 @@ size_unresolved, overlaps_object`
 | 检查 | 方法 | 结果 |
 |---|---|---|
 | dyn 对象表 | `readelf -sW` 重算 `OBJECT` 符号（值/尺寸/节），逐个对账；带尺寸符号不得凭空消失 | 对账 501 条；2 条落在更大对象内部（重叠已声明）；无不一致 |
-| fix 对象表 | `objdump --dwarf=info` 重算 `DW_TAG_variable` 的 `DW_OP_addr` + 类型链尺寸 | 7 条；`g_table=16`、`g_msg=11`、`g_zero=32` 全部一致 |
-| fix 引用点 | `objdump -d` 的 `# 目标` 注释（objdump 自己算的）逐点比对 | **207/207** 一致 |
+| fix 对象表 | `objdump --dwarf=info` 重算 `DW_TAG_variable` 的 `DW_OP_addr` + 类型链尺寸 | 5 条；`g_table=16`、`g_msg=11`、`g_zero=32` 全部一致（旧 7 条） |
+| fix 引用点 | `objdump -d` 的 `# 目标` 注释（objdump 自己算的）逐点比对 | **111/111** 一致（旧 207/207） |
 | dyn 引用点 | 同上 | **3854/3855** 一致（1 条 objdump 未给注释，不计入核对） |
 | fix 指针槽 | `objdump -s` 原始字节按指针宽解包，减 ImageBase | 2/2 一致 |
 | 恒等式 / ELF 格式层 | 内建分母 + `format_rejections` 必须为 0 | PASS |

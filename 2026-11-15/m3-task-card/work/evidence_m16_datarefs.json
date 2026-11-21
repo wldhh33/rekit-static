@@ -24,13 +24,13 @@
    "id": "fix-a",
    "name": "objdump DWARF 对象表对账",
    "status": "PASS",
-   "detail": "对账 7 条 DWARF 变量；无不一致"
+   "detail": "对账 5 条 DWARF 变量；无不一致"
   },
   {
    "id": "fix-b",
    "name": "objdump 引用点目标",
    "status": "PASS",
-   "detail": "核对 207/207 个 rip 引用点；全部一致"
+   "detail": "核对 111/111 个 rip 引用点；全部一致"
   },
   {
    "id": "fix-c",
@@ -100,23 +100,21 @@
    "object_code_ref_ratio": 0.8633540372670807
   },
   "fix": {
-   "declared_candidates": 9,
-   "accepted": 7,
-   "rejected_total": 2,
-   "by_rejection": {
-    "location_not_static": 2
-   },
+   "declared_candidates": 5,
+   "accepted": 5,
+   "rejected_total": 0,
+   "by_rejection": {},
    "duplicates": 0,
    "identity_ok": true,
    "format_rejections": {
-    "coff_symbols": 720,
+    "coff_symbols": 592,
     "export_table": 0
    },
    "format_rejections_note": "PE 的 COFF 符号/导出表没有尺寸字段，结构上无法成为对象；它们不进对象分母，只在此处计数（PE/ELF 差异）",
    "with_code_ref": 5,
    "with_pointer_edge": 1,
-   "without_ref": 2,
-   "object_code_ref_ratio": 0.7142857142857143
+   "without_ref": 0,
+   "object_code_ref_ratio": 1.0
   }
  },
  "sample_states": {

@@ -12,3 +12,6 @@
 - [x] T10 回归稳定性：修 `paramdecl._abbrev_table` 以 `id()` 作缓存键导致的 `full-e`
   偶发失败（约 1/15）；`no_declaration_source` 拆“无 DWARF 节 / 有节但解析失败”；
   12 次新鲜进程 verify 全 PASS，新增 2 项护栏单测（R111）
+- [x] T11 可复现性（2026-11-21）：`make_datarefs_full.py` 改固定构建目录 + `-fdebug-prefix-map`
+  + PE 时间戳归零后重生成样本；新增 `tests/test_repro.py`（两次生成逐字节相同、产物==入库、
+  不含本机路径、失败自证）；样本数字按新编译器重算并逐项写入 `NUMBERS_LEDGER.md` §11.2/§11.3
