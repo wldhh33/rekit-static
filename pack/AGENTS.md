@@ -66,7 +66,7 @@ python "pack\tools\status.py"
 | 样本 | `work\samples\`（m2 + m3） | 约 170 MB；被 `.gitignore` 排除，新克隆用 `setup.ps1` 恢复；`tests\samples`、`tests\fixtures` 已入库 |
 
 `pack` 与 `work\pack03` 的 CHARTER/PROGRESS/CHANGELOG：**内容相同**，编辑时先确认改哪一份，改完同步另一份。
-`.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `85cf36f`（U1-a+U1-b；2026-11-21 历史改写后重建，旧哈希 `d63d244`），`v0.1.1` 覆盖门禁脚本、`setup.ps1`、R126、去垫片等收尾补件。
+`.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `6593dea`（U1-a+U1-b；2026-11-21 历史改写后重建），`v0.1.1` 覆盖门禁脚本、`setup.ps1`、R126、去垫片等收尾补件。
 
 ## 6. 环境怪癖（已知，不是 bug）
 

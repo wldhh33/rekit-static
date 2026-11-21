@@ -17,11 +17,11 @@
 - **可分发性验证（2026-11-17，不占里程碑号）**：`python -m build --no-isolation` 产出 wheel（只含 `rekit/**` + dist-info）与 sdist（包本体 + 元数据）；新增 `MANIFEST.in` 把 `tests`/`examples` prune 掉，`.gitignore` 补 `dist/`/`build/`，产物不入库。`tests\verify_dist.py` 在系统临时目录新建 venv、`--no-index` 装 wheel（非 `-e`），仓库外跑 `--help` / `info`（PE/ELF/.NET）/ `ilflow`（.NET），与仓库内 `python -m rekit` 的 `--json` **stdout 逐字节相同**（`path` 是唯一路径派生字段，两边同路径、不排除）；空比对 FAIL、篡改/路径变化/差异定位自证。证据 `work\evidence_dist.json`（内容已去绝对路径/临时目录，两次运行 sha256 相同）。不可用项：examples、tests/fixtures、samples（.NET 需自备）、gate/setup、`coverage` 需外部 objdump；结论已写入 `pack\README.md` 与 `LIBRARY_API.md` §6。
 - **元数据诚实性（2026-11-17，不占里程碑号）**：`requires-python >=3.8` 从「静态扫描」升级为**实测**——`uv python install 3.8` 装 CPython **3.8.20**（独立构建），仓库外新建 venv、`--no-index` 装 wheel，`--help` / `info`（PE/ELF/.NET）/ `ilflow`（.NET）/ `import rekit.api` 全部 exit 0；门禁与全量 pytest 仍在 3.14.0 上跑。`verify_dist.py` 增 4 项：pyproject/README/LIBRARY_API 三处声明一致、METADATA `Requires-Python` 与声明逐字相等、当前解释器满足声明、版本比对器可失败自证（伪造版本/空声明必须不等）；`meta.py38scan` 明确标注「仅静态参考、不作承诺」。复跑命令写入 `pack\README.md`「Python 版本是实测的」与 `LIBRARY_API.md` §6。
 - **许可 MIT 定案（2026-11-21，用户裁决，不占里程碑号）**：仓库根新增 `LICENSE`（MIT 正文，版权行 `Copyright (c) 2026 WLDHH33`，取自可核实 git 身份）；`pyproject.toml` 改 PEP 639（`license = "MIT"` + `license-files = ["LICENSE"]`，移除自由文本 table 与弃用 classifier）；重建后 wheel METADATA 出 `License-Expression: MIT` / `License-File: LICENSE`，wheel 与 sdist 各含 `LICENSE`。`verify_dist.py` 37 → **43 项**（新增 6 项许可判据 + 自证），实跑负向：篡改 SPDX、删除 LICENSE、空声明均 FAIL。README / `LIBRARY_API.md` §6 / CHANGELOG 已同步；`dist/`、`build/` 仍 git 排除，分发前必须重建。
-- **公开前历史改写与样本出库（2026-11-21，用户裁决，不占里程碑号）**：仓库无远端，趁此改写全部提交的邮箱（姓名保留，统一 `WLDHH33 <wldhh33@users.noreply.github.com>`）；13 个不可再分发/GPL 样本从**全部历史**移除（本机磁盘保留、`.gitignore` 排除，清单与自备方式见 `pack\SAMPLES.md`）；3 个 tag 重建指向新提交（`baseline-pre-rename`→`c54db22`、`v0.1.0`→`85cf36f`、`v0.1.1`→`5e0b508`；旧哈希仅存于备份与历史记录）。改写前在仓库外留全量 bundle（`git bundle verify` 通过，5 refs）与 tag→commit 对照表。根 `LICENSE` 与包内逐字相同（`verify_dist` 新增 `license.root` + 可失败自证，**43 → 45 项**）；根 `README.md` 补入口；`status.py` 缺 junction 改**硬失败**；`gate.ps1` 补 pwsh 安装提示；`06_日报docx` 乱码文件名改回可读中文。
+- **公开前历史改写与样本出库（2026-11-21，用户裁决，不占里程碑号）**：仓库无远端，趁此改写全部提交的邮箱（姓名保留，统一 `WLDHH33 <wldhh33@users.noreply.github.com>`）；13 个不可再分发/GPL 样本从**全部历史**移除（本机磁盘保留、`.gitignore` 排除，清单与自备方式见 `pack\SAMPLES.md`）；3 个 tag 重建指向新提交（`baseline-pre-rename`→`e8d6cdd`、`v0.1.0`→`6593dea`、`v0.1.1`→`904ecc4`；旧哈希仅存于备份与历史记录）。改写前在仓库外留全量 bundle（`git bundle verify` 通过，5 refs）与 tag→commit 对照表。根 `LICENSE` 与包内逐字相同（`verify_dist` 新增 `license.root` + 可失败自证，**43 → 45 项**）；根 `README.md` 补入口；`status.py` 缺 junction 改**硬失败**；`gate.ps1` 补 pwsh 安装提示；`06_日报docx` 乱码文件名改回可读中文。
 - **门禁当前态**：全量 verify 套 **25/25 PASS**、pytest **554 passed**、`ledger_check --check` PASS（脱敏后 run `20261121T174009-5981`，`GATE: PASS exit=0`；含 `verify_dist` **45 项** / `verify_api` **38 项** / `verify_sigblob` 27 项 / `verify_layout` 33 项）。总账 **10 小节 / 103 个登记数字 / 去重后未登记 127 个**（五类原因），权威 `work\evidence_numbers_ledger.json`；`evidence_index --check` 131/131。
 - **治理当前态**：`pack\` 已 git 初始化（基线 tag `baseline-pre-rename`）；4 个 mojibake 目录已改名、`work` 下 junction 已重建（`pack` 7 个目录均可访问）；`pack\rules.json` 条数与全部规模数字**以 `pack\tools\status.py` 现算为准**（R127，不在此写死）；`status.py` 硬判 HANDOFF/verification/ledger。
 - 文档规模数字已从正文移除并指向 `status.py` 现算（R127；复算 1,387 行差 = 旧口径空行数，模块差 1 = `__main__.py`）；`CHARTER.md` 补 M20 行与转段触发器 T1–T5（**T1/T4 已命中**，T1 曾被误读为需两个条件同时满足，已更正并留记录）。
-- **U1 收口（2026-11-17）**：`v0.1.0` 由 `5fbb421` 移至 `d63d244`（含 U1-a + U1-b；worktree 检出该提交后 ledger/evidence_index 双 PASS）；新增单命令门禁 `pack\tools\gate.ps1`（preflight fail-fast + ledger → evidence_index → verify_gate）；`.github\workflows\gate.yml` 为**未验证**草稿（仅手动触发，从未运行）；新增规则 **R126**；`evidence_index.repo_root()` 修掉 junction 入口多算一级目录的 bug。
+- **U1 收口（2026-11-17）**：`v0.1.0` 由 `f2f3d07` 移至 `6593dea`（含 U1-a + U1-b；worktree 检出该提交后 ledger/evidence_index 双 PASS）；新增单命令门禁 `pack\tools\gate.ps1`（preflight fail-fast + ledger → evidence_index → verify_gate）；`.github\workflows\gate.yml` 为**未验证**草稿（仅手动触发，从未运行）；新增规则 **R126**；`evidence_index.repo_root()` 修掉 junction 入口多算一级目录的 bug。
 - **干净克隆演练（2026-11-17，`v0.1.1`）**：仓库外空目录按 `pack\README.md` 从零操作，第一次 `gate.ps1` 即 exit 2（9 项前置缺失）。新增 `pack\tools\setup.ps1`（显式 `-AssetsSource`、先复制后 junction、幂等）；去掉 5 个测试 + 3 个生成器的 `<旧仓库根>` 硬编码；`verify_layout`/`verify_sigblob` 证据路径改 work 相对路径（绝对路径会让 sha256 随克隆目录漂移）。修后：setup 0.9 s、gate **432.5 s**、23/23 + 554 passed + ledger PASS、exit 0。详见 `CHANGELOG.md` / `PROGRESS.md` 同日条目。
 
 ## 2. 未完成清单
@@ -34,7 +34,7 @@ U1 交付批次已全部收口（打包 / console entry / 示例 / 证据索引 
 | M19 样本重建 | 命令：`powershell -File "2026-11-15\m3-task-card\work\outputs\m19_sigblob\gen.ps1"`（需 ilasm；产出确定，自动重写 manifest）；缺样本时 gate 报 exit 2 并给出这条命令 |
 | 真 CI | `.github\workflows\gate.yml` 只是未验证草稿（无远端、从未触发）；启用与远端推送留 U2 |
 | 122 条 null run_id | **不回填**（不猜来源）；新证据按 `AGENTS.md` §8 的 run_id 约定落盘，避免缺口扩大 |
-| tag 覆盖范围 | `v0.1.0` 停在 `d63d244`（U1-a + U1-b）；**`v0.1.1` 覆盖门禁脚本、setup、R126、去垫片等收尾补件**；release tag 只在该批次全部收口后打 |
+| tag 覆盖范围 | `v0.1.0` 停在 `6593dea`（U1-a + U1-b）；**`v0.1.1` 覆盖门禁脚本、setup、R126、去垫片等收尾补件**；release tag 只在该批次全部收口后打 |
 | 下一条命令 | 本文件 §6；全量用 `gate.ps1`（干净克隆实测 432.5 s） |
 
 非源码类、尚未做：
@@ -58,7 +58,7 @@ U1 交付批次已全部收口（打包 / console entry / 示例 / 证据索引 
 2. R95 七个样本的口径：**已定案**为 7 个具体 fixture（`dyn_nopie`/`dyn_static`/`dyn_execstack`/`dyn_norelro`/`minipe.exe`/`minidll.dll`/`minipe_fakerich.exe`），见 `work\fixtures_sample_manifest.json`；18/25 → 25/25。
 3. v0.1.0 的"可分发"边界：`tests\fixtures\cli-64.exe` 出处不明（`AGENTS.md` 已标"不可再分发"），发布包必须排除，但仓库是否保留待定。
 4. `verify_layout.py` 的 SKIP 1（System.Console 的 `FieldRVA=0`）是否需要在交付批次补一个"零行表"负样本，目前由聚合分母兜底。
-5. tag 覆盖范围：`v0.1.0` 停在 `d63d244`，U1 收口补件（`gate.ps1`/文档/R126）在 tag 之后。若要把补件纳入发布，只能再移一次 tag（会覆盖本次重定位记录，不建议）；当前口径是"tag 标代码交付，收口补件单列"。
+5. tag 覆盖范围：`v0.1.0` 停在 `6593dea`，U1 收口补件（`gate.ps1`/文档/R126）在 tag 之后。若要把补件纳入发布，只能再移一次 tag（会覆盖本次重定位记录，不建议）；当前口径是"tag 标代码交付，收口补件单列"。
 6. **许可 / LICENSE（已定案：MIT，2026-11-21 用户裁决）**：新增仓库根 `LICENSE`（标准 MIT 正文，
    版权行 `Copyright (c) 2026 WLDHH33`，取自 git 身份、未编造个人姓名）；`pyproject.toml` 改为
    PEP 639 口径 `license = "MIT"` + `license-files = ["LICENSE"]`（移除自由文本 table，不用弃用

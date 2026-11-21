@@ -400,7 +400,7 @@
 
 ### 2026-11-17 U1 收口 — tag 重定位 / 单命令门禁 / R126（不占里程碑号）
 
-- **`v0.1.0` 重定位**：原指向 `5fbb421`（仅 U1-a），移至 `d63d244`（U1-a + U1-b 完整交付）。仓库无远端、未推送，无下游影响；原指向与原因写进 tag 说明，本文件与 `CHANGELOG.md` 同时留痕，未抹除。用 `git worktree` 检出 `d63d244` 实跑：`ledger_check --check` PASS（10 小节/10 证据/98 数字）、`evidence_index --check` PASS（129/129），即 tag 树可跑门禁。
+- **`v0.1.0` 重定位**：原指向 `f2f3d07`（仅 U1-a），移至 `6593dea`（U1-a + U1-b 完整交付）。仓库无远端、未推送，无下游影响；原指向与原因写进 tag 说明，本文件与 `CHANGELOG.md` 同时留痕，未抹除。用 `git worktree` 检出 `6593dea` 实跑：`ledger_check --check` PASS（10 小节/10 证据/98 数字）、`evidence_index --check` PASS（129/129），即 tag 树可跑门禁。
 - **单命令门禁 `pack\tools\gate.ps1`**：按脚本自身位置定位仓库根，preflight 检查 Python 3.8+、`work` 与 3 个 junction、samples（m9/m17/m18/m20）、binutils、`powershell`+`pwsh`；缺任一即 exit 2 且**不执行任何验证**。通过后固定顺序：`ledger_check --check` → `evidence_index --check` → `verify_gate --run`。`-List`/`-Only` 透传。实测 `-List` 在 Windows PowerShell 5.1 与 pwsh 7 下均 exit 0。
 - **README 三条事实**：样本与工具链被 `.gitignore` 排除需先恢复（不提供假的自动下载）；pytest 必须在 `work` 目录跑；.NET 运行期 oracle 仅 Windows（`verify_layout` 用 Windows PowerShell CLR、`verify_sigblob` 用 pwsh 7 SRM，另需 `dnfile`）。
 - **`.github/workflows/gate.yml`**：仅 `workflow_dispatch`，文件头与 README 均标注「**未验证**：无远端、从未被 GitHub Actions 触发」；只跑不依赖样本的 `ledger_check` 与 `evidence_index`，不冒充全量 CI。
@@ -419,6 +419,6 @@
 
 - **本轮补件（`v0.1.1` 内容）**：新增 `pack\tools\setup.ps1`（资产恢复 + 7 个 junction，显式来源、幂等、不删除）；`gate.ps1` preflight 增加 m2 samples 与 `dnfile` 硬检查；5 个测试 + 3 个生成器去 `<旧仓库根>` 硬编码；`verify_layout.py` / `verify_sigblob.py` 证据路径改 work 相对路径（仓库外 `mscorlib` / `System.Console` 保留绝对路径）；README 写入演练记录与前置。
 - **证据一致性**：两处路径改动只改"路径怎么表示"，未改任何期望值/分母/判据。重登记前后：`ledger_check` 10 小节 / 10 证据 / **98 个登记数字**全等；`verify_layout` 28 项（PASS 27 / SKIP 1）、`verify_sigblob` 17 项结果全等。`ledger_check --write` 与 `evidence_index --write` 仅重算 sha256/形式字段。
-- **tag**：`v0.1.0` 保持 `d63d244` 不动；本轮补件提交打 **`v0.1.1`**（说明写明"覆盖门禁脚本与 R126 等收尾补件"）。**release tag 规则**：`v*` 只在该批次全部收口后打，只打在包含该批次全部补件的提交上。
+- **tag**：`v0.1.0` 保持 `6593dea` 不动；本轮补件提交打 **`v0.1.1`**（说明写明"覆盖门禁脚本与 R126 等收尾补件"）。**release tag 规则**：`v*` 只在该批次全部收口后打，只打在包含该批次全部补件的提交上。
 
 

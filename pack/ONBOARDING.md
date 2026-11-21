@@ -33,7 +33,7 @@
 | 口径对齐 | M8 口径对齐(U0–U3) → M9 覆盖缺口+样本 → M10 归因与性能 → M11 gopclntab → M12 推算换实测 → M13 下界重算 → M13-patch → M14 | 判据独立化、覆盖率恒等式、Go 函数表、缝隙量化、下界逐项复算 | `CHARTER.md:28-36`；数字 `NUMBERS_LEDGER.md` §1–§9 |
 | 报告/数据层 | M15 funcreport → M16 datarefs | 七层同址报告（只呈现不判断）、非字符串数据引用（对象只认声明） | `CHARTER.md:37-38`；LEDGER §10–§11 |
 | .NET 纵切面 | M17 dotnet → M18 ilflow → M19 sigblob → **M20 layout（封口）** | 结构→IL 控制流→签名语义→类型布局与 FieldRVA | `CHARTER.md:39-42`；LEDGER §12/§13/§15/§16 |
-| 交付轨（不占里程碑号） | U1-a 打包 → U1-b 证据索引/R95 → U1 收口（gate.ps1、R126）→ 干净克隆演练（v0.1.1） | `pyproject` + `rekit` 命令 + JSON 契约冻结 + 证据索引 + 一命令门禁 | `PROGRESS.md:383-419`；tag `v0.1.0`→`85cf36f`、`v0.1.1`→`5e0b508`（2026-11-21 历史改写后重建） |
+| 交付轨（不占里程碑号） | U1-a 打包 → U1-b 证据索引/R95 → U1 收口（gate.ps1、R126）→ 干净克隆演练（v0.1.1） | `pyproject` + `rekit` 命令 + JSON 契约冻结 + 证据索引 + 一命令门禁 | `PROGRESS.md:383-419`；tag `v0.1.0`→`6593dea`、`v0.1.1`→`904ecc4`（2026-11-21 历史改写后重建） |
 
 **当前门禁态（2026-11-21 实跑，run `20261121T174009-5981`）**：25/25 套 verify PASS、pytest **554 passed / 0 failed / 0 skipped**、ledger **10 小节 / 10 证据 / 103 数字** PASS、证据索引 **131/131**、`GATE: PASS exit=0`。出处：`work\verification\20261121T174009-5981\summary.json`、`pack\tools\status.py` 输出。
 
@@ -106,7 +106,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 | "弃权/残差" | 一律**单列**，不并入成功率，且必须写 `missing`（缺什么）；`evidence_m5_expr_residual.json` 是残差账 | R40/R47/R51；`CHARTER.md:22-25` |
 | "`sentinel` / `pinned` 签名" | **仍无样本**，没造、没冒充；`LOCAL_SIG` 只记长度/边界 | `HANDOFF.md:27`（§2 首行） |
 | "M19 用 dnfile 对拍签名" | 定标②**已偏离**：dnfile 无 Signature API，改用 SRM（`tests\sigref.ps1`，缺 pwsh 即 `env_missing` exit 2） | `CHARTER.md:41`；`PROGRESS.md:346` |
-| "tag `v0.1.0` 是最新交付" | `v0.1.0`→`85cf36f`；收尾补件在 `v0.1.1`→`5e0b508`（哈希为 2026-11-21 改写后）；release tag 规则见 README | `pack\README.md:120-131` |
+| "tag `v0.1.0` 是最新交付" | `v0.1.0`→`6593dea`；收尾补件在 `v0.1.1`→`904ecc4`（哈希为 2026-11-21 改写后）；release tag 规则见 README | `pack\README.md:120-131` |
 | "有 CI" | **没有已启用的 CI**。`.github\workflows\gate.yml` 是未验证草稿（无远端、从未触发），只跑两项轻检查 | `pack\README.md:133-137`；`AGENTS.md:66` |
 
 另两条口径纪律：证据里**不得写仓库内绝对路径**（会让 sha256 随克隆目录漂移，异地 clone 必 FAIL）；`122` 条历史 `null` run_id **不回填、不猜**。出处：`AGENTS.md:77-79,97`；`HANDOFF.md:30`。
