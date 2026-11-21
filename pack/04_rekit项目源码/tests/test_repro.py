@@ -46,11 +46,10 @@ def _leaks(data):
 
 
 def test_leak_checker_can_fail():
-    """失败自证：含用户名的合成字节必须被检出，干净字节必须不报。"""
+    """失败自证：含用户名/家目录的合成字节必须被检出，干净字节必须不报。"""
     dirty = b"MZ\x90\x00 debug: C:\\Users\\bob\\AppData\\Local\\Temp\\x.c"
     assert _leaks(dirty), "含 C:\\Users\\ 的字节未被检出"
-    assert b"/home/z/proj/a.c" in b"xx /home/z/proj/a.c", "自证输入构造错误"
-    assert _leaks(b"xx /home/z/proj/a.c")
+    assert _leaks(b"xx /home/example-user/proj/a.c"), "含 /home/ 的字节未被检出"
     assert _leaks(b"MZ clean payload hello-data") == []
 
 
