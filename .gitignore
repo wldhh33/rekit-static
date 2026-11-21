@@ -9,6 +9,23 @@
 /2026-11-15/m3-task-card/work/samples/
 /2026-11-15/m2-task-card/work/samples/
 
+# ---- 1b. 许可不明 / 不可再分发的回归样本（只留本地，不进 git 历史）----
+# 清单、许可状态与自行获取/构造方式见 pack/SAMPLES.md。
+# 这些文件仍保留在本机供验证套件使用；历史改写时已从全部提交移除。
+/pack/04_rekit项目源码/tests/fixtures/bin_ls.elf
+/pack/04_rekit项目源码/tests/fixtures/cli-64.exe
+/pack/04_rekit项目源码/tests/fixtures/dyn_execstack
+/pack/04_rekit项目源码/tests/fixtures/dyn_nopie
+/pack/04_rekit项目源码/tests/fixtures/dyn_norelro
+/pack/04_rekit项目源码/tests/fixtures/dyn_static
+/pack/04_rekit项目源码/tests/fixtures/minidll.dll
+/pack/04_rekit项目源码/tests/fixtures/minipe.exe
+/pack/04_rekit项目源码/tests/fixtures/minipe_fakerich.exe
+/pack/04_rekit项目源码/tests/minidll.dll
+/pack/04_rekit项目源码/tests/minipe.exe
+/pack/04_rekit项目源码/tests/samples/fingerprint/busybox-1.35.0-musl-x86_64
+/pack/04_rekit项目源码/tests/samples/fingerprint/upx/upx_cli-64.exe
+
 # ---- 2. 第三方工具链（外部下载物，非本项目源码）----
 # binutils-2.47（GNU objdump）与 upx 发行包；vharness 通过 PATH 注入使用，
 # 版本已在文档中写死，不需要把二进制纳入版本控制。

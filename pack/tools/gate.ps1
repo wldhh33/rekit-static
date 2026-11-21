@@ -145,7 +145,11 @@ if (-not (Test-Path -LiteralPath (Join-Path $Bin "objdump.exe"))) {
 # 6. .NET 运行期 oracle（Windows-only）
 foreach ($t in @("powershell", "pwsh")) {
     if (-not (Get-Command $t -ErrorAction SilentlyContinue)) {
-        Add-Problem "missing $t (verify_layout needs Windows PowerShell CLR; verify_sigblob needs pwsh 7 SRM)"
+        if ($t -eq "pwsh") {
+            Add-Problem "missing pwsh (verify_sigblob needs pwsh 7 SRM; install: winget install --id Microsoft.PowerShell --source winget, or https://aka.ms/powershell)"
+        } else {
+            Add-Problem "missing powershell (verify_layout needs Windows PowerShell CLR; enable Windows PowerShell 5.1 under Windows features)"
+        }
     } else {
         Ok "$t available"
     }

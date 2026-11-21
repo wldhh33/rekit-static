@@ -19,7 +19,9 @@
 #   (f) 路径字段：--json 唯一的路径派生字段是 "path"，两边传入同一绝对路径，
 #       要求该字段逐字节相等（不做任何排除；一旦路径不同，字节比较会先失败）；
 #   (g) cwd 无关：安装版在两个不同 cwd 下输出必须相同；
-#   (h) 可失败自证：篡改一字节 / 改动 path 字段必须被检出；空比对（b"" vs b""）判 FAIL。
+#   (h) 可失败自证：篡改一字节 / 改动 path 字段必须被检出；空比对（b"" vs b""）判 FAIL；
+#   (i) 许可：包内 LICENSE 是 MIT、pyproject SPDX / 产物 METADATA 一致、两个产物含 LICENSE；
+#   (j) 仓库根 LICENSE 与包内 LICENSE **逐字节相同**（篡改/空文件必须 FAIL）。
 #
 # 样本：PE/ELF 用仓库内 fixtures；.NET 用 m3 samples（fresh clone 需 setup.ps1 恢复）。
 # 缺样本 / build / setuptools -> ENV_MISSING(exit 2)，不静默跳过。任何 FAIL -> exit 1。
@@ -76,6 +78,8 @@ PACK = os.path.dirname(SRC)
 README = os.path.join(PACK, "README.md")
 LIBAPI = os.path.join(PACK, "03_路线图与章程", "LIBRARY_API.md")
 LIC = os.path.join(SRC, "LICENSE")
+ROOT = os.path.dirname(PACK)                    # 仓库根（git 仓库根 = 工作区根）
+ROOT_LIC = os.path.join(ROOT, "LICENSE")
 # 文档里唯一的版本声明行：`- **支持的 Python 版本**：3.8+（实测 …）`
 DECL_RE = re.compile(r"支持的 Python 版本\*\*[：:]\s*(\d+\.\d+)\+")
 # 判定 LICENSE 正文是否为 MIT：关键条款句 + 版权行（不比对全文，允许换行差异）
@@ -136,6 +140,19 @@ def _run(argv, cwd, timeout=300):
 def _bytes_same(a, b):
     """空比对一律不成立：b"" vs b"" 必须判 FAIL。"""
     return bool(a) and bool(b) and a == b
+
+
+def _file_bytes(path):
+    try:
+        with open(path, "rb") as f:
+            return f.read()
+    except OSError:
+        return b""
+
+
+def _same_bytes(a, b):
+    """逐字节相等，且两侧都不得为空（空文件不能算"两处一致"）。"""
+    return bool(a) and a == b
 
 
 def _first_diff(a, b):
@@ -338,6 +355,18 @@ def main():
             lic_text = ""
         lok, ldetail = _mit_ok(lic_text)
         _add("license.file", "仓库 LICENSE 存在且正文是 MIT（关键条款 + 版权行）", lok, ldetail)
+
+        root_raw, pkg_raw = _file_bytes(ROOT_LIC), _file_bytes(LIC)
+        _add("license.root", "仓库根 LICENSE 与包内 LICENSE 逐字节相同",
+             _same_bytes(root_raw, pkg_raw),
+             "root=%dB package=%dB %s" % (len(root_raw), len(pkg_raw),
+                                          "逐字相同" if _same_bytes(root_raw, pkg_raw)
+                                          else "不同或缺失"))
+        _add("license.root.selfproof",
+             "根/包 LICENSE 一致性判据可失败自证（篡改一字节 / 空文件均不等）",
+             _same_bytes(b"MIT", b"MIT") and not _same_bytes(b"MIT", b"MIT\n")
+             and not _same_bytes(b"", b""),
+             "同文=相等 多一字节=不等 空文件=不等")
 
         with open(os.path.join(SRC, "pyproject.toml"), encoding="utf-8") as f:
             pytxt = f.read()

@@ -59,6 +59,8 @@ r = parse_pe(r"tests\fixtures\minipe.exe")   # dict：machine / entry / sections
   `2026-11-15\m2-task-card\work\samples`、`2026-11-15\m2-task-card\work\tools`。
   M19 补证样本在 `samples\m19_sigblob\{_gen,_neg}`（7 个 DLL），随 m3 samples 一起恢复；
   `work\m19_sample_manifest.json` 登记其 sha256，`gate.ps1` preflight 逐条核对。
+  逐个文件的性质、许可状态与自行获取/构造方式见 **`pack\SAMPLES.md`**（许可不明或不可再分发的样本
+  已从 git 历史移除，只保留在本机）。
 
 **仅重新生成 M19 受控样本时需要（门禁不需要）**
 

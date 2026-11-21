@@ -2,7 +2,7 @@
 r"""会话开工自检：10 秒内看清"现在在哪、缺什么"。
 
 用法:  python "pack\tools\status.py"
-退出码: 0 = 无阻断问题 / 1 = HANDOFF 缺失或不完整 / 2 = 找不到工作区
+退出码: 0 = 无阻断问题 / 1 = HANDOFF、目录联接或证据链不完整 / 2 = 找不到工作区
 
 纯标准库、只读：规模段现算模块/测试/验证文件数与行数（行数同时给总行与非空行，
 避免"含不含空行"两种口径各写一个数），pytest 条数用 --collect-only -p no:cacheprovider
@@ -162,6 +162,16 @@ def main() -> int:
     except OSError:
         rows.append("[info] rules registry: 缺失 (n/a)")
 
+    # ---- 2d. 目录联接：缺了不能只报 WARN（否则干净 clone 会"全绿"通过）
+    links = ["rekit", "tests", "pack03"]
+    missing_links = [n for n in links if not os.path.isdir(os.path.join(work, n))]
+    if missing_links:
+        rows.append("[FAIL] junction 缺失: %s -> 先跑 pack\\tools\\setup.ps1 -AssetsSource <原工作区根>"
+                    % ", ".join(missing_links))
+        hard_fail = True
+    else:
+        rows.append("[PASS] junction: %d/%d 存在" % (len(links), len(links)))
+
     # ---- 3. 样本清单条目数
     man = os.path.join(work, "m9_sample_manifest.json")
     try:
@@ -206,7 +216,8 @@ def main() -> int:
                     f"{pc if pc is not None else 'n/a（采集失败，不阻断）'}")
         rows.append(f"[info] 规模: verify {nv} 文件 / {vl:,} 行（非空 {vn:,}）/ 门禁 {ng} 套")
     except OSError as e:
-        rows.append(f"[WARN] 规模统计失败: {e}")
+        rows.append(f"[FAIL] 规模统计失败: {e}")
+        hard_fail = True
 
     print("\n".join(rows))
     print(f"VERDICT: {'FAIL' if hard_fail else 'PASS'} exit={1 if hard_fail else 0}")
