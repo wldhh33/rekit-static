@@ -1,6 +1,6 @@
 ﻿=== pytest -q ===
 python : ERROR: file or directory not found: tests
-At C:\Users\<user>\AppData\Local\Temp\m12_regress.ps1:8 char:1
+At <tmp>\m12_regress.ps1:8 char:1
 + python -m pytest tests -q 2>&1 | Out-File -Encoding utf8 -Append evid ...
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : NotSpecified: (ERROR: file or ...ot found: tests:String) [], RemoteException

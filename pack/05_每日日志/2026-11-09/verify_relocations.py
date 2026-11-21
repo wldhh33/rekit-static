@@ -2,14 +2,17 @@
 """2026-11-09 白银任务验收脚本：重定位解析交叉验证
 权威源 readelf -rW；三方复核 objdump -R；A3 内部一致性用自家节表。
 输出逐项 PASS/FAIL + 证据存档。"""
+import os
 import re
 import subprocess
 import sys
 
-sys.path.insert(0, "<旧仓库根>")
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
+sys.path.insert(0, REPO)
 from rekit.elf import parse  # noqa: E402
 
-FIX = "<旧仓库根>/tests/fixtures"
+FIX = REPO + "/tests/fixtures"
 RESULTS = []
 
 

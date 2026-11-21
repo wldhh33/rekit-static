@@ -309,7 +309,7 @@ def selftest():
 
 def main():
     if shutil.which("objdump") is None:
-        print("SKIP: PATH 中没有 objdump（先加 D:\\msys64\\ucrt64\\bin）")
+        print("SKIP: PATH 中没有 objdump（先加入 GNU binutils 的 bin 目录）")
         return 0
     reports = {}
     # 完整声明

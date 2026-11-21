@@ -3,7 +3,7 @@
 #       用户级 PATH 已追加该目录，但已打开的终端/IDE 需重启才继承，故提供本脚本。
 # 用法： .\run_pytest.ps1  [-Repo <rekit 仓库根>] [-Args <额外的 pytest 参数>]
 param(
-    [string]$Repo = '<旧仓库根>',
+    [string]$Repo = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..\pack\04_rekit项目源码')).Path,
     [string[]]$Args = @()
 )
 $bin = Join-Path $PSScriptRoot 'tools\binutils-2.47\mingw64\bin'

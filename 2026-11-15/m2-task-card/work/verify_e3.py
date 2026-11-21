@@ -39,9 +39,7 @@ def main():
     print("rekit M2 · E2/E3 证据日志（2026-11-15）")
     print("=" * 72)
     print("工具：upx 5.3.0 win64（用户上传包）")
-    print("  zip  sha256 =", sha256(os.path.expanduser(
-        r"c:\Users\<user>\.trae-cn\attachments\e9340713-5a07-41e5-ae21-8ccb4234fe41_"
-        r"5e3fa8d2-b906-4bf3-b6a1-b4f2961bcbb5_upx-5.3.0-win64.zip")))
+    print("  zip  sha256 = 见 evidence_e2e3_2026-11-15.log（原始上传包路径不随仓库公开）")
     print("  upx.exe sha256 =", sha256(upx_exe))
     rc, out = upx(upx_exe, "--version")
     print("  upx --version:", out.splitlines()[0])

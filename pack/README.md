@@ -143,7 +143,7 @@ wheel 的 METADATA 带 `License-Expression: MIT` 与 `License-File: LICENSE`，w
 并自证篡改 SPDX 值、删除 `LICENSE`、伪造空声明三种情况都会 FAIL。
 
 **旧产物不要误发**：`dist\`、`build\` 被 `.gitignore` 覆盖、不入库；旧版 wheel 的 `license`
-是自由文本，METADATA 里只有 `License: 内部学习项目，未声明开源许可`，没有 `License-Expression`。
+是自由文本许可声明，METADATA 里没有 `License-Expression`。
 分发前必须用上面的 `python -m build --no-isolation` 重建，并清掉 `dist\` 里的旧文件；
 判据会拒绝缺 `LICENSE` 或缺 `License-Expression: MIT` 的产物。
 
@@ -169,11 +169,11 @@ wheel 的 METADATA 带 `License-Expression: MIT` 与 `License-File: LICENSE`，w
   与 wheel 的 `Requires-Python` 逐字比对，不一致即 FAIL；`meta.py38scan` 的静态扫描只作参考，
   **不作承诺**。
 
-**路径垫片（2026-11-17 起不再需要）**：旧测试曾硬编码 `<旧仓库根>`，
-依赖 `<旧仓库根>\...` 目录联接；且 Windows 上 `/home/...` 按**当前盘符根**解析，克隆在 C: 时
-需要 `<旧仓库根>\...`（普通用户通常无权限）。本次演练已把 5 个测试与 3 个生成器改为按
+**路径垫片（2026-11-17 起不再需要）**：旧测试曾硬编码统一开发机上的仓库根（`/<用户>/<项目>/rekit`），
+依赖 `D:\home\<用户>\...` 目录联接；且 Windows 上 `/home/...` 按**当前盘符根**解析，克隆在 C: 时
+需要 `C:\home\...`（普通用户通常无权限）。本次演练已把 5 个测试与 3 个生成器改为按
 `__file__` 定位，垫片已可删除。**没有改路径前**的失败点是：pytest 报
-`FileNotFoundError: '<旧仓库根>/.../tests/fixtures/bin_ls.elf'`（约 31 个失败/错误）。
+`FileNotFoundError: '/home/.../tests/fixtures/bin_ls.elf'`（约 31 个失败/错误）。
 
 ### 干净克隆演练记录（2026-11-17）
 
@@ -185,7 +185,7 @@ wheel 的 METADATA 带 `License-Expression: MIT` 与 `License-File: LICENSE`，w
 | `gate.ps1` 报 “junction 见 README” | README 没有 junction 创建步骤 | 同上，setup 建 7 个 junction |
 | 只提 m3 samples + binutils | pytest 的 `paramdecl`/`strxref` 还要 **m2 samples** | preflight 增加 m2 samples 检查，setup 一并复制 |
 | “另需 Python 包 dnfile”，无安装命令 | 缺 dnfile 时两套 `env_missing` → 门禁 FAIL | 前置写明 `python -m pip install dnfile pefile`，preflight 硬检查 |
-| “依赖 `<旧仓库根>` 垫片” | 克隆在 C: 时 `<旧仓库根>` 解析到 `C:\home`，31 个失败/错误 | 测试改 `__file__` 相对定位，垫片降级为历史说明 |
+| “依赖 `D:\home\<用户>` 垫片” | 克隆在 C: 时 `/home/...` 解析到 `C:\home`，31 个失败/错误 | 测试改 `__file__` 相对定位，垫片降级为历史说明 |
 | 手动 pytest 步骤 | PATH 里的 objdump 非 2.47 且输出 GBK，`test_minidll_crosscheck_objdump` 报 UnicodeDecodeError→TypeError | 测试内优先用仓库 binutils 并设 `LC_ALL=C`；工具不可用时才 skip（gate 内仍执行断言） |
 | “`gate.ps1` 全绿，可复跑” | 异地克隆跑完 23 套 verify 后，`verify_gate` 内部 `ledger_check` 报 `证据 sha256 变化：evidence_m20_layout.json` | `verify_layout.py` 把样本**绝对路径**写进证据；克隆换了目录，sha256 必然变。改为写 work 相对路径 |
 | 同上（第 2 轮） | 修完 layout 后，同类问题又出现在 `evidence_m19_sigblob.json` | `verify_sigblob.py` 同样把绝对路径写进证据；按同一方式改为相对路径 |

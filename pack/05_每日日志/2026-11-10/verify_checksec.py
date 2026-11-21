@@ -5,12 +5,15 @@
 #   NX     = GNU_STACK 含 X ? disabled : enabled
 #   RELRO  = 无 GNU_RELRO ? none : (BIND_NOW∨FLAGS&0x8∨FLAGS_1&0x1 ? full : partial)
 #   PIE    = EXEC ? no : (INTERP ? yes : dso)
+import os
 import sys
 
-sys.path.insert(0, "<旧仓库根>")
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
+sys.path.insert(0, REPO)
 from rekit.elf import parse  # noqa: E402
 
-FIX = "<旧仓库根>/tests/fixtures"
+FIX = REPO + "/tests/fixtures"
 # (样本, NX, RELRO, PIE) — 全部来自 evidence_readelf_authority.log 实测
 EXPECT = [
     ("bin_ls.elf",    "enabled",  "full",    "yes"),   # FLAGS BIND_NOW + FLAGS_1 NOW

@@ -13,7 +13,8 @@ import sys
 import tempfile
 import os
 
-REPO = "<旧仓库根>"
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
 FIX = REPO + "/tests/fixtures"
 PY = sys.executable
 

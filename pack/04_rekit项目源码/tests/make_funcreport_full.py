@@ -15,8 +15,9 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "m15_fixtures", "funcreport_full")
-GCC_CANDIDATES = [r"D:\msys64\ucrt64\bin\gcc.exe",
-                  r"D:\msys64\mingw64\bin\gcc.exe"]
+GCC_CANDIDATES = [os.environ.get("CC", ""),
+                  r"C:\msys64\ucrt64\bin\gcc.exe",
+                  r"C:\msys64\mingw64\bin\gcc.exe"]
 SRC = """\
 int add3(int a, int b, int c) { return a + b * c; }
 int twice(int x) { return x * 2; }
@@ -41,7 +42,7 @@ def find_gcc():
 def main():
     exe = find_gcc()
     if exe is None:
-        print("SKIP: 找不到 gcc（PATH 与 D:\\msys64\\ucrt64\\bin 均无）")
+        print("SKIP: 找不到 gcc（PATH 与 msys64 候选目录均无）")
         return 0
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     tmp = tempfile.mkdtemp(prefix="rekit_m15_")

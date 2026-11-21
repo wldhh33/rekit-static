@@ -116,7 +116,8 @@ def sample():
 # ── Ghidra 侧 ────────────────────────────────────────────────────────
 def ghidra_session(path, addrs, sec_va):
     """返回 {addr(我方地址空间): metrics}；Ghidra 不可用则抛 ImportError。"""
-    os.environ.setdefault("GHIDRA_INSTALL_DIR", r"D:\tools\ghidra_12.2")
+    if not os.environ.get("GHIDRA_INSTALL_DIR"):
+        raise ImportError("GHIDRA_INSTALL_DIR 未设置（Ghidra 弱参照可选，跳过）")
     import pyghidra
     pyghidra.start()            # ghidra.* 模块只有在 start() 之后才可导入
     from ghidra.program.model.block import BasicBlockModel

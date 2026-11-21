@@ -412,8 +412,7 @@ def _check_sample_state(tag, rep, allowed):
 def main():
     for tool in ("objdump", "readelf"):
         if shutil.which(tool) is None:
-            print("SKIP: PATH 中没有 %s（先加 C:\\Users\\<user>\\Tools\\"
-                  "toolchains\\mingw64\\bin）" % tool)
+            print("SKIP: PATH 中没有 %s（先加入 GNU binutils 的 bin 目录）" % tool)
             return 0
     reports = {}
     tmp_dyn = _ascii_copy(DYN)

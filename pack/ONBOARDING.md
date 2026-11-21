@@ -35,7 +35,7 @@
 | .NET 纵切面 | M17 dotnet → M18 ilflow → M19 sigblob → **M20 layout（封口）** | 结构→IL 控制流→签名语义→类型布局与 FieldRVA | `CHARTER.md:39-42`；LEDGER §12/§13/§15/§16 |
 | 交付轨（不占里程碑号） | U1-a 打包 → U1-b 证据索引/R95 → U1 收口（gate.ps1、R126）→ 干净克隆演练（v0.1.1） | `pyproject` + `rekit` 命令 + JSON 契约冻结 + 证据索引 + 一命令门禁 | `PROGRESS.md:383-419`；tag `v0.1.0`→`d63d244`、`v0.1.1` |
 
-**当前门禁态（2026-11-17 实跑，run `20261117T040139-2ff9`）**：23/23 套 verify PASS、pytest **554 passed / 0 failed / 0 skipped**、ledger **10 小节 / 10 证据 / 103 数字** PASS、证据索引 **129/129**、`VERDICT: PASS`；vharness 361.2 s + pytest 75.6 s ≈ **436.8 s（7.3 分钟）**。出处：`work\verification\latest\summary.json`、`pack\tools\status.py` 输出。
+**当前门禁态（2026-11-21 实跑，run `20261121T163552-6067`）**：25/25 套 verify PASS、pytest **554 passed / 0 failed / 0 skipped**、ledger **10 小节 / 10 证据 / 103 数字** PASS、证据索引 **131/131**、`GATE: PASS exit=0`。出处：`work\verification\20261121T163552-6067\summary.json`、`pack\tools\status.py` 输出。
 
 **方向已定**：M20 是 .NET 纵切面的封口，不是"第四个 .NET 里程碑"。转段判据 T1–T5 已写进 `CHARTER.md:44-68`；**T1 与 T4 已命中**（T1 实现/验收新增行比 0.96 ≥ 0.90；T4 运行期 oracle 依赖 Windows CLR），T2 计数 1/2。所以后续是交付/发布工作，不是继续叠层。
 

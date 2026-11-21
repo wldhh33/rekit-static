@@ -75,7 +75,7 @@ python "pack\tools\status.py"
 - objdump 打开含中文的绝对路径会报 `Illegal byte sequence`：先设 `LC_ALL=C`。
 - 系统策略拦截 MSI/安装器；外部工具只用免安装 zip，单包 <500 MB，来源与许可须清楚。
 - `cli-64.exe` 出处不明，**不可再分发**，只在本机测试。
-- 部分旧测试曾硬编码 `<旧仓库根>`；2026-11-17 已把 5 个测试与 3 个生成器
+- 部分旧测试曾硬编码统一开发机上的仓库根（`/<用户>/<项目>/rekit`）；2026-11-17 已把 5 个测试与 3 个生成器
   改为按 `__file__` 定位，**垫片不再需要**（旧版在 C: 盘克隆时会解析到 `C:\home` 并报 31 个失败/错误）。
 - **证据里不得写仓库内绝对路径**：`evidence_*` 被 `ledger_check` 按 sha256 登记，绝对路径会让 sha256
   随克隆目录变化，异地 clone 门禁必 FAIL。`verify_layout` / `verify_sigblob` 已改为写 work 相对路径；

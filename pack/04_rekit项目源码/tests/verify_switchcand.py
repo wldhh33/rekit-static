@@ -82,7 +82,8 @@ def negative_baseline():
 
 
 def ghidra_starts(path, func_addr, sec_va):
-    os.environ.setdefault("GHIDRA_INSTALL_DIR", r"D:\tools\ghidra_12.2")
+    if not os.environ.get("GHIDRA_INSTALL_DIR"):
+        raise ImportError("GHIDRA_INSTALL_DIR 未设置（Ghidra 弱参照可选，跳过）")
     import pyghidra
     pyghidra.start()
     from ghidra.program.model.block import BasicBlockModel

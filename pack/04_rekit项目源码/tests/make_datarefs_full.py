@@ -15,9 +15,9 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "m16_fixtures", "datarefs_full.exe")
-GCC_CANDIDATES = [r"C:\Users\<user>\Tools\toolchains\mingw64\bin\gcc.exe",
-                  r"D:\msys64\ucrt64\bin\gcc.exe",
-                  r"D:\msys64\mingw64\bin\gcc.exe"]
+GCC_CANDIDATES = [os.environ.get("CC", ""),
+                  r"C:\msys64\ucrt64\bin\gcc.exe",
+                  r"C:\msys64\mingw64\bin\gcc.exe"]
 SRC = """\
 int g_counter = 7;
 static int g_table[4] = {11, 22, 33, 44};

@@ -387,7 +387,8 @@ def discover(repo):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", default=r"<旧仓库根>")
+    ap.add_argument("--repo", default=str(Path(__file__).resolve().parents[3]
+                                          / "pack" / "04_rekit项目源码"))
     ap.add_argument("--out", default=str(Path(__file__).with_name("map_ground_truth.json")))
     ap.add_argument("--binutils", default=str(Path(__file__).with_name("tools")
                                              / "binutils-2.47" / "mingw64" / "bin"))

@@ -8,14 +8,17 @@
 #      与 rekit.pe.parse 的 EAT / name->ordinal 并列打印，逐项比对
 #
 # 用法： python verify_objdump.py [minidll.dll 路径]
-#   —— 输入路径默认走 ASCII 目录联接（objdump.exe 对非 ASCII 路径不稳）：
-#      <旧仓库根>\tests\fixtures\minidll.dll
+#   —— 输入路径默认取仓库内测试样本（objdump.exe 对非 ASCII 路径不稳，
+#      必要时把仓库克隆到纯 ASCII 路径再跑）
+import os
 import re
 import shutil
 import subprocess
 import sys
 
-REPO = r"<旧仓库根>"
+HERE = os.path.dirname(os.path.abspath(__file__))
+_ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
 DEFAULT_DLL = REPO + r"\tests\fixtures\minidll.dll"
 
 sys.path.insert(0, REPO)

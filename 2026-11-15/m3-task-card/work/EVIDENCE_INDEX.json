@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_at": "2026-11-21T16:44:52",
+ "generated_at": "2026-11-21T16:57:17",
  "work_dir": "2026-11-15/m3-task-card/work",
  "rules": {
   "coverage": "work/evidence_* 每个文件都必须在 entries 中",

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # 验收脚本：rekit.elf 动态段解析 vs readelf 权威输出（2026-11-07 白银任务）
+import os
 import re
 import subprocess
 import sys
 
-sys.path.insert(0, "<旧仓库根>")
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
+sys.path.insert(0, REPO)
 from rekit.elf import parse  # noqa: E402
 
 SAMPLES = ["/bin/ls", "/tmp/re_daily/dyn_pie", "/tmp/re_daily/dyn_nopie"]

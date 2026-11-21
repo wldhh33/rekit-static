@@ -4,11 +4,13 @@
 #       与 readelf/pefile 权威输出交叉对拍（E1–E5，标准见 TASK_m15_mcp.md）
 # 证据：stdout 全量日志 → evidence_mcp_verify.log
 import json
+import os
 import re
 import subprocess
 import sys
 
-REPO = "<旧仓库根>"
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
 FIX = REPO + "/tests/fixtures"
 BIN_LS = FIX + "/bin_ls.elf"
 MINIDLL = FIX + "/minidll.dll"

@@ -20,4 +20,4 @@ jobs:
       - name: evidence_index --check
         run: python "pack/04_rekit项目源码/tests/evidence_index.py" --check
       - name: notice
-        run: echo "Full gate (23 verify suites + pytest) requires samples/binutils excluded by .gitignore; run pack/tools/gate.ps1 locally."
+        run: echo "Full gate (25 verify suites + pytest, count is dynamic) requires samples/binutils excluded by .gitignore; run pack/tools/gate.ps1 locally."

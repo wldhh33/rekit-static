@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 # verify_exports.py — B2 三方逐项全等比对：rekit ↔ objdump -p（构造参数为公共参照）
 # 用法：python3 verify_exports.py [dll路径]  → 输出 PASS/FAIL 明细
+import os
 import re
 import subprocess
 import sys
 
-sys.path.insert(0, "<旧仓库根>")
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+REPO = os.path.join(_ROOT, "pack", "04_rekit项目源码")
+sys.path.insert(0, REPO)
 from rekit.pe import parse  # noqa: E402
 
 DLL = sys.argv[1] if len(sys.argv) > 1 else \
-    "<旧仓库根>/tests/minidll.dll"
+    REPO + "/tests/minidll.dll"
 
 # ---- rekit 侧：(name|None, ordinal, rva) ----
 r = parse(DLL)

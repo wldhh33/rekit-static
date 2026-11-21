@@ -277,7 +277,7 @@
       "zip_sha256": "d127996c76615e431be810e9c8d2910dbe3dd400600c5c0c50276fc5a17a9705",
       "zip_size": 687595,
       "upx_exe_sha256": "ff30a651c9e41a2bbb363825fac9e7e23d92871c1ac82813a264e3b8d1cd302b",
-      "source": "用户上传 c:\\Users\\<user>\\.trae-cn\\attachments\\...upx-5.3.0-win64.zip（结构：COPYING/LICENSE/NEWS/README/upx.exe/upx-doc.*，与官方 win64 发布一致）",
+      "source": "用户上传的 upx-5.3.0-win64.zip（原始上传路径不随仓库公开；结构：COPYING/LICENSE/NEWS/README/upx.exe/upx-doc.*，与官方 win64 发布一致）",
       "license": "GPL-2.0-or-later（见包内 LICENSE/COPYING）",
       "install_path": "work/tools/upx-5.3.0-win64（不在 pack 内）",
       "verified": "upx --version → 'upx 5.3.0'；NRV 0.84 / UCL 1.03",
@@ -324,7 +324,7 @@
       "license": "binutils GPL-3.0-or-later；gettext-runtime / libiconv LGPL-2.1-or-later；zlib-ng zlib License；zstd BSD-3-Clause OR GPL-2.0；许可原文随包落在 mingw64/share/licenses/（binutils/gettext-runtime/libiconv/zlib-ng-compat/zstd 五项）",
       "verified": "objdump --version → 'GNU objdump (GNU Binutils) 2.47.20260726'；minidll.dll 导出表对拍全等；全量 pytest 92 passed / 0 skipped / 0 failed",
       "path_change": "已把 ...\\mingw64\\bin 追加到【用户级】PATH（HKCU\\Environment，639→729 字符，未动机器级 PATH）；回退方式 = 从用户 PATH 删除该目录。当前已打开的终端/IDE 需重启才继承",
-      "caveat": "1) gettext-runtime 在清华镜像返回拒访 HTML 页（15,350 B），改从官方 repo.msys2.org 取得；2) D:\\tools\\go*\\pkg\\tool\\windows_amd64\\objdump.exe 是 Go 自带 objdump，参数与输出格式均不同于 GNU，不能替代；3) objdump.exe 依赖同目录 4 个 DLL（zlib1/libzstd/libintl-8/libiconv-2），已随包落盘；4) 该目录同时含 readelf.exe，PATH 生效后 4 条 readelf 交叉验证由 skip 转为真跑（实测 4 passed）；5) objdump 读取非 ASCII 路径不稳，测试输入走 ASCII 目录联接 <旧仓库根>"
+      "caveat": "1) gettext-runtime 在清华镜像返回拒访 HTML 页（15,350 B），改从官方 repo.msys2.org 取得；2) Go 工具链自带的 objdump.exe 参数与输出格式均不同于 GNU，不能替代；3) objdump.exe 依赖同目录 4 个 DLL（zlib1/libzstd/libintl-8/libiconv-2），已随包落盘；4) 该目录同时含 readelf.exe，PATH 生效后 4 条 readelf 交叉验证由 skip 转为真跑（实测 4 passed）；5) objdump 读取非 ASCII 路径不稳，测试输入走 ASCII 路径的仓库克隆"
     }
   ]
 }

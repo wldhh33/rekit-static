@@ -124,8 +124,16 @@ call_total=1  blocks_total=1  edges_total=0
   （`tests` 是指向本目录的联接；fixture 路径按 cwd 解析，不能从仓库根直接指定 tests 路径）
 
 **路径垫片已移除（2026-11-17）**：测试与生成器已改为按 `__file__` 定位，
-不再依赖 `<旧仓库根>` 或 `<旧仓库根>\...`。若仍在使用旧版测试，
-失败点是 `FileNotFoundError: '<旧仓库根>/.../tests/fixtures/...'`；升级到本版即可。
+不再依赖 `/home/.../rekit` 或 `D:\home\...`。若仍在使用旧版测试，
+失败点是 `FileNotFoundError: '/home/.../tests/fixtures/...'`；升级到本版即可。
 （历史原因：Windows 上 `/home/...` 按当前盘符根解析，克隆在不同盘符会要求不同的垫片。）
+
+## 许可
+
+MIT，见本目录 `LICENSE`（版权行 `Copyright (c) 2026 WLDHH33`）。`pyproject.toml` 用 PEP 639 口径
+（`license = "MIT"`、`license-files = ["LICENSE"]`），wheel METADATA 出
+`License-Expression: MIT` 与 `License-File: LICENSE`，wheel 与 sdist 各含一份 `LICENSE`。
+收到 wheel 的人被授予使用、复制、修改、合并、发布、分发、再许可和/或销售本软件及副本的权利，
+条件是保留版权声明与许可声明；软件按“原样”提供，不附带任何担保（以 `LICENSE` 正文为准）。
 
 已知环境怪癖：objdump 打开含中文的绝对路径需 `LC_ALL=C`（`verify_gate.py` 已自动处理）。
