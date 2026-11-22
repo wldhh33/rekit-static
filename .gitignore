@@ -49,6 +49,9 @@
 /2026-11-15/m3-task-card/work/tests/
 /2026-11-15/m3-task-card/work/tools/
 
+# setup.ps1 成功标记（机器本地；status/gate 用它区分“从未 setup”与“setup 过但坏了”）
+/2026-11-15/m3-task-card/work/.rekit_setup.json
+
 # ---- 5. Python 缓存与测试缓存 ----
 __pycache__/
 *.py[cod]

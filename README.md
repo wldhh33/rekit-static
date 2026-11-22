@@ -18,6 +18,26 @@
 3. 跑 `python "pack\tools\status.py"` 看当前状态。
 4. 跑门禁：`powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"`（前置缺失时 exit 2）。
 
+## 第一次 clone 后会看到什么
+
+仓库只含分析实现、证据链、可复现 fixture 与门禁脚本；**样本与工具链不入库**（原因与自备方式见 `pack/SAMPLES.md`）。
+干净 clone 的第一条状态命令会失败——这是缺资产，**不是仓库损坏**：
+
+| 命令 | 未 setup 时 | 说明 |
+|---|---|---|
+| `cd pack\04_rekit项目源码` 后 `python -m rekit info tests\fixtures\dyn_pie` | exit 0 | 纯标准库，clone 即可跑 |
+| `python "pack\tools\status.py"` | `VERDICT: NOT_INITIALIZED exit=1` + 下一步命令 | 明确提示“从未 setup” |
+| `powershell … -File "pack\tools\gate.ps1"` | `GATE: NOT_INITIALIZED exit=2` + 下一步命令 | 不执行任何验证 |
+
+要跑全量门禁，先准备含 `samples` 与 binutils 的原工作区，再执行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\setup.ps1" -AssetsSource <原工作区根>
+powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
+```
+
+`setup.ps1` 成功后会写 `work\.rekit_setup.json`。之后若再缺资产，`status.py` / `gate.ps1` 会按 **FAIL** 逐条报缺项——“已初始化”不等于健康。
+
 ## 许可
 
 MIT，见根目录 `LICENSE`。包内 `pack/04_rekit项目源码/LICENSE` 必须与本文件**逐字相同**；

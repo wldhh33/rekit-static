@@ -17,6 +17,8 @@ pack\tools\setup.ps1 — 干净克隆后的资产恢复与目录联接（2026-11
   -SkipJunctions 只复制资产，不建 junction（默认都做）
 
 幂等：目标已存在且内容类型正确时跳过并报 SKIP；不会删除任何真实目录。
+成功后写 work\.rekit_setup.json（机器本地标记，.gitignore 排除），
+供 status.py / gate.ps1 区分「从未 setup」与「setup 过但资产坏了」。
 退出码：0 就绪 / 1 复制或联接失败 / 2 参数或来源不完整
 #>
 [CmdletBinding()]
@@ -127,6 +129,17 @@ if ($Problems.Count -gt 0) {
     foreach ($p in $Problems) { Write-Host "  - $p" -ForegroundColor Red }
     exit 1
 }
+
+# setup 成功标记：status.py / gate.ps1 用它区分「从未 setup」与「setup 过但资产坏了」。
+# 只在成功路径写入；已存在则覆盖（重复 setup 是幂等的）。
+$marker = Join-Path $Root "2026-11-15\m3-task-card\work\.rekit_setup.json"
+$payload = [ordered]@{
+    assets_source = $Src
+    junctions     = (-not $SkipJunctions)
+    time          = (Get-Date).ToString("o")
+} | ConvertTo-Json
+Set-Content -LiteralPath $marker -Value $payload -Encoding UTF8
+Ok "setup marker: $marker"
 
 Write-Host ""
 Write-Host "SETUP: OK  next: powershell -NoProfile -ExecutionPolicy Bypass -File `"pack\tools\gate.ps1`"" -ForegroundColor Green

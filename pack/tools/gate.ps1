@@ -22,6 +22,8 @@ pack\tools\gate.ps1 — 单命令门禁入口（U1 收口，2026-11-17）
   powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1" -Only verify_map,verify_iat
 
 退出码：0 PASS / 1 FAIL / 2 前置缺失（fail-closed，未执行任何验证）
+        preflight 的 exit 2 会区分两类：从未 setup（打印 NOT_INITIALIZED + setup 命令）
+        与 setup 过但资产坏了（逐条列出缺项）。两类的退出码相同，都不放宽判据。
 #>
 [CmdletBinding()]
 param(
@@ -185,9 +187,31 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 if ($script:problems.Count -gt 0) {
+    # 区分「从未 setup」与「setup 过但坏了」：判据由 pack\tools\firstrun.py 单点实现，
+    # 与 status.py 共用，避免两处口径漂移（R73 同类问题）。
+    $firstRun = ""
+    if (Get-Command python -ErrorAction SilentlyContinue) {
+        $fr = & python (Join-Path $Tools "firstrun.py") --root $Root --state 2>$null
+        if ($fr) { $firstRun = ([string](@($fr)[0])).Trim() }
+    }
     Write-Host ""
-    Write-Host "GATE: FAIL exit=2 (preflight failed: $($script:problems.Count) item(s); nothing executed)" -ForegroundColor Red
-    foreach ($p in $script:problems) { Write-Host "  - $p" -ForegroundColor Red }
+    if ($firstRun -eq "not_setup") {
+        Write-Host "== 首次 clone：未初始化（不是仓库坏了） ==" -ForegroundColor Yellow
+        Write-Host "  work 下 junction 与样本/工具链都不存在；preflight 因此停下，未执行任何验证。"
+        Write-Host "  下一步（需要原始工作区的 samples + binutils）:"
+        Write-Host '    powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\setup.ps1" -AssetsSource <原工作区根>'
+        Write-Host '  只想先跑分析: cd pack\04_rekit项目源码 后 python -m rekit info tests\fixtures\dyn_pie'
+        Write-Host "  资产为何不入库: pack\SAMPLES.md"
+        Write-Host ""
+        Write-Host "缺什么（$($script:problems.Count) 项）:"
+        foreach ($p in $script:problems) { Write-Host "  - $p" -ForegroundColor Yellow }
+        Write-Host ""
+        Write-Host "GATE: NOT_INITIALIZED exit=2 (preflight failed; nothing executed)" -ForegroundColor Yellow
+    } else {
+        Write-Host "GATE: FAIL exit=2 (preflight failed: $($script:problems.Count) item(s); nothing executed)" -ForegroundColor Red
+        foreach ($p in $script:problems) { Write-Host "  - $p" -ForegroundColor Red }
+        Write-Host '下一步: 修掉上面缺项；若缺 samples/tools，跑 powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\setup.ps1" -AssetsSource <原工作区根>'
+    }
     exit 2
 }
 

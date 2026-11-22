@@ -2,7 +2,10 @@
 r"""会话开工自检：10 秒内看清"现在在哪、缺什么"。
 
 用法:  python "pack\tools\status.py"
-退出码: 0 = 无阻断问题 / 1 = HANDOFF、目录联接或证据链不完整 / 2 = 找不到工作区
+退出码: 0 = 无阻断问题 / 1 = HANDOFF、目录联接或证据链不完整（含“从未 setup”）/ 2 = 找不到工作区
+
+「从未 setup」与「setup 过但坏了」用 firstrun.py 的同一判据区分：
+前者输出未初始化提示 + setup 命令（仍 exit 1），后者才按缺项逐条 FAIL。
 
 纯标准库、只读：规模段现算模块/测试/验证文件数与行数（行数同时给总行与非空行，
 避免"含不含空行"两种口径各写一个数），pytest 条数用 --collect-only -p no:cacheprovider
@@ -13,6 +16,8 @@ import os
 import re
 import subprocess
 import sys
+
+import firstrun
 
 SECTIONS = ["1. 当前进度", "2. 未完成清单", "3. 已否决方案",
             "4. 待确认问题", "5. 新增证据文件", "6. 下一位第一条命令"]
@@ -57,6 +62,8 @@ def main() -> int:
         print(f"VERDICT: FAIL exit=2 (work dir not found: {work})")
         return 2
 
+    first = firstrun.classify(root)
+    not_setup = first["state"] == "not_setup"
     rows, hard_fail = [], False
 
     # ---- 1. HANDOFF：存在 / 6 段齐全 / 每段非空 / <=150 行
@@ -165,7 +172,11 @@ def main() -> int:
     # ---- 2d. 目录联接：缺了不能只报 WARN（否则干净 clone 会"全绿"通过）
     links = ["rekit", "tests", "pack03"]
     missing_links = [n for n in links if not os.path.isdir(os.path.join(work, n))]
-    if missing_links:
+    if missing_links and not_setup:
+        rows.append("[UNINIT] junction %d/%d、样本/工具链 %d/%d 均不存在（从未 setup）"
+                    % (len(links) - len(missing_links), len(links),
+                       len(first["assets_present"]), len(firstrun.ASSETS)))
+    elif missing_links:
         rows.append("[FAIL] junction 缺失: %s -> 先跑 pack\\tools\\setup.ps1 -AssetsSource <原工作区根>"
                     % ", ".join(missing_links))
         hard_fail = True
@@ -205,19 +216,33 @@ def main() -> int:
     # ---- 5. 规模计数（现算；文档不得硬编码这些数字，一律指回本段输出）
     tests = os.path.join(work, "tests")
     src = os.path.join(work, "rekit")
-    try:
-        nm, ml, mn = _py_stats(src)
-        nt, tl, tn = _py_stats(tests, "test_")
-        nv, vl, vn = _py_stats(tests, "verify_")
-        ng = nv - (1 if "verify_gate.py" in os.listdir(tests) else 0)
-        pc = _pytest_collected(work)
-        rows.append(f"[info] 规模: rekit 模块 {nm} / {ml:,} 行（非空 {mn:,}）")
-        rows.append(f"[info] 规模: test {nt} 文件 / {tl:,} 行（非空 {tn:,}）/ pytest 收集 "
-                    f"{pc if pc is not None else 'n/a（采集失败，不阻断）'}")
-        rows.append(f"[info] 规模: verify {nv} 文件 / {vl:,} 行（非空 {vn:,}）/ 门禁 {ng} 套")
-    except OSError as e:
-        rows.append(f"[FAIL] 规模统计失败: {e}")
-        hard_fail = True
+    if not_setup:
+        rows.append("[SKIP] 规模统计: 需要 work\\rekit 与 work\\tests（未 setup）")
+    else:
+        try:
+            nm, ml, mn = _py_stats(src)
+            nt, tl, tn = _py_stats(tests, "test_")
+            nv, vl, vn = _py_stats(tests, "verify_")
+            ng = nv - (1 if "verify_gate.py" in os.listdir(tests) else 0)
+            pc = _pytest_collected(work)
+            rows.append(f"[info] 规模: rekit 模块 {nm} / {ml:,} 行（非空 {mn:,}）")
+            rows.append(f"[info] 规模: test {nt} 文件 / {tl:,} 行（非空 {tn:,}）/ pytest 收集 "
+                        f"{pc if pc is not None else 'n/a（采集失败，不阻断）'}")
+            rows.append(f"[info] 规模: verify {nv} 文件 / {vl:,} 行（非空 {vn:,}）/ 门禁 {ng} 套")
+        except OSError as e:
+            rows.append(f"[FAIL] 规模统计失败: {e}")
+            hard_fail = True
+
+    if not_setup:
+        print("[未初始化] 这个 clone 从未 setup：work 下 junction 与样本/工具链均不存在。")
+        print('下一步: powershell -NoProfile -ExecutionPolicy Bypass -File "pack\\tools\\setup.ps1" '
+              "-AssetsSource <原工作区根>")
+        print("未 setup 也能跑: cd pack\\04_rekit项目源码 后 python -m rekit info tests\\fixtures\\dyn_pie")
+        print("资产为何不入库: pack\\SAMPLES.md")
+        print("")
+        print("\n".join(rows))
+        print("VERDICT: NOT_INITIALIZED exit=1 (缺资产 ≠ 仓库损坏；先 setup)")
+        return 1
 
     print("\n".join(rows))
     print(f"VERDICT: {'FAIL' if hard_fail else 'PASS'} exit={1 if hard_fail else 0}")
