@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "purpose": "只用仓库内已跟踪样本 + 纯标准库的可证伪契约检查；不含反汇编/CFG/.NET 等分析层",
+  "samples": [
+    {
+      "file": "tests/fixtures/dyn_pie",
+      "sha256": "953b2278a4ef5fecee0be9d1fed9c02b7d60dd79be2c37a0bd05b853fdffaa57",
+      "size": 15832,
+      "format": "elf",
+      "expect": {
+        "type": 3,
+        "machine": 62,
+        "entry": 4160,
+        "nsect": 30,
+        "nphdr": 14
+      }
+    },
+    {
+      "file": "tests/m15_fixtures/funcreport_full",
+      "sha256": "93df7f7be556a4b9af88a4e8e73fac5c9f1620b52c5e8d17c1396ecaa56a6afe",
+      "size": 41384,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 5264,
+        "image_base": 5368709120,
+        "subsystem": "Console",
+        "nsect": 15
+      }
+    },
+    {
+      "file": "tests/m16_fixtures/datarefs_full.exe",
+      "sha256": "4296a99947196ccf8c20ab2566678e8835d07702350a26c9bc7ae63d85b72d61",
+      "size": 42163,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 5264,
+        "image_base": 5368709120,
+        "subsystem": "Console",
+        "nsect": 15
+      }
+    },
+    {
+      "file": "tests/samples/avx/avx_dense.exe",
+      "sha256": "e66e7d96ce5d801c8f398ac5f974da8695b4b9fb409e0c48540e396459c9e7d2",
+      "size": 5077,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 4096,
+        "image_base": 5368709120,
+        "subsystem": "Console",
+        "nsect": 4
+      }
+    },
+    {
+      "file": "tests/samples/fingerprint/hello_go.exe",
+      "sha256": "0ae6b7a2da2217e580671f094ec3cb548194dc504bf7103ccefd5a6cb87b60fe",
+      "size": 2494464,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 522176,
+        "image_base": 5368709120,
+        "subsystem": "Console",
+        "nsect": 16
+      }
+    },
+    {
+      "file": "tests/samples/fingerprint/hello_go_linux",
+      "sha256": "7ff3272d225417b105c07fd33c7eb2b48357286a502bfb167e4cb9d1771c7a05",
+      "size": 2342697,
+      "format": "elf",
+      "expect": {
+        "type": 2,
+        "machine": 62,
+        "entry": 4716448,
+        "nsect": 26,
+        "nphdr": 6
+      }
+    },
+    {
+      "file": "tests/samples/fingerprint/hello_rust.exe",
+      "sha256": "6b58b7c50a3416ff5298963a2f8694f992d6bce3ddc3d393f06a652a09b229ca",
+      "size": 130560,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 86832,
+        "image_base": 5368709120,
+        "subsystem": "Console",
+        "nsect": 5
+      }
+    },
+    {
+      "file": "tests/samples/fingerprint/putty-64bit.exe",
+      "sha256": "d01fdb5aae8f112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87",
+      "size": 1706136,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 785188,
+        "image_base": 5368709120,
+        "subsystem": "GUI",
+        "nsect": 10
+      }
+    },
+    {
+      "file": "tests/samples/fingerprint/upx/upx_putty-64bit.exe",
+      "sha256": "59389e309325b4124d02521c49bc9efb3021fa0d875c5dd2c64c2f711ee10944",
+      "size": 960664,
+      "format": "pe",
+      "expect": {
+        "machine": "AMD64",
+        "entry": 1750656,
+        "image_base": 5368709120,
+        "subsystem": "GUI",
+        "nsect": 3
+      }
+    },
+    {
+      "file": "tests/samples/fingerprint/upx/upx_dyn_pie",
+      "sha256": "aa147bd7b0c0cfe59d5a7a8546e776955a98c3e0941bff7a27b4f1c535d6b7cd",
+      "size": 6124,
+      "format": "elf",
+      "error": "MalformedBinary"
+    }
+  ],
+  "excluded": [
+    {
+      "file": "tests/samples/avx/avx_dense.o",
+      "reason": "detect_format 返回 None：文件头不是 ELF/PE（COFF 目标文件），不在本契约范围"
+    }
+  ]
+}

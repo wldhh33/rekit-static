@@ -27,6 +27,7 @@
 |---|---|---|
 | `cd pack\04_rekit项目源码` 后 `python -m rekit info tests\fixtures\dyn_pie` | exit 0 | 纯标准库，clone 即可跑 |
 | `python "pack\tools\status.py"` | `VERDICT: NOT_INITIALIZED exit=1` + 下一步命令 | 明确提示“从未 setup” |
+| `python "pack\tools\repo_contract.py"` | exit 0（`--selftest` 亦 0） | 10 个入库样本的 sha256/格式/头字段契约，纯标准库 |
 | `powershell … -File "pack\tools\gate.ps1"` | `GATE: NOT_INITIALIZED exit=2` + 下一步命令 | 不执行任何验证 |
 
 要跑全量门禁，先准备含 `samples` 与 binutils 的原工作区，再执行：

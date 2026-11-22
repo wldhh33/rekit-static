@@ -1,0 +1,36 @@
+# 职责边界（2026-11-22 改名）：本工作流只做“契约层”——
+#   1) 数字总账（authority JSON ↔ 人读镜像）的完整性；
+#   2) 证据索引与磁盘证据的 sha256 一致性；
+#   3) 只用仓库内已跟踪样本 + 纯标准库的解析契约（pack/tools/repo_contract.py）。
+# 它不跑 25 套 verify、不跑 pytest、不跑 gate.ps1、不执行 setup、不接触被 .gitignore
+# 排除的样本与 binutils/UPX/pwsh/dnfile。
+# 因此本工作流绿 ≠ 工具正确性通过；全量门禁请在本机跑 pack\tools\gate.ps1。
+name: repo-contract (ledger + evidence index + samples)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    name: ledger + evidence index + sample parse contract (not tool correctness)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ledger integrity (authority JSON vs human mirror)
+        run: python pack/tools/ledger_check.py --check
+      - name: evidence index integrity (sha256 vs files on disk)
+        run: python "pack/04_rekit项目源码/tests/evidence_index.py" --check
+      - name: sample parse contract (tracked samples only, no external tools)
+        run: python pack/tools/repo_contract.py
+      - name: contract self-proof (tampered expectation must be detected)
+        run: python pack/tools/repo_contract.py --selftest
+      - name: scope notice
+        run: echo "Scope: ledger + evidence index + sample parse contract only. Not 25 verify suites, not pytest, not tool correctness."
