@@ -15,6 +15,12 @@ on:
 permissions:
   contents: read
 
+env:
+  # windows-latest 的默认控制台是 cp1252，输出中文会 UnicodeEncodeError；
+  # 这是 CI 环境设置，不改任何判据。
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
 jobs:
   contract:
     name: ledger + evidence index + sample parse contract (not tool correctness)
