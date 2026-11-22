@@ -33,4 +33,4 @@ jobs:
       - name: contract self-proof (tampered expectation must be detected)
         run: python pack/tools/repo_contract.py --selftest
       - name: scope notice
-        run: echo "Scope: ledger + evidence index + sample parse contract only. Not 25 verify suites, not pytest, not tool correctness."
+        run: echo "Scope - ledger + evidence index + sample parse contract only. Not 25 verify suites, not pytest, not tool correctness."
