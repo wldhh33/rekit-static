@@ -1,0 +1,6 @@
+# 本仓库以“字节可复现”为前提：证据文件（evidence_*、EVIDENCE_INDEX.json、总账 JSON）
+# 与入库样本都用 sha256 校验，任何 clone 必须逐字节一致。
+# 禁止 git 做换行符转换：windows-latest 默认 core.autocrlf=true 会把 LF 换成 CRLF，
+# 同一份证据在 CI 上 sha256/size 就不同（2026-11-22 CI 实测 3 个证据文件因此 FAIL）。
+# -text 只关闭 EOL 转换，不影响 git diff 的文本显示。
+* -text

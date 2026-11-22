@@ -214,6 +214,11 @@ wheel 的 METADATA 带 `License-Expression: MIT` 与 `License-File: LICENSE`，w
 
 ## CI 状态
 
-**没有已启用的 CI**。`.github/workflows/gate.yml` 是**未验证**草稿：本仓库无 git 远端、该文件
-**从未被 GitHub Actions 实际触发过**。它只跑不依赖样本的两项（`ledger_check --check`、
-`evidence_index --check`），全量门禁仍需本机按上面的命令执行。不要把该文件当成“CI 已绿”的证据。
+`.github/workflows/repo-contract.yml`（2026-11-22 由 `gate.yml` 改名）是**已启用但只做契约层**的 CI：
+`workflow_dispatch` + push `master` 触发，`permissions: contents: read`，Windows runner 上依次跑
+`ledger_check --check`、`evidence_index --check`、`pack/tools/repo_contract.py` 与
+`repo_contract.py --selftest`。它**不跑 pytest、不跑 25 套 verify、不跑 `gate.ps1`、不执行 setup**，
+也不接触被 `.gitignore` 排除的样本与 binutils/UPX/pwsh/dnfile。
+
+因此：**CI 绿 ≠ 工具正确性通过**，只代表账本、证据索引与 10 个入库样本的解析契约一致。
+全量门禁仍需本机按上面的命令执行；不要把 CI 绿当成“25 套全绿”的证据。

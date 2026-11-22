@@ -107,7 +107,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 | "`sentinel` / `pinned` 签名" | **仍无样本**，没造、没冒充；`LOCAL_SIG` 只记长度/边界 | `HANDOFF.md:27`（§2 首行） |
 | "M19 用 dnfile 对拍签名" | 定标②**已偏离**：dnfile 无 Signature API，改用 SRM（`tests\sigref.ps1`，缺 pwsh 即 `env_missing` exit 2） | `CHARTER.md:41`；`PROGRESS.md:346` |
 | "tag `v0.1.0` 是最新交付" | `v0.1.0`→`6593dea`；收尾补件在 `v0.1.1`→`904ecc4`（哈希为 2026-11-21 改写后）；release tag 规则见 README | `pack\README.md:120-131` |
-| "有 CI" | **没有已启用的 CI**。`.github\workflows\gate.yml` 是未验证草稿（无远端、从未触发），只跑两项轻检查 | `pack\README.md:133-137`；`AGENTS.md:66` |
+| "有 CI / CI 绿了" | CI 已启用（`repo-contract.yml`，推送 `master` 触发），但**只做契约层**：账本 + 证据索引 + 10 个入库样本的解析契约。**不代表 25 套 verify / pytest / 工具正确性**。出处：`pack\README.md` 的“CI 状态”；`AGENTS.md` §5 |
 
 另两条口径纪律：证据里**不得写仓库内绝对路径**（会让 sha256 随克隆目录漂移，异地 clone 必 FAIL）；`122` 条历史 `null` run_id **不回填、不猜**。出处：`AGENTS.md:77-79,97`；`HANDOFF.md:30`。
 
@@ -130,7 +130,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "pack\tools\gate.ps1"
 | §1 规模数字 | `status.py` 的 `规模:` 行变化（它每次现算，**以它为准**） |
 | §4 权威链 | `pack\tools\` 出现新脚本而 §4/§3 未提；ledger `sections` 数 ≠ 10 |
 | §6 边界清单 | 任一里程碑新开一层、或 R12x 增加；`HANDOFF.md` §4 待确认项被裁决 |
-| CI 状态 | `.github\workflows\gate.yml` 从"未验证草稿"变为有远端实跑记录（U2） |
+| CI 状态 | `.github\workflows\repo-contract.yml` 的步骤或职责变化（当前：只做契约层，不代表工具正确性） |
 
 **已知不一致 / 待核实（本文不掩盖）**
 

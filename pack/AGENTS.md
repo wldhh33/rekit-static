@@ -66,7 +66,7 @@ python "pack\tools\status.py"
 | 样本 | `work\samples\`（m2 + m3） | 约 170 MB；被 `.gitignore` 排除，新克隆用 `setup.ps1` 恢复；`tests\samples`、`tests\fixtures` 已入库 |
 
 `pack` 与 `work\pack03` 的 CHARTER/PROGRESS/CHANGELOG：**内容相同**，编辑时先确认改哪一份，改完同步另一份。
-`.github\workflows\gate.yml` 是**未验证**草稿：无远端、从未被 GitHub Actions 触发，不是已启用的 CI；`v0.1.0` 停在 `6593dea`（U1-a+U1-b；2026-11-21 历史改写后重建），`v0.1.1` 覆盖门禁脚本、`setup.ps1`、R126、去垫片等收尾补件。
+`.github\workflows\repo-contract.yml` 是**已启用但只做契约层**的 CI（2026-11-22 由 `gate.yml` 改名）：只跑 `ledger_check --check`、`evidence_index --check` 与 `repo_contract.py`（10 个入库样本的解析契约 + 可失败自证），`permissions: contents: read`，不跑 pytest / 25 套 / `gate.ps1` / setup；**它的绿只代表账本、证据索引与样本契约一致，不代表工具正确性**，全量仍在本机跑 `gate.ps1`。`v0.1.0` 停在 `6593dea`（U1-a+U1-b；2026-11-21 历史改写后重建），`v0.1.1` 覆盖门禁脚本、`setup.ps1`、R126、去垫片等收尾补件。
 
 ## 6. 环境怪癖（已知，不是 bug）
 

@@ -34,7 +34,7 @@ U1 交付批次已全部收口（打包 / console entry / 示例 / 证据索引 
 |---|---|
 | `sentinel` / `pinned` 样本 | 补证后**仍无样本**：`sentinel`（0x41）需 vararg 调用点签名（IL `.method vararg` + 调用点），`pinned`（0x45）只出现在局部变量签名（C# `fixed` 可生成，但 M19 对 `LOCAL_SIG` 只记长度/边界，要先扩范围才测得到）；本批方法签名样本链覆盖不到，未造、未冒充 |
 | M19 样本重建 | 命令：`powershell -File "2026-11-15\m3-task-card\work\outputs\m19_sigblob\gen.ps1"`（需 ilasm；产出确定，自动重写 manifest）；缺样本时 gate 报 exit 2 并给出这条命令 |
-| 真 CI | `.github\workflows\gate.yml` 只是未验证草稿（无远端、从未触发）；启用与远端推送留 U2 |
+| 真 CI | `.github\workflows\repo-contract.yml` 已启用（push `master` + `workflow_dispatch`），但**只做契约层**：账本 + 证据索引 + 10 个入库样本解析契约；25 套 / pytest / `gate.ps1` / setup 一律不进 |
 | 122 条 null run_id | **不回填**（不猜来源）；新证据按 `AGENTS.md` §8 的 run_id 约定落盘，避免缺口扩大 |
 | tag 覆盖范围 | `v0.1.0` 停在 `6593dea`（U1-a + U1-b）；**`v0.1.1` 覆盖门禁脚本、setup、R126、去垫片等收尾补件**；release tag 只在该批次全部收口后打 |
 | 下一条命令 | 本文件 §6；全量用 `gate.ps1`（干净克隆实测 432.5 s） |
